@@ -1,6 +1,6 @@
 {
   "provider": "huggingface",
-  "model": "",
+  "model_id": "",
   "model_root": "",
   "cache_dir": ""
 }
