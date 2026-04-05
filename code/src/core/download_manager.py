@@ -61,6 +61,46 @@ def get_model_root(model_config: dict) -> Path:
         model_root = "models"
     return Path(model_root)
 
+def get_model_family_dir(model_config: dict) -> Path:
+    """
+    Retrieves the model family directory from the model configuration.
 
+    Args:
+        model_config (dict): The model configuration dictionary.
+    Returns:
+        Path: The model family directory.
+    """
+    model_root = get_model_root(model_config)
+    model_id = get_model_id(model_config)
+    safe_model_name = model_id.replace("/", "_")
+    return model_root / safe_model_name
+
+def get_original_model_dir(model_config: dict) -> Path:
+    return get_model_family_dir(model_config) / "original"
+
+
+
+def download_model(model_config: dict) -> Path:
+    """
+    Downloads the model specified in the model configuration.
     
+    Args:
+        model_config (dict): The model configuration dictionary.
+    Returns:        
+        Path: The path to the downloaded model directory.           
+    """
+    ensure_huggingface_provider(model_config)
 
+    model_id = get_model_id(model_config)
+    original_dir = get_original_model_dir(model_config)
+    cache_dir = model_config.get("cache_dir")
+
+    original_dir.mkdir(parents=True, exist_ok=True)
+
+    snapshot_download(
+        repo_id=model_id,
+        local_dir=str(original_dir),
+        cache_dir=cache_dir,
+    )
+
+    return original_dir
