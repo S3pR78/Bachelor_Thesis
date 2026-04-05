@@ -45,3 +45,22 @@ def get_model_id(model_config: dict) -> str:
         raise ValueError("Model ID must be specified in the configuration.")
     return model_id
 
+
+def get_model_root(model_config: dict) -> Path:
+    """
+    Retrieves the model root directory from the model configuration.
+
+    Args:
+        model_config (dict): The model configuration dictionary.
+    Returns:
+        Path: The model root directory.
+    """
+
+    model_root = model_config.get("model_root", "models")
+    if not model_root:
+        model_root = "models"
+    return Path(model_root)
+
+
+    
+
