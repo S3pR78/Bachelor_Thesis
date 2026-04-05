@@ -1,1 +1,6 @@
-{}
+{
+  "provider": "huggingface",
+  "model": "",
+  "model_root": "",
+  "cache_dir": ""
+}
