@@ -1,0 +1,7 @@
+Welche Fragetypen und Query Typen das Benchmark abdecken soll?
+Welche Evaluationsmetriken das Benchmark verwenden soll?
+Wie ich Benchmark und Training trenne?
+Warum mein Benchmark wissenschaftlich sinnvoll ist?
+
+
+Diese Fragen soll ich mithilfe von Literaturen beantworten.
