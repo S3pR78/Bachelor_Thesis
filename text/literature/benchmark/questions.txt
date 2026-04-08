@@ -9,9 +9,12 @@ Diese Fragen soll ich mithilfe von Literaturen beantworten.
 
 IOS_ORKG:
 
-Das Paper sagt klar, dass ORKG-Templates dafür da sind, Forschungsbeiträge in einer konsistenten und maschinenlesbaren Form zu erfassen.
-Genau das kann ich als Begründung nutzen, warum mein Benchmark nicht zufällig, sondern an der Template-Struktur orientiert aufgebaut wird.
-Aus dem Paper kann man ableiten, dass die Benchmark Fragen enthalten sollte, die die ORKG-Stärken wirklich prüfen:
+Das Paper sagt klar, dass ORKG-Templates dafür da sind, Forschungsbeiträge 
+in einer konsistenten und maschinenlesbaren Form zu erfassen.
+Genau das kann ich als Begründung nutzen, warum mein Benchmark nicht zufällig, sondern an der 
+Template-Struktur orientiert aufgebaut wird.
+Aus dem Paper kann man ableiten, dass die Benchmark Fragen enthalten sollte, die 
+die ORKG-Stärken wirklich prüfen:
 
 - strukturierte Faktenabfrage,
 - Vergleich über Papers hinweg,
@@ -19,7 +22,8 @@ Aus dem Paper kann man ableiten, dass die Benchmark Fragen enthalten sollte, die
 - Multi-hop über verschachtelte Template-Ketten,
 - Fragen zu Reviews/Comparisons/Benchmarks.
 
-Das folgt direkt aus der Rolle von ORKG für comparisons, reviews und benchmarks sowie aus der Aussage, dass symbolisches Querying und Inferenz komplexe Anfragen ermöglichen.
+Das folgt direkt aus der Rolle von ORKG für comparisons, reviews und benchmarks sowie aus der Aussage, 
+dass symbolisches Querying und Inferenz komplexe Anfragen ermöglichen.
 
 Das Paper betont, dass Templates mit SHACL-Vokabular, Constraints und Validierung arbeiten, 
 damit Daten strukturiert, konsistent und vergleichbar bleiben. Denn man kann ein Sacverhalt auch auf verschiedene Weise in form von
@@ -34,3 +38,36 @@ Gold-SPARQL brauche und warum template-konforme Fragen besser sind als frei form
 - Komplexe Abfragen profitieren von symbolic querying, reasoning and inference.
 
 Frage für ORKG-ASK: Which question types and query complexities should a benchmark for natural-language-to-SPARQL over scholarly knowledge graphs include?
+
+
+
+SciQA:
+2-stage benchmark design: 100 manual + 2465 generated.
+Benchmark dimensions: Objectives, Data Structure, Data Collection
+Question classification: paper-based vs comparison-based
+Question content classes: 
+    factoid(Einfache Faktenfragen (Wer? Was?)), 
+    non-factoid(Komplexere Erklärungen), 
+    superlative(Suche nach Extremwerten), 
+    negation(dinge ausschließen), 
+    count,
+    ranking(Anordnung von Ergebnissen in einer bestimmten Reihenfolge), 
+    temporal
+
+SPARQL complexity metadata: number of triple patterns, query shape
+    single edge,
+    chain,
+    star,
+    cycle,
+    tree,
+    forest
+Automatic generation should be constrained when data is heterogeneous
+
+Fragen für ORKG-ASK:
+1) Which question types should be included in a benchmark for scholarly question 
+answering over ORKG-style research contributions and comparisons?
+
+2) What kinds of comparison-based, count, temporal, ranking, 
+and superlative questions can be answered from ORKG comparisons?
+
+3)Which benchmark questions over ORKG templates would cover both paper-based and comparison-based querying patterns?
