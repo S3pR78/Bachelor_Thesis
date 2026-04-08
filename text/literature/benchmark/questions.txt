@@ -71,3 +71,43 @@ answering over ORKG-style research contributions and comparisons?
 and superlative questions can be answered from ORKG comparisons?
 
 3)Which benchmark questions over ORKG templates would cover both paper-based and comparison-based querying patterns?
+
+
+KGQA:
+Dataset minimum: NL question, SPARQL query, endpoint/graph, idealerweise expected answers.
+
+Main benchmark dimensions: 
+ambiguity:Das Paper zeigt, dass viele Fragen Oberflächenformen mit sehr vielen 
+                Entity-Kandidaten enthalten und dass die richtige Entität oft nicht die populärste ist. 
+                Es bedeutet das: In dem Benchmark sollte ich nicht nur „saubere“ Fragen haben, 
+                sondern auch einige Fragen, 
+                bei denen Entity Linking oder Disambiguierung nicht trivial ist.
+
+lexical gap: Das Paper beschreibt den lexical gap als fehlende direkte Übereinstimmung 
+                zwischen der Formulierung in natürlicher Sprache und den Labels von Entitäten, 
+                Properties oder Klassen im KG. Das ist für deine ORKG-/Template-Welt sehr 
+                relevant, weil User-Fragen oft anders formuliert sind als Property- oder Template-Namen. 
+                Für den Benchmark heißt das: Nicht alle Fragen sollten die 
+                Schema-Begriffe 1:1 wiederholen.
+
+complex queries:Das Paper betont schon im Abstract, dass simple One-Triple-Fragen 
+                oft lösbar sind, während komplexe Queries mit Subqueries oder mehreren Funktionen 
+                weiterhin schwierig sind. Für den Benchmark ist das eine sehr gute argumentative 
+                Begründung dafür, warum ich neben einfachen Lookup-Fragen auch Aggregationen, 
+                Vergleiche, Negation, mehrstufige Pfade und komplexere Query-Formen brauche.
+
+templates: Dass das Paper templates ausdrücklich als eigene Benchmark-Dimension 
+            betrachtet, ist für mich besonders passend. meine Arbeit ist ja stark 
+            template-basiert. Das gibt mir eine gute theoretische Stütze dafür, 
+            warum ich meine Fragen nicht nur nach Inhalt, sondern auch nach wiederkehrenden 
+            Frage-/Query-Mustern betrachten sollte
+ontology types: 
+answer types;
+
+Simple questions are not enough; complex queries remain hard.
+
+Benchmark choice influences system evaluation strongly.
+
+No single benchmark is universally “easy” or “hard”; datasets differ by challenge profile.
+
+ORKG ASK: What benchmark dimensions are most useful for analyzing question answering datasets over knowledge graphs, especially ambiguity, lexical gap, complex queries, templates, ontology types, and answer types?
