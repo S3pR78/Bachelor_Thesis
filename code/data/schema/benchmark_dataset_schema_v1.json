@@ -2,12 +2,31 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Benchmark dataset entry",
   "type": "object",
-  "required": ["id", "family", "split", "language", "source"],
+  "additionalProperties": true,
+  "required": [
+    "id",
+    "source_dataset",
+    "source_id",
+    "family",
+    "split",
+    "language",
+    "question"
+  ],
   "properties": {
     "id": {
       "type": "string",
       "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*-[0-9]{4,}$",
       "description": "Globally unique entry id, e.g. nlp4re-0042"
+    },
+    "source_dataset": {
+      "type": "string",
+      "enum": ["EmpiRE_Compass", "usw."],
+      "description": "Original source collection of the entry"
+    },
+    "source_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "description": "Original identifier in the source dataset"
     },
     "family": {
       "type": "string",
@@ -22,35 +41,22 @@
     "language": {
       "type": "string",
       "enum": ["en", "de"],
-      "description": "Language of the natural-language question"
+      "description": "Language of the question"
     },
-    "status": {
+    "question": {
       "type": "string",
-      "enum": ["draft", "reviewed", "approved", "rejected"],
-      "description": "Optional curation status"
+      "minLength": 1,
+      "description": "Primary natural-language question used as the main benchmark input."
     },
-    "source": {
-      "type": "object",
-      "required": ["dataset", "record_id", "origin"],
-      "additionalProperties": false,
-      "properties": {
-        "dataset": {
-          "type": "string",
-          "enum": ["EmpiRE_Compass", "usw."],
-          "description": "Original source collection"
-        },
-        "record_id": {
-          "type": "string",
-          "pattern": "^[A-Za-z0-9._:-]+$",
-          "description": "Original source-side identifier"
-        },
-        "origin": {
-          "type": "string",
-          "enum": ["human", "generated", "converted"],
-          "description": "How the entry originally entered the pipeline"
-        }
+    "paraphrased_questions": {
+      "type": "array",
+      "description": "Optional alternative phrasings of the main question.",
+      "default": [],
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
       }
     }
-  },
-  "additionalProperties": true
+  }
 }
