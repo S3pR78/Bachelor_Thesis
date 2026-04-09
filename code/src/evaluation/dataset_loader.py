@@ -146,3 +146,18 @@ def build_profiles_for_fields(
         profiles[field_name] = build_field_profile(entries, field_name)
 
     return profiles
+
+"""Helper function to build standard benchmark profiles for a predefined set of fields in the dataset."""
+def build_standard_benchmark_profiles(
+    entries: list[dict[str, Any]],
+) -> dict[str, dict[str, Any]]:
+    standard_fields = [
+        "family",
+        "source_dataset",
+        "query_type",
+        "answer_type",
+        "query_shape",
+        "complexity_level",
+    ]
+
+    return build_profiles_for_fields(entries, standard_fields)
