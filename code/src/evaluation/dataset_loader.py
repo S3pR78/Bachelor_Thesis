@@ -99,3 +99,22 @@ def count_field_values(
         counts[value] = counts.get(value, 0) + 1
 
     return dict(sorted(counts.items()))
+
+
+def count_missing_field_values(
+    entries: list[dict[str, Any]],
+    field_name: str,
+) -> int:
+    missing_count = 0
+
+    for entry in entries:
+        if not isinstance(entry, dict):
+            missing_count += 1
+            continue
+
+        value = entry.get(field_name)
+
+        if value is None:
+            missing_count += 1
+
+    return missing_count
