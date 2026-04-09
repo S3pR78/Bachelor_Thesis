@@ -26,7 +26,7 @@
     "lexical_gap_risk": "medium",
     "hallucination_risk": "medium",
     "human_or_generated": "human",
-    "review_status": "reviewed",
+    "review_status": "approved",
     "gold_status": "final"
   },
   {
@@ -56,7 +56,7 @@
     "lexical_gap_risk": "low",
     "hallucination_risk": "medium",
     "human_or_generated": "human",
-    "review_status": "reviewed",
+    "review_status": "approved",
     "gold_status": "final"
   },
   {
@@ -87,7 +87,7 @@
     "lexical_gap_risk": "high",
     "hallucination_risk": "medium",
     "human_or_generated": "human",
-    "review_status": "reviewed",
+    "review_status": "approved",
     "gold_status": "final"
   },
   {
@@ -117,7 +117,7 @@
     "lexical_gap_risk": "low",
     "hallucination_risk": "medium",
     "human_or_generated": "human",
-    "review_status": "reviewed",
+    "review_status": "approved",
     "gold_status": "final"
   },
   {
@@ -147,7 +147,7 @@
     "lexical_gap_risk": "high",
     "hallucination_risk": "medium",
     "human_or_generated": "human",
-    "review_status": "reviewed",
+    "review_status": "approved",
     "gold_status": "final"
   },
   {
@@ -177,7 +177,7 @@
     "lexical_gap_risk": "high",
     "hallucination_risk": "medium",
     "human_or_generated": "human",
-    "review_status": "reviewed",
+    "review_status": "approved",
     "gold_status": "final"
   },
   {
@@ -208,7 +208,7 @@
     "lexical_gap_risk": "medium",
     "hallucination_risk": "high",
     "human_or_generated": "human",
-    "review_status": "reviewed",
+    "review_status": "approved",
     "gold_status": "final"
   },
   {
@@ -238,7 +238,7 @@
     "lexical_gap_risk": "medium",
     "hallucination_risk": "medium",
     "human_or_generated": "human",
-    "review_status": "reviewed",
+    "review_status": "approved",
     "gold_status": "final"
   },
   {
@@ -275,7 +275,7 @@
     "lexical_gap_risk": "high",
     "hallucination_risk": "high",
     "human_or_generated": "human",
-    "review_status": "reviewed",
+    "review_status": "approved",
     "gold_status": "final"
   },
   {
@@ -305,7 +305,7 @@
     "lexical_gap_risk": "medium",
     "hallucination_risk": "medium",
     "human_or_generated": "human",
-    "review_status": "reviewed",
+    "review_status": "approved",
     "gold_status": "final"
   }
 ]
