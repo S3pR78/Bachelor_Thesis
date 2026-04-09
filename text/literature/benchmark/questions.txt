@@ -136,5 +136,3 @@ Controlled generation via templates is better than unconstrained generation.
 Question types should be explicitly categorized.
 Not every predicate fits every question type; filtering matters.
 Benchmark quality needs a verbalization/paraphrasing validation step.
-
-
