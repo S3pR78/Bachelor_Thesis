@@ -23,7 +23,9 @@ def _filter_entries_by_filed(
 
 def load_dataset_from_config(dataset_key: str, 
         review_status: str | None = None,
-        gold_status: str | None = None) -> list[dict[str, Any]]:
+        gold_status: str | None = None,
+        family: str | None = None,
+        source_dataset: str | None = None) -> list[dict[str, Any]]:
     
     """Load a dataset from a JSON file specified in the path configuration. Optionally filter entries by review_status."""
     dataset_path = get_configured_path(dataset_key)
@@ -36,5 +38,29 @@ def load_dataset_from_config(dataset_key: str,
     
     data = _filter_entries_by_filed(data, "review_status", review_status)
     data = _filter_entries_by_filed(data, "gold_status", gold_status)
+    data = _filter_entries_by_filed(data, "family", family)
+    data = _filter_entries_by_filed(data, "source_dataset", source_dataset)
     
     return data
+
+
+
+"""Helper function to build a summary of the dataset loading process, including the number of entries and applied filters."""
+def build_dataset_load_summary(
+    entries: list[dict[str, Any]],
+    dataset_key: str,
+    review_status: str | None = None,
+    gold_status: str | None = None,
+    family: str | None = None,
+    source_dataset: str | None = None,
+) -> dict[str, Any]:
+    return {
+        "dataset_key": dataset_key,
+        "num_entries": len(entries),
+        "filters": {
+            "review_status": review_status,
+            "gold_status": gold_status,
+            "family": family,
+            "source_dataset": source_dataset,
+        },
+    }
