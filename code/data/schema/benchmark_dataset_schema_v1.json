@@ -21,7 +21,7 @@
     },
     "source_dataset": {
       "type": "string",
-      "enum": ["EmpiRE_Compass", "Hybrid_Empirical_Research"],
+      "enum": ["EmpiRE_Compass", "Hybrid_Empirical_Research", "Hybrid_NLP4RE"],
       "description": "Original source collection of the entry"
     },
     "source_id": {
