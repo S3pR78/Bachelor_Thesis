@@ -6,5 +6,7 @@
   "prompts": "code/prompts",
   "benchmarks": "code/data/dataset",
   "evaluation_runs": "code/outputs/evaluation_runs",
-  "benchmark_analysis": "code/outputs/benchmark_analysis"
+  "benchmark_analysis": "code/outputs/benchmark_analysis",
+  "nlp4re_dataset": "code/data/dataset/nlp4re/merged.json",
+  "empirical_research_dataset": "code/data/dataset/empirical_research/merged.json"
 }
