@@ -78,3 +78,24 @@ def get_unique_field_values(
     }
 
     return sorted(unique_values)
+
+
+"""Helper function to count occurrences of unique values in a specified field across a list of dictionary entries."""
+def count_field_values(
+    entries: list[dict[str, Any]],
+    field_name: str,
+) -> dict[str, int]:
+    counts: dict[str, int] = {}
+
+    for entry in entries:
+        if not isinstance(entry, dict):
+            continue
+
+        value = entry.get(field_name)
+
+        if value is None:
+            continue
+
+        counts[value] = counts.get(value, 0) + 1
+
+    return dict(sorted(counts.items()))
