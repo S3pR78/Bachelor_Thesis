@@ -100,7 +100,7 @@ def count_field_values(
 
     return dict(sorted(counts.items()))
 
-
+"""Helper function to count the number of entries with missing values for a specified field across a list of dictionary entries."""
 def count_missing_field_values(
     entries: list[dict[str, Any]],
     field_name: str,
@@ -118,3 +118,18 @@ def count_missing_field_values(
             missing_count += 1
 
     return missing_count
+
+"""Helper function to build a profile of a specific field in the dataset, including the number of unique values, count of missing values, and counts of each unique value."""
+def build_field_profile(
+    entries: list[dict[str, Any]],
+    field_name: str,
+) -> dict[str, Any]:
+    value_counts = count_field_values(entries, field_name)
+    missing_count = count_missing_field_values(entries, field_name)
+
+    return {
+        "field_name": field_name,
+        "num_unique_values": len(value_counts),
+        "missing_count": missing_count,
+        "value_counts": value_counts,
+    }
