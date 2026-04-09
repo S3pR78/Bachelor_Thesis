@@ -64,3 +64,17 @@ def build_dataset_load_summary(
             "source_dataset": source_dataset,
         },
     }
+
+
+
+def get_unique_field_values(
+    entries: list[dict[str, Any]],
+    field_name: str,
+) -> list[str]:
+    unique_values = {
+        entry.get(field_name)
+        for entry in entries
+        if isinstance(entry, dict) and entry.get(field_name) is not None
+    }
+
+    return sorted(unique_values)
