@@ -111,3 +111,18 @@ Benchmark choice influences system evaluation strongly.
 No single benchmark is universally “easy” or “hard”; datasets differ by challenge profile.
 
 ORKG ASK: What benchmark dimensions are most useful for analyzing question answering datasets over knowledge graphs, especially ambiguity, lexical gap, complex queries, templates, ontology types, and answer types?
+
+
+
+
+Lehmann:
+Train/validation/test split matters and template distribution should be checked. the paper uses 70, 10 , 20 split. Training, validation, benchmark
+Use multiple metrics, not only exact match.
+Fine-tuning small models can outperform larger models.
+Similarity-based few-shot selection works best.
+Zero-shot is too weak on difficult scholarly KGQA benchmarks.
+Error analysis should separate entity, predicate, syntax, and semantic errors.
+Automatically generated benchmark parts can inflate pattern-learning effects.
+Execution metrics are desirable; string similarity alone is limited.
+
+
