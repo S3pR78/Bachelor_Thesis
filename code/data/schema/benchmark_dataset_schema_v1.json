@@ -10,7 +10,8 @@
     "family",
     "split",
     "language",
-    "question"
+    "question",
+    "gold_sparql"
   ],
   "properties": {
     "id": {
@@ -56,6 +57,39 @@
       "items": {
         "type": "string",
         "minLength": 1
+      }
+    },
+    "gold_sparql": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Final gold SPARQL query for the entry."
+    },
+    "canonical_sparql": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Optional canonical schema-level SPARQL query with placeholders instead of final ORKG-specific identifiers."
+    },
+    "canonical_to_gold_mapping": {
+      "type": "object",
+      "description": "Optional mapping from canonical placeholders to final ORKG identifiers or literals.",
+      "minProperties": 1,
+      "propertyNames": {
+        "pattern": "^__[A-Z0-9_]+__$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "required": ["kind", "value"],
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": ["predicate", "class", "resource", "literal"]
+          },
+          "value": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
       }
     }
   }
