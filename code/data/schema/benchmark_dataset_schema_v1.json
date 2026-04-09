@@ -101,6 +101,98 @@
         "type": "string",
         "minLength": 1
       }
+    },
+    "query_type": {
+      "type": "string",
+      "enum": ["factoid", "non_factoid"],
+      "description": "High-level question category."
+    },
+    "special_types": {
+      "type": "array",
+      "description": "Optional list of more specific question/query characteristics.",
+      "default": [],
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "lookup",
+          "typed_lookup",
+          "multi_hop",
+          "count",
+          "aggregation",
+          "ranking",
+          "superlative",
+          "temporal",
+          "boolean",
+          "negation",
+          "missing_info",
+          "comparison",
+          "multi_intent",
+          "string_operation"
+        ]
+      }
+    },
+    "answer_type": {
+      "type": "string",
+      "enum": ["resource", "string", "number", "boolean", "date", "list", "mixed"],
+      "description": "Expected answer type of the query."
+    },
+    "query_shape": {
+      "type": "string",
+      "enum": ["edge", "chain", "star", "tree", "cycle", "forest", "other"],
+      "description": "Structural shape of the SPARQL query."
+    },
+    "number_of_patterns": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Number of triple patterns in the gold SPARQL query."
+    },
+    "query_components": {
+      "type": "array",
+      "description": "SPARQL operators and structural components used in the gold query.",
+      "default": [],
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "SELECT",
+          "ASK",
+          "COUNT",
+          "FILTER",
+          "REGEX",
+          "STR",
+          "ORDER_BY",
+          "GROUP_BY",
+          "HAVING",
+          "LIMIT",
+          "OPTIONAL",
+          "UNION",
+          "NOT_EXISTS",
+          "MIN",
+          "MAX",
+          "AVG"
+        ]
+      }
+    },
+    "complexity_level": {
+      "type": "string",
+      "enum": ["low", "medium", "high"],
+      "description": "Coarse human-readable complexity label."
+    },
+    "ambiguity_risk": {
+      "type": "string",
+      "enum": ["low", "medium", "high"],
+      "description": "Estimated ambiguity risk of the question wording."
+    },
+    "lexical_gap_risk": {
+      "type": "string",
+      "enum": ["low", "medium", "high"],
+      "description": "Estimated lexical gap between the question wording and schema vocabulary."
+    },
+    "hallucination_risk": {
+      "type": "string",
+      "enum": ["low", "medium", "high"],
+      "description": "Estimated risk that generation may hallucinate schema elements or identifiers."
     }
   }
 }
