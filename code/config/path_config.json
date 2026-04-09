@@ -1,8 +1,20 @@
 {
-  "data": "",
-  "outputs": "",
-  "logs": "",
-  "models": "",
-  "prompts": "",
-  "benchmarks": ""
+  "data": "code/data",
+  "outputs": "code/outputs",
+  "logs": "code/logs",
+  "models": "code/models",
+  "prompts": "code/prompts",
+  "benchmarks": "code/data/dataset",
+
+  "datasets": {
+    "root": "code/data/dataset",
+    "nlp4re_merged": "code/data/dataset/nlp4re/merged.json",
+    "empirical_research_merged": "code/data/dataset/empirical_research/merged.json"
+  },
+
+  "evaluation": {
+    "root": "code/outputs/evaluation_runs",
+    "analysis_root": "code/outputs/benchmark_analysis",
+    "reports_root": "code/outputs/evaluation_reports"
+  }
 }
