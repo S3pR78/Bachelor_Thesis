@@ -13,3 +13,17 @@ def load_json_config(config_path: str | Path) -> dict:
         config = json.load(f)
     
     return config
+
+
+def get_repo_root() -> Path:
+    """Get the root directory of the repository."""
+    return Path(__file__).resolve().parents[3]
+
+
+def get_path_config_path() -> Path:
+    """Get the path to the path configuration file."""
+    return get_repo_root() / "code" / "config" / "path_config.json"
+
+
+
+
