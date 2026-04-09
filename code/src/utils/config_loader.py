@@ -26,4 +26,15 @@ def get_path_config_path() -> Path:
 
 
 
+def get_configured_path(key: str) -> Path:
+    """Get the configured path for a given key from the path configuration file."""
+    config = load_json_config(str(get_path_config_path()))
 
+    if key not in config:
+        raise KeyError(f"Key '{key}' not found in path configuration.")
+    
+    value = config[key]
+    if not isinstance(value, str) or not value.strip():
+        raise ValueError(f"Configured path for key '{key}' must be a non-empty string")
+    
+    return (get_repo_root() / value.strip()).resolve()
