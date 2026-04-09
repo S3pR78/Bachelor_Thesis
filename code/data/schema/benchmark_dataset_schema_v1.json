@@ -91,6 +91,16 @@
           }
         }
       }
+    },
+    "template_sections": {
+      "type": "array",
+      "description": "Optional list of template sections involved in the question.",
+      "uniqueItems": true,
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
     }
   }
 }
