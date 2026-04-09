@@ -21,7 +21,7 @@
     },
     "source_dataset": {
       "type": "string",
-      "enum": ["EmpiRE_Compass", "usw."],
+      "enum": ["EmpiRE_Compass", "Manual_NLP4RE"],
       "description": "Original source collection of the entry"
     },
     "source_id": {
@@ -193,6 +193,25 @@
       "type": "string",
       "enum": ["low", "medium", "high"],
       "description": "Estimated risk that generation may hallucinate schema elements or identifiers."
+    },
+    "human_or_generated": {
+      "type": "string",
+      "enum": ["human", "generated", "hybrid"],
+      "description": "Whether the entry was written manually, generated automatically, or created through a hybrid process."
+    },
+    "review_status": {
+      "type": "string",
+      "enum": ["unreviewed", "reviewed", "revised", "approved"],
+      "description": "Current manual review status of the entry."
+    },
+    "gold_status": {
+      "type": "string",
+      "enum": ["draft", "validated", "final"],
+      "description": "Current maturity status of the gold SPARQL query."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Optional free-text notes about issues, decisions, or review remarks."
     }
   }
 }
