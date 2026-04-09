@@ -133,3 +133,16 @@ def build_field_profile(
         "missing_count": missing_count,
         "value_counts": value_counts,
     }
+
+
+"""Helper function to build profiles for multiple specified fields in the dataset, returning a dictionary of field profiles keyed by field name."""
+def build_profiles_for_fields(
+    entries: list[dict[str, Any]],
+    field_names: list[str],
+) -> dict[str, dict[str, Any]]:
+    profiles: dict[str, dict[str, Any]] = {}
+
+    for field_name in field_names:
+        profiles[field_name] = build_field_profile(entries, field_name)
+
+    return profiles
