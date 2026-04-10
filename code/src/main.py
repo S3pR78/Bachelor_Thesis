@@ -1,4 +1,8 @@
 import argparse
+from src.utils.config_loader import load_json_config
+from src.core.model_loader import load_model_and_tokenizer, generate_raw_response
+
+CONFIG_PATH = 'code/config/model_config.json'
 
 def run_query_task(args: argparse.Namespace) -> int:
     print("Running query task with args:", args)
@@ -40,10 +44,27 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
+def run_query(args: argparse.Namespace):
+    model_config = load_json_config(config_path=CONFIG_PATH)
+
+    tokenizer, model = load_model_and_tokenizer(model_config)
+
+    response = generate_raw_response(
+        model=model,
+        tokenizer=tokenizer,
+        prompt=args.question,
+        max_new_tokens=128
+    )
+
 def main() -> int:
     parser = build_parser()
     args = parser.parse_args()
-    print(args)
+    
+    if not hasattr(args, "func"):
+        parser.print_help()
+        return
+
+    args.func(args)
     return 0
 
 
