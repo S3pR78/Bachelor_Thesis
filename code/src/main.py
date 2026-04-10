@@ -6,10 +6,24 @@ CONFIG_PATH = 'code/config/model_config.json'
 
 def run_query_task(args: argparse.Namespace) -> int:
     print("Running query task with args:", args)
+    
+    model_config = load_json_config(config_path=CONFIG_PATH)
+
+    tokenizer, model = load_model_and_tokenizer(model_config)
+
+    response = generate_raw_response(
+        model=model,
+        tokenizer=tokenizer,
+        prompt=args.question,
+        max_new_tokens=128
+    )
+
+    print("Generated response:", response)
     return 0
 
 def run_train_task(args: argparse.Namespace) -> int:
     print("Running training task with args:", args)
+
     return 0
 
 def run_evaluate_task(args: argparse.Namespace) -> int:
@@ -44,17 +58,6 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def run_query(args: argparse.Namespace):
-    model_config = load_json_config(config_path=CONFIG_PATH)
-
-    tokenizer, model = load_model_and_tokenizer(model_config)
-
-    response = generate_raw_response(
-        model=model,
-        tokenizer=tokenizer,
-        prompt=args.question,
-        max_new_tokens=128
-    )
 
 def main() -> int:
     parser = build_parser()
