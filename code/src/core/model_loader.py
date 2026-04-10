@@ -77,3 +77,34 @@ def prepare_generation_inputs(
     )
 
     return inputs
+
+
+
+def generate_raw_response(
+        model,
+        tokenizer,
+        prompt: str,
+        max_new_tokens: int = 128,
+) -> str:
+    """
+    Generates a raw response from the model based on the provided prompt.
+
+    Args:
+        model: The language model to use for generation.
+        tokenizer: The tokenizer to use for encoding the prompt and decoding the response.
+        prompt (str): The input prompt for generation.
+        max_new_tokens (int): The maximum number of new tokens to generate.
+    Returns:
+        str: The generated response as a string.
+    """
+
+    model.eval()
+    
+    inputs = prepare_generation_inputs(tokenizer, prompt)
+
+    output_ids = model.generate(
+        **inputs,
+        max_new_tokens=max_new_tokens,
+    )
+
+    return tokenizer.decode(output_ids[0], skip_special_tokens=True)
