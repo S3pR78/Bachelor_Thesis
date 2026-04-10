@@ -1,6 +1,7 @@
 {
   "provider": "huggingface",
-  "model_id": "",
-  "model_root": "",
-  "cache_dir": ""
+  "model_id": "google-t5/t5-base",
+  "architecture": "seq2seq",
+  "model_root": "code/models",
+  "cache_dir": "code/models/cache"
 }
