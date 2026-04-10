@@ -53,3 +53,27 @@ def load_model_and_tokenizer(model_config: dict):
         )
 
     return tokenizer, model
+
+
+def prepare_generation_inputs(
+        tokenizer,
+        prompt: str,
+):
+    """
+    Prepares the input tensors for generation based on the provided prompt.
+
+    Args:
+        tokenizer: The tokenizer to use for encoding the prompt.
+        prompt (str): The input prompt for generation.  
+    """
+
+    if not isinstance(prompt, str) or not prompt.strip():
+        raise ValueError("Prompt must be a non-empty string.")
+
+    inputs = tokenizer(
+        prompt,
+        return_tensors="pt",
+        truncation=True
+    )
+
+    return inputs
