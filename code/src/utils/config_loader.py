@@ -38,3 +38,31 @@ def get_configured_path(key: str) -> Path:
         raise ValueError(f"Configured path for key '{key}' must be a non-empty string")
     
     return (get_repo_root() / value.strip()).resolve()
+
+
+
+def get_model_entry(config: dict, model_key: str) -> dict:
+    """Get the model entry from the configuration for a given model key."""
+    if "models" not in config:
+        raise KeyError("The configuration must contain a 'models' section.")
+    
+    models = config["models"]
+    
+    if not isinstance(models, dict) or not models:
+        raise ValueError("The 'models' section must be a non-empty dictionary.")
+    
+    if not isinstance(model_key, str) or not model_key.strip():
+        raise ValueError("Model key must be a non-empty string.")
+    
+    normalized_key = model_key.strip().lower()
+
+    if normalized_key not in models:
+        available_keys = ", ".join(models.keys())
+        raise KeyError(f"Model key '{model_key}' not found in configuration. Available keys: {available_keys}")
+    
+    model_entry = models[normalized_key]
+
+    if not isinstance(model_entry, dict):
+        raise ValueError(f"Model entry for key '{model_key}' must be a dictionary.")
+    
+    return model_entry
