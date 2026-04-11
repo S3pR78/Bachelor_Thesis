@@ -1,11 +1,19 @@
 import argparse
-from src.utils.config_loader import load_json_config, get_model_entry
+from src.utils.config_loader import load_json_config, get_model_entry, get_configured_path
 from src.core.model_loader import load_model_and_tokenizer, generate_raw_response
+from pathlib import Path
 
 CONFIG_PATH = 'code/config/model_config.json'
 
 def run_query_task(args: argparse.Namespace) -> int:
     validate_query_args(args)
+    if args.prompt_mode == "empire_compass":
+        profile = get_empire_compass_profile_for_family(args.family)
+        prompt_output_path = Path(profile["output_txt_path"])
+
+        print(f"Empire Compass family: {args.family}")
+        print(f"Expected prompt path: {prompt_output_path}")
+
     print("Running query task with args:", args)
     
     full_model_config = load_json_config(CONFIG_PATH)
@@ -35,7 +43,34 @@ def run_evaluate_task(args: argparse.Namespace) -> int:
 def validate_query_args(args: argparse.Namespace) -> None:
     if args.prompt_mode == "empire_compass" and not args.family:
         raise ValueError("The --family argument is required when using the 'empire_compass' prompt mode.")
+    
 
+
+def load_empire_compass_runner_config() -> dict:
+    runner_config_path = get_configured_path("empire_compass_prompt_runner_config")
+    return load_json_config(runner_config_path)
+
+
+def get_empire_compass_profile_for_family(family: str) ->dict:
+    if not isinstance(family,str) or not family.strip():
+        raise ValueError("family must be a non-empty string.")
+    
+    normalized_family = family.strip().lower()
+    runner_config = load_empire_compass_runner_config()
+
+    profiles = runner_config.get("profiles")
+    if not isinstance(profiles, dict) or not profiles:
+        raise ValueError("Runner configuration must contain a non-empty 'profiles' object.")
+
+    profile = profiles.get(normalized_family)
+    if not isinstance(profile, dict):
+        available_families = ", ".join(profiles.keys())
+        raise ValueError(
+            f"Unknown Empire Compass template family '{normalized_family}'"
+            f". Available families are: {available_families}."
+        )
+
+    return profile
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
