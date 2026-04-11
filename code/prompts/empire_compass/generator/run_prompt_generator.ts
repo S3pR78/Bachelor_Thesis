@@ -3,7 +3,7 @@ import * as path from "node:path";
 import { generateDynamicSPARQLPrompt } from "./promptGenerator";
 
 
-const SELECTED_PROFILE_KEY = "nlp4re"; // Change this to select a different profile. When i find the time to implement CLI args, this will be replaced by a command line argument.
+const SELECTED_PROFILE_KEY = "empirical_research"; // Change this to select a different profile. When i find the time to implement CLI args, this will be replaced by a command line argument.
 
 
 type PromptRunProfile = {
