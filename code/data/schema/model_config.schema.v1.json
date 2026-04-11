@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "model_config.schema.v1.json",
+  "title": "Model Config Schema V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "provider",
+    "model_id",
+    "interface",
+    "variant",
+    "generation"
+  ],
+  "properties": {
+    "provider": {
+      "type": "string",
+      "enum": ["huggingface", "openai"],
+      "description": "Backend/provider used to access the model."
+    },
+    "model_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Unique model identifier, e.g. google-t5/t5-base or gpt-4.1-mini."
+    },
+    "interface": {
+      "type": "string",
+      "enum": ["seq2seq", "causal_lm", "chat"],
+      "description": "How the model is used by the pipeline."
+    },
+    "variant": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Logical model variant, e.g. original, finetuned_sft, finetuned_lora."
+    },
+    "paths": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["model_root", "cache_dir"],
+      "properties": {
+        "model_root": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Root directory that stores local model families."
+        },
+        "cache_dir": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Cache directory used while downloading local models."
+        }
+      }
+    },
+    "generation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_new_tokens", "temperature", "do_sample"],
+      "properties": {
+        "max_new_tokens": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "temperature": {
+          "type": "number",
+          "minimum": 0.0
+        },
+        "do_sample": {
+          "type": "boolean"
+        }
+      }
+    },
+    "api": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["api_key_env"],
+      "properties": {
+        "api_key_env": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Environment variable name that contains the API key."
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "provider": { "const": "huggingface" }
+        },
+        "required": ["provider"]
+      },
+      "then": {
+        "required": ["paths"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "provider": { "const": "openai" }
+        },
+        "required": ["provider"]
+      },
+      "then": {
+        "required": ["api"]
+      }
+    }
+  ]
+}
