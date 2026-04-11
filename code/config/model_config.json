@@ -1,7 +1,34 @@
 {
-  "provider": "huggingface",
-  "model_id": "google-t5/t5-base",
-  "architecture": "seq2seq",
-  "model_root": "code/models",
-  "cache_dir": "code/models/cache"
+  "models": {
+    "t5_base": {
+      "provider": "huggingface",
+      "model_id": "google-t5/t5-base",
+      "interface": "seq2seq",
+      "variant": "original",
+      "paths": {
+        "model_root": "code/models",
+        "cache_dir": "code/models/cache"
+      },
+      "generation": {
+        "max_new_tokens": 128,
+        "temperature": 0.0,
+        "do_sample": false
+      }
+    },
+    "qwen3_0_6b": {
+      "provider": "huggingface",
+      "model_id": "Qwen/Qwen3-0.6B",
+      "interface": "causal_lm",
+      "variant": "original",
+      "paths": {
+        "model_root": "code/models",
+        "cache_dir": "code/models/cache"
+      },
+      "generation": {
+        "max_new_tokens": 128,
+        "temperature": 0.0,
+        "do_sample": false
+      }
+    }
+  }
 }
