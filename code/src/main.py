@@ -44,11 +44,11 @@ def build_parser() -> argparse.ArgumentParser:
     )
 
     subparsers = parser.add_subparsers(dest="mode", required=True)
+    query_parser = subparsers.add_parser("query", help="Run the query task.")
     query_parser.add_argument("--model", required=True, help="Model to use for querying.")
     query_parser.add_argument("--prompt-mode", required=False,choices=["empire_compass", "zero_shot", "few_shot"] ,help="Prompt mode to use for querying.")
     query_parser.add_argument("--family", required=False,choices=["nlp4re", "empirical_research"] ,help="Template family to use for querying (e.g., 'nlp4re', 'empirical_research').")
     query_parser.add_argument("--question", required=True, help="The question to query the model with.")
-    query_parser = subparsers.add_parser("query", help="Run the query task.")
 
 
     query_parser.set_defaults(func=run_query_task)
