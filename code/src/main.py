@@ -5,6 +5,7 @@ from src.core.model_loader import load_model_and_tokenizer, generate_raw_respons
 CONFIG_PATH = 'code/config/model_config.json'
 
 def run_query_task(args: argparse.Namespace) -> int:
+    validate_query_args(args)
     print("Running query task with args:", args)
     
     full_model_config = load_json_config(CONFIG_PATH)
@@ -30,6 +31,12 @@ def run_evaluate_task(args: argparse.Namespace) -> int:
     print("Running evaluation task with args:", args)
     return 0
 
+
+def validate_query_args(args: argparse.Namespace) -> None:
+    if args.prompt_mode == "empire_compass" and not args.family:
+        raise ValueError("The --family argument is required when using the 'empire_compass' prompt mode.")
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="orkg-sparql-pipeline",
@@ -37,11 +44,13 @@ def build_parser() -> argparse.ArgumentParser:
     )
 
     subparsers = parser.add_subparsers(dest="mode", required=True)
-
-    query_parser = subparsers.add_parser("query", help="Run the query task.")
     query_parser.add_argument("--model", required=True, help="Model to use for querying.")
-    query_parser.add_argument("--template", required=False, help="Template being used. (e.g., 'nlp4re' or 'empirical_research')")
-    query_parser.add_argument("--question", required=True, help="The question to query.")
+    query_parser.add_argument("--prompt-mode", required=False,choices=["empire_compass", "zero_shot", "few_shot"] ,help="Prompt mode to use for querying.")
+    query_parser.add_argument("--family", required=False,choices=["nlp4re", "empirical_research"] ,help="Template family to use for querying (e.g., 'nlp4re', 'empirical_research').")
+    query_parser.add_argument("--question", required=True, help="The question to query the model with.")
+    query_parser = subparsers.add_parser("query", help="Run the query task.")
+
+
     query_parser.set_defaults(func=run_query_task)
 
 
