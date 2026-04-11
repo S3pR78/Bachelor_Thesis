@@ -12,9 +12,9 @@
 
   "empire_compass_nlp4re_template" : "code/prompts/empire_compass/templates/nlp4re-template.json",
   "empire_compass_empirical_research_template": "code/prompts/empire_compass/templates/empirical_research_practice.json",
-
   "empire_compass_nlp4re_rendered_prompt": "code/prompts/empire_compass/generated/rendered/nlp4re_prompt.txt",
   "empire_compass_empirical_research_rendered_prompt": "code/prompts/empire_compass/generated/rendered/empirical_research_prompt.txt",
-
-  "empire_compass_prompt_runner_config": "code/prompts/empire_compass/config/prompt_runner_config.json"
+  "empire_compass_prompt_runner_config": "code/prompts/empire_compass/config/prompt_runner_config.json",
+  "empire_compass_runner_script": "code/prompts/empire_compass/generator/run_prompt_generator.ts",
+  "empire_compass_runner_tsconfig": "code/prompts/empire_compass/tsconfig.json"
 }

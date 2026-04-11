@@ -1,7 +1,14 @@
 import argparse
-from src.utils.config_loader import load_json_config, get_model_entry, get_configured_path
+import subprocess
 from src.core.model_loader import load_model_and_tokenizer, generate_raw_response
 from pathlib import Path
+import shutil
+
+from src.utils.config_loader import (
+    load_json_config,
+    get_model_entry,
+    get_configured_path,
+)
 
 CONFIG_PATH = 'code/config/model_config.json'
 
@@ -13,8 +20,7 @@ def run_query_task(args: argparse.Namespace) -> int:
 
         print(f"Empire Compass family: {args.family}")
         print(f"Expected prompt path: {prompt_output_path}")
-        ensure_prompt_file_exists(prompt_output_path)
-        print("prompt file found")
+        ensure_empire_compass_prompt_exists(args.family, prompt_output_path)
 
     print("Running query task with args:", args)
     
@@ -74,7 +80,7 @@ def get_empire_compass_profile_for_family(family: str) ->dict:
 
     return profile
 
-
+# now is this function actually useless. maybe remove it!!
 def ensure_prompt_file_exists(prompt_path: Path) -> None:
     if not prompt_path.exists():
         raise FileNotFoundError(
@@ -86,6 +92,45 @@ def ensure_prompt_file_exists(prompt_path: Path) -> None:
         raise FileNotFoundError(
             f"Prompt path exists but is not a file: {prompt_path}"
         )
+
+def ensure_empire_compass_prompt_exists(family: str, prompt_path: Path) -> None:
+    if prompt_path.exists() and prompt_path.is_file():
+        print("prompt file found.")
+        return
+
+    print(f"Prompt file missing. Generating Empire Compass prompt for family '{family}'...")
+
+    runner_script_path = get_configured_path("empire_compass_runner_script")
+    runner_tsconfig_path = get_configured_path("empire_compass_runner_tsconfig")
+
+    repo_root = Path(__file__).resolve().parents[2]
+
+    npx_path = shutil.which("npx")
+
+    if not npx_path:
+        raise FileNotFoundError(
+            "Could not find 'npx' in PATH. "
+            "Please make sure Node.js/npm is installed on this machine "
+            "and that 'npx' is available in the active shell environment."
+        )
+
+    command = [
+        "npx",
+        "ts-node",
+        "--project",
+        str(runner_tsconfig_path),
+        str(runner_script_path),
+        family,
+    ]
+
+    subprocess.run(command, check=True, cwd=repo_root)
+
+    if not prompt_path.exists() or not prompt_path.is_file():
+        raise FileNotFoundError(
+            f"Prompt file was not created successfully: {prompt_path}"
+        )
+    print("Prompt file generated successfully.")
+
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
