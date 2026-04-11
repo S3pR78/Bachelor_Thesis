@@ -25,7 +25,13 @@ const PATH_CONFIG_PATH = path.resolve(REPO_ROOT, "code/config/path_config.json")
 
 const PROMPT_RUNNER_CONFIG_KEY = "empire_compass_prompt_runner_config";
 
-const SELECTED_PROFILE_KEY = "nlp4re";
+function parseSelectedProfileKey(): string {
+	const profileKey = process.argv[2];
+	if (!profileKey || typeof profileKey !== "string") {
+		throw new Error("No profile key provided.");
+	}
+	return profileKey.trim();
+}
 
 function readJsonFile<T>(filePath: string): T {
 	const fileContent = fs.readFileSync(filePath, "utf-8");
@@ -67,12 +73,13 @@ function loadRunnerConfig(filePath: string): PromptRunnerConfig {
 	const config = readJsonFile<PromptRunnerConfig>(filePath);
 
 	if (!config.profiles ||  typeof config.profiles !== "object") {
-		throw new Error(`Profile '${SELECTED_PROFILE_KEY}' not found in runner config.`);
+		throw new Error(`prompt_runner_config.json must contain a 'profiles' object.`);
 	}
 	return config;
 }
 
 function main(): void {
+	const SELECTED_PROFILE_KEY = parseSelectedProfileKey();
 	const pathConfig = loadPathConfig(PATH_CONFIG_PATH);
 	const RUNNER_CONFIG_PATH = getConfiguredPath(pathConfig, PROMPT_RUNNER_CONFIG_KEY);
 	
@@ -80,7 +87,7 @@ function main(): void {
 	const runnerConfig = loadRunnerConfig(RUNNER_CONFIG_PATH);
 	const profile = runnerConfig.profiles[SELECTED_PROFILE_KEY];
 
-	
+
 	if (!profile) {
 		throw new Error(`Profile '${SELECTED_PROFILE_KEY}' not found in runner config.`);
 	}
