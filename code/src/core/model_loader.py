@@ -21,10 +21,10 @@ def get_model_architecture(model_config: dict) -> str:
     """
     Retrieves the model architecture from the model configuration.
     """
-    architecture = model_config.get("architecture")
+    architecture = model_config.get("interface")
 
     if not architecture:
-        raise ValueError("Model architecture must be specified in the configuration.")
+        raise ValueError("Model interface must be specified in the configuration.")
 
     return architecture.strip().lower()
 

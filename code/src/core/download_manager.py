@@ -47,18 +47,17 @@ def get_model_id(model_config: dict) -> str:
 
 
 def get_model_root(model_config: dict) -> Path:
-    """
-    Retrieves the model root directory from the model configuration.
 
-    Args:
-        model_config (dict): The model configuration dictionary.
-    Returns:
-        Path: The model root directory.
-    """
+    paths_config = model_config.get("paths", {})
 
-    model_root = model_config.get("model_root", "models")
-    if not model_root:
-        model_root = "models"
+    if not isinstance (paths_config, dict):
+        raise ValueError("The 'paths' field in the model configuration must be a dictionary.")
+
+    model_root = paths_config.get("model_root", "code/models")
+    
+    if not isinstance(model_root, str) or not model_root.strip():
+        raise ValueError("The 'model_root' field in the model configuration must be a non-empty string.")
+
     return Path(model_root)
 
 def get_model_family_dir(model_config: dict) -> Path:
