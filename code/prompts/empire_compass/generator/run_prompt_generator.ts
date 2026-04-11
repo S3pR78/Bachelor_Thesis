@@ -3,8 +3,7 @@ import * as path from "node:path";
 import { generateDynamicSPARQLPrompt } from "./promptGenerator";
 
 
-const SELECTED_PROFILE_KEY = "empirical_research"; // Change this to select a different profile. When i find the time to implement CLI args, this will be replaced by a command line argument.
-
+type PathConfig = Record<string, string>;
 
 type PromptRunProfile = {
 	template_path: string;
@@ -18,10 +17,15 @@ type PromptRunnerConfig = {
 	profiles: Record<string, PromptRunProfile>;
 }
 
-const RUNNER_CONFIG_PATH = path.resolve(__dirname, "../config/prompt_runner_config.json");
+
 
 const REPO_ROOT = path.resolve(__dirname, "../../../..");
 
+const PATH_CONFIG_PATH = path.resolve(REPO_ROOT, "code/config/path_config.json");
+
+const PROMPT_RUNNER_CONFIG_KEY = "empire_compass_prompt_runner_config";
+
+const SELECTED_PROFILE_KEY = "nlp4re";
 
 function readJsonFile<T>(filePath: string): T {
 	const fileContent = fs.readFileSync(filePath, "utf-8");
@@ -47,8 +51,21 @@ function resolveRepoPath(relativePath: string): string {
 	return path.resolve(REPO_ROOT, relativePath);
 }
 
+function loadPathConfig(filePath: string): PathConfig {
+	return readJsonFile<PathConfig>(filePath);
+}
+
+function getConfiguredPath(pathConfig: PathConfig,key: string): string {
+	const relativePath = pathConfig[key];
+	if (!relativePath || typeof relativePath !== "string") {
+		throw new Error(`Path for key '${key}' not found in path config.`);
+	}
+	return resolveRepoPath(relativePath);
+}
+
 function loadRunnerConfig(filePath: string): PromptRunnerConfig {
 	const config = readJsonFile<PromptRunnerConfig>(filePath);
+
 	if (!config.profiles ||  typeof config.profiles !== "object") {
 		throw new Error(`Profile '${SELECTED_PROFILE_KEY}' not found in runner config.`);
 	}
@@ -56,8 +73,14 @@ function loadRunnerConfig(filePath: string): PromptRunnerConfig {
 }
 
 function main(): void {
+	const pathConfig = loadPathConfig(PATH_CONFIG_PATH);
+	const RUNNER_CONFIG_PATH = getConfiguredPath(pathConfig, PROMPT_RUNNER_CONFIG_KEY);
+	
+	
 	const runnerConfig = loadRunnerConfig(RUNNER_CONFIG_PATH);
 	const profile = runnerConfig.profiles[SELECTED_PROFILE_KEY];
+
+	
 	if (!profile) {
 		throw new Error(`Profile '${SELECTED_PROFILE_KEY}' not found in runner config.`);
 	}
