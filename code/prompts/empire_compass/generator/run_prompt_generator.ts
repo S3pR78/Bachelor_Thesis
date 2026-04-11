@@ -2,8 +2,26 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import { generateDynamicSPARQLPrompt } from "./promptGenerator";
 
-const NLP4RE_TEMPLATE_PATH = path.resolve(__dirname, "../templates/nlp4re-template.json");
-const OUTPUT_TXT_PATH = path.resolve(__dirname, "../generated/rendered_prompt.txt");
+
+const SELECTED_PROFILE_KEY = "nlp4re"; // Change this to select a different profile. When i find the time to implement CLI args, this will be replaced by a command line argument.
+
+
+type PromptRunProfile = {
+	template_path: string;
+	template_id: string;
+	template_label: string;
+	target_class_id: string;
+	output_txt_path: string;
+};
+
+type PromptRunnerConfig = {
+	profiles: Record<string, PromptRunProfile>;
+}
+
+const RUNNER_CONFIG_PATH = path.resolve(__dirname, "../config/prompt_runner_config.json");
+
+const REPO_ROOT = path.resolve(__dirname, "../../../..");
+
 
 function readJsonFile<T>(filePath: string): T {
 	const fileContent = fs.readFileSync(filePath, "utf-8");
@@ -20,25 +38,50 @@ function ensureDir(dirPath: string): void {
 function writeToFile(filePath: string, content: string): void {
 	ensureDir(path.dirname(filePath));
 	fs.writeFileSync(filePath, content, "utf-8");
-	console.log(`Prompt written to: ${filePath}`);
+}
+
+function resolveRepoPath(relativePath: string): string {
+	if (path.isAbsolute(relativePath)) {
+		return relativePath;
+	}
+	return path.resolve(REPO_ROOT, relativePath);
+}
+
+function loadRunnerConfig(filePath: string): PromptRunnerConfig {
+	const config = readJsonFile<PromptRunnerConfig>(filePath);
+	if (!config.profiles ||  typeof config.profiles !== "object") {
+		throw new Error(`Profile '${SELECTED_PROFILE_KEY}' not found in runner config.`);
+	}
+	return config;
 }
 
 function main(): void {
-    const templateMapping = readJsonFile<Record<string, unknown>>(NLP4RE_TEMPLATE_PATH);
+	const runnerConfig = loadRunnerConfig(RUNNER_CONFIG_PATH);
+	const profile = runnerConfig.profiles[SELECTED_PROFILE_KEY];
+	if (!profile) {
+		throw new Error(`Profile '${SELECTED_PROFILE_KEY}' not found in runner config.`);
+	}
 
+	const templatePath = resolveRepoPath(profile.template_path);
+	const outputTxtPath = resolveRepoPath(profile.output_txt_path);
+
+	const templateMapping = readJsonFile<Record<string, unknown>>(templatePath);
 
 	const prompt = generateDynamicSPARQLPrompt(
 		templateMapping as any,
-		"R1544125",
-		"NLP for Requirements Engineering (NLP4RE)",
-		"C121001"
+		profile.template_id,
+		profile.template_label,
+		profile.target_class_id
 	);
 
-	writeToFile(OUTPUT_TXT_PATH, prompt);
-	console.log("Prompt generated successfully and saved successfully.");
-	console.log(`Template file: ${NLP4RE_TEMPLATE_PATH}`);
-	console.log(`Output file: ${OUTPUT_TXT_PATH}`);
-	console.log(`prompt length: ${prompt.length}`);
+	writeToFile(outputTxtPath, prompt);
+
+	console.log("Prompt generated and saved successfully.");
+	console.log(`Profile:      ${SELECTED_PROFILE_KEY}`);
+	console.log(`Config file:  ${RUNNER_CONFIG_PATH}`);
+	console.log(`Template:     ${templatePath}`);
+	console.log(`Output file:  ${outputTxtPath}`);
+	console.log(`Prompt size:  ${prompt.length}`);
 }
 
 main();
