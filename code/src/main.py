@@ -13,6 +13,8 @@ def run_query_task(args: argparse.Namespace) -> int:
 
         print(f"Empire Compass family: {args.family}")
         print(f"Expected prompt path: {prompt_output_path}")
+        ensure_prompt_file_exists(prompt_output_path)
+        print("prompt file found")
 
     print("Running query task with args:", args)
     
@@ -71,6 +73,19 @@ def get_empire_compass_profile_for_family(family: str) ->dict:
         )
 
     return profile
+
+
+def ensure_prompt_file_exists(prompt_path: Path) -> None:
+    if not prompt_path.exists():
+        raise FileNotFoundError(
+            f"Prompt file not found: {prompt_path}. "
+            "Generate the Empire Compass prompt first."           
+        )
+
+    if not prompt_path.is_file():
+        raise FileNotFoundError(
+            f"Prompt path exists but is not a file: {prompt_path}"
+        )
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
