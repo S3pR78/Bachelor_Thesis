@@ -1,0 +1,18 @@
+{
+  "profiles": {
+    "nlp4re": {
+      "template_path": "code/prompts/empire_compass/templates/nlp4re-template.json",
+      "template_id": "R1544125",
+      "template_label": "NLP for Requirements Engineering (NLP4RE)",
+      "target_class_id": "C121001",
+      "output_txt_path": "code/prompts/empire_compass/generated/rendered/nlp4re_prompt.txt"
+    },
+    "empirical_research": {
+      "template_path": "code/prompts/empire_compass/templates/empirical_research_practice.json",
+      "template_id": "R186491",
+      "template_label": "Empirical Research Practice",
+      "target_class_id": "C27001",
+      "output_txt_path": "code/prompts/empire_compass/generated/rendered/empirical_research_prompt.txt"
+    }
+  }
+}
