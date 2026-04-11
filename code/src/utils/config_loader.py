@@ -41,28 +41,59 @@ def get_configured_path(key: str) -> Path:
 
 
 
-def get_model_entry(config: dict, model_key: str) -> dict:
-    """Get the model entry from the configuration for a given model key."""
-    if "models" not in config:
-        raise KeyError("The configuration must contain a 'models' section.")
-    
-    models = config["models"]
-    
+def get_model_entry(config: dict, model_selector: str) -> dict:
+    """
+    Returns a single model entry from the multi-model configuration.
+
+    The selector may either be:
+    - the model config key (e.g. "t5_base"), or
+    - the model_id value (e.g. "google-t5/t5-base").
+    """
+    models = config.get("models")
+
     if not isinstance(models, dict) or not models:
-        raise ValueError("The 'models' section must be a non-empty dictionary.")
-    
-    if not isinstance(model_key, str) or not model_key.strip():
-        raise ValueError("Model key must be a non-empty string.")
-    
-    normalized_key = model_key.strip().lower()
+        raise ValueError("Model configuration must contain a non-empty 'models' object.")
 
-    if normalized_key not in models:
-        available_keys = ", ".join(models.keys())
-        raise KeyError(f"Model key '{model_key}' not found in configuration. Available keys: {available_keys}")
-    
-    model_entry = models[normalized_key]
+    if not isinstance(model_selector, str) or not model_selector.strip():
+        raise ValueError("model_selector must be a non-empty string.")
 
-    if not isinstance(model_entry, dict):
-        raise ValueError(f"Model entry for key '{model_key}' must be a dictionary.")
-    
-    return model_entry
+    selector = model_selector.strip().lower()
+
+    if selector in models:
+        model_entry = models[selector]
+        if not isinstance(model_entry, dict):
+            raise ValueError(f"Model entry '{selector}' must be a dictionary.")
+        return model_entry
+
+    matching_entries = []
+
+    for model_key, model_entry in models.items():
+        if not isinstance(model_entry, dict):
+            raise ValueError(f"Model entry '{model_key}' must be a dictionary.")
+
+        if model_entry.get("model_id") == selector:
+            matching_entries.append((model_key, model_entry))
+
+    if len(matching_entries) == 1:
+        return matching_entries[0][1]
+
+    if len(matching_entries) > 1:
+        matching_keys = ", ".join(model_key for model_key, _ in matching_entries)
+        raise ValueError(
+            f"Model selector '{selector}' is ambiguous. Matching model keys: {matching_keys}"
+        )
+
+    available_keys = ", ".join(sorted(models.keys()))
+    available_model_ids = ", ".join(
+        sorted(
+            model_entry.get("model_id", "")
+            for model_entry in models.values()
+            if isinstance(model_entry, dict) and model_entry.get("model_id")
+        )
+    )
+
+    raise ValueError(
+        f"Unknown model selector '{selector}'. "
+        f"Available model keys: {available_keys}. "
+        f"Available model_ids: {available_model_ids}"
+    )
