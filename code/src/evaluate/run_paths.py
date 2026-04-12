@@ -12,3 +12,12 @@ def make_safe_name(value: str) -> str:
         char if char.isalnum() or char in "._-" else "_"
         for char in value.strip()
     )
+
+
+def get_dataset_stem(dataset_path: str) -> str:
+    path = Path(dataset_path)
+    
+    if not path.name:
+        raise ValueError(f"Invalid dataset path: {dataset_path}")
+    
+    return path.stem
