@@ -1,5 +1,5 @@
 from __future__ import annotations
-
+from collections import Counter
 import json
 from pathlib import Path
 from typing import Any
@@ -47,3 +47,58 @@ def load_analysis_inputs(
         "schema": schema,
         "has_schema": schema is not None,
     }
+
+
+def collect_available_fields(entries: list[dict]) -> list[str]:
+    """
+    Collect all field names that appear in dictionary entries.
+    """
+    field_names: set[str] = set()
+
+    for entry in entries:
+        if not isinstance(entry, dict):
+            continue
+
+        field_names.update(entry.keys())
+
+    return sorted(field_names)
+
+
+def build_field_presence_summary(entries: list[dict]) -> dict[str, Any]:
+    """
+    Build a summary of which fields appear across dataset entries.
+    """
+    dict_entries = [entry for entry in entries if isinstance(entry, dict)]
+    total_entries = len(dict_entries)
+
+    field_counter: Counter[str] = Counter()
+
+    for entry in dict_entries:
+        field_counter.update(entry.keys())
+
+    all_fields = sorted(field_counter.keys())
+
+    field_details = {}
+    for field_name in all_fields:
+        present_count = field_counter[field_name]
+        field_details[field_name] = {
+            "present_count": present_count,
+            "missing_count": total_entries - present_count,
+            "coverage_ratio": round(present_count / total_entries, 4) if total_entries > 0 else None,
+        }
+
+    return {
+        "total_entries": total_entries,
+        "field_count": len(all_fields),
+        "fields": all_fields,
+        "field_details": field_details,
+    }
+
+
+
+
+
+"""
+    dataset_path='code/data/dataset/benchmark_merged_v1.json',
+    schema_path='code/config/schemas/benchmark_dataset_schema_v1.json'
+"""
