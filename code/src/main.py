@@ -1,10 +1,10 @@
 import argparse
 from src.query.query_executor import generate_query_response
-from src.utils.config_loader import load_json_config
 from src.query.prompt_builder import (
     build_final_prompt_for_question,
     validate_query_args,
 )
+from src.evaluate.dataset_loader import load_evaluate_entries
 
 
 """
@@ -44,8 +44,14 @@ def run_train_task(args: argparse.Namespace) -> int:
 
 def run_evaluate_task(args: argparse.Namespace) -> int:
     print("Running evaluation task with args:", args)
-    return 0
 
+    entries = load_evaluate_entries(
+        dataset_path=args.dataset,
+        limit=args.limit,
+    )
+
+    print(f"Loaded entries for this run: {len(entries)}")
+    return 0
 
 # def get_prompt_token_count(tokenizer, prompt:str) -> int:
 #     encoded = tokenizer(prompt, return_tensors="pt", truncation=False)

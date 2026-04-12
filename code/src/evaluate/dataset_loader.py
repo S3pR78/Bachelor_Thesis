@@ -161,3 +161,42 @@ def build_standard_benchmark_profiles(
     ]
 
     return build_profiles_for_fields(entries, standard_fields)
+
+
+import json
+from pathlib import Path
+
+
+def get_dataset_entries(dataset_obj: object) -> list[dict]:
+    if isinstance(dataset_obj, list):
+        return dataset_obj
+
+    if isinstance(dataset_obj, dict):
+        for key in ("entries", "items", "data"):
+            value = dataset_obj.get(key)
+            if isinstance(value, list):
+                return value
+
+    raise ValueError(
+        "Dataset must be a list or a dict containing one of: "
+        "'entries', 'items', or 'data'."
+    )
+
+
+def load_evaluate_entries(dataset_path: str, limit: int | None = None) -> list[dict]:
+    path = Path(dataset_path)
+
+    if not path.exists() or not path.is_file():
+        raise FileNotFoundError(f"Dataset file not found: {path}")
+
+    with path.open("r", encoding="utf-8") as f:
+        dataset_obj = json.load(f)
+
+    entries = get_dataset_entries(dataset_obj)
+
+    if limit is not None:
+        if limit <= 0:
+            raise ValueError("limit must be a positive integer.")
+        entries = entries[:limit]
+
+    return entries
