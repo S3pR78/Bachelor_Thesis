@@ -14,6 +14,8 @@ CONFIG_PATH = 'code/config/model_config.json'
 
 def run_query_task(args: argparse.Namespace) -> int:
     validate_query_args(args)
+    final_prompt = args.question
+
     if args.prompt_mode == "empire_compass":
         profile = get_empire_compass_profile_for_family(args.family)
         prompt_output_path = Path(profile["output_txt_path"])
@@ -21,6 +23,7 @@ def run_query_task(args: argparse.Namespace) -> int:
         print(f"Empire Compass family: {args.family}")
         print(f"Expected prompt path: {prompt_output_path}")
         ensure_empire_compass_prompt_exists(args.family, prompt_output_path)
+        final_prompt = build_empire_compass_prompt(prompt_output_path, args.question)
 
     print("Running query task with args:", args)
     
@@ -28,10 +31,14 @@ def run_query_task(args: argparse.Namespace) -> int:
     model_config = get_model_entry(full_model_config, args.model)
 
     tokenizer, model = load_model_and_tokenizer(model_config)
+
+
+    
+
     response = generate_raw_response(
         model=model,
         tokenizer=tokenizer,
-        prompt=args.question,
+        prompt=final_prompt,
         max_new_tokens=model_config.get("generation", {}).get("max_new_tokens", 128)
     )
 
@@ -130,6 +137,24 @@ def ensure_empire_compass_prompt_exists(family: str, prompt_path: Path) -> None:
             f"Prompt file was not created successfully: {prompt_path}"
         )
     print("Prompt file generated successfully.")
+
+
+
+def load_text_file(file_path: Path) ->str:
+    return file_path.read_text(encoding="utf-8")
+
+def build_empire_compass_prompt(prompt_path: Path, question: str) ->str:
+    prompt_text = load_text_file(prompt_path)
+
+    placeholder = "[Research Question]"
+
+    if placeholder not in prompt_text:
+        raise ValueError(
+            f"Empire Compass prompt does not contain the expectd placeholder "
+            f"{placeholder}: {prompt_path}"
+        )
+    
+    return prompt_text.replace(placeholder, question.strip())
 
 
 def build_parser() -> argparse.ArgumentParser:
