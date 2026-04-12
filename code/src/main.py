@@ -74,32 +74,6 @@ def run_train_task(args: argparse.Namespace) -> int:
 
 
 
-def get_entry_benchmark_metadata(entry: dict) -> dict:
-    metadata = {}
-
-    for key in (
-        "uid",
-        "id",
-        "source_id",
-        "source_dataset",
-        "family",
-        "special_types",
-        "query_shape",
-        "sparql_components",
-        "answer_type",
-        "complexity_level",
-        "ambiguity_risk",
-        "lexical_gap_risk",
-        "hallucination_risk",
-    ):
-        if key in entry:
-            metadata[key] = entry.get(key)
-
-    return metadata
-
-
-
-
 def run_evaluate_task(args: argparse.Namespace) -> int:
     print("Running evaluation task with args:", args)
     return 0
