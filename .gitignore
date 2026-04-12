@@ -2,3 +2,5 @@
 **/.German/
 .vscode/
 models/
+.env
+.env.*

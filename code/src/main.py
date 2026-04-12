@@ -32,15 +32,15 @@ def run_query_task(args: argparse.Namespace) -> int:
 
     tokenizer, model = load_model_and_tokenizer(model_config)
 
+    
+    # prompt_token_count = get_prompt_token_count(tokenizer, final_prompt)
+    # print(f"Prompt token count: {prompt_token_count}")
 
-    prompt_token_count = get_prompt_token_count(tokenizer, final_prompt)
-    print(f"Prompt token count: {prompt_token_count}")
-
-    if prompt_token_count > 512 :
-        raise ValueError(
-            f"Prompt is too long ({prompt_token_count} tokens). "
-            "Please shorten the question or choose a different prompt mode."
-        )
+    # if prompt_token_count > 512 :
+    #     raise ValueError(
+    #         f"Prompt is too long ({prompt_token_count} tokens). "
+    #         "Please shorten the question or choose a different prompt mode."
+    #     )
     
 
     response = generate_raw_response(
