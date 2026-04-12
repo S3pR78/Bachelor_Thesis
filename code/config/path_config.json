@@ -9,6 +9,7 @@
   "benchmark_analysis": "code/outputs/benchmark_analysis",
   "nlp4re_dataset": "code/data/dataset/nlp4re/merged.json",
   "empirical_research_dataset": "code/data/dataset/empirical_research/merged.json",
+  "benchmark_merged_v1": "code/data/dataset/benchmark_merged_v1.json",
 
   "empire_compass_nlp4re_template" : "code/prompts/empire_compass/templates/nlp4re-template.json",
   "empire_compass_empirical_research_template": "code/prompts/empire_compass/templates/empirical_research_practice.json",
