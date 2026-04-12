@@ -1,5 +1,6 @@
 import argparse
 from src.query.query_executor import generate_query_response
+from src.evaluate.run_paths import ensure_evaluate_run_dir
 from src.query.prompt_builder import (
     build_final_prompt_for_question,
     validate_query_args,
@@ -52,6 +53,15 @@ def run_evaluate_task(args: argparse.Namespace) -> int:
         dataset_path=args.dataset,
         limit=args.limit,
     )
+
+    run_dir = ensure_evaluate_run_dir(
+        model_name=args.model,
+        dataset_path=args.dataset,
+        prompt_mode=None,
+    )
+
+    print(f"Run directory: {run_dir}")
+    print(f"Loaded entries for this run: {len(entries)}")
 
     print(f"Loaded entries for this run: {len(entries)}")
 
