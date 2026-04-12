@@ -33,6 +33,14 @@ def run_query_task(args: argparse.Namespace) -> int:
     tokenizer, model = load_model_and_tokenizer(model_config)
 
 
+    prompt_token_count = get_prompt_token_count(tokenizer, final_prompt)
+    print(f"Prompt token count: {prompt_token_count}")
+
+    if prompt_token_count > 512 :
+        raise ValueError(
+            f"Prompt is too long ({prompt_token_count} tokens). "
+            "Please shorten the question or choose a different prompt mode."
+        )
     
 
     response = generate_raw_response(
@@ -155,6 +163,11 @@ def build_empire_compass_prompt(prompt_path: Path, question: str) ->str:
         )
     
     return prompt_text.replace(placeholder, question.strip())
+
+
+def get_prompt_token_count(tokenizer, prompt:str) -> int:
+    encoded = tokenizer(prompt, return_tensors="pt", truncation=False)
+    return int(encoded["input_ids"].shape[1])
 
 
 def build_parser() -> argparse.ArgumentParser:
