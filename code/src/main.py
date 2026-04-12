@@ -13,18 +13,22 @@ from src.utils.config_loader import (
 
 CONFIG_PATH = 'code/config/model_config.json'
 
+"""
+This function runs the query task based on the provided command-line arguments.
+It first validates the arguments, then builds the final prompt based on the question and selected prompt mode.
+It loads the model configuration from a JSON file and determines which provider to use (e.g., OpenAI or a local model).
+If the provider is OpenAI, it calls the function to generate a response using the OpenAI API. If the provider is not OpenAI, 
+it loads the local model and tokenizer, and generates
+a response using the local model. Finally, it prints the generated response and returns 0 to indicate successful execution.
+"""
 def run_query_task(args: argparse.Namespace) -> int:
     validate_query_args(args)
-    final_prompt = args.question
 
-    if args.prompt_mode == "empire_compass":
-        profile = get_empire_compass_profile_for_family(args.family)
-        prompt_output_path = Path(profile["output_txt_path"])
-
-        print(f"Empire Compass family: {args.family}")
-        print(f"Expected prompt path: {prompt_output_path}")
-        ensure_empire_compass_prompt_exists(args.family, prompt_output_path)
-        final_prompt = build_empire_compass_prompt(prompt_output_path, args.question)
+    final_prompt = build_final_prompt_for_question(
+        question=args.question,
+        prompt_mode=args.prompt_mode,
+        family=args.family,
+    )
 
     print("Running query task with args:", args)
     
@@ -78,12 +82,22 @@ def validate_query_args(args: argparse.Namespace) -> None:
         raise ValueError("The --family argument is required when using the 'empire_compass' prompt mode.")
     
 
-
+"""
+This function loads the configuration for the Empire Compass prompt runner from a JSON file. 
+The path to the configuration file is retrieved using the get_configured_path utility function, 
+which looks up the path based on a key (in this case, "empire_compass_prompt_runner_config
+"""
 def load_empire_compass_runner_config() -> dict:
     runner_config_path = get_configured_path("empire_compass_prompt_runner_config")
     return load_json_config(runner_config_path)
 
 
+"""
+This function retrieves the Empire Compass prompt profile for a given template family. 
+It first validates the input family name, then loads the runner configuration to find the corresponding profile. 
+If the family is not found in the configuration, it raises a ValueError with a message listing the available families. 
+If the profile is found, it returns the profile as a dictionary. This profile is expected to contain information such as the path to the generated prompt file for that family, which will be used later to build the final prompt for the model.
+"""
 def get_empire_compass_profile_for_family(family: str) ->dict:
     if not isinstance(family,str) or not family.strip():
         raise ValueError("family must be a non-empty string.")
@@ -105,6 +119,43 @@ def get_empire_compass_profile_for_family(family: str) ->dict:
 
     return profile
 
+"""
+This function is responsible for building the final prompt that will be sent 
+to the model based on the user's question and the selected prompt mode. 
+If the 'empire_compass' prompt mode is selected, it will ensure that the corresponding 
+prompt file exists (generating it if necessary) and then build the final prompt by 
+replacing the placeholder in the prompt template with the user's question. 
+For other prompt modes (e.g., 'zero_shot', 'few_shot'), 
+it currently just returns the question as the final prompt, but this can 
+be extended in the future to apply different formatting or templates based on the selected prompt mode.
+"""
+def build_final_prompt_for_question(
+        question: str,
+        prompt_mode: str,
+        family: str
+) -> str:
+    if not isinstance(question, str) or not question.strip():
+        raise ValueError("question must be a non-empty string.")
+    
+    final_prompt = question.strip()
+
+    if prompt_mode == "empire_compass":
+        if not family:
+            raise ValueError("family must be provided when using 'empire_compass' prompt mode.")
+        
+        profile = get_empire_compass_profile_for_family(family)
+        prompt_output_path = Path(profile["output_txt_path"])
+
+        print(f"Empire Compass family: {family}")
+        print(f"Expected prompt path: {prompt_output_path}")
+
+
+
+        ensure_empire_compass_prompt_exists(family, prompt_output_path)
+        final_prompt = build_empire_compass_prompt(prompt_output_path, question)
+
+        return final_prompt
+
 # now is this function actually useless. maybe remove it!!
 def ensure_prompt_file_exists(prompt_path: Path) -> None:
     if not prompt_path.exists():
@@ -118,6 +169,14 @@ def ensure_prompt_file_exists(prompt_path: Path) -> None:
             f"Prompt path exists but is not a file: {prompt_path}"
         )
 
+"""
+This function checks if the Empire Compass prompt file
+for the specified family exists at the expected location. 
+If the file is missing, it runs the Empire Compass prompt generation script using npx and ts-node to create the prompt file. 
+After running the script, it verifies that the prompt file was created successfully. 
+If any step fails (e.g., npx not found, script execution failure, or prompt file still missing),
+it raises an appropriate error with a descriptive message.
+"""
 def ensure_empire_compass_prompt_exists(family: str, prompt_path: Path) -> None:
     if prompt_path.exists() and prompt_path.is_file():
         print("prompt file found.")
