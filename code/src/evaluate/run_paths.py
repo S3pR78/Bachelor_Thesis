@@ -21,3 +21,22 @@ def get_dataset_stem(dataset_path: str) -> str:
         raise ValueError(f"Invalid dataset path: {dataset_path}")
     
     return path.stem
+
+
+def build_evaluate_run_dir(
+        model_name: str,
+        dataset_path: str,
+        prompt_mode: str | None,
+) -> Path:
+    base_dir = get_configured_path("evaluation_runs")
+
+    safe_model_name = make_safe_name(model_name)
+    safe_prompt_mode = make_safe_name(prompt_mode or "default")
+    safe_dataset_name = make_safe_name(get_dataset_stem(dataset_path))
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+
+    return(
+        base_dir
+        / safe_model_name
+        / f"{safe_prompt_mode}__{safe_dataset_name}__{timestamp}"
+    )
