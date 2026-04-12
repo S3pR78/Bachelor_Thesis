@@ -3,6 +3,7 @@ import subprocess
 from src.core.model_loader import load_model_and_tokenizer, generate_raw_response
 from pathlib import Path
 import shutil
+from src.core.openai_provider import generate_raw_response_openai
 
 from src.utils.config_loader import (
     load_json_config,
@@ -30,25 +31,34 @@ def run_query_task(args: argparse.Namespace) -> int:
     full_model_config = load_json_config(CONFIG_PATH)
     model_config = get_model_entry(full_model_config, args.model)
 
-    tokenizer, model = load_model_and_tokenizer(model_config)
+    provider = model_config.get("provider", "").strip().lower()
+    if provider == "openai":
+        response = generate_raw_response_openai(
+            model_id = model_config.get("model_id"),
+            prompt=final_prompt,
+            max_output_tokens=model_config.get("generation", {}).get("max_new_tokens", 256),
+            temperature=model_config.get("generation", {}).get("temperature", 0.0),
+            env_var_name=model_config.get("api", {}).get("env_var_name", "OPENAI_API_KEY")
+        )   
+        print("Generated response:", response)
+        return 0
+    else:
+        tokenizer, model = load_model_and_tokenizer(model_config)
+        # prompt_token_count = get_prompt_token_count(tokenizer, final_prompt)
+        # print(f"Prompt token count: {prompt_token_count}")
 
-    
-    # prompt_token_count = get_prompt_token_count(tokenizer, final_prompt)
-    # print(f"Prompt token count: {prompt_token_count}")
-
-    # if prompt_token_count > 512 :
-    #     raise ValueError(
-    #         f"Prompt is too long ({prompt_token_count} tokens). "
-    #         "Please shorten the question or choose a different prompt mode."
-    #     )
-    
-
-    response = generate_raw_response(
-        model=model,
-        tokenizer=tokenizer,
-        prompt=final_prompt,
-        max_new_tokens=model_config.get("generation", {}).get("max_new_tokens", 128)
-    )
+        # if prompt_token_count > 512 :
+        #     raise ValueError(
+        #         f"Prompt is too long ({prompt_token_count} tokens). "
+        #         "Please shorten the question or choose a different prompt mode."
+        #     )
+        
+        response = generate_raw_response(
+            model=model,
+            tokenizer=tokenizer,
+            prompt=final_prompt,
+            max_new_tokens=model_config.get("generation", {}).get("max_new_tokens", 128)
+        )
 
     print("Generated response:", response)
     return 0
