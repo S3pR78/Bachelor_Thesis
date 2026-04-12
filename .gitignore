@@ -5,3 +5,4 @@ models/
 .env
 .env.*
 plan.md
+code/.tools
