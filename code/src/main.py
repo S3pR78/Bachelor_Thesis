@@ -34,6 +34,9 @@ def run_query_task(args: argparse.Namespace) -> int:
     print("Generated response:", response)
     return 0
 
+
+
+
 def run_train_task(args: argparse.Namespace) -> int:
     print("Running training task with args:", args)
     return 0

@@ -4,3 +4,4 @@
 models/
 .env
 .env.*
+plan.md
