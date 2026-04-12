@@ -5,7 +5,7 @@ from src.utils.config_loader import get_configured_path
 
 
 
-def _filter_entries_by_filed(
+def _filter_entries_by_field(
     data: list[dict[str, Any]], 
     field_name: str, 
     field_value: str | None
@@ -36,10 +36,10 @@ def load_dataset_from_config(dataset_key: str,
     if not isinstance(data, list):
         raise ValueError("Dataset JSON must be a list of entries.")
     
-    data = _filter_entries_by_filed(data, "review_status", review_status)
-    data = _filter_entries_by_filed(data, "gold_status", gold_status)
-    data = _filter_entries_by_filed(data, "family", family)
-    data = _filter_entries_by_filed(data, "source_dataset", source_dataset)
+    data = _filter_entries_by_field(data, "review_status", review_status)
+    data = _filter_entries_by_field(data, "gold_status", gold_status)
+    data = _filter_entries_by_field(data, "family", family)
+    data = _filter_entries_by_field(data, "source_dataset", source_dataset)
     
     return data
 
