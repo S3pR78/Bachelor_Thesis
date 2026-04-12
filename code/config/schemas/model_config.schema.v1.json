@@ -38,7 +38,7 @@
         "model_id": {
           "type": "string",
           "minLength": 1,
-          "description": "Unique model identifier, e.g. google-t5/t5-base or gpt-4.1-mini."
+          "description": "Unique model identifier, e.g. google-t5/t5-base or gpt-4o."
         },
         "interface": {
           "type": "string",
@@ -70,9 +70,12 @@
         "generation": {
           "type": "object",
           "additionalProperties": false,
-          "required": ["max_new_tokens", "temperature", "do_sample"],
           "properties": {
             "max_new_tokens": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "max_output_tokens": {
               "type": "integer",
               "minimum": 1
             },
@@ -107,7 +110,12 @@
             "required": ["provider"]
           },
           "then": {
-            "required": ["paths"]
+            "required": ["paths"],
+            "properties": {
+              "generation": {
+                "required": ["max_new_tokens", "temperature", "do_sample"]
+              }
+            }
           }
         },
         {
@@ -118,7 +126,15 @@
             "required": ["provider"]
           },
           "then": {
-            "required": ["api"]
+            "required": ["api"],
+            "properties": {
+              "interface": {
+                "const": "chat"
+              },
+              "generation": {
+                "required": ["max_output_tokens", "temperature"]
+              }
+            }
           }
         }
       ]

@@ -29,6 +29,19 @@
         "temperature": 0.0,
         "do_sample": false
       }
+    },
+    "gpt_4o": {
+    	"provider": "openai",
+    	"model_id": "gpt-4o",
+    	"interface": "chat",
+    	"variant": "original",
+    	"generation": {
+        "max_output_tokens": 512,
+        "temperature": 0.0
+     	 },
+      	"api": {
+        	"api_key_env": "OPENAI_API_KEY"
+      	}
     }
   }
 }
