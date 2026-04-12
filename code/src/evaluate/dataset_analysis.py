@@ -96,6 +96,49 @@ def build_field_presence_summary(entries: list[dict]) -> dict[str, Any]:
 
 
 
+def extract_schema_field_names(schema: dict[str, Any]) -> list[str]:
+    """
+    Extract top-level field names from a JSON schema object.
+    Expected format: schema["properties"] is a dictionary.
+    """
+    properties = schema.get("properties")
+
+    if not isinstance(properties, dict):
+        raise ValueError(
+            "Schema must contain a top-level 'properties' dictionary."
+        )
+
+    return sorted(properties.keys())
+
+
+def build_schema_field_comparison(
+    entries: list[dict],
+    schema: dict[str, Any],
+) -> dict[str, Any]:
+    """
+    Compare dataset fields against schema-defined top-level fields.
+    """
+    dataset_fields = set(collect_available_fields(entries))
+    schema_fields = set(extract_schema_field_names(schema))
+
+    shared_fields = sorted(dataset_fields & schema_fields)
+    schema_only_fields = sorted(schema_fields - dataset_fields)
+    dataset_only_fields = sorted(dataset_fields - schema_fields)
+
+    return {
+        "dataset_field_count": len(dataset_fields),
+        "schema_field_count": len(schema_fields),
+        "shared_field_count": len(shared_fields),
+        "shared_fields": shared_fields,
+        "schema_only_field_count": len(schema_only_fields),
+        "schema_only_fields": schema_only_fields,
+        "dataset_only_field_count": len(dataset_only_fields),
+        "dataset_only_fields": dataset_only_fields,
+    }
+
+
+"""
+"""
 
 
 """
