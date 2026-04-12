@@ -1,18 +1,11 @@
 import argparse
-from src.core.model_loader import load_model_and_tokenizer, generate_raw_response
-from src.core.openai_provider import generate_raw_response_openai
-
-from src.utils.config_loader import (
-    load_json_config,
-    get_model_entry,
-)
-
+from src.query.query_executor import generate_query_response
+from src.utils.config_loader import load_json_config
 from src.query.prompt_builder import (
     build_final_prompt_for_question,
     validate_query_args,
 )
 
-CONFIG_PATH = 'code/config/model_config.json'
 
 """
 This function runs the query task based on the provided command-line arguments.
@@ -32,39 +25,11 @@ def run_query_task(args: argparse.Namespace) -> int:
     )
 
     print("Running query task with args:", args)
-    
-    full_model_config = load_json_config(CONFIG_PATH)
-    model_config = get_model_entry(full_model_config, args.model)
 
-    provider = model_config.get("provider", "").strip().lower()
-    if provider == "openai":
-        response = generate_raw_response_openai(
-            model_id = model_config.get("model_id"),
-            prompt=final_prompt,
-            max_output_tokens=model_config.get("generation", {}).get("max_new_tokens", 256),
-            temperature=model_config.get("generation", {}).get("temperature", 0.0),
-            env_var_name=model_config.get("api", {}).get("env_var_name", "OPENAI_API_KEY")
-        )   
-        print("Generated response:", response)
-        return 0
-    else:
-        tokenizer, model = load_model_and_tokenizer(model_config)
-       
-        # prompt_token_count = get_prompt_token_count(tokenizer, final_prompt)
-        # print(f"Prompt token count: {prompt_token_count}")
-
-        # if prompt_token_count > 512 :
-        #     raise ValueError(
-        #         f"Prompt is too long ({prompt_token_count} tokens). "
-        #         "Please shorten the question or choose a different prompt mode."
-        #     )
-        
-        response = generate_raw_response(
-            model=model,
-            tokenizer=tokenizer,
-            prompt=final_prompt,
-            max_new_tokens=model_config.get("generation", {}).get("max_new_tokens", 128)
-        )
+    response = generate_query_response(
+        model_name=args.model,
+        final_prompt=final_prompt,
+    )
 
     print("Generated response:", response)
     return 0

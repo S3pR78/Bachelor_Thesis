@@ -36,7 +36,7 @@
     	"interface": "chat",
     	"variant": "original",
     	"generation": {
-        "max_output_tokens": 512,
+        "max_new_tokens": 512,
         "temperature": 0.0
      	 },
       	"api": {

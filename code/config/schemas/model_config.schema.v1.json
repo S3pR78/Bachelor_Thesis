@@ -132,7 +132,7 @@
                 "const": "chat"
               },
               "generation": {
-                "required": ["max_output_tokens", "temperature"]
+                "required": ["max_new_tokens", "temperature"]
               }
             }
           }
