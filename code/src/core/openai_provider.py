@@ -5,6 +5,12 @@ from typing import Optional
 from dotenv import load_dotenv
 from openai import OpenAI
 
+DEFAULT_OPENAI_DEVELOPER_MESSAGE = (
+    "You are an expert ORKG SPARQL query generator. "
+    "Generate precise, syntactically correct, and executable SPARQL queries "
+    "for research questions. Return the query only unless asked otherwise."
+)
+
 
 def get_openai_api_key(env_var_name: str = "OPENAI_API_KEY") -> str:
     repo_root = Path(__file__).resolve().parents[3]
@@ -44,11 +50,15 @@ def generate_raw_response_openai(
 
     client = create_openai_client(env_var_name=env_var_name)
 
+    effective_developer_message = developer_message
+    if effective_developer_message is None:
+        effective_developer_message = DEFAULT_OPENAI_DEVELOPER_MESSAGE
+
     messages = []
 
-    if developer_message and developer_message.strip():
+    if effective_developer_message and effective_developer_message.strip():
         messages.append(
-            {"role": "developer", "content": developer_message.strip()}
+            {"role": "developer", "content": effective_developer_message.strip()}
         )
 
     messages.append({"role": "user", "content": prompt.strip()})
