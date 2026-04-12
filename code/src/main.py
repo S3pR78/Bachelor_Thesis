@@ -4,7 +4,10 @@ from src.query.prompt_builder import (
     build_final_prompt_for_question,
     validate_query_args,
 )
-from src.evaluate.dataset_loader import load_evaluate_entries
+from src.evaluate.dataset_loader import (
+    select_entry_fields,
+    load_evaluate_entries,
+)
 
 
 """
@@ -51,6 +54,21 @@ def run_evaluate_task(args: argparse.Namespace) -> int:
     )
 
     print(f"Loaded entries for this run: {len(entries)}")
+
+    for index, entry in enumerate(entries, start=1):
+        selected = select_entry_fields(
+            entry,
+            ["uid", "question", "gold_sparql"],
+        )
+
+        entry_id = selected["uid"] or f"item_{index}"
+        question = selected["question"]
+        gold_query = selected["gold_sparql"]
+
+        print(f"[{index}/{len(entries)}] id={entry_id}")
+        print(f"  question={question!r}")
+        print(f"  has_gold_query={gold_query is not None}")
+
     return 0
 
 # def get_prompt_token_count(tokenizer, prompt:str) -> int:

@@ -200,3 +200,19 @@ def load_evaluate_entries(dataset_path: str, limit: int | None = None) -> list[d
         entries = entries[:limit]
 
     return entries
+
+
+
+def select_entry_fields(
+    entry: dict,
+    field_names: list[str] | tuple[str, ...],
+) -> dict:
+    if not isinstance(entry, dict):
+        raise ValueError("entry must be a dictionary.")
+
+    result = {}
+
+    for field_name in field_names:
+        result[field_name] = entry.get(field_name)
+
+    return result
