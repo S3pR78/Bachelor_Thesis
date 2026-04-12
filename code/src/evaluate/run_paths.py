@@ -40,3 +40,19 @@ def build_evaluate_run_dir(
         / safe_model_name
         / f"{safe_prompt_mode}__{safe_dataset_name}__{timestamp}"
     )
+
+
+
+def ensure_evaluate_run_dir(
+        model_name: str,
+        dataset_path: str,
+        prompt_mode: str | None,
+) -> Path:
+    run_dir = build_evaluate_run_dir(
+        model_name=model_name,
+        dataset_path=dataset_path,
+        prompt_mode=prompt_mode,
+    )
+
+    run_dir.mkdir(parents=True, exist_ok=False)
+    return run_dir
