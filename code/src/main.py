@@ -154,7 +154,7 @@ def build_final_prompt_for_question(
         ensure_empire_compass_prompt_exists(family, prompt_output_path)
         final_prompt = build_empire_compass_prompt(prompt_output_path, question)
 
-        return final_prompt
+    return final_prompt
 
 # now is this function actually useless. maybe remove it!!
 def ensure_prompt_file_exists(prompt_path: Path) -> None:
