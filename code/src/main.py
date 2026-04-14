@@ -3,6 +3,7 @@ from src.query.query_executor import generate_query_response
 from datetime import datetime, timezone
 from src.evaluate.result_builder import build_raw_result_entry
 from src.evaluate.run_metadata import build_initial_run_metadata
+import json
 from src.evaluate.run_paths import (
     ensure_evaluate_run_dir,
     get_benchmark_raw_output_path,
@@ -67,7 +68,6 @@ def run_evaluate_task(args: argparse.Namespace) -> int:
         prompt_mode=None,
     )
 
-
     output_path = get_benchmark_raw_output_path(run_dir)
     started_at_utc = datetime.now(timezone.utc).isoformat()
 
@@ -82,11 +82,10 @@ def run_evaluate_task(args: argparse.Namespace) -> int:
         total_items=len(entries),
     )
 
-    print(f"Run directory: {run_dir}", '\n')
-    print(f"Raw benchmark output path: {output_path}", '\n')
-    print(f"Run metadata: {run_metadata}", '\n')
-    print(f"Loaded entries for this run: {len(entries)}", '\n')
-
+    print(f"Run directory: {run_dir}\n")
+    print(f"Raw benchmark output path: {output_path}\n")
+    print(f"Run metadata: {run_metadata}\n")
+    print(f"Loaded entries for this run: {len(entries)}\n")
 
     results = []
 
@@ -96,19 +95,32 @@ def run_evaluate_task(args: argparse.Namespace) -> int:
             ["uid", "question", "gold_sparql"],
         )
 
-    entry_id = selected["uid"] or f"item_{index}"
-    question = selected["question"]
-    gold_query = selected["gold_sparql"]
+        entry_id = selected["uid"] or f"item_{index}"
+        question = selected["question"]
+        gold_query = selected["gold_sparql"]
 
-    result_entry = build_raw_result_entry(
-        benchmark_entry_id=entry_id,
-        question=question,
-        gold_query=gold_query,
+        result_entry = build_raw_result_entry(
+            entry_id=entry_id,
+            question=question,
+            gold_query=gold_query,
+        )
+
+        results.append(result_entry)
+
+        print(f"[{index}/{len(entries)}] result_entry={result_entry}")
+
+    payload = {
+        "run_metadata": run_metadata,
+        "results": results,
+    }
+
+    output_path.write_text(
+        json.dumps(payload, indent=2, ensure_ascii=False),
+        encoding="utf-8",
     )
 
-    results.append(result_entry)
-
-    print(f"[{index}/{len(entries)}] result_entry={result_entry}")
+    print(f"Collected result entries: {len(results)}")
+    print(f"Saved raw benchmark payload to: {output_path}")
 
     return 0
 
