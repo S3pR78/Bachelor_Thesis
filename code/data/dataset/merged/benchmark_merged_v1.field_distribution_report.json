@@ -1,7 +1,7 @@
 {
   "report_type": "dataset_field_distribution",
   "report_metadata": {
-    "generated_at_utc": "2026-04-14T08:53:23.820334+00:00",
+    "generated_at_utc": "2026-04-14T09:14:05.754030+00:00",
     "dataset_path": "code/data/dataset/merged/benchmark_merged_v1.json",
     "dataset_name": "benchmark_merged_v1",
     "entry_count": 127,
@@ -723,6 +723,151 @@
           "train",
           "validation"
         ],
+        "unexpected_value_counts": {}
+      }
+    }
+  },
+  "array_enum_distributions": {
+    "total_entries": 127,
+    "array_enum_field_count": 2,
+    "array_enum_fields": [
+      "query_components",
+      "special_types"
+    ],
+    "field_details": {
+      "query_components": {
+        "allowed_values": [
+          "SELECT",
+          "ASK",
+          "COUNT",
+          "FILTER",
+          "REGEX",
+          "STR",
+          "ORDER_BY",
+          "GROUP_BY",
+          "HAVING",
+          "LIMIT",
+          "OPTIONAL",
+          "UNION",
+          "NOT_EXISTS",
+          "MIN",
+          "MAX",
+          "AVG",
+          "IF",
+          "BIND"
+        ],
+        "allowed_value_count": 18,
+        "entry_present_count": 127,
+        "entry_missing_count": 0,
+        "entry_coverage_percent": 100.0,
+        "total_item_count": 615,
+        "valid_item_count": 615,
+        "unexpected_item_count": 0,
+        "value_counts": {
+          "SELECT": 118,
+          "ASK": 10,
+          "COUNT": 50,
+          "FILTER": 99,
+          "REGEX": 0,
+          "STR": 36,
+          "ORDER_BY": 99,
+          "GROUP_BY": 65,
+          "HAVING": 8,
+          "LIMIT": 0,
+          "OPTIONAL": 96,
+          "UNION": 8,
+          "NOT_EXISTS": 10,
+          "MIN": 0,
+          "MAX": 14,
+          "AVG": 0,
+          "IF": 1,
+          "BIND": 1
+        },
+        "value_percents": {
+          "SELECT": 19.19,
+          "ASK": 1.63,
+          "COUNT": 8.13,
+          "FILTER": 16.1,
+          "REGEX": 0.0,
+          "STR": 5.85,
+          "ORDER_BY": 16.1,
+          "GROUP_BY": 10.57,
+          "HAVING": 1.3,
+          "LIMIT": 0.0,
+          "OPTIONAL": 15.61,
+          "UNION": 1.3,
+          "NOT_EXISTS": 1.63,
+          "MIN": 0.0,
+          "MAX": 2.28,
+          "AVG": 0.0,
+          "IF": 0.16,
+          "BIND": 0.16
+        },
+        "missing_allowed_values": [
+          "REGEX",
+          "LIMIT",
+          "MIN",
+          "AVG"
+        ],
+        "unexpected_value_counts": {}
+      },
+      "special_types": {
+        "allowed_values": [
+          "lookup",
+          "typed_lookup",
+          "multi_hop",
+          "count",
+          "aggregation",
+          "ranking",
+          "superlative",
+          "temporal",
+          "boolean",
+          "negation",
+          "missing_info",
+          "comparison",
+          "multi_intent",
+          "string_operation"
+        ],
+        "allowed_value_count": 14,
+        "entry_present_count": 127,
+        "entry_missing_count": 0,
+        "entry_coverage_percent": 100.0,
+        "total_item_count": 615,
+        "valid_item_count": 615,
+        "unexpected_item_count": 0,
+        "value_counts": {
+          "lookup": 87,
+          "typed_lookup": 57,
+          "multi_hop": 126,
+          "count": 37,
+          "aggregation": 65,
+          "ranking": 28,
+          "superlative": 24,
+          "temporal": 38,
+          "boolean": 10,
+          "negation": 15,
+          "missing_info": 15,
+          "comparison": 39,
+          "multi_intent": 37,
+          "string_operation": 37
+        },
+        "value_percents": {
+          "lookup": 14.15,
+          "typed_lookup": 9.27,
+          "multi_hop": 20.49,
+          "count": 6.02,
+          "aggregation": 10.57,
+          "ranking": 4.55,
+          "superlative": 3.9,
+          "temporal": 6.18,
+          "boolean": 1.63,
+          "negation": 2.44,
+          "missing_info": 2.44,
+          "comparison": 6.34,
+          "multi_intent": 6.02,
+          "string_operation": 6.02
+        },
+        "missing_allowed_values": [],
         "unexpected_value_counts": {}
       }
     }
