@@ -88,6 +88,8 @@ def run_evaluate_task(args: argparse.Namespace) -> int:
     print(f"Loaded entries for this run: {len(entries)}", '\n')
 
 
+    results = []
+
     for index, entry in enumerate(entries, start=1):
         selected = select_entry_fields(
             entry,
@@ -103,6 +105,8 @@ def run_evaluate_task(args: argparse.Namespace) -> int:
         question=question,
         gold_query=gold_query,
     )
+
+    results.append(result_entry)
 
     print(f"[{index}/{len(entries)}] result_entry={result_entry}")
 
