@@ -391,3 +391,88 @@ def build_dataset_analysis_report(
         )
 
     return report
+
+
+
+def resolve_coverage_field_names(
+    entries: list[dict],
+    schema: dict[str, Any] | None = None,
+    field_scope: str = "required",
+) -> list[str]:
+    """
+    Resolve which field names should be used for coverage analysis.
+
+    Supported field_scope values:
+    - "required": only required schema fields
+    - "schema": all top-level schema fields
+    - "dataset": all fields found in dataset entries
+    """
+    if field_scope == "required":
+        if schema is None:
+            raise ValueError("Schema is required when field_scope='required'.")
+        return extract_required_schema_fields(schema)
+
+    if field_scope == "schema":
+        if schema is None:
+            raise ValueError("Schema is required when field_scope='schema'.")
+        return extract_schema_field_names(schema)
+
+    if field_scope == "dataset":
+        return collect_available_fields(entries)
+
+    raise ValueError(
+        "field_scope must be one of: 'required', 'schema', 'dataset'."
+    )
+
+
+def build_field_coverage_summary(
+    entries: list[dict],
+    schema: dict[str, Any] | None = None,
+    field_scope: str = "required",
+) -> dict[str, Any]:
+    """
+    Build field-level coverage statistics with percentages.
+    """
+    field_names = resolve_coverage_field_names(
+        entries=entries,
+        schema=schema,
+        field_scope=field_scope,
+    )
+
+    dict_entries = [entry for entry in entries if isinstance(entry, dict)]
+    total_entries = len(dict_entries)
+
+    field_details = {}
+
+    for field_name in field_names:
+        present_count = 0
+
+        for entry in dict_entries:
+            if field_name not in entry:
+                continue
+
+            if is_missing_required_value(entry.get(field_name)):
+                continue
+
+            present_count += 1
+
+        missing_count = total_entries - present_count
+        coverage_percent = (
+            round((present_count / total_entries) * 100, 2)
+            if total_entries > 0
+            else None
+        )
+
+        field_details[field_name] = {
+            "present_count": present_count,
+            "missing_count": missing_count,
+            "coverage_percent": coverage_percent,
+        }
+
+    return {
+        "field_scope": field_scope,
+        "total_entries": total_entries,
+        "field_count": len(field_names),
+        "fields": field_names,
+        "field_details": field_details,
+    }
