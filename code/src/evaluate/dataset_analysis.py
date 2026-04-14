@@ -157,11 +157,67 @@ def build_schema_field_comparison(
     }
 
 
-"""
-"""
 
 
-"""
-    dataset_path='code/data/dataset/benchmark_merged_v1.json',
-    schema_path='code/config/schemas/benchmark_dataset_schema_v1.json'
-"""
+def is_missing_required_value(value: Any) -> bool:
+    """
+    Decide whether a required field value should count as missing.
+    """
+    if value is None:
+        return True
+
+    if isinstance(value, str) and not value.strip():
+        return True
+
+    if isinstance(value, list) and len(value) == 0:
+        return True
+
+    return False
+
+
+def build_required_field_validation(
+    entries: list[dict],
+    schema: dict[str, Any],
+) -> dict[str, Any]:
+    """
+    Validate required top-level schema fields for each dataset entry.
+    """
+    required_fields = extract_required_schema_fields(schema)
+
+    missing_counts_by_field = {field_name: 0 for field_name in required_fields}
+    entries_with_missing_required = []
+
+    checked_entries = 0
+
+    for index, entry in enumerate(entries):
+        if not isinstance(entry, dict):
+            continue
+
+        checked_entries += 1
+        missing_fields = []
+
+        for field_name in required_fields:
+            if field_name not in entry or is_missing_required_value(entry.get(field_name)):
+                missing_fields.append(field_name)
+                missing_counts_by_field[field_name] += 1
+
+        if missing_fields:
+            entries_with_missing_required.append(
+                {
+                    "entry_index": index,
+                    "entry_id": entry.get("id", f"row_{index}"),
+                    "missing_required_fields": missing_fields,
+                }
+            )
+
+    invalid_entry_count = len(entries_with_missing_required)
+    valid_entry_count = checked_entries - invalid_entry_count
+
+    return {
+        "checked_entry_count": checked_entries,
+        "required_fields": required_fields,
+        "valid_entry_count": valid_entry_count,
+        "invalid_entry_count": invalid_entry_count,
+        "missing_counts_by_field": missing_counts_by_field,
+        "entries_with_missing_required": entries_with_missing_required,
+    }
