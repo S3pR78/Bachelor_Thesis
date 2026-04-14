@@ -622,3 +622,67 @@ def build_enum_distribution_summary(
         "enum_fields": enum_field_names,
         "field_details": field_details,
     }
+
+
+def build_dataset_analysis_report(
+    dataset_path: str | Path,
+    schema_path: str | Path | None = None,
+    limit: int | None = None,
+    coverage_scopes: list[str] | None = None,
+) -> dict[str, Any]:
+    """
+    Build a combined dataset analysis report from dataset and optional schema.
+    """
+    inputs = load_analysis_inputs(
+        dataset_path=dataset_path,
+        schema_path=schema_path,
+        limit=limit,
+    )
+
+    entries = inputs["entries"]
+    schema = inputs["schema"]
+
+    if coverage_scopes is None:
+        coverage_scopes = ["required", "schema"]
+
+    report = {
+        "report_metadata": {
+            "generated_at_utc": utc_now_iso(),
+            "dataset_path": inputs["dataset_path"],
+            "dataset_name": inputs["dataset_name"],
+            "entry_count": inputs["entry_count"],
+            "schema_path": inputs["schema_path"],
+            "has_schema": inputs["has_schema"],
+        },
+        "field_presence": build_field_presence_summary(entries),
+    }
+
+    if schema is not None:
+        report["schema_field_comparison"] = build_schema_field_comparison(
+            entries,
+            schema,
+        )
+        report["required_field_validation"] = build_required_field_validation(
+            entries,
+            schema,
+        )
+        report["type_and_enum_validation"] = build_type_and_enum_validation(
+            entries,
+            schema,
+        )
+
+        field_coverage = {}
+        for field_scope in coverage_scopes:
+            field_coverage[field_scope] = build_field_coverage_summary(
+                entries=entries,
+                schema=schema,
+                field_scope=field_scope,
+            )
+
+        report["field_coverage"] = field_coverage
+        report["enum_distributions"] = build_enum_distribution_summary(
+            entries=entries,
+            schema=schema,
+        )
+
+    return report
