@@ -347,6 +347,22 @@ def utc_now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
+
+def build_report_metadata(
+    inputs: dict[str, Any],
+) -> dict[str, Any]:
+    """
+    Build standard metadata shared by all report types.
+    """
+    return {
+        "generated_at_utc": utc_now_iso(),
+        "dataset_path": inputs["dataset_path"],
+        "dataset_name": inputs["dataset_name"],
+        "entry_count": inputs["entry_count"],
+        "schema_path": inputs["schema_path"],
+        "has_schema": inputs["has_schema"],
+    }
+
 def build_dataset_analysis_report(
     dataset_path: str | Path,
     schema_path: str | Path | None = None,
@@ -388,6 +404,89 @@ def build_dataset_analysis_report(
         report["type_and_enum_validation"] = build_type_and_enum_validation(
             entries,
             schema,
+        )
+
+    return report
+
+
+def build_dataset_validation_report(
+    dataset_path: str | Path,
+    schema_path: str | Path,
+    limit: int | None = None,
+) -> dict[str, Any]:
+    """
+    Build a validation-focused report for a dataset against a schema.
+    """
+    inputs = load_analysis_inputs(
+        dataset_path=dataset_path,
+        schema_path=schema_path,
+        limit=limit,
+    )
+
+    entries = inputs["entries"]
+    schema = inputs["schema"]
+
+    if schema is None:
+        raise ValueError("Schema is required for validation report generation.")
+
+    return {
+        "report_type": "dataset_validation",
+        "report_metadata": build_report_metadata(inputs),
+        "schema_field_comparison": build_schema_field_comparison(
+            entries,
+            schema,
+        ),
+        "required_field_validation": build_required_field_validation(
+            entries,
+            schema,
+        ),
+        "type_and_enum_validation": build_type_and_enum_validation(
+            entries,
+            schema,
+        ),
+    }
+
+
+def build_dataset_field_distribution_report(
+    dataset_path: str | Path,
+    schema_path: str | Path | None = None,
+    limit: int | None = None,
+    coverage_scopes: list[str] | None = None,
+) -> dict[str, Any]:
+    """
+    Build a field-distribution-focused report for a dataset.
+    """
+    inputs = load_analysis_inputs(
+        dataset_path=dataset_path,
+        schema_path=schema_path,
+        limit=limit,
+    )
+
+    entries = inputs["entries"]
+    schema = inputs["schema"]
+
+    report = {
+        "report_type": "dataset_field_distribution",
+        "report_metadata": build_report_metadata(inputs),
+        "field_presence": build_field_presence_summary(entries),
+    }
+
+    if schema is not None:
+        if coverage_scopes is None:
+            coverage_scopes = ["required", "schema"]
+
+        field_coverage = {}
+        for field_scope in coverage_scopes:
+            field_coverage[field_scope] = build_field_coverage_summary(
+                entries=entries,
+                schema=schema,
+                field_scope=field_scope,
+            )
+
+        report["field_coverage"] = field_coverage
+        report["enum_distributions"] = build_enum_distribution_summary(
+            entries=entries,
+            schema=schema,
         )
 
     return report
