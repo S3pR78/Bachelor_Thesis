@@ -476,3 +476,149 @@ def build_field_coverage_summary(
         "fields": field_names,
         "field_details": field_details,
     }
+
+
+
+def normalize_report_value_key(value: Any) -> str:
+    """
+    Convert a value into a stable string key for JSON reporting.
+    """
+    if isinstance(value, str):
+        return value
+
+    if value is None:
+        return "null"
+
+    if isinstance(value, bool):
+        return "true" if value else "false"
+
+    if isinstance(value, (int, float)):
+        return str(value)
+
+    return json.dumps(value, ensure_ascii=False, sort_keys=True)
+
+
+def extract_enum_field_names(schema: dict[str, Any]) -> list[str]:
+    """
+    Extract top-level schema field names that define an enum.
+    """
+    if not isinstance(schema, dict):
+        raise ValueError("Schema must be a dictionary/object.")
+
+    properties = schema.get("properties")
+    if not isinstance(properties, dict):
+        raise ValueError(
+            "Schema must contain a top-level 'properties' dictionary."
+        )
+
+    enum_field_names = []
+
+    for field_name, field_schema in properties.items():
+        if not isinstance(field_schema, dict):
+            continue
+
+        if isinstance(field_schema.get("enum"), list):
+            enum_field_names.append(field_name)
+
+    return sorted(enum_field_names)
+
+
+def build_enum_distribution_summary(
+    entries: list[dict],
+    schema: dict[str, Any],
+) -> dict[str, Any]:
+    """
+    Build distribution statistics for top-level enum fields in the schema.
+
+    Percentages are calculated over valid enum values that are present.
+    Unexpected values are reported separately.
+    """
+    if not isinstance(schema, dict):
+        raise ValueError("Schema must be a dictionary/object.")
+
+    properties = schema.get("properties")
+    if not isinstance(properties, dict):
+        raise ValueError(
+            "Schema must contain a top-level 'properties' dictionary."
+        )
+
+    dict_entries = [entry for entry in entries if isinstance(entry, dict)]
+    total_entries = len(dict_entries)
+    enum_field_names = extract_enum_field_names(schema)
+
+    field_details = {}
+
+    for field_name in enum_field_names:
+        field_schema = properties[field_name]
+        allowed_values = field_schema.get("enum", [])
+
+        allowed_value_counts = {
+            normalize_report_value_key(value): 0
+            for value in allowed_values
+        }
+        unexpected_value_counts: dict[str, int] = {}
+
+        present_count = 0
+
+        for entry in dict_entries:
+            if field_name not in entry:
+                continue
+
+            value = entry.get(field_name)
+
+            if is_missing_required_value(value):
+                continue
+
+            present_count += 1
+            value_key = normalize_report_value_key(value)
+
+            if value in allowed_values:
+                allowed_value_counts[value_key] += 1
+            else:
+                unexpected_value_counts[value_key] = (
+                    unexpected_value_counts.get(value_key, 0) + 1
+                )
+
+        valid_present_count = sum(allowed_value_counts.values())
+
+        value_percents = {
+            value_key: (
+                round((count / valid_present_count) * 100, 2)
+                if valid_present_count > 0
+                else None
+            )
+            for value_key, count in allowed_value_counts.items()
+        }
+
+        missing_allowed_values = [
+            value
+            for value in allowed_values
+            if allowed_value_counts[normalize_report_value_key(value)] == 0
+        ]
+
+        coverage_percent = (
+            round((present_count / total_entries) * 100, 2)
+            if total_entries > 0
+            else None
+        )
+
+        field_details[field_name] = {
+            "allowed_values": allowed_values,
+            "allowed_value_count": len(allowed_values),
+            "present_count": present_count,
+            "missing_count": total_entries - present_count,
+            "coverage_percent": coverage_percent,
+            "valid_present_count": valid_present_count,
+            "unexpected_value_count": sum(unexpected_value_counts.values()),
+            "value_counts": allowed_value_counts,
+            "value_percents": value_percents,
+            "missing_allowed_values": missing_allowed_values,
+            "unexpected_value_counts": unexpected_value_counts,
+        }
+
+    return {
+        "total_entries": total_entries,
+        "enum_field_count": len(enum_field_names),
+        "enum_fields": enum_field_names,
+        "field_details": field_details,
+    }
