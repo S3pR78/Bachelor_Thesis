@@ -1,6 +1,9 @@
 import argparse
 from src.query.query_executor import generate_query_response
-from src.evaluate.run_paths import ensure_evaluate_run_dir
+from src.evaluate.run_paths import (
+    ensure_evaluate_run_dir,
+    get_benchmark_raw_output_path,
+)
 from src.query.prompt_builder import (
     build_final_prompt_for_question,
     validate_query_args,
@@ -60,10 +63,12 @@ def run_evaluate_task(args: argparse.Namespace) -> int:
         prompt_mode=None,
     )
 
+    output_path = get_benchmark_raw_output_path(run_dir)
+
     print(f"Run directory: {run_dir}")
+    print(f"Raw benchmark output path: {output_path}")
     print(f"Loaded entries for this run: {len(entries)}")
 
-    print(f"Loaded entries for this run: {len(entries)}")
 
     for index, entry in enumerate(entries, start=1):
         selected = select_entry_fields(
