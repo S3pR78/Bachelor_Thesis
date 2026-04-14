@@ -98,17 +98,32 @@ def build_field_presence_summary(entries: list[dict]) -> dict[str, Any]:
 
 def extract_schema_field_names(schema: dict[str, Any]) -> list[str]:
     """
-    Extract top-level field names from a JSON schema object.
-    Expected format: schema["properties"] is a dictionary.
+    Extract top-level field names from the schema's 'properties' object.
     """
-    properties = schema.get("properties")
+    if not isinstance(schema, dict):
+        raise ValueError("Schema must be a dictionary/object.")
 
+    properties = schema.get("properties")
     if not isinstance(properties, dict):
         raise ValueError(
             "Schema must contain a top-level 'properties' dictionary."
         )
 
     return sorted(properties.keys())
+
+
+def extract_required_schema_fields(schema: dict[str, Any]) -> list[str]:
+    """
+    Extract required top-level field names from the schema.
+    """
+    if not isinstance(schema, dict):
+        raise ValueError("Schema must be a dictionary/object.")
+
+    required_fields = schema.get("required", [])
+    if not isinstance(required_fields, list):
+        raise ValueError("Schema field 'required' must be a list.")
+
+    return sorted(field for field in required_fields if isinstance(field, str))
 
 
 def build_schema_field_comparison(
@@ -120,20 +135,25 @@ def build_schema_field_comparison(
     """
     dataset_fields = set(collect_available_fields(entries))
     schema_fields = set(extract_schema_field_names(schema))
+    required_fields = set(extract_required_schema_fields(schema))
 
     shared_fields = sorted(dataset_fields & schema_fields)
     schema_only_fields = sorted(schema_fields - dataset_fields)
     dataset_only_fields = sorted(dataset_fields - schema_fields)
+    missing_required_fields = sorted(required_fields - dataset_fields)
 
     return {
         "dataset_field_count": len(dataset_fields),
         "schema_field_count": len(schema_fields),
+        "required_field_count": len(required_fields),
         "shared_field_count": len(shared_fields),
         "shared_fields": shared_fields,
         "schema_only_field_count": len(schema_only_fields),
         "schema_only_fields": schema_only_fields,
         "dataset_only_field_count": len(dataset_only_fields),
         "dataset_only_fields": dataset_only_fields,
+        "missing_required_field_count": len(missing_required_fields),
+        "missing_required_fields": missing_required_fields,
     }
 
 
