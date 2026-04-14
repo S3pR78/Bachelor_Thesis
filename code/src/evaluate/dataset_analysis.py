@@ -3,6 +3,7 @@ from collections import Counter
 import json
 from pathlib import Path
 from typing import Any
+from datetime import datetime, timezone
 
 from src.evaluate.dataset_loader import load_evaluate_entries
 
@@ -337,3 +338,56 @@ def build_type_and_enum_validation(
         "enum_error_count": enum_error_count,
         "entries_with_field_errors": entries_with_field_errors,
     }
+
+
+def utc_now_iso() -> str:
+    """
+    Return the current UTC timestamp as an ISO string.
+    """
+    return datetime.now(timezone.utc).isoformat()
+
+
+def build_dataset_analysis_report(
+    dataset_path: str | Path,
+    schema_path: str | Path | None = None,
+    limit: int | None = None,
+) -> dict[str, Any]:
+    """
+    Build a combined dataset analysis report from dataset and optional schema.
+    """
+    inputs = load_analysis_inputs(
+        dataset_path=dataset_path,
+        schema_path=schema_path,
+        limit=limit,
+    )
+
+    entries = inputs["entries"]
+    schema = inputs["schema"]
+
+    report = {
+        "report_metadata": {
+            "generated_at_utc": utc_now_iso(),
+            "dataset_path": inputs["dataset_path"],
+            "dataset_name": inputs["dataset_name"],
+            "entry_count": inputs["entry_count"],
+            "schema_path": inputs["schema_path"],
+            "has_schema": inputs["has_schema"],
+        },
+        "field_presence": build_field_presence_summary(entries),
+    }
+
+    if schema is not None:
+        report["schema_field_comparison"] = build_schema_field_comparison(
+            entries,
+            schema,
+        )
+        report["required_field_validation"] = build_required_field_validation(
+            entries,
+            schema,
+        )
+        report["type_and_enum_validation"] = build_type_and_enum_validation(
+            entries,
+            schema,
+        )
+
+    return report
