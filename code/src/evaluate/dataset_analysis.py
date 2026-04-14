@@ -221,3 +221,119 @@ def build_required_field_validation(
         "missing_counts_by_field": missing_counts_by_field,
         "entries_with_missing_required": entries_with_missing_required,
     }
+
+
+
+def schema_type_matches_value(expected_type: str, value: Any) -> bool:
+    """
+    Check whether a Python value matches a simple JSON-schema type.
+    """
+    if expected_type == "string":
+        return isinstance(value, str)
+
+    if expected_type == "integer":
+        return isinstance(value, int) and not isinstance(value, bool)
+
+    if expected_type == "number":
+        return (isinstance(value, int) or isinstance(value, float)) and not isinstance(value, bool)
+
+    if expected_type == "boolean":
+        return isinstance(value, bool)
+
+    if expected_type == "array":
+        return isinstance(value, list)
+
+    if expected_type == "object":
+        return isinstance(value, dict)
+
+    if expected_type == "null":
+        return value is None
+
+    return True
+
+
+def build_type_and_enum_validation(
+    entries: list[dict],
+    schema: dict[str, Any],
+) -> dict[str, Any]:
+    """
+    Validate top-level field types and enum values against schema properties.
+    Missing values are skipped here because required-field validation handles them separately.
+    """
+    properties = schema.get("properties")
+    if not isinstance(properties, dict):
+        raise ValueError("Schema must contain a top-level 'properties' dictionary.")
+
+    checked_entries = 0
+    invalid_entry_count = 0
+    type_error_count = 0
+    enum_error_count = 0
+    entries_with_field_errors = []
+
+    for index, entry in enumerate(entries):
+        if not isinstance(entry, dict):
+            continue
+
+        checked_entries += 1
+        field_errors = []
+
+        for field_name, field_schema in properties.items():
+            if not isinstance(field_schema, dict):
+                continue
+
+            if field_name not in entry:
+                continue
+
+            value = entry.get(field_name)
+
+            if is_missing_required_value(value):
+                continue
+
+            expected_type = field_schema.get("type")
+            if isinstance(expected_type, str):
+                if not schema_type_matches_value(expected_type, value):
+                    field_errors.append(
+                        {
+                            "field_name": field_name,
+                            "error_type": "type_mismatch",
+                            "expected_type": expected_type,
+                            "actual_type": type(value).__name__,
+                            "actual_value": value,
+                        }
+                    )
+                    type_error_count += 1
+                    continue
+
+            allowed_values = field_schema.get("enum")
+            if isinstance(allowed_values, list):
+                if value not in allowed_values:
+                    field_errors.append(
+                        {
+                            "field_name": field_name,
+                            "error_type": "enum_mismatch",
+                            "allowed_values": allowed_values,
+                            "actual_value": value,
+                        }
+                    )
+                    enum_error_count += 1
+
+        if field_errors:
+            invalid_entry_count += 1
+            entries_with_field_errors.append(
+                {
+                    "entry_index": index,
+                    "entry_id": entry.get("id", f"row_{index}"),
+                    "field_errors": field_errors,
+                }
+            )
+
+    valid_entry_count = checked_entries - invalid_entry_count
+
+    return {
+        "checked_entry_count": checked_entries,
+        "valid_entry_count": valid_entry_count,
+        "invalid_entry_count": invalid_entry_count,
+        "type_error_count": type_error_count,
+        "enum_error_count": enum_error_count,
+        "entries_with_field_errors": entries_with_field_errors,
+    }
