@@ -1,9 +1,12 @@
 import argparse
 from src.query.query_executor import generate_query_response
+from datetime import datetime, timezone
+from src.evaluate.run_metadata import build_initial_run_metadata
 from src.evaluate.run_paths import (
     ensure_evaluate_run_dir,
     get_benchmark_raw_output_path,
 )
+
 from src.query.prompt_builder import (
     build_final_prompt_for_question,
     validate_query_args,
@@ -63,11 +66,25 @@ def run_evaluate_task(args: argparse.Namespace) -> int:
         prompt_mode=None,
     )
 
-    output_path = get_benchmark_raw_output_path(run_dir)
 
-    print(f"Run directory: {run_dir}")
-    print(f"Raw benchmark output path: {output_path}")
-    print(f"Loaded entries for this run: {len(entries)}")
+    output_path = get_benchmark_raw_output_path(run_dir)
+    started_at_utc = datetime.now(timezone.utc).isoformat()
+
+    run_metadata = build_initial_run_metadata(
+        model_name=args.model,
+        dataset_path=args.dataset,
+        prompt_mode=None,
+        requested_limit=args.limit,
+        run_dir=run_dir,
+        output_path=output_path,
+        started_at_utc=started_at_utc,
+        total_items=len(entries),
+    )
+
+    print(f"Run directory: {run_dir}", '\n')
+    print(f"Raw benchmark output path: {output_path}", '\n')
+    print(f"Run metadata: {run_metadata}", '\n')
+    print(f"Loaded entries for this run: {len(entries)}", '\n')
 
 
     for index, entry in enumerate(entries, start=1):
