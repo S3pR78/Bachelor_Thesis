@@ -488,6 +488,10 @@ def build_dataset_field_distribution_report(
             entries=entries,
             schema=schema,
         )
+        report["array_enum_distributions"] = build_array_enum_distribution_summary(
+            entries=entries,
+            schema=schema,
+        )
 
     return report
 
@@ -719,6 +723,150 @@ def build_enum_distribution_summary(
         "total_entries": total_entries,
         "enum_field_count": len(enum_field_names),
         "enum_fields": enum_field_names,
+        "field_details": field_details,
+    }
+
+
+def extract_array_enum_field_names(schema: dict[str, Any]) -> list[str]:
+    """
+    Extract top-level schema field names that are arrays with enum-constrained items.
+    """
+    if not isinstance(schema, dict):
+        raise ValueError("Schema must be a dictionary/object.")
+
+    properties = schema.get("properties")
+    if not isinstance(properties, dict):
+        raise ValueError(
+            "Schema must contain a top-level 'properties' dictionary."
+        )
+
+    array_enum_field_names = []
+
+    for field_name, field_schema in properties.items():
+        if not isinstance(field_schema, dict):
+            continue
+
+        if field_schema.get("type") != "array":
+            continue
+
+        items_schema = field_schema.get("items")
+        if not isinstance(items_schema, dict):
+            continue
+
+        if isinstance(items_schema.get("enum"), list):
+            array_enum_field_names.append(field_name)
+
+    return sorted(array_enum_field_names)
+
+
+def build_array_enum_distribution_summary(
+    entries: list[dict],
+    schema: dict[str, Any],
+) -> dict[str, Any]:
+    """
+    Build distribution statistics for top-level array fields whose items are enum-constrained.
+
+    Percentages are calculated over valid enum items, not over entries.
+    """
+    if not isinstance(schema, dict):
+        raise ValueError("Schema must be a dictionary/object.")
+
+    properties = schema.get("properties")
+    if not isinstance(properties, dict):
+        raise ValueError(
+            "Schema must contain a top-level 'properties' dictionary."
+        )
+
+    dict_entries = [entry for entry in entries if isinstance(entry, dict)]
+    total_entries = len(dict_entries)
+    array_enum_field_names = extract_array_enum_field_names(schema)
+
+    field_details = {}
+
+    for field_name in array_enum_field_names:
+        field_schema = properties[field_name]
+        items_schema = field_schema.get("items", {})
+        allowed_values = items_schema.get("enum", [])
+
+        allowed_value_counts = {
+            normalize_report_value_key(value): 0
+            for value in allowed_values
+        }
+        unexpected_value_counts: dict[str, int] = {}
+
+        entry_present_count = 0
+        total_item_count = 0
+
+        for entry in dict_entries:
+            if field_name not in entry:
+                continue
+
+            value = entry.get(field_name)
+
+            if is_missing_required_value(value):
+                continue
+
+            if not isinstance(value, list):
+                continue
+
+            entry_present_count += 1
+
+            for item in value:
+                if is_missing_required_value(item):
+                    continue
+
+                total_item_count += 1
+                item_key = normalize_report_value_key(item)
+
+                if item in allowed_values:
+                    allowed_value_counts[item_key] += 1
+                else:
+                    unexpected_value_counts[item_key] = (
+                        unexpected_value_counts.get(item_key, 0) + 1
+                    )
+
+        valid_item_count = sum(allowed_value_counts.values())
+
+        value_percents = {
+            value_key: (
+                round((count / valid_item_count) * 100, 2)
+                if valid_item_count > 0
+                else None
+            )
+            for value_key, count in allowed_value_counts.items()
+        }
+
+        missing_allowed_values = [
+            value
+            for value in allowed_values
+            if allowed_value_counts[normalize_report_value_key(value)] == 0
+        ]
+
+        entry_coverage_percent = (
+            round((entry_present_count / total_entries) * 100, 2)
+            if total_entries > 0
+            else None
+        )
+
+        field_details[field_name] = {
+            "allowed_values": allowed_values,
+            "allowed_value_count": len(allowed_values),
+            "entry_present_count": entry_present_count,
+            "entry_missing_count": total_entries - entry_present_count,
+            "entry_coverage_percent": entry_coverage_percent,
+            "total_item_count": total_item_count,
+            "valid_item_count": valid_item_count,
+            "unexpected_item_count": sum(unexpected_value_counts.values()),
+            "value_counts": allowed_value_counts,
+            "value_percents": value_percents,
+            "missing_allowed_values": missing_allowed_values,
+            "unexpected_value_counts": unexpected_value_counts,
+        }
+
+    return {
+        "total_entries": total_entries,
+        "array_enum_field_count": len(array_enum_field_names),
+        "array_enum_fields": array_enum_field_names,
         "field_details": field_details,
     }
 
