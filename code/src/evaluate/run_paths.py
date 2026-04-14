@@ -62,11 +62,3 @@ def get_benchmark_raw_output_path(run_dir: Path) -> Path:
         raise ValueError("run_dir must be a pathlib.Path instance.")
 
     return run_dir / "benchmark_raw.json"
-
-
-
-def get_benchmark_raw_output_path(run_dir: Path) -> Path:
-    if not isinstance(run_dir, Path):
-        raise ValueError("run_dir must be a pathlib.Path instance.")
-
-    return run_dir / "benchmark_raw.json"

@@ -1,6 +1,7 @@
 import argparse
 from src.query.query_executor import generate_query_response
 from datetime import datetime, timezone
+from src.evaluate.result_builder import build_raw_result_entry
 from src.evaluate.run_metadata import build_initial_run_metadata
 from src.evaluate.run_paths import (
     ensure_evaluate_run_dir,
@@ -93,13 +94,17 @@ def run_evaluate_task(args: argparse.Namespace) -> int:
             ["uid", "question", "gold_sparql"],
         )
 
-        entry_id = selected["uid"] or f"item_{index}"
-        question = selected["question"]
-        gold_query = selected["gold_sparql"]
+    entry_id = selected["uid"] or f"item_{index}"
+    question = selected["question"]
+    gold_query = selected["gold_sparql"]
 
-        print(f"[{index}/{len(entries)}] id={entry_id}")
-        print(f"  question={question!r}")
-        print(f"  has_gold_query={gold_query is not None}")
+    result_entry = build_raw_result_entry(
+        benchmark_entry_id=entry_id,
+        question=question,
+        gold_query=gold_query,
+    )
+
+    print(f"[{index}/{len(entries)}] result_entry={result_entry}")
 
     return 0
 
