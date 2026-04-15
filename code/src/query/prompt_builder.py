@@ -3,6 +3,25 @@ import subprocess
 from pathlib import Path
 from src.utils.config_loader import get_configured_path, load_json_config
 
+
+
+def normalize_empire_compass_family(family: str) -> str:
+    if not isinstance(family, str) or not family.strip():
+        raise ValueError("family must be a non-empty string.")
+
+    normalized = family.strip().lower()
+
+    family_aliases = {
+        "nlp4re": "nlp4re",
+        "empirical_research": "empirical_research",
+        "empirical_research_practice": "empirical_research",
+    }
+
+    if normalized in family_aliases:
+        return family_aliases[normalized]
+
+    return normalized
+
 def validate_query_args(args) -> None:
     if args.prompt_mode == "empire_compass" and not args.family:
         raise ValueError("The --family argument is required when using the 'empire_compass' prompt mode.")
@@ -29,7 +48,7 @@ def get_empire_compass_profile_for_family(family: str) ->dict:
     if not isinstance(family,str) or not family.strip():
         raise ValueError("family must be a non-empty string.")
     
-    normalized_family = family.strip().lower()
+    normalized_family = normalize_empire_compass_family(family)
     runner_config = load_empire_compass_runner_config()
 
     profiles = runner_config.get("profiles")
