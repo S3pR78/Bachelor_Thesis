@@ -2,6 +2,7 @@ import argparse
 import json
 from datetime import datetime, timezone
 from src.query.prompt_builder import build_final_prompt_for_question
+from src.query.query_executor import generate_query_response
 
 from src.evaluate.dataset_loader import (
     load_evaluate_entries,
@@ -68,11 +69,17 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
             family=family,
         )
 
+        raw_model_output = generate_query_response(
+            model_name=args.model,
+            final_prompt=final_prompt,
+        )
+
         result_entry = build_raw_result_entry(
             entry_id=entry_id,
             question=question,
             gold_query=gold_query,
         )
+        result_entry["raw_model_output"] = raw_model_output
 
         results.append(result_entry)
         print(f"[{index}/{len(entries)}] family={family} prompt_chars={len(final_prompt)}")
