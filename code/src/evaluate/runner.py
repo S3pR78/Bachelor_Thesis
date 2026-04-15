@@ -75,10 +75,17 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
             family=family,
         )
 
+        response_started_at = datetime.now(timezone.utc)
+
         raw_model_output = generate_response_with_session(
             session=inference_session,
             final_prompt=final_prompt,
         )
+
+        response_finished_at = datetime.now(timezone.utc)
+        response_time_seconds = (
+            response_finished_at - response_started_at
+        ).total_seconds()
 
         result_entry = build_raw_result_entry(
             entry_id=entry_id,
@@ -86,6 +93,7 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
             gold_query=gold_query,
         )
         result_entry["raw_model_output"] = raw_model_output
+        result_entry["response_time_seconds"] = round(response_time_seconds, 4)
 
         results.append(result_entry)
         print(f"[{index}/{len(entries)}] family={family} prompt_chars={len(final_prompt)}")
