@@ -73,6 +73,7 @@ def build_parser() -> argparse.ArgumentParser:
     evaluate_parser.add_argument("--model", required=True, help="Model to use for evaluation.")
     evaluate_parser.add_argument("--dataset", required=True, help="Dataset to use for evaluation.")
     evaluate_parser.add_argument("--limit", required=False, type=int, help="Use only the first N dataset entries for a test run.")
+    evaluate_parser.add_argument( "--prompt-mode",required=False,choices=["empire_compass", "zero_shot", "few_shot"],help="Prompt mode to use for evaluation.")
     evaluate_parser.set_defaults(func=run_evaluate_task)
     # evaluation files can be added as arguments here, e.g., --predictions, --references
     

@@ -1,6 +1,7 @@
 import argparse
 import json
 from datetime import datetime, timezone
+from src.query.prompt_builder import build_final_prompt_for_question
 
 from src.evaluate.dataset_loader import (
     load_evaluate_entries,
@@ -25,7 +26,7 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
     run_dir = ensure_evaluate_run_dir(
         model_name=args.model,
         dataset_path=args.dataset,
-        prompt_mode=None,
+        prompt_mode=args.prompt_mode,
     )
 
     output_path = get_benchmark_raw_output_path(run_dir)
@@ -34,7 +35,7 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
     run_metadata = build_initial_run_metadata(
         model_name=args.model,
         dataset_path=args.dataset,
-        prompt_mode=None,
+        prompt_mode=args.prompt_mode,
         requested_limit=args.limit,
         run_dir=run_dir,
         output_path=output_path,
@@ -52,12 +53,20 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
     for index, entry in enumerate(entries, start=1):
         selected = select_entry_fields(
             entry,
-            ["uid", "question", "gold_sparql"],
+            ["uid", "family" ,"question", "gold_sparql"],
         )
 
         entry_id = selected["uid"] or f"item_{index}"
         question = selected["question"]
         gold_query = selected["gold_sparql"]
+
+        family = selected["family"]
+
+        final_prompt = build_final_prompt_for_question(
+            question=question,
+            prompt_mode=args.prompt_mode,
+            family=family,
+        )
 
         result_entry = build_raw_result_entry(
             entry_id=entry_id,
@@ -66,6 +75,7 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
         )
 
         results.append(result_entry)
+        print(f"[{index}/{len(entries)}] family={family} prompt_chars={len(final_prompt)}")
 
         print(f"[{index}/{len(entries)}] result_entry={result_entry}")
 
