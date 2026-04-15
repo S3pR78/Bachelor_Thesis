@@ -2,7 +2,10 @@ import argparse
 import json
 from datetime import datetime, timezone
 from src.query.prompt_builder import build_final_prompt_for_question
-from src.query.query_executor import generate_query_response
+from src.query.inference_session import (
+    generate_response_with_session,
+    prepare_inference_session,
+)
 
 from src.evaluate.dataset_loader import (
     load_evaluate_entries,
@@ -49,6 +52,9 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
     print(f"Run metadata: {run_metadata}\n")
     print(f"Loaded entries for this run: {len(entries)}\n")
 
+    inference_session = prepare_inference_session(args.model)
+    print(f"Inference provider: {inference_session['provider']}\n")
+
     results = []
 
     for index, entry in enumerate(entries, start=1):
@@ -69,8 +75,8 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
             family=family,
         )
 
-        raw_model_output = generate_query_response(
-            model_name=args.model,
+        raw_model_output = generate_response_with_session(
+            session=inference_session,
             final_prompt=final_prompt,
         )
 
