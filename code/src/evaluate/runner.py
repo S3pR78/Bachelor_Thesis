@@ -83,6 +83,8 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
             final_prompt=final_prompt,
         )
         extracted_query = extract_sparql_query(raw_model_output)
+        has_extracted_query = extracted_query is not None
+        extraction_status = "ok" if has_extracted_query else "empty"
 
         response_finished_at = datetime.now(timezone.utc)
         response_time_seconds = (
@@ -96,6 +98,8 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
         )
         result_entry["raw_model_output"] = raw_model_output
         result_entry["extracted_query"] = extracted_query
+        result_entry["has_extracted_query"] = has_extracted_query
+        result_entry["extraction_status"] = extraction_status
         result_entry["response_time_seconds"] = round(response_time_seconds, 4)
 
         results.append(result_entry)
