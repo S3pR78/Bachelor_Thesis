@@ -1,4 +1,5 @@
 import argparse
+from src.evaluate.sparql_extraction import extract_sparql_query
 import json
 from datetime import datetime, timezone
 from src.query.prompt_builder import build_final_prompt_for_question
@@ -81,6 +82,7 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
             session=inference_session,
             final_prompt=final_prompt,
         )
+        extracted_query = extract_sparql_query(raw_model_output)
 
         response_finished_at = datetime.now(timezone.utc)
         response_time_seconds = (
@@ -93,6 +95,7 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
             gold_query=gold_query,
         )
         result_entry["raw_model_output"] = raw_model_output
+        result_entry["extracted_query"] = extracted_query
         result_entry["response_time_seconds"] = round(response_time_seconds, 4)
 
         results.append(result_entry)
