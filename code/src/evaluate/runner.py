@@ -2,6 +2,8 @@ import argparse
 from src.evaluate.sparql_extraction import extract_sparql_query
 import json
 from datetime import datetime, timezone
+from src.sparql.execution import detect_sparql_query_type, execute_sparql_query
+from src.sparql.prefixes import prepend_orkg_prefixes
 from src.query.prompt_builder import build_final_prompt_for_question
 from src.query.inference_session import (
     generate_response_with_session,
@@ -61,13 +63,12 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
     for index, entry in enumerate(entries, start=1):
         selected = select_entry_fields(
             entry,
-            ["uid", "family" ,"question", "gold_sparql"],
+            ["uid", "family", "question", "gold_sparql"],
         )
 
         entry_id = selected["uid"] or f"item_{index}"
         question = selected["question"]
         gold_query = selected["gold_sparql"]
-
         family = selected["family"]
 
         final_prompt = build_final_prompt_for_question(
@@ -82,14 +83,54 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
             session=inference_session,
             final_prompt=final_prompt,
         )
-        extracted_query = extract_sparql_query(raw_model_output)
-        has_extracted_query = extracted_query is not None
-        extraction_status = "ok" if has_extracted_query else "empty"
 
         response_finished_at = datetime.now(timezone.utc)
         response_time_seconds = (
             response_finished_at - response_started_at
         ).total_seconds()
+
+        extracted_query = extract_sparql_query(raw_model_output)
+        has_extracted_query = extracted_query is not None
+        extraction_status = "ok" if has_extracted_query else "empty"
+
+        query_execution = {
+            "status": "skipped",
+            "reason": "no_endpoint_configured",
+        }
+
+        if has_extracted_query and args.sparql_endpoint:
+            try:
+                query_with_prefixes = prepend_orkg_prefixes(extracted_query)
+                result_type = detect_sparql_query_type(query_with_prefixes)
+
+                if result_type not in {"select", "ask"}:
+                    query_execution = {
+                        "status": "skipped",
+                        "reason": f"unsupported_query_type:{result_type}",
+                        "result_type": result_type,
+                        "query_with_prefixes": query_with_prefixes,
+                    }
+                else:
+                    response_json = execute_sparql_query(
+                        query=query_with_prefixes,
+                        endpoint_url=args.sparql_endpoint,
+                    )
+                    query_execution = {
+                        "status": "ok",
+                        "result_type": result_type,
+                        "query_with_prefixes": query_with_prefixes,
+                        "response_json": response_json,
+                    }
+            except Exception as exc:
+                query_execution = {
+                    "status": "error",
+                    "error": str(exc),
+                }
+        elif not has_extracted_query:
+            query_execution = {
+                "status": "skipped",
+                "reason": "no_extracted_query",
+            }
 
         result_entry = build_raw_result_entry(
             entry_id=entry_id,
@@ -101,11 +142,12 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
         result_entry["has_extracted_query"] = has_extracted_query
         result_entry["extraction_status"] = extraction_status
         result_entry["response_time_seconds"] = round(response_time_seconds, 4)
+        result_entry["query_execution"] = query_execution
 
         results.append(result_entry)
-        print(f"[{index}/{len(entries)}] family={family} prompt_chars={len(final_prompt)}")
 
-        print(f"[{index}/{len(entries)}] result_entry={result_entry}")
+        print(f"[{index}/{len(entries)}] family={family} prompt_chars={len(final_prompt)}")
+        #print(f"[{index}/{len(entries)}] result_entry={result_entry}")
 
     payload = {
         "run_metadata": run_metadata,
