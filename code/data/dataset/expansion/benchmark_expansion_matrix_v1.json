@@ -1,0 +1,313 @@
+{
+  "matrix_version": "v1",
+  "status": "draft",
+  "created_for": "controlled dataset expansion for benchmark and fine-tuning",
+  "benchmark_source_dataset": "code/data/dataset/merged/benchmark_merged_v1.json",
+  "notes": [
+    "Do not force full balance across all metadata fields.",
+    "Follow a SciQA-like strategy: preserve natural skew where justified, but close important coverage gaps.",
+    "Treat the current 127 approved/final entries as the benchmark seed set.",
+    "Use generated questions primarily for expansion, then validate selectively for benchmark use and more broadly for fine-tuning use."
+  ],
+  "current_snapshot": {
+    "total_entries": 127,
+    "families": {
+      "nlp4re": 50,
+      "empirical_research_practice": 77
+    },
+    "source_datasets": {
+      "EmpiRE_Compass": 26,
+      "Hybrid_Empirical_Research": 61,
+      "Hybrid_NLP4RE": 40
+    },
+    "query_type": {
+      "factoid": 84,
+      "non_factoid": 43
+    },
+    "complexity_level": {
+      "low": 19,
+      "medium": 36,
+      "high": 72
+    },
+    "answer_type": {
+      "boolean": 10,
+      "list": 34,
+      "mixed": 83,
+      "resource": 0,
+      "string": 0,
+      "number": 0,
+      "date": 0
+    },
+    "query_shape": {
+      "tree": 121,
+      "chain": 4,
+      "forest": 2,
+      "edge": 0,
+      "star": 0,
+      "cycle": 0,
+      "other": 0
+    },
+    "missing_query_components": [
+      "REGEX",
+      "LIMIT",
+      "MIN",
+      "AVG"
+    ],
+    "split": {
+      "train": 0,
+      "validation": 0,
+      "test": 127
+    }
+  },
+  "strategy": {
+    "preserve_natural_skew": [
+      "family",
+      "query_shape",
+      "complexity_level",
+      "human_or_generated"
+    ],
+    "actively_expand_coverage": [
+      "answer_type",
+      "query_components",
+      "special_types",
+      "query_type",
+      "split"
+    ],
+    "benchmark_principle": "small high-quality benchmark with targeted expansion",
+    "finetuning_principle": "larger generated pool with automatic filtering and selective human review"
+  },
+  "target_ranges": {
+    "benchmark_total_entries": {
+      "min": 180,
+      "max": 220
+    },
+    "finetuning_pool_total_entries": {
+      "min": 600,
+      "max": 900
+    }
+  },
+  "benchmark_expansion_targets": {
+    "families": {
+      "nlp4re_add": {
+        "min": 35,
+        "max": 55
+      },
+      "empirical_research_practice_add": {
+        "min": 20,
+        "max": 35
+      }
+    },
+    "query_type_add": {
+      "factoid": {
+        "min": 25,
+        "max": 40
+      },
+      "non_factoid": {
+        "min": 30,
+        "max": 45
+      }
+    },
+    "answer_type_add": {
+      "resource": {
+        "min": 8,
+        "max": 15
+      },
+      "string": {
+        "min": 8,
+        "max": 15
+      },
+      "number": {
+        "min": 10,
+        "max": 18
+      },
+      "date": {
+        "min": 8,
+        "max": 15
+      },
+      "boolean": {
+        "min": 5,
+        "max": 10
+      },
+      "list": {
+        "min": 10,
+        "max": 18
+      },
+      "mixed": {
+        "min": 10,
+        "max": 20
+      }
+    },
+    "query_components_add": {
+      "REGEX": {
+        "min": 6,
+        "max": 12
+      },
+      "LIMIT": {
+        "min": 8,
+        "max": 15
+      },
+      "MIN": {
+        "min": 4,
+        "max": 8
+      },
+      "AVG": {
+        "min": 4,
+        "max": 8
+      },
+      "BIND": {
+        "min": 4,
+        "max": 8
+      },
+      "UNION": {
+        "min": 4,
+        "max": 8
+      },
+      "NOT_EXISTS": {
+        "min": 4,
+        "max": 8
+      }
+    },
+    "special_types_add": {
+      "comparison": {
+        "min": 8,
+        "max": 15
+      },
+      "temporal": {
+        "min": 8,
+        "max": 15
+      },
+      "ranking": {
+        "min": 8,
+        "max": 15
+      },
+      "superlative": {
+        "min": 8,
+        "max": 12
+      },
+      "negation": {
+        "min": 5,
+        "max": 10
+      },
+      "missing_info": {
+        "min": 5,
+        "max": 10
+      },
+      "multi_intent": {
+        "min": 8,
+        "max": 15
+      },
+      "string_operation": {
+        "min": 8,
+        "max": 15
+      }
+    }
+  },
+  "finetuning_pool_targets": {
+    "priority_family": "nlp4re",
+    "priority_split_goal": {
+      "train_percent": 70,
+      "validation_percent": 10,
+      "test_percent": 20
+    },
+    "generation_preference": {
+      "nlp4re_share_percent": 65,
+      "empirical_research_practice_share_percent": 35
+    },
+    "question_style_mix": {
+      "direct": 0.35,
+      "paraphrased": 0.35,
+      "comparative": 0.15,
+      "constraint_heavy": 0.15
+    }
+  },
+  "generation_batches": [
+    {
+      "batch_id": "benchmark_batch_001",
+      "goal": "close answer_type gaps",
+      "focus": [
+        "resource",
+        "string",
+        "number",
+        "date"
+      ],
+      "suggested_size": 20
+    },
+    {
+      "batch_id": "benchmark_batch_002",
+      "goal": "introduce missing query components",
+      "focus": [
+        "REGEX",
+        "LIMIT",
+        "MIN",
+        "AVG"
+      ],
+      "suggested_size": 20
+    },
+    {
+      "batch_id": "benchmark_batch_003",
+      "goal": "increase non_factoid and multi_intent coverage",
+      "focus": [
+        "non_factoid",
+        "comparison",
+        "temporal",
+        "multi_intent"
+      ],
+      "suggested_size": 20
+    },
+    {
+      "batch_id": "benchmark_batch_004",
+      "goal": "raise nlp4re coverage without forcing equality",
+      "focus": [
+        "nlp4re"
+      ],
+      "suggested_size": 15
+    },
+    {
+      "batch_id": "finetune_pool_batch_001_to_010",
+      "goal": "large-scale controlled generation",
+      "focus": [
+        "nlp4re_priority",
+        "schema-faithful variations",
+        "diverse wording"
+      ],
+      "suggested_size_per_batch": 50
+    }
+  ],
+  "acceptance_rules": {
+    "hard_requirements": [
+      "question must be grammatical and semantically aligned with the gold SPARQL",
+      "gold_sparql must be executable or at minimum syntax-valid",
+      "no duplicate question-gold_sparql pairs",
+      "family and source_dataset must match the underlying template",
+      "metadata fields must be fully populated"
+    ],
+    "benchmark_only_requirements": [
+      "manual review required",
+      "answer_type must match actual expected answer shape",
+      "query_components must be checked against the gold SPARQL",
+      "special_types must be justified by the query behavior"
+    ],
+    "finetuning_pool_requirements": [
+      "automatic validation required",
+      "manual review for sampled and high-risk cases only"
+    ]
+  },
+  "review_policy": {
+    "benchmark_entries": {
+      "manual_review_percent": 100,
+      "required_status_after_review": [
+        "gold_status=final",
+        "review_status=approved"
+      ]
+    },
+    "finetuning_entries": {
+      "manual_review_percent": 15,
+      "sample_high_risk_cases_first": true
+    }
+  },
+  "split_plan": {
+    "current_seed_set_handling": "keep current 127 entries frozen as benchmark seed until expansion review is complete",
+    "future_benchmark_usage": "compose benchmark test set from the reviewed seed plus targeted reviewed additions",
+    "future_finetuning_usage": "derive train/validation/test after deduplication and quality filtering"
+  }
+}
