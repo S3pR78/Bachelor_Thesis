@@ -31,3 +31,14 @@ Prefer:
 - high complexity emphasis
 
 Return valid JSON only.
+
+
+
+Return only these fields for each item:
+- `id`
+- `question`
+- `gold_sparql`
+- `family`
+- `answer_type`
+
+Do not include any other metadata fields.

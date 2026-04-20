@@ -49,26 +49,10 @@ def validate_candidate_items(
 ) -> None:
     required_fields = {
         "id",
-        "source_id",
         "question",
         "gold_sparql",
         "family",
-        "source_dataset",
-        "language",
-        "query_type",
-        "query_shape",
         "answer_type",
-        "complexity_level",
-        "ambiguity_risk",
-        "lexical_gap_risk",
-        "hallucination_risk",
-        "query_components",
-        "special_types",
-        "number_of_patterns",
-        "human_or_generated",
-        "gold_status",
-        "review_status",
-        "split",
     }
 
     if not items:
@@ -80,7 +64,6 @@ def validate_candidate_items(
         )
 
     seen_ids: set[str] = set()
-    seen_source_ids: set[str] = set()
 
     for index, item in enumerate(items, start=1):
         if not isinstance(item, dict):
@@ -91,24 +74,12 @@ def validate_candidate_items(
             raise ValueError(f"Entry {index} is missing required fields: {missing}")
 
         item_id = str(item["id"])
-        source_id = str(item["source_id"])
 
         if item_id in seen_ids:
             raise ValueError(f"Duplicate id detected: {item_id}")
-        if source_id in seen_source_ids:
-            raise ValueError(f"Duplicate source_id detected: {source_id}")
+
 
         seen_ids.add(item_id)
-        seen_source_ids.add(source_id)
-
-        if not isinstance(item["query_components"], list):
-            raise ValueError(
-                f"Entry {index} field 'query_components' must be a list."
-            )
-        if not isinstance(item["special_types"], list):
-            raise ValueError(
-                f"Entry {index} field 'special_types' must be a list."
-            )
 
 
 def get_usage_counts(response) -> tuple[int, int]:
@@ -142,30 +113,13 @@ def estimate_cost_usd(
     return input_cost + output_cost
 
 
-
 def build_candidate_items_schema(expected_count: int) -> dict:
     required_fields = [
         "id",
-        "source_id",
         "question",
         "gold_sparql",
         "family",
-        "source_dataset",
-        "language",
-        "query_type",
-        "query_shape",
         "answer_type",
-        "complexity_level",
-        "ambiguity_risk",
-        "lexical_gap_risk",
-        "hallucination_risk",
-        "query_components",
-        "special_types",
-        "number_of_patterns",
-        "human_or_generated",
-        "gold_status",
-        "review_status",
-        "split",
     ]
 
     item_schema = {
@@ -174,32 +128,10 @@ def build_candidate_items_schema(expected_count: int) -> dict:
         "required": required_fields,
         "properties": {
             "id": {"type": "string"},
-            "source_id": {"type": "string"},
             "question": {"type": "string"},
             "gold_sparql": {"type": "string"},
             "family": {"type": "string"},
-            "source_dataset": {"type": "string"},
-            "language": {"type": "string"},
-            "query_type": {"type": "string"},
-            "query_shape": {"type": "string"},
             "answer_type": {"type": "string"},
-            "complexity_level": {"type": "string"},
-            "ambiguity_risk": {"type": "string"},
-            "lexical_gap_risk": {"type": "string"},
-            "hallucination_risk": {"type": "string"},
-            "query_components": {
-                "type": "array",
-                "items": {"type": "string"},
-            },
-            "special_types": {
-                "type": "array",
-                "items": {"type": "string"},
-            },
-            "number_of_patterns": {"type": "integer"},
-            "human_or_generated": {"type": "string"},
-            "gold_status": {"type": "string"},
-            "review_status": {"type": "string"},
-            "split": {"type": "string"},
         },
     }
 

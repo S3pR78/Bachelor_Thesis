@@ -26,15 +26,18 @@ This wrapper must be combined with exactly one family-specific base prompt from 
 - include a few temporal or string-focused cases where appropriate
 - prefer medium complexity overall
 
-## Required metadata behavior
-Each item must contain full metadata.
+## Output fields
 
-Default generated metadata:
-- `language = "en"`
-- `human_or_generated = "generated"`
-- `gold_status = "draft"`
-- `review_status = "unreviewed"`
-- `split = "train"`
+Return only these fields for each item:
+- `id`
+- `question`
+- `gold_sparql`
+- `family`
+- `answer_type`
+
+Do not generate any other metadata fields.
+Additional metadata will be added later in a separate enrichment step.
 
 ## Output requirement
 Return valid JSON only.
+Return a JSON object with key `"items"`.
