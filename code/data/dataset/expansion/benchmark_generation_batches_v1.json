@@ -1,0 +1,289 @@
+{
+  "plan_version": "v1",
+  "status": "draft",
+  "based_on": "code/data/dataset/expansion/benchmark_expansion_matrix_v1.json",
+  "applies_to_dataset": "code/data/dataset/merged/benchmark_merged_v1.json",
+  "phase_name": "benchmark_expansion_phase_1",
+  "goal": "add targeted benchmark candidates that close real coverage gaps without forcing full balance",
+  "dataset_snapshot": {
+    "current_total_entries": 127,
+    "planned_additions_phase_1": 85,
+    "target_total_after_phase_1": 212
+  },
+  "do_not_force_balance_for": [
+    "query_shape",
+    "human_or_generated",
+    "gold_status",
+    "review_status",
+    "family"
+  ],
+  "priority_gaps": [
+    "answer_type: resource",
+    "answer_type: string",
+    "answer_type: number",
+    "answer_type: date",
+    "query_components: REGEX",
+    "query_components: LIMIT",
+    "query_components: MIN",
+    "query_components: AVG",
+    "query_type: non_factoid",
+    "family: nlp4re"
+  ],
+  "batches": [
+    {
+      "batch_id": "benchmark_b001_answer_type_gaps",
+      "status": "planned",
+      "target_additions": 20,
+      "purpose": "close zero-count answer_type gaps with relatively reviewable questions",
+      "family_distribution": {
+        "nlp4re": 12,
+        "empirical_research_practice": 8
+      },
+      "source_dataset_distribution": {
+        "Hybrid_NLP4RE": 12,
+        "Hybrid_Empirical_Research": 8
+      },
+      "query_type_distribution": {
+        "factoid": 12,
+        "non_factoid": 8
+      },
+      "answer_type_distribution": {
+        "resource": 5,
+        "string": 5,
+        "number": 5,
+        "date": 5
+      },
+      "special_types_focus": [
+        "lookup",
+        "typed_lookup",
+        "multi_hop",
+        "temporal",
+        "string_operation"
+      ],
+      "required_query_components_min_counts": {
+        "SELECT": 20,
+        "FILTER": 8,
+        "OPTIONAL": 8,
+        "STR": 4
+      },
+      "complexity_distribution": {
+        "low": 6,
+        "medium": 10,
+        "high": 4
+      },
+      "review_priority": "high"
+    },
+    {
+      "batch_id": "benchmark_b002_missing_query_components",
+      "status": "planned",
+      "target_additions": 20,
+      "purpose": "introduce currently missing query components",
+      "family_distribution": {
+        "nlp4re": 10,
+        "empirical_research_practice": 10
+      },
+      "source_dataset_distribution": {
+        "Hybrid_NLP4RE": 10,
+        "Hybrid_Empirical_Research": 10
+      },
+      "query_type_distribution": {
+        "factoid": 8,
+        "non_factoid": 12
+      },
+      "answer_type_distribution": {
+        "string": 6,
+        "number": 6,
+        "date": 4,
+        "list": 4
+      },
+      "special_types_focus": [
+        "string_operation",
+        "ranking",
+        "superlative",
+        "temporal",
+        "aggregation"
+      ],
+      "required_query_components_min_counts": {
+        "REGEX": 6,
+        "LIMIT": 6,
+        "MIN": 4,
+        "AVG": 4
+      },
+      "complexity_distribution": {
+        "low": 2,
+        "medium": 8,
+        "high": 10
+      },
+      "review_priority": "very_high"
+    },
+    {
+      "batch_id": "benchmark_b003_non_factoid_reasoning",
+      "status": "planned",
+      "target_additions": 20,
+      "purpose": "increase non-factoid, comparison-heavy and reasoning-oriented questions",
+      "family_distribution": {
+        "nlp4re": 8,
+        "empirical_research_practice": 12
+      },
+      "source_dataset_distribution": {
+        "Hybrid_NLP4RE": 8,
+        "Hybrid_Empirical_Research": 12
+      },
+      "query_type_distribution": {
+        "factoid": 4,
+        "non_factoid": 16
+      },
+      "answer_type_distribution": {
+        "mixed": 8,
+        "list": 6,
+        "boolean": 3,
+        "number": 3
+      },
+      "special_types_focus": [
+        "comparison",
+        "temporal",
+        "multi_intent",
+        "negation",
+        "missing_info"
+      ],
+      "required_query_components_min_counts": {
+        "FILTER": 14,
+        "GROUP_BY": 8,
+        "ORDER_BY": 8,
+        "OPTIONAL": 10,
+        "NOT_EXISTS": 3
+      },
+      "complexity_distribution": {
+        "low": 0,
+        "medium": 8,
+        "high": 12
+      },
+      "review_priority": "very_high"
+    },
+    {
+      "batch_id": "benchmark_b004_nlp4re_priority",
+      "status": "planned",
+      "target_additions": 15,
+      "purpose": "raise nlp4re coverage without forcing equality with empirical_research_practice",
+      "family_distribution": {
+        "nlp4re": 15,
+        "empirical_research_practice": 0
+      },
+      "source_dataset_distribution": {
+        "Hybrid_NLP4RE": 15
+      },
+      "query_type_distribution": {
+        "factoid": 8,
+        "non_factoid": 7
+      },
+      "answer_type_distribution": {
+        "resource": 3,
+        "string": 3,
+        "number": 3,
+        "date": 2,
+        "list": 2,
+        "mixed": 2
+      },
+      "special_types_focus": [
+        "lookup",
+        "typed_lookup",
+        "comparison",
+        "temporal",
+        "multi_intent"
+      ],
+      "required_query_components_min_counts": {
+        "SELECT": 15,
+        "FILTER": 8,
+        "OPTIONAL": 8,
+        "ORDER_BY": 6,
+        "COUNT": 4
+      },
+      "complexity_distribution": {
+        "low": 3,
+        "medium": 6,
+        "high": 6
+      },
+      "review_priority": "high"
+    },
+    {
+      "batch_id": "benchmark_b005_hard_case_buffer",
+      "status": "planned",
+      "target_additions": 10,
+      "purpose": "create a small buffer of difficult benchmark candidates for later selection or replacement",
+      "family_distribution": {
+        "nlp4re": 6,
+        "empirical_research_practice": 4
+      },
+      "source_dataset_distribution": {
+        "Hybrid_NLP4RE": 6,
+        "Hybrid_Empirical_Research": 4
+      },
+      "query_type_distribution": {
+        "factoid": 3,
+        "non_factoid": 7
+      },
+      "answer_type_distribution": {
+        "mixed": 4,
+        "list": 2,
+        "number": 2,
+        "boolean": 2
+      },
+      "special_types_focus": [
+        "ranking",
+        "comparison",
+        "missing_info",
+        "multi_intent",
+        "boolean"
+      ],
+      "required_query_components_min_counts": {
+        "UNION": 2,
+        "NOT_EXISTS": 2,
+        "BIND": 2,
+        "HAVING": 2,
+        "MAX": 2
+      },
+      "complexity_distribution": {
+        "low": 0,
+        "medium": 2,
+        "high": 8
+      },
+      "review_priority": "very_high"
+    }
+  ],
+  "global_generation_rules": {
+    "language": "en",
+    "deduplicate_against_existing_questions": true,
+    "deduplicate_against_existing_question_sparql_pairs": true,
+    "preserve_schema_faithfulness": true,
+    "do_not_invent_predicates_or_classes": true,
+    "prefer_template-grounded_generation": true
+  },
+  "validation_pipeline": {
+    "required_checks_for_all_candidates": [
+      "valid JSON structure",
+      "all metadata fields populated",
+      "SPARQL syntax sanity check",
+      "family-source_dataset consistency",
+      "query_components match gold_sparql",
+      "answer_type matches expected answer shape",
+      "duplicate detection against existing dataset",
+      "basic endpoint execution where feasible"
+    ],
+    "required_checks_for_benchmark_acceptance": [
+      "manual review of question wording",
+      "manual review of gold_sparql correctness",
+      "manual review of metadata correctness",
+      "review_status must become approved",
+      "gold_status must become final"
+    ]
+  },
+  "post_phase_decisions": {
+    "after_generation": [
+      "review all 85 candidates",
+      "keep strongest 55 to 85 depending on quality",
+      "freeze accepted additions for benchmark selection",
+      "move remaining valid candidates into fine-tuning candidate pool"
+    ],
+    "split_policy_note": "do not assign final train/validation/test until deduplication and benchmark freeze are complete"
+  }
+}
