@@ -6,6 +6,22 @@ Your task is to generate high-quality candidate question–SPARQL pairs for the 
 
 ---
 
+## Schema source in repo
+
+The family schema grounding for this prompt comes from the repository files below.
+
+Primary readable schema prompt:
+- `code/prompts/empire_compass/generated/rendered/nlp4re_prompt.txt`
+
+Family-to-template mapping:
+- `code/prompts/empire_compass/config/prompt_runner_config.json`
+
+Underlying template source:
+- `code/prompts/empire_compass/templates/nlp4re-template.json`
+
+Use the rendered family prompt as the main schema-grounding source.
+Use the config and template files only as supporting references for consistency.
+
 ## ORKG / Family grounding
 
 You are working on the family:
