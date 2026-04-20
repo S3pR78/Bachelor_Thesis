@@ -42,6 +42,20 @@
       	"api": {
         	"api_key_env": "OPENAI_API_KEY"
       	}
+    },
+    "gpt-5.4-mini": {
+      "provider": "openai",
+      "model_id": "gpt-5.4-mini",
+      "api": {
+        "env_var_name": "OPENAI_API_KEY"
+      }
+    },
+    "gpt-5.4": {
+      "provider": "openai",
+      "model_id": "gpt-5.4",
+      "api": {
+        "env_var_name": "OPENAI_API_KEY"
+      }
     }
   }
 }

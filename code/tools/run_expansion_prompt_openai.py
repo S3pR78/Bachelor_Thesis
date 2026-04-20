@@ -7,7 +7,11 @@ from pathlib import Path
 from typing import Any
 
 from src.core.openai_provider import create_openai_client
-from src.utils.config_loader import load_model_config
+from src.utils.config_loader import (
+    get_configured_path,
+    get_model_entry,
+    load_json_config,
+)
 
 
 def read_text(path: Path) -> str:
@@ -193,11 +197,10 @@ def main() -> int:
     parser = build_parser()
     args = parser.parse_args()
 
-    model_configs = load_model_config()
-    if args.model not in model_configs:
-        raise ValueError(f"Model '{args.model}' not found in model_config.")
+    model_config_path = get_configured_path("config.model_config")
+    model_config_data = load_json_config(model_config_path)
+    model_config = get_model_entry(model_config_data, args.model)
 
-    model_config = model_configs[args.model]
     env_var_name = model_config.get("api", {}).get("env_var_name", "OPENAI_API_KEY")
 
     prompt_path = Path(args.prompt_file)
