@@ -1,8 +1,11 @@
-# Run Prompt — B004 NLP4RE 
+# Run Prompt — B004 NLP4RE
 
 Generate exactly 10 candidate dataset entries.
 
 Selected family: `nlp4re`
+
+For every item, set:
+- `family` = `nlp4re`
 
 Use these id values exactly:
 - `b004_nlp4re_001`
@@ -16,6 +19,9 @@ Use these id values exactly:
 - `b004_nlp4re_009`
 - `b004_nlp4re_010`
 
+Use each `id` exactly once.
+Do not repeat or reuse any `id`.
+The output must contain exactly 10 items with 10 unique ids.
 
 Focus:
 - direct lookup
@@ -24,15 +30,14 @@ Focus:
 - comparison
 - stronger multi-hop
 - multi_intent
+- clearly NLP4RE-specific template content
 
 Prefer:
 - 6 factoid
 - 4 non_factoid
 - mostly medium complexity
-
-Return valid JSON only.
-
-
+- a few higher-complexity cases
+- genuinely template-anchored NLP4RE questions over generic scholarly metadata questions
 
 Return only these fields for each item:
 - `id`
@@ -42,3 +47,16 @@ Return only these fields for each item:
 - `answer_type`
 
 Do not include any other metadata fields.
+
+`answer_type` must be one of:
+- `resource`
+- `string`
+- `number`
+- `date`
+
+Do not use values such as:
+- `factoid`
+- `non_factoid`
+
+Return valid JSON only.
+Return a JSON object with key `"items"`.
