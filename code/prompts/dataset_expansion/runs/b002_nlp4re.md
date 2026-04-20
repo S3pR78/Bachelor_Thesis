@@ -1,9 +1,8 @@
-# Run Prompt — B002 NLP4RE Part 1
+# Run Prompt — B002 NLP4RE 
 
-Generate exactly 5 candidate dataset entries.
+Generate exactly 10 candidate dataset entries.
 
 Selected family: `nlp4re`
-Selected source_dataset: `Hybrid_NLP4RE`
 
 Use these id values exactly:
 - `b002_nlp4re_001`
@@ -11,22 +10,22 @@ Use these id values exactly:
 - `b002_nlp4re_003`
 - `b002_nlp4re_004`
 - `b002_nlp4re_005`
+- `b002_nlp4re_006`
+- `b002_nlp4re_007`
+- `b002_nlp4re_008`
+- `b002_nlp4re_009`
+- `b002_nlp4re_010`
 
-Use these source_id values exactly:
-- `gen_b002_nlp4re_001`
-- `gen_b002_nlp4re_002`
-- `gen_b002_nlp4re_003`
-- `gen_b002_nlp4re_004`
-- `gen_b002_nlp4re_005`
 
 Required component focus:
-- at least 2 REGEX
-- at least 2 LIMIT
-- at least 1 MIN or AVG
+- at least 3 REGEX
+- at least 3 LIMIT
+- at least 3 MIN or AVG
+- at least 1 BIND or NOT_EXISTS
 
 Prefer:
-- 2 factoid
-- 3 non_factoid
+- 4 factoid
+- 6 non_factoid
 - medium to high complexity
 
 Return valid JSON only.

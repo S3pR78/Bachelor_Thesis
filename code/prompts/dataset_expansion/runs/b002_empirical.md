@@ -1,9 +1,8 @@
-# Run Prompt — B002 Empirical Part 1
+# Run Prompt — B002 Empirical
 
-Generate exactly 5 candidate dataset entries.
+Generate exactly 10 candidate dataset entries.
 
 Selected family: `empirical_research_practice`
-Selected source_dataset: `Hybrid_Empirical_Research`
 
 Use these id values exactly:
 - `b002_empirical_001`
@@ -11,22 +10,22 @@ Use these id values exactly:
 - `b002_empirical_003`
 - `b002_empirical_004`
 - `b002_empirical_005`
+- `b002_empirical_006`
+- `b002_empirical_007`
+- `b002_empirical_008`
+- `b002_empirical_009`
+- `b002_empirical_010`
 
-Use these source_id values exactly:
-- `gen_b002_empirical_001`
-- `gen_b002_empirical_002`
-- `gen_b002_empirical_003`
-- `gen_b002_empirical_004`
-- `gen_b002_empirical_005`
 
 Required component focus:
-- at least 2 REGEX
-- at least 2 LIMIT
-- at least 1 MIN or AVG
+- at least 3 REGEX
+- at least 3 LIMIT
+- at least 2 MIN or AVG
+- at least 2 UNION or NOT_EXISTS
 
 Prefer:
-- 2 factoid
-- 3 non_factoid
+- 4 factoid
+- 6 non_factoid
 - medium to high complexity
 
 Return valid JSON only.
