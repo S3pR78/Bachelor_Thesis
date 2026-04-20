@@ -1,0 +1,72 @@
+[
+  {
+    "id": "b003_empirical_001",
+    "question": "Which papers report a qualitative data collection method?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?paper ?paperLabel WHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C27001 .\n  ?contribution orkgp:P56008 ?dc .\n  ?dc orkgp:P1005 ?method .\n  ?method orkgp:P94003 ?methodType .\n  ?methodType rdfs:label ?methodTypeLabel .\n  FILTER(LCASE(STR(?methodTypeLabel)) = LCASE('qualitative'))\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}",
+    "family": "empirical_research_practice",
+    "answer_type": "resource"
+  },
+  {
+    "id": "b003_empirical_002",
+    "question": "Which papers published in 2020 or later report quantitative collected data?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?paper ?paperLabel WHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C27001 .\n  ?paper orkgp:P29 ?year .\n  FILTER(xsd:integer(?year) >= 2020)\n  ?contribution orkgp:DATA ?data .\n  ?data orkgp:P7055 ?dataType .\n  ?dataType rdfs:label ?dataTypeLabel .\n  FILTER(LCASE(STR(?dataTypeLabel)) = LCASE('quantitative'))\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}",
+    "family": "empirical_research_practice",
+    "answer_type": "resource"
+  },
+  {
+    "id": "b003_empirical_003",
+    "question": "How many papers report more than one data collection method?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT (COUNT(DISTINCT ?paper) AS ?count) WHERE {\n  {\n    SELECT ?paper WHERE {\n      ?paper orkgp:P31 ?contribution .\n      ?contribution a orkgc:C27001 .\n      ?contribution orkgp:P56008 ?dc .\n      ?dc orkgp:P1005 ?method .\n    }\n    GROUP BY ?paper\n    HAVING(COUNT(DISTINCT ?method) > 1)\n  }\n}",
+    "family": "empirical_research_practice",
+    "answer_type": "number"
+  },
+  {
+    "id": "b003_empirical_004",
+    "question": "Which papers report both recall and precision among their machine-learning metrics?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?paper ?paperLabel WHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C27001 .\n  FILTER EXISTS {\n    ?contribution orkgp:P15124 ?da1 .\n    ?da1 orkgp:P57016 ?ml1 .\n    ?ml1 orkgp:P2006 ?metric1 .\n    ?metric1 rdfs:label ?metricLabel1 .\n    FILTER(LCASE(STR(?metricLabel1)) = LCASE('recall'))\n  }\n  FILTER EXISTS {\n    ?contribution orkgp:P15124 ?da2 .\n    ?da2 orkgp:P57016 ?ml2 .\n    ?ml2 orkgp:P2006 ?metric2 .\n    ?metric2 rdfs:label ?metricLabel2 .\n    FILTER(LCASE(STR(?metricLabel2)) = LCASE('precision'))\n  }\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}",
+    "family": "empirical_research_practice",
+    "answer_type": "resource"
+  },
+  {
+    "id": "b003_empirical_005",
+    "question": "Which papers report a null hypothesis but no alternative hypothesis?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?paper ?paperLabel WHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C27001 .\n  ?contribution orkgp:P15124 ?da .\n  ?da orkgp:P56043 ?inf .\n  ?inf orkgp:P30001 ?hypothesis .\n  ?hypothesis orkgp:P41703 ?hypothesisType .\n  ?hypothesisType orkgp:P35106 ?nullHypothesis .\n  FILTER NOT EXISTS {\n    ?hypothesisType orkgp:P35107 ?alternativeHypothesis .\n  }\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}",
+    "family": "empirical_research_practice",
+    "answer_type": "resource"
+  },
+  {
+    "id": "b003_empirical_006",
+    "question": "Which papers report data collection methods but do not specify any method type?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?paper ?paperLabel WHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C27001 .\n  ?contribution orkgp:P56008 ?dc .\n  ?dc orkgp:P1005 ?method .\n  FILTER NOT EXISTS {\n    ?method orkgp:P94003 ?methodType .\n  }\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}",
+    "family": "empirical_research_practice",
+    "answer_type": "resource"
+  },
+  {
+    "id": "b003_empirical_007",
+    "question": "Which papers report both a research question and a research question answer?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?paper ?paperLabel WHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C27001 .\n  FILTER EXISTS { ?contribution orkgp:P37330 ?rq . }\n  FILTER EXISTS { ?contribution orkgp:P57004 ?rqa . }\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}",
+    "family": "empirical_research_practice",
+    "answer_type": "resource"
+  },
+  {
+    "id": "b003_empirical_008",
+    "question": "What are the reported data collection method names for papers that describe their collected data as qualitative?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?methodName WHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C27001 .\n  ?contribution orkgp:P56008 ?dc .\n  ?dc orkgp:DATA ?data .\n  ?data orkgp:P7055 ?dataType .\n  ?dataType rdfs:label ?dataTypeLabel .\n  FILTER(LCASE(STR(?dataTypeLabel)) = LCASE('qualitative'))\n  ?dc orkgp:P1005 ?method .\n  ?method orkgp:P145012 ?methodName .\n}",
+    "family": "empirical_research_practice",
+    "answer_type": "string"
+  },
+  {
+    "id": "b003_empirical_009",
+    "question": "Which papers published before 2019 report precision but not recall in their machine-learning metrics?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?paper ?paperLabel WHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C27001 .\n  ?paper orkgp:P29 ?year .\n  FILTER(xsd:integer(?year) < 2019)\n  FILTER EXISTS {\n    ?contribution orkgp:P15124 ?da1 .\n    ?da1 orkgp:P57016 ?ml1 .\n    ?ml1 orkgp:P2006 ?metric1 .\n    ?metric1 rdfs:label ?metricLabel1 .\n    FILTER(LCASE(STR(?metricLabel1)) = LCASE('precision'))\n  }\n  FILTER NOT EXISTS {\n    ?contribution orkgp:P15124 ?da2 .\n    ?da2 orkgp:P57016 ?ml2 .\n    ?ml2 orkgp:P2006 ?metric2 .\n    ?metric2 rdfs:label ?metricLabel2 .\n    FILTER(LCASE(STR(?metricLabel2)) = LCASE('recall'))\n  }\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}",
+    "family": "empirical_research_practice",
+    "answer_type": "resource"
+  },
+  {
+    "id": "b003_empirical_010",
+    "question": "Which venue names are reported for papers that mention both internal validity and external validity threats?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?venueName WHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C27001 .\n  ?contribution orkgp:P39099 ?threats .\n  ?threats orkgp:P55035 ?internalValidity .\n  ?threats orkgp:P55034 ?externalValidity .\n  ?contribution orkgp:P135046 ?venue .\n  ?venue rdfs:label ?venueName .\n}",
+    "family": "empirical_research_practice",
+    "answer_type": "string"
+  }
+]
