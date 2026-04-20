@@ -215,14 +215,25 @@ def main() -> int:
 
     client = create_openai_client(env_var_name=env_var_name)
 
-    response = client.responses.create(
-        model=args.model,
-        input=prompt_text,
-        temperature=args.temperature,
-        max_output_tokens=args.max_output_tokens,
-        reasoning={"effort": args.reasoning_effort},
-        text={"format": {"type": "text"}},
-    )
+    request_kwargs = {
+        "model": args.model,
+        "input": prompt_text,
+        "max_output_tokens": args.max_output_tokens,
+        "reasoning": {"effort": args.reasoning_effort},
+        "text": {"format": {"type": "text"}},
+    }
+
+    # GPT-5.4 / GPT-5.4-mini akzeptieren temperature hier nicht.
+    # Deshalb nur für Modelle mitsenden, die es unterstützen.
+    models_without_temperature = {
+        "gpt-5.4",
+        "gpt-5.4-mini",
+    }
+
+    if args.model not in models_without_temperature:
+        request_kwargs["temperature"] = args.temperature
+
+    response = client.responses.create(**request_kwargs)
 
     raw_text = response.output_text
     items = extract_json_array(raw_text)
