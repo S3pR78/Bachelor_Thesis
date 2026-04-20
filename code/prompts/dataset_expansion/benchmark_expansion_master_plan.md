@@ -48,6 +48,97 @@ Generated files must be written to:
 
 Generated files are candidate data only and must not be treated as final benchmark gold data before review.
 
+
+## Two-layer expansion strategy
+
+The expansion workflow is divided into two layers.
+
+### Layer A — Core benchmark expansion
+Purpose:
+- create a controlled, high-quality core set
+- close the most important coverage gaps
+- validate prompt behavior and schema faithfulness
+- generate a manageable number of reviewable candidates
+
+This layer uses:
+- `part1`
+- `part2`
+
+Expected size:
+- about 90 to 150 candidate entries across all defined core runs
+
+### Layer B — Scaled fine-tuning expansion
+Purpose:
+- generate a much larger candidate pool for fine-tuning
+- reuse the validated batch logic from the core layer
+- scale generation through repeated waves with controlled variation
+
+This layer uses:
+- `wave01`
+- `wave02`
+- `wave03`
+- and later additional waves as needed
+
+Expected size:
+- about 500 to 1500 candidate entries depending on the number of waves
+
+## Interpretation of current run files
+
+The current `part1` and `part2` files are core runs only.
+They are not intended to be the full expansion volume.
+
+They serve as:
+- controlled benchmark-oriented expansion
+- validation of batch logic
+- seed generation patterns for later scaling
+
+## Scaled run naming convention
+
+Pattern:
+- `<batch>_<family>_waveXX.md`
+
+Examples:
+- `b001_nlp4re_wave01.md`
+- `b001_empirical_wave03.md`
+- `b004_nlp4re_wave05.md`
+
+## Scaled final prompt naming convention
+
+Pattern:
+- `<batch>_<family>_waveXX_full_prompt.md`
+
+Examples:
+- `b002_nlp4re_wave02_full_prompt.md`
+- `b005_empirical_wave04_full_prompt.md`
+
+## Scaled candidate output naming convention
+
+Pattern:
+- `<batch>_<family>_waveXX_candidates.json`
+
+Examples:
+- `b003_nlp4re_wave01_candidates.json`
+- `b004_nlp4re_wave06_candidates.json`
+
+## Scaling principle
+
+Scale waves must:
+- preserve the family-specific schema grounding
+- preserve the batch objective
+- vary question wording and constraints
+- avoid duplicates against benchmark seed, core runs, and prior waves
+- remain candidate data until validation
+
+## Practical scaling plan
+
+Suggested first target:
+- finish all core runs first
+- then add wave01 to wave03 for B001, B002, B003, and B005
+- then add more NLP4RE-focused waves for B004
+
+This already produces several hundred candidates while preserving structure.
+
+
 ## Batch overview
 
 ### B001 — Answer type gaps
@@ -205,3 +296,5 @@ The family prompts are the schema-grounding source.
 The wrapper prompts do not replace them.
 The run prompts do not replace them.
 The final prompt combines the family grounding with batch and run constraints.
+
+
