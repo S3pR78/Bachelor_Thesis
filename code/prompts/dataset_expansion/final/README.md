@@ -1,69 +1,139 @@
 # Final Dataset Expansion Prompts
 
-This directory contains fully assembled, ready-to-use generation prompts for dataset expansion runs.
+This directory contains execution-ready prompts for dataset expansion.
 
-These prompts are the end products of the modular prompt workflow defined in `code/prompts/dataset_expansion/`.
+These files are the final prompts used by the OpenAI generation runner.
 
-## Purpose
+## Directory structure
 
-Use the files in this directory when you want to directly generate candidate dataset entries without manually assembling:
+- `core/`
+  - controlled benchmark-oriented expansion runs
+  - small, reviewable runs
+  - usually `part1` and `part2`
 
-1. family base prompt
-2. batch wrapper prompt
-3. run-specific instruction block
+- `scaled/`
+  - larger wave-based candidate generation
+  - intended for broader fine-tuning candidate expansion
+  - usually `wave01`, `wave02`, and later waves
 
-## Available final prompts
+## Purpose of the two layers
 
-- `benchmark_b001_nlp4re_full_prompt.md`
-- `benchmark_b001_empirical_full_prompt.md`
+### Core
+Use core prompts when you want:
+- tightly controlled batches
+- smaller reviewable candidate sets
+- initial validation of prompt behavior
+- benchmark-oriented expansion
 
-## What these files already include
+### Scaled
+Use scaled prompts when you want:
+- larger candidate generation
+- repeated wave-based growth
+- fine-tuning candidate pool expansion
+- reuse of already validated batch logic
 
-Each final prompt already combines:
+## Available core prompts
 
-- family-specific schema grounding
-- batch-specific generation objective
-- run-specific constraints
-- metadata requirements
-- output formatting rules
+### B001
+- `core/b001_nlp4re_part1_full_prompt.md`
+- `core/b001_nlp4re_part2_full_prompt.md`
+- `core/b001_empirical_part1_full_prompt.md`
+- `core/b001_empirical_part2_full_prompt.md`
 
-## Recommended usage
+## Available scaled prompts
 
-Use one final prompt at a time.
+### B001
+- `scaled/b001_nlp4re_wave01_full_prompt.md`
+- `scaled/b001_empirical_wave01_full_prompt.md`
 
-Expected output:
-- one JSON array
-- one candidate batch
-- ready to save under `code/data/dataset/expansion/candidates/`
+### B002
+- `scaled/b002_nlp4re_wave01_full_prompt.md`
+- `scaled/b002_empirical_wave01_full_prompt.md`
 
-## Recommended output files
+### B003
+- `scaled/b003_nlp4re_wave01_full_prompt.md`
+- `scaled/b003_empirical_wave01_full_prompt.md`
 
-For the current b001 batch:
+### B004
+- `scaled/b004_nlp4re_wave01_full_prompt.md`
 
-- `code/data/dataset/expansion/candidates/benchmark_b001_nlp4re_candidates.json`
-- `code/data/dataset/expansion/candidates/benchmark_b001_empirical_candidates.json`
+### B005
+- `scaled/b005_nlp4re_wave01_full_prompt.md`
+- `scaled/b005_empirical_wave01_full_prompt.md`
 
-## Relationship to the modular workflow
+## Recommended execution order
 
-The modular source files remain useful for maintenance and future batch creation:
+### First practical runs
+1. `core/b001_nlp4re_part1_full_prompt.md`
+2. `core/b001_nlp4re_part2_full_prompt.md`
+3. `core/b001_empirical_part1_full_prompt.md`
+4. `core/b001_empirical_part2_full_prompt.md`
 
-- base prompts: `code/prompts/empire_compass/generated/rendered/`
-- batch wrappers: `code/prompts/dataset_expansion/`
-- run files: `code/prompts/dataset_expansion/runs/`
+### Then scaled runs
+5. `scaled/b001_nlp4re_wave01_full_prompt.md`
+6. `scaled/b001_empirical_wave01_full_prompt.md`
+7. `scaled/b002_nlp4re_wave01_full_prompt.md`
+8. `scaled/b002_empirical_wave01_full_prompt.md`
 
-The files in this `final/` directory are the execution-ready versions.
+### Then harder reasoning and hard-case waves
+9. `scaled/b003_nlp4re_wave01_full_prompt.md`
+10. `scaled/b003_empirical_wave01_full_prompt.md`
+11. `scaled/b004_nlp4re_wave01_full_prompt.md`
+12. `scaled/b005_nlp4re_wave01_full_prompt.md`
+13. `scaled/b005_empirical_wave01_full_prompt.md`
 
-## Naming convention
+## Output handling
 
-Use the pattern:
+Generated outputs should be written to:
 
-`<batch_id>_<family>_full_prompt.md`
+- `code/data/dataset/expansion/candidates/`
+
+These outputs are candidate data only.
+They must not be treated as final benchmark gold data before review and validation.
+
+## Validation rule
+
+After each generated candidate file:
+
+1. run duplicate checking
+2. inspect schema warnings
+3. inspect suspicious predicates
+4. manually inspect at least a sample
+5. only then continue
+
+## Naming conventions
+
+### Core prompt files
+Pattern:
+- `<batch>_<family>_<part>_full_prompt.md`
 
 Examples:
-- `benchmark_b001_nlp4re_full_prompt.md`
-- `benchmark_b001_empirical_full_prompt.md`
+- `b001_nlp4re_part1_full_prompt.md`
+- `b001_empirical_part2_full_prompt.md`
+
+### Scaled prompt files
+Pattern:
+- `<batch>_<family>_waveXX_full_prompt.md`
+
+Examples:
+- `b002_nlp4re_wave01_full_prompt.md`
+- `b005_empirical_wave01_full_prompt.md`
+
+### Candidate output files
+Pattern:
+- `<batch>_<family>_<part_or_wave>_candidates.json`
+
+Examples:
+- `b001_nlp4re_part1_candidates.json`
+- `b002_empirical_wave01_candidates.json`
 
 ## Important note
 
-Outputs generated with these prompts are still candidate data.
-They must not be treated as final benchmark gold data before validation and review.
+The files in this directory are already execution-ready.
+
+You do not need to manually assemble:
+- family base prompt
+- wrapper prompt
+- run prompt
+
+That assembly has already been captured in the final prompt files.
