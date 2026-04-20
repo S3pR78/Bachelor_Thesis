@@ -24,6 +24,16 @@ This wrapper must be combined with exactly one family-specific base prompt from 
 8. Do not generate generic bibliographic-only queries based only on title, year, or generic paper metadata.
 9. If a target component such as REGEX, LIMIT, MIN, AVG, BIND, UNION, or NOT_EXISTS is requested, use it only when it is semantically justified by the question.
 10. Prefer questions whose wording clearly reflects comparison, temporal reasoning, missing information, negation, or multi-intent structure.
+11. Do not insert a target component artificially if it makes the question unnatural.
+12. `answer_type` must be one of:
+   - `resource`
+   - `string`
+   - `number`
+   - `date`
+
+   Do not use values such as:
+   - `factoid`
+   - `non_factoid`
 
 ### Question-answer alignment rules
 
@@ -43,6 +53,8 @@ This wrapper must be combined with exactly one family-specific base prompt from 
 
 Prefer projecting only the minimal variables needed to answer the question.
 Do not include `?paper` or `?paperLabel` unless the question explicitly asks for papers.
+
+6. Use the family anchor pattern consistently. For NLP4RE, prefer the family grounding structure where the paper links to a contribution and the contribution carries the template class. Do not assign the template class directly to the paper unless the family schema explicitly requires it.
 
 ## Desired behavior
 - prefer non-factoid questions

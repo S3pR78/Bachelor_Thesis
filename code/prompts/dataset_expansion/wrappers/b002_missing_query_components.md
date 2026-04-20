@@ -23,6 +23,20 @@ This wrapper must be combined with exactly one family-specific base prompt from 
 3. Do not force artificial complexity just to include an operator.
 4. Generate only English questions.
 5. Avoid duplicates and near-duplicates.
+6. Keep question wording natural and academically plausible.
+7. Every query must use at least one family-specific template predicate or template path from the selected family prompt.
+8. Do not generate generic bibliographic-only queries based only on title, year, or generic paper metadata.
+9. Use REGEX, LIMIT, MIN, AVG, BIND, UNION, or NOT_EXISTS only when semantically justified.
+10. Do not insert a target component artificially if it makes the question unnatural.
+11. `answer_type` must be one of:
+   - `resource`
+   - `string`
+   - `number`
+   - `date`
+
+   Do not use values such as:
+   - `factoid`
+   - `non_factoid`
 
 ### Question-answer alignment rules
 
@@ -39,10 +53,8 @@ This wrapper must be combined with exactly one family-specific base prompt from 
    - "For which papers ..."
    - "Which datasets ..."
    - "Which natural languages are reported for datasets ..."
+6. Use the family anchor pattern consistently. For NLP4RE, prefer the family grounding structure where the paper links to a contribution and the contribution carries the template class. Do not assign the template class directly to the paper unless the family schema explicitly requires it.
 
-6. Keep question wording natural and academically plausible.
-7. Every query must use at least one family-specific template predicate or template path from the selected family prompt.
-8. Do not generate generic bibliographic-only queries based only on title, year, or generic paper metadata.
 
 Prefer projecting only the minimal variables needed to answer the question.
 Do not include `?paper` or `?paperLabel` unless the question explicitly asks for papers.
