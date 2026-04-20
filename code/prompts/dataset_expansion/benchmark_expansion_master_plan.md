@@ -202,9 +202,6 @@ Families:
 - nlp4re
 - empirical_research_practice
 
-Split:
-- part1
-- part2
 
 ## Required prompt files
 
@@ -281,14 +278,17 @@ After every generated candidate file:
 4. review at least a sample manually
 5. only then continue to the next batch
 
-## Metadata rule for generated candidates
 
-Generated candidates should start with:
+## Current active generation format
 
-- `human_or_generated = "generated"`
-- `gold_status = "draft"`
-- `review_status = "unreviewed"`
-- `split = "train"`
+The model must currently generate only:
+- id
+- question
+- gold_sparql
+- family
+- answer_type
+
+All remaining metadata is added later in a separate enrichment step.
 
 ## Important note
 
@@ -296,5 +296,15 @@ The family prompts are the schema-grounding source.
 The wrapper prompts do not replace them.
 The run prompts do not replace them.
 The final prompt combines the family grounding with batch and run constraints.
+
+## Current active prompt path
+
+Use:
+- family base prompts
+- wrappers
+- runs / scaled_runs
+- assembly tool
+
+Do not rely on hand-maintained final prompt files as the primary workflow.
 
 
