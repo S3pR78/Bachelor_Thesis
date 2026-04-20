@@ -157,7 +157,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--expected-count",
         type=int,
-        default=5,
+        default=10,
         help="Expected number of generated candidate entries.",
     )
     parser.add_argument(

@@ -1,0 +1,72 @@
+[
+  {
+    "id": "b001_nlp4re_001",
+    "question": "Which NLP task types are reported in papers that evaluate their approach with F1-score?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?taskType ?taskTypeLabel WHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 .\n  ?contribution orkgp:P181003 ?taskTemplate .\n  ?taskTemplate orkgp:P181004 ?taskType .\n  OPTIONAL { ?taskType rdfs:label ?taskTypeLabel . }\n  ?contribution orkgp:HAS_EVALUATION ?evaluation .\n  ?evaluation orkgp:P110006 ?metric .\n  ?metric rdfs:label ?metricLabel .\n  FILTER(LCASE(STR(?metricLabel)) = LCASE(\"f1-score\"))\n}",
+    "family": "nlp4re",
+    "answer_type": "resource"
+  },
+  {
+    "id": "b001_nlp4re_002",
+    "question": "Which data source types are used for datasets whose natural language is English?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?sourceType ?sourceTypeLabel WHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 .\n  ?contribution orkgp:P181011 ?datasetTemplate .\n  ?datasetTemplate orkgp:P181022 ?dataTypeTemplate .\n  ?dataTypeTemplate orkgp:P181025 ?language .\n  ?language rdfs:label ?languageLabel .\n  FILTER(LCASE(STR(?languageLabel)) = LCASE(\"english\"))\n  ?datasetTemplate orkgp:P181017 ?sourceTemplate .\n  ?sourceTemplate orkgp:P181018 ?sourceType .\n  OPTIONAL { ?sourceType rdfs:label ?sourceTypeLabel . }\n}",
+    "family": "nlp4re",
+    "answer_type": "resource"
+  },
+  {
+    "id": "b001_nlp4re_003",
+    "question": "Which intercoder reliability metrics are used for contributions whose data source domain is information systems?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?metric ?metricLabel WHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 .\n  ?contribution orkgp:P181031 ?annotationTemplate .\n  ?annotationTemplate orkgp:P181041 ?agreementTemplate .\n  ?agreementTemplate orkgp:P181042 ?metric .\n  OPTIONAL { ?metric rdfs:label ?metricLabel . }\n  ?contribution orkgp:P181011 ?datasetTemplate .\n  ?datasetTemplate orkgp:P181017 ?sourceTemplate .\n  ?sourceTemplate orkgp:P181020 ?domain .\n  ?domain rdfs:label ?domainLabel .\n  FILTER(LCASE(STR(?domainLabel)) = LCASE(\"information systems\"))\n}",
+    "family": "nlp4re",
+    "answer_type": "resource"
+  },
+  {
+    "id": "b001_nlp4re_004",
+    "question": "What natural language is reported for datasets that draw on more than one data source?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?languageLabel WHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 .\n  ?contribution orkgp:P181011 ?datasetTemplate .\n  ?datasetTemplate orkgp:P181017 ?sourceTemplate .\n  ?sourceTemplate orkgp:P181019 ?numSources .\n  FILTER(xsd:integer(?numSources) > 1)\n  ?datasetTemplate orkgp:P181022 ?dataTypeTemplate .\n  ?dataTypeTemplate orkgp:P181025 ?language .\n  ?language rdfs:label ?languageLabel .\n}",
+    "family": "nlp4re",
+    "answer_type": "string"
+  },
+  {
+    "id": "b001_nlp4re_005",
+    "question": "What license type is reported for datasets stored on GitHub?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?licenseLabel WHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 .\n  ?contribution orkgp:P181011 ?datasetTemplate .\n  ?datasetTemplate orkgp:P181028 ?locationTemplate .\n  ?locationTemplate orkgp:P1003 ?url .\n  FILTER(CONTAINS(LCASE(STR(?url)), \"github\"))\n  ?datasetTemplate orkgp:license ?licenseTemplate .\n  ?licenseTemplate orkgp:P181027 ?license .\n  ?license rdfs:label ?licenseLabel .\n}",
+    "family": "nlp4re",
+    "answer_type": "string"
+  },
+  {
+    "id": "b001_nlp4re_006",
+    "question": "What release URL is provided for implemented approaches that include documentation?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?url WHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 .\n  ?contribution orkgp:P181046 ?approachTemplate .\n  ?approachTemplate orkgp:P41835 ?docType .\n  ?contribution orkgp:release ?releaseTemplate .\n  ?releaseTemplate orkgp:P1003 ?url .\n}",
+    "family": "nlp4re",
+    "answer_type": "string"
+  },
+  {
+    "id": "b001_nlp4re_007",
+    "question": "What is the measured agreement reported for contributions that apply annotator agreement?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?agreementValue WHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 .\n  ?contribution orkgp:P181031 ?annotationTemplate .\n  ?annotationTemplate orkgp:P181041 ?agreementTemplate .\n  ?agreementTemplate orkgp:P181045 ?agreementValue .\n}",
+    "family": "nlp4re",
+    "answer_type": "number"
+  },
+  {
+    "id": "b001_nlp4re_008",
+    "question": "How many data sources are reported for datasets whose source domain is information systems?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?numSources WHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 .\n  ?contribution orkgp:P181011 ?datasetTemplate .\n  ?datasetTemplate orkgp:P181017 ?sourceTemplate .\n  ?sourceTemplate orkgp:P181020 ?domain .\n  ?domain rdfs:label ?domainLabel .\n  FILTER(LCASE(STR(?domainLabel)) = LCASE(\"information systems\"))\n  ?sourceTemplate orkgp:P181019 ?numSources .\n}",
+    "family": "nlp4re",
+    "answer_type": "number"
+  },
+  {
+    "id": "b001_nlp4re_009",
+    "question": "In which year were papers that store their dataset on GitHub published?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?year WHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 .\n  ?contribution orkgp:P181011 ?datasetTemplate .\n  ?datasetTemplate orkgp:P181028 ?locationTemplate .\n  ?locationTemplate orkgp:P1003 ?url .\n  FILTER(CONTAINS(LCASE(STR(?url)), \"github\"))\n  ?paper orkgp:P29 ?year .\n}",
+    "family": "nlp4re",
+    "answer_type": "date"
+  },
+  {
+    "id": "b001_nlp4re_010",
+    "question": "In which year was the dataset produced for contributions whose natural language is English?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?productionTime WHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 .\n  ?contribution orkgp:P181011 ?datasetTemplate .\n  ?datasetTemplate orkgp:P181022 ?dataTypeTemplate .\n  ?dataTypeTemplate orkgp:P181025 ?language .\n  ?language rdfs:label ?languageLabel .\n  FILTER(LCASE(STR(?languageLabel)) = LCASE(\"english\"))\n  ?datasetTemplate orkgp:P181016 ?productionTime .\n}",
+    "family": "nlp4re",
+    "answer_type": "date"
+  }
+]
