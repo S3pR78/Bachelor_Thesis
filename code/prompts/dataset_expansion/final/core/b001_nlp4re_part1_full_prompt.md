@@ -30,6 +30,103 @@ Use the config and template files only as supporting references for consistency.
 8. Ensure that `special_types` match actual reasoning behavior.
 9. Ensure that `answer_type` matches the expected answer shape.
 
+## Critical family-specific constraints
+
+1. Every query must be clearly anchored in the NLP4RE family structure.
+2. Every query must use at least one NLP4RE-specific template predicate or nested template path from the family grounding prompt.
+3. Do not generate generic bibliographic-only queries.
+4. Do not generate queries whose main logic is only based on:
+   - `orkg:Paper`
+   - `dcterms:title`
+   - `dcterms:issued`
+   - generic paper metadata without NLP4RE template grounding
+5. “NLP4RE” must not appear only in the natural-language question. It must be reflected in the SPARQL structure.
+6. Prefer questions about NLP4RE-specific aspects such as:
+   - NLP task
+   - NLP task type
+   - NLP task output
+   - output type
+   - dataset
+   - data source
+   - data source type
+   - number of data sources
+   - data domain
+   - data abstraction level
+   - data type
+   - data format
+   - natural language
+   - public availability
+   - license type
+   - dataset location
+7. Prefer queries that connect the paper/contribution to template-specific properties instead of using title-keyword search as the main semantics.
+8. Title or publication year filters may be used only as secondary constraints, not as the core meaning of the query.
+9. At least one family-specific predicate path must be central to the answer.
+
+## Dataset metadata vocabulary constraints
+
+Use only the dataset vocabulary below.
+
+### Allowed `query_shape` values
+- `edge`
+- `chain`
+- `star`
+- `tree`
+- `cycle`
+- `forest`
+- `other`
+
+Do not use values like:
+- `conjunctive`
+- `aggregation`
+
+### Allowed `query_components` values
+- `SELECT`
+- `ASK`
+- `COUNT`
+- `FILTER`
+- `REGEX`
+- `STR`
+- `ORDER_BY`
+- `GROUP_BY`
+- `HAVING`
+- `LIMIT`
+- `OPTIONAL`
+- `UNION`
+- `NOT_EXISTS`
+- `MIN`
+- `MAX`
+- `AVG`
+- `IF`
+- `BIND`
+
+Do not invent custom labels such as:
+- `paper_entity`
+- `title_literal`
+- `keyword_filter`
+- `resource_projection`
+
+### Allowed `special_types` values
+- `lookup`
+- `typed_lookup`
+- `multi_hop`
+- `count`
+- `aggregation`
+- `ranking`
+- `superlative`
+- `temporal`
+- `boolean`
+- `negation`
+- `missing_info`
+- `comparison`
+- `multi_intent`
+- `string_operation`
+
+Do not invent custom labels such as:
+- `keyword_filter`
+- `temporal_filter`
+- `constraint_filter`
+- `ordering`
+
 ## Batch objective
 
 Generate candidate dataset entries that close answer-type coverage gaps.
@@ -75,6 +172,13 @@ Prefer:
 - 3 factoid
 - 2 non_factoid
 - mostly medium complexity
+
+Additional run requirements:
+- at least 4 of the 5 questions must use clearly template-specific NLP4RE properties
+- at most 1 question may use paper-level metadata such as title or year as a secondary filter
+- at least 2 questions should involve a dataset-related NLP4RE property
+- at least 2 questions should involve an NLP task, output type, or source-related property
+- at least 1 question should involve a string-oriented answer or string operation without becoming a pure title lookup
 
 Avoid overlap with:
 - benchmark seed data

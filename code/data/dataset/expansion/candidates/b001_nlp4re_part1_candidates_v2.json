@@ -1,0 +1,163 @@
+[
+  {
+    "id": "b001_nlp4re_001",
+    "source_id": "gen_b001_nlp4re_001",
+    "question": "Which NLP task type is associated with datasets that have an open license and more than two data sources?",
+    "gold_sparql": "PREFIX orkg: <http://orkg.org/orkg/>\nPREFIX dcterms: <http://purl.org/dc/terms/>\nSELECT DISTINCT ?taskType WHERE {\n  ?paper a orkg:Paper ;\n         orkg:hasContribution ?contribution .\n  ?contribution orkg:hasDataset ?dataset ;\n                orkg:hasNLPTaskType ?taskType .\n  ?dataset orkg:hasDataSource ?dataSource ;\n           orkg:hasLicenseType ?license .\n  FILTER(REGEX(STR(?license), \"open\", \"i\"))\n}\nGROUP BY ?taskType ?dataset\nHAVING (COUNT(DISTINCT ?dataSource) > 2)",
+    "family": "nlp4re",
+    "source_dataset": "Hybrid_NLP4RE",
+    "language": "en",
+    "query_type": "non_factoid",
+    "query_shape": "tree",
+    "answer_type": "resource",
+    "complexity_level": "medium",
+    "ambiguity_risk": "medium",
+    "lexical_gap_risk": "medium",
+    "hallucination_risk": "medium",
+    "query_components": [
+      "SELECT",
+      "COUNT",
+      "FILTER",
+      "REGEX",
+      "STR",
+      "GROUP_BY",
+      "HAVING"
+    ],
+    "special_types": [
+      "aggregation",
+      "comparison",
+      "multi_hop",
+      "string_operation"
+    ],
+    "number_of_patterns": 6,
+    "human_or_generated": "generated",
+    "gold_status": "draft",
+    "review_status": "unreviewed",
+    "split": "train"
+  },
+  {
+    "id": "b001_nlp4re_002",
+    "source_id": "gen_b001_nlp4re_002",
+    "question": "Which data source type is used in contributions whose NLP output type is relation extraction?",
+    "gold_sparql": "PREFIX orkg: <http://orkg.org/orkg/>\nSELECT DISTINCT ?sourceType WHERE {\n  ?paper a orkg:Paper ;\n         orkg:hasContribution ?contribution .\n  ?contribution orkg:hasDataset ?dataset ;\n                orkg:hasNLPOutputType ?outputType .\n  ?dataset orkg:hasDataSourceType ?sourceType .\n  FILTER(REGEX(STR(?outputType), \"relation extraction\", \"i\"))\n}",
+    "family": "nlp4re",
+    "source_dataset": "Hybrid_NLP4RE",
+    "language": "en",
+    "query_type": "factoid",
+    "query_shape": "star",
+    "answer_type": "resource",
+    "complexity_level": "medium",
+    "ambiguity_risk": "medium",
+    "lexical_gap_risk": "medium",
+    "hallucination_risk": "medium",
+    "query_components": [
+      "SELECT",
+      "FILTER",
+      "REGEX",
+      "STR"
+    ],
+    "special_types": [
+      "multi_hop",
+      "lookup",
+      "string_operation"
+    ],
+    "number_of_patterns": 5,
+    "human_or_generated": "generated",
+    "gold_status": "draft",
+    "review_status": "unreviewed",
+    "split": "train"
+  },
+  {
+    "id": "b001_nlp4re_003",
+    "source_id": "gen_b001_nlp4re_003",
+    "question": "What natural language is specified for the dataset used in the contribution?",
+    "gold_sparql": "PREFIX orkg: <http://orkg.org/orkg/>\nSELECT DISTINCT ?naturalLanguage WHERE {\n  ?paper a orkg:Paper ;\n         orkg:hasContribution ?contribution .\n  ?contribution orkg:hasDataset ?dataset .\n  ?dataset orkg:hasNaturalLanguage ?naturalLanguage .\n}",
+    "family": "nlp4re",
+    "source_dataset": "Hybrid_NLP4RE",
+    "language": "en",
+    "query_type": "factoid",
+    "query_shape": "chain",
+    "answer_type": "string",
+    "complexity_level": "low",
+    "ambiguity_risk": "low",
+    "lexical_gap_risk": "low",
+    "hallucination_risk": "low",
+    "query_components": [
+      "SELECT"
+    ],
+    "special_types": [
+      "lookup"
+    ],
+    "number_of_patterns": 4,
+    "human_or_generated": "generated",
+    "gold_status": "draft",
+    "review_status": "unreviewed",
+    "split": "train"
+  },
+  {
+    "id": "b001_nlp4re_004",
+    "source_id": "gen_b001_nlp4re_004",
+    "question": "How many distinct data sources are listed for datasets used in event extraction tasks?",
+    "gold_sparql": "PREFIX orkg: <http://orkg.org/orkg/>\nSELECT (COUNT(DISTINCT ?dataSource) AS ?numberOfDataSources) WHERE {\n  ?paper a orkg:Paper ;\n         orkg:hasContribution ?contribution .\n  ?contribution orkg:hasDataset ?dataset ;\n                orkg:hasNLPTask ?task .\n  ?dataset orkg:hasDataSource ?dataSource .\n  FILTER(REGEX(STR(?task), \"event extraction\", \"i\"))\n}",
+    "family": "nlp4re",
+    "source_dataset": "Hybrid_NLP4RE",
+    "language": "en",
+    "query_type": "non_factoid",
+    "query_shape": "star",
+    "answer_type": "number",
+    "complexity_level": "medium",
+    "ambiguity_risk": "medium",
+    "lexical_gap_risk": "medium",
+    "hallucination_risk": "medium",
+    "query_components": [
+      "SELECT",
+      "COUNT",
+      "FILTER",
+      "REGEX",
+      "STR"
+    ],
+    "special_types": [
+      "count",
+      "aggregation",
+      "multi_hop",
+      "string_operation"
+    ],
+    "number_of_patterns": 4,
+    "human_or_generated": "generated",
+    "gold_status": "draft",
+    "review_status": "unreviewed",
+    "split": "train"
+  },
+  {
+    "id": "b001_nlp4re_005",
+    "source_id": "gen_b001_nlp4re_005",
+    "question": "On what publication date was the paper that reports a dataset with an open license and a corpus data source type published?",
+    "gold_sparql": "PREFIX orkg: <http://orkg.org/orkg/>\nPREFIX dcterms: <http://purl.org/dc/terms/>\nSELECT DISTINCT ?publicationDate WHERE {\n  ?paper a orkg:Paper ;\n         dcterms:issued ?publicationDate ;\n         orkg:hasContribution ?contribution .\n  ?contribution orkg:hasDataset ?dataset .\n  ?dataset orkg:hasLicenseType ?license ;\n           orkg:hasDataSourceType ?sourceType .\n  FILTER(REGEX(STR(?license), \"open\", \"i\"))\n  FILTER(REGEX(STR(?sourceType), \"corpus\", \"i\"))\n}",
+    "family": "nlp4re",
+    "source_dataset": "Hybrid_NLP4RE",
+    "language": "en",
+    "query_type": "factoid",
+    "query_shape": "tree",
+    "answer_type": "date",
+    "complexity_level": "medium",
+    "ambiguity_risk": "medium",
+    "lexical_gap_risk": "medium",
+    "hallucination_risk": "medium",
+    "query_components": [
+      "SELECT",
+      "FILTER",
+      "REGEX",
+      "STR"
+    ],
+    "special_types": [
+      "temporal",
+      "multi_hop",
+      "string_operation"
+    ],
+    "number_of_patterns": 6,
+    "human_or_generated": "generated",
+    "gold_status": "draft",
+    "review_status": "unreviewed",
+    "split": "train"
+  }
+]
