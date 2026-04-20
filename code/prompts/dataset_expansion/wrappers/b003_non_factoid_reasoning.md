@@ -34,6 +34,12 @@ This wrapper must be combined with exactly one family-specific base prompt from 
    Do not use values such as:
    - `factoid`
    - `non_factoid`
+13. Do not assign the family template class directly to `?paper` unless the family schema explicitly requires it.
+Use the family anchor pattern where the paper links to a contribution and the contribution carries the family template class.
+14. Do not use placeholder-style predicates such as:
+- `orkgp:HAS_EVALUATION`
+- generic uppercase pseudo-predicates
+Only use predicates that are explicitly grounded in the family prompt.
 
 ### Question-answer alignment rules
 

@@ -1,0 +1,72 @@
+[
+  {
+    "id": "b003_nlp4re_001",
+    "question": "Which papers report both a dataset URL and an implementation release URL?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?paper ?paperLabel WHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 .\n  ?contribution orkgp:P181011 ?dataset .\n  ?dataset orkgp:P181028 ?datasetLocation .\n  ?datasetLocation orkgp:P1003 ?datasetUrl .\n  ?contribution orkgp:P181046 ?approach .\n  ?approach orkgp:release ?release .\n  ?release orkgp:P1003 ?releaseUrl .\n  OPTIONAL { ?paper rdfs:label ?paperLabel }\n}",
+    "family": "nlp4re",
+    "answer_type": "resource"
+  },
+  {
+    "id": "b003_nlp4re_002",
+    "question": "What natural languages are reported for datasets in papers that also provide an implementation release URL?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?naturalLanguageValue WHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 .\n  ?contribution orkgp:P181011 ?dataset .\n  ?dataset orkgp:P181022 ?datatype .\n  ?datatype orkgp:P181025 ?naturalLanguage .\n  OPTIONAL { ?naturalLanguage rdfs:label ?naturalLanguageLabel . }\n  BIND(COALESCE(?naturalLanguageLabel, STR(?naturalLanguage)) AS ?naturalLanguageValue)\n  ?contribution orkgp:release ?release .\n  ?release orkgp:P1003 ?releaseUrl .\n}",
+    "family": "nlp4re",
+    "answer_type": "string"
+  },
+  {
+    "id": "b003_nlp4re_003",
+    "question": "How many papers report more than one evaluation metric?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT (COUNT(DISTINCT ?paper) AS ?count) WHERE {\n  {\n    SELECT ?paper WHERE {\n      ?paper orkgp:P31 ?contribution .\n      ?contribution a orkgc:C121001 .\n      ?contribution orkgp:HAS_EVALUATION ?evaluation .\n      ?evaluation orkgp:P110006 ?metric .\n    }\n    GROUP BY ?paper\n    HAVING(COUNT(DISTINCT ?metric) > 1)\n  }\n}",
+    "family": "nlp4re",
+    "answer_type": "number"
+  },
+  {
+    "id": "b003_nlp4re_004",
+    "question": "Which papers report both an annotation agreement metric and a conflict resolution step?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?paper ?paperLabel WHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 .\n  ?contribution orkgp:P181031 ?annotationProcess .\n  ?annotationProcess orkgp:P181041 ?agreement .\n  ?agreement orkgp:P181042 ?metric .\n  ?agreement orkgp:P181044 ?conflictResolution .\n  OPTIONAL { ?paper rdfs:label ?paperLabel }\n}",
+    "family": "nlp4re",
+    "answer_type": "resource"
+  },
+  {
+    "id": "b003_nlp4re_005",
+    "question": "Which papers report a dataset location but no dataset URL?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?paper ?paperLabel WHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 .\n  ?contribution orkgp:P181011 ?dataset .\n  ?dataset orkgp:P181028 ?datasetLocation .\n  FILTER NOT EXISTS { ?datasetLocation orkgp:P1003 ?datasetUrl . }\n  OPTIONAL { ?paper rdfs:label ?paperLabel }\n}",
+    "family": "nlp4re",
+    "answer_type": "resource"
+  },
+  {
+    "id": "b003_nlp4re_006",
+    "question": "Which papers report datasets from more than one source and list at least one data source domain?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?paper ?paperLabel WHERE {\n  {\n    SELECT ?paper WHERE {\n      ?paper orkgp:P31 ?contribution .\n      ?contribution a orkgc:C121001 .\n      ?contribution orkgp:P181011 ?dataset .\n      ?dataset orkgp:P181017 ?source .\n      ?source orkgp:P181019 ?numSources .\n      ?source orkgp:P181020 ?domain .\n      FILTER(xsd:decimal(?numSources) > 1)\n    }\n    GROUP BY ?paper\n  }\n  OPTIONAL { ?paper rdfs:label ?paperLabel }\n}",
+    "family": "nlp4re",
+    "answer_type": "resource"
+  },
+  {
+    "id": "b003_nlp4re_007",
+    "question": "Which papers published in 2023 report an implementation release URL?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?paper ?paperLabel WHERE {\n  ?paper orkgp:P29 ?year .\n  FILTER(STR(?year) = \"2023\")\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 .\n  ?contribution orkgp:P181046 ?approach .\n  ?approach orkgp:release ?release .\n  ?release orkgp:P1003 ?releaseUrl .\n  OPTIONAL { ?paper rdfs:label ?paperLabel }\n}",
+    "family": "nlp4re",
+    "answer_type": "resource"
+  },
+  {
+    "id": "b003_nlp4re_008",
+    "question": "Which papers report both an NLP task output type and a translation mapping cardinality?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?paper ?paperLabel WHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 .\n  ?contribution orkgp:P181003 ?nlpTask .\n  ?nlpTask orkgp:P181006 ?output .\n  ?output orkgp:P181007 ?outputType .\n  ?output orkgp:P181010 ?mappingCardinality .\n  OPTIONAL { ?paper rdfs:label ?paperLabel }\n}",
+    "family": "nlp4re",
+    "answer_type": "resource"
+  },
+  {
+    "id": "b003_nlp4re_009",
+    "question": "What license types are reported for datasets that also provide a dataset URL?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?licenseTypeValue WHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 .\n  ?contribution orkgp:P181011 ?dataset .\n  ?dataset orkgp:license ?license .\n  ?license orkgp:P181027 ?licenseType .\n  OPTIONAL { ?licenseType rdfs:label ?licenseTypeLabel . }\n  BIND(COALESCE(?licenseTypeLabel, STR(?licenseType)) AS ?licenseTypeValue)\n  ?dataset orkgp:P181028 ?location .\n  ?location orkgp:P1003 ?datasetUrl .\n}",
+    "family": "nlp4re",
+    "answer_type": "string"
+  },
+  {
+    "id": "b003_nlp4re_010",
+    "question": "Which papers report an evaluation metric but do not specify any baseline comparison detail?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?paper ?paperLabel WHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 .\n  ?contribution orkgp:HAS_EVALUATION ?evaluation .\n  ?evaluation orkgp:P110006 ?metric .\n  FILTER NOT EXISTS {\n    ?evaluation orkgp:P181051 ?baseline .\n    ?baseline orkgp:P181053 ?detail .\n  }\n  OPTIONAL { ?paper rdfs:label ?paperLabel }\n}",
+    "family": "nlp4re",
+    "answer_type": "resource"
+  }
+]

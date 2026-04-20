@@ -1,0 +1,553 @@
+# Assembled Dataset Expansion Prompt
+
+## Family Base Prompt
+# ORKG SPARQL Generator
+
+Generate precise, executable SPARQL for the Open Research Knowledge Graph. Template: "NLP for Requirements Engineering (NLP4RE)" (ID: R1544125).
+
+## Prefixes (required in every query)
+```sparql
+PREFIX orkgr: <http://orkg.org/orkg/resource/>
+PREFIX orkgc: <http://orkg.org/orkg/class/>
+PREFIX orkgp: <http://orkg.org/orkg/predicate/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+```
+
+## Core
+| Entity | Term | Usage |
+|--------|------|--------|
+| Paper | - | publication resource |
+| Contribution | `orkgp:P31`, `orkgc:C121001` | `?paper orkgp:P31 ?contribution` ; `?contribution a orkgc:C121001 .` |
+| Year (if time/trends) | `orkgp:P29` | `?paper orkgp:P29 ?year` (never on contribution) |
+| Venue (if asked) | `orkgp:P135046` | `?contribution orkgp:P135046 ?venue . ?venue rdfs:label ?venue_name` |
+
+#### Template Properties
+
+| Concept | ORKG Term | Type | Description & Usage |
+|---------|-----------|------|---------------------|
+| RE task | `orkgp:P181002` | Predicate | What requirements engineering task is your study addressing?. Usage: `?variable orkgp:P181002 ?target` |
+| NLP task | `orkgp:P181003` | Predicate | What natural language processing task is your study tackling?. Usage: `?variable orkgp:P181003 ?target` |
+| └─ NLP task type | `orkgp:P181004` | Predicate (multiple) | What type of natural language processing task is your study tackling?. Usage: `?contribution orkgp:P181003 ?subtemplate . ?subtemplate orkgp:P181004 ?subtarget` |
+| └─ NLP task input | `orkgp:P181005` | Predicate (multiple) | What is the input of your natural language processing task?. Usage: `?contribution orkgp:P181003 ?subtemplate . ?subtemplate orkgp:P181005 ?subtarget` |
+| └─ NLP task output | `orkgp:P181006` | Predicate | What is the output of your natural language processing task?. Usage: `?contribution orkgp:P181003 ?subtemplate . ?subtemplate orkgp:P181006 ?subtarget` |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ NLP task output type | `orkgp:P181007` | Predicate (multiple) | What is the output type of your natural language processing task?. Usage: `?contribution orkgp:P181003 ?subtemplate . ?subtemplate orkgp:P181006 ?nestedtemplate . ?nestedtemplate orkgp:P181007 ?nestedtarget` |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ NLP task output classification label | `orkgp:P181008` | Predicate | What is the output label that can be assigned in your natural language processing classification task?. Usage: `?contribution orkgp:P181003 ?subtemplate . ?subtemplate orkgp:P181006 ?nestedtemplate . ?nestedtemplate orkgp:P181008 ?nestedtarget` |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ NLP task output extracted element | `orkgp:P181009` | Predicate | What is the type of the element extracted in your natural language processing information extraction task?. Usage: `?contribution orkgp:P181003 ?subtemplate . ?subtemplate orkgp:P181006 ?nestedtemplate . ?nestedtemplate orkgp:P181009 ?nestedtarget` |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ NLP task translation mapping cardinality | `orkgp:P181010` | Predicate (multiple) | What is the translation mapping cardinality between the initial input and final output in your natural language processing translation task?. Usage: `?contribution orkgp:P181003 ?subtemplate . ?subtemplate orkgp:P181006 ?nestedtemplate . ?nestedtemplate orkgp:P181010 ?nestedtarget` |
+| NLP dataset | `orkgp:P181011` | Predicate | What natural language processing dataset is your study using?. Usage: `?variable orkgp:P181011 ?target` |
+| └─ NLP data item | `orkgp:P181015` | Predicate | How many data items do you process? Please report the numerical information and details about all the data that is used in your evaluation.. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:P181015 ?subtarget` |
+| └─ NLP data production time | `orkgp:P181016` | Predicate | In which year or interval of year were the data produced?. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:P181016 ?subtarget` |
+| └─ NLP data source | `orkgp:P181017` | Predicate | What is the source of the data?. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:P181017 ?subtarget` |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ NLP data source type | `orkgp:P181018` | Predicate (multiple) | What is the source type of the data?. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:P181017 ?nestedtemplate . ?nestedtemplate orkgp:P181018 ?nestedtarget` |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ Number of data sources | `orkgp:P181019` | Predicate | From how many different sources your data comes from?. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:P181017 ?nestedtemplate . ?nestedtemplate orkgp:P181019 ?nestedtarget` |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ Data source domain | `orkgp:P181020` | Predicate (multiple) | Please list which domains your data belongs to (e.g., automotive, satellite,
+entertainment, information systems).. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:P181017 ?nestedtemplate . ?nestedtemplate orkgp:P181020 ?nestedtarget` |
+| └─ NLP data abstraction level | `orkgp:P181021` | Predicate (multiple) | What is the level of abstraction of the data (not limited to requirements)?. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:P181021 ?subtarget` |
+| └─ NLP data type | `orkgp:P181022` | Predicate | What is the type of the data?. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:P181022 ?subtarget` |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ NLP data format | `orkgp:P181023` | Predicate (multiple) | What is the format of the data?. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:P181022 ?nestedtemplate . ?nestedtemplate orkgp:P181023 ?nestedtarget` |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ Rigor of data format | `orkgp:P181024` | Predicate (multiple) | How rigorous is the format of the data?. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:P181022 ?nestedtemplate . ?nestedtemplate orkgp:P181024 ?nestedtarget` |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ Natural language | `orkgp:P181025` | Predicate | What is the natural language of
+the data (if applicable) ?. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:P181022 ?nestedtemplate . ?nestedtemplate orkgp:P181025 ?nestedtarget` |
+| └─ License | `orkgp:license` | Predicate | What license has been used?. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:license ?subtarget` |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ Public availability | `orkgp:P181026` | Predicate | Is the dataset publicly available?. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:license ?nestedtemplate . ?nestedtemplate orkgp:P181026 ?nestedtarget` |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ License type | `orkgp:P181027` | Predicate | What license has been used?. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:license ?nestedtemplate . ?nestedtemplate orkgp:P181027 ?nestedtarget` |
+| └─ NLP dataset location | `orkgp:P181028` | Predicate | Where is the dataset stored?. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:P181028 ?subtarget` |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ Location type | `orkgp:P181030` | Predicate (multiple) | Where is the dataset stored?. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:P181028 ?nestedtemplate . ?nestedtemplate orkgp:P181030 ?nestedtarget` |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ url | `orkgp:P1003` | Predicate (multiple) | Provide a URL to the dataset, if available, or to the original paper that proposed the dataset. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:P181028 ?nestedtemplate . ?nestedtemplate orkgp:P1003 ?nestedtarget` |
+| Annotation process | `orkgp:P181031` | Predicate | What annotation process did you use for your dataset?. Usage: `?variable orkgp:P181031 ?target` |
+| └─ Annotator | `orkgp:P181032` | Predicate | Who are the annotators of your dataset?. Usage: `?contribution orkgp:P181031 ?subtemplate . ?subtemplate orkgp:P181032 ?subtarget` |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ Number of annotators | `orkgp:P59120` | Predicate | How many annotators have been involved in your annotation process?. Usage: `?contribution orkgp:P181031 ?subtemplate . ?subtemplate orkgp:P181032 ?nestedtemplate . ?nestedtemplate orkgp:P59120 ?nestedtarget` |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ Annotator assignment | `orkgp:P181033` | Predicate (multiple) | How are the entries annotated assigned to the annotators?. Usage: `?contribution orkgp:P181031 ?subtemplate . ?subtemplate orkgp:P181032 ?nestedtemplate . ?nestedtemplate orkgp:P181033 ?nestedtarget` |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ Level of application domain experience | `orkgp:P181034` | Predicate (multiple) | What is the average level of application domain experience of the annotators?. Usage: `?contribution orkgp:P181031 ?subtemplate . ?subtemplate orkgp:P181032 ?nestedtemplate . ?nestedtemplate orkgp:P181034 ?nestedtarget` |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ Annotator Identity | `orkgp:P181035` | Predicate (multiple) | Who are the annotators?. Usage: `?contribution orkgp:P181031 ?subtemplate . ?subtemplate orkgp:P181032 ?nestedtemplate . ?nestedtemplate orkgp:P181035 ?nestedtarget` |
+| └─ Annotation Scheme | `orkgp:P181036` | Predicate (multiple) | What is the annotation scheme used for your dataset?. Usage: `?contribution orkgp:P181031 ?subtemplate . ?subtemplate orkgp:P181036 ?subtarget` |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ Scheme establishement | `orkgp:P181037` | Predicate (multiple) | How was the annotation scheme established among the annotators?. Usage: `?contribution orkgp:P181031 ?subtemplate . ?subtemplate orkgp:P181036 ?nestedtemplate . ?nestedtemplate orkgp:P181037 ?nestedtarget` |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ Guideline availability | `orkgp:P181038` | Predicate (multiple) | Did you make the written guidelines public?. Usage: `?contribution orkgp:P181031 ?subtemplate . ?subtemplate orkgp:P181036 ?nestedtemplate . ?nestedtemplate orkgp:P181038 ?nestedtarget` |
+| └─ Shared material | `orkgp:P181039` | Predicate (multiple) | Did you share other information that could support the annotators other
+than the elements to annotate?. Usage: `?contribution orkgp:P181031 ?subtemplate . ?subtemplate orkgp:P181039 ?subtarget` |
+| └─ Fatigue mitigation technique | `orkgp:P181040` | Predicate | Did you employ techniques to mitigate fatigue effects during the
+annotation sessions?. Usage: `?contribution orkgp:P181031 ?subtemplate . ?subtemplate orkgp:P181040 ?subtarget` |
+| └─ Annotator agreement | `orkgp:P181041` | Predicate | What annotator agreement did you apply for your dataset?. Usage: `?contribution orkgp:P181031 ?subtemplate . ?subtemplate orkgp:P181041 ?subtarget` |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ Intercoder reliability metric | `orkgp:P181042` | Predicate (multiple) | What are the metrics used to measure intercoder reliability?. Usage: `?contribution orkgp:P181031 ?subtemplate . ?subtemplate orkgp:P181041 ?nestedtemplate . ?nestedtemplate orkgp:P181042 ?nestedtarget` |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ Conflict resolution | `orkgp:P181044` | Predicate (multiple) | How were conflicts resolved?. Usage: `?contribution orkgp:P181031 ?subtemplate . ?subtemplate orkgp:P181041 ?nestedtemplate . ?nestedtemplate orkgp:P181044 ?nestedtarget` |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ Measured agreement | `orkgp:P181045` | Predicate | What is the measured agreement?. Usage: `?contribution orkgp:P181031 ?subtemplate . ?subtemplate orkgp:P181041 ?nestedtemplate . ?nestedtemplate orkgp:P181045 ?nestedtarget` |
+| Implemented approach | `orkgp:P181046` | Predicate | What approach did you implement for your study?. Usage: `?variable orkgp:P181046 ?target` |
+| └─ Approach type | `orkgp:P5043` | Predicate (multiple) | What is the type of the implemented approach?. Usage: `?contribution orkgp:P181046 ?subtemplate . ?subtemplate orkgp:P5043 ?subtarget` |
+| └─ Algorithm | `orkgp:P58069` | Predicate (multiple) | What algorithms are used in the implemented approach?. Usage: `?contribution orkgp:P181046 ?subtemplate . ?subtemplate orkgp:P58069 ?subtarget` |
+| └─ Running requirement | `orkgp:P181047` | Predicate (multiple) | What needs to be done for running the implemented approach?. Usage: `?contribution orkgp:P181046 ?subtemplate . ?subtemplate orkgp:P181047 ?subtarget` |
+| └─ Documentation type | `orkgp:P41835` | Predicate (multiple) | What type of documentation has been provided alongside the implemented approach?. Usage: `?contribution orkgp:P181046 ?subtemplate . ?subtemplate orkgp:P41835 ?subtarget` |
+| └─ Dependency | `orkgp:P181048` | Predicate (multiple) | What type of dependencies does the implemented approach have?. Usage: `?contribution orkgp:P181046 ?subtemplate . ?subtemplate orkgp:P181048 ?subtarget` |
+| └─ License type | `orkgp:P181027` | Predicate | What license has been used?. Usage: `?contribution orkgp:P181046 ?subtemplate . ?subtemplate orkgp:P181027 ?subtarget` |
+| └─ Release | `orkgp:release` | Predicate | How was the implemented approach released?. Usage: `?contribution orkgp:P181046 ?subtemplate . ?subtemplate orkgp:release ?subtarget` |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ Release format | `orkgp:P181049` | Predicate (multiple) | What has been released?. Usage: `?contribution orkgp:P181046 ?subtemplate . ?subtemplate orkgp:release ?nestedtemplate . ?nestedtemplate orkgp:P181049 ?nestedtarget` |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ Location type | `orkgp:P181029` | Predicate (multiple) | How is the tool released?. Usage: `?contribution orkgp:P181046 ?subtemplate . ?subtemplate orkgp:release ?nestedtemplate . ?nestedtemplate orkgp:P181029 ?nestedtarget` |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ url | `orkgp:P1003` | Predicate (multiple) | Where is the tool released?. Usage: `?contribution orkgp:P181046 ?subtemplate . ?subtemplate orkgp:release ?nestedtemplate . ?nestedtemplate orkgp:P1003 ?nestedtarget` |
+| Evaluation | `orkgp:HAS_EVALUATION` | Predicate | What evaluation did you apply for your study?. Usage: `?variable orkgp:HAS_EVALUATION ?target` |
+| └─ Metric | `orkgp:P110006` | Predicate (multiple) | What metrics are used to evaluate the implemented approach(?. Usage: `?contribution orkgp:HAS_EVALUATION ?subtemplate . ?subtemplate orkgp:P110006 ?subtarget` |
+| └─ Validation procedure | `orkgp:P181050` | Predicate (multiple) | What is the validation procedure?. Usage: `?contribution orkgp:HAS_EVALUATION ?subtemplate . ?subtemplate orkgp:P181050 ?subtarget` |
+| └─ Baseline comparison | `orkgp:P181051` | Predicate | What is the baseline comparison applied in the evaluation of an implemented approach?. Usage: `?contribution orkgp:HAS_EVALUATION ?subtemplate . ?subtemplate orkgp:P181051 ?subtarget` |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ Baseline comparison  type | `orkgp:P181052` | Predicate (multiple) | What baseline do you compare against?. Usage: `?contribution orkgp:HAS_EVALUATION ?subtemplate . ?subtemplate orkgp:P181051 ?nestedtemplate . ?nestedtemplate orkgp:P181052 ?nestedtarget` |
+| &nbsp;&nbsp;&nbsp;&nbsp;└─ Baseline comparison detail | `orkgp:P181053` | Predicate | Please provide more details about the baseline you compare against, if any.. Usage: `?contribution orkgp:HAS_EVALUATION ?subtemplate . ?subtemplate orkgp:P181051 ?nestedtemplate . ?nestedtemplate orkgp:P181053 ?nestedtarget` |
+| NLP task type | `orkgp:P181004` | Predicate (multiple) | What type of natural language processing task is your study tackling?. Usage: `?variable orkgp:P181004 ?target` |
+| NLP task input | `orkgp:P181005` | Predicate (multiple) | What is the input of your natural language processing task?. Usage: `?variable orkgp:P181005 ?target` |
+| NLP task output | `orkgp:P181006` | Predicate | What is the output of your natural language processing task?. Usage: `?variable orkgp:P181006 ?target` |
+| └─ NLP task output type | `orkgp:P181007` | Predicate (multiple) | What is the output type of your natural language processing task?. Usage: `?contribution orkgp:P181006 ?subtemplate . ?subtemplate orkgp:P181007 ?subtarget` |
+| └─ NLP task output classification label | `orkgp:P181008` | Predicate | What is the output label that can be assigned in your natural language processing classification task?. Usage: `?contribution orkgp:P181006 ?subtemplate . ?subtemplate orkgp:P181008 ?subtarget` |
+| └─ NLP task output extracted element | `orkgp:P181009` | Predicate | What is the type of the element extracted in your natural language processing information extraction task?. Usage: `?contribution orkgp:P181006 ?subtemplate . ?subtemplate orkgp:P181009 ?subtarget` |
+| └─ NLP task translation mapping cardinality | `orkgp:P181010` | Predicate (multiple) | What is the translation mapping cardinality between the initial input and final output in your natural language processing translation task?. Usage: `?contribution orkgp:P181006 ?subtemplate . ?subtemplate orkgp:P181010 ?subtarget` |
+| NLP task output type | `orkgp:P181007` | Predicate (multiple) | What is the output type of your natural language processing task?. Usage: `?variable orkgp:P181007 ?target` |
+| NLP task output classification label | `orkgp:P181008` | Predicate | What is the output label that can be assigned in your natural language processing classification task?. Usage: `?variable orkgp:P181008 ?target` |
+| NLP task output extracted element | `orkgp:P181009` | Predicate | What is the type of the element extracted in your natural language processing information extraction task?. Usage: `?variable orkgp:P181009 ?target` |
+| NLP task translation mapping cardinality | `orkgp:P181010` | Predicate (multiple) | What is the translation mapping cardinality between the initial input and final output in your natural language processing translation task?. Usage: `?variable orkgp:P181010 ?target` |
+| NLP data item | `orkgp:P181015` | Predicate | How many data items do you process? Please report the numerical information and details about all the data that is used in your evaluation.. Usage: `?variable orkgp:P181015 ?target` |
+| NLP data production time | `orkgp:P181016` | Predicate | In which year or interval of year were the data produced?. Usage: `?variable orkgp:P181016 ?target` |
+| NLP data source | `orkgp:P181017` | Predicate | What is the source of the data?. Usage: `?variable orkgp:P181017 ?target` |
+| └─ NLP data source type | `orkgp:P181018` | Predicate (multiple) | What is the source type of the data?. Usage: `?contribution orkgp:P181017 ?subtemplate . ?subtemplate orkgp:P181018 ?subtarget` |
+| └─ Number of data sources | `orkgp:P181019` | Predicate | From how many different sources your data comes from?. Usage: `?contribution orkgp:P181017 ?subtemplate . ?subtemplate orkgp:P181019 ?subtarget` |
+| └─ Data source domain | `orkgp:P181020` | Predicate (multiple) | Please list which domains your data belongs to (e.g., automotive, satellite,
+entertainment, information systems).. Usage: `?contribution orkgp:P181017 ?subtemplate . ?subtemplate orkgp:P181020 ?subtarget` |
+| NLP data abstraction level | `orkgp:P181021` | Predicate (multiple) | What is the level of abstraction of the data (not limited to requirements)?. Usage: `?variable orkgp:P181021 ?target` |
+| NLP data type | `orkgp:P181022` | Predicate | What is the type of the data?. Usage: `?variable orkgp:P181022 ?target` |
+| └─ NLP data format | `orkgp:P181023` | Predicate (multiple) | What is the format of the data?. Usage: `?contribution orkgp:P181022 ?subtemplate . ?subtemplate orkgp:P181023 ?subtarget` |
+| └─ Rigor of data format | `orkgp:P181024` | Predicate (multiple) | How rigorous is the format of the data?. Usage: `?contribution orkgp:P181022 ?subtemplate . ?subtemplate orkgp:P181024 ?subtarget` |
+| └─ Natural language | `orkgp:P181025` | Predicate | What is the natural language of
+the data (if applicable) ?. Usage: `?contribution orkgp:P181022 ?subtemplate . ?subtemplate orkgp:P181025 ?subtarget` |
+| License | `orkgp:license` | Predicate | What license has been used?. Usage: `?variable orkgp:license ?target` |
+| └─ Public availability | `orkgp:P181026` | Predicate | Is the dataset publicly available?. Usage: `?contribution orkgp:license ?subtemplate . ?subtemplate orkgp:P181026 ?subtarget` |
+| └─ License type | `orkgp:P181027` | Predicate | What license has been used?. Usage: `?contribution orkgp:license ?subtemplate . ?subtemplate orkgp:P181027 ?subtarget` |
+| NLP dataset location | `orkgp:P181028` | Predicate | Where is the dataset stored?. Usage: `?variable orkgp:P181028 ?target` |
+| └─ Location type | `orkgp:P181030` | Predicate (multiple) | Where is the dataset stored?. Usage: `?contribution orkgp:P181028 ?subtemplate . ?subtemplate orkgp:P181030 ?subtarget` |
+| └─ url | `orkgp:P1003` | Predicate (multiple) | Provide a URL to the dataset, if available, or to the original paper that proposed the dataset. Usage: `?contribution orkgp:P181028 ?subtemplate . ?subtemplate orkgp:P1003 ?subtarget` |
+| NLP data source type | `orkgp:P181018` | Predicate (multiple) | What is the source type of the data?. Usage: `?variable orkgp:P181018 ?target` |
+| Number of data sources | `orkgp:P181019` | Predicate | From how many different sources your data comes from?. Usage: `?variable orkgp:P181019 ?target` |
+| Data source domain | `orkgp:P181020` | Predicate (multiple) | Please list which domains your data belongs to (e.g., automotive, satellite,
+entertainment, information systems).. Usage: `?variable orkgp:P181020 ?target` |
+| NLP data format | `orkgp:P181023` | Predicate (multiple) | What is the format of the data?. Usage: `?variable orkgp:P181023 ?target` |
+| Rigor of data format | `orkgp:P181024` | Predicate (multiple) | How rigorous is the format of the data?. Usage: `?variable orkgp:P181024 ?target` |
+| Natural language | `orkgp:P181025` | Predicate | What is the natural language of
+the data (if applicable) ?. Usage: `?variable orkgp:P181025 ?target` |
+| Public availability | `orkgp:P181026` | Predicate | Is the dataset publicly available?. Usage: `?variable orkgp:P181026 ?target` |
+| License type | `orkgp:P181027` | Predicate | What license has been used?. Usage: `?variable orkgp:P181027 ?target` |
+| Location type | `orkgp:P181030` | Predicate (multiple) | Where is the dataset stored?. Usage: `?variable orkgp:P181030 ?target` |
+| url | `orkgp:P1003` | Predicate (multiple) | Where is the tool released?. Usage: `?variable orkgp:P1003 ?target` |
+| Annotator | `orkgp:P181032` | Predicate | Who are the annotators of your dataset?. Usage: `?variable orkgp:P181032 ?target` |
+| └─ Number of annotators | `orkgp:P59120` | Predicate | How many annotators have been involved in your annotation process?. Usage: `?contribution orkgp:P181032 ?subtemplate . ?subtemplate orkgp:P59120 ?subtarget` |
+| └─ Annotator assignment | `orkgp:P181033` | Predicate (multiple) | How are the entries annotated assigned to the annotators?. Usage: `?contribution orkgp:P181032 ?subtemplate . ?subtemplate orkgp:P181033 ?subtarget` |
+| └─ Level of application domain experience | `orkgp:P181034` | Predicate (multiple) | What is the average level of application domain experience of the annotators?. Usage: `?contribution orkgp:P181032 ?subtemplate . ?subtemplate orkgp:P181034 ?subtarget` |
+| └─ Annotator Identity | `orkgp:P181035` | Predicate (multiple) | Who are the annotators?. Usage: `?contribution orkgp:P181032 ?subtemplate . ?subtemplate orkgp:P181035 ?subtarget` |
+| Annotation Scheme | `orkgp:P181036` | Predicate (multiple) | What is the annotation scheme used for your dataset?. Usage: `?variable orkgp:P181036 ?target` |
+| └─ Scheme establishement | `orkgp:P181037` | Predicate (multiple) | How was the annotation scheme established among the annotators?. Usage: `?contribution orkgp:P181036 ?subtemplate . ?subtemplate orkgp:P181037 ?subtarget` |
+| └─ Guideline availability | `orkgp:P181038` | Predicate (multiple) | Did you make the written guidelines public?. Usage: `?contribution orkgp:P181036 ?subtemplate . ?subtemplate orkgp:P181038 ?subtarget` |
+| Shared material | `orkgp:P181039` | Predicate (multiple) | Did you share other information that could support the annotators other
+than the elements to annotate?. Usage: `?variable orkgp:P181039 ?target` |
+| Fatigue mitigation technique | `orkgp:P181040` | Predicate | Did you employ techniques to mitigate fatigue effects during the
+annotation sessions?. Usage: `?variable orkgp:P181040 ?target` |
+| Annotator agreement | `orkgp:P181041` | Predicate | What annotator agreement did you apply for your dataset?. Usage: `?variable orkgp:P181041 ?target` |
+| └─ Intercoder reliability metric | `orkgp:P181042` | Predicate (multiple) | What are the metrics used to measure intercoder reliability?. Usage: `?contribution orkgp:P181041 ?subtemplate . ?subtemplate orkgp:P181042 ?subtarget` |
+| └─ Conflict resolution | `orkgp:P181044` | Predicate (multiple) | How were conflicts resolved?. Usage: `?contribution orkgp:P181041 ?subtemplate . ?subtemplate orkgp:P181044 ?subtarget` |
+| └─ Measured agreement | `orkgp:P181045` | Predicate | What is the measured agreement?. Usage: `?contribution orkgp:P181041 ?subtemplate . ?subtemplate orkgp:P181045 ?subtarget` |
+| Number of annotators | `orkgp:P59120` | Predicate | How many annotators have been involved in your annotation process?. Usage: `?variable orkgp:P59120 ?target` |
+| Annotator assignment | `orkgp:P181033` | Predicate (multiple) | How are the entries annotated assigned to the annotators?. Usage: `?variable orkgp:P181033 ?target` |
+| Level of application domain experience | `orkgp:P181034` | Predicate (multiple) | What is the average level of application domain experience of the annotators?. Usage: `?variable orkgp:P181034 ?target` |
+| Annotator Identity | `orkgp:P181035` | Predicate (multiple) | Who are the annotators?. Usage: `?variable orkgp:P181035 ?target` |
+| Scheme establishement | `orkgp:P181037` | Predicate (multiple) | How was the annotation scheme established among the annotators?. Usage: `?variable orkgp:P181037 ?target` |
+| Guideline availability | `orkgp:P181038` | Predicate (multiple) | Did you make the written guidelines public?. Usage: `?variable orkgp:P181038 ?target` |
+| Intercoder reliability metric | `orkgp:P181042` | Predicate (multiple) | What are the metrics used to measure intercoder reliability?. Usage: `?variable orkgp:P181042 ?target` |
+| Conflict resolution | `orkgp:P181044` | Predicate (multiple) | How were conflicts resolved?. Usage: `?variable orkgp:P181044 ?target` |
+| Measured agreement | `orkgp:P181045` | Predicate | What is the measured agreement?. Usage: `?variable orkgp:P181045 ?target` |
+| Approach type | `orkgp:P5043` | Predicate (multiple) | What is the type of the implemented approach?. Usage: `?variable orkgp:P5043 ?target` |
+| Algorithm | `orkgp:P58069` | Predicate (multiple) | What algorithms are used in the implemented approach?. Usage: `?variable orkgp:P58069 ?target` |
+| Running requirement | `orkgp:P181047` | Predicate (multiple) | What needs to be done for running the implemented approach?. Usage: `?variable orkgp:P181047 ?target` |
+| Documentation type | `orkgp:P41835` | Predicate (multiple) | What type of documentation has been provided alongside the implemented approach?. Usage: `?variable orkgp:P41835 ?target` |
+| Dependency | `orkgp:P181048` | Predicate (multiple) | What type of dependencies does the implemented approach have?. Usage: `?variable orkgp:P181048 ?target` |
+| Release | `orkgp:release` | Predicate | How was the implemented approach released?. Usage: `?variable orkgp:release ?target` |
+| └─ Release format | `orkgp:P181049` | Predicate (multiple) | What has been released?. Usage: `?contribution orkgp:release ?subtemplate . ?subtemplate orkgp:P181049 ?subtarget` |
+| └─ Location type | `orkgp:P181029` | Predicate (multiple) | How is the tool released?. Usage: `?contribution orkgp:release ?subtemplate . ?subtemplate orkgp:P181029 ?subtarget` |
+| └─ url | `orkgp:P1003` | Predicate (multiple) | Where is the tool released?. Usage: `?contribution orkgp:release ?subtemplate . ?subtemplate orkgp:P1003 ?subtarget` |
+| Release format | `orkgp:P181049` | Predicate (multiple) | What has been released?. Usage: `?variable orkgp:P181049 ?target` |
+| Location type | `orkgp:P181029` | Predicate (multiple) | How is the tool released?. Usage: `?variable orkgp:P181029 ?target` |
+| Metric | `orkgp:P110006` | Predicate (multiple) | What metrics are used to evaluate the implemented approach(?. Usage: `?variable orkgp:P110006 ?target` |
+| Validation procedure | `orkgp:P181050` | Predicate (multiple) | What is the validation procedure?. Usage: `?variable orkgp:P181050 ?target` |
+| Baseline comparison | `orkgp:P181051` | Predicate | What is the baseline comparison applied in the evaluation of an implemented approach?. Usage: `?variable orkgp:P181051 ?target` |
+| └─ Baseline comparison  type | `orkgp:P181052` | Predicate (multiple) | What baseline do you compare against?. Usage: `?contribution orkgp:P181051 ?subtemplate . ?subtemplate orkgp:P181052 ?subtarget` |
+| └─ Baseline comparison detail | `orkgp:P181053` | Predicate | Please provide more details about the baseline you compare against, if any.. Usage: `?contribution orkgp:P181051 ?subtemplate . ?subtemplate orkgp:P181053 ?subtarget` |
+| Baseline comparison  type | `orkgp:P181052` | Predicate (multiple) | What baseline do you compare against?. Usage: `?variable orkgp:P181052 ?target` |
+| Baseline comparison detail | `orkgp:P181053` | Predicate | Please provide more details about the baseline you compare against, if any.. Usage: `?variable orkgp:P181053 ?target` |
+
+
+#### Template Hierarchy Structure
+
+Traverse via parent → child:
+
+**RE task** (`orkgp:P181002`)
+
+**NLP task** (`orkgp:P181003`)
+  └─ **NLP task type** (`orkgp:P181004`)
+  └─ **NLP task input** (`orkgp:P181005`)
+  └─ **NLP task output** (`orkgp:P181006`)
+    └─ **NLP task output type** (`orkgp:P181007`)
+    └─ **NLP task output classification label** (`orkgp:P181008`)
+    └─ **NLP task output extracted element** (`orkgp:P181009`)
+    └─ **NLP task translation mapping cardinality** (`orkgp:P181010`)
+
+**NLP dataset** (`orkgp:P181011`)
+  └─ **NLP data item** (`orkgp:P181015`)
+  └─ **NLP data production time** (`orkgp:P181016`)
+  └─ **NLP data source** (`orkgp:P181017`)
+    └─ **NLP data source type** (`orkgp:P181018`)
+    └─ **Number of data sources** (`orkgp:P181019`)
+    └─ **Data source domain** (`orkgp:P181020`)
+  └─ **NLP data abstraction level** (`orkgp:P181021`)
+  └─ **NLP data type** (`orkgp:P181022`)
+    └─ **NLP data format** (`orkgp:P181023`)
+    └─ **Rigor of data format** (`orkgp:P181024`)
+    └─ **Natural language** (`orkgp:P181025`)
+  └─ **License** (`orkgp:license`)
+    └─ **Public availability** (`orkgp:P181026`)
+    └─ **License type** (`orkgp:P181027`)
+  └─ **NLP dataset location** (`orkgp:P181028`)
+    └─ **Location type** (`orkgp:P181030`)
+    └─ **url** (`orkgp:P1003`)
+
+**Annotation process** (`orkgp:P181031`)
+  └─ **Annotator** (`orkgp:P181032`)
+    └─ **Number of annotators** (`orkgp:P59120`)
+    └─ **Annotator assignment** (`orkgp:P181033`)
+    └─ **Level of application domain experience** (`orkgp:P181034`)
+    └─ **Annotator Identity** (`orkgp:P181035`)
+  └─ **Annotation Scheme** (`orkgp:P181036`)
+    └─ **Scheme establishement** (`orkgp:P181037`)
+    └─ **Guideline availability** (`orkgp:P181038`)
+  └─ **Shared material** (`orkgp:P181039`)
+  └─ **Fatigue mitigation technique** (`orkgp:P181040`)
+  └─ **Annotator agreement** (`orkgp:P181041`)
+    └─ **Intercoder reliability metric** (`orkgp:P181042`)
+    └─ **Conflict resolution** (`orkgp:P181044`)
+    └─ **Measured agreement** (`orkgp:P181045`)
+
+**Implemented approach** (`orkgp:P181046`)
+  └─ **Approach type** (`orkgp:P5043`)
+  └─ **Algorithm** (`orkgp:P58069`)
+  └─ **Running requirement** (`orkgp:P181047`)
+  └─ **Documentation type** (`orkgp:P41835`)
+  └─ **Dependency** (`orkgp:P181048`)
+  └─ **License type** (`orkgp:P181027`)
+  └─ **Release** (`orkgp:release`)
+    └─ **Release format** (`orkgp:P181049`)
+    └─ **Location type** (`orkgp:P181029`)
+    └─ **url** (`orkgp:P1003`)
+
+**Evaluation** (`orkgp:HAS_EVALUATION`)
+  └─ **Metric** (`orkgp:P110006`)
+  └─ **Validation procedure** (`orkgp:P181050`)
+  └─ **Baseline comparison** (`orkgp:P181051`)
+    └─ **Baseline comparison  type** (`orkgp:P181052`)
+    └─ **Baseline comparison detail** (`orkgp:P181053`)
+
+**NLP task type** (`orkgp:P181004`)
+
+**NLP task input** (`orkgp:P181005`)
+
+**NLP task output** (`orkgp:P181006`)
+  └─ **NLP task output type** (`orkgp:P181007`)
+  └─ **NLP task output classification label** (`orkgp:P181008`)
+  └─ **NLP task output extracted element** (`orkgp:P181009`)
+  └─ **NLP task translation mapping cardinality** (`orkgp:P181010`)
+
+**NLP task output type** (`orkgp:P181007`)
+
+**NLP task output classification label** (`orkgp:P181008`)
+
+**NLP task output extracted element** (`orkgp:P181009`)
+
+**NLP task translation mapping cardinality** (`orkgp:P181010`)
+
+**NLP data item** (`orkgp:P181015`)
+
+**NLP data production time** (`orkgp:P181016`)
+
+**NLP data source** (`orkgp:P181017`)
+  └─ **NLP data source type** (`orkgp:P181018`)
+  └─ **Number of data sources** (`orkgp:P181019`)
+  └─ **Data source domain** (`orkgp:P181020`)
+
+**NLP data abstraction level** (`orkgp:P181021`)
+
+**NLP data type** (`orkgp:P181022`)
+  └─ **NLP data format** (`orkgp:P181023`)
+  └─ **Rigor of data format** (`orkgp:P181024`)
+  └─ **Natural language** (`orkgp:P181025`)
+
+**License** (`orkgp:license`)
+  └─ **Public availability** (`orkgp:P181026`)
+  └─ **License type** (`orkgp:P181027`)
+
+**NLP dataset location** (`orkgp:P181028`)
+  └─ **Location type** (`orkgp:P181030`)
+  └─ **url** (`orkgp:P1003`)
+
+**NLP data source type** (`orkgp:P181018`)
+
+**Number of data sources** (`orkgp:P181019`)
+
+**Data source domain** (`orkgp:P181020`)
+
+**NLP data format** (`orkgp:P181023`)
+
+**Rigor of data format** (`orkgp:P181024`)
+
+**Natural language** (`orkgp:P181025`)
+
+**Public availability** (`orkgp:P181026`)
+
+**License type** (`orkgp:P181027`)
+
+**Location type** (`orkgp:P181030`)
+
+**url** (`orkgp:P1003`)
+
+**Annotator** (`orkgp:P181032`)
+  └─ **Number of annotators** (`orkgp:P59120`)
+  └─ **Annotator assignment** (`orkgp:P181033`)
+  └─ **Level of application domain experience** (`orkgp:P181034`)
+  └─ **Annotator Identity** (`orkgp:P181035`)
+
+**Annotation Scheme** (`orkgp:P181036`)
+  └─ **Scheme establishement** (`orkgp:P181037`)
+  └─ **Guideline availability** (`orkgp:P181038`)
+
+**Shared material** (`orkgp:P181039`)
+
+**Fatigue mitigation technique** (`orkgp:P181040`)
+
+**Annotator agreement** (`orkgp:P181041`)
+  └─ **Intercoder reliability metric** (`orkgp:P181042`)
+  └─ **Conflict resolution** (`orkgp:P181044`)
+  └─ **Measured agreement** (`orkgp:P181045`)
+
+**Number of annotators** (`orkgp:P59120`)
+
+**Annotator assignment** (`orkgp:P181033`)
+
+**Level of application domain experience** (`orkgp:P181034`)
+
+**Annotator Identity** (`orkgp:P181035`)
+
+**Scheme establishement** (`orkgp:P181037`)
+
+**Guideline availability** (`orkgp:P181038`)
+
+**Intercoder reliability metric** (`orkgp:P181042`)
+
+**Conflict resolution** (`orkgp:P181044`)
+
+**Measured agreement** (`orkgp:P181045`)
+
+**Approach type** (`orkgp:P5043`)
+
+**Algorithm** (`orkgp:P58069`)
+
+**Running requirement** (`orkgp:P181047`)
+
+**Documentation type** (`orkgp:P41835`)
+
+**Dependency** (`orkgp:P181048`)
+
+**Release** (`orkgp:release`)
+  └─ **Release format** (`orkgp:P181049`)
+  └─ **Location type** (`orkgp:P181029`)
+  └─ **url** (`orkgp:P1003`)
+
+**Release format** (`orkgp:P181049`)
+
+**Location type** (`orkgp:P181029`)
+
+**Metric** (`orkgp:P110006`)
+
+**Validation procedure** (`orkgp:P181050`)
+
+**Baseline comparison** (`orkgp:P181051`)
+  └─ **Baseline comparison  type** (`orkgp:P181052`)
+  └─ **Baseline comparison detail** (`orkgp:P181053`)
+
+**Baseline comparison  type** (`orkgp:P181052`)
+
+**Baseline comparison detail** (`orkgp:P181053`)
+
+└─ = child of above; traverse parent first.
+
+
+
+## Template-Specific Guidance
+
+NLP4RE: NLP/RE tasks, evaluation metrics, datasets, annotation, baselines. Use `?contribution a orkgc:C121001`. Evaluation: HAS_EVALUATION → P110006 (metrics). NLP tasks: P181003 → P181004. RE tasks: P181002. Datasets: P181011 → P181022 → P181023. Annotation: P181031 → P181036 → P181038.
+
+
+
+Class: `?contribution a orkgc:C121001`. Use SELECT DISTINCT. OPTIONAL for labels. Top N: include ?paper and ?paperLabel, no LIMIT, ORDER BY ?paperLabel. Traverse full chains (e.g. dataset→datatype→dataformat; HAS_EVALUATION→evaluation→P110006).
+
+
+
+DISTINCT; OPTIONAL for labels; full property chains; for "top N" return ?paper ?paperLabel + field, no LIMIT.
+
+
+
+Duplicates → SELECT DISTINCT. Missing labels → OPTIONAL { rdfs:label }. Empty nested → traverse full chain. Metrics → HAS_EVALUATION then P110006.
+
+
+## Rules
+1. **Class**: Always `?contribution a orkgc:C121001 .`
+2. **Year**: Only if question asks time/trends; use `?paper orkgp:P29 ?year` (never `?contribution orkgp:P29`).
+3. **Top N / frequency**: Include `?paper` and `?paperLabel` in SELECT; no LIMIT; ORDER BY paper.
+4. **One query per code block**: Each ```sparql block has one SELECT; use `# id: name`.
+5. **URIs vs labels**: Properties return URIs. Get label first: `?resource rdfs:label ?label`. Compare only the label to strings.
+6. **Label comparison**: Always use `LCASE(STR(?label)) = LCASE("value")` (case-insensitive).
+7. **BIND**: Only in WHERE; variables in BIND must be defined before it. No IF() in SELECT—use BIND(IF(...)) in WHERE.
+8. **Proportions**: Use subqueries; cast `xsd:decimal` for division.
+9. **Nested props**: Follow schema hierarchy (contribution → parent → child); use `└─` in Template Properties.
+
+**Output**: Only SPARQL in ```sparql blocks. No explanations. One query per block.
+
+## Input
+**Research Question:** [Research Question]
+
+---
+
+## Batch Wrapper Prompt
+# Wrapper Prompt — B003 Non-Factoid Reasoning
+
+## Purpose
+Generate candidate dataset entries with stronger non-factoid and reasoning-heavy behavior.
+
+Primary target special types:
+- comparison
+- temporal
+- multi_intent
+- negation
+- missing_info
+
+## Use rule
+This wrapper must be combined with exactly one family-specific base prompt from the repository.
+
+## Hard constraints
+1. Do not invent predicates, classes, template fields, or schema paths.
+2. Use only schema-valid paths for the selected family.
+3. Generate only English questions.
+4. Avoid duplicates and near-duplicates.
+5. Do not create fake complexity unsupported by the family template.
+6. Keep question wording natural and academically plausible.
+7. Every query must use at least one family-specific template predicate or template path from the selected family prompt.
+8. Do not generate generic bibliographic-only queries based only on title, year, or generic paper metadata.
+9. If a target component such as REGEX, LIMIT, MIN, AVG, BIND, UNION, or NOT_EXISTS is requested, use it only when it is semantically justified by the question.
+10. Prefer questions whose wording clearly reflects comparison, temporal reasoning, missing information, negation, or multi-intent structure.
+11. Do not insert a target component artificially if it makes the question unnatural.
+12. `answer_type` must be one of:
+   - `resource`
+   - `string`
+   - `number`
+   - `date`
+
+   Do not use values such as:
+   - `factoid`
+   - `non_factoid`
+13. Do not assign the family template class directly to `?paper` unless the family schema explicitly requires it.
+Use the family anchor pattern where the paper links to a contribution and the contribution carries the family template class.
+14. Do not use placeholder-style predicates such as:
+- `orkgp:HAS_EVALUATION`
+- generic uppercase pseudo-predicates
+Only use predicates that are explicitly grounded in the family prompt.
+
+### Question-answer alignment rules
+
+1. The natural-language question must match the projected variables in the SPARQL query.
+2. If the query returns both `?paper` and an answer variable, the question must explicitly ask for the paper together with the answer.
+3. If the question asks only for the answer value, do not project `?paper` unless it is required by the question.
+4. Avoid underspecified wording such as:
+   - "the study"
+   - "the dataset"
+   - "the paper"
+   unless the question includes a clear identifying constraint.
+5. Prefer formulations such as:
+   - "Which papers ..."
+   - "For which papers ..."
+   - "Which datasets ..."
+   - "Which natural languages are reported for datasets ..."
+
+Prefer projecting only the minimal variables needed to answer the question.
+Do not include `?paper` or `?paperLabel` unless the question explicitly asks for papers.
+
+6. Use the family anchor pattern consistently. For NLP4RE, prefer the family grounding structure where the paper links to a contribution and the contribution carries the template class. Do not assign the template class directly to the paper unless the family schema explicitly requires it.
+
+## Desired behavior
+- prefer non-factoid questions
+- include comparison or contrastive wording
+- include temporal conditions where meaningful
+- include some questions that require missing-info or negation logic
+- prefer medium-to-high complexity
+
+## Output fields
+
+Return only these fields for each item:
+- `id`
+- `question`
+- `gold_sparql`
+- `family`
+- `answer_type`
+
+Do not generate any other metadata fields.
+Additional metadata will be added later in a separate enrichment step.
+
+## Output requirement
+Return valid JSON only.
+Return a JSON object with key `"items"`.
+
+---
+
+## Run Prompt
+# Run Prompt — B003 NLP4RE
+
+Generate exactly 10 candidate dataset entries.
+
+Selected family: `nlp4re`
+
+
+Use these id values exactly:
+- `b003_nlp4re_001`
+- `b003_nlp4re_002`
+- `b003_nlp4re_003`
+- `b003_nlp4re_004`
+- `b003_nlp4re_005`
+- `b003_nlp4re_006`
+- `b003_nlp4re_007`
+- `b003_nlp4re_008`
+- `b003_nlp4re_009`
+- `b003_nlp4re_010`
+
+
+Required special type focus:
+- comparison
+- temporal
+- multi_intent
+- negation
+- missing_info
+- multi_intent
+
+Prefer:
+- 3 factoid
+- 7 non_factoid
+- medium to high complexity
+
+Return valid JSON only.
+
+
+
+Return only these fields for each item:
+- `id`
+- `question`
+- `gold_sparql`
+- `family`
+- `answer_type`
+
+Do not include any other metadata fields.
