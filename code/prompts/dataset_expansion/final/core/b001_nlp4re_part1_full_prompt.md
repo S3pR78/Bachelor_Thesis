@@ -1,4 +1,4 @@
-# Final Prompt — B001 NLP4RE Part 2
+# Final Prompt — B001 NLP4RE Part 1
 
 You are generating candidate dataset entries for a Text-to-SPARQL system over the Open Research Knowledge Graph (ORKG).
 
@@ -52,22 +52,22 @@ Selected family: `nlp4re`
 Selected source_dataset: `Hybrid_NLP4RE`
 
 Use these id values exactly:
-- `b001_nlp4re_006`
-- `b001_nlp4re_007`
-- `b001_nlp4re_008`
-- `b001_nlp4re_009`
-- `b001_nlp4re_010`
+- `b001_nlp4re_001`
+- `b001_nlp4re_002`
+- `b001_nlp4re_003`
+- `b001_nlp4re_004`
+- `b001_nlp4re_005`
 
 Use these source_id values exactly:
-- `gen_b001_nlp4re_006`
-- `gen_b001_nlp4re_007`
-- `gen_b001_nlp4re_008`
-- `gen_b001_nlp4re_009`
-- `gen_b001_nlp4re_010`
+- `gen_b001_nlp4re_001`
+- `gen_b001_nlp4re_002`
+- `gen_b001_nlp4re_003`
+- `gen_b001_nlp4re_004`
+- `gen_b001_nlp4re_005`
 
 Target answer_type distribution:
-- 1 resource
-- 2 string
+- 2 resource
+- 1 string
 - 1 number
 - 1 date
 
@@ -78,7 +78,6 @@ Prefer:
 
 Avoid overlap with:
 - benchmark seed data
-- b001_nlp4re_part1 outputs
 - existing generated candidate files
 
 ## Metadata rules

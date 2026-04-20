@@ -1,0 +1,150 @@
+[
+  {
+    "id": "b001_nlp4re_006",
+    "source_id": "gen_b001_nlp4re_006",
+    "question": "Which research problem is associated with the paper \"Automated Extraction of Functional Requirements from User Stories\"?",
+    "gold_sparql": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nSELECT DISTINCT ?answer WHERE {\n  ?paper rdfs:label \"Automated Extraction of Functional Requirements from User Stories\"@en .\n  ?paper <http://orkg.org/orkg/predicate/hasResearchProblem> ?answer .\n}",
+    "family": "nlp4re",
+    "source_dataset": "Hybrid_NLP4RE",
+    "language": "en",
+    "query_type": "factoid",
+    "query_shape": "single_hop",
+    "answer_type": "resource",
+    "complexity_level": "medium",
+    "ambiguity_risk": "medium",
+    "lexical_gap_risk": "medium",
+    "hallucination_risk": "medium",
+    "query_components": [
+      "paper_title",
+      "research_problem_resource"
+    ],
+    "special_types": [
+      "resource_link"
+    ],
+    "number_of_patterns": 2,
+    "human_or_generated": "generated",
+    "gold_status": "draft",
+    "review_status": "unreviewed",
+    "split": "train"
+  },
+  {
+    "id": "b001_nlp4re_007",
+    "source_id": "gen_b001_nlp4re_007",
+    "question": "What dataset is used in the paper \"Requirements Smells Detection Using NLP\"?",
+    "gold_sparql": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nSELECT DISTINCT ?answer WHERE {\n  ?paper rdfs:label \"Requirements Smells Detection Using NLP\"@en .\n  ?paper <http://orkg.org/orkg/predicate/hasDataset> ?dataset .\n  ?dataset rdfs:label ?answer .\n}",
+    "family": "nlp4re",
+    "source_dataset": "Hybrid_NLP4RE",
+    "language": "en",
+    "query_type": "factoid",
+    "query_shape": "join",
+    "answer_type": "string",
+    "complexity_level": "medium",
+    "ambiguity_risk": "medium",
+    "lexical_gap_risk": "medium",
+    "hallucination_risk": "medium",
+    "query_components": [
+      "paper_title",
+      "dataset_resource",
+      "dataset_label"
+    ],
+    "special_types": [
+      "resource_link",
+      "literal"
+    ],
+    "number_of_patterns": 2,
+    "human_or_generated": "generated",
+    "gold_status": "draft",
+    "review_status": "unreviewed",
+    "split": "train"
+  },
+  {
+    "id": "b001_nlp4re_008",
+    "source_id": "gen_b001_nlp4re_008",
+    "question": "Which dataset is reused in more than one NLP4RE paper?",
+    "gold_sparql": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nSELECT ?answer WHERE {\n  ?paper <http://orkg.org/orkg/predicate/hasDataset> ?dataset .\n  ?dataset rdfs:label ?answer .\n}\nGROUP BY ?answer\nHAVING (COUNT(DISTINCT ?paper) > 1)\nORDER BY DESC(COUNT(DISTINCT ?paper))\nLIMIT 1",
+    "family": "nlp4re",
+    "source_dataset": "Hybrid_NLP4RE",
+    "language": "en",
+    "query_type": "non_factoid",
+    "query_shape": "group_by",
+    "answer_type": "string",
+    "complexity_level": "medium",
+    "ambiguity_risk": "medium",
+    "lexical_gap_risk": "medium",
+    "hallucination_risk": "medium",
+    "query_components": [
+      "dataset_resource",
+      "dataset_label",
+      "group_by",
+      "count_distinct_papers",
+      "having"
+    ],
+    "special_types": [
+      "aggregation",
+      "grouping",
+      "superlative"
+    ],
+    "number_of_patterns": 3,
+    "human_or_generated": "generated",
+    "gold_status": "draft",
+    "review_status": "unreviewed",
+    "split": "train"
+  },
+  {
+    "id": "b001_nlp4re_009",
+    "source_id": "gen_b001_nlp4re_009",
+    "question": "How many distinct datasets are mentioned across the NLP4RE papers?",
+    "gold_sparql": "SELECT (COUNT(DISTINCT ?dataset) AS ?answer) WHERE {\n  ?paper <http://orkg.org/orkg/predicate/hasDataset> ?dataset .\n}",
+    "family": "nlp4re",
+    "source_dataset": "Hybrid_NLP4RE",
+    "language": "en",
+    "query_type": "non_factoid",
+    "query_shape": "count",
+    "answer_type": "number",
+    "complexity_level": "medium",
+    "ambiguity_risk": "medium",
+    "lexical_gap_risk": "medium",
+    "hallucination_risk": "medium",
+    "query_components": [
+      "dataset_resource",
+      "count_distinct"
+    ],
+    "special_types": [
+      "count",
+      "aggregation"
+    ],
+    "number_of_patterns": 2,
+    "human_or_generated": "generated",
+    "gold_status": "draft",
+    "review_status": "unreviewed",
+    "split": "train"
+  },
+  {
+    "id": "b001_nlp4re_010",
+    "source_id": "gen_b001_nlp4re_010",
+    "question": "On what date was the paper \"Sentiment Analysis for Requirements Prioritization\" published?",
+    "gold_sparql": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX dcterms: <http://purl.org/dc/terms/>\nSELECT DISTINCT ?answer WHERE {\n  ?paper rdfs:label \"Sentiment Analysis for Requirements Prioritization\"@en .\n  ?paper dcterms:issued ?answer .\n}",
+    "family": "nlp4re",
+    "source_dataset": "Hybrid_NLP4RE",
+    "language": "en",
+    "query_type": "factoid",
+    "query_shape": "single_hop",
+    "answer_type": "date",
+    "complexity_level": "medium",
+    "ambiguity_risk": "medium",
+    "lexical_gap_risk": "medium",
+    "hallucination_risk": "medium",
+    "query_components": [
+      "paper_title",
+      "publication_date"
+    ],
+    "special_types": [
+      "date_literal"
+    ],
+    "number_of_patterns": 2,
+    "human_or_generated": "generated",
+    "gold_status": "draft",
+    "review_status": "unreviewed",
+    "split": "train"
+  }
+]
