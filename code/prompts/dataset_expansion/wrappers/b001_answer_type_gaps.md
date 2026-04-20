@@ -21,6 +21,7 @@ This wrapper must be combined with exactly one family-specific base prompt from 
 6. Keep question wording natural and academically plausible.
 7. Every query must use at least one family-specific template predicate or template path from the selected family prompt.
 8. Do not generate generic bibliographic-only queries based only on title, year, or generic paper metadata.
+9. If a target component such as REGEX, LIMIT, MIN, AVG, BIND, UNION, or NOT_EXISTS is requested, use it only when it is semantically justified by the question.
 
 ### Question-answer alignment rules
 
