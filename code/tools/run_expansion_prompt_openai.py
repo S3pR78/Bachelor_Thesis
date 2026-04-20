@@ -142,6 +142,82 @@ def estimate_cost_usd(
     return input_cost + output_cost
 
 
+
+def build_candidate_items_schema(expected_count: int) -> dict:
+    required_fields = [
+        "id",
+        "source_id",
+        "question",
+        "gold_sparql",
+        "family",
+        "source_dataset",
+        "language",
+        "query_type",
+        "query_shape",
+        "answer_type",
+        "complexity_level",
+        "ambiguity_risk",
+        "lexical_gap_risk",
+        "hallucination_risk",
+        "query_components",
+        "special_types",
+        "number_of_patterns",
+        "human_or_generated",
+        "gold_status",
+        "review_status",
+        "split",
+    ]
+
+    item_schema = {
+        "type": "object",
+        "additionalProperties": False,
+        "required": required_fields,
+        "properties": {
+            "id": {"type": "string"},
+            "source_id": {"type": "string"},
+            "question": {"type": "string"},
+            "gold_sparql": {"type": "string"},
+            "family": {"type": "string"},
+            "source_dataset": {"type": "string"},
+            "language": {"type": "string"},
+            "query_type": {"type": "string"},
+            "query_shape": {"type": "string"},
+            "answer_type": {"type": "string"},
+            "complexity_level": {"type": "string"},
+            "ambiguity_risk": {"type": "string"},
+            "lexical_gap_risk": {"type": "string"},
+            "hallucination_risk": {"type": "string"},
+            "query_components": {
+                "type": "array",
+                "items": {"type": "string"},
+            },
+            "special_types": {
+                "type": "array",
+                "items": {"type": "string"},
+            },
+            "number_of_patterns": {"type": "integer"},
+            "human_or_generated": {"type": "string"},
+            "gold_status": {"type": "string"},
+            "review_status": {"type": "string"},
+            "split": {"type": "string"},
+        },
+    }
+
+    return {
+        "type": "object",
+        "additionalProperties": False,
+        "required": ["items"],
+        "properties": {
+            "items": {
+                "type": "array",
+                "minItems": expected_count,
+                "maxItems": expected_count,
+                "items": item_schema,
+            }
+        },
+    }
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Run a final dataset-expansion prompt via OpenAI and save JSON candidates."
@@ -215,16 +291,23 @@ def main() -> int:
 
     client = create_openai_client(env_var_name=env_var_name)
 
+    schema = build_candidate_items_schema(args.expected_count)
+
     request_kwargs = {
         "model": args.model,
         "input": prompt_text,
         "max_output_tokens": args.max_output_tokens,
         "reasoning": {"effort": args.reasoning_effort},
-        "text": {"format": {"type": "text"}},
+        "text": {
+            "format": {
+                "type": "json_schema",
+                "name": "dataset_expansion_candidates",
+                "strict": True,
+                "schema": schema,
+            }
+        },
     }
 
-    # GPT-5.4 / GPT-5.4-mini akzeptieren temperature hier nicht.
-    # Deshalb nur für Modelle mitsenden, die es unterstützen.
     models_without_temperature = {
         "gpt-5.4",
         "gpt-5.4-mini",
@@ -236,7 +319,20 @@ def main() -> int:
     response = client.responses.create(**request_kwargs)
 
     raw_text = response.output_text
-    items = extract_json_array(raw_text)
+
+    try:
+        parsed_output = json.loads(raw_text)
+    except json.JSONDecodeError as exc:
+        raise ValueError(
+            f"Model returned non-JSON output. Raw output was:\n{raw_text}"
+        ) from exc
+
+    items = parsed_output.get("items")
+    if not isinstance(items, list):
+        raise ValueError(
+            f"Model returned JSON, but no valid 'items' array was found. Raw output was:\n{raw_text}"
+        )
+
     validate_candidate_items(items, expected_count=args.expected_count)
 
     input_tokens, output_tokens = get_usage_counts(response)
