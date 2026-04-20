@@ -225,7 +225,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--expected-count",
         type=int,
-        default=10,
+        default=5,
         help="Expected number of generated candidate entries.",
     )
     parser.add_argument(
@@ -252,7 +252,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--max-output-tokens",
         type=int,
-        default=14000,
+        default=30000,
         help="Maximum output tokens for the generation.",
     )
     parser.add_argument(
@@ -317,6 +317,17 @@ def main() -> int:
         request_kwargs["temperature"] = args.temperature
 
     response = client.responses.create(**request_kwargs)
+    incomplete_details = getattr(response, "incomplete_details", None)
+    if incomplete_details is not None:
+        reason = getattr(incomplete_details, "reason", None)
+        if reason is None and isinstance(incomplete_details, dict):
+            reason = incomplete_details.get("reason")
+
+        if reason is not None:
+            raise ValueError(
+                f"Response was incomplete. Reason: {reason}. "
+                f"Try increasing --max-output-tokens or reducing --expected-count."
+            )
 
     raw_text = response.output_text
 

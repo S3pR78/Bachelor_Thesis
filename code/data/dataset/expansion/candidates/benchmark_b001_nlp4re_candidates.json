@@ -1,0 +1,153 @@
+[
+  {
+    "id": "benchmark_b001_nlp4re_001",
+    "source_id": "gen_b001_nlp4re_001",
+    "question": "Which dataset is reported for relation extraction studies in NLP4RE?",
+    "gold_sparql": "PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> SELECT DISTINCT ?dataset WHERE { ?study orkgp:hasTask ?task ; orkgp:hasDataset ?dataset . OPTIONAL { ?study orkgp:hasLanguage ?language . } FILTER(CONTAINS(LCASE(STR(?task)), \"relation extraction\")) }",
+    "family": "nlp4re",
+    "source_dataset": "Hybrid_NLP4RE",
+    "language": "en",
+    "query_type": "factoid",
+    "query_shape": "star",
+    "answer_type": "resource",
+    "complexity_level": "low",
+    "ambiguity_risk": "low",
+    "lexical_gap_risk": "medium",
+    "hallucination_risk": "medium",
+    "query_components": [
+      "SELECT",
+      "FILTER",
+      "OPTIONAL"
+    ],
+    "special_types": [
+      "typed_lookup"
+    ],
+    "number_of_patterns": 3,
+    "human_or_generated": "generated",
+    "gold_status": "draft",
+    "review_status": "unreviewed",
+    "split": "train"
+  },
+  {
+    "id": "benchmark_b001_nlp4re_002",
+    "source_id": "gen_b001_nlp4re_002",
+    "question": "What language is recorded for studies that use source code as the source type and classification as the output type?",
+    "gold_sparql": "PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> SELECT DISTINCT ?language WHERE { ?study orkgp:hasSourceType ?sourceType ; orkgp:hasLanguage ?language . OPTIONAL { ?study orkgp:hasOutputType ?outputType . } FILTER(CONTAINS(LCASE(STR(?sourceType)), \"source code\")) FILTER(CONTAINS(LCASE(STR(?outputType)), \"classification\")) }",
+    "family": "nlp4re",
+    "source_dataset": "Hybrid_NLP4RE",
+    "language": "en",
+    "query_type": "factoid",
+    "query_shape": "star",
+    "answer_type": "string",
+    "complexity_level": "low",
+    "ambiguity_risk": "medium",
+    "lexical_gap_risk": "medium",
+    "hallucination_risk": "medium",
+    "query_components": [
+      "SELECT",
+      "FILTER",
+      "OPTIONAL",
+      "STR"
+    ],
+    "special_types": [
+      "typed_lookup",
+      "string_operation"
+    ],
+    "number_of_patterns": 3,
+    "human_or_generated": "generated",
+    "gold_status": "draft",
+    "review_status": "unreviewed",
+    "split": "train"
+  },
+  {
+    "id": "benchmark_b001_nlp4re_003",
+    "source_id": "gen_b001_nlp4re_003",
+    "question": "How many NLP4RE studies mention sentence-level classification as the output type and have English as the language?",
+    "gold_sparql": "PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> SELECT (COUNT(DISTINCT ?study) AS ?count) WHERE { ?study orkgp:hasOutputType ?outputType ; orkgp:hasLanguage ?language . FILTER(CONTAINS(LCASE(STR(?outputType)), \"sentence-level classification\")) FILTER(LCASE(STR(?language)) = \"english\") }",
+    "family": "nlp4re",
+    "source_dataset": "Hybrid_NLP4RE",
+    "language": "en",
+    "query_type": "non-factoid",
+    "query_shape": "star",
+    "answer_type": "number",
+    "complexity_level": "medium",
+    "ambiguity_risk": "low",
+    "lexical_gap_risk": "medium",
+    "hallucination_risk": "medium",
+    "query_components": [
+      "SELECT",
+      "COUNT",
+      "FILTER"
+    ],
+    "special_types": [
+      "aggregation",
+      "typed_lookup"
+    ],
+    "number_of_patterns": 2,
+    "human_or_generated": "generated",
+    "gold_status": "draft",
+    "review_status": "unreviewed",
+    "split": "train"
+  },
+  {
+    "id": "benchmark_b001_nlp4re_004",
+    "source_id": "gen_b001_nlp4re_004",
+    "question": "What publication date is recorded for the sentiment analysis study?",
+    "gold_sparql": "PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> SELECT DISTINCT ?publicationDate WHERE { ?study orkgp:hasTask ?task ; orkgp:hasPublicationDate ?publicationDate . FILTER(CONTAINS(LCASE(STR(?task)), \"sentiment analysis\")) OPTIONAL { ?study orkgp:hasDataset ?dataset . } }",
+    "family": "nlp4re",
+    "source_dataset": "Hybrid_NLP4RE",
+    "language": "en",
+    "query_type": "factoid",
+    "query_shape": "chain",
+    "answer_type": "date",
+    "complexity_level": "medium",
+    "ambiguity_risk": "low",
+    "lexical_gap_risk": "medium",
+    "hallucination_risk": "medium",
+    "query_components": [
+      "SELECT",
+      "FILTER",
+      "OPTIONAL"
+    ],
+    "special_types": [
+      "temporal",
+      "typed_lookup"
+    ],
+    "number_of_patterns": 3,
+    "human_or_generated": "generated",
+    "gold_status": "draft",
+    "review_status": "unreviewed",
+    "split": "train"
+  },
+  {
+    "id": "benchmark_b001_nlp4re_005",
+    "source_id": "gen_b001_nlp4re_005",
+    "question": "Which dataset is associated with aspect extraction studies published after 2020 and using tweets as the source type?",
+    "gold_sparql": "PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> SELECT DISTINCT ?dataset WHERE { ?study orkgp:hasTask ?task ; orkgp:hasDataset ?dataset ; orkgp:hasPublicationDate ?publicationDate . OPTIONAL { ?study orkgp:hasSourceType ?sourceType . } FILTER(CONTAINS(LCASE(STR(?task)), \"aspect extraction\")) FILTER(?publicationDate > \"2020-12-31\"^^xsd:date) FILTER(CONTAINS(LCASE(STR(?sourceType)), \"tweet\")) }",
+    "family": "nlp4re",
+    "source_dataset": "Hybrid_NLP4RE",
+    "language": "en",
+    "query_type": "factoid",
+    "query_shape": "tree",
+    "answer_type": "resource",
+    "complexity_level": "high",
+    "ambiguity_risk": "medium",
+    "lexical_gap_risk": "high",
+    "hallucination_risk": "high",
+    "query_components": [
+      "SELECT",
+      "FILTER",
+      "OPTIONAL"
+    ],
+    "special_types": [
+      "multi_hop",
+      "temporal",
+      "filtering"
+    ],
+    "number_of_patterns": 4,
+    "human_or_generated": "generated",
+    "gold_status": "draft",
+    "review_status": "unreviewed",
+    "split": "train"
+  }
+]
