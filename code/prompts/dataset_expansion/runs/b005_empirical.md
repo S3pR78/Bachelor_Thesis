@@ -4,6 +4,9 @@ Generate exactly 10 candidate dataset entries.
 
 Selected family: `empirical_research_practice`
 
+For every item, set:
+- `family` = `empirical_research_practice`
+
 Use these id values exactly:
 - `b005_empirical_001`
 - `b005_empirical_002`
@@ -16,6 +19,9 @@ Use these id values exactly:
 - `b005_empirical_009`
 - `b005_empirical_010`
 
+Use each `id` exactly once.
+Do not repeat or reuse any `id`.
+The output must contain exactly 10 items with 10 unique ids.
 
 Focus:
 - difficult but valid questions
@@ -24,16 +30,13 @@ Focus:
 - multi_intent
 - missing_info
 - temporal
-- ranking
 - negation
 
 Prefer:
 - 3 factoid
 - 7 non_factoid
 - high complexity emphasis
-
-Return valid JSON only.
-
+- genuinely hard but still natural questions
 
 Return only these fields for each item:
 - `id`
@@ -43,3 +46,16 @@ Return only these fields for each item:
 - `answer_type`
 
 Do not include any other metadata fields.
+
+`answer_type` must be one of:
+- `resource`
+- `string`
+- `number`
+- `date`
+
+Do not use values such as:
+- `factoid`
+- `non_factoid`
+
+Return valid JSON only.
+Return a JSON object with key `"items"`.

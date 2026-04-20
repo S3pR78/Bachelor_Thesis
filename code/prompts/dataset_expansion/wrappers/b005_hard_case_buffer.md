@@ -20,10 +20,13 @@ This wrapper must be combined with exactly one family-specific base prompt from 
 5. Harder does not mean invalid or unnatural.
 6. Keep question wording natural and academically plausible.
 7. Every query must use at least one family-specific template predicate or template path from the selected family prompt.
-8. Do not generate generic bibliographic-only queries based only on title, year, or generic paper metadata.
+8. Do not generate generic bibliographic-only queries based only on title, year, venue, or generic paper metadata.
 9. If a target component such as REGEX, LIMIT, MIN, AVG, BIND, UNION, or NOT_EXISTS is requested, use it only when it is semantically justified by the question.
 10. Harder questions must still remain natural, answerable, and family-specific.
-Do not increase difficulty by making the question underspecified.
+11. Do not increase difficulty by making the question underspecified.
+12. Do not use placeholder-like predicates such as `orkgp:HAS_EVALUATION`.
+13. Do not use generic property names unless they are explicitly grounded in the family prompt.
+14. Do not assign the family template class directly to `?paper` unless the family schema explicitly requires it.
 
 ### Question-answer alignment rules
 
@@ -40,15 +43,14 @@ Do not increase difficulty by making the question underspecified.
    - "For which papers ..."
    - "Which datasets ..."
    - "Which natural languages are reported for datasets ..."
-
-Prefer projecting only the minimal variables needed to answer the question.
-Do not include `?paper` or `?paperLabel` unless the question explicitly asks for papers.
+6. Prefer projecting only the minimal variables needed to answer the question.
+7. Do not include `?paper` or `?paperLabel` unless the question explicitly asks for papers.
 
 ## Desired behavior
 - prefer medium-to-high and high complexity
 - include difficult but still answerable questions
-- include comparison, ranking, multi_intent, missing_info, or temporal logic where appropriate
-- ensure metadata truthfully reflects query behavior
+- include comparison, ranking, multi_intent, missing_info, temporal logic, or negation where appropriate
+- prefer hard but schema-faithful questions over artificial complexity
 
 ## Output fields
 
@@ -61,6 +63,18 @@ Return only these fields for each item:
 
 Do not generate any other metadata fields.
 Additional metadata will be added later in a separate enrichment step.
+
+### Answer type rule
+
+`answer_type` must be one of:
+- `resource`
+- `string`
+- `number`
+- `date`
+
+Do not use values such as:
+- `factoid`
+- `non_factoid`
 
 ## Output requirement
 Return valid JSON only.
