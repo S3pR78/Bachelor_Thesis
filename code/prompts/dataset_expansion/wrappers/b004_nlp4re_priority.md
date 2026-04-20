@@ -16,9 +16,33 @@ This wrapper must only be used with the NLP4RE family base prompt.
 5. Keep the questions realistic and relevant to the NLP4RE template.
 6. Keep question wording natural and academically plausible.
 7. Every query must use at least one family-specific template predicate or template path from the selected family prompt.
-8. Do not generate generic bibliographic-only queries based only on title, year, or generic paper metadata.
-9. Every query must be strongly anchored in the NLP4RE family template.
-Do not generate generic ORKG paper metadata questions.
+8. Do not generate generic bibliographic-only queries based only on title, year, venue, or generic paper metadata.
+9. Every query must be strongly anchored in the NLP4RE family template. Do not generate generic ORKG paper metadata questions.
+10. Do not assign the NLP4RE template class directly to `?paper` unless the family schema explicitly requires it.
+11. Prefer the family anchor pattern where the paper links to a contribution and the contribution carries the NLP4RE template class.
+
+## Preferred NLP4RE content focus
+Prefer questions about:
+- NLP task
+- NLP task type
+- NLP task output
+- output type
+- dataset
+- data source
+- data source type
+- data source domain
+- number of data sources
+- data abstraction level
+- data type
+- data format
+- natural language
+- public availability
+- license type
+- dataset location
+- annotation process
+- agreement / annotator-related information
+
+Title, year, or venue may be used only as secondary constraints, not as the main semantics of the query.
 
 ### Question-answer alignment rules
 
@@ -35,16 +59,15 @@ Do not generate generic ORKG paper metadata questions.
    - "For which papers ..."
    - "Which datasets ..."
    - "Which natural languages are reported for datasets ..."
-
-Prefer projecting only the minimal variables needed to answer the question.
-Do not include `?paper` or `?paperLabel` unless the question explicitly asks for papers.
+6. Prefer projecting only the minimal variables needed to answer the question.
+7. Do not include `?paper` or `?paperLabel` unless the question explicitly asks for papers.
 
 ## Desired behavior
 - cover a useful mix of factoid and non-factoid questions
 - include direct lookup, constrained lookup, comparison, and temporal questions
 - keep schema faithfulness more important than diversity for its own sake
 - prefer medium complexity, with some higher-complexity cases
-
+- prefer genuinely NLP4RE-specific questions over generic scholarly metadata questions
 
 ## Output fields
 
@@ -58,6 +81,18 @@ Return only these fields for each item:
 Do not generate any other metadata fields.
 Additional metadata will be added later in a separate enrichment step.
 
+### Answer type rule
+
+`answer_type` must be one of:
+- `resource`
+- `string`
+- `number`
+- `date`
+
+Do not use values such as:
+- `factoid`
+- `non_factoid`
+
 ## Output requirement
 Return valid JSON only.
-Return a JSON object with key `"items"`..
+Return a JSON object with key `"items"`.
