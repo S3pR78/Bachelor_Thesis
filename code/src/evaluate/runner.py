@@ -4,6 +4,7 @@ import json
 from datetime import datetime, timezone
 from src.sparql.execution import detect_sparql_query_type, execute_sparql_query
 from src.sparql.prefixes import prepend_orkg_prefixes
+from src.evaluate.answer_metrics import compute_answer_exact_match
 from src.query.prompt_builder import build_final_prompt_for_question
 from src.query.inference_session import (
     generate_response_with_session,
