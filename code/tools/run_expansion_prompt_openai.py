@@ -41,7 +41,7 @@ def extract_json_array(raw_text: str) -> list[dict[str, Any]]:
     return parsed
 
 
-def validate_candidate_items(items: list[dict[str, Any]]) -> None:
+def validate_candidate_items(items: list[dict[str, Any]], expected_count: int | None = None) -> None:
     required_fields = {
         "id",
         "source_id",
@@ -68,6 +68,11 @@ def validate_candidate_items(items: list[dict[str, Any]]) -> None:
 
     if not items:
         raise ValueError("Generated JSON array is empty.")
+    
+    if expected_count is not None and len(items) != expected_count:
+        raise ValueError(
+            f"Expected {expected_count} entries, but got {len(items)}."
+        )
 
     seen_ids: set[str] = set()
     seen_source_ids: set[str] = set()
@@ -102,6 +107,12 @@ def build_parser() -> argparse.ArgumentParser:
         description="Run a final dataset-expansion prompt via OpenAI and save JSON candidates."
     )
     parser.add_argument(
+        "--expected-count",
+        type=int,
+        default=10,
+        help="Expected number of generated candidate entries.",
+    )
+    parser.add_argument(
         "--prompt-file",
         required=True,
         help="Path to the fully assembled prompt file.",
@@ -113,19 +124,19 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--model",
-        default="gpt-5-mini",
+        default="gpt-5.4-mini",
         help="OpenAI model name to use.",
     )
     parser.add_argument(
         "--temperature",
         type=float,
-        default=0.4,
+        default=0.3,
         help="Sampling temperature.",
     )
     parser.add_argument(
         "--max-output-tokens",
         type=int,
-        default=12000,
+        default=14000,
         help="Maximum output tokens for the generation.",
     )
     parser.add_argument(
@@ -133,7 +144,7 @@ def build_parser() -> argparse.ArgumentParser:
         choices=["minimal", "low", "medium", "high"],
         default="medium",
         help="Reasoning effort for supported reasoning models.",
-    )
+)
     parser.add_argument(
         "--overwrite",
         action="store_true",
@@ -173,7 +184,7 @@ def main() -> int:
 
     raw_text = response.output_text
     items = extract_json_array(raw_text)
-    validate_candidate_items(items)
+    validate_candidate_items(items, expected_count=args.expected_count)
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(items, indent=2, ensure_ascii=False), encoding="utf-8")
