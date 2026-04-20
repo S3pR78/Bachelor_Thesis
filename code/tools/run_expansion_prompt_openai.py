@@ -2,12 +2,12 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
 import sys
 from pathlib import Path
 from typing import Any
 
-from openai import OpenAI
+from src.core.openai_provider import create_openai_client
+from src.utils.config_loader import load_model_config
 
 
 def read_text(path: Path) -> str:
@@ -19,7 +19,6 @@ def read_text(path: Path) -> str:
 def extract_json_array(raw_text: str) -> list[dict[str, Any]]:
     text = raw_text.strip()
 
-    # Best case: pure JSON array
     try:
         parsed = json.loads(text)
         if not isinstance(parsed, list):
@@ -28,7 +27,6 @@ def extract_json_array(raw_text: str) -> list[dict[str, Any]]:
     except json.JSONDecodeError:
         pass
 
-    # Fallback: extract first JSON array block
     start = text.find("[")
     end = text.rfind("]")
     if start == -1 or end == -1 or end <= start:
@@ -41,7 +39,10 @@ def extract_json_array(raw_text: str) -> list[dict[str, Any]]:
     return parsed
 
 
-def validate_candidate_items(items: list[dict[str, Any]], expected_count: int | None = None) -> None:
+def validate_candidate_items(
+    items: list[dict[str, Any]],
+    expected_count: int | None = None,
+) -> None:
     required_fields = {
         "id",
         "source_id",
@@ -68,7 +69,7 @@ def validate_candidate_items(items: list[dict[str, Any]], expected_count: int | 
 
     if not items:
         raise ValueError("Generated JSON array is empty.")
-    
+
     if expected_count is not None and len(items) != expected_count:
         raise ValueError(
             f"Expected {expected_count} entries, but got {len(items)}."
@@ -97,9 +98,44 @@ def validate_candidate_items(items: list[dict[str, Any]], expected_count: int | 
         seen_source_ids.add(source_id)
 
         if not isinstance(item["query_components"], list):
-            raise ValueError(f"Entry {index} field 'query_components' must be a list.")
+            raise ValueError(
+                f"Entry {index} field 'query_components' must be a list."
+            )
         if not isinstance(item["special_types"], list):
-            raise ValueError(f"Entry {index} field 'special_types' must be a list.")
+            raise ValueError(
+                f"Entry {index} field 'special_types' must be a list."
+            )
+
+
+def get_usage_counts(response) -> tuple[int, int]:
+    usage = getattr(response, "usage", None)
+    if usage is None:
+        return 0, 0
+
+    input_tokens = int(getattr(usage, "input_tokens", 0) or 0)
+    output_tokens = int(getattr(usage, "output_tokens", 0) or 0)
+    return input_tokens, output_tokens
+
+
+def estimate_cost_usd(
+    model_name: str,
+    input_tokens: int,
+    output_tokens: int,
+) -> float | None:
+    pricing_per_million = {
+        "gpt-5.4-mini": {"input": 0.75, "output": 4.50},
+        "gpt-5.4": {"input": 2.50, "output": 15.00},
+        "gpt-5-mini": {"input": 0.25, "output": 2.00},
+        "gpt-5": {"input": 1.25, "output": 10.00},
+    }
+
+    pricing = pricing_per_million.get(model_name)
+    if pricing is None:
+        return None
+
+    input_cost = (input_tokens / 1_000_000) * pricing["input"]
+    output_cost = (output_tokens / 1_000_000) * pricing["output"]
+    return input_cost + output_cost
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -144,7 +180,7 @@ def build_parser() -> argparse.ArgumentParser:
         choices=["minimal", "low", "medium", "high"],
         default="medium",
         help="Reasoning effort for supported reasoning models.",
-)
+    )
     parser.add_argument(
         "--overwrite",
         action="store_true",
@@ -157,9 +193,12 @@ def main() -> int:
     parser = build_parser()
     args = parser.parse_args()
 
-    api_key = os.getenv("OPENAI_API_KEY")
-    if not api_key:
-        raise EnvironmentError("OPENAI_API_KEY is not set in the environment.")
+    model_configs = load_model_config()
+    if args.model not in model_configs:
+        raise ValueError(f"Model '{args.model}' not found in model_config.")
+
+    model_config = model_configs[args.model]
+    env_var_name = model_config.get("api", {}).get("env_var_name", "OPENAI_API_KEY")
 
     prompt_path = Path(args.prompt_file)
     output_path = Path(args.output_file)
@@ -171,7 +210,7 @@ def main() -> int:
 
     prompt_text = read_text(prompt_path)
 
-    client = OpenAI(api_key=api_key)
+    client = create_openai_client(env_var_name=env_var_name)
 
     response = client.responses.create(
         model=args.model,
@@ -186,10 +225,23 @@ def main() -> int:
     items = extract_json_array(raw_text)
     validate_candidate_items(items, expected_count=args.expected_count)
 
+    input_tokens, output_tokens = get_usage_counts(response)
+    estimated_cost_usd = estimate_cost_usd(args.model, input_tokens, output_tokens)
+
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps(items, indent=2, ensure_ascii=False), encoding="utf-8")
+    output_path.write_text(
+        json.dumps(items, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
 
     print(f"Saved {len(items)} candidate entries to: {output_path}")
+    print(f"Usage: input_tokens={input_tokens}, output_tokens={output_tokens}")
+
+    if estimated_cost_usd is not None:
+        print(f"Estimated API cost: ${estimated_cost_usd:.6f}")
+    else:
+        print(f"Estimated API cost: unavailable for model '{args.model}'")
+
     return 0
 
 
