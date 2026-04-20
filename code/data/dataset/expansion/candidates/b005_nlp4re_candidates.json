@@ -1,0 +1,72 @@
+[
+  {
+    "id": "b005_nlp4re_001",
+    "question": "How many NLP4RE papers report both an evaluation metric and a validation procedure?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT (COUNT(DISTINCT ?paper) AS ?count)\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 .\n  ?contribution orkgp:HAS_EVALUATION ?evaluation .\n  ?evaluation orkgp:P110006 ?metric .\n  ?evaluation orkgp:P181050 ?validationProcedure .\n}",
+    "family": "nlp4re",
+    "answer_type": "number"
+  },
+  {
+    "id": "b005_nlp4re_002",
+    "question": "What natural languages are reported for datasets whose datatype specifies both a format and a rigor of data format?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?naturalLanguage\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 .\n  ?contribution orkgp:P181011 ?dataset .\n  ?dataset orkgp:P181022 ?dataType .\n  ?dataType orkgp:P181023 ?dataFormat .\n  ?dataType orkgp:P181024 ?rigorOfDataFormat .\n  ?dataType orkgp:P181025 ?nl .\n  OPTIONAL { ?nl rdfs:label ?nlLabel . }\n  BIND(COALESCE(?nlLabel, STR(?nl)) AS ?naturalLanguage)\n}\nORDER BY ?naturalLanguage",
+    "family": "nlp4re",
+    "answer_type": "string"
+  },
+  {
+    "id": "b005_nlp4re_003",
+    "question": "What measured agreement values are reported for annotation processes that also specify an intercoder reliability metric?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?measuredAgreement\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 .\n  ?contribution orkgp:P181031 ?annotationProcess .\n  ?annotationProcess orkgp:P181041 ?annotatorAgreement .\n  ?annotatorAgreement orkgp:P181042 ?intercoderReliabilityMetric .\n  ?annotatorAgreement orkgp:P181045 ?measuredAgreementValue .\n  OPTIONAL { ?measuredAgreementValue rdfs:label ?measuredAgreementLabel . }\n  BIND(COALESCE(?measuredAgreementLabel, STR(?measuredAgreementValue)) AS ?measuredAgreement)\n}\nORDER BY ?measuredAgreement",
+    "family": "nlp4re",
+    "answer_type": "string"
+  },
+  {
+    "id": "b005_nlp4re_004",
+    "question": "How many NLP4RE papers describe an implemented approach that has both a release URL and at least one dependency?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT (COUNT(DISTINCT ?paper) AS ?count)\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 .\n  ?contribution orkgp:P181046 ?implementedApproach .\n  ?implementedApproach orkgp:release ?release .\n  ?release orkgp:P1003 ?url .\n  ?implementedApproach orkgp:P181048 ?dependency .\n}",
+    "family": "nlp4re",
+    "answer_type": "number"
+  },
+  {
+    "id": "b005_nlp4re_005",
+    "question": "Which papers report an NLP task with an explicit task type and output label, and what task type and output label are reported?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?paper ?paperLabel ?taskTypeLabel ?outputLabel\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 .\n  ?contribution orkgp:P181003 ?nlpTask .\n  ?nlpTask orkgp:P181004 ?taskType .\n  ?nlpTask orkgp:P181006 ?taskOutput .\n  ?taskOutput orkgp:P181008 ?outputLabelValue .\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n  OPTIONAL { ?taskType rdfs:label ?taskTypeLabel . }\n  OPTIONAL { ?outputLabelValue rdfs:label ?outputLabelLabel . }\n  BIND(COALESCE(?outputLabelLabel, STR(?outputLabelValue)) AS ?outputLabel)\n}\nORDER BY ?paperLabel ?taskTypeLabel ?outputLabel",
+    "family": "nlp4re",
+    "answer_type": "resource"
+  },
+  {
+    "id": "b005_nlp4re_006",
+    "question": "Which papers report a dataset source with both a source type and a domain, and what source type and domain are reported?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?paper ?paperLabel ?sourceTypeLabel ?domainLabel\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 .\n  ?contribution orkgp:P181011 ?dataset .\n  ?dataset orkgp:P181017 ?dataSource .\n  ?dataSource orkgp:P181018 ?sourceType .\n  ?dataSource orkgp:P181020 ?domain .\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n  OPTIONAL { ?sourceType rdfs:label ?sourceTypeLabel . }\n  OPTIONAL { ?domain rdfs:label ?domainLabel . }\n}\nORDER BY ?paperLabel ?sourceTypeLabel ?domainLabel",
+    "family": "nlp4re",
+    "answer_type": "resource"
+  },
+  {
+    "id": "b005_nlp4re_007",
+    "question": "Which papers report an annotation scheme with public guidelines, and how many annotators are involved?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?paper ?paperLabel ?nAnnotators\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 .\n  ?contribution orkgp:P181031 ?annotationProcess .\n  ?annotationProcess orkgp:P181036 ?annotationScheme .\n  ?annotationScheme orkgp:P181038 ?guidelineAvailability .\n  ?annotationProcess orkgp:P181032 ?annotator .\n  ?annotator orkgp:P59120 ?nAnnotators .\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}\nORDER BY ?paperLabel ?nAnnotators",
+    "family": "nlp4re",
+    "answer_type": "resource"
+  },
+  {
+    "id": "b005_nlp4re_008",
+    "question": "Which papers describe an implemented approach that includes both an algorithm and documentation type, and what are they?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?paper ?paperLabel ?algorithmLabel ?documentationTypeLabel\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 .\n  ?contribution orkgp:P181046 ?implementedApproach .\n  ?implementedApproach orkgp:P58069 ?algorithm .\n  ?implementedApproach orkgp:P41835 ?documentationType .\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n  OPTIONAL { ?algorithm rdfs:label ?algorithmLabel . }\n  OPTIONAL { ?documentationType rdfs:label ?documentationTypeLabel . }\n}\nORDER BY ?paperLabel ?algorithmLabel ?documentationTypeLabel",
+    "family": "nlp4re",
+    "answer_type": "resource"
+  },
+  {
+    "id": "b005_nlp4re_009",
+    "question": "Which papers report a baseline comparison detail but no validation procedure, and what baseline details are given?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?paper ?paperLabel ?baselineDetail\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 .\n  ?contribution orkgp:HAS_EVALUATION ?evaluation .\n  ?evaluation orkgp:P181051 ?baselineComparison .\n  ?baselineComparison orkgp:P181053 ?baselineDetailValue .\n  FILTER NOT EXISTS { ?evaluation orkgp:P181050 ?validationProcedure . }\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n  OPTIONAL { ?baselineDetailValue rdfs:label ?baselineDetailLabel . }\n  BIND(COALESCE(?baselineDetailLabel, STR(?baselineDetailValue)) AS ?baselineDetail)\n}\nORDER BY ?paperLabel ?baselineDetail",
+    "family": "nlp4re",
+    "answer_type": "resource"
+  },
+  {
+    "id": "b005_nlp4re_010",
+    "question": "Which papers report a dataset location with both a location type and a URL, and what location type and URL are reported?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?paper ?paperLabel ?locationTypeLabel ?url\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 .\n  ?contribution orkgp:P181011 ?dataset .\n  ?dataset orkgp:P181028 ?datasetLocation .\n  ?datasetLocation orkgp:P181030 ?locationType .\n  ?datasetLocation orkgp:P1003 ?url .\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n  OPTIONAL { ?locationType rdfs:label ?locationTypeLabel . }\n}\nORDER BY ?paperLabel ?locationTypeLabel ?url",
+    "family": "nlp4re",
+    "answer_type": "resource"
+  }
+]
