@@ -1,0 +1,680 @@
+{
+  "candidate_file": "code/data/dataset/expansion/candidates/b002_nlp4re_wave01_candidates.json",
+  "sparql_endpoint": "https://www.orkg.org/triplestore",
+  "summary": {
+    "total_items": 50,
+    "ok_count": 50,
+    "error_count": 0,
+    "skipped_count": 0,
+    "empty_result_count": 19,
+    "green_count": 31,
+    "yellow_count": 19,
+    "red_count": 0
+  },
+  "results": [
+    {
+      "id": "b002_nlp4re_w01_001",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which five papers report English as the natural language of their dataset?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_nlp4re_w01_002",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers report a dataset format whose label mentions CSV or tabular data?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_nlp4re_w01_003",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers provide a release URL that points to GitHub for their implemented approach?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 14,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R194345; paperLabel=A Machine Learning-Based Approach for Demarcating Requirements in Textual Specifications",
+        "paper=http://orkg.org/orkg/resource/R1547319; paperLabel=An NLP approach for cross-domain ambiguity detection in requirements engineering",
+        "paper=http://orkg.org/orkg/resource/R1554261; paperLabel=Automated demarcation of requirements in textual specifications: a machine learning-based approach"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_nlp4re_w01_004",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers report evaluation metrics whose labels mention F1 or accuracy?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_nlp4re_w01_005",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers describe an implemented approach whose algorithm name mentions transformer or BERT?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_nlp4re_w01_006",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers compare their evaluation against a previous baseline?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_nlp4re_w01_007",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which three papers report the largest number of annotators, and how many annotators do they report?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 3,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R1544459; paperLabel=Analysing anaphoric ambiguity in natural language requirements; numAnnotators=38",
+        "paper=http://orkg.org/orkg/resource/R1553499; paperLabel=Improving agile requirements: the Quality User Story framework and tool; numAnnotators=34",
+        "paper=http://orkg.org/orkg/resource/R1554252; paperLabel=GaiusT: supporting the extraction of rights and obligations for regulatory compliance; numAnnotators=18"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_nlp4re_w01_008",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which five papers report the largest number of data sources, and how many sources do they use?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 5,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R1544459; paperLabel=Analysing anaphoric ambiguity in natural language requirements; numSources=11",
+        "paper=http://orkg.org/orkg/resource/R1553499; paperLabel=Improving agile requirements: the Quality User Story framework and tool; numSources=18",
+        "paper=http://orkg.org/orkg/resource/R1554233; paperLabel=Automatic Detection of Causality in Requirement Artifacts: The CiRA Approach; numSources=53"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_nlp4re_w01_009",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers report at least five annotators?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 9,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R1553474; paperLabel=An Active Learning Approach for Improving the Accuracy of Automated Domain Model Extraction",
+        "paper=http://orkg.org/orkg/resource/R1553463; paperLabel=An empirical study on the potential usefulness of domain models for completeness checking of requirements",
+        "paper=http://orkg.org/orkg/resource/R1544459; paperLabel=Analysing anaphoric ambiguity in natural language requirements"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_nlp4re_w01_010",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers report at least two data sources for their dataset?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 29,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R194345; paperLabel=A Machine Learning-Based Approach for Demarcating Requirements in Textual Specifications",
+        "paper=http://orkg.org/orkg/resource/R1553443; paperLabel=A semantic relatedness approach for traceability link recovery",
+        "paper=http://orkg.org/orkg/resource/R1553474; paperLabel=An Active Learning Approach for Improving the Accuracy of Automated Domain Model Extraction"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_nlp4re_w01_011",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers describe their annotators as domain experts or highly experienced in the application domain?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_nlp4re_w01_012",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers say that annotation conflicts were resolved by discussion or adjudication?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_nlp4re_w01_013",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers do not report any baseline comparison in their evaluation?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_nlp4re_w01_014",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers do not provide any release URL for their implemented approach?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 28,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R1547354; paperLabel=A Query System for Extracting Requirements-Related Information from Legal Texts",
+        "paper=http://orkg.org/orkg/resource/R1553443; paperLabel=A semantic relatedness approach for traceability link recovery",
+        "paper=http://orkg.org/orkg/resource/R1553463; paperLabel=An empirical study on the potential usefulness of domain models for completeness checking of requirements"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_nlp4re_w01_015",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What natural languages are reported for the datasets in papers that mention English or German language data?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_nlp4re_w01_016",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What dataset formats are reported for the datasets used in NLP4RE papers?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_nlp4re_w01_017",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What license types are reported for datasets in NLP4RE papers?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_nlp4re_w01_018",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What evaluation metrics are reported for NLP4RE papers that tackle classification tasks?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_nlp4re_w01_019",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What NLP task types are reported for papers whose output is a classification label?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 7,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "taskTypeLabel=Classification",
+        "taskTypeLabel=Extraction of concepts based on a conceptual schema (aka ontology)",
+        "taskTypeLabel=Information extraction"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_nlp4re_w01_020",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What classification output labels are reported for NLP tasks in NLP4RE papers?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_nlp4re_w01_021",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What algorithm names are reported for implemented approaches in NLP4RE papers?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_nlp4re_w01_022",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What documentation types are reported alongside implemented approaches?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 8,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "docLabel=An academic paper",
+        "docLabel=No documentation",
+        "docLabel=Not reported"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_nlp4re_w01_023",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What baseline comparison types are reported in the evaluation sections of NLP4RE papers?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_nlp4re_w01_024",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What conflict resolution strategies are reported for annotation disagreements?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_nlp4re_w01_025",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What scheme establishment methods are reported for annotation schemes?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_nlp4re_w01_026",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What release formats are reported for implemented approaches?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 12,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "formatLabel=Executable notebook",
+        "formatLabel=Library / API",
+        "formatLabel=No tool has been released"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_nlp4re_w01_027",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What data source domains are reported for the datasets used in NLP4RE papers?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_nlp4re_w01_028",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What annotator assignment strategies are reported for NLP4RE datasets?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_nlp4re_w01_029",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "What is the average number of annotators reported across NLP4RE papers?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "avgAnnotators=5.676470588235294"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_nlp4re_w01_030",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "What is the minimum number of annotators reported in NLP4RE papers?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "minAnnotators=1"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_nlp4re_w01_031",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "What is the average number of data sources reported across NLP4RE datasets?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "avgSources=5.311111111111111"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_nlp4re_w01_032",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "What is the maximum number of data sources reported in NLP4RE papers?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "maxSources=53"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_nlp4re_w01_033",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "What is the average number of data items in datasets whose natural language is English?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_nlp4re_w01_034",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many papers report at least five annotators?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paperCount=9"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_nlp4re_w01_035",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many papers report at least two data sources?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paperCount=29"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_nlp4re_w01_036",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many papers report metrics whose labels mention F1 or accuracy?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paperCount=0"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_nlp4re_w01_037",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "What is the average number of annotators in papers that resolve annotation conflicts by discussion?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_nlp4re_w01_038",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "What is the minimum number of data items reported for English-language datasets?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_nlp4re_w01_039",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "What is the maximum number of annotators reported in papers that use transformer-based algorithms?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_nlp4re_w01_040",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "What is the average publication year of papers that release their tools on GitHub?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "avgYear=2018.8125"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_nlp4re_w01_041",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year was the earliest paper published among those that report English-language datasets?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_nlp4re_w01_042",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year was the latest paper published among those that use a CSV or tabular data format?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_nlp4re_w01_043",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year was the paper with the largest number of annotators published?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=2011"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_nlp4re_w01_044",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year was the paper with the largest number of data sources published?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=2021"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_nlp4re_w01_045",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year were the earliest papers published that provide a GitHub release URL for their implemented approach?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=2016"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_nlp4re_w01_046",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year were the latest papers published that compare against a baseline?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=2025"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_nlp4re_w01_047",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year was the paper with the fewest annotators published?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=2017"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_nlp4re_w01_048",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year was the earliest paper published that reports an F1 or accuracy metric?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_nlp4re_w01_049",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year was the latest paper published that describes its annotators as domain experts?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_nlp4re_w01_050",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year was the paper with the largest number of data items published?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=2019"
+      ],
+      "review_bucket": "green"
+    }
+  ]
+}
