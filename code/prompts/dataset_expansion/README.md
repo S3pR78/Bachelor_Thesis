@@ -1,16 +1,36 @@
-Current active workflow:
+# Dataset Expansion Prompts
 
-1. assemble prompt from:
-   - family base prompt
-   - wrapper
-   - run file
-2. generate minimal candidate JSON with only:
-   - id
-   - question
-   - gold_sparql
-   - family
-   - answer_type
-3. run duplicate/schema checks
-4. enrich metadata later in a separate step
-5. The `final/` directory is currently archival/reference only.
-The active generation path uses `wrappers/`, `runs/`, `scaled_runs/`, and the assembly tool.
+## Current active workflow
+
+1. Assemble the final prompt from:
+   - a family base prompt
+   - a batch wrapper
+   - a run file
+
+2. Generate a minimal candidate JSON output with only:
+   - `id`
+   - `question`
+   - `gold_sparql`
+   - `family`
+   - `answer_type`
+
+3. Run review checks on generated candidates, including:
+   - duplicate and near-duplicate checks
+   - schema-faithfulness checks
+   - lightweight execution review against the SPARQL endpoint
+
+4. Flag suspicious or repairable entries for later review.
+
+5. Enrich additional metadata only in a later step, after review and filtering.
+
+## Active prompt path
+
+The active generation workflow uses:
+- `wrappers/`
+- `runs/`
+- `scaled_runs/`
+- `assemble_expansion_prompt.py`
+
+## Archive note
+
+The `final/` directory is currently archival/reference only and is not the primary generation path.
