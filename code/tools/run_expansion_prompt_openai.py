@@ -20,39 +20,27 @@ def read_text(path: Path) -> str:
     return path.read_text(encoding="utf-8")
 
 
-def extract_json_array(raw_text: str) -> list[dict[str, Any]]:
-    text = raw_text.strip()
-
-    try:
-        parsed = json.loads(text)
-        if not isinstance(parsed, list):
-            raise ValueError("Model output is valid JSON, but not a JSON array.")
-        return parsed
-    except json.JSONDecodeError:
-        pass
-
-    start = text.find("[")
-    end = text.rfind("]")
-    if start == -1 or end == -1 or end <= start:
-        raise ValueError("Could not find a JSON array in model output.")
-
-    candidate = text[start : end + 1]
-    parsed = json.loads(candidate)
-    if not isinstance(parsed, list):
-        raise ValueError("Extracted JSON content is not a JSON array.")
-    return parsed
-
-
 def validate_candidate_items(
     items: list[dict[str, Any]],
     expected_count: int | None = None,
 ) -> None:
     required_fields = {
-        "id",
         "question",
         "gold_sparql",
         "family",
         "answer_type",
+    }
+
+    allowed_families = {
+        "nlp4re",
+        "empirical_research_practice",
+    }
+
+    allowed_answer_types = {
+        "resource",
+        "string",
+        "number",
+        "date",
     }
 
     if not items:
@@ -63,8 +51,6 @@ def validate_candidate_items(
             f"Expected {expected_count} entries, but got {len(items)}."
         )
 
-    seen_ids: set[str] = set()
-
     for index, item in enumerate(items, start=1):
         if not isinstance(item, dict):
             raise ValueError(f"Entry {index} is not a JSON object.")
@@ -73,13 +59,41 @@ def validate_candidate_items(
         if missing:
             raise ValueError(f"Entry {index} is missing required fields: {missing}")
 
-        item_id = str(item["id"])
+        question = str(item["question"]).strip()
+        gold_sparql = str(item["gold_sparql"]).strip()
+        family = str(item["family"]).strip()
+        answer_type = str(item["answer_type"]).strip()
 
-        if item_id in seen_ids:
-            raise ValueError(f"Duplicate id detected: {item_id}")
+        if not question:
+            raise ValueError(f"Entry {index} has an empty question.")
+        if not gold_sparql:
+            raise ValueError(f"Entry {index} has an empty gold_sparql.")
+
+        if family not in allowed_families:
+            raise ValueError(
+                f"Entry {index} has invalid family '{family}'. "
+                f"Allowed values: {sorted(allowed_families)}"
+            )
+
+        if answer_type not in allowed_answer_types:
+            raise ValueError(
+                f"Entry {index} has invalid answer_type '{answer_type}'. "
+                f"Allowed values: {sorted(allowed_answer_types)}"
+            )
 
 
-        seen_ids.add(item_id)
+def assign_ids_to_items(
+    items: list[dict[str, Any]],
+    id_prefix: str,
+) -> list[dict[str, Any]]:
+    assigned: list[dict[str, Any]] = []
+
+    for index, item in enumerate(items, start=1):
+        new_item = dict(item)
+        new_item["id"] = f"{id_prefix}_{index:03d}"
+        assigned.append(new_item)
+
+    return assigned
 
 
 def get_usage_counts(response) -> tuple[int, int]:
@@ -115,7 +129,6 @@ def estimate_cost_usd(
 
 def build_candidate_items_schema(expected_count: int) -> dict:
     required_fields = [
-        "id",
         "question",
         "gold_sparql",
         "family",
@@ -127,7 +140,6 @@ def build_candidate_items_schema(expected_count: int) -> dict:
         "additionalProperties": False,
         "required": required_fields,
         "properties": {
-            "id": {"type": "string"},
             "question": {"type": "string"},
             "gold_sparql": {"type": "string"},
             "family": {"type": "string"},
@@ -152,13 +164,18 @@ def build_candidate_items_schema(expected_count: int) -> dict:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Run a final dataset-expansion prompt via OpenAI and save JSON candidates."
+        description="Run a dataset-expansion prompt via OpenAI and save JSON candidates."
     )
     parser.add_argument(
         "--expected-count",
         type=int,
         default=10,
         help="Expected number of generated candidate entries.",
+    )
+    parser.add_argument(
+        "--id-prefix",
+        required=True,
+        help="Prefix used to assign deterministic ids, e.g. b001_nlp4re_w01",
     )
     parser.add_argument(
         "--prompt-file",
@@ -249,6 +266,7 @@ def main() -> int:
         request_kwargs["temperature"] = args.temperature
 
     response = client.responses.create(**request_kwargs)
+
     incomplete_details = getattr(response, "incomplete_details", None)
     if incomplete_details is not None:
         reason = getattr(incomplete_details, "reason", None)
@@ -277,6 +295,7 @@ def main() -> int:
         )
 
     validate_candidate_items(items, expected_count=args.expected_count)
+    items = assign_ids_to_items(items, id_prefix=args.id_prefix)
 
     input_tokens, output_tokens = get_usage_counts(response)
     estimated_cost_usd = estimate_cost_usd(args.model, input_tokens, output_tokens)

@@ -1,0 +1,352 @@
+[
+  {
+    "question": "Which NLP task types are reported in contributions that use F1-score as an evaluation metric?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?taskType ?taskTypeLabel WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181003 ?nlpTask ;\n    orkgp:HAS_EVALUATION ?evaluation .\n  ?nlpTask orkgp:P181004 ?taskType .\n  ?evaluation orkgp:P110006 ?metric .\n  ?metric rdfs:label ?metricLabel .\n  OPTIONAL { ?taskType rdfs:label ?taskTypeLabel . }\n  FILTER(CONTAINS(LCASE(STR(?metricLabel)), \"f1\"))\n}",
+    "family": "nlp4re",
+    "answer_type": "resource",
+    "id": "b001_nlp4re_w01_001"
+  },
+  {
+    "question": "Which data source domains are associated with datasets that list at least two different data sources?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?domain ?domainLabel WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181011 ?dataset .\n  ?dataset orkgp:P181017 ?source .\n  ?source orkgp:P181019 ?numSources ;\n          orkgp:P181020 ?domain .\n  OPTIONAL { ?domain rdfs:label ?domainLabel . }\n  FILTER(xsd:integer(?numSources) >= 2)\n}",
+    "family": "nlp4re",
+    "answer_type": "resource",
+    "id": "b001_nlp4re_w01_002"
+  },
+  {
+    "question": "Which baseline comparison types are used in evaluations of contributions that release a tool on GitHub?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?baselineType ?baselineTypeLabel WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181046 ?approach ;\n    orkgp:HAS_EVALUATION ?evaluation .\n  ?approach orkgp:release ?release .\n  ?release orkgp:P181029 ?locationType .\n  ?locationType rdfs:label ?locationTypeLabel .\n  FILTER(CONTAINS(LCASE(STR(?locationTypeLabel)), \"github\"))\n  ?evaluation orkgp:P181051 ?baseline .\n  ?baseline orkgp:P181052 ?baselineType .\n  OPTIONAL { ?baselineType rdfs:label ?baselineTypeLabel . }\n}",
+    "family": "nlp4re",
+    "answer_type": "resource",
+    "id": "b001_nlp4re_w01_003"
+  },
+  {
+    "question": "What natural languages are reported for datasets whose data format is marked as strict?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?naturalLanguage WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181011 ?dataset .\n  ?dataset orkgp:P181022 ?dtype .\n  ?dtype orkgp:P181024 ?rigor .\n  ?rigor rdfs:label ?rigorLabel .\n  FILTER(CONTAINS(LCASE(STR(?rigorLabel)), \"strict\"))\n  ?dtype orkgp:P181025 ?lang .\n  OPTIONAL { ?lang rdfs:label ?langLabel . }\n  BIND(COALESCE(?langLabel, STR(?lang)) AS ?naturalLanguage)\n}",
+    "family": "nlp4re",
+    "answer_type": "string",
+    "id": "b001_nlp4re_w01_004"
+  },
+  {
+    "question": "What license types are used for implemented approaches released through a public repository?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?licenseTypeText WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181046 ?approach .\n  ?approach orkgp:release ?release ;\n           orkgp:P181027 ?licenseType .\n  ?release orkgp:P181029 ?locationType .\n  ?locationType rdfs:label ?locationTypeLabel .\n  FILTER(CONTAINS(LCASE(STR(?locationTypeLabel)), \"repository\") || CONTAINS(LCASE(STR(?locationTypeLabel)), \"github\"))\n  OPTIONAL { ?licenseType rdfs:label ?licenseTypeLabel . }\n  BIND(COALESCE(?licenseTypeLabel, STR(?licenseType)) AS ?licenseTypeText)\n}",
+    "family": "nlp4re",
+    "answer_type": "string",
+    "id": "b001_nlp4re_w01_005"
+  },
+  {
+    "question": "Which intercoder reliability metrics are reported when annotator conflicts are resolved by discussion or consensus?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?reliabilityMetric WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181031 ?annotationProcess .\n  ?annotationProcess orkgp:P181041 ?agreement .\n  ?agreement orkgp:P181044 ?resolution .\n  ?resolution rdfs:label ?resolutionLabel .\n  FILTER(CONTAINS(LCASE(STR(?resolutionLabel)), \"discussion\") || CONTAINS(LCASE(STR(?resolutionLabel)), \"consensus\"))\n  ?agreement orkgp:P181042 ?metric .\n  OPTIONAL { ?metric rdfs:label ?metricLabel . }\n  BIND(COALESCE(?metricLabel, STR(?metric)) AS ?reliabilityMetric)\n}",
+    "family": "nlp4re",
+    "answer_type": "string",
+    "id": "b001_nlp4re_w01_006"
+  },
+  {
+    "question": "How many contributions report both an evaluation metric and a validation procedure?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT (COUNT(DISTINCT ?contribution) AS ?count) WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:HAS_EVALUATION ?evaluation .\n  ?evaluation orkgp:P110006 ?metric ;\n              orkgp:P181050 ?validationProcedure .\n}",
+    "family": "nlp4re",
+    "answer_type": "number",
+    "id": "b001_nlp4re_w01_007"
+  },
+  {
+    "question": "How many contributions mention an annotation scheme whose guidelines are publicly available?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT (COUNT(DISTINCT ?contribution) AS ?count) WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181031 ?annotationProcess .\n  ?annotationProcess orkgp:P181036 ?scheme .\n  ?scheme orkgp:P181038 ?guidelineAvailability .\n  FILTER(CONTAINS(LCASE(STR(COALESCE(?guidelineAvailability, STR(?guidelineAvailability)))), \"public\"))\n}",
+    "family": "nlp4re",
+    "answer_type": "number",
+    "id": "b001_nlp4re_w01_008"
+  },
+  {
+    "question": "In which years were the papers published that report publicly available datasets licensed under CC-BY?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?year WHERE {\n  ?paper orkgp:P31 ?contribution ;\n         orkgp:P29 ?year .\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181011 ?dataset .\n  ?dataset orkgp:license ?license .\n  ?license orkgp:P181026 ?publicAvailability ;\n           orkgp:P181027 ?licenseType .\n  OPTIONAL { ?publicAvailability rdfs:label ?publicAvailabilityLabel . }\n  OPTIONAL { ?licenseType rdfs:label ?licenseTypeLabel . }\n  FILTER(CONTAINS(LCASE(STR(COALESCE(?publicAvailabilityLabel, ?publicAvailability))), \"public\"))\n  FILTER(CONTAINS(LCASE(STR(COALESCE(?licenseTypeLabel, ?licenseType))), \"cc-by\"))\n}",
+    "family": "nlp4re",
+    "answer_type": "date",
+    "id": "b001_nlp4re_w01_009"
+  },
+  {
+    "question": "In which years were the papers published that describe annotation processes with more than two annotators?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?year WHERE {\n  ?paper orkgp:P31 ?contribution ;\n         orkgp:P29 ?year .\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181031 ?annotationProcess .\n  ?annotationProcess orkgp:P181032 ?annotator .\n  ?annotator orkgp:P59120 ?numberOfAnnotators .\n  FILTER(xsd:integer(?numberOfAnnotators) > 2)\n}",
+    "family": "nlp4re",
+    "answer_type": "date",
+    "id": "b001_nlp4re_w01_010"
+  },
+  {
+    "question": "Which NLP task types are reported in contributions that use F1-score as an evaluation metric?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?taskType ?taskTypeLabel WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181003 ?nlpTask ;\n    orkgp:HAS_EVALUATION ?evaluation .\n  ?nlpTask orkgp:P181004 ?taskType .\n  ?evaluation orkgp:P110006 ?metric .\n  ?metric rdfs:label ?metricLabel .\n  OPTIONAL { ?taskType rdfs:label ?taskTypeLabel . }\n  FILTER(CONTAINS(LCASE(STR(?metricLabel)), \"f1\"))\n}",
+    "family": "nlp4re",
+    "answer_type": "resource",
+    "id": "b001_nlp4re_w01_011"
+  },
+  {
+    "question": "Which data source domains are associated with datasets that list at least two different data sources?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?domain ?domainLabel WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181011 ?dataset .\n  ?dataset orkgp:P181017 ?source .\n  ?source orkgp:P181019 ?numSources ;\n          orkgp:P181020 ?domain .\n  OPTIONAL { ?domain rdfs:label ?domainLabel . }\n  FILTER(xsd:integer(?numSources) >= 2)\n}",
+    "family": "nlp4re",
+    "answer_type": "resource",
+    "id": "b001_nlp4re_w01_012"
+  },
+  {
+    "question": "Which baseline comparison types are used in evaluations of contributions that release a tool on GitHub?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?baselineType ?baselineTypeLabel WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181046 ?approach ;\n    orkgp:HAS_EVALUATION ?evaluation .\n  ?approach orkgp:release ?release .\n  ?release orkgp:P181029 ?locationType .\n  ?locationType rdfs:label ?locationTypeLabel .\n  FILTER(CONTAINS(LCASE(STR(?locationTypeLabel)), \"github\"))\n  ?evaluation orkgp:P181051 ?baseline .\n  ?baseline orkgp:P181052 ?baselineType .\n  OPTIONAL { ?baselineType rdfs:label ?baselineTypeLabel . }\n}",
+    "family": "nlp4re",
+    "answer_type": "resource",
+    "id": "b001_nlp4re_w01_013"
+  },
+  {
+    "question": "What natural languages are reported for datasets whose data format is marked as strict?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?naturalLanguage WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181011 ?dataset .\n  ?dataset orkgp:P181022 ?dtype .\n  ?dtype orkgp:P181024 ?rigor .\n  ?rigor rdfs:label ?rigorLabel .\n  FILTER(CONTAINS(LCASE(STR(?rigorLabel)), \"strict\"))\n  ?dtype orkgp:P181025 ?lang .\n  OPTIONAL { ?lang rdfs:label ?langLabel . }\n  BIND(COALESCE(?langLabel, STR(?lang)) AS ?naturalLanguage)\n}",
+    "family": "nlp4re",
+    "answer_type": "string",
+    "id": "b001_nlp4re_w01_014"
+  },
+  {
+    "question": "What license types are used for implemented approaches released through a public repository?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?licenseTypeText WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181046 ?approach .\n  ?approach orkgp:release ?release ;\n           orkgp:P181027 ?licenseType .\n  ?release orkgp:P181029 ?locationType .\n  ?locationType rdfs:label ?locationTypeLabel .\n  FILTER(CONTAINS(LCASE(STR(?locationTypeLabel)), \"repository\") || CONTAINS(LCASE(STR(?locationTypeLabel)), \"github\"))\n  OPTIONAL { ?licenseType rdfs:label ?licenseTypeLabel . }\n  BIND(COALESCE(?licenseTypeLabel, STR(?licenseType)) AS ?licenseTypeText)\n}",
+    "family": "nlp4re",
+    "answer_type": "string",
+    "id": "b001_nlp4re_w01_015"
+  },
+  {
+    "question": "Which intercoder reliability metrics are reported when annotator conflicts are resolved by discussion or consensus?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?reliabilityMetric WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181031 ?annotationProcess .\n  ?annotationProcess orkgp:P181041 ?agreement .\n  ?agreement orkgp:P181044 ?resolution .\n  ?resolution rdfs:label ?resolutionLabel .\n  FILTER(CONTAINS(LCASE(STR(?resolutionLabel)), \"discussion\") || CONTAINS(LCASE(STR(?resolutionLabel)), \"consensus\"))\n  ?agreement orkgp:P181042 ?metric .\n  OPTIONAL { ?metric rdfs:label ?metricLabel . }\n  BIND(COALESCE(?metricLabel, STR(?metric)) AS ?reliabilityMetric)\n}",
+    "family": "nlp4re",
+    "answer_type": "string",
+    "id": "b001_nlp4re_w01_016"
+  },
+  {
+    "question": "How many contributions report both an evaluation metric and a validation procedure?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT (COUNT(DISTINCT ?contribution) AS ?count) WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:HAS_EVALUATION ?evaluation .\n  ?evaluation orkgp:P110006 ?metric ;\n              orkgp:P181050 ?validationProcedure .\n}",
+    "family": "nlp4re",
+    "answer_type": "number",
+    "id": "b001_nlp4re_w01_017"
+  },
+  {
+    "question": "How many contributions mention an annotation scheme whose guidelines are publicly available?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT (COUNT(DISTINCT ?contribution) AS ?count) WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181031 ?annotationProcess .\n  ?annotationProcess orkgp:P181036 ?scheme .\n  ?scheme orkgp:P181038 ?guidelineAvailability .\n  FILTER(CONTAINS(LCASE(STR(COALESCE(?guidelineAvailability, STR(?guidelineAvailability)))), \"public\"))\n}",
+    "family": "nlp4re",
+    "answer_type": "number",
+    "id": "b001_nlp4re_w01_018"
+  },
+  {
+    "question": "In which years were the papers published that report publicly available datasets licensed under CC-BY?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?year WHERE {\n  ?paper orkgp:P31 ?contribution ;\n         orkgp:P29 ?year .\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181011 ?dataset .\n  ?dataset orkgp:license ?license .\n  ?license orkgp:P181026 ?publicAvailability ;\n           orkgp:P181027 ?licenseType .\n  OPTIONAL { ?publicAvailability rdfs:label ?publicAvailabilityLabel . }\n  OPTIONAL { ?licenseType rdfs:label ?licenseTypeLabel . }\n  FILTER(CONTAINS(LCASE(STR(COALESCE(?publicAvailabilityLabel, ?publicAvailability))), \"public\"))\n  FILTER(CONTAINS(LCASE(STR(COALESCE(?licenseTypeLabel, ?licenseType))), \"cc-by\"))\n}",
+    "family": "nlp4re",
+    "answer_type": "date",
+    "id": "b001_nlp4re_w01_019"
+  },
+  {
+    "question": "In which years were the papers published that describe annotation processes with more than two annotators?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?year WHERE {\n  ?paper orkgp:P31 ?contribution ;\n         orkgp:P29 ?year .\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181031 ?annotationProcess .\n  ?annotationProcess orkgp:P181032 ?annotator .\n  ?annotator orkgp:P59120 ?numberOfAnnotators .\n  FILTER(xsd:integer(?numberOfAnnotators) > 2)\n}",
+    "family": "nlp4re",
+    "answer_type": "date",
+    "id": "b001_nlp4re_w01_020"
+  },
+  {
+    "question": "Which NLP task types are reported in contributions that use F1-score as an evaluation metric?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?taskType ?taskTypeLabel WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181003 ?nlpTask ;\n    orkgp:HAS_EVALUATION ?evaluation .\n  ?nlpTask orkgp:P181004 ?taskType .\n  ?evaluation orkgp:P110006 ?metric .\n  ?metric rdfs:label ?metricLabel .\n  OPTIONAL { ?taskType rdfs:label ?taskTypeLabel . }\n  FILTER(CONTAINS(LCASE(STR(?metricLabel)), \"f1\"))\n}",
+    "family": "nlp4re",
+    "answer_type": "resource",
+    "id": "b001_nlp4re_w01_021"
+  },
+  {
+    "question": "What natural languages are reported for datasets whose data format is marked as strict?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?naturalLanguage WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181011 ?dataset .\n  ?dataset orkgp:P181022 ?dtype .\n  ?dtype orkgp:P181024 ?rigor .\n  ?rigor rdfs:label ?rigorLabel .\n  FILTER(CONTAINS(LCASE(STR(?rigorLabel)), \"strict\"))\n  ?dtype orkgp:P181025 ?lang .\n  OPTIONAL { ?lang rdfs:label ?langLabel . }\n  BIND(COALESCE(?langLabel, STR(?lang)) AS ?naturalLanguage)\n}",
+    "family": "nlp4re",
+    "answer_type": "string",
+    "id": "b001_nlp4re_w01_022"
+  },
+  {
+    "question": "What license types are used for implemented approaches released through a public repository?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?licenseTypeText WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181046 ?approach .\n  ?approach orkgp:release ?release ;\n           orkgp:P181027 ?licenseType .\n  ?release orkgp:P181029 ?locationType .\n  ?locationType rdfs:label ?locationTypeLabel .\n  FILTER(CONTAINS(LCASE(STR(?locationTypeLabel)), \"repository\") || CONTAINS(LCASE(STR(?locationTypeLabel)), \"github\"))\n  OPTIONAL { ?licenseType rdfs:label ?licenseTypeLabel . }\n  BIND(COALESCE(?licenseTypeLabel, STR(?licenseType)) AS ?licenseTypeText)\n}",
+    "family": "nlp4re",
+    "answer_type": "string",
+    "id": "b001_nlp4re_w01_023"
+  },
+  {
+    "question": "Which intercoder reliability metrics are reported when annotator conflicts are resolved by discussion or consensus?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?reliabilityMetric WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181031 ?annotationProcess .\n  ?annotationProcess orkgp:P181041 ?agreement .\n  ?agreement orkgp:P181044 ?resolution .\n  ?resolution rdfs:label ?resolutionLabel .\n  FILTER(CONTAINS(LCASE(STR(?resolutionLabel)), \"discussion\") || CONTAINS(LCASE(STR(?resolutionLabel)), \"consensus\"))\n  ?agreement orkgp:P181042 ?metric .\n  OPTIONAL { ?metric rdfs:label ?metricLabel . }\n  BIND(COALESCE(?metricLabel, STR(?metric)) AS ?reliabilityMetric)\n}",
+    "family": "nlp4re",
+    "answer_type": "string",
+    "id": "b001_nlp4re_w01_024"
+  },
+  {
+    "question": "How many contributions report both an evaluation metric and a validation procedure?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT (COUNT(DISTINCT ?contribution) AS ?count) WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:HAS_EVALUATION ?evaluation .\n  ?evaluation orkgp:P110006 ?metric ;\n              orkgp:P181050 ?validationProcedure .\n}",
+    "family": "nlp4re",
+    "answer_type": "number",
+    "id": "b001_nlp4re_w01_025"
+  },
+  {
+    "question": "How many contributions mention an annotation scheme whose guidelines are publicly available?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT (COUNT(DISTINCT ?contribution) AS ?count) WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181031 ?annotationProcess .\n  ?annotationProcess orkgp:P181036 ?scheme .\n  ?scheme orkgp:P181038 ?guidelineAvailability .\n  FILTER(CONTAINS(LCASE(STR(COALESCE(?guidelineAvailability, STR(?guidelineAvailability)))), \"public\"))\n}",
+    "family": "nlp4re",
+    "answer_type": "number",
+    "id": "b001_nlp4re_w01_026"
+  },
+  {
+    "question": "In which years were the papers published that report publicly available datasets licensed under CC-BY?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?year WHERE {\n  ?paper orkgp:P31 ?contribution ;\n         orkgp:P29 ?year .\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181011 ?dataset .\n  ?dataset orkgp:license ?license .\n  ?license orkgp:P181026 ?publicAvailability ;\n           orkgp:P181027 ?licenseType .\n  OPTIONAL { ?publicAvailability rdfs:label ?publicAvailabilityLabel . }\n  OPTIONAL { ?licenseType rdfs:label ?licenseTypeLabel . }\n  FILTER(CONTAINS(LCASE(STR(COALESCE(?publicAvailabilityLabel, ?publicAvailability))), \"public\"))\n  FILTER(CONTAINS(LCASE(STR(COALESCE(?licenseTypeLabel, ?licenseType))), \"cc-by\"))\n}",
+    "family": "nlp4re",
+    "answer_type": "date",
+    "id": "b001_nlp4re_w01_027"
+  },
+  {
+    "question": "In which years were the papers published that describe annotation processes with more than two annotators?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?year WHERE {\n  ?paper orkgp:P31 ?contribution ;\n         orkgp:P29 ?year .\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181031 ?annotationProcess .\n  ?annotationProcess orkgp:P181032 ?annotator .\n  ?annotator orkgp:P59120 ?numberOfAnnotators .\n  FILTER(xsd:integer(?numberOfAnnotators) > 2)\n}",
+    "family": "nlp4re",
+    "answer_type": "date",
+    "id": "b001_nlp4re_w01_028"
+  },
+  {
+    "question": "Which NLP task types are reported in contributions that use F1-score as an evaluation metric?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?taskType ?taskTypeLabel WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181003 ?nlpTask ;\n    orkgp:HAS_EVALUATION ?evaluation .\n  ?nlpTask orkgp:P181004 ?taskType .\n  ?evaluation orkgp:P110006 ?metric .\n  ?metric rdfs:label ?metricLabel .\n  OPTIONAL { ?taskType rdfs:label ?taskTypeLabel . }\n  FILTER(CONTAINS(LCASE(STR(?metricLabel)), \"f1\"))\n}",
+    "family": "nlp4re",
+    "answer_type": "resource",
+    "id": "b001_nlp4re_w01_029"
+  },
+  {
+    "question": "Which data source domains are associated with datasets that list at least two different data sources?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?domain ?domainLabel WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181011 ?dataset .\n  ?dataset orkgp:P181017 ?source .\n  ?source orkgp:P181019 ?numSources ;\n          orkgp:P181020 ?domain .\n  OPTIONAL { ?domain rdfs:label ?domainLabel . }\n  FILTER(xsd:integer(?numSources) >= 2)\n}",
+    "family": "nlp4re",
+    "answer_type": "resource",
+    "id": "b001_nlp4re_w01_030"
+  },
+  {
+    "question": "Which baseline comparison types are used in evaluations of contributions that release a tool on GitHub?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?baselineType ?baselineTypeLabel WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181046 ?approach ;\n    orkgp:HAS_EVALUATION ?evaluation .\n  ?approach orkgp:release ?release .\n  ?release orkgp:P181029 ?locationType .\n  ?locationType rdfs:label ?locationTypeLabel .\n  FILTER(CONTAINS(LCASE(STR(?locationTypeLabel)), \"github\"))\n  ?evaluation orkgp:P181051 ?baseline .\n  ?baseline orkgp:P181052 ?baselineType .\n  OPTIONAL { ?baselineType rdfs:label ?baselineTypeLabel . }\n}",
+    "family": "nlp4re",
+    "answer_type": "resource",
+    "id": "b001_nlp4re_w01_031"
+  },
+  {
+    "question": "What natural languages are reported for datasets whose data format is marked as strict?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?naturalLanguage WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181011 ?dataset .\n  ?dataset orkgp:P181022 ?dtype .\n  ?dtype orkgp:P181024 ?rigor .\n  ?rigor rdfs:label ?rigorLabel .\n  FILTER(CONTAINS(LCASE(STR(?rigorLabel)), \"strict\"))\n  ?dtype orkgp:P181025 ?lang .\n  OPTIONAL { ?lang rdfs:label ?langLabel . }\n  BIND(COALESCE(?langLabel, STR(?lang)) AS ?naturalLanguage)\n}",
+    "family": "nlp4re",
+    "answer_type": "string",
+    "id": "b001_nlp4re_w01_032"
+  },
+  {
+    "question": "What license types are used for implemented approaches released through a public repository?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?licenseTypeText WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181046 ?approach .\n  ?approach orkgp:release ?release ;\n           orkgp:P181027 ?licenseType .\n  ?release orkgp:P181029 ?locationType .\n  ?locationType rdfs:label ?locationTypeLabel .\n  FILTER(CONTAINS(LCASE(STR(?locationTypeLabel)), \"repository\") || CONTAINS(LCASE(STR(?locationTypeLabel)), \"github\"))\n  OPTIONAL { ?licenseType rdfs:label ?licenseTypeLabel . }\n  BIND(COALESCE(?licenseTypeLabel, STR(?licenseType)) AS ?licenseTypeText)\n}",
+    "family": "nlp4re",
+    "answer_type": "string",
+    "id": "b001_nlp4re_w01_033"
+  },
+  {
+    "question": "Which intercoder reliability metrics are reported when annotator conflicts are resolved by discussion or consensus?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?reliabilityMetric WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181031 ?annotationProcess .\n  ?annotationProcess orkgp:P181041 ?agreement .\n  ?agreement orkgp:P181044 ?resolution .\n  ?resolution rdfs:label ?resolutionLabel .\n  FILTER(CONTAINS(LCASE(STR(?resolutionLabel)), \"discussion\") || CONTAINS(LCASE(STR(?resolutionLabel)), \"consensus\"))\n  ?agreement orkgp:P181042 ?metric .\n  OPTIONAL { ?metric rdfs:label ?metricLabel . }\n  BIND(COALESCE(?metricLabel, STR(?metric)) AS ?reliabilityMetric)\n}",
+    "family": "nlp4re",
+    "answer_type": "string",
+    "id": "b001_nlp4re_w01_034"
+  },
+  {
+    "question": "How many contributions report both an evaluation metric and a validation procedure?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT (COUNT(DISTINCT ?contribution) AS ?count) WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:HAS_EVALUATION ?evaluation .\n  ?evaluation orkgp:P110006 ?metric ;\n              orkgp:P181050 ?validationProcedure .\n}",
+    "family": "nlp4re",
+    "answer_type": "number",
+    "id": "b001_nlp4re_w01_035"
+  },
+  {
+    "question": "How many contributions mention an annotation scheme whose guidelines are publicly available?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT (COUNT(DISTINCT ?contribution) AS ?count) WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181031 ?annotationProcess .\n  ?annotationProcess orkgp:P181036 ?scheme .\n  ?scheme orkgp:P181038 ?guidelineAvailability .\n  FILTER(CONTAINS(LCASE(STR(COALESCE(?guidelineAvailability, STR(?guidelineAvailability)))), \"public\"))\n}",
+    "family": "nlp4re",
+    "answer_type": "number",
+    "id": "b001_nlp4re_w01_036"
+  },
+  {
+    "question": "In which years were the papers published that report publicly available datasets licensed under CC-BY?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?year WHERE {\n  ?paper orkgp:P31 ?contribution ;\n         orkgp:P29 ?year .\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181011 ?dataset .\n  ?dataset orkgp:license ?license .\n  ?license orkgp:P181026 ?publicAvailability ;\n           orkgp:P181027 ?licenseType .\n  OPTIONAL { ?publicAvailability rdfs:label ?publicAvailabilityLabel . }\n  OPTIONAL { ?licenseType rdfs:label ?licenseTypeLabel . }\n  FILTER(CONTAINS(LCASE(STR(COALESCE(?publicAvailabilityLabel, ?publicAvailability))), \"public\"))\n  FILTER(CONTAINS(LCASE(STR(COALESCE(?licenseTypeLabel, ?licenseType))), \"cc-by\"))\n}",
+    "family": "nlp4re",
+    "answer_type": "date",
+    "id": "b001_nlp4re_w01_037"
+  },
+  {
+    "question": "In which years were the papers published that describe annotation processes with more than two annotators?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?year WHERE {\n  ?paper orkgp:P31 ?contribution ;\n         orkgp:P29 ?year .\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181031 ?annotationProcess .\n  ?annotationProcess orkgp:P181032 ?annotator .\n  ?annotator orkgp:P59120 ?numberOfAnnotators .\n  FILTER(xsd:integer(?numberOfAnnotators) > 2)\n}",
+    "family": "nlp4re",
+    "answer_type": "date",
+    "id": "b001_nlp4re_w01_038"
+  },
+  {
+    "question": "Which NLP task types are reported in contributions that use F1-score as an evaluation metric?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?taskType ?taskTypeLabel WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181003 ?nlpTask ;\n    orkgp:HAS_EVALUATION ?evaluation .\n  ?nlpTask orkgp:P181004 ?taskType .\n  ?evaluation orkgp:P110006 ?metric .\n  ?metric rdfs:label ?metricLabel .\n  OPTIONAL { ?taskType rdfs:label ?taskTypeLabel . }\n  FILTER(CONTAINS(LCASE(STR(?metricLabel)), \"f1\"))\n}",
+    "family": "nlp4re",
+    "answer_type": "resource",
+    "id": "b001_nlp4re_w01_039"
+  },
+  {
+    "question": "Which data source domains are associated with datasets that list at least two different data sources?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?domain ?domainLabel WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181011 ?dataset .\n  ?dataset orkgp:P181017 ?source .\n  ?source orkgp:P181019 ?numSources ;\n          orkgp:P181020 ?domain .\n  OPTIONAL { ?domain rdfs:label ?domainLabel . }\n  FILTER(xsd:integer(?numSources) >= 2)\n}",
+    "family": "nlp4re",
+    "answer_type": "resource",
+    "id": "b001_nlp4re_w01_040"
+  },
+  {
+    "question": "Which baseline comparison types are used in evaluations of contributions that release a tool on GitHub?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?baselineType ?baselineTypeLabel WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181046 ?approach ;\n    orkgp:HAS_EVALUATION ?evaluation .\n  ?approach orkgp:release ?release .\n  ?release orkgp:P181029 ?locationType .\n  ?locationType rdfs:label ?locationTypeLabel .\n  FILTER(CONTAINS(LCASE(STR(?locationTypeLabel)), \"github\"))\n  ?evaluation orkgp:P181051 ?baseline .\n  ?baseline orkgp:P181052 ?baselineType .\n  OPTIONAL { ?baselineType rdfs:label ?baselineTypeLabel . }\n}",
+    "family": "nlp4re",
+    "answer_type": "resource",
+    "id": "b001_nlp4re_w01_041"
+  },
+  {
+    "question": "What natural languages are reported for datasets whose data format is marked as strict?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?naturalLanguage WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181011 ?dataset .\n  ?dataset orkgp:P181022 ?dtype .\n  ?dtype orkgp:P181024 ?rigor .\n  ?rigor rdfs:label ?rigorLabel .\n  FILTER(CONTAINS(LCASE(STR(?rigorLabel)), \"strict\"))\n  ?dtype orkgp:P181025 ?lang .\n  OPTIONAL { ?lang rdfs:label ?langLabel . }\n  BIND(COALESCE(?langLabel, STR(?lang)) AS ?naturalLanguage)\n}",
+    "family": "nlp4re",
+    "answer_type": "string",
+    "id": "b001_nlp4re_w01_042"
+  },
+  {
+    "question": "What license types are used for implemented approaches released through a public repository?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?licenseTypeText WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181046 ?approach .\n  ?approach orkgp:release ?release ;\n           orkgp:P181027 ?licenseType .\n  ?release orkgp:P181029 ?locationType .\n  ?locationType rdfs:label ?locationTypeLabel .\n  FILTER(CONTAINS(LCASE(STR(?locationTypeLabel)), \"repository\") || CONTAINS(LCASE(STR(?locationTypeLabel)), \"github\"))\n  OPTIONAL { ?licenseType rdfs:label ?licenseTypeLabel . }\n  BIND(COALESCE(?licenseTypeLabel, STR(?licenseType)) AS ?licenseTypeText)\n}",
+    "family": "nlp4re",
+    "answer_type": "string",
+    "id": "b001_nlp4re_w01_043"
+  },
+  {
+    "question": "Which intercoder reliability metrics are reported when annotator conflicts are resolved by discussion or consensus?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?reliabilityMetric WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181031 ?annotationProcess .\n  ?annotationProcess orkgp:P181041 ?agreement .\n  ?agreement orkgp:P181044 ?resolution .\n  ?resolution rdfs:label ?resolutionLabel .\n  FILTER(CONTAINS(LCASE(STR(?resolutionLabel)), \"discussion\") || CONTAINS(LCASE(STR(?resolutionLabel)), \"consensus\"))\n  ?agreement orkgp:P181042 ?metric .\n  OPTIONAL { ?metric rdfs:label ?metricLabel . }\n  BIND(COALESCE(?metricLabel, STR(?metric)) AS ?reliabilityMetric)\n}",
+    "family": "nlp4re",
+    "answer_type": "string",
+    "id": "b001_nlp4re_w01_044"
+  },
+  {
+    "question": "How many contributions report both an evaluation metric and a validation procedure?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT (COUNT(DISTINCT ?contribution) AS ?count) WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:HAS_EVALUATION ?evaluation .\n  ?evaluation orkgp:P110006 ?metric ;\n              orkgp:P181050 ?validationProcedure .\n}",
+    "family": "nlp4re",
+    "answer_type": "number",
+    "id": "b001_nlp4re_w01_045"
+  },
+  {
+    "question": "How many contributions mention an annotation scheme whose guidelines are publicly available?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT (COUNT(DISTINCT ?contribution) AS ?count) WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181031 ?annotationProcess .\n  ?annotationProcess orkgp:P181036 ?scheme .\n  ?scheme orkgp:P181038 ?guidelineAvailability .\n  FILTER(CONTAINS(LCASE(STR(COALESCE(?guidelineAvailability, STR(?guidelineAvailability)))), \"public\"))\n}",
+    "family": "nlp4re",
+    "answer_type": "number",
+    "id": "b001_nlp4re_w01_046"
+  },
+  {
+    "question": "In which years were the papers published that report publicly available datasets licensed under CC-BY?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?year WHERE {\n  ?paper orkgp:P31 ?contribution ;\n         orkgp:P29 ?year .\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181011 ?dataset .\n  ?dataset orkgp:license ?license .\n  ?license orkgp:P181026 ?publicAvailability ;\n           orkgp:P181027 ?licenseType .\n  OPTIONAL { ?publicAvailability rdfs:label ?publicAvailabilityLabel . }\n  OPTIONAL { ?licenseType rdfs:label ?licenseTypeLabel . }\n  FILTER(CONTAINS(LCASE(STR(COALESCE(?publicAvailabilityLabel, ?publicAvailability))), \"public\"))\n  FILTER(CONTAINS(LCASE(STR(COALESCE(?licenseTypeLabel, ?licenseType))), \"cc-by\"))\n}",
+    "family": "nlp4re",
+    "answer_type": "date",
+    "id": "b001_nlp4re_w01_047"
+  },
+  {
+    "question": "In which years were the papers published that describe annotation processes with more than two annotators?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?year WHERE {\n  ?paper orkgp:P31 ?contribution ;\n         orkgp:P29 ?year .\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181031 ?annotationProcess .\n  ?annotationProcess orkgp:P181032 ?annotator .\n  ?annotator orkgp:P59120 ?numberOfAnnotators .\n  FILTER(xsd:integer(?numberOfAnnotators) > 2)\n}",
+    "family": "nlp4re",
+    "answer_type": "date",
+    "id": "b001_nlp4re_w01_048"
+  },
+  {
+    "question": "Which NLP task types are reported in contributions that use F1-score as an evaluation metric?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?taskType ?taskTypeLabel WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181003 ?nlpTask ;\n    orkgp:HAS_EVALUATION ?evaluation .\n  ?nlpTask orkgp:P181004 ?taskType .\n  ?evaluation orkgp:P110006 ?metric .\n  ?metric rdfs:label ?metricLabel .\n  OPTIONAL { ?taskType rdfs:label ?taskTypeLabel . }\n  FILTER(CONTAINS(LCASE(STR(?metricLabel)), \"f1\"))\n}",
+    "family": "nlp4re",
+    "answer_type": "resource",
+    "id": "b001_nlp4re_w01_049"
+  },
+  {
+    "question": "Which data source domains are associated with datasets that list at least two different data sources?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?domain ?domainLabel WHERE {\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181011 ?dataset .\n  ?dataset orkgp:P181017 ?source .\n  ?source orkgp:P181019 ?numSources ;\n          orkgp:P181020 ?domain .\n  OPTIONAL { ?domain rdfs:label ?domainLabel . }\n  FILTER(xsd:integer(?numSources) >= 2)\n}",
+    "family": "nlp4re",
+    "answer_type": "resource",
+    "id": "b001_nlp4re_w01_050"
+  }
+]
