@@ -43,14 +43,14 @@
   },
   {
     "id": "b002_nlp4re_007",
-    "question": "Which papers use the highest number of annotators?",
+    "question":  "Which papers are among those with the highest reported numbers of annotators?",
     "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?paper ?paperLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181031 ?annotation . ?annotation orkgp:P181032 ?annotator . ?annotator orkgp:P59120 ?numAnnotators . OPTIONAL { ?paper rdfs:label ?paperLabel } } ORDER BY DESC(xsd:decimal(?numAnnotators)) ?paperLabel LIMIT 5",
     "family": "nlp4re",
     "answer_type": "resource"
   },
   {
     "id": "b002_nlp4re_008",
-    "question": "Which papers describe a dataset but do not specify any license type?",
+    "question": "Which papers are among those with the largest reported datasets by number of data items?",
     "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?paper ?paperLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?dataset . ?dataset orkgp:license ?license . FILTER NOT EXISTS { ?license orkgp:P181027 ?licenseType . } OPTIONAL { ?paper rdfs:label ?paperLabel } } ORDER BY ?paperLabel",
     "family": "nlp4re",
     "answer_type": "resource"
@@ -64,8 +64,8 @@
   },
   {
     "id": "b002_nlp4re_010",
-    "question": "Which papers implement an approach whose algorithm label mentions BERT?",
-    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?paper ?paperLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181046 ?approach . ?approach orkgp:P58069 ?algorithm . ?algorithm rdfs:label ?algorithmLabel . FILTER(REGEX(LCASE(STR(?algorithmLabel)), \"bert\")) OPTIONAL { ?paper rdfs:label ?paperLabel } } ORDER BY ?paperLabel LIMIT 10",
+    "question": "Which papers are among those with the highest reported measured agreement values?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nSELECT DISTINCT ?paper ?paperLabel ?agreement WHERE {\n  {\n    SELECT ?paper (MAX(xsd:decimal(?a)) AS ?agreement) WHERE {\n      ?paper orkgp:P31 ?contribution .\n      ?contribution a orkgc:C121001 .\n      ?contribution orkgp:P181031 ?annotationProcess .\n      ?annotationProcess orkgp:P181041 ?agreementStmt .\n      ?agreementStmt orkgp:P181045 ?a .\n    }\n    GROUP BY ?paper\n  }\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}\nORDER BY DESC(?agreement)\nLIMIT 10",
     "family": "nlp4re",
     "answer_type": "resource"
   }
