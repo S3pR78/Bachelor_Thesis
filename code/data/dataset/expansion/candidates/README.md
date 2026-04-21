@@ -1,6 +1,6 @@
 # Dataset Expansion Candidates
 
-This directory stores generated candidate dataset files before they are reviewed and enriched.
+This directory stores generated candidate dataset files before they are reviewed, filtered, and enriched.
 
 ## Current active file format
 
@@ -15,7 +15,7 @@ Additional metadata is added later in a separate enrichment step.
 
 ## Review policy
 
-Generated candidate files in this directory are not final benchmark files.
+Generated candidate files in this directory are not final benchmark files and are not automatically treated as gold data.
 
 Before reuse, candidates should be checked for:
 - JSON validity
@@ -26,6 +26,7 @@ Before reuse, candidates should be checked for:
 - suspicious predicates
 - answer_type correctness
 - question-query alignment
+- lightweight execution review against the SPARQL endpoint
 
 ## Naming convention
 
