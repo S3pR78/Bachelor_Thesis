@@ -180,6 +180,27 @@ Action:
 - keep as candidate batch
 - include in later manual/schema review
 
+
+Retain:
+- b003_empirical_001
+- b003_empirical_002
+- b003_empirical_003
+- b003_empirical_004
+- b003_empirical_005
+- b003_empirical_006
+- b003_empirical_007
+- b003_empirical_008
+- b003_empirical_009
+- b003_empirical_010
+
+Review/repair:
+- none currently required
+
+Notes:
+- one of the better empirical batches
+- good family anchoring
+- good use of negation, multi-condition logic, and non-factoid structure
+
 ---
 
 ### B004 — NLP4RE priority
