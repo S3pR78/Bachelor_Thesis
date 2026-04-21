@@ -60,6 +60,20 @@ def summarize_ask_result(response_json: dict[str, Any]) -> tuple[int | None, lis
         return 1 if boolean_value else 0, [f"boolean={boolean_value}"]
     return None, []
 
+def classify_review_bucket(
+    execution_status: str,
+    result_cardinality: int | None,
+) -> str:
+    if execution_status == "error":
+        return "red"
+    if execution_status == "skipped":
+        return "yellow"
+    if execution_status == "ok" and result_cardinality == 0:
+        return "yellow"
+    if execution_status == "ok" and result_cardinality is not None and result_cardinality > 0:
+        return "green"
+    return "yellow"
+
 
 def review_entry(
     entry: dict[str, Any],
@@ -83,6 +97,7 @@ def review_entry(
             "result_cardinality": None,
             "execution_error": "Missing or empty gold_sparql.",
             "sample_answer_preview": [],
+            "review_bucket": "red",
         }
 
     query_with_prefixes = raw_query
@@ -99,8 +114,8 @@ def review_entry(
             "result_cardinality": None,
             "execution_error": f"Unsupported query type: {query_type}",
             "sample_answer_preview": [],
+            "review_bucket": "yellow",
         }
-
     try:
         response_json = execute_sparql_query(
             query=query_with_prefixes,
@@ -123,6 +138,7 @@ def review_entry(
             "result_cardinality": result_cardinality,
             "execution_error": None,
             "sample_answer_preview": preview,
+            "review_bucket": classify_review_bucket("ok", result_cardinality),
         }
 
     except Exception as exc:
@@ -136,6 +152,7 @@ def review_entry(
             "result_cardinality": None,
             "execution_error": str(exc),
             "sample_answer_preview": [],
+            "review_bucket": "red",
         }
 
 
@@ -150,12 +167,19 @@ def build_summary(results: list[dict[str, Any]]) -> dict[str, Any]:
         if item["execution_status"] == "ok" and item["result_cardinality"] == 0
     )
 
+    green_count = sum(1 for item in results if item.get("review_bucket") == "green")
+    yellow_count = sum(1 for item in results if item.get("review_bucket") == "yellow")
+    red_count = sum(1 for item in results if item.get("review_bucket") == "red")
+
     return {
         "total_items": total,
         "ok_count": ok_count,
         "error_count": error_count,
         "skipped_count": skipped_count,
         "empty_result_count": empty_count,
+        "green_count": green_count,
+        "yellow_count": yellow_count,
+        "red_count": red_count,
     }
 
 
@@ -233,6 +257,7 @@ def main() -> int:
                     "result_cardinality": None,
                     "execution_error": "Entry is not a JSON object.",
                     "sample_answer_preview": [],
+                    "review_bucket": "red",
                 }
             )
             continue
@@ -247,6 +272,7 @@ def main() -> int:
         print(
             f"[{index}/{len(entries)}] id={result['id']} "
             f"status={result['execution_status']} "
+            f"bucket={result['review_bucket']} "
             f"type={result['query_type']} "
             f"cardinality={result['result_cardinality']}"
         )

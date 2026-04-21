@@ -1,0 +1,49 @@
+{
+  "candidate_file": "code/data/dataset/expansion/candidates/b001_nlp4re_candidates.json",
+  "sparql_endpoint": "https://www.orkg.org/triplestore",
+  "summary": {
+    "total_items": 3,
+    "ok_count": 3,
+    "error_count": 0,
+    "skipped_count": 0,
+    "empty_result_count": 2
+  },
+  "results": [
+    {
+      "id": "b001_nlp4re_001",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which NLP task types are reported in papers that evaluate their approach with F1-score?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": []
+    },
+    {
+      "id": "b001_nlp4re_002",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which data source types are used for datasets whose natural language is English?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": []
+    },
+    {
+      "id": "b001_nlp4re_003",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which intercoder reliability metrics are used for contributions whose data source domain is information systems?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 2,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "metric=http://orkg.org/orkg/resource/R1544513; metricLabel=Not reported",
+        "metric=http://orkg.org/orkg/resource/R1585166; metricLabel=Krippendorf's Alpha"
+      ]
+    }
+  ]
+}
