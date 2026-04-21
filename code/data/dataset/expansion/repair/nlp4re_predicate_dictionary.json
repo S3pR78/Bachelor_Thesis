@@ -1,10 +1,42 @@
 {
   "orkgp:HAS_EVALUATION": {
     "status": "needs_mapping_review",
-    "notes": "Repeated placeholder-style predicate in generated NLP4RE queries."
+    "category": "suspicious_predicate",
+    "family": "nlp4re",
+    "recommended_action": "review_or_repair",
+    "replacement": null,
+    "notes": [
+      "Repeated placeholder-style predicate in generated NLP4RE queries.",
+      "Appears in multiple batches and should be mapped to the exact grounded family path before any automatic replacement."
+    ],
+    "observed_in": [
+      "b001_nlp4re_001",
+      "b002_nlp4re_003",
+      "b003_nlp4re_003",
+      "b003_nlp4re_010",
+      "b004_nlp4re_004",
+      "b004_nlp4re_005",
+      "b004_nlp4re_010",
+      "b005_nlp4re_001",
+      "b005_nlp4re_009"
+    ]
   },
   "orkgp:release": {
     "status": "needs_mapping_review",
-    "notes": "Repeated generic release predicate in generated NLP4RE queries; confirm grounded family path."
+    "category": "suspicious_predicate",
+    "family": "nlp4re",
+    "recommended_action": "review_or_repair",
+    "replacement": null,
+    "notes": [
+      "Repeated generic release predicate in generated NLP4RE queries.",
+      "Should be checked against the exact family-grounded implementation/release path before any automatic replacement."
+    ],
+    "observed_in": [
+      "b003_nlp4re_001",
+      "b003_nlp4re_002",
+      "b003_nlp4re_007",
+      "b004_nlp4re_008",
+      "b005_nlp4re_004"
+    ]
   }
 }
