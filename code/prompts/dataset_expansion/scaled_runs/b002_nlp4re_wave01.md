@@ -1,50 +1,74 @@
 # Scaled Run Prompt — B002 NLP4RE Wave 01
 
-Generate exactly 10 candidate dataset entries.
+Generate exactly 50 candidate dataset entries.
 
 Selected family: `nlp4re`
-Selected source_dataset: `Hybrid_NLP4RE`
 
-Wave id: `wave01`
+For every item, set:
+- `family` = `nlp4re`
 
-Use these id values exactly:
-- `b002_nlp4re_w01_001`
-- `b002_nlp4re_w01_002`
-- `b002_nlp4re_w01_003`
-- `b002_nlp4re_w01_004`
-- `b002_nlp4re_w01_005`
-- `b002_nlp4re_w01_006`
-- `b002_nlp4re_w01_007`
-- `b002_nlp4re_w01_008`
-- `b002_nlp4re_w01_009`
-- `b002_nlp4re_w01_010`
+Do not generate an `id` field.
+IDs will be assigned later in a deterministic post-processing step.
 
-Use these source_id values exactly:
-- `gen_b002_nlp4re_w01_001`
-- `gen_b002_nlp4re_w01_002`
-- `gen_b002_nlp4re_w01_003`
-- `gen_b002_nlp4re_w01_004`
-- `gen_b002_nlp4re_w01_005`
-- `gen_b002_nlp4re_w01_006`
-- `gen_b002_nlp4re_w01_007`
-- `gen_b002_nlp4re_w01_008`
-- `gen_b002_nlp4re_w01_009`
-- `gen_b002_nlp4re_w01_010`
+Primary batch purpose:
+- expand coverage of important query components for NLP4RE
+- generate schema-faithful questions that naturally require component-sensitive SPARQL patterns
+- increase coverage of useful operator and constraint combinations
 
-Required component focus:
-- at least 2 REGEX
-- at least 2 LIMIT
-- at least 2 MIN or AVG combined
-- optionally BIND, UNION, or NOT_EXISTS
+Preferred focus:
+- REGEX or string-based filtering where semantically justified
+- LIMIT where the question naturally asks for a top result or restricted result set
+- MIN / MAX / AVG where aggregation is clearly motivated
+- NOT EXISTS where missing-information logic is natural
+- comparison and constrained retrieval
+- moderate multi-hop behavior
 
-Prefer:
-- 3 factoid
-- 7 non_factoid
-- medium to high complexity
+Preferred difficulty:
+- mostly medium complexity
+- some medium-to-high complexity
+- avoid artificial complexity
+- avoid operator use for its own sake
+
+Important alignment rules:
+- If a query returns a ranked or top-k list, phrase the question accordingly.
+- Do not phrase a top-k query as if it returned a single strict maximum unless the query really enforces that.
+- Use REGEX, LIMIT, MIN, AVG, MAX, or NOT EXISTS only when genuinely motivated by the question.
+- Do not create artificial operator-driven questions just to satisfy the batch purpose.
+
+Target answer_type distribution:
+- around 14 `resource`
+- around 14 `string`
+- around 12 `number`
+- around 10 `date`
 
 Avoid overlap with:
-- benchmark seed data
-- b002 core runs
-- previously generated candidate files
+- seed benchmark entries
+- previously accepted or retained `b002_nlp4re` candidates
+- earlier generated candidates in the same family
+- simple paraphrases of already generated questions
+
+Prefer:
+- new combinations of constraints
+- new component-sensitive reasoning patterns
+- schema-faithful variety over superficial wording changes
+
+Return only these fields for each item:
+- `question`
+- `gold_sparql`
+- `family`
+- `answer_type`
+
+Do not include any other metadata fields.
+
+`answer_type` must be one of:
+- `resource`
+- `string`
+- `number`
+- `date`
+
+Do not use values such as:
+- `factoid`
+- `non_factoid`
 
 Return valid JSON only.
+Return a JSON object with key `"items"`.

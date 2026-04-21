@@ -1,0 +1,352 @@
+[
+  {
+    "question": "What NLP task type is reported for the NLP4RE contribution?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?taskType ?taskTypeLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181003 ?task . ?task orkgp:P181004 ?taskType . OPTIONAL { ?taskType rdfs:label ?taskTypeLabel } }",
+    "family": "nlp4re",
+    "answer_type": "resource",
+    "id": "b004_nlp4re_w01_001"
+  },
+  {
+    "question": "What NLP task input is reported for the NLP4RE contribution?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?taskInput ?taskInputLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181003 ?task . ?task orkgp:P181005 ?taskInput . OPTIONAL { ?taskInput rdfs:label ?taskInputLabel } }",
+    "family": "nlp4re",
+    "answer_type": "resource",
+    "id": "b004_nlp4re_w01_002"
+  },
+  {
+    "question": "What NLP task output type is reported for the NLP4RE contribution?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?outputType ?outputTypeLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181003 ?task . ?task orkgp:P181006 ?taskOutput . ?taskOutput orkgp:P181007 ?outputType . OPTIONAL { ?outputType rdfs:label ?outputTypeLabel } }",
+    "family": "nlp4re",
+    "answer_type": "resource",
+    "id": "b004_nlp4re_w01_003"
+  },
+  {
+    "question": "What NLP task output classification label is reported for the NLP4RE contribution?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?classificationLabel ?classificationLabelLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181003 ?task . ?task orkgp:P181006 ?taskOutput . ?taskOutput orkgp:P181008 ?classificationLabel . OPTIONAL { ?classificationLabel rdfs:label ?classificationLabelLabel } }",
+    "family": "nlp4re",
+    "answer_type": "resource",
+    "id": "b004_nlp4re_w01_004"
+  },
+  {
+    "question": "What NLP task output extracted element is reported for the NLP4RE contribution?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?extractedElement ?extractedElementLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181003 ?task . ?task orkgp:P181006 ?taskOutput . ?taskOutput orkgp:P181009 ?extractedElement . OPTIONAL { ?extractedElement rdfs:label ?extractedElementLabel } }",
+    "family": "nlp4re",
+    "answer_type": "resource",
+    "id": "b004_nlp4re_w01_005"
+  },
+  {
+    "question": "What NLP data source type is reported for the dataset?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?sourceType ?sourceTypeLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?nlpDataset . ?nlpDataset orkgp:P181017 ?source . ?source orkgp:P181018 ?sourceType . OPTIONAL { ?sourceType rdfs:label ?sourceTypeLabel } }",
+    "family": "nlp4re",
+    "answer_type": "resource",
+    "id": "b004_nlp4re_w01_006"
+  },
+  {
+    "question": "What data source domain is reported for the dataset?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?sourceDomain ?sourceDomainLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?nlpDataset . ?nlpDataset orkgp:P181017 ?source . ?source orkgp:P181020 ?sourceDomain . OPTIONAL { ?sourceDomain rdfs:label ?sourceDomainLabel } }",
+    "family": "nlp4re",
+    "answer_type": "resource",
+    "id": "b004_nlp4re_w01_007"
+  },
+  {
+    "question": "What NLP data type is reported for the dataset?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?dataType ?dataTypeLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?nlpDataset . ?nlpDataset orkgp:P181022 ?dataType . OPTIONAL { ?dataType rdfs:label ?dataTypeLabel } }",
+    "family": "nlp4re",
+    "answer_type": "resource",
+    "id": "b004_nlp4re_w01_008"
+  },
+  {
+    "question": "What NLP data format is reported for the dataset?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?dataFormat ?dataFormatLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?nlpDataset . ?nlpDataset orkgp:P181022 ?dataType . ?dataType orkgp:P181023 ?dataFormat . OPTIONAL { ?dataFormat rdfs:label ?dataFormatLabel } }",
+    "family": "nlp4re",
+    "answer_type": "resource",
+    "id": "b004_nlp4re_w01_009"
+  },
+  {
+    "question": "What natural language is reported for the dataset?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?naturalLanguage ?naturalLanguageLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?nlpDataset . ?nlpDataset orkgp:P181022 ?dataType . ?dataType orkgp:P181025 ?naturalLanguage . OPTIONAL { ?naturalLanguage rdfs:label ?naturalLanguageLabel } }",
+    "family": "nlp4re",
+    "answer_type": "resource",
+    "id": "b004_nlp4re_w01_010"
+  },
+  {
+    "question": "What license type is reported for the dataset?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?licenseType ?licenseTypeLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?nlpDataset . ?nlpDataset orkgp:license ?license . ?license orkgp:P181027 ?licenseType . OPTIONAL { ?licenseType rdfs:label ?licenseTypeLabel } }",
+    "family": "nlp4re",
+    "answer_type": "resource",
+    "id": "b004_nlp4re_w01_011"
+  },
+  {
+    "question": "What location type describes where the dataset is stored?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?locationType ?locationTypeLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?nlpDataset . ?nlpDataset orkgp:P181028 ?datasetLocation . ?datasetLocation orkgp:P181030 ?locationType . OPTIONAL { ?locationType rdfs:label ?locationTypeLabel } }",
+    "family": "nlp4re",
+    "answer_type": "resource",
+    "id": "b004_nlp4re_w01_012"
+  },
+  {
+    "question": "What evaluation metric is reported for the NLP4RE study?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?metric ?metricLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:HAS_EVALUATION ?evaluation . ?evaluation orkgp:P110006 ?metric . OPTIONAL { ?metric rdfs:label ?metricLabel } }",
+    "family": "nlp4re",
+    "answer_type": "resource",
+    "id": "b004_nlp4re_w01_013"
+  },
+  {
+    "question": "What release format is reported for the implemented approach?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?releaseFormat ?releaseFormatLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181046 ?approach . ?approach orkgp:release ?release . ?release orkgp:P181049 ?releaseFormat . OPTIONAL { ?releaseFormat rdfs:label ?releaseFormatLabel } }",
+    "family": "nlp4re",
+    "answer_type": "resource",
+    "id": "b004_nlp4re_w01_014"
+  },
+  {
+    "question": "What URL is provided for the NLP dataset?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?datasetUrl WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?nlpDataset . ?nlpDataset orkgp:P181028 ?datasetLocation . ?datasetLocation orkgp:P1003 ?datasetUrl . }",
+    "family": "nlp4re",
+    "answer_type": "string",
+    "id": "b004_nlp4re_w01_015"
+  },
+  {
+    "question": "What URL is provided for the released tool?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?releaseUrl WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181046 ?approach . ?approach orkgp:release ?release . ?release orkgp:P1003 ?releaseUrl . }",
+    "family": "nlp4re",
+    "answer_type": "string",
+    "id": "b004_nlp4re_w01_016"
+  },
+  {
+    "question": "What baseline comparison detail is reported?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?baselineDetail WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:HAS_EVALUATION ?evaluation . ?evaluation orkgp:P181051 ?baselineComparison . ?baselineComparison orkgp:P181053 ?baselineDetail . }",
+    "family": "nlp4re",
+    "answer_type": "string",
+    "id": "b004_nlp4re_w01_017"
+  },
+  {
+    "question": "What running requirement is described for the implemented approach?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?runningRequirement WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181046 ?approach . ?approach orkgp:P181047 ?runningRequirement . }",
+    "family": "nlp4re",
+    "answer_type": "string",
+    "id": "b004_nlp4re_w01_018"
+  },
+  {
+    "question": "What guideline availability status is reported for the annotation scheme?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?guidelineAvailability WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181031 ?annotationProcess . ?annotationProcess orkgp:P181036 ?annotationScheme . ?annotationScheme orkgp:P181038 ?guidelineAvailability . }",
+    "family": "nlp4re",
+    "answer_type": "string",
+    "id": "b004_nlp4re_w01_019"
+  },
+  {
+    "question": "What shared material is reported for annotators?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?sharedMaterial WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181031 ?annotationProcess . ?annotationProcess orkgp:P181039 ?sharedMaterial . }",
+    "family": "nlp4re",
+    "answer_type": "string",
+    "id": "b004_nlp4re_w01_020"
+  },
+  {
+    "question": "What fatigue mitigation technique is used during annotation?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?fatigueMitigationTechnique WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181031 ?annotationProcess . ?annotationProcess orkgp:P181040 ?fatigueMitigationTechnique . }",
+    "family": "nlp4re",
+    "answer_type": "string",
+    "id": "b004_nlp4re_w01_021"
+  },
+  {
+    "question": "What annotator assignment strategy is described?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?annotatorAssignment WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181031 ?annotationProcess . ?annotationProcess orkgp:P181032 ?annotator . ?annotator orkgp:P181033 ?annotatorAssignment . }",
+    "family": "nlp4re",
+    "answer_type": "string",
+    "id": "b004_nlp4re_w01_022"
+  },
+  {
+    "question": "What level of application domain experience is reported for annotators?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?domainExperience WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181031 ?annotationProcess . ?annotationProcess orkgp:P181032 ?annotator . ?annotator orkgp:P181034 ?domainExperience . }",
+    "family": "nlp4re",
+    "answer_type": "string",
+    "id": "b004_nlp4re_w01_023"
+  },
+  {
+    "question": "Who are the annotators named in the annotation process?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?annotatorIdentity WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181031 ?annotationProcess . ?annotationProcess orkgp:P181032 ?annotator . ?annotator orkgp:P181035 ?annotatorIdentity . }",
+    "family": "nlp4re",
+    "answer_type": "string",
+    "id": "b004_nlp4re_w01_024"
+  },
+  {
+    "question": "How was the annotation scheme established among annotators?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?schemeEstablishment WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181031 ?annotationProcess . ?annotationProcess orkgp:P181036 ?annotationScheme . ?annotationScheme orkgp:P181037 ?schemeEstablishment . }",
+    "family": "nlp4re",
+    "answer_type": "string",
+    "id": "b004_nlp4re_w01_025"
+  },
+  {
+    "question": "How were conflicts resolved during annotation?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?conflictResolution WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181031 ?annotationProcess . ?annotationProcess orkgp:P181041 ?agreement . ?agreement orkgp:P181044 ?conflictResolution . }",
+    "family": "nlp4re",
+    "answer_type": "string",
+    "id": "b004_nlp4re_w01_026"
+  },
+  {
+    "question": "What measured agreement is reported?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?measuredAgreement WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181031 ?annotationProcess . ?annotationProcess orkgp:P181041 ?agreement . ?agreement orkgp:P181045 ?measuredAgreement . }",
+    "family": "nlp4re",
+    "answer_type": "string",
+    "id": "b004_nlp4re_w01_027"
+  },
+  {
+    "question": "What validation procedure is applied in the evaluation?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?validationProcedure WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:HAS_EVALUATION ?evaluation . ?evaluation orkgp:P181050 ?validationProcedure . }",
+    "family": "nlp4re",
+    "answer_type": "string",
+    "id": "b004_nlp4re_w01_028"
+  },
+  {
+    "question": "How many data items are reported for the dataset?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?dataItems WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?nlpDataset . ?nlpDataset orkgp:P181015 ?dataItems . }",
+    "family": "nlp4re",
+    "answer_type": "number",
+    "id": "b004_nlp4re_w01_029"
+  },
+  {
+    "question": "How many annotators were involved in the annotation process?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?numberOfAnnotators WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181031 ?annotationProcess . ?annotationProcess orkgp:P181032 ?annotator . ?annotator orkgp:P59120 ?numberOfAnnotators . }",
+    "family": "nlp4re",
+    "answer_type": "number",
+    "id": "b004_nlp4re_w01_030"
+  },
+  {
+    "question": "How many data sources does the dataset use?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?numberOfDataSources WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?nlpDataset . ?nlpDataset orkgp:P181017 ?source . ?source orkgp:P181019 ?numberOfDataSources . }",
+    "family": "nlp4re",
+    "answer_type": "number",
+    "id": "b004_nlp4re_w01_031"
+  },
+  {
+    "question": "How many distinct NLP data source types are reported?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT (COUNT(DISTINCT ?sourceType) AS ?count) WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?nlpDataset . ?nlpDataset orkgp:P181017 ?source . ?source orkgp:P181018 ?sourceType . }",
+    "family": "nlp4re",
+    "answer_type": "number",
+    "id": "b004_nlp4re_w01_032"
+  },
+  {
+    "question": "How many distinct data source domains are reported?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT (COUNT(DISTINCT ?sourceDomain) AS ?count) WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?nlpDataset . ?nlpDataset orkgp:P181017 ?source . ?source orkgp:P181020 ?sourceDomain . }",
+    "family": "nlp4re",
+    "answer_type": "number",
+    "id": "b004_nlp4re_w01_033"
+  },
+  {
+    "question": "How many distinct data formats are reported?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT (COUNT(DISTINCT ?dataFormat) AS ?count) WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?nlpDataset . ?nlpDataset orkgp:P181022 ?dataType . ?dataType orkgp:P181023 ?dataFormat . }",
+    "family": "nlp4re",
+    "answer_type": "number",
+    "id": "b004_nlp4re_w01_034"
+  },
+  {
+    "question": "How many distinct NLP task types are reported?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT (COUNT(DISTINCT ?taskType) AS ?count) WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181003 ?task . ?task orkgp:P181004 ?taskType . }",
+    "family": "nlp4re",
+    "answer_type": "number",
+    "id": "b004_nlp4re_w01_035"
+  },
+  {
+    "question": "How many distinct NLP task outputs are reported?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT (COUNT(DISTINCT ?taskOutput) AS ?count) WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181003 ?task . ?task orkgp:P181006 ?taskOutput . }",
+    "family": "nlp4re",
+    "answer_type": "number",
+    "id": "b004_nlp4re_w01_036"
+  },
+  {
+    "question": "How many distinct evaluation metrics are used?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT (COUNT(DISTINCT ?metric) AS ?count) WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:HAS_EVALUATION ?evaluation . ?evaluation orkgp:P110006 ?metric . }",
+    "family": "nlp4re",
+    "answer_type": "number",
+    "id": "b004_nlp4re_w01_037"
+  },
+  {
+    "question": "How many distinct release formats are reported?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT (COUNT(DISTINCT ?releaseFormat) AS ?count) WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181046 ?approach . ?approach orkgp:release ?release . ?release orkgp:P181049 ?releaseFormat . }",
+    "family": "nlp4re",
+    "answer_type": "number",
+    "id": "b004_nlp4re_w01_038"
+  },
+  {
+    "question": "How many distinct baseline comparison types are reported?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT (COUNT(DISTINCT ?baselineComparisonType) AS ?count) WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:HAS_EVALUATION ?evaluation . ?evaluation orkgp:P181051 ?baselineComparison . ?baselineComparison orkgp:P181052 ?baselineComparisonType . }",
+    "family": "nlp4re",
+    "answer_type": "number",
+    "id": "b004_nlp4re_w01_039"
+  },
+  {
+    "question": "How many distinct natural languages are reported?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT (COUNT(DISTINCT ?naturalLanguage) AS ?count) WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?nlpDataset . ?nlpDataset orkgp:P181022 ?dataType . ?dataType orkgp:P181025 ?naturalLanguage . }",
+    "family": "nlp4re",
+    "answer_type": "number",
+    "id": "b004_nlp4re_w01_040"
+  },
+  {
+    "question": "What data production time is reported for contributions that also report an NLP task type?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?dataProductionTime WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181003 ?task . ?task orkgp:P181004 ?taskType . ?contribution orkgp:P181011 ?nlpDataset . ?nlpDataset orkgp:P181016 ?dataProductionTime . }",
+    "family": "nlp4re",
+    "answer_type": "date",
+    "id": "b004_nlp4re_w01_041"
+  },
+  {
+    "question": "What data production time is reported for datasets with a public availability statement?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?dataProductionTime WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?nlpDataset . ?nlpDataset orkgp:license ?license . ?license orkgp:P181026 ?publicAvailability . ?nlpDataset orkgp:P181016 ?dataProductionTime . }",
+    "family": "nlp4re",
+    "answer_type": "date",
+    "id": "b004_nlp4re_w01_042"
+  },
+  {
+    "question": "What data production time is reported for datasets with a reported data source domain?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?dataProductionTime WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?nlpDataset . ?nlpDataset orkgp:P181017 ?source . ?source orkgp:P181020 ?sourceDomain . ?nlpDataset orkgp:P181016 ?dataProductionTime . }",
+    "family": "nlp4re",
+    "answer_type": "date",
+    "id": "b004_nlp4re_w01_043"
+  },
+  {
+    "question": "What data production time is reported for datasets that specify a natural language?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?dataProductionTime WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?nlpDataset . ?nlpDataset orkgp:P181022 ?dataType . ?dataType orkgp:P181025 ?naturalLanguage . ?nlpDataset orkgp:P181016 ?dataProductionTime . }",
+    "family": "nlp4re",
+    "answer_type": "date",
+    "id": "b004_nlp4re_w01_044"
+  },
+  {
+    "question": "What data production time is reported for datasets with a described storage location?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?dataProductionTime WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?nlpDataset . ?nlpDataset orkgp:P181028 ?datasetLocation . ?datasetLocation orkgp:P181030 ?locationType . ?nlpDataset orkgp:P181016 ?dataProductionTime . }",
+    "family": "nlp4re",
+    "answer_type": "date",
+    "id": "b004_nlp4re_w01_045"
+  },
+  {
+    "question": "What data production time is reported for datasets with an explicit license type?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?dataProductionTime WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?nlpDataset . ?nlpDataset orkgp:license ?license . ?license orkgp:P181027 ?licenseType . ?nlpDataset orkgp:P181016 ?dataProductionTime . }",
+    "family": "nlp4re",
+    "answer_type": "date",
+    "id": "b004_nlp4re_w01_046"
+  },
+  {
+    "question": "What data production time is reported for datasets with a defined annotation scheme?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?dataProductionTime WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181031 ?annotationProcess . ?annotationProcess orkgp:P181036 ?annotationScheme . ?annotationScheme orkgp:P181037 ?schemeEstablishment . ?contribution orkgp:P181011 ?nlpDataset . ?nlpDataset orkgp:P181016 ?dataProductionTime . }",
+    "family": "nlp4re",
+    "answer_type": "date",
+    "id": "b004_nlp4re_w01_047"
+  },
+  {
+    "question": "What data production time is reported for datasets with annotator agreement information?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?dataProductionTime WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181031 ?annotationProcess . ?annotationProcess orkgp:P181041 ?agreement . ?contribution orkgp:P181011 ?nlpDataset . ?nlpDataset orkgp:P181016 ?dataProductionTime . }",
+    "family": "nlp4re",
+    "answer_type": "date",
+    "id": "b004_nlp4re_w01_048"
+  },
+  {
+    "question": "What data production time is reported for datasets whose implemented approach has a release URL?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?dataProductionTime WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181046 ?approach . ?approach orkgp:release ?release . ?release orkgp:P1003 ?releaseUrl . ?contribution orkgp:P181011 ?nlpDataset . ?nlpDataset orkgp:P181016 ?dataProductionTime . }",
+    "family": "nlp4re",
+    "answer_type": "date",
+    "id": "b004_nlp4re_w01_049"
+  },
+  {
+    "question": "What data production time is reported for datasets whose evaluation includes explicit metrics?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?dataProductionTime WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:HAS_EVALUATION ?evaluation . ?evaluation orkgp:P110006 ?metric . ?contribution orkgp:P181011 ?nlpDataset . ?nlpDataset orkgp:P181016 ?dataProductionTime . }",
+    "family": "nlp4re",
+    "answer_type": "date",
+    "id": "b004_nlp4re_w01_050"
+  }
+]

@@ -1,0 +1,798 @@
+{
+  "candidate_file": "code/data/dataset/expansion/candidates/b004_nlp4re_wave01_candidates.json",
+  "sparql_endpoint": "https://www.orkg.org/triplestore",
+  "summary": {
+    "total_items": 50,
+    "ok_count": 50,
+    "error_count": 0,
+    "skipped_count": 0,
+    "empty_result_count": 0,
+    "green_count": 50,
+    "yellow_count": 0,
+    "red_count": 0
+  },
+  "results": [
+    {
+      "id": "b004_nlp4re_w01_001",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "What NLP task type is reported for the NLP4RE contribution?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 7,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "taskType=http://orkg.org/orkg/resource/R1544148; taskTypeLabel=Classification",
+        "taskType=http://orkg.org/orkg/resource/R1544150; taskTypeLabel=Information extraction",
+        "taskType=http://orkg.org/orkg/resource/R1544149; taskTypeLabel=Information retrieval"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_002",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "What NLP task input is reported for the NLP4RE contribution?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 10,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "taskInput=http://orkg.org/orkg/resource/R1544154; taskInputLabel=Phrases",
+        "taskInput=http://orkg.org/orkg/resource/R1544463; taskInputLabel=Detection focuses on words (pronouns), resolution looks for phrases",
+        "taskInput=http://orkg.org/orkg/resource/R1544156; taskInputLabel=Words"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_003",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "What NLP task output type is reported for the NLP4RE contribution?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 24,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "outputType=http://orkg.org/orkg/resource/R1544161; outputTypeLabel=Binary-single label",
+        "outputType=http://orkg.org/orkg/resource/R1544163; outputTypeLabel=Test cases",
+        "outputType=http://orkg.org/orkg/resource/R1544164; outputTypeLabel=Paragraphs"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_004",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "What NLP task output classification label is reported for the NLP4RE contribution?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 27,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "classificationLabel=Ambiguous/nonambiguous, and then refining the former whether it's nocuous or not",
+        "classificationLabel=Functional, Quality, OnlyQuality, OnlyFunctional",
+        "classificationLabel=Not reported"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_005",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "What NLP task output extracted element is reported for the NLP4RE contribution?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 18,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "extractedElement=The most likely antecedent the anaphora refers to",
+        "extractedElement=Not reported",
+        "extractedElement=semantic legal metadata: actor, agent, target, auxiliary party, artifact, situation, location, time, definition, obligation, prohibition, permission, constraint, condition, exception, penalty, violation, sanction"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_006",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "What NLP data source type is reported for the dataset?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 13,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "sourceType=http://orkg.org/orkg/resource/R1544225; sourceTypeLabel=Community-based open source projects",
+        "sourceType=http://orkg.org/orkg/resource/R1544226; sourceTypeLabel=Legal/regulatory documents",
+        "sourceType=http://orkg.org/orkg/resource/R1544227; sourceTypeLabel=Toy Requirements"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_007",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "What data source domain is reported for the dataset?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 170,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "sourceDomain=http://orkg.org/orkg/resource/R1544486; sourceDomainLabel=transportation",
+        "sourceDomain=http://orkg.org/orkg/resource/R1544487; sourceDomainLabel=engineering",
+        "sourceDomain=http://orkg.org/orkg/resource/R1544488; sourceDomainLabel=communication"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_008",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "What NLP data type is reported for the dataset?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 51,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "dataType=http://orkg.org/orkg/resource/R1544490; dataTypeLabel=NLP data type",
+        "dataType=http://orkg.org/orkg/resource/R1544551; dataTypeLabel=NLP data type",
+        "dataType=http://orkg.org/orkg/resource/R1547337; dataTypeLabel=NLP data type"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_009",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "What NLP data format is reported for the dataset?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 10,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "dataFormat=http://orkg.org/orkg/resource/R1544248; dataFormatLabel=User stories",
+        "dataFormat=http://orkg.org/orkg/resource/R1544249; dataFormatLabel=\"Shall\" requirements",
+        "dataFormat=http://orkg.org/orkg/resource/R1544250; dataFormatLabel=Scenarios"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_010",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "What natural language is reported for the dataset?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 5,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "naturalLanguage=English",
+        "naturalLanguage=Not reported",
+        "naturalLanguage=French"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_011",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "What license type is reported for the dataset?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 3,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "licenseType=http://orkg.org/orkg/resource/R1544273; licenseTypeLabel=License: Modification for any purposes",
+        "licenseType=http://orkg.org/orkg/resource/R1544274; licenseTypeLabel=No license",
+        "licenseType=http://orkg.org/orkg/resource/R1544495; licenseTypeLabel=Not reported"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_012",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "What location type describes where the dataset is stored?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 11,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "locationType=http://orkg.org/orkg/resource/R1544280; locationTypeLabel=On a private/corporate website",
+        "locationType=http://orkg.org/orkg/resource/R1544281; locationTypeLabel=In a repository",
+        "locationType=http://orkg.org/orkg/resource/R1544282; locationTypeLabel=In a persistent platform with DOI"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_013",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "What evaluation metric is reported for the NLP4RE study?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 31,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "metric=http://orkg.org/orkg/resource/R1544436; metricLabel=Precision/Recall",
+        "metric=http://orkg.org/orkg/resource/R1544438; metricLabel=AUC",
+        "metric=http://orkg.org/orkg/resource/R1544439; metricLabel=LAG"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_014",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "What release format is reported for the implemented approach?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 20,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "releaseFormat=http://orkg.org/orkg/resource/R1544406; releaseFormatLabel=No tool has been released",
+        "releaseFormat=http://orkg.org/orkg/resource/R1544407; releaseFormatLabel=Executable notebook",
+        "releaseFormat=http://orkg.org/orkg/resource/R1544408; releaseFormatLabel=Service on the web"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_015",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What URL is provided for the NLP dataset?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 36,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "datasetUrl=https://zenodo.org/record/1476902",
+        "datasetUrl=https://github.com/5Quintessential/FeatureX/tree/master/examples/Specifications%20used%20in%20the%20paper",
+        "datasetUrl=http:// mast.informatik.uni-hamburg.de/app-review-analysis/"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_016",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What URL is provided for the released tool?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 26,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "releaseUrl=https://zenodo.org/record/1476902",
+        "releaseUrl=https://github.com/isti-fmt-nemis/Domain-specific-ambiguity/tree/1.0",
+        "releaseUrl=https://github.com/5Quintessential/FeatureX/"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_017",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What baseline comparison detail is reported?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 22,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "baselineDetail=each recognized ambiguity instance has the potential to be a nocuous ambiguity",
+        "baselineDetail=Not reported",
+        "baselineDetail=Baseline with features from BoW"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_018",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What running requirement is described for the implemented approach?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 8,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "runningRequirement=http://orkg.org/orkg/resource/R1544524",
+        "runningRequirement=http://orkg.org/orkg/resource/R1544379",
+        "runningRequirement=http://orkg.org/orkg/resource/R1544382"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_019",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What guideline availability status is reported for the annotation scheme?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 9,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "guidelineAvailability=http://orkg.org/orkg/resource/R1544508",
+        "guidelineAvailability=http://orkg.org/orkg/resource/R1544314",
+        "guidelineAvailability=http://orkg.org/orkg/resource/R1544316"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_020",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What shared material is reported for annotators?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 6,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "sharedMaterial=http://orkg.org/orkg/resource/R1547311",
+        "sharedMaterial=http://orkg.org/orkg/resource/R1544319",
+        "sharedMaterial=http://orkg.org/orkg/resource/R1544321"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_021",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What fatigue mitigation technique is used during annotation?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 6,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "fatigueMitigationTechnique=http://orkg.org/orkg/resource/R1544324",
+        "fatigueMitigationTechnique=http://orkg.org/orkg/resource/R1547370",
+        "fatigueMitigationTechnique=http://orkg.org/orkg/resource/R1547312"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_022",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What annotator assignment strategy is described?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 15,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "annotatorAssignment=http://orkg.org/orkg/resource/R1544293",
+        "annotatorAssignment=http://orkg.org/orkg/resource/R1544500",
+        "annotatorAssignment=http://orkg.org/orkg/resource/R1547307"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_023",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What level of application domain experience is reported for annotators?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 5,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "domainExperience=http://orkg.org/orkg/resource/R1544300",
+        "domainExperience=http://orkg.org/orkg/resource/R1544298",
+        "domainExperience=http://orkg.org/orkg/resource/R1544299"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_024",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "Who are the annotators named in the annotation process?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 7,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "annotatorIdentity=http://orkg.org/orkg/resource/R1544304",
+        "annotatorIdentity=http://orkg.org/orkg/resource/R1544302",
+        "annotatorIdentity=http://orkg.org/orkg/resource/R1544303"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_025",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "How was the annotation scheme established among annotators?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 10,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "schemeEstablishment=http://orkg.org/orkg/resource/R1547310",
+        "schemeEstablishment=http://orkg.org/orkg/resource/R1544309",
+        "schemeEstablishment=http://orkg.org/orkg/resource/R1544310"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_026",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "How were conflicts resolved during annotation?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 25,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "conflictResolution=http://orkg.org/orkg/resource/R1544335",
+        "conflictResolution=http://orkg.org/orkg/resource/R1544514",
+        "conflictResolution=http://orkg.org/orkg/resource/R1544333"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_027",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What measured agreement is reported?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 16,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "measuredAgreement=Not reported",
+        "measuredAgreement=varied on the tested cases",
+        "measuredAgreement=58-84%"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_028",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What validation procedure is applied in the evaluation?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 9,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "validationProcedure=http://orkg.org/orkg/resource/R1544448",
+        "validationProcedure=http://orkg.org/orkg/resource/R1544445",
+        "validationProcedure=http://orkg.org/orkg/resource/R1544447"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_029",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many data items are reported for the dataset?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 47,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "dataItems=11 requirements documents with a total of 26829 sentences. The paper focuses on a subset of 200 anaphoric instances",
+        "dataItems=Not reported",
+        "dataItems=47500 wikipedia pages from 5 domains"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_030",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many annotators were involved in the annotation process?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 12,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "numberOfAnnotators=38",
+        "numberOfAnnotators=2",
+        "numberOfAnnotators=3"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_031",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many data sources does the dataset use?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 13,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "numberOfDataSources=11",
+        "numberOfDataSources=8",
+        "numberOfDataSources=1"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_032",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many distinct NLP data source types are reported?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=13"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_033",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many distinct data source domains are reported?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=170"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_034",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many distinct data formats are reported?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=10"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_035",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many distinct NLP task types are reported?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=7"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_036",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many distinct NLP task outputs are reported?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=51"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_037",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many distinct evaluation metrics are used?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=31"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_038",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many distinct release formats are reported?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=20"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_039",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many distinct baseline comparison types are reported?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=7"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_040",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many distinct natural languages are reported?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=5"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_041",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "What data production time is reported for contributions that also report an NLP task type?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 26,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "dataProductionTime=Between 2000 and 2010",
+        "dataProductionTime=Not reported",
+        "dataProductionTime=2018-2019"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_042",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "What data production time is reported for datasets with a public availability statement?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 26,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "dataProductionTime=Between 2000 and 2010",
+        "dataProductionTime=Not reported",
+        "dataProductionTime=2018-2019"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_043",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "What data production time is reported for datasets with a reported data source domain?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 26,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "dataProductionTime=Between 2000 and 2010",
+        "dataProductionTime=Not reported",
+        "dataProductionTime=2018-2019"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_044",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "What data production time is reported for datasets that specify a natural language?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 26,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "dataProductionTime=Between 2000 and 2010",
+        "dataProductionTime=Not reported",
+        "dataProductionTime=2018-2019"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_045",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "What data production time is reported for datasets with a described storage location?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 26,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "dataProductionTime=Between 2000 and 2010",
+        "dataProductionTime=Not reported",
+        "dataProductionTime=2018-2019"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_046",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "What data production time is reported for datasets with an explicit license type?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 26,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "dataProductionTime=Between 2000 and 2010",
+        "dataProductionTime=Not reported",
+        "dataProductionTime=2018-2019"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_047",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "What data production time is reported for datasets with a defined annotation scheme?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 26,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "dataProductionTime=Between 2000 and 2010",
+        "dataProductionTime=Not reported",
+        "dataProductionTime=2018-2019"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_048",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "What data production time is reported for datasets with annotator agreement information?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 26,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "dataProductionTime=Between 2000 and 2010",
+        "dataProductionTime=Not reported",
+        "dataProductionTime=2018-2019"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_049",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "What data production time is reported for datasets whose implemented approach has a release URL?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 15,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "dataProductionTime=Not reported",
+        "dataProductionTime=2012-2018",
+        "dataProductionTime=Datasets from different publications (some from external authors). Years not mentioned directly in this publication"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_w01_050",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "What data production time is reported for datasets whose evaluation includes explicit metrics?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 26,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "dataProductionTime=Between 2000 and 2010",
+        "dataProductionTime=Not reported",
+        "dataProductionTime=2018-2019"
+      ],
+      "review_bucket": "green"
+    }
+  ]
+}
