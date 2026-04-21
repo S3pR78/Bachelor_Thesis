@@ -1,0 +1,775 @@
+{
+  "candidate_file": "code/data/dataset/expansion/candidates/b005_empirical_wave01_candidates.json",
+  "sparql_endpoint": "https://www.orkg.org/triplestore",
+  "summary": {
+    "total_items": 50,
+    "ok_count": 50,
+    "error_count": 0,
+    "skipped_count": 0,
+    "empty_result_count": 3,
+    "green_count": 47,
+    "yellow_count": 3,
+    "red_count": 0
+  },
+  "results": [
+    {
+      "id": "b005_empirical_w01_001",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report research data that are marked both qualitative and quantitative?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 608,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R1471727",
+        "paper=http://orkg.org/orkg/resource/R1490995",
+        "paper=http://orkg.org/orkg/resource/R1493955"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_002",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report machine learning metrics that include both recall and precision?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 117,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R1471727",
+        "paper=http://orkg.org/orkg/resource/R1493955",
+        "paper=http://orkg.org/orkg/resource/R1543447"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_003",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers include inferential statistics but no descriptive statistics in data analysis?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w01_004",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers explicitly highlight their research question in the text?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 777,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R1471727",
+        "paper=http://orkg.org/orkg/resource/R1490995",
+        "paper=http://orkg.org/orkg/resource/R1493955"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_005",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers hide the research question answer in the text and also include at least one subquestion?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 24,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R1543501",
+        "paper=http://orkg.org/orkg/resource/R1556946",
+        "paper=http://orkg.org/orkg/resource/R193070"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_006",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers mention threats to validity without classifying them into a specific category?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w01_007",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report both mean and standard deviation as descriptive statistics?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 504,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R1471727",
+        "paper=http://orkg.org/orkg/resource/R1490995",
+        "paper=http://orkg.org/orkg/resource/R1493955"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_008",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report both median and boxplot among their descriptive statistics?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 504,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R1471727",
+        "paper=http://orkg.org/orkg/resource/R1490995",
+        "paper=http://orkg.org/orkg/resource/R1493955"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_009",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers describe qualitative research data and provide a URL for it?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 262,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R1471727",
+        "paper=http://orkg.org/orkg/resource/R1490995",
+        "paper=http://orkg.org/orkg/resource/R1493955"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_010",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report a null hypothesis in their inferential statistics?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 34,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R1500294",
+        "paper=http://orkg.org/orkg/resource/R1556208",
+        "paper=http://orkg.org/orkg/resource/R1556286"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_011",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report an alternative hypothesis together with a statistical technique?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 34,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R1556208",
+        "paper=http://orkg.org/orkg/resource/R1556286",
+        "paper=http://orkg.org/orkg/resource/R1556765"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_012",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers include at least one subquestion with an explicit question type?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 23,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R1543501",
+        "paper=http://orkg.org/orkg/resource/R1556946",
+        "paper=http://orkg.org/orkg/resource/R194414"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_013",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers mention both construct validity and reliability threats?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 777,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R1471727",
+        "paper=http://orkg.org/orkg/resource/R1490995",
+        "paper=http://orkg.org/orkg/resource/R1493955"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_014",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report both a data collection method and a data analysis method?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 575,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R1471727",
+        "paper=http://orkg.org/orkg/resource/R1490995",
+        "paper=http://orkg.org/orkg/resource/R1493955"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_015",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What are the exact data collection method names reported in papers that mention quantitative data and recall?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 41,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "method_name=market research and analysis",
+        "method_name=experiment",
+        "method_name=human evaluation"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_016",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What is the research question text reported in papers that include a subquestion and an alternative hypothesis?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 5,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "rq_text=To what extent do requirements artifacts affect how efficiently USs are fulfilled?",
+        "rq_text=Does rating predictability vary across app stores’ categories?",
+        "rq_text=How robust is our approach to the choice of the number of apps, k, used to form the cases for predictive modelling?"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_017",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What hypothesis statements are reported in papers that also mention a statistical technique?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 143,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "statement=There is no observable difference between the median of the distributions of students’ scores with and without the LLM explanations.",
+        "statement=There is no observable difference between the quality scores based on whether they were generated with the original or updated prompt.",
+        "statement=There is no significant difference in the number of\nidentified stakeholders between groups using combined internal empathy techniques (Vision Canvas) and external empathy techniques (Empathy Map), or external empathy alone."
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_018",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What machine learning algorithm labels are reported in papers that mention both accuracy and f-score?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 132,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "alg_label=GPT-2",
+        "alg_label=XLM-RoBERTa",
+        "alg_label=RoBERTa"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_019",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "Which venue series are reported for papers that mention both internal and external validity threats?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 2,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "venue_name=IEEE International Requirements Engineering Conference",
+        "venue_name=International Working Conference on Requirements Engineering: Foundation for Software Quality"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_020",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What data type labels are reported for papers that provide a research data URL and mention precision?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 3,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "dtype_label=Data Type",
+        "dtype_label=qualitative",
+        "dtype_label=qualitative and quantitative"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_021",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What subquestion type labels are reported for papers whose research question is hidden in the text?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 4,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "qtype_label=comparative",
+        "qtype_label=exploratory",
+        "qtype_label=descriptive"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_022",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What data collection method type labels are reported for papers with quantitative research data and a data URL?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 6,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "mtype_label=secondary research",
+        "mtype_label=study",
+        "mtype_label=case study"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_023",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What data analysis method labels are reported in papers that also report both mean and variance?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 210,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "method_label=pair coding",
+        "method_label=individual coding",
+        "method_label=simulation"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_024",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What statistical technique labels are reported in papers that mention a null hypothesis and a boxplot?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 38,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "tech_label=Kruskal-Wallis Rank Sum test",
+        "tech_label=Wilcoxon paired signed rank test",
+        "tech_label=kruskal-wallis test"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_025",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What problem descriptions are reported in papers that mention both content validity and descriptive validity threats?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 2,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "problem_desc=This research problem is about synthesizing a comprehensive, up-to-date, and long-term body of empirical research knowledge in the field of requirements engineering.",
+        "problem_desc=The task of classifying (natural language) requirements into certain classes."
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_026",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What research data URLs are reported for papers whose research data are marked both qualitative and quantitative?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 338,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "url=https://doi.org/10.5281/zenodo.8088427",
+        "url=https://doi.org/10.5281/ zenodo.8140927",
+        "url=https://zenodo.org/record/8026646."
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_027",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What hypothesis type labels are reported in papers that contain both null and alternative hypotheses?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 2,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "ht_label=null hypothesis",
+        "ht_label=alternative hypothesis"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_028",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "Which venue series are reported for papers that include a subquestion and specify a data collection method name?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "venue_name=IEEE International Requirements Engineering Conference"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_029",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers report research data that are marked both qualitative and quantitative?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=608"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_030",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers report machine learning metrics that include both recall and precision?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=117"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_031",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers include inferential statistics but no descriptive statistics in data analysis?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=0"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_032",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers mention threats to validity without classifying them into a specific category?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=0"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_033",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers highlight the research question in the text and hide the research question answer?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=776"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_034",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers include at least one subquestion with an explicit question type?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=23"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_035",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers report both mean and standard deviation as descriptive statistics?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=504"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_036",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers report an alternative hypothesis and a statistical technique?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=34"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_037",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers report quantitative research data and provide a URL for it?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=262"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_038",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers report both a data collection method and a data analysis method?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=575"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_039",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers report both boxplot and variance as descriptive statistics?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=504"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_040",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers mention both internal and external validity threats?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=777"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_041",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In which publication years were the papers published that report both qualitative and quantitative research data?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 33,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=1993",
+        "year=1994",
+        "year=1995"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_042",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In which publication years were the papers published that report both recall and precision metrics?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 26,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=1995",
+        "year=2001",
+        "year=2002"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_043",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In which publication years were the papers published that highlight the research question and hide the research question answer?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 33,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=1993",
+        "year=1994",
+        "year=1995"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_044",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In which publication years were the papers published that mention threats to validity without classifying them into a specific category?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w01_045",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In which publication years were the papers published that report both mean and standard deviation as descriptive statistics?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 33,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=1993",
+        "year=1994",
+        "year=1995"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_046",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In which publication years were the papers published that report an alternative hypothesis and a statistical technique?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 18,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=2000",
+        "year=2002",
+        "year=2006"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_047",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In which publication years were the papers published that report quantitative research data and provide a URL for it?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 27,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=1999",
+        "year=2000",
+        "year=2001"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_048",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In which publication years were the papers published that report both a data collection method and a data analysis method?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 33,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=1993",
+        "year=1994",
+        "year=1995"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_049",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In which publication years were the papers published that mention both internal and external validity threats?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 33,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=1993",
+        "year=1994",
+        "year=1995"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w01_050",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In which publication years were the papers published that report both boxplot and variance as descriptive statistics?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 33,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=1993",
+        "year=1994",
+        "year=1995"
+      ],
+      "review_bucket": "green"
+    }
+  ]
+}

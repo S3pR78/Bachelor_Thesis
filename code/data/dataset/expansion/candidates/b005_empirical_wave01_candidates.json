@@ -1,0 +1,352 @@
+[
+  {
+    "question": "Which papers report research data that are marked both qualitative and quantitative?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?paper WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P56008 ?dc . ?dc orkgp:DATA ?data . ?data orkgp:P7055 ?dtype . ?dtype orkgp:P57038 ?qual . ?dtype orkgp:P57039 ?quant . }",
+    "family": "empirical_research_practice",
+    "answer_type": "resource",
+    "id": "b005_empirical_w01_001"
+  },
+  {
+    "question": "Which papers report machine learning metrics that include both recall and precision?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?paper WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P15124 ?da . ?da orkgp:P57016 ?ml . ?ml orkgp:P2006 ?metric . ?metric orkgp:P5073 ?recall . ?metric orkgp:P3004 ?precision . }",
+    "family": "empirical_research_practice",
+    "answer_type": "resource",
+    "id": "b005_empirical_w01_002"
+  },
+  {
+    "question": "Which papers include inferential statistics but no descriptive statistics in data analysis?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?paper WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . FILTER EXISTS { ?contribution orkgp:P15124 ?da . ?da orkgp:P56043 ?inf . } FILTER NOT EXISTS { ?contribution orkgp:P15124 ?da2 . ?da2 orkgp:P56048 ?desc . } }",
+    "family": "empirical_research_practice",
+    "answer_type": "resource",
+    "id": "b005_empirical_w01_003"
+  },
+  {
+    "question": "Which papers explicitly highlight their research question in the text?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?paper WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P37330 ?rq . ?rq orkgp:P55039 ?highlighted . }",
+    "family": "empirical_research_practice",
+    "answer_type": "resource",
+    "id": "b005_empirical_w01_004"
+  },
+  {
+    "question": "Which papers hide the research question answer in the text and also include at least one subquestion?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?paper WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P57004 ?answer . ?answer orkgp:P55038 ?hidden . ?contribution orkgp:P37330 ?rq . ?rq orkgp:P57000 ?subquestion . }",
+    "family": "empirical_research_practice",
+    "answer_type": "resource",
+    "id": "b005_empirical_w01_005"
+  },
+  {
+    "question": "Which papers mention threats to validity without classifying them into a specific category?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?paper WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P39099 ?threats . FILTER EXISTS { ?threats orkgp:P145000 ?mentioned . } FILTER NOT EXISTS { ?contribution orkgp:P39099 ?t1 . ?t1 orkgp:P55037 ?x1 . } FILTER NOT EXISTS { ?contribution orkgp:P39099 ?t2 . ?t2 orkgp:P55035 ?x2 . } FILTER NOT EXISTS { ?contribution orkgp:P39099 ?t3 . ?t3 orkgp:P55034 ?x3 . } FILTER NOT EXISTS { ?contribution orkgp:P39099 ?t4 . ?t4 orkgp:P55036 ?x4 . } FILTER NOT EXISTS { ?contribution orkgp:P39099 ?t5 . ?t5 orkgp:P59109 ?x5 . } FILTER NOT EXISTS { ?contribution orkgp:P39099 ?t6 . ?t6 orkgp:P60006 ?x6 . } FILTER NOT EXISTS { ?contribution orkgp:P39099 ?t7 . ?t7 orkgp:P97002 ?x7 . } FILTER NOT EXISTS { ?contribution orkgp:P39099 ?t8 . ?t8 orkgp:P68005 ?x8 . } FILTER NOT EXISTS { ?contribution orkgp:P39099 ?t9 . ?t9 orkgp:P97000 ?x9 . } FILTER NOT EXISTS { ?contribution orkgp:P39099 ?t10 . ?t10 orkgp:P97001 ?x10 . } }",
+    "family": "empirical_research_practice",
+    "answer_type": "resource",
+    "id": "b005_empirical_w01_006"
+  },
+  {
+    "question": "Which papers report both mean and standard deviation as descriptive statistics?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?paper WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P15124 ?da . ?da orkgp:P56048 ?desc . ?desc orkgp:P57005 ?central . ?central orkgp:P47000 ?mean . ?desc orkgp:P57008 ?dispersion . ?dispersion orkgp:P44087 ?sd . }",
+    "family": "empirical_research_practice",
+    "answer_type": "resource",
+    "id": "b005_empirical_w01_007"
+  },
+  {
+    "question": "Which papers report both median and boxplot among their descriptive statistics?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?paper WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P15124 ?da . ?da orkgp:P56048 ?desc . ?desc orkgp:P57005 ?central . ?central orkgp:P57006 ?median . ?desc orkgp:P57010 ?position . ?position orkgp:P59065 ?boxplot . }",
+    "family": "empirical_research_practice",
+    "answer_type": "resource",
+    "id": "b005_empirical_w01_008"
+  },
+  {
+    "question": "Which papers describe qualitative research data and provide a URL for it?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?paper WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P56008 ?dc . ?dc orkgp:DATA ?data . ?data orkgp:P7055 ?dtype . ?dtype orkgp:P57038 ?qualitative . ?data orkgp:url ?url . }",
+    "family": "empirical_research_practice",
+    "answer_type": "resource",
+    "id": "b005_empirical_w01_009"
+  },
+  {
+    "question": "Which papers report a null hypothesis in their inferential statistics?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?paper WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P15124 ?da . ?da orkgp:P56043 ?inf . ?inf orkgp:P30001 ?hypothesis . ?hypothesis orkgp:P41703 ?type . ?type orkgp:P35106 ?nullhypothesis . }",
+    "family": "empirical_research_practice",
+    "answer_type": "resource",
+    "id": "b005_empirical_w01_010"
+  },
+  {
+    "question": "Which papers report an alternative hypothesis together with a statistical technique?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?paper WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P15124 ?da . ?da orkgp:P56043 ?inf . ?inf orkgp:P30001 ?hypothesis . ?hypothesis orkgp:P41703 ?type . ?type orkgp:P35107 ?alternative . ?inf orkgp:P35133 ?technique . }",
+    "family": "empirical_research_practice",
+    "answer_type": "resource",
+    "id": "b005_empirical_w01_011"
+  },
+  {
+    "question": "Which papers include at least one subquestion with an explicit question type?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?paper WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P37330 ?rq . ?rq orkgp:P57000 ?subquestion . ?subquestion orkgp:P41928 ?qtype . }",
+    "family": "empirical_research_practice",
+    "answer_type": "resource",
+    "id": "b005_empirical_w01_012"
+  },
+  {
+    "question": "Which papers mention both construct validity and reliability threats?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?paper WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P39099 ?threats . ?threats orkgp:P55037 ?construct . ?threats orkgp:P59109 ?reliability . }",
+    "family": "empirical_research_practice",
+    "answer_type": "resource",
+    "id": "b005_empirical_w01_013"
+  },
+  {
+    "question": "Which papers report both a data collection method and a data analysis method?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?paper WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P56008 ?dc . ?dc orkgp:P1005 ?collectionMethod . ?contribution orkgp:P15124 ?da . ?da orkgp:P1005 ?analysisMethod . }",
+    "family": "empirical_research_practice",
+    "answer_type": "resource",
+    "id": "b005_empirical_w01_014"
+  },
+  {
+    "question": "What are the exact data collection method names reported in papers that mention quantitative data and recall?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?method_name WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P56008 ?dc . ?dc orkgp:DATA ?data . ?data orkgp:P7055 ?dtype . ?dtype orkgp:P57039 ?quantitative . ?contribution orkgp:P15124 ?da . ?da orkgp:P57016 ?ml . ?ml orkgp:P2006 ?metric . ?metric orkgp:P5073 ?recall . ?dc orkgp:P1005 ?method . ?method orkgp:P145012 ?method_name . }",
+    "family": "empirical_research_practice",
+    "answer_type": "string",
+    "id": "b005_empirical_w01_015"
+  },
+  {
+    "question": "What is the research question text reported in papers that include a subquestion and an alternative hypothesis?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?rq_text WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P37330 ?rq . ?rq orkgp:P44139 ?rq_text . ?rq orkgp:P57000 ?subquestion . ?contribution orkgp:P15124 ?da . ?da orkgp:P56043 ?inf . ?inf orkgp:P30001 ?hypothesis . ?hypothesis orkgp:P41703 ?type . ?type orkgp:P35107 ?alternative . }",
+    "family": "empirical_research_practice",
+    "answer_type": "string",
+    "id": "b005_empirical_w01_016"
+  },
+  {
+    "question": "What hypothesis statements are reported in papers that also mention a statistical technique?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?statement WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P15124 ?da . ?da orkgp:P56043 ?inf . ?inf orkgp:P30001 ?hypothesis . ?hypothesis orkgp:P56046 ?statement . ?inf orkgp:P35133 ?technique . }",
+    "family": "empirical_research_practice",
+    "answer_type": "string",
+    "id": "b005_empirical_w01_017"
+  },
+  {
+    "question": "What machine learning algorithm labels are reported in papers that mention both accuracy and f-score?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?alg_label WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P15124 ?da . ?da orkgp:P57016 ?ml . ?ml orkgp:P2001 ?alg . ?alg rdfs:label ?alg_label . ?ml orkgp:P2006 ?metric . ?metric orkgp:P18048 ?accuracy . ?metric orkgp:P59137 ?fscore . }",
+    "family": "empirical_research_practice",
+    "answer_type": "string",
+    "id": "b005_empirical_w01_018"
+  },
+  {
+    "question": "Which venue series are reported for papers that mention both internal and external validity threats?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?venue_name WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P39099 ?threats . ?threats orkgp:P55035 ?internal . ?threats orkgp:P55034 ?external . ?contribution orkgp:P135046 ?venue . ?venue rdfs:label ?venue_name . }",
+    "family": "empirical_research_practice",
+    "answer_type": "string",
+    "id": "b005_empirical_w01_019"
+  },
+  {
+    "question": "What data type labels are reported for papers that provide a research data URL and mention precision?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?dtype_label WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P56008 ?dc . ?dc orkgp:DATA ?data . ?data orkgp:P7055 ?dtype . ?dtype rdfs:label ?dtype_label . ?data orkgp:url ?url . ?contribution orkgp:P15124 ?da . ?da orkgp:P57016 ?ml . ?ml orkgp:P2006 ?metric . ?metric orkgp:P3004 ?precision . }",
+    "family": "empirical_research_practice",
+    "answer_type": "string",
+    "id": "b005_empirical_w01_020"
+  },
+  {
+    "question": "What subquestion type labels are reported for papers whose research question is hidden in the text?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?qtype_label WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P37330 ?rq . ?rq orkgp:P55038 ?hidden . ?rq orkgp:P57000 ?subquestion . ?subquestion orkgp:P41928 ?qtype . ?qtype rdfs:label ?qtype_label . }",
+    "family": "empirical_research_practice",
+    "answer_type": "string",
+    "id": "b005_empirical_w01_021"
+  },
+  {
+    "question": "What data collection method type labels are reported for papers with quantitative research data and a data URL?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?mtype_label WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P56008 ?dc . ?dc orkgp:DATA ?data . ?data orkgp:P7055 ?dtype . ?dtype orkgp:P57039 ?quantitative . ?data orkgp:url ?url . ?dc orkgp:P1005 ?method . ?method orkgp:P94003 ?mtype . ?mtype rdfs:label ?mtype_label . }",
+    "family": "empirical_research_practice",
+    "answer_type": "string",
+    "id": "b005_empirical_w01_022"
+  },
+  {
+    "question": "What data analysis method labels are reported in papers that also report both mean and variance?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?method_label WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P15124 ?da . ?da orkgp:P1005 ?method . ?method rdfs:label ?method_label . ?da orkgp:P56048 ?desc . ?desc orkgp:P57005 ?central . ?central orkgp:P47000 ?mean . ?desc orkgp:P57008 ?dispersion . ?dispersion orkgp:P57009 ?variance . }",
+    "family": "empirical_research_practice",
+    "answer_type": "string",
+    "id": "b005_empirical_w01_023"
+  },
+  {
+    "question": "What statistical technique labels are reported in papers that mention a null hypothesis and a boxplot?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?tech_label WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P15124 ?da . ?da orkgp:P56043 ?inf . ?inf orkgp:P30001 ?hypothesis . ?hypothesis orkgp:P41703 ?type . ?type orkgp:P35106 ?nullhypothesis . ?da orkgp:P56048 ?desc . ?desc orkgp:P57010 ?position . ?position orkgp:P59065 ?boxplot . ?inf orkgp:P35133 ?technique . ?technique rdfs:label ?tech_label . }",
+    "family": "empirical_research_practice",
+    "answer_type": "string",
+    "id": "b005_empirical_w01_024"
+  },
+  {
+    "question": "What problem descriptions are reported in papers that mention both content validity and descriptive validity threats?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?problem_desc WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P32 ?problem . ?problem orkgp:description ?problem_desc . ?contribution orkgp:P39099 ?threats . ?threats orkgp:P68005 ?content . ?threats orkgp:P97000 ?descriptive . }",
+    "family": "empirical_research_practice",
+    "answer_type": "string",
+    "id": "b005_empirical_w01_025"
+  },
+  {
+    "question": "What research data URLs are reported for papers whose research data are marked both qualitative and quantitative?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?url WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P56008 ?dc . ?dc orkgp:DATA ?data . ?data orkgp:P7055 ?dtype . ?dtype orkgp:P57038 ?qualitative . ?dtype orkgp:P57039 ?quantitative . ?data orkgp:url ?url . }",
+    "family": "empirical_research_practice",
+    "answer_type": "string",
+    "id": "b005_empirical_w01_026"
+  },
+  {
+    "question": "What hypothesis type labels are reported in papers that contain both null and alternative hypotheses?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?ht_label WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P15124 ?da . ?da orkgp:P56043 ?inf . ?inf orkgp:P30001 ?hypothesis . ?hypothesis orkgp:P41703 ?ht . ?ht rdfs:label ?ht_label . ?ht orkgp:P35106 ?nullhypothesis . ?ht orkgp:P35107 ?alternativehypothesis . }",
+    "family": "empirical_research_practice",
+    "answer_type": "string",
+    "id": "b005_empirical_w01_027"
+  },
+  {
+    "question": "Which venue series are reported for papers that include a subquestion and specify a data collection method name?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?venue_name WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P37330 ?rq . ?rq orkgp:P57000 ?subquestion . ?contribution orkgp:P56008 ?dc . ?dc orkgp:P1005 ?method . ?method orkgp:P145012 ?method_name . ?contribution orkgp:P135046 ?venue . ?venue rdfs:label ?venue_name . }",
+    "family": "empirical_research_practice",
+    "answer_type": "string",
+    "id": "b005_empirical_w01_028"
+  },
+  {
+    "question": "How many papers report research data that are marked both qualitative and quantitative?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT (COUNT(DISTINCT ?paper) AS ?count) WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P56008 ?dc . ?dc orkgp:DATA ?data . ?data orkgp:P7055 ?dtype . ?dtype orkgp:P57038 ?qualitative . ?dtype orkgp:P57039 ?quantitative . }",
+    "family": "empirical_research_practice",
+    "answer_type": "number",
+    "id": "b005_empirical_w01_029"
+  },
+  {
+    "question": "How many papers report machine learning metrics that include both recall and precision?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT (COUNT(DISTINCT ?paper) AS ?count) WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P15124 ?da . ?da orkgp:P57016 ?ml . ?ml orkgp:P2006 ?metric . ?metric orkgp:P5073 ?recall . ?metric orkgp:P3004 ?precision . }",
+    "family": "empirical_research_practice",
+    "answer_type": "number",
+    "id": "b005_empirical_w01_030"
+  },
+  {
+    "question": "How many papers include inferential statistics but no descriptive statistics in data analysis?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT (COUNT(DISTINCT ?paper) AS ?count) WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . FILTER EXISTS { ?contribution orkgp:P15124 ?da . ?da orkgp:P56043 ?inf . } FILTER NOT EXISTS { ?contribution orkgp:P15124 ?da2 . ?da2 orkgp:P56048 ?desc . } }",
+    "family": "empirical_research_practice",
+    "answer_type": "number",
+    "id": "b005_empirical_w01_031"
+  },
+  {
+    "question": "How many papers mention threats to validity without classifying them into a specific category?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT (COUNT(DISTINCT ?paper) AS ?count) WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P39099 ?threats . FILTER EXISTS { ?threats orkgp:P145000 ?mentioned . } FILTER NOT EXISTS { ?contribution orkgp:P39099 ?t1 . ?t1 orkgp:P55037 ?x1 . } FILTER NOT EXISTS { ?contribution orkgp:P39099 ?t2 . ?t2 orkgp:P55035 ?x2 . } FILTER NOT EXISTS { ?contribution orkgp:P39099 ?t3 . ?t3 orkgp:P55034 ?x3 . } FILTER NOT EXISTS { ?contribution orkgp:P39099 ?t4 . ?t4 orkgp:P55036 ?x4 . } FILTER NOT EXISTS { ?contribution orkgp:P39099 ?t5 . ?t5 orkgp:P59109 ?x5 . } FILTER NOT EXISTS { ?contribution orkgp:P39099 ?t6 . ?t6 orkgp:P60006 ?x6 . } FILTER NOT EXISTS { ?contribution orkgp:P39099 ?t7 . ?t7 orkgp:P97002 ?x7 . } FILTER NOT EXISTS { ?contribution orkgp:P39099 ?t8 . ?t8 orkgp:P68005 ?x8 . } FILTER NOT EXISTS { ?contribution orkgp:P39099 ?t9 . ?t9 orkgp:P97000 ?x9 . } FILTER NOT EXISTS { ?contribution orkgp:P39099 ?t10 . ?t10 orkgp:P97001 ?x10 . } }",
+    "family": "empirical_research_practice",
+    "answer_type": "number",
+    "id": "b005_empirical_w01_032"
+  },
+  {
+    "question": "How many papers highlight the research question in the text and hide the research question answer?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT (COUNT(DISTINCT ?paper) AS ?count) WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P37330 ?rq . ?rq orkgp:P55039 ?highlighted . ?contribution orkgp:P57004 ?answer . ?answer orkgp:P55038 ?hidden . }",
+    "family": "empirical_research_practice",
+    "answer_type": "number",
+    "id": "b005_empirical_w01_033"
+  },
+  {
+    "question": "How many papers include at least one subquestion with an explicit question type?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT (COUNT(DISTINCT ?paper) AS ?count) WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P37330 ?rq . ?rq orkgp:P57000 ?subquestion . ?subquestion orkgp:P41928 ?qtype . }",
+    "family": "empirical_research_practice",
+    "answer_type": "number",
+    "id": "b005_empirical_w01_034"
+  },
+  {
+    "question": "How many papers report both mean and standard deviation as descriptive statistics?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT (COUNT(DISTINCT ?paper) AS ?count) WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P15124 ?da . ?da orkgp:P56048 ?desc . ?desc orkgp:P57005 ?central . ?central orkgp:P47000 ?mean . ?desc orkgp:P57008 ?dispersion . ?dispersion orkgp:P44087 ?sd . }",
+    "family": "empirical_research_practice",
+    "answer_type": "number",
+    "id": "b005_empirical_w01_035"
+  },
+  {
+    "question": "How many papers report an alternative hypothesis and a statistical technique?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT (COUNT(DISTINCT ?paper) AS ?count) WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P15124 ?da . ?da orkgp:P56043 ?inf . ?inf orkgp:P30001 ?hypothesis . ?hypothesis orkgp:P41703 ?type . ?type orkgp:P35107 ?alternative . ?inf orkgp:P35133 ?technique . }",
+    "family": "empirical_research_practice",
+    "answer_type": "number",
+    "id": "b005_empirical_w01_036"
+  },
+  {
+    "question": "How many papers report quantitative research data and provide a URL for it?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT (COUNT(DISTINCT ?paper) AS ?count) WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P56008 ?dc . ?dc orkgp:DATA ?data . ?data orkgp:P7055 ?dtype . ?dtype orkgp:P57039 ?quantitative . ?data orkgp:url ?url . }",
+    "family": "empirical_research_practice",
+    "answer_type": "number",
+    "id": "b005_empirical_w01_037"
+  },
+  {
+    "question": "How many papers report both a data collection method and a data analysis method?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT (COUNT(DISTINCT ?paper) AS ?count) WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P56008 ?dc . ?dc orkgp:P1005 ?collectionMethod . ?contribution orkgp:P15124 ?da . ?da orkgp:P1005 ?analysisMethod . }",
+    "family": "empirical_research_practice",
+    "answer_type": "number",
+    "id": "b005_empirical_w01_038"
+  },
+  {
+    "question": "How many papers report both boxplot and variance as descriptive statistics?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT (COUNT(DISTINCT ?paper) AS ?count) WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P15124 ?da . ?da orkgp:P56048 ?desc . ?desc orkgp:P57008 ?dispersion . ?dispersion orkgp:P57009 ?variance . ?desc orkgp:P57010 ?position . ?position orkgp:P59065 ?boxplot . }",
+    "family": "empirical_research_practice",
+    "answer_type": "number",
+    "id": "b005_empirical_w01_039"
+  },
+  {
+    "question": "How many papers mention both internal and external validity threats?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT (COUNT(DISTINCT ?paper) AS ?count) WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P39099 ?threats . ?threats orkgp:P55035 ?internal . ?threats orkgp:P55034 ?external . }",
+    "family": "empirical_research_practice",
+    "answer_type": "number",
+    "id": "b005_empirical_w01_040"
+  },
+  {
+    "question": "In which publication years were the papers published that report both qualitative and quantitative research data?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?year WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?paper orkgp:P29 ?year . ?contribution orkgp:P56008 ?dc . ?dc orkgp:DATA ?data . ?data orkgp:P7055 ?dtype . ?dtype orkgp:P57038 ?qualitative . ?dtype orkgp:P57039 ?quantitative . } ORDER BY ?year",
+    "family": "empirical_research_practice",
+    "answer_type": "date",
+    "id": "b005_empirical_w01_041"
+  },
+  {
+    "question": "In which publication years were the papers published that report both recall and precision metrics?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?year WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?paper orkgp:P29 ?year . ?contribution orkgp:P15124 ?da . ?da orkgp:P57016 ?ml . ?ml orkgp:P2006 ?metric . ?metric orkgp:P5073 ?recall . ?metric orkgp:P3004 ?precision . } ORDER BY ?year",
+    "family": "empirical_research_practice",
+    "answer_type": "date",
+    "id": "b005_empirical_w01_042"
+  },
+  {
+    "question": "In which publication years were the papers published that highlight the research question and hide the research question answer?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?year WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?paper orkgp:P29 ?year . ?contribution orkgp:P37330 ?rq . ?rq orkgp:P55039 ?highlighted . ?contribution orkgp:P57004 ?answer . ?answer orkgp:P55038 ?hidden . } ORDER BY ?year",
+    "family": "empirical_research_practice",
+    "answer_type": "date",
+    "id": "b005_empirical_w01_043"
+  },
+  {
+    "question": "In which publication years were the papers published that mention threats to validity without classifying them into a specific category?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?year WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?paper orkgp:P29 ?year . ?contribution orkgp:P39099 ?threats . FILTER EXISTS { ?threats orkgp:P145000 ?mentioned . } FILTER NOT EXISTS { ?contribution orkgp:P39099 ?t1 . ?t1 orkgp:P55037 ?x1 . } FILTER NOT EXISTS { ?contribution orkgp:P39099 ?t2 . ?t2 orkgp:P55035 ?x2 . } FILTER NOT EXISTS { ?contribution orkgp:P39099 ?t3 . ?t3 orkgp:P55034 ?x3 . } FILTER NOT EXISTS { ?contribution orkgp:P39099 ?t4 . ?t4 orkgp:P55036 ?x4 . } FILTER NOT EXISTS { ?contribution orkgp:P39099 ?t5 . ?t5 orkgp:P59109 ?x5 . } FILTER NOT EXISTS { ?contribution orkgp:P39099 ?t6 . ?t6 orkgp:P60006 ?x6 . } FILTER NOT EXISTS { ?contribution orkgp:P39099 ?t7 . ?t7 orkgp:P97002 ?x7 . } FILTER NOT EXISTS { ?contribution orkgp:P39099 ?t8 . ?t8 orkgp:P68005 ?x8 . } FILTER NOT EXISTS { ?contribution orkgp:P39099 ?t9 . ?t9 orkgp:P97000 ?x9 . } FILTER NOT EXISTS { ?contribution orkgp:P39099 ?t10 . ?t10 orkgp:P97001 ?x10 . } } ORDER BY ?year",
+    "family": "empirical_research_practice",
+    "answer_type": "date",
+    "id": "b005_empirical_w01_044"
+  },
+  {
+    "question": "In which publication years were the papers published that report both mean and standard deviation as descriptive statistics?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?year WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?paper orkgp:P29 ?year . ?contribution orkgp:P15124 ?da . ?da orkgp:P56048 ?desc . ?desc orkgp:P57005 ?central . ?central orkgp:P47000 ?mean . ?desc orkgp:P57008 ?dispersion . ?dispersion orkgp:P44087 ?sd . } ORDER BY ?year",
+    "family": "empirical_research_practice",
+    "answer_type": "date",
+    "id": "b005_empirical_w01_045"
+  },
+  {
+    "question": "In which publication years were the papers published that report an alternative hypothesis and a statistical technique?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?year WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?paper orkgp:P29 ?year . ?contribution orkgp:P15124 ?da . ?da orkgp:P56043 ?inf . ?inf orkgp:P30001 ?hypothesis . ?hypothesis orkgp:P41703 ?type . ?type orkgp:P35107 ?alternative . ?inf orkgp:P35133 ?technique . } ORDER BY ?year",
+    "family": "empirical_research_practice",
+    "answer_type": "date",
+    "id": "b005_empirical_w01_046"
+  },
+  {
+    "question": "In which publication years were the papers published that report quantitative research data and provide a URL for it?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?year WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?paper orkgp:P29 ?year . ?contribution orkgp:P56008 ?dc . ?dc orkgp:DATA ?data . ?data orkgp:P7055 ?dtype . ?dtype orkgp:P57039 ?quantitative . ?data orkgp:url ?url . } ORDER BY ?year",
+    "family": "empirical_research_practice",
+    "answer_type": "date",
+    "id": "b005_empirical_w01_047"
+  },
+  {
+    "question": "In which publication years were the papers published that report both a data collection method and a data analysis method?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?year WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?paper orkgp:P29 ?year . ?contribution orkgp:P56008 ?dc . ?dc orkgp:P1005 ?collectionMethod . ?contribution orkgp:P15124 ?da . ?da orkgp:P1005 ?analysisMethod . } ORDER BY ?year",
+    "family": "empirical_research_practice",
+    "answer_type": "date",
+    "id": "b005_empirical_w01_048"
+  },
+  {
+    "question": "In which publication years were the papers published that mention both internal and external validity threats?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?year WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?paper orkgp:P29 ?year . ?contribution orkgp:P39099 ?threats . ?threats orkgp:P55035 ?internal . ?threats orkgp:P55034 ?external . } ORDER BY ?year",
+    "family": "empirical_research_practice",
+    "answer_type": "date",
+    "id": "b005_empirical_w01_049"
+  },
+  {
+    "question": "In which publication years were the papers published that report both boxplot and variance as descriptive statistics?",
+    "gold_sparql": "PREFIX orkgr: <http://orkg.org/orkg/resource/> PREFIX orkgc: <http://orkg.org/orkg/class/> PREFIX orkgp: <http://orkg.org/orkg/predicate/> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> SELECT DISTINCT ?year WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?paper orkgp:P29 ?year . ?contribution orkgp:P15124 ?da . ?da orkgp:P56048 ?desc . ?desc orkgp:P57008 ?dispersion . ?dispersion orkgp:P57009 ?variance . ?desc orkgp:P57010 ?position . ?position orkgp:P59065 ?boxplot . } ORDER BY ?year",
+    "family": "empirical_research_practice",
+    "answer_type": "date",
+    "id": "b005_empirical_w01_050"
+  }
+]
