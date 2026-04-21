@@ -23,7 +23,7 @@ def merge_json_files(input_files, output_file):
     # Wir fangen bei 1 an und gehen bis zum Ende der kombinierten Liste
     for index, item in enumerate(merged_data, start=1):
         # Wir setzen die source_id als String, passend zum ursprünglichen Format
-        item['source_id'] = str(index)
+        item['id'] = str(index)
         
         # 'id' bleibt hier völlig unverändert, wie von dir gewünscht.
 
@@ -39,9 +39,10 @@ def merge_json_files(input_files, output_file):
 dateien = [
     "/home/s3pr/UNI/BT/code/data/dataset/expansion/selected/green_candidates_enriched_v2.json",
     "/home/s3pr/UNI/BT/code/data/dataset/expansion/selected/yellow_candidates_merged_enriched.json",
-    "/home/s3pr/UNI/BT/code/data/dataset/merged/benchmark_merged_v1.json"
+    "/home/s3pr/UNI/BT/code/data/dataset/merged/benchmark_merged_v1.json",
+
 ]
 
 # Ausführung des Programms
 if __name__ == "__main__":
-    merge_json_files(dateien, "all_candidates_master.json")
+    merge_json_files(dateien, "only_candidates_master.json")
