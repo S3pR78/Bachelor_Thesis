@@ -1,0 +1,172 @@
+{
+  "candidate_file": "code/data/dataset/expansion/candidates/b004_nlp4re_candidates.json",
+  "sparql_endpoint": "https://www.orkg.org/triplestore",
+  "summary": {
+    "total_items": 10,
+    "ok_count": 10,
+    "error_count": 0,
+    "skipped_count": 0,
+    "empty_result_count": 0,
+    "green_count": 10,
+    "yellow_count": 0,
+    "red_count": 0
+  },
+  "results": [
+    {
+      "id": "b004_nlp4re_001",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What natural languages are reported for datasets used in NLP4RE papers?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_002",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many annotators are reported for the annotation processes described in NLP4RE papers?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 12,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "numAnnotators=1",
+        "numAnnotators=2",
+        "numAnnotators=3"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_003",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "Which data source domains are reported for the datasets used in NLP4RE papers?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 127,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "domainLabel=15 domains from Promise dataset",
+        "domainLabel=Aerospace",
+        "domainLabel=Artificial intelligence website"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_004",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "Which evaluation metrics are used for the implemented approaches in NLP4RE papers?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 25,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "metricLabel=AUC",
+        "metricLabel=Accuracy",
+        "metricLabel=DiffAR"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_005",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers compare their implemented approach against a baseline, and what baseline comparison types are reported?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 59,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R194345; paperLabel=A Machine Learning-Based Approach for Demarcating Requirements in Textual Specifications; baselineTypeLabel=Automated, but self-defined",
+        "paper=http://orkg.org/orkg/resource/R1547354; paperLabel=A Query System for Extracting Requirements-Related Information from Legal Texts; baselineTypeLabel=Human baseline",
+        "paper=http://orkg.org/orkg/resource/R1553443; paperLabel=A semantic relatedness approach for traceability link recovery; baselineTypeLabel=Existing tool or algorithm"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_006",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What guideline availability values are reported for annotation schemes in NLP4RE papers?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 7,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "guidelineAvailabilityLabel=From a previously published paper by different authors",
+        "guidelineAvailabilityLabel=No",
+        "guidelineAvailabilityLabel=No, but are made available upon request"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_007",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "Which papers report dataset public availability information, and in which publication year were they published?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 48,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R194345; paperLabel=A Machine Learning-Based Approach for Demarcating Requirements in Textual Specifications; year=2019",
+        "paper=http://orkg.org/orkg/resource/R1547354; paperLabel=A Query System for Extracting Requirements-Related Information from Legal Texts; year=2019",
+        "paper=http://orkg.org/orkg/resource/R1553443; paperLabel=A semantic relatedness approach for traceability link recovery; year=2012"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_008",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What URLs are reported for released implemented approaches in NLP4RE papers?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 26,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "url=https://github.com/5Quintessential/FeatureX/",
+        "url=https://github.com/isti-fmt-nemis/Domain-specific-ambiguity/tree/1.0",
+        "url=https://github.com/nlp4se/review-emotion-analysis"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_009",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What output classification labels are reported for NLP task outputs in NLP4RE papers?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 27,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "classificationLabel=Ambiguous/nonambiguous, and then refining the former whether it's nocuous or not",
+        "classificationLabel=Confidentiality, Integrity, Identification & Authentication, Availability, Accountability, Privacy",
+        "classificationLabel=Defect type, see Section 3.2"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b004_nlp4re_010",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What validation procedures are used to evaluate implemented approaches in NLP4RE papers?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 9,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "validationProcedureLabel=Cross-project validation",
+        "validationProcedureLabel=Cross-validation",
+        "validationProcedureLabel=Entire dataset"
+      ],
+      "review_bucket": "green"
+    }
+  ]
+}

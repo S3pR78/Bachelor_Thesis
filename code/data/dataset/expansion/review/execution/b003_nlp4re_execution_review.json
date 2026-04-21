@@ -1,0 +1,162 @@
+{
+  "candidate_file": "code/data/dataset/expansion/candidates/b003_nlp4re_candidates.json",
+  "sparql_endpoint": "https://www.orkg.org/triplestore",
+  "summary": {
+    "total_items": 10,
+    "ok_count": 10,
+    "error_count": 0,
+    "skipped_count": 0,
+    "empty_result_count": 3,
+    "green_count": 7,
+    "yellow_count": 3,
+    "red_count": 0
+  },
+  "results": [
+    {
+      "id": "b003_nlp4re_001",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers report both a dataset URL and an implementation release URL?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 17,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R1547319; paperLabel=An NLP approach for cross-domain ambiguity detection in requirements engineering",
+        "paper=http://orkg.org/orkg/resource/R1547377; paperLabel=Extracting software product line feature models from natural language specifications",
+        "paper=http://orkg.org/orkg/resource/R1553452; paperLabel=Is the SAFE Approach Too Simple for App Feature Extraction? A Replication Study"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_nlp4re_002",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What natural languages are reported for datasets in papers that also provide an implementation release URL?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b003_nlp4re_003",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many papers report more than one evaluation metric?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=39"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_nlp4re_004",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers report both an annotation agreement metric and a conflict resolution step?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 48,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R1544459; paperLabel=Analysing anaphoric ambiguity in natural language requirements",
+        "paper=http://orkg.org/orkg/resource/R194610; paperLabel=Requirements Classification with Interpretable Machine Learning and Dependency Parsing",
+        "paper=http://orkg.org/orkg/resource/R1547319; paperLabel=An NLP approach for cross-domain ambiguity detection in requirements engineering"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_nlp4re_005",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers report a dataset location but no dataset URL?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 21,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R1544459; paperLabel=Analysing anaphoric ambiguity in natural language requirements",
+        "paper=http://orkg.org/orkg/resource/R1547354; paperLabel=A Query System for Extracting Requirements-Related Information from Legal Texts",
+        "paper=http://orkg.org/orkg/resource/R1553393; paperLabel=Extracting Arguments Based on User Decisions in App Reviews"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_nlp4re_006",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers report datasets from more than one source and list at least one data source domain?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 29,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R1544459; paperLabel=Analysing anaphoric ambiguity in natural language requirements",
+        "paper=http://orkg.org/orkg/resource/R1547377; paperLabel=Extracting software product line feature models from natural language specifications",
+        "paper=http://orkg.org/orkg/resource/R1553362; paperLabel=On the automatic classification of app reviews"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_nlp4re_007",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers published in 2023 report an implementation release URL?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b003_nlp4re_008",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers report both an NLP task output type and a translation mapping cardinality?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 48,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R1544459; paperLabel=Analysing anaphoric ambiguity in natural language requirements",
+        "paper=http://orkg.org/orkg/resource/R194610; paperLabel=Requirements Classification with Interpretable Machine Learning and Dependency Parsing",
+        "paper=http://orkg.org/orkg/resource/R1547319; paperLabel=An NLP approach for cross-domain ambiguity detection in requirements engineering"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_nlp4re_009",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What license types are reported for datasets that also provide a dataset URL?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 3,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "licenseTypeValue=No license",
+        "licenseTypeValue=Not reported",
+        "licenseTypeValue=License: Modification for any purposes"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_nlp4re_010",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers report an evaluation metric but do not specify any baseline comparison detail?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    }
+  ]
+}

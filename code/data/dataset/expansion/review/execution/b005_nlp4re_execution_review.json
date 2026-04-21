@@ -1,0 +1,168 @@
+{
+  "candidate_file": "code/data/dataset/expansion/candidates/b005_nlp4re_candidates.json",
+  "sparql_endpoint": "https://www.orkg.org/triplestore",
+  "summary": {
+    "total_items": 10,
+    "ok_count": 10,
+    "error_count": 0,
+    "skipped_count": 0,
+    "empty_result_count": 1,
+    "green_count": 9,
+    "yellow_count": 1,
+    "red_count": 0
+  },
+  "results": [
+    {
+      "id": "b005_nlp4re_001",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many NLP4RE papers report both an evaluation metric and a validation procedure?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=48"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_002",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What natural languages are reported for datasets whose datatype specifies both a format and a rigor of data format?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 5,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "naturalLanguage=English",
+        "naturalLanguage=English and Italian",
+        "naturalLanguage=French"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_003",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What measured agreement values are reported for annotation processes that also specify an intercoder reliability metric?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 16,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "measuredAgreement=.87, .91",
+        "measuredAgreement=0,821",
+        "measuredAgreement=0.54 for security vs. non-security\r0.85 for the security sentences: explicit vs. need for security\r0.32 for the classification of objectives"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_004",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many NLP4RE papers describe an implemented approach that has both a release URL and at least one dependency?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=22"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_005",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers report an NLP task with an explicit task type and output label, and what task type and output label are reported?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 66,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R194345; paperLabel=A Machine Learning-Based Approach for Demarcating Requirements in Textual Specifications; taskTypeLabel=Classification; outputLabel=Requirement and Non-requirement.",
+        "paper=http://orkg.org/orkg/resource/R1547354; paperLabel=A Query System for Extracting Requirements-Related Information from Legal Texts; taskTypeLabel=Classification; outputLabel=TABLE I MAPPING BETWEEN QUESTIONS AND METADATA TYPES IN OUR CONCEPTUAL MODEL",
+        "paper=http://orkg.org/orkg/resource/R1547354; paperLabel=A Query System for Extracting Requirements-Related Information from Legal Texts; taskTypeLabel=Information extraction; outputLabel=TABLE I MAPPING BETWEEN QUESTIONS AND METADATA TYPES IN OUR CONCEPTUAL MODEL"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_006",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers report a dataset source with both a source type and a domain, and what source type and domain are reported?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 256,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R194345; paperLabel=A Machine Learning-Based Approach for Demarcating Requirements in Textual Specifications; sourceTypeLabel=Industrial project,  proprietary data; domainLabel=aerospace",
+        "paper=http://orkg.org/orkg/resource/R194345; paperLabel=A Machine Learning-Based Approach for Demarcating Requirements in Textual Specifications; sourceTypeLabel=Industrial project,  proprietary data; domainLabel=automotive",
+        "paper=http://orkg.org/orkg/resource/R194345; paperLabel=A Machine Learning-Based Approach for Demarcating Requirements in Textual Specifications; sourceTypeLabel=Industrial project,  proprietary data; domainLabel=aviation"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_007",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers report an annotation scheme with public guidelines, and how many annotators are involved?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 32,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R194345; paperLabel=A Machine Learning-Based Approach for Demarcating Requirements in Textual Specifications; nAnnotators=1",
+        "paper=http://orkg.org/orkg/resource/R1547354; paperLabel=A Query System for Extracting Requirements-Related Information from Legal Texts; nAnnotators=3",
+        "paper=http://orkg.org/orkg/resource/R1553474; paperLabel=An Active Learning Approach for Improving the Accuracy of Automated Domain Model Extraction; nAnnotators=7"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_008",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers describe an implemented approach that includes both an algorithm and documentation type, and what are they?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 190,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R194345; paperLabel=A Machine Learning-Based Approach for Demarcating Requirements in Textual Specifications; algorithmLabel=Decision  Tree; documentationTypeLabel=README file",
+        "paper=http://orkg.org/orkg/resource/R194345; paperLabel=A Machine Learning-Based Approach for Demarcating Requirements in Textual Specifications; algorithmLabel=Decision  Tree; documentationTypeLabel=Ready-to-use examples",
+        "paper=http://orkg.org/orkg/resource/R194345; paperLabel=A Machine Learning-Based Approach for Demarcating Requirements in Textual Specifications; algorithmLabel=Feedforward  Neural  Network; documentationTypeLabel=README file"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_009",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers report a baseline comparison detail but no validation procedure, and what baseline details are given?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_nlp4re_010",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers report a dataset location with both a location type and a URL, and what location type and URL are reported?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 43,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R1553443; paperLabel=A semantic relatedness approach for traceability link recovery; locationTypeLabel=Dataset available from other studies; url=http://mdp.ivv.nasa.gov/mdp_glossary.html#CM15",
+        "paper=http://orkg.org/orkg/resource/R1553443; paperLabel=A semantic relatedness approach for traceability link recovery; locationTypeLabel=Dataset available from other studies; url=http://www.cs.technion.ac.il/~gabr/resources/code/esa/esa.htm",
+        "paper=http://orkg.org/orkg/resource/R1553443; paperLabel=A semantic relatedness approach for traceability link recovery; locationTypeLabel=Dataset available from other studies; url=http://www.cs.wm.edu/semeru/tefse2011/"
+      ],
+      "review_bucket": "green"
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "candidate_file": "code/data/dataset/expansion/candidates/b003_empirical_candidates.json",
+  "sparql_endpoint": "https://www.orkg.org/triplestore",
+  "summary": {
+    "total_items": 10,
+    "ok_count": 10,
+    "error_count": 0,
+    "skipped_count": 0,
+    "empty_result_count": 5,
+    "green_count": 5,
+    "yellow_count": 5,
+    "red_count": 0
+  },
+  "results": [
+    {
+      "id": "b003_empirical_001",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report a qualitative data collection method?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b003_empirical_002",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers published in 2020 or later report quantitative collected data?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b003_empirical_003",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers report more than one data collection method?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=220"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_004",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report both recall and precision among their machine-learning metrics?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b003_empirical_005",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report a null hypothesis but no alternative hypothesis?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b003_empirical_006",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report data collection methods but do not specify any method type?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b003_empirical_007",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report both a research question and a research question answer?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 778,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R108199; paperLabel=A Little Bird Told Me: Mining Tweets for Requirements and Software Evolution",
+        "paper=http://orkg.org/orkg/resource/R111988; paperLabel=A Needle in a Haystack: What Do Twitter Users Say about Software?",
+        "paper=http://orkg.org/orkg/resource/R112434; paperLabel=Users — The Hidden Software Product Quality Experts?: A Study on How App Users Report Quality Aspects in Online Reviews"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_008",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What are the reported data collection method names for papers that describe their collected data as qualitative?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 105,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "methodName=quasi-experiment",
+        "methodName=experiment",
+        "methodName=systematic literature review"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_009",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers published before 2019 report precision but not recall in their machine-learning metrics?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R112434; paperLabel=Users — The Hidden Software Product Quality Experts?: A Study on How App Users Report Quality Aspects in Online Reviews"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_010",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "Which venue names are reported for papers that mention both internal validity and external validity threats?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 2,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "venueName=IEEE International Requirements Engineering Conference",
+        "venueName=International Working Conference on Requirements Engineering: Foundation for Software Quality"
+      ],
+      "review_bucket": "green"
+    }
+  ]
+}

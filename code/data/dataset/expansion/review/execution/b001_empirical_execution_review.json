@@ -1,0 +1,165 @@
+{
+  "candidate_file": "code/data/dataset/expansion/candidates/b001_empirical_candidates.json",
+  "sparql_endpoint": "https://www.orkg.org/triplestore",
+  "summary": {
+    "total_items": 10,
+    "ok_count": 10,
+    "error_count": 0,
+    "skipped_count": 0,
+    "empty_result_count": 2,
+    "green_count": 8,
+    "yellow_count": 2,
+    "red_count": 0
+  },
+  "results": [
+    {
+      "id": "b001_empirical_001",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which machine learning algorithms are reported in empirical papers that mention precision as a machine learning metric?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 132,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "algorithm=http://orkg.org/orkg/resource/R1471751",
+        "algorithm=http://orkg.org/orkg/resource/R1471752",
+        "algorithm=http://orkg.org/orkg/resource/R1471753"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_empirical_002",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What exact names of data collection methods are reported in empirical papers that collect quantitative data?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_empirical_003",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many empirical papers report external validity threats?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=777"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_empirical_004",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In which publication years do empirical papers report an alternative hypothesis?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_empirical_005",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What hypothesis statements are reported in empirical papers that use inferential statistics?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 143,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "hypothesis_statement=There is no observable difference between the median of the distributions of students’ scores with and without the LLM explanations.",
+        "hypothesis_statement=There is no observable difference between the quality scores based on whether they were generated with the original or updated prompt.",
+        "hypothesis_statement=There is no significant difference in the number of\nidentified stakeholders between groups using combined internal empathy techniques (Vision Canvas) and external empathy techniques (Empathy Map), or external empathy alone."
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_empirical_006",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which venue series are reported for empirical papers that mention a highlighted research question?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 2,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "venue=http://orkg.org/orkg/resource/R662636",
+        "venue=http://orkg.org/orkg/resource/R723746"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_empirical_007",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What labels are reported for research question answers that are hidden in the text in empirical papers?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 3,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer_label=Research Question Answer",
+        "answer_label=highlighted",
+        "answer_label=hidden in text"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_empirical_008",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "Which years are reported for empirical papers that include a data collection method type?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 33,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=2017",
+        "year=2016",
+        "year=2018"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_empirical_009",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What exact method names are reported for data analysis in empirical papers that mention descriptive statistics?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 210,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "analysis_method_label=individual coding",
+        "analysis_method_label=pair coding",
+        "analysis_method_label=test scenario analysis"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_empirical_010",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which statistical techniques are reported in empirical papers that include inferential statistics?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 73,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "statistical_technique=http://orkg.org/orkg/resource/R1552249",
+        "statistical_technique=http://orkg.org/orkg/resource/R1552250",
+        "statistical_technique=http://orkg.org/orkg/resource/R282367"
+      ],
+      "review_bucket": "green"
+    }
+  ]
+}

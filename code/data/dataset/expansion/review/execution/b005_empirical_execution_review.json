@@ -1,0 +1,158 @@
+{
+  "candidate_file": "code/data/dataset/expansion/candidates/b005_empirical_candidates.json",
+  "sparql_endpoint": "https://www.orkg.org/triplestore",
+  "summary": {
+    "total_items": 10,
+    "ok_count": 10,
+    "error_count": 0,
+    "skipped_count": 0,
+    "empty_result_count": 4,
+    "green_count": 6,
+    "yellow_count": 4,
+    "red_count": 0
+  },
+  "results": [
+    {
+      "id": "b005_empirical_001",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers report both a highlighted research question and a highlighted research question answer?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=777"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_002",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which machine learning algorithms are reported in papers that also report both precision and recall?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 132,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "algo=http://orkg.org/orkg/resource/R1471751; algoLabel=GPT-2",
+        "algo=http://orkg.org/orkg/resource/R1471752; algoLabel=XLM-RoBERTa",
+        "algo=http://orkg.org/orkg/resource/R282166; algoLabel=RoBERTa"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_003",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What are the reported data collection method names in papers whose collected data are classified as qualitative?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_004",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report at least one measure of central tendency and at least one measure of dispersion or variation?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 504,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R1471727; paperLabel=A Data-Driven Approach for Finding Requirements Relevant Feedback from TikTok and YouTube",
+        "paper=http://orkg.org/orkg/resource/R1490995; paperLabel=A Requirements-Driven Platform for Validating Field Operations of Small Uncrewed Aerial Vehicles",
+        "paper=http://orkg.org/orkg/resource/R1493955; paperLabel=A Transformer-based Approach for Abstractive Summarization of Requirements from Obligations in Software Engineering Contracts"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_005",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report both null-hypothesis and alternative-hypothesis statements under inferential statistics?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 34,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R113160; paperLabel=Customer Rating Reactions Can Be Predicted Purely using App Features",
+        "paper=http://orkg.org/orkg/resource/R1556208; paperLabel=Augmenting, Not Replacing: The Role of LLMs in Human-Centric Formal RE",
+        "paper=http://orkg.org/orkg/resource/R1556286; paperLabel=Design Thinking in Requirements Engineering: Understanding the Role of Internal and External Empathy"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_006",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers mention threats to validity but do not classify any of them as construct, internal, external, conclusion, reliability, generalizability, repeatability, content, descriptive, or theoretical validity?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_007",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers published after 2018 report quantitative data, at least one machine-learning metric, and no descriptive statistics?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_008",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report a highlighted research question and at least one highlighted subquestion with a question type?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_009",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers have a data collection method where both the method type and method name are reported, and also have a venue label?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 776,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R1471727; paperLabel=A Data-Driven Approach for Finding Requirements Relevant Feedback from TikTok and YouTube",
+        "paper=http://orkg.org/orkg/resource/R1490995; paperLabel=A Requirements-Driven Platform for Validating Field Operations of Small Uncrewed Aerial Vehicles",
+        "paper=http://orkg.org/orkg/resource/R1493955; paperLabel=A Transformer-based Approach for Abstractive Summarization of Requirements from Obligations in Software Engineering Contracts"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_010",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report the largest number of distinct descriptive-statistic categories among frequency, central tendency, dispersion, and position?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 504,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R108199; paperLabel=A Little Bird Told Me: Mining Tweets for Requirements and Software Evolution",
+        "paper=http://orkg.org/orkg/resource/R111988; paperLabel=A Needle in a Haystack: What Do Twitter Users Say about Software?",
+        "paper=http://orkg.org/orkg/resource/R112434; paperLabel=Users — The Hidden Software Product Quality Experts?: A Study on How App Users Report Quality Aspects in Online Reviews"
+      ],
+      "review_bucket": "green"
+    }
+  ]
+}

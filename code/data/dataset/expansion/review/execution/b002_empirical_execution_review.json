@@ -1,0 +1,169 @@
+{
+  "candidate_file": "code/data/dataset/expansion/candidates/b002_empirical_candidates.json",
+  "sparql_endpoint": "https://www.orkg.org/triplestore",
+  "summary": {
+    "total_items": 10,
+    "ok_count": 10,
+    "error_count": 0,
+    "skipped_count": 0,
+    "empty_result_count": 0,
+    "green_count": 10,
+    "yellow_count": 0,
+    "red_count": 0
+  },
+  "results": [
+    {
+      "id": "b002_empirical_001",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report a data collection method whose name matches \"survey\"?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 10,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R113008; paperLabel=Canary: Extracting Requirements-Related Information from Online Discussions",
+        "paper=http://orkg.org/orkg/resource/R1543447; paperLabel=Mobile Application Privacy Risk Assessments from User-authored Scenarios",
+        "paper=http://orkg.org/orkg/resource/R1543521; paperLabel=User Driven Functionality Deletion for Mobile Apps"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_002",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report a research question whose text mentions \"requirements\"?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 10,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R108199; paperLabel=A Little Bird Told Me: Mining Tweets for Requirements and Software Evolution",
+        "paper=http://orkg.org/orkg/resource/R1385617; paperLabel=Integrating ethnography into the requirements engineering process",
+        "paper=http://orkg.org/orkg/resource/R1435100; paperLabel=A Comparative Evaluation of Requirement Template Systems"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_003",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report either descriptive statistics or machine learning in their data analysis?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 10,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R108199; paperLabel=A Little Bird Told Me: Mining Tweets for Requirements and Software Evolution",
+        "paper=http://orkg.org/orkg/resource/R111988; paperLabel=A Needle in a Haystack: What Do Twitter Users Say about Software?",
+        "paper=http://orkg.org/orkg/resource/R112434; paperLabel=Users — The Hidden Software Product Quality Experts?: A Study on How App Users Report Quality Aspects in Online Reviews"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_004",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "What is the earliest publication year among papers whose data collection method type mentions interview?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "earliest_year=1993"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_005",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "What is the average publication year of papers that report a null hypothesis?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "avg_year=2016"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_006",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report a data analysis method but do not report any statistical technique?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 10,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R108199; paperLabel=A Little Bird Told Me: Mining Tweets for Requirements and Software Evolution",
+        "paper=http://orkg.org/orkg/resource/R111988; paperLabel=A Needle in a Haystack: What Do Twitter Users Say about Software?",
+        "paper=http://orkg.org/orkg/resource/R112434; paperLabel=Users — The Hidden Software Product Quality Experts?: A Study on How App Users Report Quality Aspects in Online Reviews"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_007",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report either mean or median in their descriptive statistics?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 10,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R108199; paperLabel=A Little Bird Told Me: Mining Tweets for Requirements and Software Evolution",
+        "paper=http://orkg.org/orkg/resource/R111988; paperLabel=A Needle in a Haystack: What Do Twitter Users Say about Software?",
+        "paper=http://orkg.org/orkg/resource/R112434; paperLabel=Users — The Hidden Software Product Quality Experts?: A Study on How App Users Report Quality Aspects in Online Reviews"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_008",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "What is the minimum publication year among papers that report external validity threats?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "min_year=1993"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_009",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report an accuracy metric but do not report recall?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 2,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R195692; paperLabel=“SHORT”er Reasoning About Larger Requirements Models",
+        "paper=http://orkg.org/orkg/resource/R211283; paperLabel=Maintaining requirements for long-living software systems by incorporating security knowledge"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_010",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers published in venues whose name matches \"requirements\" report external validity threats?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 10,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R108199; paperLabel=A Little Bird Told Me: Mining Tweets for Requirements and Software Evolution",
+        "paper=http://orkg.org/orkg/resource/R111988; paperLabel=A Needle in a Haystack: What Do Twitter Users Say about Software?",
+        "paper=http://orkg.org/orkg/resource/R112434; paperLabel=Users — The Hidden Software Product Quality Experts?: A Study on How App Users Report Quality Aspects in Online Reviews"
+      ],
+      "review_bucket": "green"
+    }
+  ]
+}

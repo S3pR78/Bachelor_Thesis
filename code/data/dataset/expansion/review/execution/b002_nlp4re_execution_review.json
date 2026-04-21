@@ -1,0 +1,140 @@
+{
+  "candidate_file": "code/data/dataset/expansion/candidates/b002_nlp4re_candidates.json",
+  "sparql_endpoint": "https://www.orkg.org/triplestore",
+  "summary": {
+    "total_items": 10,
+    "ok_count": 1,
+    "error_count": 0,
+    "skipped_count": 9,
+    "empty_result_count": 0,
+    "green_count": 1,
+    "yellow_count": 9,
+    "red_count": 0
+  },
+  "results": [
+    {
+      "id": "b002_nlp4re_001",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers use datasets whose natural language is English?",
+      "execution_status": "skipped",
+      "query_type": "unknown",
+      "result_cardinality": null,
+      "execution_error": "Unsupported query type: unknown",
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_nlp4re_002",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers provide a dataset URL that contains GitHub?",
+      "execution_status": "skipped",
+      "query_type": "unknown",
+      "result_cardinality": null,
+      "execution_error": "Unsupported query type: unknown",
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_nlp4re_003",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers tackle a classification NLP task?",
+      "execution_status": "skipped",
+      "query_type": "unknown",
+      "result_cardinality": null,
+      "execution_error": "Unsupported query type: unknown",
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_nlp4re_004",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "What is the minimum number of data sources reported in NLP4RE datasets?",
+      "execution_status": "skipped",
+      "query_type": "unknown",
+      "result_cardinality": null,
+      "execution_error": "Unsupported query type: unknown",
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_nlp4re_005",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "What is the average number of annotators reported across NLP4RE studies?",
+      "execution_status": "skipped",
+      "query_type": "unknown",
+      "result_cardinality": null,
+      "execution_error": "Unsupported query type: unknown",
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_nlp4re_006",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "What is the average measured agreement reported across NLP4RE annotation studies?",
+      "execution_status": "skipped",
+      "query_type": "unknown",
+      "result_cardinality": null,
+      "execution_error": "Unsupported query type: unknown",
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_nlp4re_007",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers are among those with the highest reported numbers of annotators?",
+      "execution_status": "skipped",
+      "query_type": "unknown",
+      "result_cardinality": null,
+      "execution_error": "Unsupported query type: unknown",
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_nlp4re_008",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers are among those with the largest reported datasets by number of data items?",
+      "execution_status": "skipped",
+      "query_type": "unknown",
+      "result_cardinality": null,
+      "execution_error": "Unsupported query type: unknown",
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_nlp4re_009",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers report datasets released under a CC-BY license?",
+      "execution_status": "skipped",
+      "query_type": "unknown",
+      "result_cardinality": null,
+      "execution_error": "Unsupported query type: unknown",
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_nlp4re_010",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which papers are among those with the highest reported measured agreement values?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 10,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R1554246; paperLabel=Supporting Analysts by Dynamic Extraction and Classification of Requirements-Related Knowledge; agreement=0.92",
+        "paper=http://orkg.org/orkg/resource/R195113; paperLabel=Automated Extraction of Semantic Legal Metadata using Natural Language Processing; agreement=0.824",
+        "paper=http://orkg.org/orkg/resource/R211380; paperLabel=Hidden in plain sight: Automatically identifying security requirements from natural language artifacts; agreement=0.54"
+      ],
+      "review_bucket": "green"
+    }
+  ]
+}

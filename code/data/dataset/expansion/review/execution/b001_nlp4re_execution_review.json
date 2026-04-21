@@ -2,11 +2,14 @@
   "candidate_file": "code/data/dataset/expansion/candidates/b001_nlp4re_candidates.json",
   "sparql_endpoint": "https://www.orkg.org/triplestore",
   "summary": {
-    "total_items": 3,
-    "ok_count": 3,
+    "total_items": 10,
+    "ok_count": 10,
     "error_count": 0,
     "skipped_count": 0,
-    "empty_result_count": 2
+    "empty_result_count": 5,
+    "green_count": 5,
+    "yellow_count": 5,
+    "red_count": 0
   },
   "results": [
     {
@@ -18,7 +21,8 @@
       "query_type": "select",
       "result_cardinality": 0,
       "execution_error": null,
-      "sample_answer_preview": []
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
     },
     {
       "id": "b001_nlp4re_002",
@@ -29,7 +33,8 @@
       "query_type": "select",
       "result_cardinality": 0,
       "execution_error": null,
-      "sample_answer_preview": []
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
     },
     {
       "id": "b001_nlp4re_003",
@@ -43,7 +48,108 @@
       "sample_answer_preview": [
         "metric=http://orkg.org/orkg/resource/R1544513; metricLabel=Not reported",
         "metric=http://orkg.org/orkg/resource/R1585166; metricLabel=Krippendorf's Alpha"
-      ]
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_004",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What natural language is reported for datasets that draw on more than one data source?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_005",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What license type is reported for datasets stored on GitHub?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 3,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "licenseLabel=No license",
+        "licenseLabel=Not reported",
+        "licenseLabel=License: Modification for any purposes"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_006",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What release URL is provided for implemented approaches that include documentation?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_007",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "What is the measured agreement reported for contributions that apply annotator agreement?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 16,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "agreementValue=Not reported",
+        "agreementValue=varied on the tested cases",
+        "agreementValue=58-84%"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_008",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many data sources are reported for datasets whose source domain is information systems?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 7,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "numSources=5",
+        "numSources=3",
+        "numSources=2"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_009",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year were papers that store their dataset on GitHub published?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 5,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=2017",
+        "year=2018",
+        "year=2019"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_010",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year was the dataset produced for contributions whose natural language is English?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
     }
   ]
 }
