@@ -261,6 +261,25 @@ Action:
 - review suspicious entries individually
 - likely strong source for later hard-case selection
 
+Retain:
+- b005_nlp4re_002
+- b005_nlp4re_003
+- b005_nlp4re_005
+- b005_nlp4re_006
+- b005_nlp4re_007
+- b005_nlp4re_008
+- b005_nlp4re_010
+
+Review/repair:
+- b005_nlp4re_001
+- b005_nlp4re_004
+- b005_nlp4re_009
+
+Notes:
+- one of the better nlp4re batches
+- several entries are strong hard-case candidates
+- repeated suspicious predicates remain the main repair trigger
+
 #### b005_empirical
 Status: **strong**
 
