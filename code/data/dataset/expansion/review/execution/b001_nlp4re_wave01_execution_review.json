@@ -1,0 +1,726 @@
+{
+  "candidate_file": "code/data/dataset/expansion/candidates/b001_nlp4re_wave01_candidates.json",
+  "sparql_endpoint": "https://www.orkg.org/triplestore",
+  "summary": {
+    "total_items": 50,
+    "ok_count": 50,
+    "error_count": 0,
+    "skipped_count": 0,
+    "empty_result_count": 15,
+    "green_count": 35,
+    "yellow_count": 15,
+    "red_count": 0
+  },
+  "results": [
+    {
+      "id": "b001_nlp4re_w01_001",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which NLP task types are reported in contributions that use F1-score as an evaluation metric?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w01_002",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which data source domains are associated with datasets that list at least two different data sources?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 122,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "domain=http://orkg.org/orkg/resource/R1544486; domainLabel=transportation",
+        "domain=http://orkg.org/orkg/resource/R1544487; domainLabel=engineering",
+        "domain=http://orkg.org/orkg/resource/R1544488; domainLabel=communication"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_003",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which baseline comparison types are used in evaluations of contributions that release a tool on GitHub?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w01_004",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What natural languages are reported for datasets whose data format is marked as strict?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "naturalLanguage=English"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_005",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What license types are used for implemented approaches released through a public repository?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 6,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "licenseTypeText=License: Reuse only for non-commercial purposes",
+        "licenseTypeText=License: Modification for any purposes",
+        "licenseTypeText=No license"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_006",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "Which intercoder reliability metrics are reported when annotator conflicts are resolved by discussion or consensus?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 6,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "reliabilityMetric=Cohen's K",
+        "reliabilityMetric=Not reported",
+        "reliabilityMetric=Fleiss' K"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_007",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many contributions report both an evaluation metric and a validation procedure?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=51"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_008",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many contributions mention an annotation scheme whose guidelines are publicly available?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=0"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_009",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which years were the papers published that report publicly available datasets licensed under CC-BY?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w01_010",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which years were the papers published that describe annotation processes with more than two annotators?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 9,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=2017",
+        "year=2011",
+        "year=2019"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_011",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which NLP task types are reported in contributions that use F1-score as an evaluation metric?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w01_012",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which data source domains are associated with datasets that list at least two different data sources?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 122,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "domain=http://orkg.org/orkg/resource/R1544486; domainLabel=transportation",
+        "domain=http://orkg.org/orkg/resource/R1544487; domainLabel=engineering",
+        "domain=http://orkg.org/orkg/resource/R1544488; domainLabel=communication"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_013",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which baseline comparison types are used in evaluations of contributions that release a tool on GitHub?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w01_014",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What natural languages are reported for datasets whose data format is marked as strict?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "naturalLanguage=English"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_015",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What license types are used for implemented approaches released through a public repository?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 6,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "licenseTypeText=License: Reuse only for non-commercial purposes",
+        "licenseTypeText=License: Modification for any purposes",
+        "licenseTypeText=No license"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_016",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "Which intercoder reliability metrics are reported when annotator conflicts are resolved by discussion or consensus?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 6,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "reliabilityMetric=Cohen's K",
+        "reliabilityMetric=Not reported",
+        "reliabilityMetric=Fleiss' K"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_017",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many contributions report both an evaluation metric and a validation procedure?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=51"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_018",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many contributions mention an annotation scheme whose guidelines are publicly available?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=0"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_019",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which years were the papers published that report publicly available datasets licensed under CC-BY?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w01_020",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which years were the papers published that describe annotation processes with more than two annotators?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 9,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=2017",
+        "year=2011",
+        "year=2019"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_021",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which NLP task types are reported in contributions that use F1-score as an evaluation metric?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w01_022",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What natural languages are reported for datasets whose data format is marked as strict?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "naturalLanguage=English"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_023",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What license types are used for implemented approaches released through a public repository?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 6,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "licenseTypeText=License: Reuse only for non-commercial purposes",
+        "licenseTypeText=License: Modification for any purposes",
+        "licenseTypeText=No license"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_024",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "Which intercoder reliability metrics are reported when annotator conflicts are resolved by discussion or consensus?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 6,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "reliabilityMetric=Cohen's K",
+        "reliabilityMetric=Not reported",
+        "reliabilityMetric=Fleiss' K"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_025",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many contributions report both an evaluation metric and a validation procedure?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=51"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_026",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many contributions mention an annotation scheme whose guidelines are publicly available?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=0"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_027",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which years were the papers published that report publicly available datasets licensed under CC-BY?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w01_028",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which years were the papers published that describe annotation processes with more than two annotators?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 9,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=2017",
+        "year=2011",
+        "year=2019"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_029",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which NLP task types are reported in contributions that use F1-score as an evaluation metric?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w01_030",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which data source domains are associated with datasets that list at least two different data sources?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 122,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "domain=http://orkg.org/orkg/resource/R1544486; domainLabel=transportation",
+        "domain=http://orkg.org/orkg/resource/R1544487; domainLabel=engineering",
+        "domain=http://orkg.org/orkg/resource/R1544488; domainLabel=communication"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_031",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which baseline comparison types are used in evaluations of contributions that release a tool on GitHub?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w01_032",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What natural languages are reported for datasets whose data format is marked as strict?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "naturalLanguage=English"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_033",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What license types are used for implemented approaches released through a public repository?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 6,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "licenseTypeText=License: Reuse only for non-commercial purposes",
+        "licenseTypeText=License: Modification for any purposes",
+        "licenseTypeText=No license"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_034",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "Which intercoder reliability metrics are reported when annotator conflicts are resolved by discussion or consensus?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 6,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "reliabilityMetric=Cohen's K",
+        "reliabilityMetric=Not reported",
+        "reliabilityMetric=Fleiss' K"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_035",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many contributions report both an evaluation metric and a validation procedure?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=51"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_036",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many contributions mention an annotation scheme whose guidelines are publicly available?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=0"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_037",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which years were the papers published that report publicly available datasets licensed under CC-BY?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w01_038",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which years were the papers published that describe annotation processes with more than two annotators?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 9,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=2017",
+        "year=2011",
+        "year=2019"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_039",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which NLP task types are reported in contributions that use F1-score as an evaluation metric?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w01_040",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which data source domains are associated with datasets that list at least two different data sources?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 122,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "domain=http://orkg.org/orkg/resource/R1544486; domainLabel=transportation",
+        "domain=http://orkg.org/orkg/resource/R1544487; domainLabel=engineering",
+        "domain=http://orkg.org/orkg/resource/R1544488; domainLabel=communication"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_041",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which baseline comparison types are used in evaluations of contributions that release a tool on GitHub?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w01_042",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What natural languages are reported for datasets whose data format is marked as strict?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "naturalLanguage=English"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_043",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What license types are used for implemented approaches released through a public repository?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 6,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "licenseTypeText=License: Reuse only for non-commercial purposes",
+        "licenseTypeText=License: Modification for any purposes",
+        "licenseTypeText=No license"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_044",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "Which intercoder reliability metrics are reported when annotator conflicts are resolved by discussion or consensus?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 6,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "reliabilityMetric=Cohen's K",
+        "reliabilityMetric=Not reported",
+        "reliabilityMetric=Fleiss' K"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_045",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many contributions report both an evaluation metric and a validation procedure?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=51"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_046",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many contributions mention an annotation scheme whose guidelines are publicly available?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=0"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_047",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which years were the papers published that report publicly available datasets licensed under CC-BY?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w01_048",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which years were the papers published that describe annotation processes with more than two annotators?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 9,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=2017",
+        "year=2011",
+        "year=2019"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w01_049",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which NLP task types are reported in contributions that use F1-score as an evaluation metric?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w01_050",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which data source domains are associated with datasets that list at least two different data sources?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 122,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "domain=http://orkg.org/orkg/resource/R1544486; domainLabel=transportation",
+        "domain=http://orkg.org/orkg/resource/R1544487; domainLabel=engineering",
+        "domain=http://orkg.org/orkg/resource/R1544488; domainLabel=communication"
+      ],
+      "review_bucket": "green"
+    }
+  ]
+}
