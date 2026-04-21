@@ -1,0 +1,776 @@
+{
+  "candidate_file": "code/data/dataset/expansion/candidates/b005_nlp4re_wave01_candidates.json",
+  "sparql_endpoint": "https://www.orkg.org/triplestore",
+  "summary": {
+    "total_items": 50,
+    "ok_count": 50,
+    "error_count": 0,
+    "skipped_count": 0,
+    "empty_result_count": 10,
+    "green_count": 40,
+    "yellow_count": 10,
+    "red_count": 0
+  },
+  "results": [
+    {
+      "id": "b005_nlp4re_w01_001",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which NLP task output types are reported for contributions whose datasets specify both a data format and a natural language?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 24,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=http://orkg.org/orkg/resource/R1544170; answerLabel=Words",
+        "answer=http://orkg.org/orkg/resource/R1544174; answerLabel=Binary-multi label",
+        "answer=http://orkg.org/orkg/resource/R1544171; answerLabel=Multi class-single label"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_002",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which algorithms are used in implemented approaches that also provide a release URL and a dependency?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 47,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=http://orkg.org/orkg/resource/R1547345; answerLabel=word2vec",
+        "answer=http://orkg.org/orkg/resource/R1547398; answerLabel=Naive Bayes",
+        "answer=http://orkg.org/orkg/resource/R1552329; answerLabel=Logistic  Regression"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_003",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which data source domains are reported for datasets that also specify a source type and a dataset location URL?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_nlp4re_w01_004",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which release formats are reported for implemented approaches that also provide documentation type and a running requirement?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 20,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=http://orkg.org/orkg/resource/R1544406; answerLabel=No tool has been released",
+        "answer=http://orkg.org/orkg/resource/R1544407; answerLabel=Executable notebook",
+        "answer=http://orkg.org/orkg/resource/R1544410; answerLabel=Source code"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_005",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which location types are reported for datasets that are publicly available and have a license type?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_nlp4re_w01_006",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which annotator assignment types are reported for annotation processes that also state the number of annotators and the annotators' identity?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 15,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=http://orkg.org/orkg/resource/R1544293; answerLabel=Multiple annotators per entry",
+        "answer=http://orkg.org/orkg/resource/R1544294; answerLabel=Partly multiple annotators per entry, partly one annotator per entry",
+        "answer=http://orkg.org/orkg/resource/R1544500; answerLabel=No reconciliation: the different opinions indicate nocuous ambiguity!"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_007",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which annotation scheme establishment types are reported for annotation processes that also make guidelines public?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 10,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=http://orkg.org/orkg/resource/R1547310; answerLabel=Not reported",
+        "answer=http://orkg.org/orkg/resource/R1544309; answerLabel=Only via class labels",
+        "answer=http://orkg.org/orkg/resource/R1544310; answerLabel=Written guidelines with definitions and examples"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_008",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which NLP data types are reported for datasets that specify both a data source domain and a natural language?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_nlp4re_w01_009",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which NLP task types are reported for contributions that also specify an input type and a task output classification label?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 7,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=http://orkg.org/orkg/resource/R1544148; answerLabel=Classification",
+        "answer=http://orkg.org/orkg/resource/R1544150; answerLabel=Information extraction",
+        "answer=http://orkg.org/orkg/resource/R1544149; answerLabel=Information retrieval"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_010",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which task output extracted elements are reported for contributions that also specify an NLP dataset and an implemented approach?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 18,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=The most likely antecedent the anaphora refers to",
+        "answer=Not reported",
+        "answer=semantic legal metadata: actor, agent, target, auxiliary party, artifact, situation, location, time, definition, obligation, prohibition, permission, constraint, condition, exception, penalty, violation, sanction"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_011",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which dependency types are reported for implemented approaches that also provide documentation and a release URL?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 7,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=http://orkg.org/orkg/resource/R1544394; answerLabel=Open source libraries / software",
+        "answer=http://orkg.org/orkg/resource/R1544528; answerLabel=Not reported",
+        "answer=http://orkg.org/orkg/resource/R1552645; answerLabel=Proprietary libraries / software"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_012",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which annotator identities are reported for annotation processes that also mention annotator assignment?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 7,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=http://orkg.org/orkg/resource/R1544304; answerLabel=People who have direct contact with the designers",
+        "answer=http://orkg.org/orkg/resource/R1544302; answerLabel=The designers of the technique/tool",
+        "answer=http://orkg.org/orkg/resource/R1544303; answerLabel=Independent annotators"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_013",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which NLP data source types are reported for datasets that provide a source domain and a data format?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 13,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=http://orkg.org/orkg/resource/R1544228; answerLabel=Industrial project,  proprietary data",
+        "answer=http://orkg.org/orkg/resource/R1544476; answerLabel=The dataset was publicly available but not anymore",
+        "answer=http://orkg.org/orkg/resource/R1544225; answerLabel=Community-based open source projects"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_014",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which NLP data abstraction levels are reported for datasets that also specify a data type and a natural language?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_nlp4re_w01_015",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What natural languages are reported for datasets that also provide a public URL and a license type?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_nlp4re_w01_016",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What release location labels are reported for implemented approaches that also specify a release format and a URL?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 3,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=On a private/corporate website",
+        "answer=In a persistent platform with DOI",
+        "answer=In a repository"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_017",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What documentation types are reported for implemented approaches that also list an algorithm and a dependency?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 13,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=http://orkg.org/orkg/resource/R1544527",
+        "answer=http://orkg.org/orkg/resource/R1544386",
+        "answer=http://orkg.org/orkg/resource/R1544390"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_018",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What conflict resolution descriptions are reported for annotation processes that also report annotator agreement?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 25,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=http://orkg.org/orkg/resource/R1544335",
+        "answer=http://orkg.org/orkg/resource/R1544514",
+        "answer=http://orkg.org/orkg/resource/R1544333"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_019",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What measured agreement values are reported for annotation processes that also specify intercoder reliability metrics?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 16,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=Not reported",
+        "answer=varied on the tested cases",
+        "answer=58-84%"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_020",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What shared material descriptions are reported for annotation processes that also describe the annotator assignment?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 6,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=http://orkg.org/orkg/resource/R1547311",
+        "answer=http://orkg.org/orkg/resource/R1544319",
+        "answer=http://orkg.org/orkg/resource/R1544321"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_021",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What fatigue mitigation techniques are reported for annotation processes that also specify the number of annotators?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 6,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=http://orkg.org/orkg/resource/R1544324",
+        "answer=http://orkg.org/orkg/resource/R1547370",
+        "answer=http://orkg.org/orkg/resource/R1547312"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_022",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What data format labels are reported for datasets that also list a natural language and a source type?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 10,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=\"Shall\" requirements",
+        "answer=Legal text",
+        "answer=Scenarios"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_023",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What output classification labels are reported for tasks that also specify an input and an output type?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 27,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=Ambiguous/nonambiguous, and then refining the former whether it's nocuous or not",
+        "answer=Functional, Quality, OnlyQuality, OnlyFunctional",
+        "answer=Not reported"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_024",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What translation mapping cardinalities are reported for tasks whose outputs are specified and whose datasets are linked?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 6,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=http://orkg.org/orkg/resource/R1544465",
+        "answer=http://orkg.org/orkg/resource/R1544185",
+        "answer=http://orkg.org/orkg/resource/R1544186"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_025",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What license type labels are reported for datasets that also provide a dataset location and a public availability flag?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_nlp4re_w01_026",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What scheme establishment descriptions are reported for annotation processes that also share material?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 10,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=http://orkg.org/orkg/resource/R1547310",
+        "answer=http://orkg.org/orkg/resource/R1544309",
+        "answer=http://orkg.org/orkg/resource/R1544310"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_027",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What running requirement descriptions are reported for implemented approaches that also provide a dependency and a release URL?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 7,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=http://orkg.org/orkg/resource/R1544379",
+        "answer=http://orkg.org/orkg/resource/R1544380",
+        "answer=http://orkg.org/orkg/resource/R1544524"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_028",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What data source domain labels are reported for datasets that also report a source type and the number of data sources?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 118,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=transportation",
+        "answer=engineering",
+        "answer=communication"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_029",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many annotators are reported for annotation processes that also make guidelines public and specify a conflict resolution step?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 12,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=38",
+        "answer=2",
+        "answer=3"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_030",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "From how many different sources do the datasets come for contributions that also report a data source type and a domain?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 13,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=11",
+        "answer=8",
+        "answer=1"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_031",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many data items are reported for datasets that also specify a natural language and a data format?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 47,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=11 requirements documents with a total of 26829 sentences. The paper focuses on a subset of 200 anaphoric instances",
+        "answer=Not reported",
+        "answer=47500 wikipedia pages from 5 domains"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_032",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many annotators are reported for annotation processes that also share additional material and a fatigue mitigation technique?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 12,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=38",
+        "answer=2",
+        "answer=3"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_033",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many data items are reported for datasets that are publicly available and have a dataset URL?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 29,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=47500 wikipedia pages from 5 domains",
+        "answer=6 Requirements specification documents\nEach document contains 450 to 30000 words\n4 of the case study data can be found here - https://github.com/5Quintessential/FeatureX/tree/master/examples/Specifications%20used%20in%20the%20paper",
+        "answer=146,057 reviews for 80 apps"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_034",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many annotators are reported for annotation processes that also specify a scheme establishment and an annotator assignment?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 12,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=38",
+        "answer=2",
+        "answer=3"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_035",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "From how many different sources do the datasets come for contributions that also specify a location type and a license type?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_nlp4re_w01_036",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many data items are reported for datasets that also specify a source domain and a data source type?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 47,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=11 requirements documents with a total of 26829 sentences. The paper focuses on a subset of 200 anaphoric instances",
+        "answer=Not reported",
+        "answer=47500 wikipedia pages from 5 domains"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_037",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many annotators are reported for annotation processes that also list an annotator identity and an agreement measure?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 12,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=38",
+        "answer=2",
+        "answer=3"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_038",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many data items are reported for datasets that also include a production time and a natural language?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 47,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=11 requirements documents with a total of 26829 sentences. The paper focuses on a subset of 200 anaphoric instances",
+        "answer=Not reported",
+        "answer=47500 wikipedia pages from 5 domains"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_039",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many annotators are reported for annotation processes that also mention intercoder reliability metrics and conflict resolution?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 12,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=38",
+        "answer=2",
+        "answer=3"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_040",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "From how many different sources do the datasets come for contributions that also provide a public URL and a source type?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_nlp4re_w01_041",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year were the datasets produced for contributions that also provide a public URL and a license type?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_nlp4re_w01_042",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year were the datasets produced for contributions that also specify a data source domain and a natural language?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 26,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=Between 2000 and 2010",
+        "answer=Not reported",
+        "answer=2018-2019"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_043",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year were the datasets produced for contributions that also report a number of annotators and an annotator assignment?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 20,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=Between 2000 and 2010",
+        "answer=Not reported",
+        "answer=2018-2019"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_044",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year were the datasets produced for contributions that also share material and mention a conflict resolution step?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 26,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=Between 2000 and 2010",
+        "answer=Not reported",
+        "answer=2018-2019"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_045",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year were the datasets produced for contributions that also specify a dataset location and a release URL?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_nlp4re_w01_046",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year were the datasets produced for contributions that also provide a source type and a data format?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 26,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=Between 2000 and 2010",
+        "answer=Not reported",
+        "answer=2018-2019"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_047",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year were the datasets produced for contributions that also report a release format and a dependency?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 26,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=Between 2000 and 2010",
+        "answer=Not reported",
+        "answer=2018-2019"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_048",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year were the datasets produced for contributions that also specify a task output classification label and a dataset type?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 26,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=Between 2000 and 2010",
+        "answer=Not reported",
+        "answer=2018-2019"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_049",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year were the datasets produced for contributions that also report guideline availability and annotator agreement?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 26,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=Between 2000 and 2010",
+        "answer=Not reported",
+        "answer=2018-2019"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_nlp4re_w01_050",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year were the datasets produced for contributions that also provide a data source domain and an annotation scheme?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 26,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "answer=Between 2000 and 2010",
+        "answer=Not reported",
+        "answer=2018-2019"
+      ],
+      "review_bucket": "green"
+    }
+  ]
+}
