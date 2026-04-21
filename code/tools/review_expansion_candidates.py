@@ -75,6 +75,24 @@ def classify_review_bucket(
     return "yellow"
 
 
+
+def strip_leading_prefixes(query: str) -> str:
+    remaining = query.lstrip()
+
+    while True:
+        upper = remaining.upper()
+        if not upper.startswith("PREFIX "):
+            break
+
+        parts = remaining.split(None, 3)
+        if len(parts) < 3:
+            break
+
+        consumed = f"PREFIX {parts[1]} {parts[2]}"
+        remaining = remaining[len(consumed):].lstrip()
+
+    return remaining
+
 def review_entry(
     entry: dict[str, Any],
     endpoint_url: str,
@@ -101,7 +119,21 @@ def review_entry(
         }
 
     query_with_prefixes = raw_query
-    query_type = detect_sparql_query_type(query_with_prefixes)
+    
+    query_type_probe = query_with_prefixes
+    probe_upper = query_type_probe.upper()
+
+    while probe_upper.startswith("PREFIX "):
+        parts = query_type_probe.split(None, 3)
+        if len(parts) < 3:
+            break
+        prefix_name = parts[1]
+        prefix_uri = parts[2]
+        consumed = f"PREFIX {prefix_name} {prefix_uri}"
+        query_type_probe = query_type_probe[len(consumed):].lstrip()
+        probe_upper = query_type_probe.upper()
+
+    query_type = detect_sparql_query_type(strip_leading_prefixes(query_with_prefixes))
 
     if query_type not in {"select", "ask"}:
         return {

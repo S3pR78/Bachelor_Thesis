@@ -1,52 +1,69 @@
 # Scaled Run Prompt — B001 NLP4RE Wave 01
 
-Generate exactly 10 candidate dataset entries.
+Generate exactly 50 candidate dataset entries.
 
 Selected family: `nlp4re`
-Selected source_dataset: `Hybrid_NLP4RE`
 
-Wave id: `wave01`
+For every item, set:
+- `family` = `nlp4re`
 
-Use these id values exactly:
-- `b001_nlp4re_w01_001`
-- `b001_nlp4re_w01_002`
-- `b001_nlp4re_w01_003`
-- `b001_nlp4re_w01_004`
-- `b001_nlp4re_w01_005`
-- `b001_nlp4re_w01_006`
-- `b001_nlp4re_w01_007`
-- `b001_nlp4re_w01_008`
-- `b001_nlp4re_w01_009`
-- `b001_nlp4re_w01_010`
+Do not generate an `id` field.
+IDs will be assigned later in a deterministic post-processing step.
 
-Use these source_id values exactly:
-- `gen_b001_nlp4re_w01_001`
-- `gen_b001_nlp4re_w01_002`
-- `gen_b001_nlp4re_w01_003`
-- `gen_b001_nlp4re_w01_004`
-- `gen_b001_nlp4re_w01_005`
-- `gen_b001_nlp4re_w01_006`
-- `gen_b001_nlp4re_w01_007`
-- `gen_b001_nlp4re_w01_008`
-- `gen_b001_nlp4re_w01_009`
-- `gen_b001_nlp4re_w01_010`
+Primary batch purpose:
+- expand answer-type coverage for NLP4RE
+- generate broadly useful candidate questions
+- maintain strong schema grounding
 
 Target answer_type distribution:
-- 3 resource
-- 3 string
-- 2 number
-- 2 date
+- around 14 `resource`
+- around 14 `string`
+- around 12 `number`
+- around 10 `date`
 
-Prefer:
-- 6 factoid
-- 4 non_factoid
+Preferred question styles:
+- direct lookup
+- constrained lookup
+- temporal
+- light comparison
+- moderate multi-hop
+
+Preferred difficulty:
 - mostly medium complexity
-- at least 3 constrained questions
-- at least 2 temporal or string-focused questions
+- some low complexity
+- a few higher-complexity but still natural cases
 
 Avoid overlap with:
-- benchmark seed data
-- b001 core runs
-- previously generated candidate files
+- seed benchmark entries
+- previously accepted or retained `b001_nlp4re` candidates
+- earlier generated candidates in the same family
+- simple paraphrases of already generated questions
+
+Prefer:
+- new combinations of constraints
+- new answer targets
+- new template-path combinations
+- schema-faithful variety over superficial wording changes
+
+Keep the same grounding quality as in the stronger accepted NLP4RE batches.
+
+Return only these fields for each item:
+- `question`
+- `gold_sparql`
+- `family`
+- `answer_type`
+
+Do not include any other metadata fields.
+
+`answer_type` must be one of:
+- `resource`
+- `string`
+- `number`
+- `date`
+
+Do not use values such as:
+- `factoid`
+- `non_factoid`
 
 Return valid JSON only.
+Return a JSON object with key `"items"`.

@@ -1,17 +1,17 @@
-# Scaled Run Prompt — B001 NLP4RE Wave 01
+# Scaled Run Prompt — B001 Empirical Wave 01
 
 Generate exactly 50 candidate dataset entries.
 
-Selected family: `nlp4re`
+Selected family: `empirical_research_practice`
 
 For every item, set:
-- `family` = `nlp4re`
+- `family` = `empirical_research_practice`
 
 Do not generate an `id` field.
 IDs will be assigned later in a deterministic post-processing step.
 
 Primary batch purpose:
-- expand answer-type coverage for NLP4RE
+- expand answer-type coverage for empirical_research_practice
 - generate broadly useful candidate questions
 - maintain strong schema grounding
 
@@ -35,7 +35,7 @@ Preferred difficulty:
 
 Avoid overlap with:
 - seed benchmark entries
-- previously accepted or retained `b001_nlp4re` candidates
+- previously accepted or retained `b001_empirical` candidates
 - earlier generated candidates in the same family
 - simple paraphrases of already generated questions
 
@@ -45,7 +45,7 @@ Prefer:
 - new template-path combinations
 - schema-faithful variety over superficial wording changes
 
-Keep the same grounding quality as in the stronger accepted NLP4RE batches.
+Keep the same grounding quality as in the stronger accepted empirical batches.
 
 Return only these fields for each item:
 - `question`
