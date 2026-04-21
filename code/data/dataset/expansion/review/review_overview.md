@@ -221,6 +221,26 @@ Action:
 - review suspicious entries individually
 - use as supporting NLP4RE expansion material, not as blindly trusted gold candidates
 
+
+Retain:
+- b004_nlp4re_001
+- b004_nlp4re_002
+- b004_nlp4re_003
+- b004_nlp4re_006
+- b004_nlp4re_007
+- b004_nlp4re_009
+
+Review/repair:
+- b004_nlp4re_004
+- b004_nlp4re_005
+- b004_nlp4re_008
+- b004_nlp4re_010
+
+Notes:
+- generally good NLP4RE-specific focus
+- several entries are useful and template-relevant
+- repeated suspicious predicate patterns remain the main review trigger
+
 ---
 
 ### B005 — Hard case buffer
