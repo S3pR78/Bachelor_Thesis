@@ -9,7 +9,8 @@
       "suspicious_predicate"
     ],
     "notes": [
-      "Uses orkgp:HAS_EVALUATION, which looks like a placeholder-style predicate."
+      "Uses orkgp:HAS_EVALUATION, which looks like a placeholder-style predicate.",
+      "Question and overall query intent are still usable, so this looks repairable."
     ],
     "recommended_action": "review_or_repair"
   },

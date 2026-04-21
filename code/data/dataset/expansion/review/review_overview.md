@@ -38,6 +38,12 @@ Action:
 - keep as candidate batch
 - include in later manual/schema review
 
+Retain:
+- 9 entries directly usable as candidate pool
+
+Review/repair:
+- 1 entry flagged for suspicious predicate usage
+
 #### b001_empirical
 Status: **strong**
 
