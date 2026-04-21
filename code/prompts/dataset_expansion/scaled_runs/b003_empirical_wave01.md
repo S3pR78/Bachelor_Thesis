@@ -1,53 +1,71 @@
 # Scaled Run Prompt — B003 Empirical Wave 01
 
-Generate exactly 10 candidate dataset entries.
+Generate exactly 50 candidate dataset entries.
 
 Selected family: `empirical_research_practice`
-Selected source_dataset: `Hybrid_Empirical_Research`
 
-Wave id: `wave01`
+For every item, set:
+- `family` = `empirical_research_practice`
 
-Use these id values exactly:
-- `b003_empirical_w01_001`
-- `b003_empirical_w01_002`
-- `b003_empirical_w01_003`
-- `b003_empirical_w01_004`
-- `b003_empirical_w01_005`
-- `b003_empirical_w01_006`
-- `b003_empirical_w01_007`
-- `b003_empirical_w01_008`
-- `b003_empirical_w01_009`
-- `b003_empirical_w01_010`
+Do not generate an `id` field.
+IDs will be assigned later in a deterministic post-processing step.
 
-Use these source_id values exactly:
-- `gen_b003_empirical_w01_001`
-- `gen_b003_empirical_w01_002`
-- `gen_b003_empirical_w01_003`
-- `gen_b003_empirical_w01_004`
-- `gen_b003_empirical_w01_005`
-- `gen_b003_empirical_w01_006`
-- `gen_b003_empirical_w01_007`
-- `gen_b003_empirical_w01_008`
-- `gen_b003_empirical_w01_009`
-- `gen_b003_empirical_w01_010`
+Primary batch purpose:
+- expand non-factoid reasoning coverage for empirical_research_practice
+- generate schema-faithful questions with stronger reasoning behavior
+- increase useful variety beyond simple lookup questions
 
-Required special type focus:
+Preferred focus:
 - comparison
-- temporal
-- multi_intent
+- temporal constraints
 - negation
 - missing_info
+- multi_intent
+- moderate ranking where natural
+- stronger multi-hop behavior
 
-Prefer:
-- 2 factoid
-- 8 non_factoid
-- medium to high complexity
-- at least 3 comparison-oriented questions
-- at least 2 temporal questions
+Preferred difficulty:
+- mostly medium and medium-to-high complexity
+- some high-complexity cases
+- avoid artificial complexity
+
+Target answer_type distribution:
+- around 14 `resource`
+- around 14 `string`
+- around 12 `number`
+- around 10 `date`
 
 Avoid overlap with:
-- benchmark seed data
-- b003 core runs
-- previously generated candidate files
+- seed benchmark entries
+- previously accepted or retained `b003_empirical` candidates
+- earlier generated candidates in the same family
+- simple paraphrases of already generated questions
+
+Prefer:
+- new combinations of constraints
+- new reasoning paths
+- schema-faithful variety over superficial wording changes
+- natural but clearly non-trivial questions
+
+Keep the same grounding quality as in the stronger accepted empirical batches.
+
+Return only these fields for each item:
+- `question`
+- `gold_sparql`
+- `family`
+- `answer_type`
+
+Do not include any other metadata fields.
+
+`answer_type` must be one of:
+- `resource`
+- `string`
+- `number`
+- `date`
+
+Do not use values such as:
+- `factoid`
+- `non_factoid`
 
 Return valid JSON only.
+Return a JSON object with key `"items"`.

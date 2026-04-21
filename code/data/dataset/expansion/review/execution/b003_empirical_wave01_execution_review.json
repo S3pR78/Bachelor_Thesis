@@ -1,0 +1,742 @@
+{
+  "candidate_file": "code/data/dataset/expansion/candidates/b003_empirical_wave01_candidates.json",
+  "sparql_endpoint": "https://www.orkg.org/triplestore",
+  "summary": {
+    "total_items": 50,
+    "ok_count": 50,
+    "error_count": 0,
+    "skipped_count": 0,
+    "empty_result_count": 11,
+    "green_count": 39,
+    "yellow_count": 11,
+    "red_count": 0
+  },
+  "results": [
+    {
+      "id": "b003_empirical_w01_001",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers reported both qualitative and quantitative collected data?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 608,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R1471727; paperLabel=A Data-Driven Approach for Finding Requirements Relevant Feedback from TikTok and YouTube",
+        "paper=http://orkg.org/orkg/resource/R1490995; paperLabel=A Requirements-Driven Platform for Validating Field Operations of Small Uncrewed Aerial Vehicles",
+        "paper=http://orkg.org/orkg/resource/R1493955; paperLabel=A Transformer-based Approach for Abstractive Summarization of Requirements from Obligations in Software Engineering Contracts"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_002",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers published after 2018 reported both recall and precision but no accuracy?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b003_empirical_w01_003",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which data collection method types are reported in papers that used interviews and mentioned external validity threats?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 2,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "method_type=http://orkg.org/orkg/resource/R691450; method_type_label=interview",
+        "method_type=http://orkg.org/orkg/resource/R691499; method_type_label=survey"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_004",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which statistical techniques are reported in papers that reported an alternative hypothesis and a research question answer?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b003_empirical_w01_005",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which venue series are reported for papers that mention both construct and reliability threats?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 2,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "venue=http://orkg.org/orkg/resource/R662636; venue_name=IEEE International Requirements Engineering Conference",
+        "venue=http://orkg.org/orkg/resource/R723746; venue_name=International Working Conference on Requirements Engineering: Foundation for Software Quality"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_006",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which machine learning algorithms are reported in papers that reported accuracy and f-score?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 132,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "alg=http://orkg.org/orkg/resource/R1471751; alg_label=GPT-2",
+        "alg=http://orkg.org/orkg/resource/R1471752; alg_label=XLM-RoBERTa",
+        "alg=http://orkg.org/orkg/resource/R1471753; alg_label=BERTopic"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_007",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which hypothesis types are reported in papers that highlighted the research question in text and also reported a research question answer?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b003_empirical_w01_008",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers reported quantitative data and a boxplot?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b003_empirical_w01_009",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which data type resources are reported for papers published in the IEEE International Requirements Engineering Conference?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 106,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "dtype=http://orkg.org/orkg/resource/R1471742; dtype_label=Data Type",
+        "dtype=http://orkg.org/orkg/resource/R1493263; dtype_label=Data Type",
+        "dtype=http://orkg.org/orkg/resource/R1495565; dtype_label=Data Type"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_010",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which method types are reported for papers that also reported mean and median?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 8,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "method_type=http://orkg.org/orkg/resource/R691452; method_type_label=secondary research",
+        "method_type=http://orkg.org/orkg/resource/R691503; method_type_label=study",
+        "method_type=http://orkg.org/orkg/resource/R691447; method_type_label=case study"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_011",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers reported both generalizability and repeatability threats?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 777,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R1471727; paperLabel=A Data-Driven Approach for Finding Requirements Relevant Feedback from TikTok and YouTube",
+        "paper=http://orkg.org/orkg/resource/R1490995; paperLabel=A Requirements-Driven Platform for Validating Field Operations of Small Uncrewed Aerial Vehicles",
+        "paper=http://orkg.org/orkg/resource/R1493955; paperLabel=A Transformer-based Approach for Abstractive Summarization of Requirements from Obligations in Software Engineering Contracts"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_012",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers reported a hidden research question and at least one subquestion?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 24,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R1543501; paperLabel=Quantifying Requirements Technical Debt: A Systematic Mapping Study and a Conceptual Model",
+        "paper=http://orkg.org/orkg/resource/R1556946; paperLabel=The Impact of Requirements Artifacts on Efficiency in Agile Development: A Case Study",
+        "paper=http://orkg.org/orkg/resource/R193070; paperLabel=Non-functional requirements for machine learning: understanding current use and challenges in industry"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_013",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers published before 2017 reported a null hypothesis and precision?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b003_empirical_w01_014",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers reported a data collection URL and qualitative collected data?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 262,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R1471727; paperLabel=A Data-Driven Approach for Finding Requirements Relevant Feedback from TikTok and YouTube",
+        "paper=http://orkg.org/orkg/resource/R1490995; paperLabel=A Requirements-Driven Platform for Validating Field Operations of Small Uncrewed Aerial Vehicles",
+        "paper=http://orkg.org/orkg/resource/R1493955; paperLabel=A Transformer-based Approach for Abstractive Summarization of Requirements from Obligations in Software Engineering Contracts"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_015",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What method names are reported for papers that reported both qualitative and quantitative collected data?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 166,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "method_name=market research and analysis",
+        "method_name=questionnaire",
+        "method_name=case study"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_016",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What venue names are reported for papers that mentioned both recall and precision?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "venue_name=IEEE International Requirements Engineering Conference"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_017",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What hypothesis statements are reported for papers that reported external validity threats?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b003_empirical_w01_018",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What research question texts are reported for papers that used interviews and mentioned internal validity threats?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 196,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "rq_text=What is the current practice of using traceability\nin software projects?",
+        "rq_text=What are practitioners’ thoughts on using eye\ntracking to automatically generate traceability links?",
+        "rq_text=What are current practices to manage requirements\nin software projects?"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_019",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What data collection URLs are reported for papers that reported quantitative data and a research question answer?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 338,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "url=https://doi.org/10.5281/zenodo.8088427",
+        "url=https://doi.org/10.5281/ zenodo.8140927",
+        "url=https://zenodo.org/record/8026646."
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_020",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What descriptions are reported for research problems in papers that mentioned construct validity threats?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 2,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "problem_desc=This research problem is about synthesizing a comprehensive, up-to-date, and long-term body of empirical research knowledge in the field of requirements engineering.",
+        "problem_desc=The task of classifying (natural language) requirements into certain classes."
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_021",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What method type labels are reported for papers that reported both a boxplot and a median?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 8,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "method_type_label=secondary research",
+        "method_type_label=study",
+        "method_type_label=case study"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_022",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What statistical technique labels are reported for papers that reported an alternative hypothesis?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b003_empirical_w01_023",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What question texts are reported for subquestions in papers that reported a null hypothesis?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b003_empirical_w01_024",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What data type labels are reported for collected data in papers that reported a research data URL?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 3,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "dtype_label=Data Type",
+        "dtype_label=qualitative",
+        "dtype_label=qualitative and quantitative"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_025",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What answer texts are reported for research question answers in papers that reported both precision and recall?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 24,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "rqa=http://orkg.org/orkg/resource/R1471737",
+        "rqa=http://orkg.org/orkg/resource/R1495161",
+        "rqa=http://orkg.org/orkg/resource/R1543465"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_026",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What method names are reported for papers that reported both mean and standard deviation?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 149,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "method_name=market research and analysis",
+        "method_name=questionnaire",
+        "method_name=case study"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_027",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What hypothesis type labels are reported for papers that reported a research question answer and a hypothesis statement?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b003_empirical_w01_028",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What venue names are reported for papers that mentioned generalizability threats and were published after 2020?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 2,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "venue_name=IEEE International Requirements Engineering Conference",
+        "venue_name=International Working Conference on Requirements Engineering: Foundation for Software Quality"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_029",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers reported both qualitative and quantitative collected data and mentioned internal validity threats?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=608"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_030",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers reported both recall and precision but not accuracy?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=0"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_031",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers used interviews as a data collection method and reported external validity threats?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=102"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_032",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers reported a null hypothesis together with a statistical technique?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=0"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_033",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers reported at least one machine learning metric and at least one machine learning algorithm?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=117"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_034",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers reported a boxplot and a median?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=504"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_035",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers reported construct validity and reliability threats?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=777"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_036",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers reported a research question answer that was highlighted in text?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=778"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_037",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many distinct data collection method names are reported in papers with quantitative data?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=166"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_038",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers reported a research data URL and a method type?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=262"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_039",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers reported both mean and standard deviation but no variance?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=0"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_040",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers were published in the IEEE International Requirements Engineering Conference and reported both a research question and a subquestion?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=24"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_041",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In which publication years were papers that reported both qualitative and quantitative data published?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 33,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=1993",
+        "year=1994",
+        "year=1995"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_042",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In which publication years were papers that reported interviews and external validity threats published?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 29,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=1994",
+        "year=1995",
+        "year=1996"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_043",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In which publication years after 2018 were papers that reported both precision and recall but no accuracy published?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b003_empirical_w01_044",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In which publication years were papers with a null hypothesis and a statistical technique published?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b003_empirical_w01_045",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "Which publication years are associated with papers that reported a boxplot and median?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 33,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=1993",
+        "year=1994",
+        "year=1995"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_046",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "Which publication years are associated with papers that reported machine learning algorithms and f-score?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 26,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=1995",
+        "year=2001",
+        "year=2002"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_047",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "Which publication years are associated with papers published in the IEEE International Requirements Engineering Conference and reporting construct validity threats?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 33,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=1993",
+        "year=1994",
+        "year=1995"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_048",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In which publication years were papers that reported a research question answer and a subquestion published?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 15,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=1995",
+        "year=2007",
+        "year=2008"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_049",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "Which publication years are associated with papers that reported both mean and standard deviation?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 33,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=1993",
+        "year=1994",
+        "year=1995"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b003_empirical_w01_050",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In which publication years were papers that reported a data collection URL and a method type published?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 27,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=1999",
+        "year=2000",
+        "year=2001"
+      ],
+      "review_bucket": "green"
+    }
+  ]
+}
