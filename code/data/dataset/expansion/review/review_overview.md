@@ -102,6 +102,28 @@ Action:
 
 ----
 
+### b002_empirical
+Status: **usable**
+
+Retain:
+- b002_empirical_003
+- b002_empirical_004
+- b002_empirical_005
+- b002_empirical_006
+- b002_empirical_009
+
+Review/repair:
+- b002_empirical_001
+- b002_empirical_002
+- b002_empirical_007
+- b002_empirical_008
+- b002_empirical_010
+
+Notes:
+- batch objective is visible and useful
+- strongest risks are slightly artificial operator-driven questions and some ranking/query-phrasing mismatches
+- batch is usable, but selective retention is better than blind acceptance
+
 ### b002_nlp4re
 Status: **usable**
 

@@ -59,6 +59,51 @@
     "recommended_action": "review_or_repair"
   },
   {
+    "candidate_file": "code/data/dataset/expansion/candidates/b002_empirical_candidates.json",
+    "id": "b002_empirical_007",
+    "family": "empirical_research_practice",
+    "severity": "medium",
+    "status": "flagged",
+    "issue_types": [
+      "ranking_query_issue",
+      "projection_question_mismatch"
+    ],
+    "notes": [
+      "Question likely sounds stricter than the actual ranking/top-k behavior of the query."
+    ],
+    "recommended_action": "review_or_repair"
+  },
+  {
+    "candidate_file": "code/data/dataset/expansion/candidates/b002_empirical_candidates.json",
+    "id": "b002_empirical_008",
+    "family": "empirical_research_practice",
+    "severity": "medium",
+    "status": "flagged",
+    "issue_types": [
+      "ranking_query_issue",
+      "projection_question_mismatch"
+    ],
+    "notes": [
+      "Question likely sounds stricter than the actual ranking/top-k behavior of the query."
+    ],
+    "recommended_action": "review_or_repair"
+  },
+  {
+    "candidate_file": "code/data/dataset/expansion/candidates/b002_empirical_candidates.json",
+    "id": "b002_empirical_010",
+    "family": "empirical_research_practice",
+    "severity": "medium",
+    "status": "flagged",
+    "issue_types": [
+      "ranking_query_issue",
+      "projection_question_mismatch"
+    ],
+    "notes": [
+      "Question likely sounds stricter than the actual ranking/top-k behavior of the query."
+    ],
+    "recommended_action": "review_or_repair"
+  },
+  {
     "candidate_file": "code/data/dataset/expansion/candidates/b003_nlp4re_part1_candidates.json",
     "id": "b003_nlp4re_001",
     "family": "nlp4re",
