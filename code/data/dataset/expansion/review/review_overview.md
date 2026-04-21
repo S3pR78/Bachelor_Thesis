@@ -38,11 +38,28 @@ Action:
 - keep as candidate batch
 - include in later manual/schema review
 
+### b001_empirical
+Status: **strong**
+
 Retain:
-- 9 entries directly usable as candidate pool
+- b001_empirical_001
+- b001_empirical_002
+- b001_empirical_003
+- b001_empirical_004
+- b001_empirical_005
+- b001_empirical_006
+- b001_empirical_007
+- b001_empirical_008
+- b001_empirical_009
+- b001_empirical_010
 
 Review/repair:
-- 1 entry flagged for suspicious predicate usage
+- none currently required
+
+Notes:
+- batch is broadly usable
+- no major recurring placeholder pattern stood out in initial review
+
 
 #### b001_empirical
 Status: **strong**
@@ -58,6 +75,12 @@ Action:
 - include in later manual/schema review
 
 ---
+
+Retain:
+- 9 entries directly usable as candidate pool
+
+Review/repair:
+- 1 entry flagged for suspicious predicate usage
 
 ### B002 — Missing query components
 
