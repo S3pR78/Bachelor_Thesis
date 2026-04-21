@@ -37,10 +37,11 @@ def merge_json_files(input_files, output_file):
 
 # Deine Dateiliste
 dateien = [
-    "/home/s3pr/UNI/BT/code/data/dataset/empirical_research/merged.json",
-    "/home/s3pr/UNI/BT/code/data/dataset/nlp4re/merged.json"
+    "/home/s3pr/UNI/BT/code/data/dataset/expansion/selected/green_candidates_enriched_v2.json",
+    "/home/s3pr/UNI/BT/code/data/dataset/expansion/selected/yellow_candidates_merged_enriched.json",
+    "/home/s3pr/UNI/BT/code/data/dataset/merged/benchmark_merged_v1.json"
 ]
 
 # Ausführung des Programms
 if __name__ == "__main__":
-    merge_json_files(dateien, "merged_output.json")
+    merge_json_files(dateien, "all_candidates_master.json")
