@@ -100,6 +100,30 @@ Action:
 - review suspicious entries individually
 - use as a source for partial retention rather than blind acceptance
 
+----
+
+### b002_nlp4re
+Status: **usable**
+
+Retain:
+- b002_nlp4re_004
+- b002_nlp4re_005
+- b002_nlp4re_006
+- b002_nlp4re_009
+
+Review/repair:
+- b002_nlp4re_001
+- b002_nlp4re_002
+- b002_nlp4re_003
+- b002_nlp4re_007
+- b002_nlp4re_008
+- b002_nlp4re_010
+
+Notes:
+- batch objective is visible: REGEX, LIMIT, MIN, AVG appear
+- strongest issues are suspicious predicates and ranking-query phrasing mismatches
+- batch is usable, but selective retention is better than blind acceptance
+
 #### b002_empirical
 Status: **usable**
 

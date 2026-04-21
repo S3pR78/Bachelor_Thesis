@@ -1,6 +1,10 @@
 {
   "orkgp:HAS_EVALUATION": {
     "status": "needs_mapping_review",
-    "notes": "Placeholder-style predicate observed repeatedly in generated NLP4RE queries. Confirm exact grounded family path before replacement."
+    "notes": "Repeated placeholder-style predicate in generated NLP4RE queries."
+  },
+  "orkgp:release": {
+    "status": "needs_mapping_review",
+    "notes": "Repeated generic release predicate in generated NLP4RE queries; confirm grounded family path."
   }
 }
