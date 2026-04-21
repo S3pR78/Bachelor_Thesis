@@ -24,13 +24,29 @@ Rules:
 4. Do not change negation, temporal scope, quantity, ranking intent, comparison intent, or missing-information intent.
 5. Do not make the wording vague.
 6. Keep the paraphrase natural and academically plausible.
-7. Return JSON only in the form: {"paraphrase": "..."}
+7. Use noticeably different wording from the original question.
+8. Return JSON only in the form: {"paraphrase": "..."}
 """
 
 USER_PROMPT_TEMPLATE = """Original question:
 {question}
 
 Generate exactly one English paraphrase that preserves the original meaning exactly.
+"""
+
+RETRY_USER_PROMPT_TEMPLATE = """Original question:
+{question}
+
+Your previous attempt was not acceptable because:
+{reason}
+
+Generate exactly one English paraphrase that:
+- preserves the meaning exactly
+- uses clearly different wording
+- keeps the same answer scope
+- keeps negation, temporal constraints, comparison meaning, ranking meaning, and missing-information meaning unchanged
+
+Return JSON only in the form: {{"paraphrase": "..."}}.
 """
 
 
@@ -64,6 +80,19 @@ def normalize_text(text: str) -> str:
     return " ".join(text.strip().split())
 
 
+def normalize_question_punctuation(text: str, original: str) -> str:
+    cleaned = text.strip()
+    original_has_qmark = original.strip().endswith("?")
+    cleaned_has_qmark = cleaned.endswith("?")
+
+    if original_has_qmark and not cleaned_has_qmark:
+        cleaned = cleaned.rstrip(".! ") + "?"
+    elif not original_has_qmark and cleaned_has_qmark:
+        cleaned = cleaned.rstrip("?").rstrip()
+
+    return cleaned
+
+
 def is_bad_paraphrase(original: str, paraphrase: str) -> str | None:
     original_norm = normalize_text(original)
     paraphrase_norm = normalize_text(paraphrase)
@@ -74,10 +103,38 @@ def is_bad_paraphrase(original: str, paraphrase: str) -> str | None:
     if paraphrase_norm == original_norm:
         return "paraphrase is identical to original"
 
-    if paraphrase_norm.endswith("?") != original_norm.endswith("?"):
-        return "question punctuation mismatch"
-
     return None
+
+
+def get_usage_counts(response: Any) -> tuple[int, int]:
+    usage = getattr(response, "usage", None)
+    if usage is None:
+        return 0, 0
+
+    input_tokens = int(getattr(usage, "input_tokens", 0) or 0)
+    output_tokens = int(getattr(usage, "output_tokens", 0) or 0)
+    return input_tokens, output_tokens
+
+
+def estimate_cost_usd(
+    model_name: str,
+    input_tokens: int,
+    output_tokens: int,
+) -> float | None:
+    pricing_per_million = {
+        "gpt-5.4-mini": {"input": 0.75, "output": 4.50},
+        "gpt-5.4": {"input": 2.50, "output": 15.00},
+        "gpt-5-mini": {"input": 0.25, "output": 2.00},
+        "gpt-5": {"input": 1.25, "output": 10.00},
+    }
+
+    pricing = pricing_per_million.get(model_name)
+    if pricing is None:
+        return None
+
+    input_cost = (input_tokens / 1_000_000) * pricing["input"]
+    output_cost = (output_tokens / 1_000_000) * pricing["output"]
+    return input_cost + output_cost
 
 
 def build_request_kwargs(
@@ -129,16 +186,14 @@ def build_request_kwargs(
     return request_kwargs
 
 
-def generate_paraphrase(
+def generate_paraphrase_once(
     client: Any,
     model_name: str,
-    question: str,
+    user_prompt: str,
     max_output_tokens: int,
     reasoning_effort: str,
     temperature: float,
-) -> str:
-    user_prompt = USER_PROMPT_TEMPLATE.format(question=question)
-
+) -> tuple[str, int, int]:
     request_kwargs = build_request_kwargs(
         model_name=model_name,
         system_prompt=SYSTEM_PROMPT,
@@ -169,7 +224,52 @@ def generate_paraphrase(
     if not isinstance(paraphrase, str):
         raise ValueError("Model output did not contain a valid 'paraphrase' string.")
 
-    return paraphrase.strip()
+    input_tokens, output_tokens = get_usage_counts(response)
+    return paraphrase.strip(), input_tokens, output_tokens
+
+
+def generate_paraphrase_with_retries(
+    client: Any,
+    model_name: str,
+    question: str,
+    max_output_tokens: int,
+    reasoning_effort: str,
+    temperature: float,
+    max_attempts: int,
+) -> tuple[str, int, int]:
+    total_input_tokens = 0
+    total_output_tokens = 0
+    last_reason = "initial attempt"
+
+    for attempt in range(1, max_attempts + 1):
+        if attempt == 1:
+            user_prompt = USER_PROMPT_TEMPLATE.format(question=question)
+        else:
+            user_prompt = RETRY_USER_PROMPT_TEMPLATE.format(
+                question=question,
+                reason=last_reason,
+            )
+
+        paraphrase, input_tokens, output_tokens = generate_paraphrase_once(
+            client=client,
+            model_name=model_name,
+            user_prompt=user_prompt,
+            max_output_tokens=max_output_tokens,
+            reasoning_effort=reasoning_effort,
+            temperature=temperature,
+        )
+
+        total_input_tokens += input_tokens
+        total_output_tokens += output_tokens
+
+        paraphrase = normalize_question_punctuation(paraphrase, question)
+        bad_reason = is_bad_paraphrase(question, paraphrase)
+        if bad_reason is None:
+            return paraphrase, total_input_tokens, total_output_tokens
+
+        last_reason = bad_reason
+
+    raise ValueError(last_reason)
 
 
 def add_paraphrases(
@@ -181,12 +281,16 @@ def add_paraphrases(
     temperature: float,
     overwrite_existing: bool,
     sleep_seconds: float,
+    max_attempts: int,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     updated_items: list[dict[str, Any]] = []
 
     generated_count = 0
     skipped_existing_count = 0
     failed_count = 0
+
+    total_input_tokens = 0
+    total_output_tokens = 0
 
     failures: list[dict[str, str]] = []
 
@@ -212,18 +316,18 @@ def add_paraphrases(
             continue
 
         try:
-            paraphrase = generate_paraphrase(
+            paraphrase, input_tokens, output_tokens = generate_paraphrase_with_retries(
                 client=client,
                 model_name=model_name,
                 question=question,
                 max_output_tokens=max_output_tokens,
                 reasoning_effort=reasoning_effort,
                 temperature=temperature,
+                max_attempts=max_attempts,
             )
 
-            bad_reason = is_bad_paraphrase(question, paraphrase)
-            if bad_reason is not None:
-                raise ValueError(bad_reason)
+            total_input_tokens += input_tokens
+            total_output_tokens += output_tokens
 
             new_item["paraphrased_questions"] = [paraphrase]
             generated_count += 1
@@ -237,11 +341,20 @@ def add_paraphrases(
         if sleep_seconds > 0:
             time.sleep(sleep_seconds)
 
+    estimated_cost_usd = estimate_cost_usd(
+        model_name=model_name,
+        input_tokens=total_input_tokens,
+        output_tokens=total_output_tokens,
+    )
+
     summary = {
         "total_items": len(items),
         "generated_count": generated_count,
         "skipped_existing_count": skipped_existing_count,
         "failed_count": failed_count,
+        "total_input_tokens": total_input_tokens,
+        "total_output_tokens": total_output_tokens,
+        "estimated_cost_usd": estimated_cost_usd,
         "failures": failures,
     }
 
@@ -281,7 +394,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--max-output-tokens",
         type=int,
-        default=200,
+        default=300,
         help="Maximum output tokens per paraphrase generation.",
     )
     parser.add_argument(
@@ -300,6 +413,12 @@ def build_parser() -> argparse.ArgumentParser:
         type=float,
         default=0.0,
         help="Optional pause between requests.",
+    )
+    parser.add_argument(
+        "--max-attempts",
+        type=int,
+        default=3,
+        help="Maximum number of attempts per entry.",
     )
     parser.add_argument(
         "--overwrite",
@@ -337,6 +456,7 @@ def main() -> int:
         temperature=args.temperature,
         overwrite_existing=args.overwrite_existing,
         sleep_seconds=args.sleep_seconds,
+        max_attempts=args.max_attempts,
     )
 
     save_json_file(output_path, updated_items, overwrite=args.overwrite)
@@ -345,6 +465,11 @@ def main() -> int:
     print(f"Saved paraphrased dataset to: {output_path}")
     print(f"Saved paraphrase summary to: {summary_output_path}")
     print(json.dumps(summary, indent=2, ensure_ascii=False))
+
+    if summary["estimated_cost_usd"] is not None:
+        print(f"Estimated total API cost: ${summary['estimated_cost_usd']:.6f}")
+    else:
+        print(f"Estimated total API cost: unavailable for model '{args.model}'")
 
     return 0
 
