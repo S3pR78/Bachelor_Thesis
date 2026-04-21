@@ -1,0 +1,289 @@
+{
+  "input_count": 817,
+  "unique_count": 762,
+  "removed_count": 55,
+  "duplicate_question_count": 5,
+  "duplicate_query_count": 9,
+  "duplicate_pair_count": 41,
+  "duplicate_questions": [
+    {
+      "duplicate_id": "295",
+      "kept_id": "73",
+      "reason": "duplicate_question"
+    },
+    {
+      "duplicate_id": "315",
+      "kept_id": "73",
+      "reason": "duplicate_question"
+    },
+    {
+      "duplicate_id": "457",
+      "kept_id": "292",
+      "reason": "duplicate_question"
+    },
+    {
+      "duplicate_id": "612",
+      "kept_id": "89",
+      "reason": "duplicate_question"
+    },
+    {
+      "duplicate_id": "803",
+      "kept_id": "798",
+      "reason": "duplicate_question"
+    }
+  ],
+  "duplicate_queries": [
+    {
+      "duplicate_id": "266",
+      "kept_id": "86",
+      "reason": "duplicate_gold_sparql"
+    },
+    {
+      "duplicate_id": "269",
+      "kept_id": "40",
+      "reason": "duplicate_gold_sparql"
+    },
+    {
+      "duplicate_id": "301",
+      "kept_id": "84",
+      "reason": "duplicate_gold_sparql"
+    },
+    {
+      "duplicate_id": "448",
+      "kept_id": "66",
+      "reason": "duplicate_gold_sparql"
+    },
+    {
+      "duplicate_id": "471",
+      "kept_id": "288",
+      "reason": "duplicate_gold_sparql"
+    },
+    {
+      "duplicate_id": "754",
+      "kept_id": "752",
+      "reason": "duplicate_gold_sparql"
+    },
+    {
+      "duplicate_id": "756",
+      "kept_id": "753",
+      "reason": "duplicate_gold_sparql"
+    },
+    {
+      "duplicate_id": "761",
+      "kept_id": "753",
+      "reason": "duplicate_gold_sparql"
+    },
+    {
+      "duplicate_id": "767",
+      "kept_id": "766",
+      "reason": "duplicate_gold_sparql"
+    }
+  ],
+  "duplicate_pairs": [
+    {
+      "duplicate_id": "8",
+      "kept_id": "1",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "9",
+      "kept_id": "2",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "10",
+      "kept_id": "3",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "11",
+      "kept_id": "4",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "12",
+      "kept_id": "5",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "13",
+      "kept_id": "6",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "14",
+      "kept_id": "7",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "15",
+      "kept_id": "2",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "16",
+      "kept_id": "3",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "17",
+      "kept_id": "4",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "18",
+      "kept_id": "5",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "19",
+      "kept_id": "6",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "20",
+      "kept_id": "7",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "21",
+      "kept_id": "1",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "22",
+      "kept_id": "2",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "23",
+      "kept_id": "3",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "24",
+      "kept_id": "4",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "25",
+      "kept_id": "5",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "26",
+      "kept_id": "6",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "27",
+      "kept_id": "7",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "28",
+      "kept_id": "1",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "29",
+      "kept_id": "2",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "30",
+      "kept_id": "3",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "31",
+      "kept_id": "4",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "32",
+      "kept_id": "5",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "33",
+      "kept_id": "6",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "34",
+      "kept_id": "7",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "35",
+      "kept_id": "1",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "275",
+      "kept_id": "54",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "562",
+      "kept_id": "559",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "563",
+      "kept_id": "560",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "564",
+      "kept_id": "561",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "565",
+      "kept_id": "559",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "566",
+      "kept_id": "561",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "567",
+      "kept_id": "559",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "568",
+      "kept_id": "560",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "569",
+      "kept_id": "561",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "570",
+      "kept_id": "559",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "571",
+      "kept_id": "560",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "572",
+      "kept_id": "561",
+      "reason": "duplicate_question_and_query"
+    },
+    {
+      "duplicate_id": "573",
+      "kept_id": "559",
+      "reason": "duplicate_question_and_query"
+    }
+  ]
+}
