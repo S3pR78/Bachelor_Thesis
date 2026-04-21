@@ -1,0 +1,749 @@
+{
+  "candidate_file": "code/data/dataset/expansion/candidates/b002_empirical_wave01_candidates.json",
+  "sparql_endpoint": "https://www.orkg.org/triplestore",
+  "summary": {
+    "total_items": 50,
+    "ok_count": 50,
+    "error_count": 0,
+    "skipped_count": 0,
+    "empty_result_count": 4,
+    "green_count": 46,
+    "yellow_count": 4,
+    "red_count": 0
+  },
+  "results": [
+    {
+      "id": "b002_empirical_w01_001",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which 10 papers report a data collection method whose name contains interview?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 10,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R227482; paperLabel=A Case Study of Building Shared Understanding of Non-Functional Requirements in a Remote Software Organization",
+        "paper=http://orkg.org/orkg/resource/R194698; paperLabel=A Qualitative Study on using GuideGen to Keep Requirements and Acceptance Tests Aligned",
+        "paper=http://orkg.org/orkg/resource/R680008; paperLabel=A field study of requirements engineering practices in information systems development"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_002",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which 10 papers report a data collection method whose name contains survey?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 10,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R195866; paperLabel=A Case Study on a Specification Approach Using Activity Diagrams in Requirements Documents",
+        "paper=http://orkg.org/orkg/resource/R198681; paperLabel=A Theory of Vagueness and Privacy Risk Perception",
+        "paper=http://orkg.org/orkg/resource/R200106; paperLabel=A quality model for the systematic assessment of requirements traceability"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_003",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report a data collection method whose name contains questionnaire?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 65,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R195857; paperLabel=A Case Study on Evaluating the Relevance of Some Rules for Writing Requirements Through an Online Survey",
+        "paper=http://orkg.org/orkg/resource/R1490995; paperLabel=A Requirements-Driven Platform for Validating Field Operations of Small Uncrewed Aerial Vehicles",
+        "paper=http://orkg.org/orkg/resource/R671037; paperLabel=A usability-oriented approach to requirements engineering"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_004",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report a data collection method whose name contains focus group?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 10,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R192398; paperLabel=Agile Teams’ Perception in Privacy Requirements Elicitation: LGPD’s compliance in Brazil",
+        "paper=http://orkg.org/orkg/resource/R713795; paperLabel=An analysis of the requirements traceability problem",
+        "paper=http://orkg.org/orkg/resource/R583172; paperLabel=Customer experience requirements for multi-platform service interaction: bringing services marketing to the elicitation of user requirements"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_005",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report a machine learning algorithm whose label contains svm?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_empirical_w01_006",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report a machine learning algorithm whose label contains random forest?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 13,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R108199; paperLabel=A Little Bird Told Me: Mining Tweets for Requirements and Software Evolution",
+        "paper=http://orkg.org/orkg/resource/R194345; paperLabel=A Machine Learning-Based Approach for Demarcating Requirements in Textual Specifications",
+        "paper=http://orkg.org/orkg/resource/R194360; paperLabel=Analysis of Requirements-Related Arguments in User Forums"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_007",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report a statistical technique whose label contains t-test?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 29,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R1435100; paperLabel=A Comparative Evaluation of Requirement Template Systems",
+        "paper=http://orkg.org/orkg/resource/R195201; paperLabel=An Experimental Comparison of Two Navigation Techniques for Requirements Modeling Tools",
+        "paper=http://orkg.org/orkg/resource/R194458; paperLabel=Analysing Gender Differences in Building Social Goal Models: A Quasi-Experiment"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_008",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report a statistical technique whose label contains anova?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 8,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R195986; paperLabel=Do Words Make a Difference? An Empirical Study on the Impact of Taxonomies on the Classification of Requirements",
+        "paper=http://orkg.org/orkg/resource/R680058; paperLabel=How people categorise requirements for reuse: a natural approach",
+        "paper=http://orkg.org/orkg/resource/R265019; paperLabel=On human analyst performance in assisted requirements tracing: Statistical analysis"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_009",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report a null hypothesis?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 28,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R198944; paperLabel=Acquiring Creative Requirements from the Crowd: Understanding the Influences of Personality and Creative Potential in Crowd RE",
+        "paper=http://orkg.org/orkg/resource/R194401; paperLabel=An Approach for Reviewing Security-Related Aspects in Agile Requirements Specifications of Web Applications",
+        "paper=http://orkg.org/orkg/resource/R576765; paperLabel=An Empirical Quality Assessment of Automotive Use Cases"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_010",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report a research question answer highlighted in the text?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 778,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R556363; paperLabel=A Case Study in Systematic Improvement of Language for Requirements",
+        "paper=http://orkg.org/orkg/resource/R227482; paperLabel=A Case Study of Building Shared Understanding of Non-Functional Requirements in a Remote Software Organization",
+        "paper=http://orkg.org/orkg/resource/R195857; paperLabel=A Case Study on Evaluating the Relevance of Some Rules for Writing Requirements Through an Online Survey"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_011",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report a subquestion with a question type?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 23,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R111988; paperLabel=A Needle in a Haystack: What Do Twitter Users Say about Software?",
+        "paper=http://orkg.org/orkg/resource/R680008; paperLabel=A field study of requirements engineering practices in information systems development",
+        "paper=http://orkg.org/orkg/resource/R1500294; paperLabel=An Experiment on the Effects of Using Color to Visualize Requirements Analysis Tasks"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_012",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers mention threats to internal validity?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 777,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R556363; paperLabel=A Case Study in Systematic Improvement of Language for Requirements",
+        "paper=http://orkg.org/orkg/resource/R227482; paperLabel=A Case Study of Building Shared Understanding of Non-Functional Requirements in a Remote Software Organization",
+        "paper=http://orkg.org/orkg/resource/R195857; paperLabel=A Case Study on Evaluating the Relevance of Some Rules for Writing Requirements Through an Online Survey"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_013",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers mention threats to external validity?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 777,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R556363; paperLabel=A Case Study in Systematic Improvement of Language for Requirements",
+        "paper=http://orkg.org/orkg/resource/R227482; paperLabel=A Case Study of Building Shared Understanding of Non-Functional Requirements in a Remote Software Organization",
+        "paper=http://orkg.org/orkg/resource/R195857; paperLabel=A Case Study on Evaluating the Relevance of Some Rules for Writing Requirements Through an Online Survey"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_014",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report either a statistical technique or a machine learning algorithm in data analysis?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 203,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "paper=http://orkg.org/orkg/resource/R195857; paperLabel=A Case Study on Evaluating the Relevance of Some Rules for Writing Requirements Through an Online Survey",
+        "paper=http://orkg.org/orkg/resource/R1435100; paperLabel=A Comparative Evaluation of Requirement Template Systems",
+        "paper=http://orkg.org/orkg/resource/R1471727; paperLabel=A Data-Driven Approach for Finding Requirements Relevant Feedback from TikTok and YouTube"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_015",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What are the exact names of data collection methods reported in papers that use qualitative data?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 105,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "methodNameLabel=Delphi method",
+        "methodNameLabel=Walkthrough",
+        "methodNameLabel=Wideband Delphi estimation method"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_016",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What are the exact names of data collection methods reported in papers that use quantitative data?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 3,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "methodNameLabel=case study",
+        "methodNameLabel=experiment",
+        "methodNameLabel=questionnaire"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_017",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What research question texts are reported in papers that mention construct validity threats?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 856,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "questionText= What are the benefits and limitations of our prototypical tool?",
+        "questionText=Across change domains, is there a significant difference in The level of project management control? ",
+        "questionText=Across change domains is there a significant difference in change cost?"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_018",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What hypothesis statements are reported in papers that use inferential statistics and an alternative hypothesis?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_empirical_w01_019",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What venue names are reported for papers that report a machine learning algorithm containing random forest?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "venueName=IEEE International Requirements Engineering Conference"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_020",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What machine learning metrics are reported in papers that use machine learning?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 18,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "metricLabel=Metrics",
+        "metricLabel=accuracy",
+        "metricLabel=accuracy, precision, recall"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_021",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What statistical techniques are reported in papers that mention reliability threats?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 72,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "techLabel=    Iglewicz and Hoaglin’s modified Z-score",
+        "techLabel=ANCOVA",
+        "techLabel=ANOVA"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_022",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What research problem descriptions are reported in papers that have a research question answer?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 2,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "problemDesc=The task of classifying (natural language) requirements into certain classes.",
+        "problemDesc=This research problem is about synthesizing a comprehensive, up-to-date, and long-term body of empirical research knowledge in the field of requirements engineering."
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_023",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What data type labels are reported for papers whose data collection method name contains survey?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 3,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "dataTypeLabel=Data Type",
+        "dataTypeLabel=qualitative",
+        "dataTypeLabel=qualitative and quantitative"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_024",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What method type labels are reported for papers whose data collection method name contains interview?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 2,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "methodTypeLabel=interview",
+        "methodTypeLabel=survey"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_025",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What measures of central tendency are reported for papers that use descriptive statistics?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_empirical_w01_026",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What value is used for the validity-threat category reported in papers that mention threats to validity but do not classify them?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b002_empirical_w01_027",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What machine learning algorithms are reported in papers that use precision?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 132,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "algoLabel=ALBERT",
+        "algoLabel=ARdoc",
+        "algoLabel=AbstFinder"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_028",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What hypothesis type labels are reported in papers that state a null hypothesis?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 2,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "htypeLabel=alternative hypothesis",
+        "htypeLabel=null hypothesis"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_029",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers report a research question but no research question answer?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=0"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_030",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers report at least one machine learning metric?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=117"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_031",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers report both count and percent as measures of frequency?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=503"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_032",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers report a boxplot in descriptive statistics?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=504"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_033",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers report threats to validity?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=777"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_034",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many different venue series are reported for papers that mention descriptive validity threats?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=2"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_035",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "What is the average publication year of papers that report a quantitative data type?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "avgYear=2007"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_036",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "What is the earliest publication year among papers that report an interview-based data collection method?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "earliestYear=1994"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_037",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "What is the minimum publication year among papers that report a null hypothesis?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "minYear=2002"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_038",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "What is the average publication year of papers that report a research question highlighted in the text?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "avgYear=2008.822393822393822"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_039",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers report both a hypothesis statement and a statistical technique?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=34"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_040",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "What is the average publication year of papers that mention external validity threats?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "avgYear=2008.822393822393822"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_041",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In what year was the earliest paper published among those that report a survey-based data collection method?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "earliestYear=1996"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_042",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In what year was the earliest paper published among those that mention construct validity threats?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "earliestYear=1993"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_043",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In what year was the earliest paper published among those that report recall as a machine learning metric?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "earliestYear=1995"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_044",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In what year was the earliest paper published among those that report a research question answer highlighted in the text?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "earliestYear=1993"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_045",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In what year was the earliest paper published among those that report both a data analysis method and a data collection method?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "earliestYear=1993"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_046",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In what year was the earliest paper published among those that report a qualitative data type?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "earliestYear=1995"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_047",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In what year was the earliest paper published among those that mention reliability threats?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "earliestYear=1993"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_048",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In what year was the earliest paper published among those that report a null hypothesis and a statistical technique?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "earliestYear=2002"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_049",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In what year was the earliest paper published among those that report a machine learning algorithm containing random forest?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "earliestYear=2016"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b002_empirical_w01_050",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In what year was the earliest paper published among those that mention threats to validity but do not classify them?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "green"
+    }
+  ]
+}
