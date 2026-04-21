@@ -1,0 +1,702 @@
+{
+  "candidate_file": "code/data/dataset/expansion/candidates/b001_nlp4re_wave02_candidates.json",
+  "sparql_endpoint": "https://www.orkg.org/triplestore",
+  "summary": {
+    "total_items": 50,
+    "ok_count": 50,
+    "error_count": 0,
+    "skipped_count": 0,
+    "empty_result_count": 27,
+    "green_count": 23,
+    "yellow_count": 27,
+    "red_count": 0
+  },
+  "results": [
+    {
+      "id": "b001_nlp4re_w02_001",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which NLP task types are reported for contributions that use the CoNLL-2003 dataset?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w02_002",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What natural languages are reported for datasets that are publicly available?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w02_003",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many annotators are reported for contributions that make written guidelines public?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w02_004",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year were papers published that report publicly available datasets?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w02_005",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which evaluation metrics are used for contributions that employ cross-validation?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 8,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "metric=http://orkg.org/orkg/resource/R1544436; metricLabel=Precision/Recall",
+        "metric=http://orkg.org/orkg/resource/R1544438; metricLabel=AUC",
+        "metric=http://orkg.org/orkg/resource/R1544440; metricLabel=Accuracy"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w02_006",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What license types are reported for implemented approaches released on GitHub?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 6,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "licenseTypeValue=License: Reuse only for non-commercial purposes",
+        "licenseTypeValue=License: Modification for any purposes",
+        "licenseTypeValue=No license"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w02_007",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many data sources are reported for datasets whose source domain includes information systems?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 7,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "numSources=5",
+        "numSources=3",
+        "numSources=2"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w02_008",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year were papers published that use the Reuters-21578 dataset?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w02_009",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which algorithms are reported for implemented approaches that have documentation?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 101,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "algorithm=http://orkg.org/orkg/resource/R1544519; algorithmLabel=Decision trees",
+        "algorithm=http://orkg.org/orkg/resource/R1544520; algorithmLabel=J48",
+        "algorithm=http://orkg.org/orkg/resource/R1544521; algorithmLabel=LogitBoost"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w02_010",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What validation procedures are reported for evaluations that compare against a baseline?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 9,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "validationProcedureValue=Cross-validation",
+        "validationProcedureValue=Train-test split",
+        "validationProcedureValue=Cross-project validation"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w02_011",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many data items are reported for datasets with English as the natural language?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w02_012",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year were the data produced for datasets whose source domain is automotive?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 5,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "productionTime=Not reported",
+        "productionTime=2007",
+        "productionTime=Around the time the paper was published, perhaps a couple years before"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w02_013",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which data source types are reported for datasets that come from more than one source?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 9,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "sourceType=http://orkg.org/orkg/resource/R1544225; sourceTypeLabel=Community-based open source projects",
+        "sourceType=http://orkg.org/orkg/resource/R1544226; sourceTypeLabel=Legal/regulatory documents",
+        "sourceType=http://orkg.org/orkg/resource/R1544227; sourceTypeLabel=Toy Requirements"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w02_014",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What baseline comparison details are given for evaluations that report F1?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w02_015",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many annotators are reported for annotation processes that resolve conflicts by discussion?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 8,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "numAnnotators=3",
+        "numAnnotators=8",
+        "numAnnotators=7"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w02_016",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year were papers published that report GitHub release URLs for implemented approaches?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 7,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=2017",
+        "year=2019",
+        "year=2018"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w02_017",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which NLP task output types are reported for contributions that use classification labels?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 24,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "outputType=http://orkg.org/orkg/resource/R1544170; outputTypeLabel=Words",
+        "outputType=http://orkg.org/orkg/resource/R1544174; outputTypeLabel=Binary-multi label",
+        "outputType=http://orkg.org/orkg/resource/R1544171; outputTypeLabel=Multi class-single label"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w02_018",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What annotation scheme establishment methods are reported for datasets with two annotators?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 5,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "establishmentValue=Only via class labels",
+        "establishmentValue=Written guidelines with definitions and examples",
+        "establishmentValue=Oral agreement among the taggers"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w02_019",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many data items are reported for datasets that are stored on Zenodo?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w02_020",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year were data produced for datasets that mention more than one source?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 16,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "productionTime=Between 2000 and 2010",
+        "productionTime=Not reported",
+        "productionTime=2012-2018"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w02_021",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which data source domains are reported for datasets with English natural language?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w02_022",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What conflict resolution methods are reported for annotation processes that use Cohen's kappa?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w02_023",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many annotators are reported for datasets that use token-level annotations?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w02_024",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year were papers published that report cross-validation together with F1?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w02_025",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which release formats are reported for implemented approaches released on GitHub?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 10,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "releaseFormat=http://orkg.org/orkg/resource/R1544407; releaseFormatLabel=Executable notebook",
+        "releaseFormat=http://orkg.org/orkg/resource/R1544410; releaseFormatLabel=Source code",
+        "releaseFormat=http://orkg.org/orkg/resource/R1552335; releaseFormatLabel=Tool -- standalone"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w02_026",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What running requirements are reported for implemented approaches that include Docker in their dependencies?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w02_027",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many data sources are reported for datasets whose natural language is German?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w02_028",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year were papers published that report a released tool and a baseline comparison?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 10,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=2017",
+        "year=2019",
+        "year=2018"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w02_029",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which baseline comparison types are reported for evaluations that use macro-F1?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w02_030",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What release URLs are given for implemented approaches that are released as source code?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 17,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "url=https://zenodo.org/record/1476902",
+        "url=https://github.com/isti-fmt-nemis/Domain-specific-ambiguity/tree/1.0",
+        "url=https://github.com/5Quintessential/FeatureX/"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w02_031",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many contributions report a baseline comparison and the metric accuracy?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "numContributions=10"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w02_032",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year were the data produced for datasets with token-level annotations?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w02_033",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which location types are reported for datasets that are publicly available?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w02_034",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What public availability values are reported for datasets with a CC-BY license?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w02_035",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many annotators are reported for annotation processes that share supporting material?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 12,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "numAnnotators=38",
+        "numAnnotators=2",
+        "numAnnotators=3"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w02_036",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year were papers published that report two annotators for the annotation process?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 5,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "year=2019",
+        "year=2017",
+        "year=2016"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w02_037",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which approach types are reported for implemented approaches evaluated with precision?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w02_038",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What annotator assignment methods are reported for datasets with more than two annotators?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w02_039",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many data items are reported for datasets whose source type is GitHub?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w02_040",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year were papers published that make annotation guidelines public?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w02_041",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which documentation types are reported for implemented approaches that use neural networks?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "documentationType=http://orkg.org/orkg/resource/R1544527; documentationTypeLabel=Not reported"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w02_042",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What level of application domain experience is reported for annotators in information systems datasets?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 4,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "experienceValue=None or unknown",
+        "experienceValue=Domain expert",
+        "experienceValue=Informed outsider"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w02_043",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many data items are reported for datasets with publicly available licenses?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w02_044",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year were the data produced for datasets with more than one annotator?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 16,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "productionTime=Between 2000 and 2010",
+        "productionTime=Not reported",
+        "productionTime=2018-2019"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w02_045",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which intercoder reliability metrics are reported for annotation processes that resolve conflicts by majority vote?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w02_046",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What measured agreement values are reported for annotation processes that use Cohen's kappa?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w02_047",
+      "family": "nlp4re",
+      "answer_type": "number",
+      "question": "How many contributions report English as the natural language and a token-level data format?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "numContributions=0"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b001_nlp4re_w02_048",
+      "family": "nlp4re",
+      "answer_type": "date",
+      "question": "In which year were papers published that report an annotation scheme established by consensus?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w02_049",
+      "family": "nlp4re",
+      "answer_type": "resource",
+      "question": "Which license types are reported for datasets stored in Zenodo?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b001_nlp4re_w02_050",
+      "family": "nlp4re",
+      "answer_type": "string",
+      "question": "What dependency types are reported for implemented approaches that are released on GitHub?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 3,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "dependencyValue=Open source libraries / software",
+        "dependencyValue=Not reported",
+        "dependencyValue=Proprietary libraries / software"
+      ],
+      "review_bucket": "green"
+    }
+  ]
+}
