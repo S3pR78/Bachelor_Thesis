@@ -1,0 +1,22 @@
+{
+  "total_items": 468,
+  "by_family": {
+    "nlp4re": 226,
+    "empirical_research_practice": 242
+  },
+  "by_query_type": {
+    "factoid": 325,
+    "non_factoid": 143
+  },
+  "by_answer_type": {
+    "resource": 116,
+    "string": 124,
+    "number": 133,
+    "date": 95
+  },
+  "by_complexity": {
+    "low": 384,
+    "medium": 77,
+    "high": 7
+  }
+}
