@@ -299,6 +299,29 @@ Action:
 - review a few complex entries manually
 - strong source for later hard-case selection
 
+### b005_empirical
+Status: **strong**
+
+Retain:
+- b005_empirical_001
+- b005_empirical_002
+- b005_empirical_003
+- b005_empirical_005
+- b005_empirical_006
+- b005_empirical_007
+- b005_empirical_008
+- b005_empirical_009
+- b005_empirical_010
+
+Review/repair:
+- b005_empirical_004
+
+Notes:
+- one of the strongest empirical batches
+- good family anchoring
+- good hard-case behavior with nested logic, negation, conjunction, and counting
+- one entry should be inspected for a possible query-logic mismatch
+
 ---
 
 ## Common recurring issues
