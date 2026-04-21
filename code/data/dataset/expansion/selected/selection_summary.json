@@ -1,0 +1,14 @@
+{
+  "green_count": 468,
+  "yellow_count": 132,
+  "red_count": 0,
+  "green_by_family": {
+    "nlp4re": 226,
+    "empirical_research_practice": 242
+  },
+  "yellow_by_family": {
+    "nlp4re": 74,
+    "empirical_research_practice": 58
+  },
+  "red_by_family": {}
+}
