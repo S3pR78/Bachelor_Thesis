@@ -84,23 +84,6 @@ Review/repair:
 
 ### B002 — Missing query components
 
-#### b002_nlp4re
-Status: **usable**
-
-Notes:
-- batch objective is visible: REGEX, LIMIT, MIN, AVG appear
-- several questions are understandable and useful
-- however, some entries showed:
-  - incorrect or suspicious family anchoring in earlier versions
-  - wrong answer_type values in earlier versions
-  - possible placeholder predicates such as `orkgp:HAS_EVALUATION`
-
-Action:
-- keep as candidate batch
-- review suspicious entries individually
-- use as a source for partial retention rather than blind acceptance
-
-----
 
 ### b002_empirical
 Status: **usable**
@@ -146,19 +129,7 @@ Notes:
 - strongest issues are suspicious predicates and ranking-query phrasing mismatches
 - batch is usable, but selective retention is better than blind acceptance
 
-#### b002_empirical
-Status: **usable**
 
-Notes:
-- likely similar to b002_nlp4re in role: useful but more review-sensitive than b001
-- focus on component-triggered generation means some entries may be more artificial than ideal
-- should be reviewed for naturalness and schema faithfulness
-
-Action:
-- keep as candidate batch
-- review for artificial operator usage and suspicious predicates
-
----
 
 ### B003 — Non-factoid reasoning
 
@@ -176,6 +147,25 @@ Notes:
 Action:
 - keep as candidate batch
 - review suspicious entries individually
+
+Retain:
+- b003_nlp4re_004
+- b003_nlp4re_005
+- b003_nlp4re_006
+- b003_nlp4re_008
+- b003_nlp4re_009
+
+Review/repair:
+- b003_nlp4re_001
+- b003_nlp4re_002
+- b003_nlp4re_003
+- b003_nlp4re_007
+- b003_nlp4re_010
+
+Notes:
+- later version is clearly better than the first attempt
+- several entries are strong and genuinely reasoning-oriented
+- repeated suspicious predicates remain the main repair trigger
 
 #### b003_empirical
 Status: **strong**
