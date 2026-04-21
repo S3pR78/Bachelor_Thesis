@@ -1,0 +1,640 @@
+{
+  "candidate_file": "code/data/dataset/expansion/candidates/b005_empirical_wave02_candidates.json",
+  "sparql_endpoint": "https://www.orkg.org/triplestore",
+  "summary": {
+    "total_items": 50,
+    "ok_count": 50,
+    "error_count": 0,
+    "skipped_count": 0,
+    "empty_result_count": 38,
+    "green_count": 12,
+    "yellow_count": 38,
+    "red_count": 0
+  },
+  "results": [
+    {
+      "id": "b005_empirical_w02_001",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report both a qualitative data type and a machine learning metric of accuracy?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_002",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report both internal and external validity threats?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_003",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report a data collection method whose type is qualitative and whose name is specified?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_004",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers include a null hypothesis together with at least one statistical technique?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_005",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report a research question that has at least one subquestion and a stated question type?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_006",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report a quantitative data type and a boxplot?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_007",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report both a data collection method name and at least one machine learning algorithm?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_008",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report a research paradigm and an alternative hypothesis?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_009",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers mention reliability and repeatability as threats to validity?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_010",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report both mean and standard deviation as descriptive statistics?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_011",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report a research question answer that is highlighted in text and also a question that is hidden in text?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_012",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report a problem statement that is expanded into a nested subproblem?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_013",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers report both a data analysis method and an inferential statistic?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_014",
+      "family": "empirical_research_practice",
+      "answer_type": "resource",
+      "question": "Which papers were published in the IEEE International Requirements Engineering Conference and report a research question type?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_015",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What are the exact names of the data collection methods reported in papers that mention a qualitative data type?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_016",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What research question types are reported in papers that also state their research question answer as highlighted in text?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_017",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What hypothesis statements are reported in papers whose hypothesis type is null hypothesis?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_018",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What machine learning algorithms are reported in papers that also report recall?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_019",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What statistical techniques are reported in papers that mention both mean and standard deviation?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_020",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What exact method names are reported for data collection methods in papers whose collected data are quantitative?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_021",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What labels are reported for the research paradigms in papers that also report an alternative hypothesis?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_022",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What subquestion texts are reported in papers that have a research question and a question type for the subquestion?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_023",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What URL values are reported for papers whose collected data are explicitly described?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_024",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What labels are reported for the threat categories mentioned in papers with threats to validity?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_025",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What measures of frequency are reported in papers that use descriptive statistics?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_026",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What labels are reported for the machine learning metrics in papers that also report a machine learning algorithm?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_027",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What labels are reported for venue series in papers that also report inferential statistics?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_028",
+      "family": "empirical_research_practice",
+      "answer_type": "string",
+      "question": "What labels are reported for the data types in papers that report a research data entry?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_029",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers report both qualitative data and inferential statistics?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=0"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w02_030",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers report a null hypothesis and at least one statistical technique?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=0"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w02_031",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers mention threats to validity and specifically internal validity?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=0"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w02_032",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers report a machine learning metric and a machine learning algorithm?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=0"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w02_033",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers report both mean and median as descriptive statistics?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=0"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w02_034",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers report a data collection method of type qualitative?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=0"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w02_035",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers report a subquestion with a question type?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=0"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w02_036",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers report an alternative hypothesis and a hypothesis statement?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=0"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w02_037",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers report a boxplot?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=0"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w02_038",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers were published in the IEEE International Requirements Engineering Conference and report data analysis?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=0"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w02_039",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers report quantitative data and standard deviation?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=0"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w02_040",
+      "family": "empirical_research_practice",
+      "answer_type": "number",
+      "question": "How many papers report a research paradigm together with a venue series?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 1,
+      "execution_error": null,
+      "sample_answer_preview": [
+        "count=0"
+      ],
+      "review_bucket": "green"
+    },
+    {
+      "id": "b005_empirical_w02_041",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In which years were papers published that report qualitative data and a data collection method name?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_042",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In which years were papers published that report both accuracy and precision?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_043",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In which years were papers published that mention construct validity and conclusion validity?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_044",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In which years were papers published that report a null hypothesis?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_045",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In which years were papers published that report a research question type and a subquestion?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_046",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In which years were papers published that report a boxplot and variance?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_047",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In which years were papers published that report an alternative hypothesis and a statistical technique?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_048",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In which years were papers published that report a machine learning algorithm and recall?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_049",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In which years were papers published that report the IEEE International Requirements Engineering Conference as venue?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    },
+    {
+      "id": "b005_empirical_w02_050",
+      "family": "empirical_research_practice",
+      "answer_type": "date",
+      "question": "In which years were papers published that report both data collection and data analysis?",
+      "execution_status": "ok",
+      "query_type": "select",
+      "result_cardinality": 0,
+      "execution_error": null,
+      "sample_answer_preview": [],
+      "review_bucket": "yellow"
+    }
+  ]
+}
