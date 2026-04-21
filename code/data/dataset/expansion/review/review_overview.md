@@ -134,7 +134,7 @@ Notes:
 ### B003 — Non-factoid reasoning
 
 #### b003_nlp4re
-Status: **usable**
+Status: **strong**
 
 Notes:
 - later version is clearly better than the first attempt
@@ -143,6 +143,7 @@ Notes:
   - `orkgp:HAS_EVALUATION`
   - possibly `orkgp:release`
 - some entries should be retained, others flagged for schema review
+-confirmed they exists
 
 Action:
 - keep as candidate batch
@@ -154,8 +155,6 @@ Retain:
 - b003_nlp4re_006
 - b003_nlp4re_008
 - b003_nlp4re_009
-
-Review/repair:
 - b003_nlp4re_001
 - b003_nlp4re_002
 - b003_nlp4re_003
@@ -206,7 +205,7 @@ Notes:
 ### B004 — NLP4RE priority
 
 #### b004_nlp4re
-Status: **usable**
+Status: **strong**
 
 Notes:
 - generally good NLP4RE-specific focus
@@ -215,6 +214,7 @@ Notes:
   - `orkgp:HAS_EVALUATION`
   - `orkgp:release`
 - some entries feel more like broad template lookup than targeted priority expansion
+- confirmed they exists.
 
 Action:
 - keep as candidate batch
@@ -229,8 +229,6 @@ Retain:
 - b004_nlp4re_006
 - b004_nlp4re_007
 - b004_nlp4re_009
-
-Review/repair:
 - b004_nlp4re_004
 - b004_nlp4re_005
 - b004_nlp4re_008
@@ -255,6 +253,7 @@ Notes:
 - still contains a few suspicious predicate cases:
   - `orkgp:HAS_EVALUATION`
   - `orkgp:release`
+-confirmed they exists
 
 Action:
 - keep as candidate batch
@@ -269,8 +268,6 @@ Retain:
 - b005_nlp4re_007
 - b005_nlp4re_008
 - b005_nlp4re_010
-
-Review/repair:
 - b005_nlp4re_001
 - b005_nlp4re_004
 - b005_nlp4re_009

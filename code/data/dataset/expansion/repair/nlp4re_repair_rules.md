@@ -20,3 +20,11 @@ This file documents review-first repair rules for generated NLP4RE candidates.
 2. family anchor issues
 3. ranking/top-k phrasing mismatches
 4. local logic mismatches
+
+## Confirmed grounded predicates
+The following predicates were initially suspected but are confirmed in the NLP4RE family grounding:
+- `orkgp:HAS_EVALUATION`
+- `orkgp:release`
+
+These should not be treated as placeholder hallucinations by default.
+Review should focus on query logic, alignment, and schema use in context.
