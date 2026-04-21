@@ -3,27 +3,18 @@ from __future__ import annotations
 import re
 
 
-PREFIX_LINE_RE = re.compile(
-    r"^\s*PREFIX\s+[A-Za-z_][\w\-]*:\s*<[^>]+>\s*$",
-    re.IGNORECASE,
-)
-
 COMMENT_LINE_RE = re.compile(r"^\s*#.*$")
 
-
-def strip_prefix_lines(query: str) -> str:
-    """
-    Remove full PREFIX lines from a SPARQL query while preserving the query body.
-    """
-    lines = query.splitlines()
-    kept_lines: list[str] = []
-
-    for line in lines:
-        if PREFIX_LINE_RE.match(line):
-            continue
-        kept_lines.append(line)
-
-    return "\n".join(kept_lines).strip()
+INLINE_PREFIX_RE = re.compile(
+    r"""
+    \s*PREFIX
+    \s+
+    [A-Za-z_][\w\-]*:
+    \s*
+    <[^>]+>
+    """,
+    re.IGNORECASE | re.VERBOSE,
+)
 
 
 def strip_leading_comment_lines(query: str) -> str:
@@ -44,6 +35,23 @@ def strip_leading_comment_lines(query: str) -> str:
         break
 
     return "\n".join(lines[start_index:]).strip()
+
+
+def strip_prefixes(query: str) -> str:
+    """
+    Remove leading PREFIX declarations whether they appear:
+    - one per line
+    - or inline in a single long line before the query body
+    """
+    remaining = query.lstrip()
+
+    while True:
+        match = INLINE_PREFIX_RE.match(remaining)
+        if not match:
+            break
+        remaining = remaining[match.end():].lstrip()
+
+    return remaining.strip()
 
 
 def normalize_whitespace(query: str) -> str:
@@ -73,10 +81,10 @@ def normalize_sparql_for_storage(query: str) -> str:
     """
     Normalize a SPARQL query for dataset storage/comparison:
     - remove leading comments
-    - remove PREFIX lines
+    - remove leading PREFIX declarations
     - normalize whitespace
     """
     query = strip_leading_comment_lines(query)
-    query = strip_prefix_lines(query)
+    query = strip_prefixes(query)
     query = normalize_whitespace(query)
     return query.strip()
