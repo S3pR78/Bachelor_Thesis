@@ -1,0 +1,15 @@
+{
+  "total_items": 762,
+  "generated_count": 761,
+  "skipped_existing_count": 0,
+  "failed_count": 1,
+  "total_input_tokens": 134926,
+  "total_output_tokens": 107627,
+  "estimated_cost_usd": 0.585516,
+  "failures": [
+    {
+      "id": "706",
+      "reason": "Response was incomplete. Reason: max_output_tokens"
+    }
+  ]
+}
