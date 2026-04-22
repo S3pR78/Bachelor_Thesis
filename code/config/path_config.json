@@ -4,19 +4,53 @@
   "logs": "code/logs",
   "models": "code/models",
   "prompts": "code/prompts",
-  "benchmarks": "code/data/dataset",
-  "evaluation_runs": "code/outputs/evaluation_runs",
-  "benchmark_analysis": "code/outputs/benchmark_analysis",
-  "nlp4re_dataset": "code/data/dataset/nlp4re/merged.json",
-  "empirical_research_dataset": "code/data/dataset/empirical_research/merged.json",
-  "benchmark_merged_v1": "code/data/dataset/benchmark_merged_v1.json",
-  "config.model_config": "code/config/model_config.json",
 
-  "empire_compass_nlp4re_template" : "code/prompts/empire_compass/templates/nlp4re-template.json",
-  "empire_compass_empirical_research_template": "code/prompts/empire_compass/templates/empirical_research_practice.json",
-  "empire_compass_nlp4re_rendered_prompt": "code/prompts/empire_compass/generated/rendered/nlp4re_prompt.txt",
-  "empire_compass_empirical_research_rendered_prompt": "code/prompts/empire_compass/generated/rendered/empirical_research_prompt.txt",
-  "empire_compass_prompt_runner_config": "code/prompts/empire_compass/config/prompt_runner_config.json",
-  "empire_compass_runner_script": "code/prompts/empire_compass/generator/run_prompt_generator.ts",
-  "empire_compass_runner_tsconfig": "code/prompts/empire_compass/tsconfig.json"
+  "config.model_config": "code/config/model_config.json",
+  "config.benchmark_schema": "code/config/schemas/benchmark_dataset_schema_v1.json",
+
+  "dataset.root_dir": "code/data/dataset",
+  "dataset.sources_dir": "code/data/dataset/sources",
+  "dataset.expansion_dir": "code/data/dataset/expansion",
+  "dataset.working_dir": "code/data/dataset/working",
+  "dataset.reports_dir": "code/data/dataset/reports",
+  "dataset.final_dir": "code/data/dataset/final",
+  "dataset.archive_dir": "code/data/dataset/archive",
+
+  "dataset.sources.nlp4re_dir": "code/data/dataset/sources/nlp4re",
+  "dataset.sources.empirical_dir": "code/data/dataset/sources/empirical_research",
+
+  "dataset.working.master_validated": "code/data/dataset/working/master_validated_working.json",
+  "dataset.working.master_with_paraphrases": "code/data/dataset/working/master_validated_with_paraphrases.json",
+  "dataset.working.master_split": "code/data/dataset/working/master_validated_with_paraphrases_split_v2.json",
+
+  "dataset.reports.validation": "code/data/dataset/reports/master_validated_with_paraphrases.validation_report.json",
+  "dataset.reports.distribution": "code/data/dataset/reports/master_validated_with_paraphrases.field_distribution_report.json",
+  "dataset.reports.paraphrase_summary": "code/data/dataset/reports/paraphrase_generation_full_summary.json",
+  "dataset.reports.split_summary": "code/data/dataset/reports/master_validated_with_paraphrases_split_v2_summary.json",
+
+  "dataset.final.train": "code/data/dataset/final/train.json",
+  "dataset.final.validation": "code/data/dataset/final/validation.json",
+  "dataset.final.test": "code/data/dataset/final/test.json",
+
+  "dataset.expansion.candidates_dir": "code/data/dataset/expansion/candidates",
+  "dataset.expansion.review_dir": "code/data/dataset/expansion/review",
+  "dataset.expansion.selected_dir": "code/data/dataset/expansion/selected",
+  "dataset.expansion.repair_dir": "code/data/dataset/expansion/repair",
+
+  "prompts.dataset_expansion_root": "code/prompts/dataset_expansion",
+  "prompts.dataset_expansion.wrappers_dir": "code/prompts/dataset_expansion/wrappers",
+  "prompts.dataset_expansion.runs_dir": "code/prompts/dataset_expansion/runs",
+  "prompts.dataset_expansion.scaled_runs_dir": "code/prompts/dataset_expansion/scaled_runs",
+  "prompts.dataset_expansion.assembled_dir": "code/prompts/dataset_expansion/assembled",
+  "prompts.dataset_expansion.final_archive_dir": "code/prompts/dataset_expansion/final",
+
+  "prompts.empire_compass_nlp4re_template": "code/prompts/empire_compass/templates/nlp4re-template.json",
+  "prompts.empire_compass_empirical_template": "code/prompts/empire_compass/templates/empirical_research_practice.json",
+  "prompts.empire_compass_nlp4re_rendered": "code/prompts/empire_compass/generated/rendered/nlp4re_prompt.txt",
+  "prompts.empire_compass_empirical_rendered": "code/prompts/empire_compass/generated/rendered/empirical_research_prompt.txt",
+  "prompts.empire_compass_runner_config": "code/prompts/empire_compass/config/prompt_runner_config.json",
+  "prompts.empire_compass_runner_script": "code/prompts/empire_compass/generator/run_prompt_generator.ts",
+  "prompts.empire_compass_runner_tsconfig": "code/prompts/empire_compass/tsconfig.json",
+
+  "outputs.evaluation_runs": "code/outputs/evaluation_runs"
 }

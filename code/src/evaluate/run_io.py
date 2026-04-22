@@ -44,7 +44,7 @@ def build_evaluate_run_dir(
         dataset_path: str,
         prompt_mode: str | None,
 ) -> Path:
-    base_dir = get_configured_path("evaluation_runs")
+    base_dir = get_configured_path("outputs.evaluation_runs")
 
     safe_model_name = make_safe_name(model_name)
     safe_prompt_mode = make_safe_name(prompt_mode or "default")

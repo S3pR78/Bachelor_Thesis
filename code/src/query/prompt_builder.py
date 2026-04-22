@@ -33,7 +33,7 @@ The path to the configuration file is retrieved using the get_configured_path ut
 which looks up the path based on a key (in this case, "empire_compass_prompt_runner_config
 """
 def load_empire_compass_runner_config() -> dict:
-    runner_config_path = get_configured_path("empire_compass_prompt_runner_config")
+    runner_config_path = get_configured_path("prompts.empire_compass_runner_config")    
     return load_json_config(runner_config_path)
 
 
@@ -82,8 +82,8 @@ def ensure_empire_compass_prompt_exists(family: str, prompt_path: Path) -> None:
 
     print(f"Prompt file missing. Generating Empire Compass prompt for family '{family}'...")
 
-    runner_script_path = get_configured_path("empire_compass_runner_script")
-    runner_tsconfig_path = get_configured_path("empire_compass_runner_tsconfig")
+    runner_script_path = get_configured_path("prompts.empire_compass_runner_script")
+    runner_tsconfig_path = get_configured_path("prompts.empire_compass_runner_tsconfig")
 
     repo_root = Path(__file__).resolve().parents[2]
 
