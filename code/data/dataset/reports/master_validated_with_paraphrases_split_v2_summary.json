@@ -1,0 +1,72 @@
+{
+  "total_items": 762,
+  "split_counts": {
+    "train": 602,
+    "validation": 80,
+    "test": 80
+  },
+  "train_by_family": {
+    "nlp4re": 279,
+    "empirical_research_practice": 323
+  },
+  "validation_by_family": {
+    "empirical_research_practice": 40,
+    "nlp4re": 40
+  },
+  "test_by_family": {
+    "empirical_research_practice": 40,
+    "nlp4re": 40
+  },
+  "train_by_source_dataset": {
+    "Generated_NLP4RE": 270,
+    "Generated_Empirical_Research": 310,
+    "Hybrid_Empirical_Research": 13,
+    "Hybrid_NLP4RE": 9
+  },
+  "validation_by_source_dataset": {
+    "Hybrid_Empirical_Research": 20,
+    "Generated_NLP4RE": 40,
+    "Generated_Empirical_Research": 20
+  },
+  "test_by_source_dataset": {
+    "EmpiRE_Compass": 22,
+    "Hybrid_Empirical_Research": 28,
+    "Hybrid_NLP4RE": 30
+  },
+  "train_by_answer_type": {
+    "number": 131,
+    "date": 117,
+    "resource": 180,
+    "string": 152,
+    "mixed": 19,
+    "list": 3
+  },
+  "validation_by_answer_type": {
+    "mixed": 17,
+    "list": 3,
+    "string": 24,
+    "number": 13,
+    "resource": 22,
+    "date": 1
+  },
+  "test_by_answer_type": {
+    "mixed": 42,
+    "list": 28,
+    "boolean": 10
+  },
+  "train_by_complexity": {
+    "low": 424,
+    "medium": 127,
+    "high": 51
+  },
+  "validation_by_complexity": {
+    "high": 20,
+    "medium": 35,
+    "low": 25
+  },
+  "test_by_complexity": {
+    "high": 28,
+    "medium": 33,
+    "low": 19
+  }
+}
