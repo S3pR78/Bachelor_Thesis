@@ -58,7 +58,7 @@ def generate_response_with_session(session: dict, final_prompt: str) -> str:
                 },
                 {"role": "user", "content": final_prompt},
             ],
-            max_tokens=model_config.get("generation", {}).get(
+            max_completion_tokens=model_config.get("generation", {}).get(
                 "max_output_tokens", 256
             ),
             temperature=model_config.get("generation", {}).get("temperature", 0.0),
