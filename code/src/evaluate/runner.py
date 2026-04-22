@@ -5,19 +5,14 @@ import json
 from datetime import datetime, timezone
 from typing import Any
 
-from src.evaluate.answer_metrics import (
-    compute_answer_exact_match,
-    compute_answer_precision_recall_f1,
-)
 from src.evaluate.dataset_loader import load_evaluate_entries, select_entry_fields
+from src.evaluate.metric_runner import build_validation_metrics
 from src.evaluate.run_io import (
     build_initial_run_metadata,
     build_raw_result_entry,
     ensure_evaluate_run_dir,
     get_benchmark_raw_output_path,
-    get_benchmark_summary_output_path,
 )
-from src.evaluate.summary import build_benchmark_summary
 from src.evaluate.sparql_extraction import extract_sparql_query
 from src.query.inference_session import (
     generate_response_with_session,
@@ -51,35 +46,6 @@ ENTRY_METADATA_FIELDS = (
     "review_status",
     "gold_status",
 )
-
-
-def _round_metric_payload(metric_payload: dict[str, Any]) -> dict[str, Any]:
-    rounded = dict(metric_payload)
-    for key in ("value", "precision", "recall", "f1"):
-        value = rounded.get(key)
-        if isinstance(value, (int, float)):
-            rounded[key] = round(float(value), 4)
-    return rounded
-
-
-def _build_binary_metric(
-    metric_name: str,
-    metric_type: str,
-    comparable: bool,
-    value: float | None,
-    reason: str | None = None,
-    **extra: Any,
-) -> dict[str, Any]:
-    payload: dict[str, Any] = {
-        "metric": metric_name,
-        "type": metric_type,
-        "comparable": comparable,
-        "value": round(float(value), 4) if value is not None else None,
-    }
-    if reason is not None:
-        payload["reason"] = reason
-    payload.update(extra)
-    return payload
 
 
 def _prepare_and_execute_query(
@@ -137,190 +103,6 @@ def _prepare_and_execute_query(
         }
 
 
-def _derive_primary_error_category(
-    has_extracted_query: bool,
-    prediction_query_form: str | None,
-    gold_query_form: str | None,
-    prediction_execution: dict[str, Any],
-    gold_execution: dict[str, Any],
-    exact_match_metric: dict[str, Any],
-    endpoint_url: str | None,
-) -> str | None:
-    if not has_extracted_query:
-        return "extraction_failure"
-
-    if prediction_query_form not in SUPPORTED_QUERY_FORMS:
-        return "unsupported_query_form"
-
-    if not endpoint_url:
-        return "not_evaluated_no_endpoint"
-
-    if gold_query_form is None:
-        return "gold_query_missing"
-
-    if gold_query_form not in SUPPORTED_QUERY_FORMS:
-        return "gold_query_form_unsupported"
-
-    if gold_execution.get("status") == "error":
-        return "gold_execution_error"
-
-    if prediction_execution.get("status") == "error":
-        return "prediction_execution_error"
-
-    if prediction_execution.get("status") != "ok":
-        return "prediction_not_executed"
-
-    if gold_execution.get("status") != "ok":
-        return "gold_not_executed"
-
-    if exact_match_metric.get("comparable") and exact_match_metric.get("value") == 0.0:
-        return "answer_mismatch"
-
-    return None
-
-
-def _build_validation_block(
-    *,
-    has_extracted_query: bool,
-    prediction_query_form: str | None,
-    gold_query_form: str | None,
-    prediction_execution: dict[str, Any],
-    gold_execution: dict[str, Any],
-    endpoint_url: str | None,
-) -> dict[str, Any]:
-    query_extracted_metric = _build_binary_metric(
-        metric_name="query_extracted",
-        metric_type="structural",
-        comparable=True,
-        value=1.0 if has_extracted_query else 0.0,
-    )
-
-    if has_extracted_query:
-        supported_query_form_metric = _build_binary_metric(
-            metric_name="supported_query_form",
-            metric_type="structural",
-            comparable=True,
-            value=1.0 if prediction_query_form in SUPPORTED_QUERY_FORMS else 0.0,
-            prediction_query_form=prediction_query_form,
-        )
-    else:
-        supported_query_form_metric = _build_binary_metric(
-            metric_name="supported_query_form",
-            metric_type="structural",
-            comparable=False,
-            value=None,
-            reason="no_extracted_query",
-            prediction_query_form=prediction_query_form,
-        )
-
-    if prediction_query_form is not None and gold_query_form is not None:
-        query_form_match_metric = _build_binary_metric(
-            metric_name="query_form_match",
-            metric_type="structural",
-            comparable=True,
-            value=1.0 if prediction_query_form == gold_query_form else 0.0,
-            prediction_query_form=prediction_query_form,
-            gold_query_form=gold_query_form,
-        )
-    else:
-        query_form_match_metric = _build_binary_metric(
-            metric_name="query_form_match",
-            metric_type="structural",
-            comparable=False,
-            value=None,
-            reason="missing_query_form",
-            prediction_query_form=prediction_query_form,
-            gold_query_form=gold_query_form,
-        )
-
-    prediction_execution_comparable = bool(
-        endpoint_url and has_extracted_query and prediction_query_form in SUPPORTED_QUERY_FORMS
-    )
-    if prediction_execution_comparable:
-        prediction_execution_success_metric = _build_binary_metric(
-            metric_name="prediction_execution_success",
-            metric_type="execution_based",
-            comparable=True,
-            value=1.0 if prediction_execution.get("status") == "ok" else 0.0,
-            execution_status=prediction_execution.get("status"),
-        )
-    else:
-        reason = (
-            "no_endpoint_configured"
-            if not endpoint_url
-            else "unsupported_or_missing_prediction_query"
-        )
-        prediction_execution_success_metric = _build_binary_metric(
-            metric_name="prediction_execution_success",
-            metric_type="execution_based",
-            comparable=False,
-            value=None,
-            reason=reason,
-            execution_status=prediction_execution.get("status"),
-        )
-
-    gold_execution_comparable = bool(
-        endpoint_url and gold_query_form in SUPPORTED_QUERY_FORMS
-    )
-    if gold_execution_comparable:
-        gold_execution_success_metric = _build_binary_metric(
-            metric_name="gold_execution_success",
-            metric_type="execution_based",
-            comparable=True,
-            value=1.0 if gold_execution.get("status") == "ok" else 0.0,
-            execution_status=gold_execution.get("status"),
-        )
-    else:
-        reason = (
-            "no_endpoint_configured"
-            if not endpoint_url
-            else "unsupported_or_missing_gold_query"
-        )
-        gold_execution_success_metric = _build_binary_metric(
-            metric_name="gold_execution_success",
-            metric_type="execution_based",
-            comparable=False,
-            value=None,
-            reason=reason,
-            execution_status=gold_execution.get("status"),
-        )
-
-    exact_match_metric = _round_metric_payload(
-        compute_answer_exact_match(
-            prediction_execution=prediction_execution,
-            gold_execution=gold_execution,
-        )
-    )
-
-    prf1_metric = _round_metric_payload(
-        compute_answer_precision_recall_f1(
-            prediction_execution=prediction_execution,
-            gold_execution=gold_execution,
-        )
-    )
-
-    primary_error_category = _derive_primary_error_category(
-        has_extracted_query=has_extracted_query,
-        prediction_query_form=prediction_query_form,
-        gold_query_form=gold_query_form,
-        prediction_execution=prediction_execution,
-        gold_execution=gold_execution,
-        exact_match_metric=exact_match_metric,
-        endpoint_url=endpoint_url,
-    )
-
-    return {
-        "query_extracted": query_extracted_metric,
-        "supported_query_form": supported_query_form_metric,
-        "query_form_match": query_form_match_metric,
-        "prediction_execution_success": prediction_execution_success_metric,
-        "gold_execution_success": gold_execution_success_metric,
-        "answer_exact_match": exact_match_metric,
-        "answer_precision_recall_f1": prf1_metric,
-        "primary_error_category": primary_error_category,
-    }
-
-
 def execute_evaluate_task(args: argparse.Namespace) -> int:
     print("Running evaluation task with args:", args)
 
@@ -336,7 +118,6 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
     )
 
     output_path = get_benchmark_raw_output_path(run_dir)
-    summary_output_path = get_benchmark_summary_output_path(run_dir)
     started_at_utc = datetime.now(timezone.utc).isoformat()
 
     run_metadata = build_initial_run_metadata(
@@ -348,7 +129,6 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
         output_path=output_path,
         started_at_utc=started_at_utc,
         total_items=len(entries),
-        summary_output_path=summary_output_path,
     )
 
     print(f"Run directory: {run_dir}\n")
@@ -402,7 +182,7 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
             endpoint_url=args.sparql_endpoint,
         )
 
-        validation = _build_validation_block(
+        validation = build_validation_metrics(
             has_extracted_query=has_extracted_query,
             prediction_query_form=prediction_query_form,
             gold_query_form=gold_query_form,
@@ -452,30 +232,5 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
         )
 
     print(f"Collected result entries: {len(results)}")
-    finished_at_utc = datetime.now(timezone.utc).isoformat()
-    run_metadata["finished_at_utc"] = finished_at_utc
-    run_metadata["completed_items"] = len(results)
-
-    raw_payload = {
-        "run_metadata": run_metadata,
-        "results": results,
-    }
-
-    output_path.write_text(
-        json.dumps(raw_payload, indent=2, ensure_ascii=False),
-        encoding="utf-8",
-    )
-
-    summary_payload = {
-        "run_metadata": run_metadata,
-        "summary": build_benchmark_summary(results),
-    }
-
-    summary_output_path.write_text(
-        json.dumps(summary_payload, indent=2, ensure_ascii=False),
-        encoding="utf-8",
-    )
-
-    print(f"Saved summary payload to: {summary_output_path}")
     print(f"Saved raw benchmark payload to: {output_path}")
     return 0
