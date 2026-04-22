@@ -15,7 +15,9 @@ from src.evaluate.run_io import (
     build_raw_result_entry,
     ensure_evaluate_run_dir,
     get_benchmark_raw_output_path,
+    get_benchmark_summary_output_path,
 )
+from src.evaluate.summary import build_benchmark_summary
 from src.evaluate.sparql_extraction import extract_sparql_query
 from src.query.inference_session import (
     generate_response_with_session,
@@ -334,6 +336,7 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
     )
 
     output_path = get_benchmark_raw_output_path(run_dir)
+    summary_output_path = get_benchmark_summary_output_path(run_dir)
     started_at_utc = datetime.now(timezone.utc).isoformat()
 
     run_metadata = build_initial_run_metadata(
@@ -345,6 +348,7 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
         output_path=output_path,
         started_at_utc=started_at_utc,
         total_items=len(entries),
+        summary_output_path=summary_output_path,
     )
 
     print(f"Run directory: {run_dir}\n")
@@ -448,5 +452,30 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
         )
 
     print(f"Collected result entries: {len(results)}")
+    finished_at_utc = datetime.now(timezone.utc).isoformat()
+    run_metadata["finished_at_utc"] = finished_at_utc
+    run_metadata["completed_items"] = len(results)
+
+    raw_payload = {
+        "run_metadata": run_metadata,
+        "results": results,
+    }
+
+    output_path.write_text(
+        json.dumps(raw_payload, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+
+    summary_payload = {
+        "run_metadata": run_metadata,
+        "summary": build_benchmark_summary(results),
+    }
+
+    summary_output_path.write_text(
+        json.dumps(summary_payload, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+
+    print(f"Saved summary payload to: {summary_output_path}")
     print(f"Saved raw benchmark payload to: {output_path}")
     return 0

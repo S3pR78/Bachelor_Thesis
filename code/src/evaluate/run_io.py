@@ -94,8 +94,9 @@ def build_initial_run_metadata(
     output_path: Path,
     started_at_utc: str,
     total_items: int,
+    summary_output_path: Path | None = None,
 ) -> dict:
-    return {
+    payload = {
         "model_name": model_name,
         "dataset_path": dataset_path,
         "prompt_mode": prompt_mode,
@@ -105,3 +106,14 @@ def build_initial_run_metadata(
         "started_at_utc": started_at_utc,
         "total_items": total_items,
     }
+
+    if summary_output_path is not None:
+        payload["summary_output_path"] = str(summary_output_path)
+
+    return payload
+
+def get_benchmark_summary_output_path(run_dir: Path) -> Path:
+    if not isinstance(run_dir, Path):
+        raise ValueError("run_dir must be a pathlib.Path instance.")
+
+    return run_dir / "benchmark_summary.json"
