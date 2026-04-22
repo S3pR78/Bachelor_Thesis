@@ -1,0 +1,887 @@
+{
+  "run_metadata": {
+    "model_name": "gpt-5.4",
+    "dataset_path": "code/data/dataset/final/validation.json",
+    "prompt_mode": "empire_compass",
+    "requested_limit": 2,
+    "run_dir": "/home/s3pr/UNI/BT/code/outputs/evaluation_runs/gpt-5.4/empire_compass__validation__20260422_141555",
+    "output_path": "/home/s3pr/UNI/BT/code/outputs/evaluation_runs/gpt-5.4/empire_compass__validation__20260422_141555/benchmark_raw.json",
+    "started_at_utc": "2026-04-22T14:15:55.851809+00:00",
+    "total_items": 2,
+    "summary_output_path": "/home/s3pr/UNI/BT/code/outputs/evaluation_runs/gpt-5.4/empire_compass__validation__20260422_141555/benchmark_summary.json",
+    "finished_at_utc": "2026-04-22T14:16:04.222071+00:00",
+    "completed_items": 2,
+    "cost_summary": {
+      "total_prompt_tokens": 25436,
+      "total_completion_tokens": 459,
+      "total_tokens": 25895,
+      "total_cached_tokens": 12032,
+      "total_estimated_cost_usd": 0.043403,
+      "priced_items": 2,
+      "mean_cost_per_priced_item_usd": 0.021701
+    }
+  },
+  "summary": {
+    "total_items": 2,
+    "metrics": {
+      "query_extracted": {
+        "metric_name": "query_extracted",
+        "value_field": "value",
+        "comparable_count": 2,
+        "non_comparable_count": 0,
+        "mean": 1.0,
+        "success_count": 2,
+        "failure_count": 0,
+        "success_rate": 1.0
+      },
+      "supported_query_form": {
+        "metric_name": "supported_query_form",
+        "value_field": "value",
+        "comparable_count": 2,
+        "non_comparable_count": 0,
+        "mean": 1.0,
+        "success_count": 2,
+        "failure_count": 0,
+        "success_rate": 1.0
+      },
+      "query_form_match": {
+        "metric_name": "query_form_match",
+        "value_field": "value",
+        "comparable_count": 2,
+        "non_comparable_count": 0,
+        "mean": 1.0,
+        "success_count": 2,
+        "failure_count": 0,
+        "success_rate": 1.0
+      },
+      "prediction_execution_success": {
+        "metric_name": "prediction_execution_success",
+        "value_field": "value",
+        "comparable_count": 2,
+        "non_comparable_count": 0,
+        "mean": 1.0,
+        "success_count": 2,
+        "failure_count": 0,
+        "success_rate": 1.0
+      },
+      "gold_execution_success": {
+        "metric_name": "gold_execution_success",
+        "value_field": "value",
+        "comparable_count": 2,
+        "non_comparable_count": 0,
+        "mean": 1.0,
+        "success_count": 2,
+        "failure_count": 0,
+        "success_rate": 1.0
+      },
+      "answer_exact_match": {
+        "metric_name": "answer_exact_match",
+        "value_field": "value",
+        "comparable_count": 2,
+        "non_comparable_count": 0,
+        "mean": 0.0,
+        "success_count": 0,
+        "failure_count": 2,
+        "success_rate": 0.0
+      },
+      "answer_precision": {
+        "metric_name": "answer_precision_recall_f1",
+        "value_field": "precision",
+        "comparable_count": 2,
+        "non_comparable_count": 0,
+        "mean": 0.0,
+        "success_count": 0,
+        "failure_count": 2,
+        "success_rate": 0.0
+      },
+      "answer_recall": {
+        "metric_name": "answer_precision_recall_f1",
+        "value_field": "recall",
+        "comparable_count": 2,
+        "non_comparable_count": 0,
+        "mean": 0.0,
+        "success_count": 0,
+        "failure_count": 2,
+        "success_rate": 0.0
+      },
+      "answer_f1": {
+        "metric_name": "answer_precision_recall_f1",
+        "value_field": "f1",
+        "comparable_count": 2,
+        "non_comparable_count": 0,
+        "mean": 0.0,
+        "success_count": 0,
+        "failure_count": 2,
+        "success_rate": 0.0
+      }
+    },
+    "error_categories": {
+      "answer_mismatch": 2
+    },
+    "response_time_seconds": {
+      "count": 2,
+      "mean_seconds": 3.646,
+      "min_seconds": 3.3939,
+      "max_seconds": 3.8981,
+      "total_seconds": 7.292
+    },
+    "slices": {
+      "family": {
+        "empirical_research_practice": {
+          "item_count": 2,
+          "metrics": {
+            "query_extracted": {
+              "metric_name": "query_extracted",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 2,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "supported_query_form": {
+              "metric_name": "supported_query_form",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 2,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "query_form_match": {
+              "metric_name": "query_form_match",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 2,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "prediction_execution_success": {
+              "metric_name": "prediction_execution_success",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 2,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "gold_execution_success": {
+              "metric_name": "gold_execution_success",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 2,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "answer_exact_match": {
+              "metric_name": "answer_exact_match",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 2,
+              "success_rate": 0.0
+            },
+            "answer_precision": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 2,
+              "success_rate": 0.0
+            },
+            "answer_recall": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 2,
+              "success_rate": 0.0
+            },
+            "answer_f1": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 2,
+              "success_rate": 0.0
+            }
+          },
+          "error_categories": {
+            "answer_mismatch": 2
+          },
+          "response_time_seconds": {
+            "count": 2,
+            "mean_seconds": 3.646,
+            "min_seconds": 3.3939,
+            "max_seconds": 3.8981,
+            "total_seconds": 7.292
+          }
+        }
+      },
+      "source_dataset": {
+        "Hybrid_Empirical_Research": {
+          "item_count": 2,
+          "metrics": {
+            "query_extracted": {
+              "metric_name": "query_extracted",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 2,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "supported_query_form": {
+              "metric_name": "supported_query_form",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 2,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "query_form_match": {
+              "metric_name": "query_form_match",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 2,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "prediction_execution_success": {
+              "metric_name": "prediction_execution_success",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 2,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "gold_execution_success": {
+              "metric_name": "gold_execution_success",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 2,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "answer_exact_match": {
+              "metric_name": "answer_exact_match",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 2,
+              "success_rate": 0.0
+            },
+            "answer_precision": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 2,
+              "success_rate": 0.0
+            },
+            "answer_recall": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 2,
+              "success_rate": 0.0
+            },
+            "answer_f1": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 2,
+              "success_rate": 0.0
+            }
+          },
+          "error_categories": {
+            "answer_mismatch": 2
+          },
+          "response_time_seconds": {
+            "count": 2,
+            "mean_seconds": 3.646,
+            "min_seconds": 3.3939,
+            "max_seconds": 3.8981,
+            "total_seconds": 7.292
+          }
+        }
+      },
+      "query_type": {
+        "factoid": {
+          "item_count": 1,
+          "metrics": {
+            "query_extracted": {
+              "metric_name": "query_extracted",
+              "value_field": "value",
+              "comparable_count": 1,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 1,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "supported_query_form": {
+              "metric_name": "supported_query_form",
+              "value_field": "value",
+              "comparable_count": 1,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 1,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "query_form_match": {
+              "metric_name": "query_form_match",
+              "value_field": "value",
+              "comparable_count": 1,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 1,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "prediction_execution_success": {
+              "metric_name": "prediction_execution_success",
+              "value_field": "value",
+              "comparable_count": 1,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 1,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "gold_execution_success": {
+              "metric_name": "gold_execution_success",
+              "value_field": "value",
+              "comparable_count": 1,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 1,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "answer_exact_match": {
+              "metric_name": "answer_exact_match",
+              "value_field": "value",
+              "comparable_count": 1,
+              "non_comparable_count": 0,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 1,
+              "success_rate": 0.0
+            },
+            "answer_precision": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 1,
+              "non_comparable_count": 0,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 1,
+              "success_rate": 0.0
+            },
+            "answer_recall": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 1,
+              "non_comparable_count": 0,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 1,
+              "success_rate": 0.0
+            },
+            "answer_f1": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 1,
+              "non_comparable_count": 0,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 1,
+              "success_rate": 0.0
+            }
+          },
+          "error_categories": {
+            "answer_mismatch": 1
+          },
+          "response_time_seconds": {
+            "count": 1,
+            "mean_seconds": 3.8981,
+            "min_seconds": 3.8981,
+            "max_seconds": 3.8981,
+            "total_seconds": 3.8981
+          }
+        },
+        "non_factoid": {
+          "item_count": 1,
+          "metrics": {
+            "query_extracted": {
+              "metric_name": "query_extracted",
+              "value_field": "value",
+              "comparable_count": 1,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 1,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "supported_query_form": {
+              "metric_name": "supported_query_form",
+              "value_field": "value",
+              "comparable_count": 1,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 1,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "query_form_match": {
+              "metric_name": "query_form_match",
+              "value_field": "value",
+              "comparable_count": 1,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 1,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "prediction_execution_success": {
+              "metric_name": "prediction_execution_success",
+              "value_field": "value",
+              "comparable_count": 1,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 1,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "gold_execution_success": {
+              "metric_name": "gold_execution_success",
+              "value_field": "value",
+              "comparable_count": 1,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 1,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "answer_exact_match": {
+              "metric_name": "answer_exact_match",
+              "value_field": "value",
+              "comparable_count": 1,
+              "non_comparable_count": 0,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 1,
+              "success_rate": 0.0
+            },
+            "answer_precision": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 1,
+              "non_comparable_count": 0,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 1,
+              "success_rate": 0.0
+            },
+            "answer_recall": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 1,
+              "non_comparable_count": 0,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 1,
+              "success_rate": 0.0
+            },
+            "answer_f1": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 1,
+              "non_comparable_count": 0,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 1,
+              "success_rate": 0.0
+            }
+          },
+          "error_categories": {
+            "answer_mismatch": 1
+          },
+          "response_time_seconds": {
+            "count": 1,
+            "mean_seconds": 3.3939,
+            "min_seconds": 3.3939,
+            "max_seconds": 3.3939,
+            "total_seconds": 3.3939
+          }
+        }
+      },
+      "answer_type": {
+        "mixed": {
+          "item_count": 2,
+          "metrics": {
+            "query_extracted": {
+              "metric_name": "query_extracted",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 2,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "supported_query_form": {
+              "metric_name": "supported_query_form",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 2,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "query_form_match": {
+              "metric_name": "query_form_match",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 2,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "prediction_execution_success": {
+              "metric_name": "prediction_execution_success",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 2,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "gold_execution_success": {
+              "metric_name": "gold_execution_success",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 2,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "answer_exact_match": {
+              "metric_name": "answer_exact_match",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 2,
+              "success_rate": 0.0
+            },
+            "answer_precision": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 2,
+              "success_rate": 0.0
+            },
+            "answer_recall": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 2,
+              "success_rate": 0.0
+            },
+            "answer_f1": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 2,
+              "success_rate": 0.0
+            }
+          },
+          "error_categories": {
+            "answer_mismatch": 2
+          },
+          "response_time_seconds": {
+            "count": 2,
+            "mean_seconds": 3.646,
+            "min_seconds": 3.3939,
+            "max_seconds": 3.8981,
+            "total_seconds": 7.292
+          }
+        }
+      },
+      "query_shape": {
+        "tree": {
+          "item_count": 2,
+          "metrics": {
+            "query_extracted": {
+              "metric_name": "query_extracted",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 2,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "supported_query_form": {
+              "metric_name": "supported_query_form",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 2,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "query_form_match": {
+              "metric_name": "query_form_match",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 2,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "prediction_execution_success": {
+              "metric_name": "prediction_execution_success",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 2,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "gold_execution_success": {
+              "metric_name": "gold_execution_success",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 2,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "answer_exact_match": {
+              "metric_name": "answer_exact_match",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 2,
+              "success_rate": 0.0
+            },
+            "answer_precision": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 2,
+              "success_rate": 0.0
+            },
+            "answer_recall": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 2,
+              "success_rate": 0.0
+            },
+            "answer_f1": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 2,
+              "success_rate": 0.0
+            }
+          },
+          "error_categories": {
+            "answer_mismatch": 2
+          },
+          "response_time_seconds": {
+            "count": 2,
+            "mean_seconds": 3.646,
+            "min_seconds": 3.3939,
+            "max_seconds": 3.8981,
+            "total_seconds": 7.292
+          }
+        }
+      },
+      "complexity_level": {
+        "high": {
+          "item_count": 2,
+          "metrics": {
+            "query_extracted": {
+              "metric_name": "query_extracted",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 2,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "supported_query_form": {
+              "metric_name": "supported_query_form",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 2,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "query_form_match": {
+              "metric_name": "query_form_match",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 2,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "prediction_execution_success": {
+              "metric_name": "prediction_execution_success",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 2,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "gold_execution_success": {
+              "metric_name": "gold_execution_success",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 2,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "answer_exact_match": {
+              "metric_name": "answer_exact_match",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 2,
+              "success_rate": 0.0
+            },
+            "answer_precision": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 2,
+              "success_rate": 0.0
+            },
+            "answer_recall": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 2,
+              "success_rate": 0.0
+            },
+            "answer_f1": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 2,
+              "non_comparable_count": 0,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 2,
+              "success_rate": 0.0
+            }
+          },
+          "error_categories": {
+            "answer_mismatch": 2
+          },
+          "response_time_seconds": {
+            "count": 2,
+            "mean_seconds": 3.646,
+            "min_seconds": 3.3939,
+            "max_seconds": 3.8981,
+            "total_seconds": 7.292
+          }
+        }
+      }
+    },
+    "costs": {
+      "total_prompt_tokens": 25436,
+      "total_completion_tokens": 459,
+      "total_tokens": 25895,
+      "total_cached_tokens": 12032,
+      "total_estimated_cost_usd": 0.043403,
+      "priced_items": 2,
+      "mean_cost_per_priced_item_usd": 0.021701
+    }
+  }
+}

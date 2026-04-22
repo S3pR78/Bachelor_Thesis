@@ -1,4 +1,5 @@
 from __future__ import annotations
+from src.evaluate.costs import build_cost_payload
 
 import argparse
 import json
@@ -49,6 +50,43 @@ ENTRY_METADATA_FIELDS = (
     "gold_status",
 )
 
+
+
+def _aggregate_costs(results: list[dict[str, Any]]) -> dict[str, Any]:
+    total_prompt_tokens = 0
+    total_completion_tokens = 0
+    total_total_tokens = 0
+    total_cached_tokens = 0
+    total_estimated_cost_usd = 0.0
+    priced_items = 0
+
+    for result in results:
+        cost_payload = result.get("cost") or {}
+        usage = cost_payload.get("usage") or {}
+
+        total_prompt_tokens += int(usage.get("prompt_tokens", 0) or 0)
+        total_completion_tokens += int(usage.get("completion_tokens", 0) or 0)
+        total_total_tokens += int(usage.get("total_tokens", 0) or 0)
+        total_cached_tokens += int(usage.get("cached_tokens", 0) or 0)
+
+        estimated_cost_usd = cost_payload.get("estimated_cost_usd")
+        if isinstance(estimated_cost_usd, (int, float)):
+            total_estimated_cost_usd += float(estimated_cost_usd)
+            priced_items += 1
+
+    return {
+        "total_prompt_tokens": total_prompt_tokens,
+        "total_completion_tokens": total_completion_tokens,
+        "total_tokens": total_total_tokens,
+        "total_cached_tokens": total_cached_tokens,
+        "total_estimated_cost_usd": round(total_estimated_cost_usd, 6),
+        "priced_items": priced_items,
+        "mean_cost_per_priced_item_usd": (
+            round(total_estimated_cost_usd / priced_items, 6)
+            if priced_items > 0
+            else None
+        ),
+    }
 
 def _prepare_and_execute_query(
     query: str | None,
@@ -164,14 +202,22 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
         )
 
         response_started_at = datetime.now(timezone.utc)
-        raw_model_output = generate_response_with_session(
+        model_response = generate_response_with_session(
             session=inference_session,
             final_prompt=final_prompt,
         )
+        raw_model_output = model_response["text"]
+        model_usage = model_response.get("usage")
         response_finished_at = datetime.now(timezone.utc)
         response_time_seconds = (
             response_finished_at - response_started_at
         ).total_seconds()
+
+        cost_payload = build_cost_payload(
+            provider=inference_session["provider"],
+            model_name=inference_session["model_config"].get("model_id", args.model),
+            usage=model_usage,
+        )
 
         extracted_query = extract_sparql_query(raw_model_output)
         has_extracted_query = extracted_query is not None
@@ -211,6 +257,8 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
         result_entry["query_execution"] = query_execution
         result_entry["gold_execution"] = gold_execution
         result_entry["validation"] = validation
+        result_entry["model_usage"] = model_usage
+        result_entry["cost"] = cost_payload
 
         results.append(result_entry)
 
@@ -239,6 +287,9 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
     run_metadata["finished_at_utc"] = finished_at_utc
     run_metadata["completed_items"] = len(results)
 
+    cost_summary = _aggregate_costs(results)
+    run_metadata["cost_summary"] = cost_summary
+
     raw_payload = {
         "run_metadata": run_metadata,
         "results": results,
@@ -248,9 +299,12 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
         encoding="utf-8",
     )
 
+    summary_body = build_benchmark_summary(results)
+    summary_body["costs"] = cost_summary
+
     summary_payload = {
         "run_metadata": run_metadata,
-        "summary": build_benchmark_summary(results),
+        "summary": summary_body,
     }
     summary_output_path.write_text(
         json.dumps(summary_payload, indent=2, ensure_ascii=False),
