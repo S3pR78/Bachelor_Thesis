@@ -1,0 +1,935 @@
+{
+  "report_type": "dataset_field_distribution",
+  "report_metadata": {
+    "generated_at_utc": "2026-04-21T23:05:27.352639+00:00",
+    "dataset_path": "code/data/dataset/working/master_validated_with_paraphrases.json",
+    "dataset_name": "master_validated_with_paraphrases",
+    "entry_count": 762,
+    "schema_path": "code/config/schemas/benchmark_dataset_schema_v1.json",
+    "has_schema": true
+  },
+  "field_presence": {
+    "total_entries": 762,
+    "field_count": 24,
+    "fields": [
+      "_selection_review",
+      "ambiguity_risk",
+      "answer_type",
+      "complexity_level",
+      "family",
+      "gold_sparql",
+      "gold_status",
+      "hallucination_risk",
+      "human_or_generated",
+      "id",
+      "language",
+      "lexical_gap_risk",
+      "notes",
+      "number_of_patterns",
+      "paraphrased_questions",
+      "query_components",
+      "query_shape",
+      "query_type",
+      "question",
+      "review_status",
+      "source_dataset",
+      "source_id",
+      "special_types",
+      "split"
+    ],
+    "field_details": {
+      "_selection_review": {
+        "present_count": 119,
+        "missing_count": 643,
+        "coverage_ratio": 0.1562
+      },
+      "ambiguity_risk": {
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_ratio": 1.0
+      },
+      "answer_type": {
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_ratio": 1.0
+      },
+      "complexity_level": {
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_ratio": 1.0
+      },
+      "family": {
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_ratio": 1.0
+      },
+      "gold_sparql": {
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_ratio": 1.0
+      },
+      "gold_status": {
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_ratio": 1.0
+      },
+      "hallucination_risk": {
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_ratio": 1.0
+      },
+      "human_or_generated": {
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_ratio": 1.0
+      },
+      "id": {
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_ratio": 1.0
+      },
+      "language": {
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_ratio": 1.0
+      },
+      "lexical_gap_risk": {
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_ratio": 1.0
+      },
+      "notes": {
+        "present_count": 640,
+        "missing_count": 122,
+        "coverage_ratio": 0.8399
+      },
+      "number_of_patterns": {
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_ratio": 1.0
+      },
+      "paraphrased_questions": {
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_ratio": 1.0
+      },
+      "query_components": {
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_ratio": 1.0
+      },
+      "query_shape": {
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_ratio": 1.0
+      },
+      "query_type": {
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_ratio": 1.0
+      },
+      "question": {
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_ratio": 1.0
+      },
+      "review_status": {
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_ratio": 1.0
+      },
+      "source_dataset": {
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_ratio": 1.0
+      },
+      "source_id": {
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_ratio": 1.0
+      },
+      "special_types": {
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_ratio": 1.0
+      },
+      "split": {
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_ratio": 1.0
+      }
+    }
+  },
+  "field_coverage": {
+    "required": {
+      "field_scope": "required",
+      "total_entries": 762,
+      "field_count": 8,
+      "fields": [
+        "family",
+        "gold_sparql",
+        "id",
+        "language",
+        "question",
+        "source_dataset",
+        "source_id",
+        "split"
+      ],
+      "field_details": {
+        "family": {
+          "present_count": 762,
+          "missing_count": 0,
+          "coverage_percent": 100.0
+        },
+        "gold_sparql": {
+          "present_count": 762,
+          "missing_count": 0,
+          "coverage_percent": 100.0
+        },
+        "id": {
+          "present_count": 762,
+          "missing_count": 0,
+          "coverage_percent": 100.0
+        },
+        "language": {
+          "present_count": 762,
+          "missing_count": 0,
+          "coverage_percent": 100.0
+        },
+        "question": {
+          "present_count": 762,
+          "missing_count": 0,
+          "coverage_percent": 100.0
+        },
+        "source_dataset": {
+          "present_count": 762,
+          "missing_count": 0,
+          "coverage_percent": 100.0
+        },
+        "source_id": {
+          "present_count": 762,
+          "missing_count": 0,
+          "coverage_percent": 100.0
+        },
+        "split": {
+          "present_count": 762,
+          "missing_count": 0,
+          "coverage_percent": 100.0
+        }
+      }
+    },
+    "schema": {
+      "field_scope": "schema",
+      "total_entries": 762,
+      "field_count": 26,
+      "fields": [
+        "ambiguity_risk",
+        "answer_type",
+        "canonical_sparql",
+        "canonical_to_gold_mapping",
+        "complexity_level",
+        "family",
+        "gold_sparql",
+        "gold_status",
+        "hallucination_risk",
+        "human_or_generated",
+        "id",
+        "language",
+        "lexical_gap_risk",
+        "notes",
+        "number_of_patterns",
+        "paraphrased_questions",
+        "query_components",
+        "query_shape",
+        "query_type",
+        "question",
+        "review_status",
+        "source_dataset",
+        "source_id",
+        "special_types",
+        "split",
+        "template_sections"
+      ],
+      "field_details": {
+        "ambiguity_risk": {
+          "present_count": 762,
+          "missing_count": 0,
+          "coverage_percent": 100.0
+        },
+        "answer_type": {
+          "present_count": 762,
+          "missing_count": 0,
+          "coverage_percent": 100.0
+        },
+        "canonical_sparql": {
+          "present_count": 0,
+          "missing_count": 762,
+          "coverage_percent": 0.0
+        },
+        "canonical_to_gold_mapping": {
+          "present_count": 0,
+          "missing_count": 762,
+          "coverage_percent": 0.0
+        },
+        "complexity_level": {
+          "present_count": 762,
+          "missing_count": 0,
+          "coverage_percent": 100.0
+        },
+        "family": {
+          "present_count": 762,
+          "missing_count": 0,
+          "coverage_percent": 100.0
+        },
+        "gold_sparql": {
+          "present_count": 762,
+          "missing_count": 0,
+          "coverage_percent": 100.0
+        },
+        "gold_status": {
+          "present_count": 762,
+          "missing_count": 0,
+          "coverage_percent": 100.0
+        },
+        "hallucination_risk": {
+          "present_count": 762,
+          "missing_count": 0,
+          "coverage_percent": 100.0
+        },
+        "human_or_generated": {
+          "present_count": 762,
+          "missing_count": 0,
+          "coverage_percent": 100.0
+        },
+        "id": {
+          "present_count": 762,
+          "missing_count": 0,
+          "coverage_percent": 100.0
+        },
+        "language": {
+          "present_count": 762,
+          "missing_count": 0,
+          "coverage_percent": 100.0
+        },
+        "lexical_gap_risk": {
+          "present_count": 762,
+          "missing_count": 0,
+          "coverage_percent": 100.0
+        },
+        "notes": {
+          "present_count": 640,
+          "missing_count": 122,
+          "coverage_percent": 83.99
+        },
+        "number_of_patterns": {
+          "present_count": 762,
+          "missing_count": 0,
+          "coverage_percent": 100.0
+        },
+        "paraphrased_questions": {
+          "present_count": 762,
+          "missing_count": 0,
+          "coverage_percent": 100.0
+        },
+        "query_components": {
+          "present_count": 415,
+          "missing_count": 347,
+          "coverage_percent": 54.46
+        },
+        "query_shape": {
+          "present_count": 762,
+          "missing_count": 0,
+          "coverage_percent": 100.0
+        },
+        "query_type": {
+          "present_count": 762,
+          "missing_count": 0,
+          "coverage_percent": 100.0
+        },
+        "question": {
+          "present_count": 762,
+          "missing_count": 0,
+          "coverage_percent": 100.0
+        },
+        "review_status": {
+          "present_count": 762,
+          "missing_count": 0,
+          "coverage_percent": 100.0
+        },
+        "source_dataset": {
+          "present_count": 762,
+          "missing_count": 0,
+          "coverage_percent": 100.0
+        },
+        "source_id": {
+          "present_count": 762,
+          "missing_count": 0,
+          "coverage_percent": 100.0
+        },
+        "special_types": {
+          "present_count": 497,
+          "missing_count": 265,
+          "coverage_percent": 65.22
+        },
+        "split": {
+          "present_count": 762,
+          "missing_count": 0,
+          "coverage_percent": 100.0
+        },
+        "template_sections": {
+          "present_count": 0,
+          "missing_count": 762,
+          "coverage_percent": 0.0
+        }
+      }
+    }
+  },
+  "enum_distributions": {
+    "total_entries": 762,
+    "enum_field_count": 14,
+    "enum_fields": [
+      "ambiguity_risk",
+      "answer_type",
+      "complexity_level",
+      "family",
+      "gold_status",
+      "hallucination_risk",
+      "human_or_generated",
+      "language",
+      "lexical_gap_risk",
+      "query_shape",
+      "query_type",
+      "review_status",
+      "source_dataset",
+      "split"
+    ],
+    "field_details": {
+      "ambiguity_risk": {
+        "allowed_values": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "allowed_value_count": 3,
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_percent": 100.0,
+        "valid_present_count": 762,
+        "unexpected_value_count": 0,
+        "value_counts": {
+          "low": 80,
+          "medium": 666,
+          "high": 16
+        },
+        "value_percents": {
+          "low": 10.5,
+          "medium": 87.4,
+          "high": 2.1
+        },
+        "missing_allowed_values": [],
+        "unexpected_value_counts": {}
+      },
+      "answer_type": {
+        "allowed_values": [
+          "resource",
+          "string",
+          "number",
+          "boolean",
+          "date",
+          "list",
+          "mixed"
+        ],
+        "allowed_value_count": 7,
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_percent": 100.0,
+        "valid_present_count": 762,
+        "unexpected_value_count": 0,
+        "value_counts": {
+          "resource": 202,
+          "string": 176,
+          "number": 144,
+          "boolean": 10,
+          "date": 118,
+          "list": 34,
+          "mixed": 78
+        },
+        "value_percents": {
+          "resource": 26.51,
+          "string": 23.1,
+          "number": 18.9,
+          "boolean": 1.31,
+          "date": 15.49,
+          "list": 4.46,
+          "mixed": 10.24
+        },
+        "missing_allowed_values": [],
+        "unexpected_value_counts": {}
+      },
+      "complexity_level": {
+        "allowed_values": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "allowed_value_count": 3,
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_percent": 100.0,
+        "valid_present_count": 762,
+        "unexpected_value_count": 0,
+        "value_counts": {
+          "low": 468,
+          "medium": 195,
+          "high": 99
+        },
+        "value_percents": {
+          "low": 61.42,
+          "medium": 25.59,
+          "high": 12.99
+        },
+        "missing_allowed_values": [],
+        "unexpected_value_counts": {}
+      },
+      "family": {
+        "allowed_values": [
+          "nlp4re",
+          "empirical_research_practice"
+        ],
+        "allowed_value_count": 2,
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_percent": 100.0,
+        "valid_present_count": 762,
+        "unexpected_value_count": 0,
+        "value_counts": {
+          "nlp4re": 359,
+          "empirical_research_practice": 403
+        },
+        "value_percents": {
+          "nlp4re": 47.11,
+          "empirical_research_practice": 52.89
+        },
+        "missing_allowed_values": [],
+        "unexpected_value_counts": {}
+      },
+      "gold_status": {
+        "allowed_values": [
+          "draft",
+          "validated",
+          "final"
+        ],
+        "allowed_value_count": 3,
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_percent": 100.0,
+        "valid_present_count": 762,
+        "unexpected_value_count": 0,
+        "value_counts": {
+          "draft": 0,
+          "validated": 640,
+          "final": 122
+        },
+        "value_percents": {
+          "draft": 0.0,
+          "validated": 83.99,
+          "final": 16.01
+        },
+        "missing_allowed_values": [
+          "draft"
+        ],
+        "unexpected_value_counts": {}
+      },
+      "hallucination_risk": {
+        "allowed_values": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "allowed_value_count": 3,
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_percent": 100.0,
+        "valid_present_count": 762,
+        "unexpected_value_count": 0,
+        "value_counts": {
+          "low": 52,
+          "medium": 642,
+          "high": 68
+        },
+        "value_percents": {
+          "low": 6.82,
+          "medium": 84.25,
+          "high": 8.92
+        },
+        "missing_allowed_values": [],
+        "unexpected_value_counts": {}
+      },
+      "human_or_generated": {
+        "allowed_values": [
+          "human",
+          "generated",
+          "hybrid"
+        ],
+        "allowed_value_count": 3,
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_percent": 100.0,
+        "valid_present_count": 762,
+        "unexpected_value_count": 0,
+        "value_counts": {
+          "human": 21,
+          "generated": 641,
+          "hybrid": 100
+        },
+        "value_percents": {
+          "human": 2.76,
+          "generated": 84.12,
+          "hybrid": 13.12
+        },
+        "missing_allowed_values": [],
+        "unexpected_value_counts": {}
+      },
+      "language": {
+        "allowed_values": [
+          "en",
+          "de"
+        ],
+        "allowed_value_count": 2,
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_percent": 100.0,
+        "valid_present_count": 762,
+        "unexpected_value_count": 0,
+        "value_counts": {
+          "en": 762,
+          "de": 0
+        },
+        "value_percents": {
+          "en": 100.0,
+          "de": 0.0
+        },
+        "missing_allowed_values": [
+          "de"
+        ],
+        "unexpected_value_counts": {}
+      },
+      "lexical_gap_risk": {
+        "allowed_values": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "allowed_value_count": 3,
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_percent": 100.0,
+        "valid_present_count": 762,
+        "unexpected_value_count": 0,
+        "value_counts": {
+          "low": 86,
+          "medium": 657,
+          "high": 19
+        },
+        "value_percents": {
+          "low": 11.29,
+          "medium": 86.22,
+          "high": 2.49
+        },
+        "missing_allowed_values": [],
+        "unexpected_value_counts": {}
+      },
+      "query_shape": {
+        "allowed_values": [
+          "edge",
+          "chain",
+          "star",
+          "tree",
+          "cycle",
+          "forest",
+          "other"
+        ],
+        "allowed_value_count": 7,
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_percent": 100.0,
+        "valid_present_count": 762,
+        "unexpected_value_count": 0,
+        "value_counts": {
+          "edge": 350,
+          "chain": 63,
+          "star": 45,
+          "tree": 297,
+          "cycle": 0,
+          "forest": 7,
+          "other": 0
+        },
+        "value_percents": {
+          "edge": 45.93,
+          "chain": 8.27,
+          "star": 5.91,
+          "tree": 38.98,
+          "cycle": 0.0,
+          "forest": 0.92,
+          "other": 0.0
+        },
+        "missing_allowed_values": [
+          "cycle",
+          "other"
+        ],
+        "unexpected_value_counts": {}
+      },
+      "query_type": {
+        "allowed_values": [
+          "factoid",
+          "non_factoid"
+        ],
+        "allowed_value_count": 2,
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_percent": 100.0,
+        "valid_present_count": 762,
+        "unexpected_value_count": 0,
+        "value_counts": {
+          "factoid": 543,
+          "non_factoid": 219
+        },
+        "value_percents": {
+          "factoid": 71.26,
+          "non_factoid": 28.74
+        },
+        "missing_allowed_values": [],
+        "unexpected_value_counts": {}
+      },
+      "review_status": {
+        "allowed_values": [
+          "unreviewed",
+          "reviewed",
+          "revised",
+          "approved"
+        ],
+        "allowed_value_count": 4,
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_percent": 100.0,
+        "valid_present_count": 762,
+        "unexpected_value_count": 0,
+        "value_counts": {
+          "unreviewed": 0,
+          "reviewed": 640,
+          "revised": 0,
+          "approved": 122
+        },
+        "value_percents": {
+          "unreviewed": 0.0,
+          "reviewed": 83.99,
+          "revised": 0.0,
+          "approved": 16.01
+        },
+        "missing_allowed_values": [
+          "unreviewed",
+          "revised"
+        ],
+        "unexpected_value_counts": {}
+      },
+      "source_dataset": {
+        "allowed_values": [
+          "EmpiRE_Compass",
+          "Hybrid_Empirical_Research",
+          "Hybrid_NLP4RE",
+          "Generated_NLP4RE",
+          "Generated_Empirical_Research"
+        ],
+        "allowed_value_count": 5,
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_percent": 100.0,
+        "valid_present_count": 762,
+        "unexpected_value_count": 0,
+        "value_counts": {
+          "EmpiRE_Compass": 22,
+          "Hybrid_Empirical_Research": 61,
+          "Hybrid_NLP4RE": 39,
+          "Generated_NLP4RE": 310,
+          "Generated_Empirical_Research": 330
+        },
+        "value_percents": {
+          "EmpiRE_Compass": 2.89,
+          "Hybrid_Empirical_Research": 8.01,
+          "Hybrid_NLP4RE": 5.12,
+          "Generated_NLP4RE": 40.68,
+          "Generated_Empirical_Research": 43.31
+        },
+        "missing_allowed_values": [],
+        "unexpected_value_counts": {}
+      },
+      "split": {
+        "allowed_values": [
+          "train",
+          "validation",
+          "test"
+        ],
+        "allowed_value_count": 3,
+        "present_count": 762,
+        "missing_count": 0,
+        "coverage_percent": 100.0,
+        "valid_present_count": 762,
+        "unexpected_value_count": 0,
+        "value_counts": {
+          "train": 640,
+          "validation": 0,
+          "test": 122
+        },
+        "value_percents": {
+          "train": 83.99,
+          "validation": 0.0,
+          "test": 16.01
+        },
+        "missing_allowed_values": [
+          "validation"
+        ],
+        "unexpected_value_counts": {}
+      }
+    }
+  },
+  "array_enum_distributions": {
+    "total_entries": 762,
+    "array_enum_field_count": 2,
+    "array_enum_fields": [
+      "query_components",
+      "special_types"
+    ],
+    "field_details": {
+      "query_components": {
+        "allowed_values": [
+          "SELECT",
+          "ASK",
+          "COUNT",
+          "FILTER",
+          "REGEX",
+          "STR",
+          "ORDER_BY",
+          "GROUP_BY",
+          "HAVING",
+          "LIMIT",
+          "OPTIONAL",
+          "UNION",
+          "NOT_EXISTS",
+          "MIN",
+          "MAX",
+          "AVG",
+          "IF",
+          "BIND"
+        ],
+        "allowed_value_count": 18,
+        "entry_present_count": 415,
+        "entry_missing_count": 347,
+        "entry_coverage_percent": 54.46,
+        "total_item_count": 1556,
+        "valid_item_count": 1556,
+        "unexpected_item_count": 0,
+        "value_counts": {
+          "SELECT": 406,
+          "ASK": 11,
+          "COUNT": 74,
+          "FILTER": 248,
+          "REGEX": 44,
+          "STR": 169,
+          "ORDER_BY": 217,
+          "GROUP_BY": 68,
+          "HAVING": 9,
+          "LIMIT": 14,
+          "OPTIONAL": 198,
+          "UNION": 13,
+          "NOT_EXISTS": 33,
+          "MIN": 15,
+          "MAX": 16,
+          "AVG": 6,
+          "IF": 1,
+          "BIND": 14
+        },
+        "value_percents": {
+          "SELECT": 26.09,
+          "ASK": 0.71,
+          "COUNT": 4.76,
+          "FILTER": 15.94,
+          "REGEX": 2.83,
+          "STR": 10.86,
+          "ORDER_BY": 13.95,
+          "GROUP_BY": 4.37,
+          "HAVING": 0.58,
+          "LIMIT": 0.9,
+          "OPTIONAL": 12.72,
+          "UNION": 0.84,
+          "NOT_EXISTS": 2.12,
+          "MIN": 0.96,
+          "MAX": 1.03,
+          "AVG": 0.39,
+          "IF": 0.06,
+          "BIND": 0.9
+        },
+        "missing_allowed_values": [],
+        "unexpected_value_counts": {}
+      },
+      "special_types": {
+        "allowed_values": [
+          "lookup",
+          "typed_lookup",
+          "multi_hop",
+          "count",
+          "aggregation",
+          "ranking",
+          "superlative",
+          "temporal",
+          "boolean",
+          "negation",
+          "missing_info",
+          "comparison",
+          "multi_intent",
+          "string_operation"
+        ],
+        "allowed_value_count": 14,
+        "entry_present_count": 497,
+        "entry_missing_count": 265,
+        "entry_coverage_percent": 65.22,
+        "total_item_count": 1336,
+        "valid_item_count": 1336,
+        "unexpected_item_count": 0,
+        "value_counts": {
+          "lookup": 244,
+          "typed_lookup": 95,
+          "multi_hop": 311,
+          "count": 62,
+          "aggregation": 89,
+          "ranking": 67,
+          "superlative": 48,
+          "temporal": 76,
+          "boolean": 11,
+          "negation": 38,
+          "missing_info": 28,
+          "comparison": 58,
+          "multi_intent": 39,
+          "string_operation": 170
+        },
+        "value_percents": {
+          "lookup": 18.26,
+          "typed_lookup": 7.11,
+          "multi_hop": 23.28,
+          "count": 4.64,
+          "aggregation": 6.66,
+          "ranking": 5.01,
+          "superlative": 3.59,
+          "temporal": 5.69,
+          "boolean": 0.82,
+          "negation": 2.84,
+          "missing_info": 2.1,
+          "comparison": 4.34,
+          "multi_intent": 2.92,
+          "string_operation": 12.72
+        },
+        "missing_allowed_values": [],
+        "unexpected_value_counts": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "report_type": "dataset_validation",
+  "report_metadata": {
+    "generated_at_utc": "2026-04-21T23:07:29.318869+00:00",
+    "dataset_path": "code/data/dataset/working/master_validated_with_paraphrases.json",
+    "dataset_name": "master_validated_with_paraphrases",
+    "entry_count": 762,
+    "schema_path": "code/config/schemas/benchmark_dataset_schema_v1.json",
+    "has_schema": true
+  },
+  "schema_field_comparison": {
+    "dataset_field_count": 24,
+    "schema_field_count": 26,
+    "required_field_count": 8,
+    "shared_field_count": 23,
+    "shared_fields": [
+      "ambiguity_risk",
+      "answer_type",
+      "complexity_level",
+      "family",
+      "gold_sparql",
+      "gold_status",
+      "hallucination_risk",
+      "human_or_generated",
+      "id",
+      "language",
+      "lexical_gap_risk",
+      "notes",
+      "number_of_patterns",
+      "paraphrased_questions",
+      "query_components",
+      "query_shape",
+      "query_type",
+      "question",
+      "review_status",
+      "source_dataset",
+      "source_id",
+      "special_types",
+      "split"
+    ],
+    "schema_only_field_count": 3,
+    "schema_only_fields": [
+      "canonical_sparql",
+      "canonical_to_gold_mapping",
+      "template_sections"
+    ],
+    "dataset_only_field_count": 1,
+    "dataset_only_fields": [
+      "_selection_review"
+    ],
+    "missing_required_field_count": 0,
+    "missing_required_fields": []
+  },
+  "required_field_validation": {
+    "checked_entry_count": 762,
+    "required_fields": [
+      "family",
+      "gold_sparql",
+      "id",
+      "language",
+      "question",
+      "source_dataset",
+      "source_id",
+      "split"
+    ],
+    "valid_entry_count": 762,
+    "invalid_entry_count": 0,
+    "missing_counts_by_field": {
+      "family": 0,
+      "gold_sparql": 0,
+      "id": 0,
+      "language": 0,
+      "question": 0,
+      "source_dataset": 0,
+      "source_id": 0,
+      "split": 0
+    },
+    "entries_with_missing_required": []
+  },
+  "type_and_enum_validation": {
+    "checked_entry_count": 762,
+    "valid_entry_count": 762,
+    "invalid_entry_count": 0,
+    "type_error_count": 0,
+    "enum_error_count": 0,
+    "entries_with_field_errors": []
+  }
+}
