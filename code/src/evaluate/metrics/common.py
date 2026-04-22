@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import Any
 
+SUPPORTED_QUERY_FORMS = {"select", "ask"}
+
 
 def build_metric(
     metric_name: str,
