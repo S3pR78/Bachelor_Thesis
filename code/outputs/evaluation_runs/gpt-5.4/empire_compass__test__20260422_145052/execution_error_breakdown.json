@@ -1,0 +1,112 @@
+{
+  "total_items": 80,
+  "category_counts": {
+    "answer_mismatch": 28,
+    "endpoint_bad_request": 4,
+    "gold_execution_error": 1,
+    "likely_truncated_query": 46,
+    "success": 1
+  },
+  "top_error_signatures": [
+    {
+      "signature": "SPARQL request failed: 400 Client Error: Bad Request",
+      "count": 50
+    },
+    {
+      "signature": "SPARQL request failed: 414 Client Error: Request-URI Too Long",
+      "count": 1
+    }
+  ],
+  "examples_by_category": {
+    "answer_mismatch": [
+      {
+        "id": "814",
+        "primary_error_category": "answer_mismatch",
+        "prediction_status": "ok",
+        "details": {}
+      },
+      {
+        "id": "707",
+        "primary_error_category": "answer_mismatch",
+        "prediction_status": "ok",
+        "details": {}
+      },
+      {
+        "id": "811",
+        "primary_error_category": "answer_mismatch",
+        "prediction_status": "ok",
+        "details": {}
+      }
+    ],
+    "endpoint_bad_request": [
+      {
+        "id": "809",
+        "primary_error_category": "prediction_execution_error",
+        "prediction_status": "error",
+        "details": {
+          "error_signature": "SPARQL request failed: 400 Client Error: Bad Request"
+        }
+      },
+      {
+        "id": "710",
+        "primary_error_category": "prediction_execution_error",
+        "prediction_status": "error",
+        "details": {
+          "error_signature": "SPARQL request failed: 400 Client Error: Bad Request"
+        }
+      },
+      {
+        "id": "777",
+        "primary_error_category": "prediction_execution_error",
+        "prediction_status": "error",
+        "details": {
+          "error_signature": "SPARQL request failed: 400 Client Error: Bad Request"
+        }
+      }
+    ],
+    "gold_execution_error": [
+      {
+        "id": "816",
+        "primary_error_category": "gold_execution_error",
+        "prediction_status": "error",
+        "details": {
+          "error_signature": "SPARQL request failed: 414 Client Error: Request-URI Too Long"
+        }
+      }
+    ],
+    "likely_truncated_query": [
+      {
+        "id": "759",
+        "primary_error_category": "prediction_execution_error",
+        "prediction_status": "error",
+        "details": {
+          "error_signature": "SPARQL request failed: 400 Client Error: Bad Request"
+        }
+      },
+      {
+        "id": "760",
+        "primary_error_category": "prediction_execution_error",
+        "prediction_status": "error",
+        "details": {
+          "error_signature": "SPARQL request failed: 400 Client Error: Bad Request"
+        }
+      },
+      {
+        "id": "766",
+        "primary_error_category": "prediction_execution_error",
+        "prediction_status": "error",
+        "details": {
+          "error_signature": "SPARQL request failed: 400 Client Error: Bad Request"
+        }
+      }
+    ],
+    "success": [
+      {
+        "id": "768",
+        "primary_error_category": null,
+        "prediction_status": "ok",
+        "details": {}
+      }
+    ]
+  }
+}
