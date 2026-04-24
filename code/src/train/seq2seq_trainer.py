@@ -321,14 +321,21 @@ def run_seq2seq_training(
     }
     save_json(output_dir / "run_metadata.json", metadata)
 
-    trainer = Seq2SeqTrainer(
-        model=model,
-        args=training_args,
-        train_dataset=train_dataset,
-        eval_dataset=eval_dataset,
-        tokenizer=tokenizer,
-        data_collator=data_collator,
-    )
+    trainer_kwargs = {
+        "model": model,
+        "args": training_args,
+        "train_dataset": train_dataset,
+        "eval_dataset": eval_dataset,
+        "data_collator": data_collator,
+    }
+
+    trainer_signature = inspect.signature(Seq2SeqTrainer)
+    if "processing_class" in trainer_signature.parameters:
+        trainer_kwargs["processing_class"] = tokenizer
+    elif "tokenizer" in trainer_signature.parameters:
+        trainer_kwargs["tokenizer"] = tokenizer
+
+    trainer = Seq2SeqTrainer(**trainer_kwargs)
 
     train_result = trainer.train()
     train_metrics = train_result.metrics
