@@ -1,0 +1,36 @@
+{
+  "runs": {
+    "t5_base_pgmr_lite_v1": {
+      "model": "t5_base",
+      "method": "full_finetune",
+      "task": "pgmr_lite",
+      "dataset": {
+        "train_path": "code/data/dataset/pgmr/final/train.json",
+        "validation_path": "code/data/dataset/pgmr/final/validation.json",
+        "target_field": "gold_pgmr_sparql",
+        "required_status": "ok"
+      },
+      "prompt": {
+        "template": "Task: generate an ORKG PGMR-lite SPARQL query.\nUse pgmr: placeholders for relations and pgmrc: placeholders for classes.\nDo not use real ORKG identifiers such as orkgp:, orkgc:, or orkgr:.\nReturn only the query.\nFamily: {family}\nQuestion: {question}"
+      },
+      "training": {
+        "num_train_epochs": 5,
+        "learning_rate": 0.00005,
+        "per_device_train_batch_size": 4,
+        "per_device_eval_batch_size": 4,
+        "gradient_accumulation_steps": 2,
+        "max_source_length": 256,
+        "max_target_length": 512,
+        "logging_steps": 25,
+        "evaluation_strategy": "epoch",
+        "save_strategy": "epoch",
+        "save_total_limit": 2,
+        "fp16": true
+      },
+      "output": {
+        "base_dir": "code/models/google-t5_t5-base/finetuned",
+        "run_name": "pgmr_lite_v1"
+      }
+    }
+  }
+}
