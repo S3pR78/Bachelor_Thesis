@@ -1,0 +1,415 @@
+{
+  "dataset_dir": "code/data/dataset/final",
+  "memory_dir": "code/data/orkg_memory/templates",
+  "splits": [
+    "train",
+    "validation",
+    "test"
+  ],
+  "split_item_counts": {
+    "train": 602,
+    "validation": 80,
+    "test": 80
+  },
+  "status_counts": {
+    "ok": 76,
+    "partially_mapped": 686
+  },
+  "total_unmapped_unique_family_uri_pairs": 7,
+  "unmapped_terms": [
+    {
+      "family": "empirical_research_practice",
+      "canonical_uri": "orkgp:P31",
+      "total_entries": 403,
+      "split_counts": {
+        "train": 323,
+        "validation": 40,
+        "test": 40
+      },
+      "examples": [
+        {
+          "split": "train",
+          "id": "36",
+          "family": "empirical_research_practice",
+          "question": "Which venue series are associated with papers whose data collection method is survey?",
+          "pgmr_status": "partially_mapped",
+          "matching_sparql_lines": [
+            "SELECT DISTINCT ?venue WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P56008 ?dc . ?dc orkgp:P1005 ?method . ?method orkgp:P94003 ?method_type . ?method_type rdfs:label ?method_type_label . FILTER(LCASE(STR(?method_type_label)) = LCASE(\"survey\")) ?contribution orkgp:P135046 ?venue . }"
+          ]
+        },
+        {
+          "split": "train",
+          "id": "37",
+          "family": "empirical_research_practice",
+          "question": "Which papers report qualitative research data?",
+          "pgmr_status": "partially_mapped",
+          "matching_sparql_lines": [
+            "SELECT DISTINCT ?paper WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P56008 ?dc . ?dc orkgp:DATA ?data . ?data orkgp:P7055 ?dtype . ?dtype orkgp:P57038 ?qualitative . }"
+          ]
+        },
+        {
+          "split": "train",
+          "id": "38",
+          "family": "empirical_research_practice",
+          "question": "Which data collection method types are reported in papers that use quantitative data?",
+          "pgmr_status": "partially_mapped",
+          "matching_sparql_lines": [
+            "SELECT DISTINCT ?method_type WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P56008 ?dc . ?dc orkgp:DATA ?data . ?data orkgp:P7055 ?dtype . ?dtype orkgp:P57039 ?quantitative . ?dc orkgp:P1005 ?method . ?method orkgp:P94003 ?method_type . }"
+          ]
+        },
+        {
+          "split": "train",
+          "id": "39",
+          "family": "empirical_research_practice",
+          "question": "Which statistical techniques are reported in papers that state a null hypothesis?",
+          "pgmr_status": "partially_mapped",
+          "matching_sparql_lines": [
+            "SELECT DISTINCT ?technique WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P15124 ?da . ?da orkgp:P56043 ?inf . ?inf orkgp:P30001 ?hypothesis . ?hypothesis orkgp:P41703 ?htype . ?htype orkgp:P35106 ?null_hypothesis . ?inf orkgp:P35133 ?technique . }"
+          ]
+        },
+        {
+          "split": "train",
+          "id": "40",
+          "family": "empirical_research_practice",
+          "question": "Which machine learning algorithms are reported in papers that report accuracy?",
+          "pgmr_status": "partially_mapped",
+          "matching_sparql_lines": [
+            "SELECT DISTINCT ?algorithm WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P15124 ?da . ?da orkgp:P57016 ?ml . ?ml orkgp:P2006 ?metric . ?metric orkgp:P18048 ?accuracy . ?ml orkgp:P2001 ?algorithm . }"
+          ]
+        }
+      ]
+    },
+    {
+      "family": "nlp4re",
+      "canonical_uri": "orkgp:P31",
+      "total_entries": 259,
+      "split_counts": {
+        "train": 219,
+        "validation": 0,
+        "test": 40
+      },
+      "examples": [
+        {
+          "split": "train",
+          "id": "7",
+          "family": "nlp4re",
+          "question": "In which years were the papers published that describe annotation processes with more than two annotators?",
+          "pgmr_status": "partially_mapped",
+          "matching_sparql_lines": [
+            "?paper orkgp:P31 ?contribution ;"
+          ]
+        },
+        {
+          "split": "train",
+          "id": "211",
+          "family": "nlp4re",
+          "question": "Which papers report more annotators than data sources?",
+          "pgmr_status": "partially_mapped",
+          "matching_sparql_lines": [
+            "SELECT DISTINCT ?paper ?paperLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181031 ?annotationProc . ?annotationProc orkgp:P181032 ?annotator . ?annotator orkgp:P59120 ?numAnnotators . ?contribution orkgp:P181011 ?dataset . ?dataset orkgp:P181017 ?source . ?source orkgp:P181019 ?numSources . FILTER(xsd:decimal(?numAnnotators) > xsd:decimal(?numSources)) OPTIONAL { ?paper rdfs:label ?paperLabel } }"
+          ]
+        },
+        {
+          "split": "train",
+          "id": "212",
+          "family": "nlp4re",
+          "question": "Which papers report both an annotation scheme and conflict resolution?",
+          "pgmr_status": "partially_mapped",
+          "matching_sparql_lines": [
+            "SELECT DISTINCT ?paper ?paperLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181031 ?annotationProc . ?annotationProc orkgp:P181036 ?scheme . ?annotationProc orkgp:P181041 ?agreement . ?agreement orkgp:P181044 ?resolution . OPTIONAL { ?paper rdfs:label ?paperLabel } }"
+          ]
+        },
+        {
+          "split": "train",
+          "id": "213",
+          "family": "nlp4re",
+          "question": "Which data source domains are reported for datasets that specify both a data item count and a natural language?",
+          "pgmr_status": "partially_mapped",
+          "matching_sparql_lines": [
+            "SELECT DISTINCT ?answer ?answerLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?dataset . ?dataset orkgp:P181015 ?dataItems . ?dataset orkgp:P181022 ?dataType . ?dataType orkgp:P181025 ?nl . ?dataset orkgp:P181017 ?source . ?source orkgp:P181020 ?answer . OPTIONAL { ?answer rdfs:label ?answerLabel } }"
+          ]
+        },
+        {
+          "split": "train",
+          "id": "214",
+          "family": "nlp4re",
+          "question": "Which NLP task types are reported in studies that include a release URL?",
+          "pgmr_status": "partially_mapped",
+          "matching_sparql_lines": [
+            "SELECT DISTINCT ?answer ?answerLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181003 ?task . ?task orkgp:P181004 ?answer . ?contribution orkgp:P181046 ?approach . ?approach orkgp:release ?release . ?release orkgp:P1003 ?url . OPTIONAL { ?answer rdfs:label ?answerLabel } }"
+          ]
+        }
+      ]
+    },
+    {
+      "family": "empirical_research_practice",
+      "canonical_uri": "orkgp:P29",
+      "total_entries": 107,
+      "split_counts": {
+        "train": 83,
+        "validation": 12,
+        "test": 12
+      },
+      "examples": [
+        {
+          "split": "train",
+          "id": "75",
+          "family": "empirical_research_practice",
+          "question": "Which publication years are represented by papers that report survey as the data collection method?",
+          "pgmr_status": "partially_mapped",
+          "matching_sparql_lines": [
+            "SELECT DISTINCT ?year WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?paper orkgp:P29 ?year . ?contribution orkgp:P56008 ?dc . ?dc orkgp:P1005 ?method . ?method orkgp:P94003 ?method_type . ?method_type rdfs:label ?method_type_label . FILTER(LCASE(STR(?method_type_label)) = LCASE(\"survey\")) } ORDER BY ?year"
+          ]
+        },
+        {
+          "split": "train",
+          "id": "76",
+          "family": "empirical_research_practice",
+          "question": "Which publication years are represented by papers that report qualitative research data?",
+          "pgmr_status": "partially_mapped",
+          "matching_sparql_lines": [
+            "SELECT DISTINCT ?year WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?paper orkgp:P29 ?year . ?contribution orkgp:P56008 ?dc . ?dc orkgp:DATA ?data . ?data orkgp:P7055 ?dtype . ?dtype orkgp:P57038 ?qualitative . } ORDER BY ?year"
+          ]
+        },
+        {
+          "split": "train",
+          "id": "77",
+          "family": "empirical_research_practice",
+          "question": "Which publication years are represented by papers that use a machine learning algorithm?",
+          "pgmr_status": "partially_mapped",
+          "matching_sparql_lines": [
+            "SELECT DISTINCT ?year WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?paper orkgp:P29 ?year . ?contribution orkgp:P15124 ?da . ?da orkgp:P57016 ?ml . ?ml orkgp:P2001 ?algorithm . } ORDER BY ?year"
+          ]
+        },
+        {
+          "split": "train",
+          "id": "78",
+          "family": "empirical_research_practice",
+          "question": "Which publication years are represented by papers that mention external validity threats?",
+          "pgmr_status": "partially_mapped",
+          "matching_sparql_lines": [
+            "SELECT DISTINCT ?year WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?paper orkgp:P29 ?year . ?contribution orkgp:P39099 ?threats . ?threats orkgp:P55034 ?external_validity . } ORDER BY ?year"
+          ]
+        },
+        {
+          "split": "train",
+          "id": "79",
+          "family": "empirical_research_practice",
+          "question": "Which publication years are represented by papers published in the IEEE International Requirements Engineering Conference?",
+          "pgmr_status": "partially_mapped",
+          "matching_sparql_lines": [
+            "SELECT DISTINCT ?year WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?paper orkgp:P29 ?year . ?contribution orkgp:P135046 ?venue . ?venue rdfs:label ?venue_label . FILTER(LCASE(STR(?venue_label)) = LCASE(\"IEEE International Requirements Engineering Conference\")) } ORDER BY ?year"
+          ]
+        }
+      ]
+    },
+    {
+      "family": "nlp4re",
+      "canonical_uri": "orkgp:P29",
+      "total_entries": 43,
+      "split_counts": {
+        "train": 37,
+        "validation": 0,
+        "test": 6
+      },
+      "examples": [
+        {
+          "split": "train",
+          "id": "7",
+          "family": "nlp4re",
+          "question": "In which years were the papers published that describe annotation processes with more than two annotators?",
+          "pgmr_status": "partially_mapped",
+          "matching_sparql_lines": [
+            "orkgp:P29 ?year ."
+          ]
+        },
+        {
+          "split": "train",
+          "id": "249",
+          "family": "nlp4re",
+          "question": "In which year were papers published that report more annotators than data sources?",
+          "pgmr_status": "partially_mapped",
+          "matching_sparql_lines": [
+            "SELECT DISTINCT ?year WHERE { ?paper orkgp:P29 ?year . ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181031 ?annotationProc . ?annotationProc orkgp:P181032 ?annotator . ?annotator orkgp:P59120 ?numAnnotators . ?contribution orkgp:P181011 ?dataset . ?dataset orkgp:P181017 ?source . ?source orkgp:P181019 ?numSources . FILTER(xsd:decimal(?numAnnotators) > xsd:decimal(?numSources)) }"
+          ]
+        },
+        {
+          "split": "train",
+          "id": "250",
+          "family": "nlp4re",
+          "question": "In which year were papers published that use datasets with a URL and a license type?",
+          "pgmr_status": "partially_mapped",
+          "matching_sparql_lines": [
+            "SELECT DISTINCT ?year WHERE { ?paper orkgp:P29 ?year . ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?dataset . ?dataset orkgp:P181028 ?location . ?location orkgp:P1003 ?url . ?dataset orkgp:license ?lic . ?lic orkgp:P181027 ?licenseType . }"
+          ]
+        },
+        {
+          "split": "train",
+          "id": "251",
+          "family": "nlp4re",
+          "question": "In which year were papers published that report a baseline comparison and an evaluation metric?",
+          "pgmr_status": "partially_mapped",
+          "matching_sparql_lines": [
+            "SELECT DISTINCT ?year WHERE { ?paper orkgp:P29 ?year . ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:HAS_EVALUATION ?evaluation . ?evaluation orkgp:P181051 ?bc . ?evaluation orkgp:P110006 ?metric . }"
+          ]
+        },
+        {
+          "split": "train",
+          "id": "252",
+          "family": "nlp4re",
+          "question": "In which year were papers published that report annotation scheme establishment and guideline availability?",
+          "pgmr_status": "partially_mapped",
+          "matching_sparql_lines": [
+            "SELECT DISTINCT ?year WHERE { ?paper orkgp:P29 ?year . ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181031 ?annotationProc . ?annotationProc orkgp:P181036 ?scheme . ?scheme orkgp:P181037 ?establishment . ?scheme orkgp:P181038 ?guideline . }"
+          ]
+        }
+      ]
+    },
+    {
+      "family": "nlp4re",
+      "canonical_uri": "orkgp:release",
+      "total_entries": 41,
+      "split_counts": {
+        "train": 30,
+        "validation": 9,
+        "test": 2
+      },
+      "examples": [
+        {
+          "split": "train",
+          "id": "168",
+          "family": "nlp4re",
+          "question": "In which year were the datasets produced for contributions that also report a release format and a dependency?",
+          "pgmr_status": "partially_mapped",
+          "matching_sparql_lines": [
+            "SELECT DISTINCT ?answer WHERE { ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?dataset . ?dataset orkgp:P181016 ?answer . ?contribution orkgp:P181046 ?approach . ?approach orkgp:release ?release . ?release orkgp:P181049 ?releaseFormat . ?approach orkgp:P181048 ?dependency . }"
+          ]
+        },
+        {
+          "split": "train",
+          "id": "214",
+          "family": "nlp4re",
+          "question": "Which NLP task types are reported in studies that include a release URL?",
+          "pgmr_status": "partially_mapped",
+          "matching_sparql_lines": [
+            "SELECT DISTINCT ?answer ?answerLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181003 ?task . ?task orkgp:P181004 ?answer . ?contribution orkgp:P181046 ?approach . ?approach orkgp:release ?release . ?release orkgp:P1003 ?url . OPTIONAL { ?answer rdfs:label ?answerLabel } }"
+          ]
+        },
+        {
+          "split": "train",
+          "id": "215",
+          "family": "nlp4re",
+          "question": "Which algorithms are used in implemented approaches that provide documentation and a release?",
+          "pgmr_status": "partially_mapped",
+          "matching_sparql_lines": [
+            "SELECT DISTINCT ?answer ?answerLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181046 ?approach . ?approach orkgp:P58069 ?answer . ?approach orkgp:P41835 ?doc . ?approach orkgp:release ?release . OPTIONAL { ?answer rdfs:label ?answerLabel } }"
+          ]
+        },
+        {
+          "split": "train",
+          "id": "219",
+          "family": "nlp4re",
+          "question": "Which release formats are reported for implemented approaches that also specify dependencies?",
+          "pgmr_status": "partially_mapped",
+          "matching_sparql_lines": [
+            "SELECT DISTINCT ?answer ?answerLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181046 ?approach . ?approach orkgp:P181048 ?dependency . ?approach orkgp:release ?release . ?release orkgp:P181049 ?answer . OPTIONAL { ?answer rdfs:label ?answerLabel } }"
+          ]
+        },
+        {
+          "split": "train",
+          "id": "227",
+          "family": "nlp4re",
+          "question": "What URL is reported for implemented approaches that also provide a release format?",
+          "pgmr_status": "partially_mapped",
+          "matching_sparql_lines": [
+            "SELECT DISTINCT ?answer WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181046 ?approach . ?approach orkgp:release ?release . ?release orkgp:P181049 ?releaseFormat . ?release orkgp:P1003 ?answer . }"
+          ]
+        }
+      ]
+    },
+    {
+      "family": "nlp4re",
+      "canonical_uri": "orkgp:license",
+      "total_entries": 30,
+      "split_counts": {
+        "train": 27,
+        "validation": 0,
+        "test": 3
+      },
+      "examples": [
+        {
+          "split": "train",
+          "id": "158",
+          "family": "nlp4re",
+          "question": "How many data items are reported for datasets that are publicly available and have a dataset URL?",
+          "pgmr_status": "partially_mapped",
+          "matching_sparql_lines": [
+            "SELECT DISTINCT ?answer WHERE { ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?dataset . ?dataset orkgp:license ?license . ?license orkgp:P181026 ?publicAvailability . ?dataset orkgp:P181028 ?location . ?location orkgp:P1003 ?url . ?dataset orkgp:P181015 ?answer . }"
+          ]
+        },
+        {
+          "split": "train",
+          "id": "224",
+          "family": "nlp4re",
+          "question": "What license type is reported for datasets that have a URL?",
+          "pgmr_status": "partially_mapped",
+          "matching_sparql_lines": [
+            "SELECT DISTINCT ?answer WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?dataset . ?dataset orkgp:P181028 ?location . ?location orkgp:P1003 ?url . ?dataset orkgp:license ?lic . ?lic orkgp:P181027 ?raw . OPTIONAL { ?raw rdfs:label ?rawLabel } BIND(COALESCE(?rawLabel, STR(?raw)) AS ?answer) }"
+          ]
+        },
+        {
+          "split": "train",
+          "id": "240",
+          "family": "nlp4re",
+          "question": "How many distinct data source domains are reported for datasets that have a license type?",
+          "pgmr_status": "partially_mapped",
+          "matching_sparql_lines": [
+            "SELECT (COUNT(DISTINCT ?domain) AS ?answer) WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?dataset . ?dataset orkgp:license ?lic . ?lic orkgp:P181027 ?licenseType . ?dataset orkgp:P181017 ?source . ?source orkgp:P181020 ?domain . }"
+          ]
+        },
+        {
+          "split": "train",
+          "id": "244",
+          "family": "nlp4re",
+          "question": "How many papers report a dataset URL and a license type?",
+          "pgmr_status": "partially_mapped",
+          "matching_sparql_lines": [
+            "SELECT (COUNT(DISTINCT ?paper) AS ?answer) WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?dataset . ?dataset orkgp:P181028 ?location . ?location orkgp:P1003 ?url . ?dataset orkgp:license ?lic . ?lic orkgp:P181027 ?licenseType . }"
+          ]
+        },
+        {
+          "split": "train",
+          "id": "250",
+          "family": "nlp4re",
+          "question": "In which year were papers published that use datasets with a URL and a license type?",
+          "pgmr_status": "partially_mapped",
+          "matching_sparql_lines": [
+            "SELECT DISTINCT ?year WHERE { ?paper orkgp:P29 ?year . ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?dataset . ?dataset orkgp:P181028 ?location . ?location orkgp:P1003 ?url . ?dataset orkgp:license ?lic . ?lic orkgp:P181027 ?licenseType . }"
+          ]
+        }
+      ]
+    },
+    {
+      "family": "nlp4re",
+      "canonical_uri": "orkgp:description",
+      "total_entries": 1,
+      "split_counts": {
+        "train": 0,
+        "validation": 0,
+        "test": 1
+      },
+      "examples": [
+        {
+          "split": "test",
+          "id": "815",
+          "family": "nlp4re",
+          "question": "Which combinations of RE and NLP tasks are most (a)typical?",
+          "pgmr_status": "partially_mapped",
+          "matching_sparql_lines": [
+            "OPTIONAL{?NLPTaskType orkgp:description ?NLPTaskTypeDescription .}"
+          ]
+        }
+      ]
+    }
+  ]
+}
