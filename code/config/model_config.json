@@ -30,31 +30,88 @@
         "do_sample": false
       }
     },
-    "gpt_4o_mini": {
-    	"provider": "openai",
-    	"model_id": "gpt-4o-mini",
-    	"interface": "chat",
-    	"variant": "original",
-    	"generation": {
+    "llama3_8b_instruct": {
+      "provider": "huggingface",
+      "model_id": "meta-llama/Meta-Llama-3-8B-Instruct",
+      "interface": "causal_lm",
+      "variant": "original",
+      "paths": {
+        "model_root": "code/models",
+        "cache_dir": "code/models/cache"
+      },
+      "generation": {
         "max_new_tokens": 512,
-        "temperature": 0.0
-     	 },
-      	"api": {
-        	"api_key_env": "OPENAI_API_KEY"
-      	}
-    },
-    "gpt-5.4-mini": {
-      "provider": "openai",
-      "model_id": "gpt-5.4-mini",
-      "api": {
-        "env_var_name": "OPENAI_API_KEY"
+        "temperature": 0.0,
+        "do_sample": false
       }
     },
-    "gpt-5.4": {
+    "mistral_7b_instruct": {
+      "provider": "huggingface",
+      "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+      "interface": "causal_lm",
+      "variant": "original",
+      "paths": {
+        "model_root": "code/models",
+        "cache_dir": "code/models/cache"
+      },
+      "generation": {
+        "max_new_tokens": 512,
+        "temperature": 0.0,
+        "do_sample": false
+      }
+    },
+    "qwen25_coder_7b_instruct": {
+      "provider": "huggingface",
+      "model_id": "Qwen/Qwen2.5-Coder-7B-Instruct",
+      "interface": "causal_lm",
+      "variant": "original",
+      "paths": {
+        "model_root": "code/models",
+        "cache_dir": "code/models/cache"
+      },
+      "generation": {
+        "max_new_tokens": 512,
+        "temperature": 0.0,
+        "do_sample": false
+      }
+    },
+    "gpt_4o_mini": {
+      "provider": "openai",
+      "model_id": "gpt-4o-mini",
+      "interface": "chat",
+      "variant": "original",
+      "generation": {
+        "max_new_tokens": 512,
+        "temperature": 0.0
+      },
+      "api": {
+        "api_key_env": "OPENAI_API_KEY"
+      }
+    },
+    "gpt_5_4_mini": {
+      "provider": "openai",
+      "model_id": "gpt-5.4-mini",
+      "interface": "chat",
+      "variant": "original",
+      "generation": {
+        "max_new_tokens": 512,
+        "temperature": 0.0
+      },
+      "api": {
+        "api_key_env": "OPENAI_API_KEY"
+      }
+    },
+    "gpt_5_4": {
       "provider": "openai",
       "model_id": "gpt-5.4",
+      "interface": "chat",
+      "variant": "original",
+      "generation": {
+        "max_new_tokens": 512,
+        "temperature": 0.0
+      },
       "api": {
-        "env_var_name": "OPENAI_API_KEY"
+        "api_key_env": "OPENAI_API_KEY"
       }
     }
   }
