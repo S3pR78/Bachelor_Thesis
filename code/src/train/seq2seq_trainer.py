@@ -1,77 +1,19 @@
 from __future__ import annotations
 
-import argparse
 import inspect
 import json
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-import torch
-from torch.utils.data import Dataset
-from transformers import (
-    AutoModelForSeq2SeqLM,
-    AutoTokenizer,
-    DataCollatorForSeq2Seq,
-    Seq2SeqTrainer,
-    Seq2SeqTrainingArguments,
-    set_seed,
-)
-
 from src.train.config import get_train_run_config, load_train_config
 from src.train.dataset import build_training_examples, load_dataset
 
 
-class TextToTextDataset(Dataset):
-    def __init__(
-        self,
-        examples: list[dict[str, str]],
-        tokenizer: Any,
-        max_source_length: int,
-        max_target_length: int,
-    ) -> None:
-        self.examples = examples
-
-        inputs = [example["input_text"] for example in examples]
-        targets = [example["target_text"] for example in examples]
-
-        model_inputs = tokenizer(
-            inputs,
-            max_length=max_source_length,
-            truncation=True,
-            padding=False,
-        )
-
-        try:
-            labels = tokenizer(
-                text_target=targets,
-                max_length=max_target_length,
-                truncation=True,
-                padding=False,
-            )
-        except TypeError:
-            with tokenizer.as_target_tokenizer():
-                labels = tokenizer(
-                    targets,
-                    max_length=max_target_length,
-                    truncation=True,
-                    padding=False,
-                )
-
-        model_inputs["labels"] = labels["input_ids"]
-        self.encodings = model_inputs
-
-    def __len__(self) -> int:
-        return len(self.examples)
-
-    def __getitem__(self, index: int) -> dict[str, torch.Tensor]:
-        return {
-            key: torch.tensor(value[index])
-            for key, value in self.encodings.items()
-        }
+DEFAULT_MODEL_CONFIG_PATH = Path("code/config/model_config.json")
 
 
-def load_model_config(path: Path) -> dict[str, Any]:
+def load_model_config(path: Path = DEFAULT_MODEL_CONFIG_PATH) -> dict[str, Any]:
     if not path.exists() or not path.is_file():
         raise FileNotFoundError(f"Model config not found: {path}")
 
@@ -113,11 +55,42 @@ def build_output_dir(run_config: dict[str, Any], run_name: str) -> Path:
     return base_dir / configured_run_name / utc_run_timestamp()
 
 
+def load_training_examples_from_run_config(
+    run_config: dict[str, Any],
+    split: str,
+    limit: int | None = None,
+) -> list[dict[str, str]]:
+    dataset_config = run_config["dataset"]
+    prompt_template = run_config["prompt"]["template"]
+    target_field = dataset_config["target_field"]
+    required_status = dataset_config.get("required_status")
+
+    if split == "train":
+        dataset_path = Path(dataset_config["train_path"])
+    elif split == "validation":
+        dataset_path = Path(dataset_config["validation_path"])
+    else:
+        raise ValueError(f"Unsupported split: {split}")
+
+    entries = load_dataset(dataset_path)
+
+    return build_training_examples(
+        entries=entries,
+        prompt_template=prompt_template,
+        target_field=target_field,
+        required_status=required_status,
+        limit=limit,
+    )
+
+
 def build_seq2seq_training_args(
     output_dir: Path,
     training_config: dict[str, Any],
     override_epochs: int | None = None,
-) -> Seq2SeqTrainingArguments:
+):
+    import torch
+    from transformers import Seq2SeqTrainingArguments
+
     num_train_epochs = (
         override_epochs
         if override_epochs is not None
@@ -160,43 +133,66 @@ def build_seq2seq_training_args(
     return Seq2SeqTrainingArguments(**kwargs)
 
 
-def load_training_examples_from_run_config(
-    run_config: dict[str, Any],
-    split: str,
-    limit: int | None = None,
-) -> list[dict[str, str]]:
-    dataset_config = run_config["dataset"]
-    prompt_template = run_config["prompt"]["template"]
-    target_field = dataset_config["target_field"]
-    required_status = dataset_config.get("required_status")
+def create_text_to_text_dataset(
+    examples: list[dict[str, str]],
+    tokenizer: Any,
+    max_source_length: int,
+    max_target_length: int,
+):
+    import torch
+    from torch.utils.data import Dataset
 
-    if split == "train":
-        dataset_path = Path(dataset_config["train_path"])
-    elif split == "validation":
-        dataset_path = Path(dataset_config["validation_path"])
-    else:
-        raise ValueError(f"Unsupported split: {split}")
+    class TextToTextDataset(Dataset):
+        def __init__(self) -> None:
+            inputs = [example["input_text"] for example in examples]
+            targets = [example["target_text"] for example in examples]
 
-    entries = load_dataset(dataset_path)
+            model_inputs = tokenizer(
+                inputs,
+                max_length=max_source_length,
+                truncation=True,
+                padding=False,
+            )
 
-    return build_training_examples(
-        entries=entries,
-        prompt_template=prompt_template,
-        target_field=target_field,
-        required_status=required_status,
-        limit=limit,
-    )
+            try:
+                labels = tokenizer(
+                    text_target=targets,
+                    max_length=max_target_length,
+                    truncation=True,
+                    padding=False,
+                )
+            except TypeError:
+                with tokenizer.as_target_tokenizer():
+                    labels = tokenizer(
+                        targets,
+                        max_length=max_target_length,
+                        truncation=True,
+                        padding=False,
+                    )
+
+            model_inputs["labels"] = labels["input_ids"]
+            self.encodings = model_inputs
+
+        def __len__(self) -> int:
+            return len(examples)
+
+        def __getitem__(self, index: int) -> dict[str, torch.Tensor]:
+            return {
+                key: torch.tensor(value[index])
+                for key, value in self.encodings.items()
+            }
+
+    return TextToTextDataset()
 
 
 def run_seq2seq_training(
     train_config_path: Path,
-    model_config_path: Path,
     run_name: str,
     max_train_samples: int | None = None,
     max_eval_samples: int | None = None,
     override_epochs: int | None = None,
     dry_run: bool = False,
-) -> None:
+) -> int:
     train_config = load_train_config(train_config_path)
     run_config = get_train_run_config(train_config, run_name)
 
@@ -207,7 +203,7 @@ def run_seq2seq_training(
     if method != "full_finetune":
         raise ValueError(f"This trainer only supports method='full_finetune', got: {method}")
 
-    model_config = load_model_config(model_config_path)
+    model_config = load_model_config()
     model_entry = get_model_entry(model_config, model_key)
 
     if model_entry.get("provider") != "huggingface":
@@ -252,7 +248,16 @@ def run_seq2seq_training(
 
     if dry_run:
         print("\nDry run finished. No model was loaded and no training was started.")
-        return
+        return 0
+
+    import torch
+    from transformers import (
+        AutoModelForSeq2SeqLM,
+        AutoTokenizer,
+        DataCollatorForSeq2Seq,
+        Seq2SeqTrainer,
+        set_seed,
+    )
 
     set_seed(int(run_config["training"].get("seed", 42)))
 
@@ -272,13 +277,13 @@ def run_seq2seq_training(
     max_source_length = int(run_config["training"]["max_source_length"])
     max_target_length = int(run_config["training"]["max_target_length"])
 
-    train_dataset = TextToTextDataset(
+    train_dataset = create_text_to_text_dataset(
         examples=train_examples,
         tokenizer=tokenizer,
         max_source_length=max_source_length,
         max_target_length=max_target_length,
     )
-    eval_dataset = TextToTextDataset(
+    eval_dataset = create_text_to_text_dataset(
         examples=eval_examples,
         tokenizer=tokenizer,
         max_source_length=max_source_length,
@@ -306,7 +311,7 @@ def run_seq2seq_training(
         "train_examples": len(train_examples),
         "eval_examples": len(eval_examples),
         "train_config_path": str(train_config_path),
-        "model_config_path": str(model_config_path),
+        "model_config_path": str(DEFAULT_MODEL_CONFIG_PATH),
         "output_dir": str(output_dir),
         "final_model_dir": str(final_model_dir),
         "max_train_samples": max_train_samples,
@@ -348,69 +353,4 @@ def run_seq2seq_training(
     print(f"Run output directory: {output_dir}")
     print(f"Final model directory: {final_model_dir}")
 
-
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(
-        description="Full fine-tune a Hugging Face seq2seq model on PGMR targets."
-    )
-
-    parser.add_argument(
-        "--config",
-        type=Path,
-        default=Path("code/config/train_config.json"),
-        help="Path to train_config.json.",
-    )
-    parser.add_argument(
-        "--model-config",
-        type=Path,
-        default=Path("code/config/model_config.json"),
-        help="Path to model_config.json.",
-    )
-    parser.add_argument(
-        "--run",
-        required=True,
-        help="Training run key from train_config.json.",
-    )
-    parser.add_argument(
-        "--max-train-samples",
-        type=int,
-        default=None,
-        help="Optional limit for train examples.",
-    )
-    parser.add_argument(
-        "--max-eval-samples",
-        type=int,
-        default=None,
-        help="Optional limit for validation examples.",
-    )
-    parser.add_argument(
-        "--override-epochs",
-        type=int,
-        default=None,
-        help="Override num_train_epochs from config.",
-    )
-    parser.add_argument(
-        "--dry-run",
-        action="store_true",
-        help="Only prepare examples and print preview. Do not load model or train.",
-    )
-
-    return parser.parse_args()
-
-
-def main() -> None:
-    args = parse_args()
-
-    run_seq2seq_training(
-        train_config_path=args.config,
-        model_config_path=args.model_config,
-        run_name=args.run,
-        max_train_samples=args.max_train_samples,
-        max_eval_samples=args.max_eval_samples,
-        override_epochs=args.override_epochs,
-        dry_run=args.dry_run,
-    )
-
-
-if __name__ == "__main__":
-    main()
+    return 0
