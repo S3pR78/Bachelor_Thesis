@@ -1,10 +1,12 @@
 import argparse
+from pathlib import Path
 from src.query.query_executor import generate_query_response
 from src.evaluate.runner import execute_evaluate_task
 from src.query.prompt_builder import (
     build_final_prompt_for_question,
     validate_query_args,
 )
+from src.train.seq2seq_trainer import run_seq2seq_training
 
 
 """
@@ -38,9 +40,17 @@ def run_query_task(args: argparse.Namespace) -> int:
 
 
 def run_train_task(args: argparse.Namespace) -> int:
-    print("Running training task with args:", args)
-    return 0
 
+    run_seq2seq_training(
+        train_config_path=args.train_config,
+        run_name=args.run,
+        max_train_samples=args.max_train_samples,
+        max_eval_samples=args.max_eval_samples,
+        override_epochs=args.override_epochs,
+        dry_run=args.dry_run,
+    )
+
+    return 0
 
 def run_evaluate_task(args: argparse.Namespace) -> int:
     return execute_evaluate_task(args)
@@ -65,9 +75,41 @@ def build_parser() -> argparse.ArgumentParser:
 
 
     train_parser = subparsers.add_parser("train", help="Run the training task.")
-    train_parser.add_argument("--model", required=True, help="Model to use for training.")
+    train_parser.add_argument(
+        "--run",
+        required=True,
+        help="Training run key from train_config.json.",
+    )
+    train_parser.add_argument(
+        "--train-config",
+        type=Path,
+        default=Path("code/config/train_config.json"),
+        help="Path to the training configuration file.",
+    )
+    train_parser.add_argument(
+        "--max-train-samples",
+        type=int,
+        default=None,
+        help="Optional limit for training examples, useful for test runs.",
+    )
+    train_parser.add_argument(
+        "--max-eval-samples",
+        type=int,
+        default=None,
+        help="Optional limit for validation examples, useful for test runs.",
+    )
+    train_parser.add_argument(
+        "--override-epochs",
+        type=int,
+        default=None,
+        help="Override the number of training epochs from train_config.json.",
+    )
+    train_parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Prepare and print training examples without loading a model or training.",
+    )
     train_parser.set_defaults(func=run_train_task)
-    # training method and training data can be added as arguments here, e.g., --method, --data
 
     evaluate_parser = subparsers.add_parser("evaluate", help="Run the evaluation task.")
     evaluate_parser.add_argument("--model", required=True, help="Model to use for evaluation.")
