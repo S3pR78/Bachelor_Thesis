@@ -2,16 +2,43 @@
   {
     "family": "nlp4re",
     "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P31",
+    "label": "has contribution",
+    "placeholder": "pgmr:has_contribution",
+    "aliases": [
+      "contribution",
+      "has contribution",
+      "paper contribution",
+      "links paper to contribution"
+    ],
+    "notes": "Common ORKG predicate. ORKG label: contribution. Used in benchmark queries to link a paper to a contribution."
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P29",
+    "label": "publication year",
+    "placeholder": "pgmr:publication_year",
+    "aliases": [
+      "publication year",
+      "year",
+      "published year"
+    ],
+    "notes": "Common ORKG predicate. ORKG label: publication year. Used for paper-level publication year metadata."
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
     "kind": "class",
     "canonical_uri": "orkgc:C121001",
     "label": "NLP4RE contribution",
-    "placeholder": "[CLASS: NLP4RE contribution]",
+    "placeholder": "pgmrc:nlp4re_contribution",
     "aliases": [
-      "nlp4re contribution",
-      "nlp for requirements engineering contribution",
-      "contribution"
+      "nlp4re contribution"
     ],
-    "notes": "Contribution class for the NLP4RE template. The class ID is taken from the project context, not from the uploaded template JSON."
+    "notes": "Root contribution class for the nlp4re template."
   },
   {
     "family": "nlp4re",
@@ -19,13 +46,11 @@
     "kind": "class",
     "canonical_uri": "orkgc:C121004",
     "label": "NLP task",
-    "placeholder": "[CLASS: NLP task]",
+    "placeholder": "pgmrc:nlp_task",
     "aliases": [
-      "natural language processing task",
-      "nlp task entity",
-      "task"
+      "nlp task"
     ],
-    "notes": "Class of the NLP task subtemplate."
+    "notes": "Class used by template predicate P181003."
   },
   {
     "family": "nlp4re",
@@ -33,13 +58,11 @@
     "kind": "class",
     "canonical_uri": "orkgc:C121007",
     "label": "NLP task output",
-    "placeholder": "[CLASS: NLP task output]",
+    "placeholder": "pgmrc:nlp_task_output",
     "aliases": [
-      "nlp output",
-      "natural language processing output",
-      "task output"
+      "nlp task output"
     ],
-    "notes": "Class of the NLP task output subtemplate."
+    "notes": "Class used by template predicate P181006."
   },
   {
     "family": "nlp4re",
@@ -47,13 +70,11 @@
     "kind": "class",
     "canonical_uri": "orkgc:C121010",
     "label": "NLP dataset",
-    "placeholder": "[CLASS: NLP dataset]",
+    "placeholder": "pgmrc:nlp_dataset",
     "aliases": [
-      "natural language processing dataset",
-      "dataset used for nlp",
-      "dataset"
+      "nlp dataset"
     ],
-    "notes": "Class of the NLP dataset subtemplate."
+    "notes": "Class used by template predicate P181011."
   },
   {
     "family": "nlp4re",
@@ -61,13 +82,11 @@
     "kind": "class",
     "canonical_uri": "orkgc:C121011",
     "label": "NLP data source",
-    "placeholder": "[CLASS: NLP data source]",
+    "placeholder": "pgmrc:nlp_data_source",
     "aliases": [
-      "data source",
-      "nlp dataset source",
-      "source of data"
+      "nlp data source"
     ],
-    "notes": "Class of the NLP data source subtemplate."
+    "notes": "Class used by template predicate P181017."
   },
   {
     "family": "nlp4re",
@@ -75,13 +94,11 @@
     "kind": "class",
     "canonical_uri": "orkgc:C121015",
     "label": "NLP data type",
-    "placeholder": "[CLASS: NLP data type]",
+    "placeholder": "pgmrc:nlp_data_type",
     "aliases": [
-      "data type",
-      "type of nlp data",
-      "dataset data type"
+      "nlp data type"
     ],
-    "notes": "Class of the NLP data type subtemplate."
+    "notes": "Class used by template predicate P181022."
   },
   {
     "family": "nlp4re",
@@ -89,13 +106,11 @@
     "kind": "class",
     "canonical_uri": "orkgc:C121018",
     "label": "License",
-    "placeholder": "[CLASS: License]",
+    "placeholder": "pgmrc:license",
     "aliases": [
-      "license",
-      "dataset license",
-      "software license"
+      "license"
     ],
-    "notes": "Class of the License subtemplate. The template JSON exposes this class but does not expose a canonical relation ID for the non-PID key 'license'."
+    "notes": "Class used by template predicate license."
   },
   {
     "family": "nlp4re",
@@ -103,13 +118,11 @@
     "kind": "class",
     "canonical_uri": "orkgc:C121022",
     "label": "NLP dataset location",
-    "placeholder": "[CLASS: NLP dataset location]",
+    "placeholder": "pgmrc:nlp_dataset_location",
     "aliases": [
-      "dataset location",
-      "nlp data location",
-      "where dataset is stored"
+      "nlp dataset location"
     ],
-    "notes": "Class of the NLP dataset location subtemplate."
+    "notes": "Class used by template predicate P181028."
   },
   {
     "family": "nlp4re",
@@ -117,13 +130,11 @@
     "kind": "class",
     "canonical_uri": "orkgc:C121025",
     "label": "Annotation process",
-    "placeholder": "[CLASS: Annotation process]",
+    "placeholder": "pgmrc:annotation_process",
     "aliases": [
-      "annotation process",
-      "dataset annotation process",
-      "annotation workflow"
+      "annotation process"
     ],
-    "notes": "Class of the Annotation process subtemplate."
+    "notes": "Class used by template predicate P181031."
   },
   {
     "family": "nlp4re",
@@ -131,27 +142,23 @@
     "kind": "class",
     "canonical_uri": "orkgc:C121026",
     "label": "Annotator",
-    "placeholder": "[CLASS: Annotator]",
+    "placeholder": "pgmrc:annotator",
     "aliases": [
-      "annotator",
-      "dataset annotator",
-      "annotation worker"
+      "annotator"
     ],
-    "notes": "Class of the Annotator subtemplate."
+    "notes": "Class used by template predicate P181032."
   },
   {
     "family": "nlp4re",
     "template_id": "R1544125",
     "kind": "class",
     "canonical_uri": "orkgc:C121030",
-    "label": "Annotation scheme",
-    "placeholder": "[CLASS: Annotation scheme]",
+    "label": "Annotation Scheme",
+    "placeholder": "pgmrc:annotation_scheme",
     "aliases": [
-      "annotation scheme",
-      "labeling scheme",
-      "coding scheme"
+      "annotation scheme"
     ],
-    "notes": "Class of the Annotation scheme subtemplate."
+    "notes": "Class used by template predicate P181036."
   },
   {
     "family": "nlp4re",
@@ -159,13 +166,11 @@
     "kind": "class",
     "canonical_uri": "orkgc:C121035",
     "label": "Annotator agreement",
-    "placeholder": "[CLASS: Annotator agreement]",
+    "placeholder": "pgmrc:annotator_agreement",
     "aliases": [
-      "annotator agreement",
-      "inter annotator agreement",
-      "annotation agreement"
+      "annotator agreement"
     ],
-    "notes": "Class of the Annotator agreement subtemplate."
+    "notes": "Class used by template predicate P181041."
   },
   {
     "family": "nlp4re",
@@ -173,13 +178,11 @@
     "kind": "class",
     "canonical_uri": "orkgc:C121038",
     "label": "Implemented approach",
-    "placeholder": "[CLASS: Implemented approach]",
+    "placeholder": "pgmrc:implemented_approach",
     "aliases": [
-      "implemented approach",
-      "approach",
-      "method implementation"
+      "implemented approach"
     ],
-    "notes": "Class of the Implemented approach subtemplate."
+    "notes": "Class used by template predicate P181046."
   },
   {
     "family": "nlp4re",
@@ -187,13 +190,11 @@
     "kind": "class",
     "canonical_uri": "orkgc:C121044",
     "label": "Release",
-    "placeholder": "[CLASS: Release]",
+    "placeholder": "pgmrc:release",
     "aliases": [
-      "release",
-      "approach release",
-      "software release"
+      "release"
     ],
-    "notes": "Class of the Release subtemplate. The template JSON exposes this class but does not expose a canonical relation ID for the non-PID key 'release'."
+    "notes": "Class used by template predicate release."
   },
   {
     "family": "nlp4re",
@@ -201,13 +202,11 @@
     "kind": "class",
     "canonical_uri": "orkgc:C121047",
     "label": "Evaluation",
-    "placeholder": "[CLASS: Evaluation]",
+    "placeholder": "pgmrc:evaluation",
     "aliases": [
-      "evaluation",
-      "study evaluation",
-      "approach evaluation"
+      "evaluation"
     ],
-    "notes": "Class of the Evaluation subtemplate."
+    "notes": "Class used by template predicate HAS_EVALUATION."
   },
   {
     "family": "nlp4re",
@@ -215,786 +214,717 @@
     "kind": "class",
     "canonical_uri": "orkgc:C121050",
     "label": "Baseline comparison",
-    "placeholder": "[CLASS: Baseline comparison]",
+    "placeholder": "pgmrc:baseline_comparison",
     "aliases": [
-      "baseline comparison",
-      "comparison against baseline",
-      "baseline"
+      "baseline comparison"
     ],
-    "notes": "Class of the Baseline comparison subtemplate."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181002",
-    "label": "has RE task",
-    "placeholder": "[REL: has RE task]",
-    "aliases": [
-      "re task",
-      "requirements engineering task",
-      "addresses re task"
-    ],
-    "notes": "Links a contribution to the requirements engineering task addressed by the study."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181003",
-    "label": "has NLP task",
-    "placeholder": "[REL: has NLP task]",
-    "aliases": [
-      "nlp task",
-      "uses nlp task",
-      "has task",
-      "natural language processing task"
-    ],
-    "notes": "Links a contribution to the NLP task entity."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181011",
-    "label": "uses NLP dataset",
-    "placeholder": "[REL: uses NLP dataset]",
-    "aliases": [
-      "nlp dataset",
-      "uses dataset",
-      "dataset used",
-      "has nlp dataset"
-    ],
-    "notes": "Links a contribution to the NLP dataset entity used in the study."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181031",
-    "label": "has annotation process",
-    "placeholder": "[REL: has annotation process]",
-    "aliases": [
-      "annotation process",
-      "uses annotation process",
-      "dataset annotation"
-    ],
-    "notes": "Links a contribution to the annotation process entity."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181046",
-    "label": "has implemented approach",
-    "placeholder": "[REL: has implemented approach]",
-    "aliases": [
-      "implemented approach",
-      "approach",
-      "uses implemented approach"
-    ],
-    "notes": "Links a contribution to the implemented approach entity."
+    "notes": "Class used by template predicate P181051."
   },
   {
     "family": "nlp4re",
     "template_id": "R1544125",
     "kind": "relation",
     "canonical_uri": "orkgp:HAS_EVALUATION",
-    "label": "has evaluation",
-    "placeholder": "[REL: has evaluation]",
+    "label": "Evaluation",
+    "placeholder": "pgmr:evaluation",
     "aliases": [
-      "evaluation",
-      "study evaluation",
-      "applies evaluation"
+      "evaluation"
     ],
-    "notes": "Links a contribution to the evaluation entity."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181004",
-    "label": "has NLP task type",
-    "placeholder": "[REL: has NLP task type]",
-    "aliases": [
-      "nlp task type",
-      "task type",
-      "type of nlp task"
-    ],
-    "notes": "Links an NLP task entity to one or more NLP task types."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181005",
-    "label": "has NLP task input",
-    "placeholder": "[REL: has NLP task input]",
-    "aliases": [
-      "nlp task input",
-      "task input",
-      "input of nlp task"
-    ],
-    "notes": "Links an NLP task entity to its input type or input description."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181006",
-    "label": "has NLP task output",
-    "placeholder": "[REL: has NLP task output]",
-    "aliases": [
-      "nlp task output",
-      "task output",
-      "output of nlp task"
-    ],
-    "notes": "Links an NLP task entity to the NLP task output entity."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181007",
-    "label": "has NLP task output type",
-    "placeholder": "[REL: has NLP task output type]",
-    "aliases": [
-      "nlp output type",
-      "task output type",
-      "output type"
-    ],
-    "notes": "Links an NLP task output entity to one or more output types."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181008",
-    "label": "has NLP task output classification label",
-    "placeholder": "[REL: has NLP task output classification label]",
-    "aliases": [
-      "classification label",
-      "output classification label",
-      "nlp classification label"
-    ],
-    "notes": "Links an NLP task output entity to a classification label."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181009",
-    "label": "has NLP task output extracted element",
-    "placeholder": "[REL: has NLP task output extracted element]",
-    "aliases": [
-      "extracted element",
-      "output extracted element",
-      "information extraction element"
-    ],
-    "notes": "Links an NLP task output entity to the type of extracted element."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181010",
-    "label": "has NLP task translation mapping cardinality",
-    "placeholder": "[REL: has NLP task translation mapping cardinality]",
-    "aliases": [
-      "translation mapping cardinality",
-      "mapping cardinality",
-      "input output mapping cardinality"
-    ],
-    "notes": "Links an NLP task output entity to the translation mapping cardinality."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181015",
-    "label": "has NLP data item count",
-    "placeholder": "[REL: has NLP data item count]",
-    "aliases": [
-      "data item count",
-      "number of data items",
-      "nlp data items"
-    ],
-    "notes": "Stores or links numerical information about processed data items."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181016",
-    "label": "has NLP data production time",
-    "placeholder": "[REL: has NLP data production time]",
-    "aliases": [
-      "data production time",
-      "data production year",
-      "dataset production time"
-    ],
-    "notes": "Stores or links the year or time interval when the data was produced."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181017",
-    "label": "has NLP data source",
-    "placeholder": "[REL: has NLP data source]",
-    "aliases": [
-      "data source",
-      "nlp data source",
-      "dataset source"
-    ],
-    "notes": "Links an NLP dataset entity to a data source entity."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181021",
-    "label": "has NLP data abstraction level",
-    "placeholder": "[REL: has NLP data abstraction level]",
-    "aliases": [
-      "data abstraction level",
-      "nlp data abstraction",
-      "level of abstraction"
-    ],
-    "notes": "Links an NLP dataset entity to one or more abstraction levels."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181022",
-    "label": "has NLP data type",
-    "placeholder": "[REL: has NLP data type]",
-    "aliases": [
-      "data type",
-      "nlp data type",
-      "dataset data type"
-    ],
-    "notes": "Links an NLP dataset entity to a data type entity."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181028",
-    "label": "has NLP dataset location",
-    "placeholder": "[REL: has NLP dataset location]",
-    "aliases": [
-      "dataset location",
-      "nlp dataset location",
-      "where dataset is stored"
-    ],
-    "notes": "Links an NLP dataset entity to a dataset location entity."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181018",
-    "label": "has NLP data source type",
-    "placeholder": "[REL: has NLP data source type]",
-    "aliases": [
-      "data source type",
-      "source type",
-      "nlp source type"
-    ],
-    "notes": "Links an NLP data source entity to one or more source types."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181019",
-    "label": "has number of data sources",
-    "placeholder": "[REL: has number of data sources]",
-    "aliases": [
-      "number of data sources",
-      "data source count",
-      "count of sources"
-    ],
-    "notes": "Stores or links the number of different data sources."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181020",
-    "label": "has NLP data source domain",
-    "placeholder": "[REL: has NLP data source domain]",
-    "aliases": [
-      "data source domain",
-      "source domain",
-      "domain of data source"
-    ],
-    "notes": "Links an NLP data source entity to one or more application domains."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181023",
-    "label": "has NLP data format",
-    "placeholder": "[REL: has NLP data format]",
-    "aliases": [
-      "data format",
-      "nlp data format",
-      "dataset format"
-    ],
-    "notes": "Links an NLP data type entity to one or more data formats."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181024",
-    "label": "has data format rigor",
-    "placeholder": "[REL: has data format rigor]",
-    "aliases": [
-      "rigor of data format",
-      "data format rigor",
-      "format rigor"
-    ],
-    "notes": "Links an NLP data type entity to the rigor of the data format."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181025",
-    "label": "has natural language",
-    "placeholder": "[REL: has natural language]",
-    "aliases": [
-      "natural language",
-      "data language",
-      "language of data"
-    ],
-    "notes": "Stores or links the natural language of the data."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181026",
-    "label": "has public availability",
-    "placeholder": "[REL: has public availability]",
-    "aliases": [
-      "public availability",
-      "dataset availability",
-      "is publicly available"
-    ],
-    "notes": "Links a license entity to public availability information."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181027",
-    "label": "has license type",
-    "placeholder": "[REL: has license type]",
-    "aliases": [
-      "license type",
-      "type of license",
-      "license"
-    ],
-    "notes": "Links a license-related entity or implemented approach to a license type."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181030",
-    "label": "has dataset location type",
-    "placeholder": "[REL: has dataset location type]",
-    "aliases": [
-      "dataset location type",
-      "location type for dataset",
-      "data storage type"
-    ],
-    "notes": "Links an NLP dataset location entity to one or more dataset location types."
+    "notes": "What evaluation did you apply for your study?"
   },
   {
     "family": "nlp4re",
     "template_id": "R1544125",
     "kind": "relation",
     "canonical_uri": "orkgp:P1003",
-    "label": "has URL",
-    "placeholder": "[REL: has URL]",
+    "label": "url",
+    "placeholder": "pgmr:url",
     "aliases": [
-      "url",
-      "dataset url",
-      "tool url",
-      "release url",
-      "location url"
+      "url"
     ],
-    "notes": "General URL property reused in dataset-location and release contexts."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181032",
-    "label": "has annotator",
-    "placeholder": "[REL: has annotator]",
-    "aliases": [
-      "annotator",
-      "dataset annotator",
-      "has annotators"
-    ],
-    "notes": "Links an annotation process entity to an annotator entity."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181036",
-    "label": "has annotation scheme",
-    "placeholder": "[REL: has annotation scheme]",
-    "aliases": [
-      "annotation scheme",
-      "uses annotation scheme",
-      "labeling scheme"
-    ],
-    "notes": "Links an annotation process entity to one or more annotation schemes."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181039",
-    "label": "has shared material",
-    "placeholder": "[REL: has shared material]",
-    "aliases": [
-      "shared material",
-      "support material",
-      "annotation support material"
-    ],
-    "notes": "Links an annotation process entity to shared materials supporting annotation."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181040",
-    "label": "has fatigue mitigation technique",
-    "placeholder": "[REL: has fatigue mitigation technique]",
-    "aliases": [
-      "fatigue mitigation technique",
-      "fatigue mitigation",
-      "annotation fatigue mitigation"
-    ],
-    "notes": "Links an annotation process entity to fatigue mitigation techniques."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181041",
-    "label": "has annotator agreement",
-    "placeholder": "[REL: has annotator agreement]",
-    "aliases": [
-      "annotator agreement",
-      "intercoder agreement",
-      "annotation agreement"
-    ],
-    "notes": "Links an annotation process entity to an annotator agreement entity."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P59120",
-    "label": "has number of annotators",
-    "placeholder": "[REL: has number of annotators]",
-    "aliases": [
-      "number of annotators",
-      "annotator count",
-      "count of annotators"
-    ],
-    "notes": "Stores or links the number of annotators involved."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181033",
-    "label": "has annotator assignment",
-    "placeholder": "[REL: has annotator assignment]",
-    "aliases": [
-      "annotator assignment",
-      "assignment of annotators",
-      "annotation assignment"
-    ],
-    "notes": "Links an annotator entity to annotator assignment information."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181034",
-    "label": "has annotator domain experience level",
-    "placeholder": "[REL: has annotator domain experience level]",
-    "aliases": [
-      "domain experience level",
-      "application domain experience",
-      "annotator experience level"
-    ],
-    "notes": "Links an annotator entity to the level of application-domain experience."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181035",
-    "label": "has annotator identity",
-    "placeholder": "[REL: has annotator identity]",
-    "aliases": [
-      "annotator identity",
-      "identity of annotator",
-      "who annotated"
-    ],
-    "notes": "Links an annotator entity to annotator identity information."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181037",
-    "label": "has annotation scheme establishment",
-    "placeholder": "[REL: has annotation scheme establishment]",
-    "aliases": [
-      "scheme establishment",
-      "annotation scheme establishment",
-      "how scheme was established"
-    ],
-    "notes": "Original template label contains the typo 'Scheme establishement'; normalized label used here."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181038",
-    "label": "has guideline availability",
-    "placeholder": "[REL: has guideline availability]",
-    "aliases": [
-      "guideline availability",
-      "annotation guidelines availability",
-      "public guidelines"
-    ],
-    "notes": "Links an annotation scheme entity to guideline availability information."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181042",
-    "label": "has intercoder reliability metric",
-    "placeholder": "[REL: has intercoder reliability metric]",
-    "aliases": [
-      "intercoder reliability metric",
-      "reliability metric",
-      "agreement metric"
-    ],
-    "notes": "Links an annotator agreement entity to one or more intercoder reliability metrics."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181044",
-    "label": "has conflict resolution",
-    "placeholder": "[REL: has conflict resolution]",
-    "aliases": [
-      "conflict resolution",
-      "annotation conflict resolution",
-      "resolved conflicts"
-    ],
-    "notes": "Links an annotator agreement entity to conflict resolution information."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181045",
-    "label": "has measured agreement",
-    "placeholder": "[REL: has measured agreement]",
-    "aliases": [
-      "measured agreement",
-      "agreement value",
-      "annotator agreement measurement"
-    ],
-    "notes": "Stores or links the measured agreement value."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P5043",
-    "label": "has approach type",
-    "placeholder": "[REL: has approach type]",
-    "aliases": [
-      "approach type",
-      "type of approach",
-      "implemented approach type"
-    ],
-    "notes": "Links an implemented approach entity to one or more approach types."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P58069",
-    "label": "uses algorithm",
-    "placeholder": "[REL: uses algorithm]",
-    "aliases": [
-      "algorithm",
-      "algorithm used",
-      "uses algorithms"
-    ],
-    "notes": "Links an implemented approach entity to one or more algorithms."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181047",
-    "label": "has running requirement",
-    "placeholder": "[REL: has running requirement]",
-    "aliases": [
-      "running requirement",
-      "runtime requirement",
-      "requirement for running"
-    ],
-    "notes": "Links an implemented approach entity to running requirements."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P41835",
-    "label": "has documentation type",
-    "placeholder": "[REL: has documentation type]",
-    "aliases": [
-      "documentation type",
-      "documentation",
-      "provided documentation"
-    ],
-    "notes": "Links an implemented approach entity to documentation type information."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181048",
-    "label": "has dependency",
-    "placeholder": "[REL: has dependency]",
-    "aliases": [
-      "dependency",
-      "approach dependency",
-      "software dependency"
-    ],
-    "notes": "Links an implemented approach entity to one or more dependencies."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181049",
-    "label": "has release format",
-    "placeholder": "[REL: has release format]",
-    "aliases": [
-      "release format",
-      "format of release",
-      "released artifact type"
-    ],
-    "notes": "Links a release entity to one or more release formats."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181029",
-    "label": "has release location type",
-    "placeholder": "[REL: has release location type]",
-    "aliases": [
-      "release location type",
-      "tool release location type",
-      "location type for release"
-    ],
-    "notes": "Links a release entity to one or more release location types."
+    "notes": "Nested under 'Dataset location'. Provide a URL to the dataset, if available, or to the original paper that proposed the dataset"
   },
   {
     "family": "nlp4re",
     "template_id": "R1544125",
     "kind": "relation",
     "canonical_uri": "orkgp:P110006",
-    "label": "has evaluation metric",
-    "placeholder": "[REL: has evaluation metric]",
+    "label": "Evaluation metric",
+    "placeholder": "pgmr:evaluation_metric",
     "aliases": [
       "evaluation metric",
-      "metric",
-      "performance metric"
+      "metric"
     ],
-    "notes": "Links an evaluation entity to one or more metrics."
+    "notes": "Nested under 'Evaluation'. What metrics are used to evaluate the implemented approach(?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181002",
+    "label": "RE task",
+    "placeholder": "pgmr:re_task",
+    "aliases": [
+      "re task"
+    ],
+    "notes": "What requirements engineering task is your study addressing?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181003",
+    "label": "NLP task",
+    "placeholder": "pgmr:nlp_task",
+    "aliases": [
+      "nlp task"
+    ],
+    "notes": "What natural language processing task is your study tackling?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181004",
+    "label": "NLP task type",
+    "placeholder": "pgmr:nlp_task_type",
+    "aliases": [
+      "nlp task type"
+    ],
+    "notes": "Nested under 'NLP task'. What type of natural language processing task is your study tackling?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181005",
+    "label": "NLP task input",
+    "placeholder": "pgmr:nlp_task_input",
+    "aliases": [
+      "nlp task input"
+    ],
+    "notes": "Nested under 'NLP task'. What is the input of your natural language processing task?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181006",
+    "label": "NLP task output",
+    "placeholder": "pgmr:nlp_task_output",
+    "aliases": [
+      "nlp task output"
+    ],
+    "notes": "Nested under 'NLP task'. What is the output of your natural language processing task?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181007",
+    "label": "NLP task output type",
+    "placeholder": "pgmr:nlp_task_output_type",
+    "aliases": [
+      "nlp task output type"
+    ],
+    "notes": "Nested under 'NLP task output'. What is the output type of your natural language processing task?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181008",
+    "label": "NLP task output classification label",
+    "placeholder": "pgmr:nlp_task_output_classification_label",
+    "aliases": [
+      "nlp task output classification label"
+    ],
+    "notes": "Nested under 'NLP task output'. What is the output label that can be assigned in your natural language processing classification task?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181009",
+    "label": "NLP task output extracted element",
+    "placeholder": "pgmr:nlp_task_output_extracted_element",
+    "aliases": [
+      "nlp task output extracted element"
+    ],
+    "notes": "Nested under 'NLP task output'. What is the type of the element extracted in your natural language processing information extraction task?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181010",
+    "label": "NLP task output translation mapping cardinality",
+    "placeholder": "pgmr:nlp_task_output_translation_mapping_cardinality",
+    "aliases": [
+      "nlp task output translation mapping cardinality",
+      "nlp task translation mapping cardinality"
+    ],
+    "notes": "Nested under 'NLP task output'. What is the translation mapping cardinality between the initial input and final output in your natural language processing translation task?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181011",
+    "label": "NLP dataset",
+    "placeholder": "pgmr:nlp_dataset",
+    "aliases": [
+      "nlp dataset"
+    ],
+    "notes": "What natural language processing dataset is your study using?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181015",
+    "label": "NLP data item",
+    "placeholder": "pgmr:nlp_data_item",
+    "aliases": [
+      "nlp data item"
+    ],
+    "notes": "Nested under 'NLP dataset'. How many data items do you process? Please report the numerical information and details about all the data that is used in your evaluation."
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181016",
+    "label": "NLP data production time",
+    "placeholder": "pgmr:nlp_data_production_time",
+    "aliases": [
+      "nlp data production time"
+    ],
+    "notes": "Nested under 'NLP dataset'. In which year or interval of year were the data produced?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181017",
+    "label": "NLP data source",
+    "placeholder": "pgmr:nlp_data_source",
+    "aliases": [
+      "nlp data source"
+    ],
+    "notes": "Nested under 'NLP dataset'. What is the source of the data?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181018",
+    "label": "NLP data source type",
+    "placeholder": "pgmr:nlp_data_source_type",
+    "aliases": [
+      "nlp data source type"
+    ],
+    "notes": "Nested under 'NLP data source'. What is the source type of the data?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181019",
+    "label": "Number of data sources",
+    "placeholder": "pgmr:number_of_data_sources",
+    "aliases": [
+      "number of data sources"
+    ],
+    "notes": "Nested under 'NLP data source'. From how many different sources your data comes from?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181020",
+    "label": "NLP data source domain",
+    "placeholder": "pgmr:nlp_data_source_domain",
+    "aliases": [
+      "data source domain",
+      "nlp data source domain"
+    ],
+    "notes": "Nested under 'NLP data source'. Please list which domains your data belongs to (e.g., automotive, satellite, entertainment, information systems)."
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181021",
+    "label": "NLP data abstraction level",
+    "placeholder": "pgmr:nlp_data_abstraction_level",
+    "aliases": [
+      "nlp data abstraction level"
+    ],
+    "notes": "Nested under 'NLP dataset'. What is the level of abstraction of the data (not limited to requirements)?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181022",
+    "label": "NLP data type",
+    "placeholder": "pgmr:nlp_data_type",
+    "aliases": [
+      "nlp data type"
+    ],
+    "notes": "Nested under 'NLP dataset'. What is the type of the data?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181023",
+    "label": "NLP data format",
+    "placeholder": "pgmr:nlp_data_format",
+    "aliases": [
+      "nlp data format"
+    ],
+    "notes": "Nested under 'NLP data type'. What is the format of the data?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181024",
+    "label": "Rigor of data format",
+    "placeholder": "pgmr:rigor_of_data_format",
+    "aliases": [
+      "rigor of data format"
+    ],
+    "notes": "Nested under 'NLP data type'. How rigorous is the format of the data?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181025",
+    "label": "Natural language",
+    "placeholder": "pgmr:natural_language",
+    "aliases": [
+      "natural language"
+    ],
+    "notes": "Nested under 'NLP data type'. What is the natural language of the data (if applicable) ?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181026",
+    "label": "Public availability",
+    "placeholder": "pgmr:public_availability",
+    "aliases": [
+      "public availability"
+    ],
+    "notes": "Nested under 'License'. Is the dataset publicly available?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181027",
+    "label": "License type",
+    "placeholder": "pgmr:license_type",
+    "aliases": [
+      "license type"
+    ],
+    "notes": "Nested under 'Implemented approach'. What license has been used?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181028",
+    "label": "Dataset location",
+    "placeholder": "pgmr:dataset_location",
+    "aliases": [
+      "dataset location",
+      "nlp dataset location"
+    ],
+    "notes": "Nested under 'NLP dataset'. Where is the dataset stored?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181029",
+    "label": "Location type",
+    "placeholder": "pgmr:release_location_type",
+    "aliases": [
+      "location type",
+      "release location type"
+    ],
+    "notes": "Nested under 'Release'. How is the tool released?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181030",
+    "label": "Location type",
+    "placeholder": "pgmr:dataset_location_location_type",
+    "aliases": [
+      "dataset location location type",
+      "location type"
+    ],
+    "notes": "Nested under 'Dataset location'. Where is the dataset stored?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181031",
+    "label": "Annotation process",
+    "placeholder": "pgmr:annotation_process",
+    "aliases": [
+      "annotation process"
+    ],
+    "notes": "What annotation process did you use for your dataset?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181032",
+    "label": "Annotator",
+    "placeholder": "pgmr:annotator",
+    "aliases": [
+      "annotator"
+    ],
+    "notes": "Nested under 'Annotation process'. Who are the annotators of your dataset?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181033",
+    "label": "Annotator assignment",
+    "placeholder": "pgmr:annotator_assignment",
+    "aliases": [
+      "annotator assignment"
+    ],
+    "notes": "Nested under 'Annotator'. How are the entries annotated assigned to the annotators?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181034",
+    "label": "Level of application domain experience",
+    "placeholder": "pgmr:level_of_application_domain_experience",
+    "aliases": [
+      "level of application domain experience"
+    ],
+    "notes": "Nested under 'Annotator'. What is the average level of application domain experience of the annotators?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181035",
+    "label": "Annotator identity",
+    "placeholder": "pgmr:annotator_identity",
+    "aliases": [
+      "annotator identity"
+    ],
+    "notes": "Nested under 'Annotator'. Who are the annotators?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181036",
+    "label": "Annotation scheme",
+    "placeholder": "pgmr:annotation_scheme",
+    "aliases": [
+      "annotation scheme"
+    ],
+    "notes": "Nested under 'Annotation process'. What is the annotation scheme used for your dataset?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181037",
+    "label": "Scheme establishement",
+    "placeholder": "pgmr:scheme_establishement",
+    "aliases": [
+      "scheme establishement"
+    ],
+    "notes": "Nested under 'Annotation scheme'. How was the annotation scheme established among the annotators?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181038",
+    "label": "Guideline availability",
+    "placeholder": "pgmr:guideline_availability",
+    "aliases": [
+      "guideline availability"
+    ],
+    "notes": "Nested under 'Annotation scheme'. Did you make the written guidelines public?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181039",
+    "label": "Shared material",
+    "placeholder": "pgmr:shared_material",
+    "aliases": [
+      "shared material"
+    ],
+    "notes": "Nested under 'Annotation process'. Did you share other information that could support the annotators other than the elements to annotate?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181040",
+    "label": "Fatigue mitigation technique",
+    "placeholder": "pgmr:fatigue_mitigation_technique",
+    "aliases": [
+      "fatigue mitigation technique"
+    ],
+    "notes": "Nested under 'Annotation process'. Did you employ techniques to mitigate fatigue effects during the annotation sessions?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181041",
+    "label": "Annotator agreement",
+    "placeholder": "pgmr:annotator_agreement",
+    "aliases": [
+      "annotator agreement"
+    ],
+    "notes": "Nested under 'Annotation process'. What annotator agreement did you apply for your dataset?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181042",
+    "label": "Intercoder reliability metric",
+    "placeholder": "pgmr:intercoder_reliability_metric",
+    "aliases": [
+      "intercoder reliability metric"
+    ],
+    "notes": "Nested under 'Annotator agreement'. What are the metrics used to measure intercoder reliability?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181044",
+    "label": "Conflict resolution",
+    "placeholder": "pgmr:conflict_resolution",
+    "aliases": [
+      "conflict resolution"
+    ],
+    "notes": "Nested under 'Annotator agreement'. How were conflicts resolved?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181045",
+    "label": "Measured agreement",
+    "placeholder": "pgmr:measured_agreement",
+    "aliases": [
+      "measured agreement"
+    ],
+    "notes": "Nested under 'Annotator agreement'. What is the measured agreement?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181046",
+    "label": "Implemented approach",
+    "placeholder": "pgmr:implemented_approach",
+    "aliases": [
+      "implemented approach"
+    ],
+    "notes": "What approach did you implement for your study?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181047",
+    "label": "Running requirement",
+    "placeholder": "pgmr:running_requirement",
+    "aliases": [
+      "running requirement"
+    ],
+    "notes": "Nested under 'Implemented approach'. What needs to be done for running the implemented approach?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181048",
+    "label": "Dependency",
+    "placeholder": "pgmr:dependency",
+    "aliases": [
+      "dependency"
+    ],
+    "notes": "Nested under 'Implemented approach'. What type of dependencies does the implemented approach have?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181049",
+    "label": "Release format",
+    "placeholder": "pgmr:release_format",
+    "aliases": [
+      "release format"
+    ],
+    "notes": "Nested under 'Release'. What has been released?"
   },
   {
     "family": "nlp4re",
     "template_id": "R1544125",
     "kind": "relation",
     "canonical_uri": "orkgp:P181050",
-    "label": "has validation procedure",
-    "placeholder": "[REL: has validation procedure]",
+    "label": "Validation procedure",
+    "placeholder": "pgmr:validation_procedure",
     "aliases": [
-      "validation procedure",
-      "evaluation validation procedure",
-      "validation method"
+      "validation procedure"
     ],
-    "notes": "Links an evaluation entity to one or more validation procedures."
+    "notes": "Nested under 'Evaluation'. What is the validation procedure?"
   },
   {
     "family": "nlp4re",
     "template_id": "R1544125",
     "kind": "relation",
     "canonical_uri": "orkgp:P181051",
-    "label": "has baseline comparison",
-    "placeholder": "[REL: has baseline comparison]",
+    "label": "Baseline comparison",
+    "placeholder": "pgmr:baseline_comparison",
     "aliases": [
-      "baseline comparison",
-      "compares to baseline",
-      "baseline"
+      "baseline comparison"
     ],
-    "notes": "Links an evaluation entity to a baseline comparison entity."
+    "notes": "Nested under 'Evaluation'. What is the baseline comparison applied in the evaluation of an implemented approach?"
   },
   {
     "family": "nlp4re",
     "template_id": "R1544125",
     "kind": "relation",
     "canonical_uri": "orkgp:P181052",
-    "label": "has baseline comparison type",
-    "placeholder": "[REL: has baseline comparison type]",
+    "label": "Baseline comparison type",
+    "placeholder": "pgmr:baseline_comparison_type",
     "aliases": [
-      "baseline comparison type",
-      "baseline type",
-      "type of baseline comparison"
+      "baseline comparison  type",
+      "baseline comparison type"
     ],
-    "notes": "Links a baseline comparison entity to one or more baseline comparison types."
+    "notes": "Nested under 'Baseline comparison'. What baseline do you compare against?"
   },
   {
     "family": "nlp4re",
     "template_id": "R1544125",
     "kind": "relation",
     "canonical_uri": "orkgp:P181053",
-    "label": "has baseline comparison detail",
-    "placeholder": "[REL: has baseline comparison detail]",
+    "label": "Baseline comparison detail",
+    "placeholder": "pgmr:baseline_comparison_detail",
     "aliases": [
-      "baseline comparison detail",
-      "baseline detail",
-      "details about baseline"
+      "baseline comparison detail"
     ],
-    "notes": "Stores or links details about the baseline comparison."
+    "notes": "Nested under 'Baseline comparison'. Please provide more details about the baseline you compare against, if any."
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P41835",
+    "label": "Documentation",
+    "placeholder": "pgmr:documentation",
+    "aliases": [
+      "documentation",
+      "documentation type"
+    ],
+    "notes": "Nested under 'Implemented approach'. What type of documentation has been provided alongside the implemented approach?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P5043",
+    "label": "Approach type",
+    "placeholder": "pgmr:approach_type",
+    "aliases": [
+      "approach type"
+    ],
+    "notes": "Nested under 'Implemented approach'. What is the type of the implemented approach?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P58069",
+    "label": "Algorithm used",
+    "placeholder": "pgmr:algorithm_used",
+    "aliases": [
+      "algorithm",
+      "algorithm used"
+    ],
+    "notes": "Nested under 'Implemented approach'. What algorithms are used in the implemented approach?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P59120",
+    "label": "Number of annotators",
+    "placeholder": "pgmr:number_of_annotators",
+    "aliases": [
+      "number of annotators"
+    ],
+    "notes": "Nested under 'Annotator'. How many annotators have been involved in your annotation process?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:license",
+    "label": "License",
+    "placeholder": "pgmr:license",
+    "aliases": [
+      "license"
+    ],
+    "notes": "Nested under 'NLP dataset'. What license has been used?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:release",
+    "label": "Release",
+    "placeholder": "pgmr:release",
+    "aliases": [
+      "release"
+    ],
+    "notes": "Nested under 'Implemented approach'. How was the implemented approach released?"
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:description",
+    "label": "description",
+    "placeholder": "pgmr:description",
+    "aliases": [
+      "description",
+      "text description",
+      "resource description"
+    ],
+    "notes": "Common ORKG metadata predicate occurring in the NLP4RE benchmark queries."
   }
 ]

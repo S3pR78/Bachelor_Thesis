@@ -68,14 +68,17 @@ def validate_memory_entries(entries: list[dict[str, Any]]) -> None:
         placeholder = str(entry["placeholder"])
         kind = str(entry["kind"])
 
-        if kind == "relation" and not placeholder.startswith("[REL: "):
-            raise ValueError(
-                f"Relation placeholder should start with [REL: ]: {placeholder}"
-            )
+        valid_placeholder_prefixes = {
+            "relation": ("pgmr:", "[REL: "),
+            "class": ("pgmrc:", "[CLASS: "),
+            "resource": ("pgmrr:", "[RESOURCE: "),
+        }
 
-        if kind == "class" and not placeholder.startswith("[CLASS: "):
+        allowed_prefixes = valid_placeholder_prefixes.get(kind)
+        if allowed_prefixes is not None and not placeholder.startswith(allowed_prefixes):
             raise ValueError(
-                f"Class placeholder should start with [CLASS: ]: {placeholder}"
+                f"Invalid placeholder for kind={kind}: {placeholder}. "
+                f"Allowed prefixes: {allowed_prefixes}"
             )
 
 
@@ -86,8 +89,8 @@ def build_uri_to_placeholder_map(
     Returns:
         {
           "nlp4re": {
-              "orkgp:P181003": "[REL: has NLP task]",
-              "orkgc:C121001": "[CLASS: NLP4RE contribution]"
+              "orkgp:P181003": "pgmr:nlp_task",
+              "orkgc:C121001": "pgmrc:nlp4re_contribution"
           },
           ...
         }
