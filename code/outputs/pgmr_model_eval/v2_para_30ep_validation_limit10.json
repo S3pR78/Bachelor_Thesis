@@ -1,0 +1,305 @@
+{
+  "summary": {
+    "model": "t5_base_pgmr_lite_v2_para_30ep",
+    "dataset": "code/data/dataset/pgmr/final/validation.json",
+    "model_dir": "code/models/google-t5_t5-base/finetuned/pgmr_lite_v2_para_30ep/20260425_123132/final_model",
+    "device": "cpu",
+    "limit": 10,
+    "generation": {
+      "max_source_length": 192,
+      "max_new_tokens": 512,
+      "num_beams": 4,
+      "do_sample": false
+    },
+    "counts": {
+      "total": 10,
+      "starts_with_query_type": 10,
+      "has_where": 10,
+      "has_where_block_raw": 0,
+      "has_where_block_post": 10,
+      "balanced_braces_post": 10,
+      "usable_after_postprocess": 10
+    },
+    "rates": {
+      "starts_with_query_type": 1.0,
+      "has_where": 1.0,
+      "has_where_block_raw": 0.0,
+      "has_where_block_post": 1.0,
+      "balanced_braces_post": 1.0,
+      "usable_after_postprocess": 1.0
+    }
+  },
+  "results": [
+    {
+      "index": 0,
+      "id": "719",
+      "family": "empirical_research_practice",
+      "question": "How many reported Hypotheses does each paper have?",
+      "gold_pgmr_sparql": "SELECT ?paper ?paperLabel (COUNT(DISTINCT ?hypothesis) AS ?number_of_reported_hypotheses)\nWHERE {\n\n    ?paper pgmr:has_contribution ?contribution .\n\n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n\n    ?contribution a pgmrc:empirical_research_practice_contribution ;\n                  pgmr:venue_serie ?venue ;\n                  pgmr:data_analysis ?data_analysis .\n\n    ?venue rdfs:label ?venue_name .\n\n    ?data_analysis rdfs:label ?da_label ;\n                   pgmr:inferential_statistics ?inferential_statistics .\n\n    ?inferential_statistics pgmr:hypothesis ?hypothesis .\n\n    FILTER(?da_label != \"no analysis\"^^xsd:string)\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nGROUP BY ?paper ?paperLabel\nORDER BY DESC(?number_of_reported_hypotheses) ?paperLabel",
+      "prompt": "task: text_to_pgmr_sparql\nfamily: empirical_research_practice\nquestion: How many reported Hypotheses does each paper have?\npgmr_sparql:",
+      "raw_prediction": "SELECT (COUNT(DISTINCT ?hypothesis) AS ?count) WHERE  ?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:empirical_research_practice_contribution . ?contribution pgmr:venue_serie ?venue . ?venue rdfs:label ?venueName . ?contribution pgmr:data_analysis ?dataAnalysis . ?dataAnalysis pgmr:inferential_statistics ?inferentialStatistics . ?inferentialStatistics pgmr:hypothesis ?hypothesis . ?hypothesis pgmr:hypothesis_type ?hypothesisType . ?hypothesisType pgmr:hypothesis_type ?hypothesisType . FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\")) FILTER(LCASE(STR(?hypothesisType)) IN (\"true\", \"yes\", \"1\")) ",
+      "postprocessed_prediction": "SELECT (COUNT(DISTINCT ?hypothesis) AS ?count) WHERE { ?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:empirical_research_practice_contribution . ?contribution pgmr:venue_serie ?venue . ?venue rdfs:label ?venueName . ?contribution pgmr:data_analysis ?dataAnalysis . ?dataAnalysis pgmr:inferential_statistics ?inferentialStatistics . ?inferentialStatistics pgmr:hypothesis ?hypothesis . ?hypothesis pgmr:hypothesis_type ?hypothesisType . ?hypothesisType pgmr:hypothesis_type ?hypothesisType . FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\")) FILTER(LCASE(STR(?hypothesisType)) IN (\"true\", \"yes\", \"1\")) }",
+      "checks": {
+        "starts_with_query_type": true,
+        "has_where": true,
+        "has_where_block_raw": false,
+        "has_where_block_post": true,
+        "balanced_braces_post": true,
+        "usable_after_postprocess": true,
+        "bad_fragments": [],
+        "pgmr_tokens": [
+          "pgmr:data_analysis",
+          "pgmr:has_contribution",
+          "pgmr:hypothesis",
+          "pgmr:hypothesis_type",
+          "pgmr:inferential_statistics",
+          "pgmr:venue_serie",
+          "pgmrc:empirical_research_practice_contribution"
+        ]
+      }
+    },
+    {
+      "index": 1,
+      "id": "720",
+      "family": "empirical_research_practice",
+      "question": "How often is each research paradigm reported across the corpus?",
+      "gold_pgmr_sparql": "SELECT ?research_paradigm ?research_paradigmLabel (COUNT(DISTINCT ?paper) AS ?paper_count)\nWHERE {\n\n    ?paper pgmr:has_contribution ?contribution .\n\n    ?contribution a pgmrc:empirical_research_practice_contribution ;\n                  pgmr:venue_serie ?venue ;\n                  pgmr:research_paradigm ?research_paradigm .\n\n    ?venue rdfs:label ?venue_name .\n    ?research_paradigm rdfs:label ?research_paradigmLabel .\n\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nGROUP BY ?research_paradigm ?research_paradigmLabel\nORDER BY DESC(?paper_count)",
+      "prompt": "task: text_to_pgmr_sparql\nfamily: empirical_research_practice\nquestion: How often is each research paradigm reported across the corpus?\npgmr_sparql:",
+      "raw_prediction": "SELECT DISTINCT ?researchParadigm ?researchParadigmLabel WHERE  ?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:empirical_research_practice_contribution . ?contribution pgmr:venue_serie ?venue . ?venue rdfs:label ?venueName . ?contribution pgmr:data_analysis ?dataAnalysis . ?dataAnalysis pgmr:inferential_statistics ?inferentialStatistics . ?inferentialStatistics pgmr:research_paradigm ?researchParadigm . ?researchParadigm rdfs:label ?researchParadigmLabel . FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\")) FILTER(LCASE(STR(?researchParadigmLabel)) IN (\"true\", \"yes\", \"1\"))  ORDER BY ?researchParadigmLabel",
+      "postprocessed_prediction": "SELECT DISTINCT ?researchParadigm ?researchParadigmLabel WHERE { ?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:empirical_research_practice_contribution . ?contribution pgmr:venue_serie ?venue . ?venue rdfs:label ?venueName . ?contribution pgmr:data_analysis ?dataAnalysis . ?dataAnalysis pgmr:inferential_statistics ?inferentialStatistics . ?inferentialStatistics pgmr:research_paradigm ?researchParadigm . ?researchParadigm rdfs:label ?researchParadigmLabel . FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\")) FILTER(LCASE(STR(?researchParadigmLabel)) IN (\"true\", \"yes\", \"1\")) ORDER BY ?researchParadigmLabel }",
+      "checks": {
+        "starts_with_query_type": true,
+        "has_where": true,
+        "has_where_block_raw": false,
+        "has_where_block_post": true,
+        "balanced_braces_post": true,
+        "usable_after_postprocess": true,
+        "bad_fragments": [],
+        "pgmr_tokens": [
+          "pgmr:data_analysis",
+          "pgmr:has_contribution",
+          "pgmr:inferential_statistics",
+          "pgmr:research_paradigm",
+          "pgmr:venue_serie",
+          "pgmrc:empirical_research_practice_contribution"
+        ]
+      }
+    },
+    {
+      "index": 2,
+      "id": "721",
+      "family": "empirical_research_practice",
+      "question": "How often is each question type reported for research questions across the corpus?",
+      "gold_pgmr_sparql": "SELECT ?question_type ?question_typeLabel (COUNT(DISTINCT ?paper) AS ?paper_count)\nWHERE {\n    ?paper pgmr:has_contribution ?contribution .\n\n    ?contribution a pgmrc:empirical_research_practice_contribution ;\n                  pgmr:venue_serie ?venue ;\n                  pgmr:research_question ?research_question .\n\n    ?venue rdfs:label ?venue_name .\n\n    ?research_question pgmr:question_type ?question_type .\n\n    OPTIONAL { ?question_type rdfs:label ?question_typeLabel . }\n    FILTER(LCASE(STR(?question_typeLabel)) != LCASE(STR(\"no type\"^^xsd:string)))\n\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nGROUP BY ?question_type ?question_typeLabel\nORDER BY DESC(?paper_count)",
+      "prompt": "task: text_to_pgmr_sparql\nfamily: empirical_research_practice\nquestion: How often is each question type reported for research questions across the corpus?\npgmr_sparql:",
+      "raw_prediction": "SELECT DISTINCT ?researchQuestion ?questionText WHERE  ?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:empirical_research_practice_contribution . ?contribution pgmr:venue_serie ?venue . ?venue rdfs:label ?venueName . ?contribution pgmr:research_question ?researchQuestion . ?researchQuestion pgmr:question ?questionText . FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\"))  ORDER BY ?questionText",
+      "postprocessed_prediction": "SELECT DISTINCT ?researchQuestion ?questionText WHERE { ?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:empirical_research_practice_contribution . ?contribution pgmr:venue_serie ?venue . ?venue rdfs:label ?venueName . ?contribution pgmr:research_question ?researchQuestion . ?researchQuestion pgmr:question ?questionText . FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\")) ORDER BY ?questionText }",
+      "checks": {
+        "starts_with_query_type": true,
+        "has_where": true,
+        "has_where_block_raw": false,
+        "has_where_block_post": true,
+        "balanced_braces_post": true,
+        "usable_after_postprocess": true,
+        "bad_fragments": [],
+        "pgmr_tokens": [
+          "pgmr:has_contribution",
+          "pgmr:question",
+          "pgmr:research_question",
+          "pgmr:venue_serie",
+          "pgmrc:empirical_research_practice_contribution"
+        ]
+      }
+    },
+    {
+      "index": 3,
+      "id": "722",
+      "family": "empirical_research_practice",
+      "question": "How is the reporting of each data type for research data distributed across publication years?",
+      "gold_pgmr_sparql": "SELECT ?paper ?paperLabel ?year ?data_type ?data_typeLabel\nWHERE {\n\n        ?paper pgmr:has_contribution ?contribution ;\n            pgmr:publication_year ?year .\n        OPTIONAL { ?paper rdfs:label ?paperLabel . }\n\n        ?contribution a pgmrc:empirical_research_practice_contribution ;\n                    pgmr:venue_serie ?venue ;\n                    pgmr:data_collection ?data_collection .\n\n        ?venue rdfs:label ?venue_name .\n\n        ?data_collection rdfs:label ?dc_label ;\n                        pgmr:data ?research_data .\n\n        ?research_data pgmr:data_type ?data_type .\n\n        OPTIONAL { ?data_type rdfs:label ?data_typeLabel . }\n\n        FILTER(?dc_label != \"no collection\"^^xsd:string)\n        FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nORDER BY ?year ?paperLabel ?data_typeLabel",
+      "prompt": "task: text_to_pgmr_sparql\nfamily: empirical_research_practice\nquestion: How is the reporting of each data type for research data distributed across publication years?\npgmr_sparql:",
+      "raw_prediction": "SELECT DISTINCT ?year WHERE  ?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:empirical_research_practice_contribution . ?contribution pgmr:venue_serie ?venue . ?venue rdfs:label ?venueName . ?paper pgmr:publication_year ?year . ?contribution pgmr:data_collection ?dataCollection . ?dataCollection pgmr:data ?researchData . ?researchData pgmr:data_type ?dataType . ?dataType rdfs:label ?dataTypeLabel . FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\"))  ORDER BY ?year",
+      "postprocessed_prediction": "SELECT DISTINCT ?year WHERE { ?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:empirical_research_practice_contribution . ?contribution pgmr:venue_serie ?venue . ?venue rdfs:label ?venueName . ?paper pgmr:publication_year ?year . ?contribution pgmr:data_collection ?dataCollection . ?dataCollection pgmr:data ?researchData . ?researchData pgmr:data_type ?dataType . ?dataType rdfs:label ?dataTypeLabel . FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\")) ORDER BY ?year }",
+      "checks": {
+        "starts_with_query_type": true,
+        "has_where": true,
+        "has_where_block_raw": false,
+        "has_where_block_post": true,
+        "balanced_braces_post": true,
+        "usable_after_postprocess": true,
+        "bad_fragments": [],
+        "pgmr_tokens": [
+          "pgmr:data",
+          "pgmr:data_collection",
+          "pgmr:data_type",
+          "pgmr:has_contribution",
+          "pgmr:publication_year",
+          "pgmr:venue_serie",
+          "pgmrc:empirical_research_practice_contribution"
+        ]
+      }
+    },
+    {
+      "index": 4,
+      "id": "723",
+      "family": "empirical_research_practice",
+      "question": "How is the reporting of machine learning algorithms distributed across decades?",
+      "gold_pgmr_sparql": "SELECT ?decade ?ml_algorithm ?ml_algorithmLabel (COUNT(DISTINCT ?paper) AS ?paper_count)\nWHERE {\n    ?paper pgmr:has_contribution ?contribution ;\n           pgmr:publication_year ?year .\n\n    ?contribution a pgmrc:empirical_research_practice_contribution ;\n                  pgmr:venue_serie ?venue ;\n                  pgmr:data_analysis ?data_analysis .\n\n    ?venue rdfs:label ?venue_name .\n\n    ?data_analysis rdfs:label ?da_label ;\n                   pgmr:machine_learning ?machine_learning .\n\n    ?machine_learning pgmr:algorithm ?ml_algorithm .\n\n    OPTIONAL { ?ml_algorithm rdfs:label ?ml_algorithmLabel . }\n\n    BIND(xsd:integer(FLOOR(xsd:decimal(?year) / 10)) * 10 AS ?decade_start)\n    BIND(CONCAT(STR(?decade_start), \"s\") AS ?decade)\n\n    FILTER(?da_label != \"no analysis\"^^xsd:string)\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nGROUP BY ?decade ?ml_algorithm ?ml_algorithmLabel\nORDER BY ?decade DESC(?paper_count) ?ml_algorithmLabel",
+      "prompt": "task: text_to_pgmr_sparql\nfamily: empirical_research_practice\nquestion: How is the reporting of machine learning algorithms distributed across decades?\npgmr_sparql:",
+      "raw_prediction": "SELECT DISTINCT ?decade ?algorithm ?algorithmLabel WHERE  ?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:empirical_research_practice_contribution . ?contribution pgmr:venue_serie ?venue . ?venue rdfs:label ?venueName . ?contribution pgmr:data_analysis ?dataAnalysis . ?dataAnalysis pgmr:machine_learning ?machineLearning . ?machineLearning pgmr:algorithm ?algorithm . ?algorithm rdfs:label ?algorithmLabel . FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\"))  ORDER BY ?algorithmLabel",
+      "postprocessed_prediction": "SELECT DISTINCT ?decade ?algorithm ?algorithmLabel WHERE { ?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:empirical_research_practice_contribution . ?contribution pgmr:venue_serie ?venue . ?venue rdfs:label ?venueName . ?contribution pgmr:data_analysis ?dataAnalysis . ?dataAnalysis pgmr:machine_learning ?machineLearning . ?machineLearning pgmr:algorithm ?algorithm . ?algorithm rdfs:label ?algorithmLabel . FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\")) ORDER BY ?algorithmLabel }",
+      "checks": {
+        "starts_with_query_type": true,
+        "has_where": true,
+        "has_where_block_raw": false,
+        "has_where_block_post": true,
+        "balanced_braces_post": true,
+        "usable_after_postprocess": true,
+        "bad_fragments": [],
+        "pgmr_tokens": [
+          "pgmr:algorithm",
+          "pgmr:data_analysis",
+          "pgmr:has_contribution",
+          "pgmr:machine_learning",
+          "pgmr:venue_serie",
+          "pgmrc:empirical_research_practice_contribution"
+        ]
+      }
+    },
+    {
+      "index": 5,
+      "id": "724",
+      "family": "empirical_research_practice",
+      "question": "Across publication years, how many papers report both data collection and data analysis?",
+      "gold_pgmr_sparql": "SELECT ?year (COUNT(DISTINCT ?paper) AS ?paper_count)\nWHERE {\n    ?paper pgmr:has_contribution ?contribution ;\n           pgmr:publication_year ?year .\n\n    ?contribution a pgmrc:empirical_research_practice_contribution ;\n                  pgmr:venue_serie ?venue ;\n                  pgmr:data_collection ?data_collection ;\n                  pgmr:data_analysis ?data_analysis .\n\n    ?venue rdfs:label ?venue_name .\n    ?data_collection rdfs:label ?dc_label .\n    ?data_analysis rdfs:label ?da_label .\n\n    FILTER(?dc_label != \"no collection\"^^xsd:string)\n    FILTER(?da_label != \"no analysis\"^^xsd:string)\n\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nGROUP BY ?year\nORDER BY ?year",
+      "prompt": "task: text_to_pgmr_sparql\nfamily: empirical_research_practice\nquestion: Across publication years, how many papers report both data collection and data analysis?\npgmr_sparql:",
+      "raw_prediction": "SELECT (COUNT(DISTINCT ?year) AS ?count) WHERE  ?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:empirical_research_practice_contribution . ?contribution pgmr:venue_serie ?venue . ?venue rdfs:label ?venueName . ?paper pgmr:publication_year ?year . ?contribution pgmr:data_analysis ?dataAnalysis . FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\")) ",
+      "postprocessed_prediction": "SELECT (COUNT(DISTINCT ?year) AS ?count) WHERE { ?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:empirical_research_practice_contribution . ?contribution pgmr:venue_serie ?venue . ?venue rdfs:label ?venueName . ?paper pgmr:publication_year ?year . ?contribution pgmr:data_analysis ?dataAnalysis . FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\")) }",
+      "checks": {
+        "starts_with_query_type": true,
+        "has_where": true,
+        "has_where_block_raw": false,
+        "has_where_block_post": true,
+        "balanced_braces_post": true,
+        "usable_after_postprocess": true,
+        "bad_fragments": [],
+        "pgmr_tokens": [
+          "pgmr:data_analysis",
+          "pgmr:has_contribution",
+          "pgmr:publication_year",
+          "pgmr:venue_serie",
+          "pgmrc:empirical_research_practice_contribution"
+        ]
+      }
+    },
+    {
+      "index": 6,
+      "id": "725",
+      "family": "empirical_research_practice",
+      "question": "Across decades, how often is each research paradigm reported?",
+      "gold_pgmr_sparql": "SELECT ?decade ?research_paradigm ?research_paradigmLabel (COUNT(DISTINCT ?paper) AS ?paper_count)\nWHERE {\n    ?paper pgmr:has_contribution ?contribution ;\n           pgmr:publication_year ?year .\n\n    ?contribution a pgmrc:empirical_research_practice_contribution ;\n                  pgmr:venue_serie ?venue ;\n                  pgmr:research_paradigm ?research_paradigm .\n\n    ?venue rdfs:label ?venue_name .\n    OPTIONAL { ?research_paradigm rdfs:label ?research_paradigmLabel . }\n\n    BIND(xsd:integer(FLOOR(xsd:decimal(?year) / 10)) * 10 AS ?decade_start)\n    BIND(CONCAT(STR(?decade_start), \"s\") AS ?decade)\n\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nGROUP BY ?decade ?research_paradigm ?research_paradigmLabel\nORDER BY ?decade DESC(?paper_count) ?research_paradigmLabel",
+      "prompt": "task: text_to_pgmr_sparql\nfamily: empirical_research_practice\nquestion: Across decades, how often is each research paradigm reported?\npgmr_sparql:",
+      "raw_prediction": "SELECT ?decade ?researchParadigm ?researchParadigmLabel WHERE  ?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:empirical_research_practice_contribution . ?contribution pgmr:venue_serie ?venue . ?venue rdfs:label ?venueName . ?contribution pgmr:data_analysis ?dataAnalysis . ?dataAnalysis pgmr:inferential_statistics ?inferentialStatistics . ?inferentialStatistics pgmr:research_paradigm ?researchParadigm . ?researchParadigm rdfs:label ?researchParadigmLabel . FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\")) FILTER(LCASE(STR(?decade)) IN (\"true\", \"yes\", \"1\"))  ORDER BY ?decade",
+      "postprocessed_prediction": "SELECT ?decade ?researchParadigm ?researchParadigmLabel WHERE { ?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:empirical_research_practice_contribution . ?contribution pgmr:venue_serie ?venue . ?venue rdfs:label ?venueName . ?contribution pgmr:data_analysis ?dataAnalysis . ?dataAnalysis pgmr:inferential_statistics ?inferentialStatistics . ?inferentialStatistics pgmr:research_paradigm ?researchParadigm . ?researchParadigm rdfs:label ?researchParadigmLabel . FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\")) FILTER(LCASE(STR(?decade)) IN (\"true\", \"yes\", \"1\")) ORDER BY ?decade }",
+      "checks": {
+        "starts_with_query_type": true,
+        "has_where": true,
+        "has_where_block_raw": false,
+        "has_where_block_post": true,
+        "balanced_braces_post": true,
+        "usable_after_postprocess": true,
+        "bad_fragments": [],
+        "pgmr_tokens": [
+          "pgmr:data_analysis",
+          "pgmr:has_contribution",
+          "pgmr:inferential_statistics",
+          "pgmr:research_paradigm",
+          "pgmr:venue_serie",
+          "pgmrc:empirical_research_practice_contribution"
+        ]
+      }
+    },
+    {
+      "index": 7,
+      "id": "726",
+      "family": "empirical_research_practice",
+      "question": "For each publication year, how many papers report at least one research question?",
+      "gold_pgmr_sparql": "SELECT ?year (COUNT(DISTINCT ?paper) AS ?paper_count)\nWHERE {\n    ?paper pgmr:has_contribution ?contribution ;\n           pgmr:publication_year ?year .\n\n    ?contribution a pgmrc:empirical_research_practice_contribution ;\n                  pgmr:venue_serie ?venue ;\n                  pgmr:research_question ?research_question .\n\n    ?venue rdfs:label ?venue_name .\n\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nGROUP BY ?year\nORDER BY ?year",
+      "prompt": "task: text_to_pgmr_sparql\nfamily: empirical_research_practice\nquestion: For each publication year, how many papers report at least one research question?\npgmr_sparql:",
+      "raw_prediction": "SELECT (COUNT(DISTINCT ?year) AS ?count) WHERE  ?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:empirical_research_practice_contribution . ?contribution pgmr:venue_serie ?venue . ?venue rdfs:label ?venueName . ?paper pgmr:publication_year ?year . ?contribution pgmr:research_question ?researchQuestion . ?researchQuestion pgmr:question ?questionText . FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\")) FILTER(LCASE(STR(?researchQuestion)) IN (\"true\", \"yes\", \"1\")) ",
+      "postprocessed_prediction": "SELECT (COUNT(DISTINCT ?year) AS ?count) WHERE { ?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:empirical_research_practice_contribution . ?contribution pgmr:venue_serie ?venue . ?venue rdfs:label ?venueName . ?paper pgmr:publication_year ?year . ?contribution pgmr:research_question ?researchQuestion . ?researchQuestion pgmr:question ?questionText . FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\")) FILTER(LCASE(STR(?researchQuestion)) IN (\"true\", \"yes\", \"1\")) }",
+      "checks": {
+        "starts_with_query_type": true,
+        "has_where": true,
+        "has_where_block_raw": false,
+        "has_where_block_post": true,
+        "balanced_braces_post": true,
+        "usable_after_postprocess": true,
+        "bad_fragments": [],
+        "pgmr_tokens": [
+          "pgmr:has_contribution",
+          "pgmr:publication_year",
+          "pgmr:question",
+          "pgmr:research_question",
+          "pgmr:venue_serie",
+          "pgmrc:empirical_research_practice_contribution"
+        ]
+      }
+    },
+    {
+      "index": 8,
+      "id": "727",
+      "family": "empirical_research_practice",
+      "question": "Across publication years, how often is each question type of a research question reported?",
+      "gold_pgmr_sparql": "SELECT ?year ?question_type ?question_typeLabel (COUNT(DISTINCT ?paper) AS ?paper_count)\nWHERE {\n    ?paper pgmr:has_contribution ?contribution ;\n           pgmr:publication_year ?year .\n\n    ?contribution a pgmrc:empirical_research_practice_contribution ;\n                  pgmr:venue_serie ?venue ;\n                  pgmr:research_question ?research_question .\n\n    ?venue rdfs:label ?venue_name .\n\n    ?research_question pgmr:question_type ?question_type .\n\n    OPTIONAL { ?question_type rdfs:label ?question_typeLabel . }\n\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nGROUP BY ?year ?question_type ?question_typeLabel\nORDER BY ?year DESC(?paper_count) ?question_typeLabel",
+      "prompt": "task: text_to_pgmr_sparql\nfamily: empirical_research_practice\nquestion: Across publication years, how often is each question type of a research question reported?\npgmr_sparql:",
+      "raw_prediction": "SELECT DISTINCT ?year WHERE  ?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:empirical_research_practice_contribution . ?contribution pgmr:venue_serie ?venue . ?venue rdfs:label ?venueName . ?paper pgmr:publication_year ?year . ?contribution pgmr:research_question ?researchQuestion . ?researchQuestion pgmr:question_type ?researchQuestionType . ?researchQuestionType rdfs:label ?researchQuestionTypeLabel . FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\"))  ORDER BY ?year",
+      "postprocessed_prediction": "SELECT DISTINCT ?year WHERE { ?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:empirical_research_practice_contribution . ?contribution pgmr:venue_serie ?venue . ?venue rdfs:label ?venueName . ?paper pgmr:publication_year ?year . ?contribution pgmr:research_question ?researchQuestion . ?researchQuestion pgmr:question_type ?researchQuestionType . ?researchQuestionType rdfs:label ?researchQuestionTypeLabel . FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\")) ORDER BY ?year }",
+      "checks": {
+        "starts_with_query_type": true,
+        "has_where": true,
+        "has_where_block_raw": false,
+        "has_where_block_post": true,
+        "balanced_braces_post": true,
+        "usable_after_postprocess": true,
+        "bad_fragments": [],
+        "pgmr_tokens": [
+          "pgmr:has_contribution",
+          "pgmr:publication_year",
+          "pgmr:question_type",
+          "pgmr:research_question",
+          "pgmr:venue_serie",
+          "pgmrc:empirical_research_practice_contribution"
+        ]
+      }
+    },
+    {
+      "index": 9,
+      "id": "728",
+      "family": "empirical_research_practice",
+      "question": "Across decades, how many papers report research data with both a data type and at least one url?",
+      "gold_pgmr_sparql": "SELECT ?decade (COUNT(DISTINCT ?paper) AS ?paper_count)\nWHERE {\n    ?paper pgmr:has_contribution ?contribution ;\n           pgmr:publication_year ?year .\n\n    ?contribution a pgmrc:empirical_research_practice_contribution ;\n                  pgmr:venue_serie ?venue ;\n                  pgmr:data_collection ?data_collection .\n\n    ?venue rdfs:label ?venue_name .\n    ?data_collection rdfs:label ?dc_label ;\n                     pgmr:data ?research_data .\n\n    ?research_data pgmr:data_type ?data_type ;\n                   pgmr:url ?url .\n\n    BIND(xsd:integer(FLOOR(xsd:decimal(?year) / 10)) * 10 AS ?decade_start)\n    BIND(CONCAT(STR(?decade_start), \"s\") AS ?decade)\n\n    FILTER(?dc_label != \"no collection\"^^xsd:string)\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nGROUP BY ?decade\nORDER BY ?decade",
+      "prompt": "task: text_to_pgmr_sparql\nfamily: empirical_research_practice\nquestion: Across decades, how many papers report research data with both a data type and at least one url?\npgmr_sparql:",
+      "raw_prediction": "SELECT (COUNT(DISTINCT ?paper) AS ?count) WHERE  ?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:empirical_research_practice_contribution . ?contribution pgmr:venue_serie ?venue . ?venue rdfs:label ?venueName . ?contribution pgmr:data_collection ?dataCollection . ?dataCollection pgmr:data ?researchData . ?researchData pgmr:data_type ?dataType . ?dataType pgmr:url ?dataUrl . FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\")) FILTER(LCASE(STR(?dataType)) IN (\"true\", \"yes\", \"1\")) ",
+      "postprocessed_prediction": "SELECT (COUNT(DISTINCT ?paper) AS ?count) WHERE { ?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:empirical_research_practice_contribution . ?contribution pgmr:venue_serie ?venue . ?venue rdfs:label ?venueName . ?contribution pgmr:data_collection ?dataCollection . ?dataCollection pgmr:data ?researchData . ?researchData pgmr:data_type ?dataType . ?dataType pgmr:url ?dataUrl . FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\")) FILTER(LCASE(STR(?dataType)) IN (\"true\", \"yes\", \"1\")) }",
+      "checks": {
+        "starts_with_query_type": true,
+        "has_where": true,
+        "has_where_block_raw": false,
+        "has_where_block_post": true,
+        "balanced_braces_post": true,
+        "usable_after_postprocess": true,
+        "bad_fragments": [],
+        "pgmr_tokens": [
+          "pgmr:data",
+          "pgmr:data_collection",
+          "pgmr:data_type",
+          "pgmr:has_contribution",
+          "pgmr:url",
+          "pgmr:venue_serie",
+          "pgmrc:empirical_research_practice_contribution"
+        ]
+      }
+    }
+  ]
+}
