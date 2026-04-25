@@ -6,3 +6,10 @@ models/
 .env.*
 plan.md
 code/.tools
+
+code/models/
+code/outputs/slurm/
+__pycache__/
+*.pyc
+
+code/scripts

@@ -31,6 +31,38 @@
         "base_dir": "code/models/google-t5_t5-base/finetuned",
         "run_name": "pgmr_lite_v1"
       }
+    },
+    "t5_base_pgmr_lite_v4": {
+      "model": "t5_base",
+      "method": "full_finetune",
+      "task": "pgmr_lite",
+      "dataset": {
+        "train_path": "code/data/dataset/pgmr/final/train.json",
+        "validation_path": "code/data/dataset/pgmr/final/validation.json",
+        "target_field": "gold_pgmr_sparql",
+        "required_status": "ok"
+      },
+      "prompt": {
+        "template": "task: text_to_pgmr_sparql\nYou generate one complete valid SPARQL query in PGMR-lite format.\nThink about the answer type, variables, contribution class, and relation path internally.\nReturn only the final query.\nHard rules:\n- Output must start with SELECT or ASK.\n- Output must contain a complete WHERE {{ ... }} block.\n- Use pgmrc: only for classes after 'a'.\n- Use pgmr: only for relations/predicates.\n- Do not invent placeholder names.\n- Do not output explanations, markdown, comments, or reasoning.\nCommon structure:\n?paper pgmr:has_contribution ?contribution .\n?contribution a pgmrc:<family_contribution_class> .\nMini example:\nquestion: Which evaluation metrics are reported by NLP4RE contributions?\nquery: SELECT DISTINCT ?metric WHERE {{ ?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:nlp4re_contribution ; pgmr:evaluation ?evaluation . ?evaluation pgmr:evaluation_metric ?metric . }}\nfamily: {family}\nquestion: {question}\npgmr_sparql:"
+      },
+      "training": {
+        "num_train_epochs": 12,
+        "learning_rate": 0.00005,
+        "per_device_train_batch_size": 4,
+        "per_device_eval_batch_size": 4,
+        "gradient_accumulation_steps": 2,
+        "max_source_length": 512,
+        "max_target_length": 512,
+        "logging_steps": 25,
+        "evaluation_strategy": "epoch",
+        "save_strategy": "epoch",
+        "save_total_limit": 2,
+        "fp16": true
+      },
+      "output": {
+        "base_dir": "code/models/google-t5_t5-base/finetuned",
+        "run_name": "pgmr_lite_v4"
+      }
     }
   }
 }
