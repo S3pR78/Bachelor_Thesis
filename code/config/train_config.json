@@ -63,6 +63,38 @@
         "base_dir": "code/models/google-t5_t5-base/finetuned",
         "run_name": "pgmr_lite_v4"
       }
+    },
+    "t5_base_pgmr_lite_v2_para_30ep": {
+      "model": "t5_base",
+      "method": "full_finetune",
+      "task": "pgmr_lite",
+      "dataset": {
+        "train_path": "code/data/dataset/pgmr/final/train_augmented_with_paraphrases.json",
+        "validation_path": "code/data/dataset/pgmr/final/validation.json",
+        "target_field": "gold_pgmr_sparql",
+        "required_status": "ok"
+      },
+      "prompt": {
+        "template": "task: text_to_pgmr_sparql\nfamily: {family}\nquestion: {question}\npgmr_sparql:"
+      },
+      "training": {
+        "num_train_epochs": 30,
+        "learning_rate": 0.00003,
+        "per_device_train_batch_size": 4,
+        "per_device_eval_batch_size": 4,
+        "gradient_accumulation_steps": 2,
+        "max_source_length": 192,
+        "max_target_length": 512,
+        "logging_steps": 25,
+        "evaluation_strategy": "epoch",
+        "save_strategy": "epoch",
+        "save_total_limit": 2,
+        "fp16": true
+      },
+      "output": {
+        "base_dir": "code/models/google-t5_t5-base/finetuned",
+        "run_name": "pgmr_lite_v2_para_30ep"
+      }
     }
   }
 }

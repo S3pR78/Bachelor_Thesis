@@ -93,9 +93,6 @@ def generate_raw_response(
         max_new_tokens=max_new_tokens,
         num_beams=4,
         do_sample=False,
-        early_stopping=True,
-        repetition_penalty=1.2,
-        no_repeat_ngram_size=3,
     )
 
     return tokenizer.decode(output_ids[0], skip_special_tokens=True)
