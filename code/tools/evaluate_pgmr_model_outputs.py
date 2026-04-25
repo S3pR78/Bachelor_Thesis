@@ -11,6 +11,7 @@ from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, T5Tokenizer
 
 from src.core.model_loader import get_model_dir
 from src.utils.config_loader import get_model_entry, load_json_config
+from string import Formatter
 
 
 PGMR_TOKEN_PATTERN = re.compile(r"\b(?:pgmr|pgmrc):[A-Za-z_][A-Za-z0-9_]*\b")
@@ -26,17 +27,41 @@ def save_json(path: Path, data: Any) -> None:
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
+def format_prompt_value(value: Any) -> str:
+    if value is None:
+        return "none"
+
+    if isinstance(value, list):
+        values = [str(item).strip() for item in value if str(item).strip()]
+        return ", ".join(values) if values else "none"
+
+    if isinstance(value, dict):
+        values = [
+            f"{key}={val}"
+            for key, val in value.items()
+            if str(key).strip() and str(val).strip()
+        ]
+        return ", ".join(values) if values else "none"
+
+    text = str(value).strip()
+    return text if text else "none"
+
+
 def build_prompt(entry: dict[str, Any], prompt_template: str) -> str:
-    family = str(entry.get("family", "")).strip()
-    question = str(entry.get("question", "")).strip()
+    format_values: dict[str, str] = {}
 
-    if not family:
-        raise ValueError(f"Missing family for id={entry.get('id')}")
-    if not question:
-        raise ValueError(f"Missing question for id={entry.get('id')}")
+    for _, field_name, _, _ in Formatter().parse(prompt_template):
+        if not field_name:
+            continue
 
-    return prompt_template.format(family=family, question=question)
+        value = entry.get(field_name)
 
+        if field_name in {"family", "question"} and (value is None or not str(value).strip()):
+            raise ValueError(f"Missing required prompt field '{field_name}' for id={entry.get('id')}")
+
+        format_values[field_name] = format_prompt_value(value)
+
+    return prompt_template.format(**format_values)
 
 def normalize_spaces(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip()

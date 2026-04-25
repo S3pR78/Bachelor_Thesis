@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Any
 
 from src.train.config import get_train_run_config, load_train_config
+from string import Formatter
 
 
 def load_dataset(path: Path) -> list[dict[str, Any]]:
@@ -21,18 +22,44 @@ def load_dataset(path: Path) -> list[dict[str, Any]]:
     return data
 
 
+def format_prompt_value(value) -> str:
+    if value is None:
+        return "none"
+
+    if isinstance(value, list):
+        values = [str(item).strip() for item in value if str(item).strip()]
+        return ", ".join(values) if values else "none"
+
+    if isinstance(value, dict):
+        values = [
+            f"{key}={val}"
+            for key, val in value.items()
+            if str(key).strip() and str(val).strip()
+        ]
+        return ", ".join(values) if values else "none"
+
+    text = str(value).strip()
+    return text if text else "none"
+
+
 def build_training_input(entry: dict[str, Any], prompt_template: str) -> str:
-    question = str(entry.get("question", "")).strip()
-    family = str(entry.get("family", "")).strip()
+    if not isinstance(prompt_template, str) or not prompt_template.strip():
+        raise ValueError("prompt_template must be a non-empty string.")
 
-    if not question:
-        raise ValueError(f"Missing question for entry id={entry.get('id')}")
+    format_values: dict[str, str] = {}
 
-    if not family:
-        raise ValueError(f"Missing family for entry id={entry.get('id')}")
+    for _, field_name, _, _ in Formatter().parse(prompt_template):
+        if not field_name:
+            continue
 
-    return prompt_template.format(family=family, question=question)
+        value = entry.get(field_name)
 
+        if field_name in {"family", "question"} and (value is None or not str(value).strip()):
+            raise ValueError(f"Missing required prompt field '{field_name}' for entry id={entry.get('id')}")
+
+        format_values[field_name] = format_prompt_value(value)
+
+    return prompt_template.format(**format_values)
 
 def build_training_examples(
     entries: list[dict[str, Any]],
