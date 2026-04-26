@@ -1,11 +1,12 @@
 from __future__ import annotations
-from src.evaluate.costs import build_cost_payload
 
 import argparse
 import json
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any
 
+from src.evaluate.costs import build_cost_payload
 from src.evaluate.dataset_loader import load_evaluate_entries, select_entry_fields
 from src.evaluate.metric_runner import build_validation_metrics
 from src.evaluate.run_io import (
@@ -24,6 +25,15 @@ from src.query.inference_session import (
 from src.query.prompt_builder import build_final_prompt_for_question
 from src.sparql.execution import detect_sparql_query_type, execute_sparql_query
 from src.sparql.prefixes import prepend_orkg_prefixes
+
+from tools.pgmr.evaluate_model_outputs import postprocess_pgmr_query
+from tools.pgmr.restore_and_execute_predictions import (
+    build_entry_mapping,
+    detect_basic_query_status,
+    load_memory_mapping,
+    restore_pgmr_query,
+)
+
 
 SUPPORTED_QUERY_FORMS = {"select", "ask"}
 
@@ -50,6 +60,30 @@ ENTRY_METADATA_FIELDS = (
     "gold_status",
 )
 
+
+def _format_prompt_value(value: Any) -> str:
+    if value is None:
+        return "none"
+
+    if isinstance(value, list):
+        values = [str(item).strip() for item in value if str(item).strip()]
+        return ", ".join(values) if values else "none"
+
+    text = str(value).strip()
+    return text if text else "none"
+
+
+def _build_pgmr_lite_meta_prompt(entry: dict[str, Any]) -> str:
+    return (
+        "task: text_to_pgmr_sparql\n"
+        f"family: {_format_prompt_value(entry.get('family'))}\n"
+        f"answer_type: {_format_prompt_value(entry.get('answer_type'))}\n"
+        f"query_shape: {_format_prompt_value(entry.get('query_shape'))}\n"
+        f"special_types: {_format_prompt_value(entry.get('special_types'))}\n"
+        f"complexity_level: {_format_prompt_value(entry.get('complexity_level'))}\n"
+        f"question: {_format_prompt_value(entry.get('question'))}\n"
+        "pgmr_sparql:"
+    )
 
 
 def _aggregate_costs(results: list[dict[str, Any]]) -> dict[str, Any]:
@@ -87,6 +121,7 @@ def _aggregate_costs(results: list[dict[str, Any]]) -> dict[str, Any]:
             else None
         ),
     }
+
 
 def _prepare_and_execute_query(
     query: str | None,
@@ -143,8 +178,65 @@ def _prepare_and_execute_query(
         }
 
 
+def _build_prediction_query_from_model_output(
+    *,
+    raw_model_output: str,
+    entry: dict[str, Any],
+    prediction_format: str,
+    pgmr_memory_mapping: dict[str, str] | None,
+) -> dict[str, Any]:
+    if prediction_format != "pgmr_lite":
+        extracted_query = extract_sparql_query(raw_model_output)
+        return {
+            "extracted_query": extracted_query,
+            "has_extracted_query": extracted_query is not None,
+            "extraction_status": "ok" if extracted_query is not None else "empty",
+            "pgmr_postprocessed_query": None,
+            "pgmr_restored_query": None,
+            "pgmr_restore_status": None,
+            "pgmr_missing_mapping_tokens": [],
+            "pgmr_remaining_tokens": [],
+            "pgmr_basic_status": None,
+        }
+
+    pgmr_postprocessed_query = postprocess_pgmr_query(raw_model_output)
+
+    entry_mapping = build_entry_mapping(entry, pgmr_memory_mapping or {})
+    pgmr_restored_query, pgmr_missing_mapping_tokens = restore_pgmr_query(
+        pgmr_postprocessed_query,
+        entry_mapping,
+    )
+    pgmr_restored_query = postprocess_pgmr_query(pgmr_restored_query)
+
+    pgmr_basic_status = detect_basic_query_status(pgmr_restored_query)
+    pgmr_remaining_tokens = pgmr_basic_status.get("remaining_pgmr_tokens", [])
+
+    if pgmr_missing_mapping_tokens:
+        pgmr_restore_status = "missing_mapping"
+    elif pgmr_remaining_tokens:
+        pgmr_restore_status = "remaining_pgmr_tokens"
+    else:
+        pgmr_restore_status = "ok"
+
+    extracted_query = pgmr_restored_query if pgmr_restore_status == "ok" else None
+
+    return {
+        "extracted_query": extracted_query,
+        "has_extracted_query": extracted_query is not None,
+        "extraction_status": f"pgmr_restore:{pgmr_restore_status}",
+        "pgmr_postprocessed_query": pgmr_postprocessed_query,
+        "pgmr_restored_query": pgmr_restored_query,
+        "pgmr_restore_status": pgmr_restore_status,
+        "pgmr_missing_mapping_tokens": pgmr_missing_mapping_tokens,
+        "pgmr_remaining_tokens": pgmr_remaining_tokens,
+        "pgmr_basic_status": pgmr_basic_status,
+    }
+
+
 def execute_evaluate_task(args: argparse.Namespace) -> int:
     print("Running evaluation task with args:", args)
+
+    prediction_format = getattr(args, "prediction_format", "sparql")
 
     entries = load_evaluate_entries(
         dataset_path=args.dataset,
@@ -172,6 +264,14 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
         total_items=len(entries),
         summary_output_path=summary_output_path,
     )
+    run_metadata["prediction_format"] = prediction_format
+
+    if prediction_format == "pgmr_lite":
+        run_metadata["pgmr_memory_dir"] = getattr(
+            args,
+            "pgmr_memory_dir",
+            "code/data/orkg_memory/templates",
+        )
 
     print(f"Run directory: {run_dir}\n")
     print(f"Raw benchmark output path: {output_path}\n")
@@ -179,9 +279,16 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
     print(f"Loaded entries for this run: {len(entries)}\n")
 
     inference_session = prepare_inference_session(args.model)
+
+    pgmr_memory_mapping: dict[str, str] | None = None
+
+    if prediction_format == "pgmr_lite":
+        pgmr_memory_mapping = load_memory_mapping(Path(args.pgmr_memory_dir))
+        print(f"PGMR memory mappings loaded: {len(pgmr_memory_mapping)}")
+
     print(f"Inference provider: {inference_session['provider']}\n")
 
-    results = []
+    results: list[dict[str, Any]] = []
 
     for index, entry in enumerate(entries, start=1):
         selected = select_entry_fields(
@@ -195,20 +302,29 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
         gold_query = selected["gold_sparql"]
         family = selected["family"]
 
-        final_prompt = build_final_prompt_for_question(
-            question=question,
-            prompt_mode=args.prompt_mode,
-            family=family,
-        )
+        if args.prompt_mode == "pgmr_lite_meta":
+            final_prompt = _build_pgmr_lite_meta_prompt(entry)
+        else:
+            final_prompt = build_final_prompt_for_question(
+                question=question,
+                prompt_mode=args.prompt_mode,
+                family=family,
+            )
 
         response_started_at = datetime.now(timezone.utc)
         model_response = generate_response_with_session(
             session=inference_session,
             final_prompt=final_prompt,
         )
-        raw_model_output = model_response["text"]
-        model_usage = model_response.get("usage")
         response_finished_at = datetime.now(timezone.utc)
+
+        if isinstance(model_response, dict):
+            raw_model_output = str(model_response.get("text", "")).strip()
+            model_usage = model_response.get("usage")
+        else:
+            raw_model_output = str(model_response).strip()
+            model_usage = None
+
         response_time_seconds = (
             response_finished_at - response_started_at
         ).total_seconds()
@@ -219,9 +335,16 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
             usage=model_usage,
         )
 
-        extracted_query = extract_sparql_query(raw_model_output)
-        has_extracted_query = extracted_query is not None
-        extraction_status = "ok" if has_extracted_query else "empty"
+        prediction_payload = _build_prediction_query_from_model_output(
+            raw_model_output=raw_model_output,
+            entry=entry,
+            prediction_format=prediction_format,
+            pgmr_memory_mapping=pgmr_memory_mapping,
+        )
+
+        extracted_query = prediction_payload["extracted_query"]
+        has_extracted_query = prediction_payload["has_extracted_query"]
+        extraction_status = prediction_payload["extraction_status"]
 
         prediction_query_form, query_execution = _prepare_and_execute_query(
             query=extracted_query,
@@ -247,10 +370,31 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
             gold_query=gold_query,
         )
         result_entry["entry_metadata"] = entry_metadata
+        result_entry["prediction_format"] = prediction_format
         result_entry["raw_model_output"] = raw_model_output
         result_entry["extracted_query"] = extracted_query
         result_entry["has_extracted_query"] = has_extracted_query
         result_entry["extraction_status"] = extraction_status
+
+        result_entry["pgmr_postprocessed_query"] = prediction_payload[
+            "pgmr_postprocessed_query"
+        ]
+        result_entry["pgmr_restored_query"] = prediction_payload[
+            "pgmr_restored_query"
+        ]
+        result_entry["pgmr_restore_status"] = prediction_payload[
+            "pgmr_restore_status"
+        ]
+        result_entry["pgmr_missing_mapping_tokens"] = prediction_payload[
+            "pgmr_missing_mapping_tokens"
+        ]
+        result_entry["pgmr_remaining_tokens"] = prediction_payload[
+            "pgmr_remaining_tokens"
+        ]
+        result_entry["pgmr_basic_status"] = prediction_payload[
+            "pgmr_basic_status"
+        ]
+
         result_entry["response_time_seconds"] = round(response_time_seconds, 4)
         result_entry["prediction_query_form"] = prediction_query_form
         result_entry["gold_query_form"] = gold_query_form
@@ -267,8 +411,11 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
             f"id={entry_id} "
             f"family={family} "
             f"prompt_chars={len(final_prompt)} "
+            f"extraction={extraction_status} "
             f"pred_form={prediction_query_form} "
-            f"gold_form={gold_query_form}"
+            f"pred_exec={query_execution.get('status')} "
+            f"gold_form={gold_query_form} "
+            f"gold_exec={gold_execution.get('status')}"
         )
 
         output_path.write_text(

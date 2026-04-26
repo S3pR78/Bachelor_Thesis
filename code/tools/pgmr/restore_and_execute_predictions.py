@@ -9,7 +9,7 @@ from typing import Any
 
 from src.sparql.execution import execute_sparql_query
 from src.sparql.prefixes import prepend_orkg_prefixes
-from tools.evaluate_pgmr_model_outputs import postprocess_pgmr_query
+from tools.pgmr.evaluate_model_outputs import postprocess_pgmr_query
 
 
 PGMR_TOKEN_PATTERN = re.compile(r"\b(?:pgmr|pgmrc):[A-Za-z_][A-Za-z0-9_]*\b")
