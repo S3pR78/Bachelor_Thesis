@@ -152,9 +152,32 @@ def move_solution_modifiers_outside_where(query: str) -> str:
     return fixed.strip()
 
 
+
+def wrap_bare_optional_patterns(query: str) -> str:
+    """
+    Fix model outputs like:
+      OPTIONAL ?x rdfs:label ?label .
+    into:
+      OPTIONAL { ?x rdfs:label ?label . }
+
+    Does not modify already valid OPTIONAL { ... } blocks.
+    """
+    pattern = re.compile(
+        r"\bOPTIONAL\s+(?!\{)([^{}]*?\.)",
+        flags=re.IGNORECASE,
+    )
+
+    def repl(match: re.Match[str]) -> str:
+        body = match.group(1).strip()
+        return f"OPTIONAL {{ {body} }}"
+
+    return pattern.sub(repl, query)
+
+
 def postprocess_pgmr_query(query: str) -> str:
     fixed = normalize_spaces(query)
     fixed = add_missing_where_braces(fixed)
+    fixed = wrap_bare_optional_patterns(fixed)
     fixed = move_solution_modifiers_outside_where(fixed)
     fixed = normalize_spaces(fixed)
     return fixed
