@@ -1,0 +1,36 @@
+{
+  "v2_shape": {
+    "total": 80,
+    "count_match": 69,
+    "group_by_match": 63,
+    "order_by_match": 69,
+    "bind_match": 68,
+    "has_boolean_filter_hallucination": 22,
+    "all_pgmr_tokens_pred_subset_gold": 60
+  },
+  "v5_shape": {
+    "total": 80,
+    "count_match": 71,
+    "group_by_match": 63,
+    "order_by_match": 73,
+    "bind_match": 68,
+    "has_boolean_filter_hallucination": 14,
+    "all_pgmr_tokens_pred_subset_gold": 63
+  },
+  "v5_execution": {
+    "report": "code/outputs/pgmr_model_eval/v5_meta_para_30ep_validation_full_v4.json",
+    "dataset": "code/data/dataset/pgmr/final/validation.json",
+    "memory_dir": "code/data/orkg_memory/templates",
+    "endpoint": "https://www.orkg.org/triplestore",
+    "total_items": 80,
+    "memory_mapping_size": 160,
+    "counts": {
+      "restore_status:ok": 72,
+      "execution_status:ok": 71,
+      "restore_status:missing_mapping": 8,
+      "execution_status:error": 9,
+      "items_with_missing_tokens": 8,
+      "items_with_remaining_pgmr_tokens": 8
+    }
+  }
+}
