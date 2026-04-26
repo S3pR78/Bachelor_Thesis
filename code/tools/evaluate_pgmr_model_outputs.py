@@ -155,21 +155,25 @@ def move_solution_modifiers_outside_where(query: str) -> str:
 
 def wrap_bare_optional_patterns(query: str) -> str:
     """
-    Fix model outputs like:
+    Fix bare OPTIONAL triple patterns:
       OPTIONAL ?x rdfs:label ?label .
+      OPTIONAL ?x rdfs:label ?label }
     into:
       OPTIONAL { ?x rdfs:label ?label . }
 
-    Does not modify already valid OPTIONAL { ... } blocks.
+    This intentionally targets simple one-triple OPTIONAL patterns.
     """
     pattern = re.compile(
-        r"\bOPTIONAL\s+(?!\{)([^{}]*?\.)",
+        r"\bOPTIONAL\s+(?!\{)"
+        r"(\?[A-Za-z_][A-Za-z0-9_]*\s+"
+        r"(?:[A-Za-z_][A-Za-z0-9_]*:)?[A-Za-z_][A-Za-z0-9_]*\s+"
+        r"\?[A-Za-z_][A-Za-z0-9_]*)(\s*\.)?",
         flags=re.IGNORECASE,
     )
 
     def repl(match: re.Match[str]) -> str:
-        body = match.group(1).strip()
-        return f"OPTIONAL {{ {body} }}"
+        triple = match.group(1).strip()
+        return f"OPTIONAL {{ {triple} . }}"
 
     return pattern.sub(repl, query)
 

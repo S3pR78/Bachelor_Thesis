@@ -9,6 +9,7 @@ from typing import Any
 
 from src.sparql.execution import execute_sparql_query
 from src.sparql.prefixes import prepend_orkg_prefixes
+from tools.evaluate_pgmr_model_outputs import postprocess_pgmr_query
 
 
 PGMR_TOKEN_PATTERN = re.compile(r"\b(?:pgmr|pgmrc):[A-Za-z_][A-Za-z0-9_]*\b")
@@ -251,6 +252,7 @@ def main() -> None:
 
         entry_mapping = build_entry_mapping(entry, memory_mapping)
         restored_query, missing_tokens = restore_pgmr_query(pgmr_prediction, entry_mapping)
+        restored_query = postprocess_pgmr_query(restored_query)
         basic_status = detect_basic_query_status(restored_query)
 
         if missing_tokens:
