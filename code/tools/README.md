@@ -22,6 +22,17 @@ Skripte zur Nachbearbeitung und Anreicherung von Datensätzen:
 - enrich_selected_candidates.py
 - enrich_dataset_with_gold_results.py
 
+
+
+### pgmr/
+
+Skripte für PGMR-lite Datentransformation, Modelloutput-Evaluation und Restore nach ausführbarem ORKG-SPARQL:
+
+  * transform_dataset.py
+  * collect_unmapped_terms.py
+  * evaluate_model_outputs.py
+  * restore_and_execute_predictions.py
+
 ### reporting/
 Skripte zur Erstellung von Auswertungen und Berichten:
 - export_dataset_validation_report.py
