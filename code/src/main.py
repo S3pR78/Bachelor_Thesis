@@ -2,6 +2,7 @@ import argparse
 from pathlib import Path
 from src.query.query_executor import generate_query_response
 from src.evaluate.runner import execute_evaluate_task
+from src.pgmr.postprocess import postprocess_pgmr_query
 from src.query.prompt_builder import (
     build_final_prompt_for_question,
     validate_query_args,
@@ -34,6 +35,11 @@ def run_query_task(args: argparse.Namespace) -> int:
     )
 
     print("Generated response:", response)
+    print("Generated response:", response)
+
+    if getattr(args, "postprocess_pgmr", False):
+        postprocessed = postprocess_pgmr_query(response)
+        print("Postprocessed PGMR:", postprocessed)
     return 0
 
 
@@ -67,8 +73,9 @@ def build_parser() -> argparse.ArgumentParser:
     query_parser = subparsers.add_parser("query", help="Run the query task.")
     query_parser.add_argument("--model", required=True, help="Model to use for querying.")
     query_parser.add_argument("--prompt-mode", required=False,choices=["empire_compass", "zero_shot", "few_shot"] ,help="Prompt mode to use for querying.")
-    query_parser.add_argument("--family", required=False,choices=["nlp4re", "empirical_research"] ,help="Template family to use for querying (e.g., 'nlp4re', 'empirical_research').")
+    query_parser.add_argument("--family", required=False,choices=["nlp4re", "empirical_research_practice"] ,help="Template family to use for querying (e.g., 'nlp4re', 'empirical_research').")
     query_parser.add_argument("--question", required=True, help="The question to query the model with.")
+    query_parser.add_argument("--postprocess-pgmr", action="store_true", help="Apply PGMR-lite postprocessing to the generated response.")
 
 
     query_parser.set_defaults(func=run_query_task)
