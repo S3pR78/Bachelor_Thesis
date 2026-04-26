@@ -8,6 +8,8 @@ from src.query.prompt_builder import (
     validate_query_args,
 )
 from src.train.seq2seq_trainer import run_seq2seq_training
+from src.pgmr.postprocess import postprocess_pgmr_query
+from src.pgmr.restore import restore_pgmr_query
 
 
 """
@@ -33,14 +35,35 @@ def run_query_task(args: argparse.Namespace) -> int:
         model_name=args.model,
         final_prompt=final_prompt,
     )
-
+    print("="*80)
     print("Generated response:", response)
-    print("Generated response:", response)
 
-    if getattr(args, "postprocess_pgmr", False):
-        postprocessed = postprocess_pgmr_query(response)
-        print("Postprocessed PGMR:", postprocessed)
-    return 0
+    pgmr_query = response
+
+    if getattr(args, "postprocess_pgmr", False) or getattr(args, "restore_pgmr", False):
+        pgmr_query = postprocess_pgmr_query(response)
+        print("="*80)
+        print("\nPostprocessed PGMR:")
+        print(pgmr_query)
+
+    if getattr(args, "restore_pgmr", False):
+        restore_result = restore_pgmr_query(
+            pgmr_query=pgmr_query,
+            memory_dir=Path(args.pgmr_memory_dir),
+        )
+        print("="*80)
+        print("\nRestored ORKG SPARQL:")
+        print(restore_result.restored_query)
+
+        if restore_result.missing_mapping_tokens:
+            print("\nMissing PGMR mappings:")
+            for token in restore_result.missing_mapping_tokens:
+                print(f"- {token}")
+
+        if restore_result.remaining_pgmr_tokens:
+            print("\nRemaining PGMR tokens:")
+            for token in restore_result.remaining_pgmr_tokens:
+                print(f"- {token}")
 
 
 
@@ -76,6 +99,8 @@ def build_parser() -> argparse.ArgumentParser:
     query_parser.add_argument("--family", required=False,choices=["nlp4re", "empirical_research_practice"] ,help="Template family to use for querying (e.g., 'nlp4re', 'empirical_research').")
     query_parser.add_argument("--question", required=True, help="The question to query the model with.")
     query_parser.add_argument("--postprocess-pgmr", action="store_true", help="Apply PGMR-lite postprocessing to the generated response.")
+    query_parser.add_argument("--restore-pgmr", action="store_true", help="Restore PGMR-lite placeholders to ORKG predicates/classes and print mapped SPARQL.")
+    query_parser.add_argument("--pgmr-memory-dir",default="code/data/orkg_memory/templates", help="Directory containing PGMR memory/mapping files.")
 
 
     query_parser.set_defaults(func=run_query_task)
