@@ -20,6 +20,10 @@ MANUAL_FALLBACK_MAP = {
     # Core ORKG paper/contribution pattern.
     "pgmr:has_contribution": "orkgp:P31",
     "pgmr:publication_year": "orkgp:P29",
+
+    # Safe alias observed in model output:
+    # gold PGMR uses pgmr:statistical_tests -> orkgp:P35133.
+    "pgmr:statistical_test": "orkgp:P35133",
 }
 
 
