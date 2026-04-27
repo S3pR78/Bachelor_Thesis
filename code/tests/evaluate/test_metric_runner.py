@@ -66,9 +66,8 @@ def test_metric_runner_builds_successful_validation_block() -> None:
     assert validation["answer_precision_recall_f1"]["recall"] == 1.0
     assert validation["answer_precision_recall_f1"]["f1"] == 1.0
 
-    # Current behavior may be None for a fully successful item.
-    # We keep this explicit so we can decide whether to change it to "success".
-    assert validation["primary_error_category"] is None
+
+    assert validation["primary_error_category"] == "success"
 
 
 def test_metric_runner_marks_prediction_execution_error() -> None:

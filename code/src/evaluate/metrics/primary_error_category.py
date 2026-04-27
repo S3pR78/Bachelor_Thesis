@@ -42,4 +42,4 @@ def compute_primary_error_category(
     if answer_exact_match.get("comparable") and answer_exact_match.get("value") == 0.0:
         return "answer_mismatch"
 
-    return None
+    return "success"
