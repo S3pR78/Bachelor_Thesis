@@ -258,6 +258,30 @@ def _build_core_metrics_summary(results: list[dict[str, Any]]) -> dict[str, Any]
             results,
             "prediction_execution_success",
         ),
+        "query_normalized_exact_match": _build_metric_summary(
+            results,
+            "query_normalized_exact_match",
+        ),
+        "query_bleu": _build_metric_summary(
+            results,
+            "query_bleu",
+            value_field="bleu",
+        ),
+        "sparql_structure_precision": _build_metric_summary(
+            results,
+            "sparql_structure_match",
+            value_field="precision",
+        ),
+        "sparql_structure_recall": _build_metric_summary(
+            results,
+            "sparql_structure_match",
+            value_field="recall",
+        ),
+        "sparql_structure_f1": _build_metric_summary(
+            results,
+            "sparql_structure_match",
+            value_field="f1",
+        ),
         "gold_execution_success": _build_metric_summary(
             results,
             "gold_execution_success",

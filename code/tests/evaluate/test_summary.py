@@ -781,3 +781,196 @@ def test_summary_aggregates_pgmr_unmapped_placeholders() -> None:
     assert metric["unmapped_item_rate"] == 0.5
     assert metric["total_unmapped_placeholder_count"] == 2
     assert metric["mean_unmapped_placeholder_count"] == 1.0
+
+
+def test_summary_maps_query_text_and_structure_metrics() -> None:
+    first_validation = validation_block(
+        exact_match=1.0,
+        precision=1.0,
+        recall=1.0,
+        f1=1.0,
+        prediction_execution_success=1.0,
+        category="success",
+    )
+    first_validation.update(
+        {
+            "query_normalized_exact_match": {
+                "metric": "query_normalized_exact_match",
+                "type": "query_based",
+                "comparable": True,
+                "value": 1.0,
+                "comparison_mode": "normalized_text",
+                "prediction_normalized_length": 100,
+                "gold_normalized_length": 100,
+            },
+            "query_bleu": {
+                "metric": "query_bleu",
+                "type": "query_based",
+                "comparable": True,
+                "value": 1.0,
+                "bleu": 1.0,
+                "comparison_mode": "normalized_token_bleu",
+                "max_order": 4,
+                "smoothing": 1.0,
+                "prediction_token_count": 20,
+                "gold_token_count": 20,
+            },
+            "sparql_structure_match": {
+                "metric": "sparql_structure_match",
+                "type": "query_based",
+                "comparable": True,
+                "value": 1.0,
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1": 1.0,
+                "comparison_mode": "sqm_lite",
+                "matched_pattern_count": 3,
+                "prediction_pattern_count": 3,
+                "gold_pattern_count": 3,
+                "missing_gold_patterns": [],
+                "extra_predicted_patterns": [],
+                "matched_patterns": [],
+            },
+        }
+    )
+
+    second_validation = validation_block(
+        exact_match=0.0,
+        precision=0.5,
+        recall=0.5,
+        f1=0.5,
+        prediction_execution_success=1.0,
+        category="answer_mismatch",
+    )
+    second_validation.update(
+        {
+            "query_normalized_exact_match": {
+                "metric": "query_normalized_exact_match",
+                "type": "query_based",
+                "comparable": True,
+                "value": 0.0,
+                "comparison_mode": "normalized_text",
+                "prediction_normalized_length": 120,
+                "gold_normalized_length": 100,
+            },
+            "query_bleu": {
+                "metric": "query_bleu",
+                "type": "query_based",
+                "comparable": True,
+                "value": 0.5,
+                "bleu": 0.5,
+                "comparison_mode": "normalized_token_bleu",
+                "max_order": 4,
+                "smoothing": 1.0,
+                "prediction_token_count": 20,
+                "gold_token_count": 20,
+            },
+            "sparql_structure_match": {
+                "metric": "sparql_structure_match",
+                "type": "query_based",
+                "comparable": True,
+                "value": 0.6667,
+                "precision": 0.6667,
+                "recall": 0.6667,
+                "f1": 0.6667,
+                "comparison_mode": "sqm_lite",
+                "matched_pattern_count": 2,
+                "prediction_pattern_count": 3,
+                "gold_pattern_count": 3,
+                "missing_gold_patterns": ["?contribution orkgp:P181003 ?task"],
+                "extra_predicted_patterns": ["?contribution orkgp:P181004 ?taskType"],
+                "matched_patterns": [],
+            },
+        }
+    )
+
+    third_validation = validation_block(
+        exact_match=0.0,
+        precision=0.0,
+        recall=0.0,
+        f1=0.0,
+        prediction_execution_success=0.0,
+        category="prediction_execution_error",
+    )
+    third_validation.update(
+        {
+            "query_normalized_exact_match": {
+                "metric": "query_normalized_exact_match",
+                "type": "query_based",
+                "comparable": False,
+                "value": None,
+                "reason": "prediction_query_missing",
+                "comparison_mode": "normalized_text",
+            },
+            "query_bleu": {
+                "metric": "query_bleu",
+                "type": "query_based",
+                "comparable": False,
+                "value": None,
+                "bleu": None,
+                "reason": "prediction_query_missing",
+                "comparison_mode": "normalized_token_bleu",
+            },
+            "sparql_structure_match": {
+                "metric": "sparql_structure_match",
+                "type": "query_based",
+                "comparable": False,
+                "value": None,
+                "precision": None,
+                "recall": None,
+                "f1": None,
+                "reason": "prediction_query_missing",
+                "comparison_mode": "sqm_lite",
+            },
+        }
+    )
+
+    results = [
+        result_item(
+            family="nlp4re",
+            source_dataset="final_test",
+            query_type="SELECT",
+            answer_type="resources",
+            query_shape="single_hop",
+            complexity_level="easy",
+            validation=first_validation,
+        ),
+        result_item(
+            family="nlp4re",
+            source_dataset="final_test",
+            query_type="SELECT",
+            answer_type="resources",
+            query_shape="single_hop",
+            complexity_level="easy",
+            validation=second_validation,
+        ),
+        result_item(
+            family="empirical_research_practice",
+            source_dataset="final_test",
+            query_type="SELECT",
+            answer_type="resources",
+            query_shape="multi_hop",
+            complexity_level="medium",
+            validation=third_validation,
+        ),
+    ]
+
+    summary = build_benchmark_summary(results)
+    metrics = summary["metrics"]
+
+    assert metrics["query_normalized_exact_match"]["mean"] == 0.5
+    assert metrics["query_normalized_exact_match"]["comparable_count"] == 2
+    assert metrics["query_normalized_exact_match"]["non_comparable_count"] == 1
+
+    assert metrics["query_bleu"]["mean"] == 0.75
+    assert metrics["query_bleu"]["value_field"] == "bleu"
+    assert metrics["query_bleu"]["comparable_count"] == 2
+    assert metrics["query_bleu"]["non_comparable_count"] == 1
+
+    assert metrics["sparql_structure_precision"]["mean"] == 0.8334
+    assert metrics["sparql_structure_recall"]["mean"] == 0.8334
+    assert metrics["sparql_structure_f1"]["mean"] == 0.8334
+
+    assert metrics["sparql_structure_precision"]["value_field"] == "precision"
+    assert metrics["sparql_structure_recall"]["value_field"] == "recall"
+    assert metrics["sparql_structure_f1"]["value_field"] == "f1"
