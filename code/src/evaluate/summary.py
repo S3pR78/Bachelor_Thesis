@@ -77,6 +77,77 @@ def _build_metric_summary(
 
     return summary
 
+def _get_validation_metric(result: dict, metric_name: str) -> dict | None:
+    validation = result.get("validation", {})
+    metric = validation.get(metric_name)
+    return metric if isinstance(metric, dict) else None
+
+
+def _build_uri_hallucination_summary(results: list[dict]) -> dict:
+    metrics = [
+        _get_validation_metric(result, "uri_hallucination")
+        for result in results
+    ]
+    metrics = [metric for metric in metrics if metric is not None]
+
+    comparable_metrics = [
+        metric for metric in metrics if metric.get("comparable") is True
+    ]
+    non_comparable_count = len(metrics) - len(comparable_metrics)
+
+    hallucinated_item_count = sum(
+        1 for metric in comparable_metrics
+        if metric.get("has_hallucination") is True
+    )
+    clean_item_count = sum(
+        1 for metric in comparable_metrics
+        if metric.get("has_hallucination") is False
+    )
+
+    hallucinated_ref_counts = [
+        metric.get("hallucinated_ref_count")
+        for metric in comparable_metrics
+        if isinstance(metric.get("hallucinated_ref_count"), (int, float))
+    ]
+    hallucinated_ref_rates = [
+        metric.get("hallucinated_ref_rate")
+        for metric in comparable_metrics
+        if isinstance(metric.get("hallucinated_ref_rate"), (int, float))
+    ]
+
+    comparable_count = len(comparable_metrics)
+
+    total_hallucinated_ref_count = int(sum(hallucinated_ref_counts))
+    mean_hallucinated_ref_count = (
+        None
+        if not hallucinated_ref_counts
+        else round(sum(hallucinated_ref_counts) / len(hallucinated_ref_counts), 4)
+    )
+    mean_hallucinated_ref_rate = (
+        None
+        if not hallucinated_ref_rates
+        else round(sum(hallucinated_ref_rates) / len(hallucinated_ref_rates), 4)
+    )
+
+    hallucinated_item_rate = (
+        None
+        if comparable_count == 0
+        else round(hallucinated_item_count / comparable_count, 4)
+    )
+
+    return {
+        "metric_name": "uri_hallucination",
+        "type": "query_based",
+        "comparable_count": comparable_count,
+        "non_comparable_count": non_comparable_count,
+        "hallucinated_item_count": hallucinated_item_count,
+        "clean_item_count": clean_item_count,
+        "hallucinated_item_rate": hallucinated_item_rate,
+        "total_hallucinated_ref_count": total_hallucinated_ref_count,
+        "mean_hallucinated_ref_count": mean_hallucinated_ref_count,
+        "mean_hallucinated_ref_rate": mean_hallucinated_ref_rate,
+    }
+
 
 def _build_response_time_summary(results: list[dict[str, Any]]) -> dict[str, Any]:
     values = [
@@ -224,6 +295,8 @@ def _build_core_metrics_summary(results: list[dict[str, Any]]) -> dict[str, Any]
             "resource_ref_match",
             value_field="f1",
         ),
+
+        "uri_hallucination": _build_uri_hallucination_summary(results),
     }
 
 

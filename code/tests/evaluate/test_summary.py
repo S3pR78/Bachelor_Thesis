@@ -555,3 +555,125 @@ def test_summary_maps_kg_reference_metric_fields() -> None:
     assert metrics["kg_ref_precision"]["value_field"] == "precision"
     assert metrics["kg_ref_recall"]["value_field"] == "recall"
     assert metrics["kg_ref_f1"]["value_field"] == "f1"
+
+
+def test_summary_aggregates_uri_hallucination() -> None:
+    first_validation = validation_block(
+        exact_match=1.0,
+        precision=1.0,
+        recall=1.0,
+        f1=1.0,
+        prediction_execution_success=1.0,
+        category="success",
+    )
+    first_validation["uri_hallucination"] = {
+        "metric": "uri_hallucination",
+        "type": "query_based",
+        "comparable": True,
+        "value": 0.0,
+        "has_hallucination": False,
+        "hallucinated_ref_rate": 0.0,
+        "checked_ref_kinds": ["predicate", "class"],
+        "prediction_ref_count": 3,
+        "allowed_ref_count": 161,
+        "hallucinated_ref_count": 0,
+        "hallucinated_refs": [],
+        "checked_prediction_refs": ["orkgc:C121001", "orkgp:P31", "orkgp:P181003"],
+    }
+
+    second_validation = validation_block(
+        exact_match=0.0,
+        precision=0.0,
+        recall=0.0,
+        f1=0.0,
+        prediction_execution_success=1.0,
+        category="answer_mismatch",
+    )
+    second_validation["uri_hallucination"] = {
+        "metric": "uri_hallucination",
+        "type": "query_based",
+        "comparable": True,
+        "value": 1.0,
+        "has_hallucination": True,
+        "hallucinated_ref_rate": 0.25,
+        "checked_ref_kinds": ["predicate", "class"],
+        "prediction_ref_count": 4,
+        "allowed_ref_count": 161,
+        "hallucinated_ref_count": 1,
+        "hallucinated_refs": ["orkgp:P999999999"],
+        "checked_prediction_refs": [
+            "orkgc:C121001",
+            "orkgp:P31",
+            "orkgp:P181003",
+            "orkgp:P999999999",
+        ],
+    }
+
+    third_validation = validation_block(
+        exact_match=0.0,
+        precision=0.0,
+        recall=0.0,
+        f1=0.0,
+        prediction_execution_success=0.0,
+        category="prediction_execution_error",
+    )
+    third_validation["uri_hallucination"] = {
+        "metric": "uri_hallucination",
+        "type": "query_based",
+        "comparable": False,
+        "value": None,
+        "has_hallucination": None,
+        "hallucinated_ref_rate": None,
+        "reason": "prediction_query_missing",
+        "checked_ref_kinds": ["predicate", "class"],
+        "prediction_ref_count": None,
+        "allowed_ref_count": 161,
+        "hallucinated_ref_count": None,
+        "hallucinated_refs": [],
+        "checked_prediction_refs": [],
+    }
+
+    results = [
+        result_item(
+            family="nlp4re",
+            source_dataset="final_test",
+            query_type="SELECT",
+            answer_type="resources",
+            query_shape="single_hop",
+            complexity_level="easy",
+            validation=first_validation,
+        ),
+        result_item(
+            family="nlp4re",
+            source_dataset="final_test",
+            query_type="SELECT",
+            answer_type="resources",
+            query_shape="single_hop",
+            complexity_level="easy",
+            validation=second_validation,
+        ),
+        result_item(
+            family="empirical_research_practice",
+            source_dataset="final_test",
+            query_type="SELECT",
+            answer_type="resources",
+            query_shape="multi_hop",
+            complexity_level="medium",
+            validation=third_validation,
+        ),
+    ]
+
+    summary = build_benchmark_summary(results)
+
+    metric = summary["metrics"]["uri_hallucination"]
+
+    assert metric["metric_name"] == "uri_hallucination"
+    assert metric["type"] == "query_based"
+    assert metric["comparable_count"] == 2
+    assert metric["non_comparable_count"] == 1
+    assert metric["hallucinated_item_count"] == 1
+    assert metric["clean_item_count"] == 1
+    assert metric["hallucinated_item_rate"] == 0.5
+    assert metric["total_hallucinated_ref_count"] == 1
+    assert metric["mean_hallucinated_ref_count"] == 0.5
+    assert metric["mean_hallucinated_ref_rate"] == 0.125
