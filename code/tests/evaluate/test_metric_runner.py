@@ -126,6 +126,16 @@ def test_metric_runner_builds_successful_validation_block() -> None:
     assert validation["pgmr_unmapped_placeholders"]["unmapped_placeholders"] == []
     assert validation["pgmr_unmapped_placeholders"]["unmapped_placeholders"] == []
 
+    assert validation["query_normalized_exact_match"]["comparable"] is True
+    assert validation["query_normalized_exact_match"]["value"] == 1.0
+
+    assert validation["query_bleu"]["comparable"] is True
+    assert validation["query_bleu"]["value"] == 1.0
+
+    assert validation["sparql_structure_match"]["comparable"] is True
+    assert validation["sparql_structure_match"]["f1"] == 1.0
+    assert validation["sparql_structure_match"]["comparison_mode"] == "sqm_lite"
+
     assert validation["primary_error_category"] == "success"
 
 
@@ -235,6 +245,21 @@ def test_metric_runner_marks_extraction_failure() -> None:
 
     assert validation["answer_exact_match"]["comparable"] is False
     assert validation["answer_exact_match"]["reason"] == "prediction_missing"
+
+    assert validation["query_normalized_exact_match"]["comparable"] is False
+    assert (
+        validation["query_normalized_exact_match"]["reason"]
+        == "prediction_query_missing"
+    )
+
+    assert validation["query_bleu"]["comparable"] is False
+    assert validation["query_bleu"]["reason"] == "prediction_query_missing"
+
+    assert validation["sparql_structure_match"]["comparable"] is False
+    assert (
+        validation["sparql_structure_match"]["reason"]
+        == "prediction_query_missing"
+    )
 
     assert validation["primary_error_category"] == "extraction_failure"
 
@@ -594,3 +619,58 @@ def test_metric_runner_marks_pgmr_metric_not_applicable_for_non_pgmr_mode() -> N
     assert metric["unmapped_placeholder_count"] is None
     assert metric["unmapped_placeholders"] == []
     assert metric["reason"] == "not_pgmr_mode"
+
+
+def test_metric_runner_computes_query_text_and_structure_metrics_for_partial_match() -> None:
+    prediction_query = """
+    SELECT ?paper WHERE {
+      ?paper orkgp:P31 ?contribution .
+      ?contribution a orkgc:C121001 .
+      ?contribution orkgp:P181004 ?taskType .
+    }
+    """
+
+    gold_query = """
+    SELECT ?paper WHERE {
+      ?paper orkgp:P31 ?contribution .
+      ?contribution a orkgc:C121001 .
+      ?contribution orkgp:P181003 ?task .
+    }
+    """
+
+    validation = build_validation_metrics(
+        has_extracted_query=True,
+        prediction_query_form="select",
+        gold_query_form="select",
+        prediction_execution=ok_select(
+            [
+                {"paper": uri("http://orkg.org/orkg/resource/R1")},
+            ]
+        ),
+        gold_execution=ok_select(
+            [
+                {"paper": uri("http://orkg.org/orkg/resource/R1")},
+            ]
+        ),
+        endpoint_url=ENDPOINT_URL,
+        prediction_query=prediction_query,
+        gold_query=gold_query,
+        allowed_kg_refs=ALLOWED_KG_REFS,
+    )
+
+    assert validation["query_normalized_exact_match"]["comparable"] is True
+    assert validation["query_normalized_exact_match"]["value"] == 0.0
+
+    assert validation["query_bleu"]["comparable"] is True
+    assert 0.0 < validation["query_bleu"]["value"] < 1.0
+
+    assert validation["sparql_structure_match"]["comparable"] is True
+    assert validation["sparql_structure_match"]["precision"] == 0.6667
+    assert validation["sparql_structure_match"]["recall"] == 0.6667
+    assert validation["sparql_structure_match"]["f1"] == 0.6667
+    assert validation["sparql_structure_match"]["missing_gold_patterns"] == [
+        "?contribution orkgp:P181003 ?task"
+    ]
+    assert validation["sparql_structure_match"]["extra_predicted_patterns"] == [
+        "?contribution orkgp:P181004 ?taskType"
+    ]

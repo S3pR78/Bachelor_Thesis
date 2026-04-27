@@ -27,6 +27,14 @@ from src.evaluate.metrics.pgmr_unmapped_placeholders import (
     compute_pgmr_unmapped_placeholders,
 )
 
+from src.evaluate.metrics.query_normalized_exact_match import (
+    compute_query_normalized_exact_match,
+)
+from src.evaluate.metrics.query_bleu import compute_query_bleu
+from src.evaluate.metrics.sparql_structure_match import (
+    compute_sparql_structure_match,
+)
+
 
 def build_validation_metrics(
     *,
@@ -132,6 +140,21 @@ def build_validation_metrics(
             reason="not_pgmr_mode",
         )
 
+    query_normalized_exact_match = compute_query_normalized_exact_match(
+        prediction_query=prediction_query,
+        gold_query=gold_query,
+    )
+
+    query_bleu = compute_query_bleu(
+        prediction_query=prediction_query,
+        gold_query=gold_query,
+    )
+
+    sparql_structure_match = compute_sparql_structure_match(
+        prediction_query=prediction_query,
+        gold_query=gold_query,
+    )
+
     primary_error_category = compute_primary_error_category(
         has_extracted_query=has_extracted_query,
         prediction_query_form=prediction_query_form,
@@ -158,5 +181,8 @@ def build_validation_metrics(
         "resource_ref_match": resource_ref_match,
         "uri_hallucination": uri_hallucination,
         "pgmr_unmapped_placeholders": pgmr_unmapped_placeholders,
+        "query_normalized_exact_match": query_normalized_exact_match,
+        "query_bleu": query_bleu,
+        "sparql_structure_match": sparql_structure_match,
         "primary_error_category": primary_error_category,
     }
