@@ -1,6 +1,6 @@
 ---
 title: "PGMR-lite and T5 Experiments for ORKG Text-to-SPARQL"
-author: "Draft for Bachelor Thesis Approach/Experiments Chapter"
+author: "Sepehr Moghadarian"
 date: "2026-04-27"
 ---
 
@@ -525,3 +525,8 @@ Therefore, the final interpretation is that PGMR-lite is useful as a controlled 
 
 In this work, I introduced PGMR-lite as an intermediate representation for ORKG Text-to-SPARQL generation. Instead of training T5-base to generate real ORKG identifiers directly, the model generates semantically readable PGMR placeholders, which are later restored to ORKG-SPARQL using a deterministic mapping. After repairing and validating the dataset, I trained T5-base on paraphrase-augmented PGMR-lite data. A metadata-aware prompt further improved the model by providing answer type, query shape, special types, and complexity information. The final model still required rule-based postprocessing to repair systematic syntax issues such as missing WHERE braces, misplaced ORDER BY/GROUP BY clauses, and malformed OPTIONAL patterns. After postprocessing and restore, the final PGMR-lite approach achieved high endpoint executability on the validation set and provided a transparent pipeline for analyzing model, syntax, and mapping errors separately.
 
+
+
+------------
+
+the model has stil problems to produce filter not exists is easy to handl with preprocessing

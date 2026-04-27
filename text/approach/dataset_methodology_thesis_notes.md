@@ -1,4 +1,8 @@
-# Dataset Construction and Curation Process
+---
+title: Dataset Construction and Curation Process
+author: "Sepehr Moghadarian"
+date: "2026-04-27"
+---
 
 ## 1. Starting Point
 
