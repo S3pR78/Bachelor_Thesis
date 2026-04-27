@@ -77,6 +77,22 @@ def validation_block(
             "recall": recall,
             "f1": f1,
         },
+        "answer_value_exact_match": metric(
+            "answer_value_exact_match",
+            exact_match,
+            metric_type="answer_based",
+            comparison_mode="value_only",
+        ),
+        "answer_value_precision_recall_f1": {
+            "metric": "answer_value_precision_recall_f1",
+            "type": "answer_based",
+            "comparable": True,
+            "value": f1,
+            "precision": precision,
+            "recall": recall,
+            "f1": f1,
+            "comparison_mode": "value_only",
+        },
         "primary_error_category": category,
     }
 
@@ -138,6 +154,19 @@ def test_summary_maps_answer_precision_recall_f1_fields() -> None:
     assert metrics["answer_recall"]["value_field"] == "recall"
     assert metrics["answer_f1"]["value_field"] == "f1"
 
+    assert metrics["answer_value_exact_match"]["mean"] == 0.5
+    assert metrics["answer_value_exact_match"]["success_count"] == 1
+    assert metrics["answer_value_exact_match"]["failure_count"] == 1
+    assert metrics["answer_value_exact_match"]["success_rate"] == 0.5
+
+    assert metrics["answer_value_precision"]["mean"] == 0.75
+    assert metrics["answer_value_recall"]["mean"] == 0.625
+    assert metrics["answer_value_f1"]["mean"] == 0.6666
+
+    assert metrics["answer_value_precision"]["value_field"] == "precision"
+    assert metrics["answer_value_recall"]["value_field"] == "recall"
+    assert metrics["answer_value_f1"]["value_field"] == "f1"
+
 
 def test_summary_counts_non_comparable_answer_metrics() -> None:
     results = [
@@ -171,6 +200,25 @@ def test_summary_counts_non_comparable_answer_metrics() -> None:
                     "value": None,
                     "reason": "prediction_error",
                 },
+                "answer_value_exact_match": {
+                    "metric": "answer_value_exact_match",
+                    "type": "answer_based",
+                    "comparable": False,
+                    "value": None,
+                    "reason": "prediction_error",
+                    "comparison_mode": "value_only",
+                },
+                "answer_value_precision_recall_f1": {
+                    "metric": "answer_value_precision_recall_f1",
+                    "type": "answer_based",
+                    "comparable": False,
+                    "value": None,
+                    "precision": None,
+                    "recall": None,
+                    "f1": None,
+                    "reason": "prediction_error",
+                    "comparison_mode": "value_only",
+                },
                 "primary_error_category": "prediction_execution_error",
             },
         )
@@ -194,6 +242,22 @@ def test_summary_counts_non_comparable_answer_metrics() -> None:
     assert metrics["answer_f1"]["comparable_count"] == 0
     assert metrics["answer_f1"]["non_comparable_count"] == 1
     assert metrics["answer_f1"]["mean"] is None
+
+    assert metrics["answer_value_exact_match"]["comparable_count"] == 0
+    assert metrics["answer_value_exact_match"]["non_comparable_count"] == 1
+    assert metrics["answer_value_exact_match"]["mean"] is None
+
+    assert metrics["answer_value_precision"]["comparable_count"] == 0
+    assert metrics["answer_value_precision"]["non_comparable_count"] == 1
+    assert metrics["answer_value_precision"]["mean"] is None
+
+    assert metrics["answer_value_recall"]["comparable_count"] == 0
+    assert metrics["answer_value_recall"]["non_comparable_count"] == 1
+    assert metrics["answer_value_recall"]["mean"] is None
+
+    assert metrics["answer_value_f1"]["comparable_count"] == 0
+    assert metrics["answer_value_f1"]["non_comparable_count"] == 1
+    assert metrics["answer_value_f1"]["mean"] is None
 
 
 def test_summary_builds_slice_metrics() -> None:

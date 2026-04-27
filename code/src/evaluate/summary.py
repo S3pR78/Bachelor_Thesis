@@ -145,6 +145,25 @@ def _build_core_metrics_summary(results: list[dict[str, Any]]) -> dict[str, Any]
             "answer_precision_recall_f1",
             value_field="f1",
         ),
+        "answer_value_exact_match": _build_metric_summary(
+            results,
+            "answer_value_exact_match",
+        ),
+        "answer_value_precision": _build_metric_summary(
+            results,
+            "answer_value_precision_recall_f1",
+            value_field="precision",
+        ),
+        "answer_value_recall": _build_metric_summary(
+            results,
+            "answer_value_precision_recall_f1",
+            value_field="recall",
+        ),
+        "answer_value_f1": _build_metric_summary(
+            results,
+            "answer_value_precision_recall_f1",
+            value_field="f1",
+        ),
     }
 
 
