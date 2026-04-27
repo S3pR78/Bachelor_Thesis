@@ -1,4 +1,18 @@
 from __future__ import annotations
+"""
+Normalize executed SPARQL answers for answer-based evaluation.
+
+This module does not compare SPARQL query strings. It normalizes execution
+outputs so that answer-based metrics such as exact match and precision/recall/F1
+can compare ASK booleans or SELECT result rows.
+
+Current SELECT behavior:
+- row order does not matter
+- variable order inside a row does not matter
+- duplicate rows are collapsed because rows are represented as a set
+- variable names are part of the normalized answer
+- literal datatypes and language tags are part of the normalized answer
+"""
 
 from typing import Any
 
