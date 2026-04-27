@@ -50,7 +50,7 @@ def _collect_refs_by_kinds(
 def compute_uri_hallucination(
     *,
     prediction_query: str | None,
-    allowed_refs: set[str] | frozenset[str],
+    allowed_refs: set[str] | frozenset[str] | None,
     checked_ref_kinds: tuple[str, ...] = ("predicate", "class"),
 ) -> dict[str, Any]:
     """Detect predicted ORKG refs that are unknown to the local memory.

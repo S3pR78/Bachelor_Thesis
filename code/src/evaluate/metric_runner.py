@@ -21,6 +21,7 @@ from src.evaluate.metrics.answer_value_precision_recall_f1 import (
     compute_answer_value_precision_recall_f1,
 )
 from src.evaluate.metrics.kg_ref_match import compute_kg_ref_match
+from src.evaluate.metrics.uri_hallucination import compute_uri_hallucination
 
 
 def build_validation_metrics(
@@ -33,6 +34,7 @@ def build_validation_metrics(
     endpoint_url: str | None,
     prediction_query: str | None = None,
     gold_query: str | None = None,
+    allowed_kg_refs: set[str] | frozenset[str] | None = None,
 ) -> dict[str, Any]:
     prediction_execution_for_status = prediction_execution or {}
     gold_execution_for_status = gold_execution or {}
@@ -90,6 +92,8 @@ def build_validation_metrics(
         ref_kind="all",
     )
 
+
+
     predicate_ref_match = compute_kg_ref_match(
         prediction_query=prediction_query,
         gold_query=gold_query,
@@ -106,6 +110,12 @@ def build_validation_metrics(
         prediction_query=prediction_query,
         gold_query=gold_query,
         ref_kind="resource",
+    )
+
+    uri_hallucination = compute_uri_hallucination(
+        prediction_query=prediction_query,
+        allowed_refs=allowed_kg_refs,
+        checked_ref_kinds=("predicate", "class"),
     )
 
     primary_error_category = compute_primary_error_category(
@@ -132,5 +142,6 @@ def build_validation_metrics(
         "predicate_ref_match": predicate_ref_match,
         "class_ref_match": class_ref_match,
         "resource_ref_match": resource_ref_match,
+        "uri_hallucination": uri_hallucination,
         "primary_error_category": primary_error_category,
     }

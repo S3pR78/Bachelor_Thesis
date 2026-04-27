@@ -33,6 +33,8 @@ from tools.pgmr.restore_and_execute_predictions import (
     load_memory_mapping,
     restore_pgmr_query,
 )
+from pathlib import Path
+from src.evaluate.kg_memory import load_allowed_orkg_refs
 
 
 SUPPORTED_QUERY_FORMS = {"select", "ask"}
@@ -290,6 +292,20 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
 
     results: list[dict[str, Any]] = []
 
+    kg_memory_path = Path(
+    getattr(args, "kg_memory_path", "code/data/orkg_memory/templates")
+)
+
+    allowed_kg_refs = None
+    if kg_memory_path.exists():
+        kg_memory = load_allowed_orkg_refs(kg_memory_path)
+        allowed_kg_refs = kg_memory["all_refs"]
+    else:
+        print(
+            f"Warning: KG memory path not found: {kg_memory_path}. "
+            "URI hallucination metric will be marked as not comparable."
+        )
+
     for index, entry in enumerate(entries, start=1):
         selected = select_entry_fields(
             entry,
@@ -364,6 +380,7 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
             endpoint_url=args.sparql_endpoint,
             prediction_query=extracted_query,
             gold_query=gold_query,
+            allowed_kg_refs=allowed_kg_refs,
         )
 
         result_entry = build_raw_result_entry(

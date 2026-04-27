@@ -5,6 +5,15 @@ from src.evaluate.metric_runner import build_validation_metrics
 
 ENDPOINT_URL = "https://www.orkg.org/triplestore"
 
+ALLOWED_KG_REFS = frozenset(
+    {
+        "orkgp:P31",
+        "orkgp:P181003",
+        "orkgp:P181004",
+        "orkgc:C121001",
+    }
+)
+
 
 def uri(value: str) -> dict:
     return {
@@ -43,6 +52,22 @@ def test_metric_runner_builds_successful_validation_block() -> None:
         ]
     )
 
+    prediction_query = """
+    SELECT ?paper WHERE {
+        ?paper orkgp:P31 ?contribution .
+        ?contribution a orkgc:C121001 .
+        ?contribution orkgp:P181003 ?task .
+    }
+    """
+
+    gold_query = """
+    SELECT ?paper WHERE {
+        ?paper orkgp:P31 ?contribution .
+        ?contribution a orkgc:C121001 .
+        ?contribution orkgp:P181003 ?task .
+    }
+    """
+
     validation = build_validation_metrics(
         has_extracted_query=True,
         prediction_query_form="select",
@@ -50,6 +75,9 @@ def test_metric_runner_builds_successful_validation_block() -> None:
         prediction_execution=prediction_execution,
         gold_execution=gold_execution,
         endpoint_url=ENDPOINT_URL,
+        prediction_query=prediction_query,
+        gold_query=gold_query,
+        allowed_kg_refs=ALLOWED_KG_REFS,
     )
 
     assert validation["query_extracted"]["value"] == 1.0
@@ -79,6 +107,10 @@ def test_metric_runner_builds_successful_validation_block() -> None:
         == "value_only"
     )
 
+    assert validation["uri_hallucination"]["comparable"] is True
+    assert validation["uri_hallucination"]["value"] == 0.0
+    assert validation["uri_hallucination"]["has_hallucination"] is False
+    assert validation["uri_hallucination"]["hallucinated_refs"] == []
 
     assert validation["primary_error_category"] == "success"
 
@@ -352,3 +384,82 @@ def test_metric_runner_marks_kg_reference_metrics_not_comparable_without_predict
 
     assert validation["resource_ref_match"]["comparable"] is False
     assert validation["resource_ref_match"]["reason"] == "prediction_query_missing"
+
+
+def test_metric_runner_computes_uri_hallucination() -> None:
+    prediction_query = """
+    SELECT ?paper WHERE {
+      ?paper orkgp:P31 ?contribution .
+      ?contribution a orkgc:C121001 .
+      ?contribution orkgp:P999999999 ?x .
+    }
+    """
+
+    gold_query = """
+    SELECT ?paper WHERE {
+      ?paper orkgp:P31 ?contribution .
+      ?contribution a orkgc:C121001 .
+      ?contribution orkgp:P181003 ?task .
+    }
+    """
+
+    validation = build_validation_metrics(
+        has_extracted_query=True,
+        prediction_query_form="select",
+        gold_query_form="select",
+        prediction_execution=ok_select(
+            [
+                {"paper": uri("http://orkg.org/orkg/resource/R1")},
+            ]
+        ),
+        gold_execution=ok_select(
+            [
+                {"paper": uri("http://orkg.org/orkg/resource/R1")},
+            ]
+        ),
+        endpoint_url=ENDPOINT_URL,
+        prediction_query=prediction_query,
+        gold_query=gold_query,
+        allowed_kg_refs=ALLOWED_KG_REFS,
+    )
+
+    assert validation["uri_hallucination"]["comparable"] is True
+    assert validation["uri_hallucination"]["value"] == 1.0
+    assert validation["uri_hallucination"]["has_hallucination"] is True
+    assert validation["uri_hallucination"]["hallucinated_ref_count"] == 1
+    assert validation["uri_hallucination"]["hallucinated_refs"] == [
+        "orkgp:P999999999"
+    ]
+
+
+def test_metric_runner_marks_uri_hallucination_not_comparable_without_memory() -> None:
+    validation = build_validation_metrics(
+        has_extracted_query=True,
+        prediction_query_form="select",
+        gold_query_form="select",
+        prediction_execution=ok_select(
+            [
+                {"paper": uri("http://orkg.org/orkg/resource/R1")},
+            ]
+        ),
+        gold_execution=ok_select(
+            [
+                {"paper": uri("http://orkg.org/orkg/resource/R1")},
+            ]
+        ),
+        endpoint_url=ENDPOINT_URL,
+        prediction_query="""
+        SELECT ?paper WHERE {
+          ?paper orkgp:P31 ?contribution .
+        }
+        """,
+        gold_query="""
+        SELECT ?paper WHERE {
+          ?paper orkgp:P31 ?contribution .
+        }
+        """,
+        allowed_kg_refs=None,
+    )
+
+    assert validation["uri_hallucination"]["comparable"] is False
+    assert validation["uri_hallucination"]["reason"] == "allowed_refs_missing"
