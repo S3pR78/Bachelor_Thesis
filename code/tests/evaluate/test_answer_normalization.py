@@ -158,7 +158,7 @@ def test_different_variable_names_are_currently_strict() -> None:
     assert by_paper_variable != by_resource_variable
 
 
-def test_numeric_literal_datatype_differences_are_currently_strict() -> None:
+def test_numeric_literal_datatype_differences_are_normalized() -> None:
     integer_result = normalize_execution_result(
         ok_select(
             [
@@ -185,7 +185,7 @@ def test_numeric_literal_datatype_differences_are_currently_strict() -> None:
         )
     )
 
-    assert integer_result != decimal_result
+    assert integer_result == decimal_result
 
 
 def test_invalid_select_bindings_raise_value_error() -> None:
@@ -214,3 +214,27 @@ def test_invalid_ask_boolean_raises_value_error() -> None:
                 },
             }
         )
+
+
+def test_plain_literal_numbers_without_numeric_datatype_stay_strict() -> None:
+    plain_one = normalize_execution_result(
+        ok_select(
+            [
+                {
+                    "label": lit("1"),
+                }
+            ]
+        )
+    )
+
+    plain_one_with_leading_zero = normalize_execution_result(
+        ok_select(
+            [
+                {
+                    "label": lit("01"),
+                }
+            ]
+        )
+    )
+
+    assert plain_one != plain_one_with_leading_zero

@@ -15,13 +15,57 @@ Current SELECT behavior:
 """
 
 from typing import Any
+from decimal import Decimal, InvalidOperation
 
+XSD_DECIMAL = "http://www.w3.org/2001/XMLSchema#decimal"
+
+XSD_NUMERIC_DATATYPES = {
+    "http://www.w3.org/2001/XMLSchema#byte",
+    "http://www.w3.org/2001/XMLSchema#decimal",
+    "http://www.w3.org/2001/XMLSchema#double",
+    "http://www.w3.org/2001/XMLSchema#float",
+    "http://www.w3.org/2001/XMLSchema#int",
+    "http://www.w3.org/2001/XMLSchema#integer",
+    "http://www.w3.org/2001/XMLSchema#long",
+    "http://www.w3.org/2001/XMLSchema#negativeInteger",
+    "http://www.w3.org/2001/XMLSchema#nonNegativeInteger",
+    "http://www.w3.org/2001/XMLSchema#nonPositiveInteger",
+    "http://www.w3.org/2001/XMLSchema#positiveInteger",
+    "http://www.w3.org/2001/XMLSchema#short",
+    "http://www.w3.org/2001/XMLSchema#unsignedByte",
+    "http://www.w3.org/2001/XMLSchema#unsignedInt",
+    "http://www.w3.org/2001/XMLSchema#unsignedLong",
+    "http://www.w3.org/2001/XMLSchema#unsignedShort",
+}
+
+def _normalize_numeric_literal(value: str, datatype: str) -> tuple[str, str]:
+    if datatype not in XSD_NUMERIC_DATATYPES:
+        return value, datatype
+
+    try:
+        decimal_value = Decimal(value.strip())
+    except (InvalidOperation, ValueError):
+        return value, datatype
+
+    if not decimal_value.is_finite():
+        return value, datatype
+
+    normalized_value = format(decimal_value.normalize(), "f")
+
+    if normalized_value == "-0":
+        normalized_value = "0"
+
+    return normalized_value, XSD_DECIMAL
 
 def _normalize_binding_value(value_obj: dict[str, Any]) -> tuple[str, str, str, str]:
     value_type = str(value_obj.get("type", ""))
     value = str(value_obj.get("value", ""))
     datatype = str(value_obj.get("datatype", ""))
     language = str(value_obj.get("xml:lang", value_obj.get("lang", "")))
+
+    if value_type == "literal":
+        value, datatype = _normalize_numeric_literal(value, datatype)
+
     return (value_type, value, datatype, language)
 
 
