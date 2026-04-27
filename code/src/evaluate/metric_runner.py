@@ -22,6 +22,10 @@ from src.evaluate.metrics.answer_value_precision_recall_f1 import (
 )
 from src.evaluate.metrics.kg_ref_match import compute_kg_ref_match
 from src.evaluate.metrics.uri_hallucination import compute_uri_hallucination
+from src.evaluate.metrics.pgmr_unmapped_placeholders import (
+    build_pgmr_unmapped_placeholders_not_applicable,
+    compute_pgmr_unmapped_placeholders,
+)
 
 
 def build_validation_metrics(
@@ -35,6 +39,7 @@ def build_validation_metrics(
     prediction_query: str | None = None,
     gold_query: str | None = None,
     allowed_kg_refs: set[str] | frozenset[str] | None = None,
+    enable_pgmr_metrics: bool = False,
 ) -> dict[str, Any]:
     prediction_execution_for_status = prediction_execution or {}
     gold_execution_for_status = gold_execution or {}
@@ -118,6 +123,15 @@ def build_validation_metrics(
         checked_ref_kinds=("predicate", "class"),
     )
 
+    if enable_pgmr_metrics:
+        pgmr_unmapped_placeholders = compute_pgmr_unmapped_placeholders(
+            prediction_query=prediction_query,
+        )
+    else:
+        pgmr_unmapped_placeholders = build_pgmr_unmapped_placeholders_not_applicable(
+            reason="not_pgmr_mode",
+        )
+
     primary_error_category = compute_primary_error_category(
         has_extracted_query=has_extracted_query,
         prediction_query_form=prediction_query_form,
@@ -143,5 +157,6 @@ def build_validation_metrics(
         "class_ref_match": class_ref_match,
         "resource_ref_match": resource_ref_match,
         "uri_hallucination": uri_hallucination,
+        "pgmr_unmapped_placeholders": pgmr_unmapped_placeholders,
         "primary_error_category": primary_error_category,
     }

@@ -371,6 +371,14 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
             endpoint_url=args.sparql_endpoint,
         )
 
+        prompt_mode = str(getattr(args, "prompt_mode", "") or "").lower()
+        prediction_format = str(getattr(args, "prediction_format", "") or "").lower()
+
+        enable_pgmr_metrics = (
+            "pgmr" in prompt_mode
+            or "pgmr" in prediction_format
+        )
+
         validation = build_validation_metrics(
             has_extracted_query=has_extracted_query,
             prediction_query_form=prediction_query_form,
@@ -381,6 +389,7 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
             prediction_query=extracted_query,
             gold_query=gold_query,
             allowed_kg_refs=allowed_kg_refs,
+            enable_pgmr_metrics=enable_pgmr_metrics,
         )
 
         result_entry = build_raw_result_entry(

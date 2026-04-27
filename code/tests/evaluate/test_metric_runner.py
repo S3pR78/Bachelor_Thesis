@@ -112,6 +112,20 @@ def test_metric_runner_builds_successful_validation_block() -> None:
     assert validation["uri_hallucination"]["has_hallucination"] is False
     assert validation["uri_hallucination"]["hallucinated_refs"] == []
 
+    assert validation["pgmr_unmapped_placeholders"]["comparable"] is False
+    assert validation["pgmr_unmapped_placeholders"]["value"] is None
+    assert validation["pgmr_unmapped_placeholders"]["reason"] == "not_pgmr_mode"
+    assert (
+        validation["pgmr_unmapped_placeholders"]["has_unmapped_placeholders"]
+        is None
+    )
+    assert (
+        validation["pgmr_unmapped_placeholders"]["unmapped_placeholder_count"]
+        is None
+    )
+    assert validation["pgmr_unmapped_placeholders"]["unmapped_placeholders"] == []
+    assert validation["pgmr_unmapped_placeholders"]["unmapped_placeholders"] == []
+
     assert validation["primary_error_category"] == "success"
 
 
@@ -463,3 +477,120 @@ def test_metric_runner_marks_uri_hallucination_not_comparable_without_memory() -
 
     assert validation["uri_hallucination"]["comparable"] is False
     assert validation["uri_hallucination"]["reason"] == "allowed_refs_missing"
+
+
+def test_metric_runner_computes_pgmr_unmapped_placeholders() -> None:
+    prediction_query = """
+    SELECT ?paper WHERE {
+      ?contribution {{NLP_TASK_PROPERTY}} ?task .
+      ?contribution <UNKNOWN_CLASS> ?x .
+    }
+    """
+
+    gold_query = """
+    SELECT ?paper WHERE {
+      ?paper orkgp:P31 ?contribution .
+      ?contribution a orkgc:C121001 .
+      ?contribution orkgp:P181003 ?task .
+    }
+    """
+
+    validation = build_validation_metrics(
+        has_extracted_query=True,
+        prediction_query_form="select",
+        gold_query_form="select",
+        prediction_execution=ok_select(
+            [
+                {"paper": uri("http://orkg.org/orkg/resource/R1")},
+            ]
+        ),
+        gold_execution=ok_select(
+            [
+                {"paper": uri("http://orkg.org/orkg/resource/R1")},
+            ]
+        ),
+        endpoint_url=ENDPOINT_URL,
+        prediction_query=prediction_query,
+        gold_query=gold_query,
+        allowed_kg_refs=ALLOWED_KG_REFS,
+        enable_pgmr_metrics=True,
+    )
+
+    metric = validation["pgmr_unmapped_placeholders"]
+
+    assert metric["comparable"] is True
+    assert metric["value"] == 1.0
+    assert metric["has_unmapped_placeholders"] is True
+    assert metric["unmapped_placeholder_count"] == 2
+    assert metric["unmapped_placeholders"] == [
+        "<UNKNOWN_CLASS>",
+        "{{NLP_TASK_PROPERTY}}",
+    ]
+
+
+def test_metric_runner_marks_pgmr_unmapped_placeholders_not_comparable_without_prediction_query() -> None:
+    validation = build_validation_metrics(
+        has_extracted_query=False,
+        prediction_query_form=None,
+        gold_query_form="select",
+        prediction_execution=None,
+        gold_execution=ok_select(
+            [
+                {"paper": uri("http://orkg.org/orkg/resource/R1")},
+            ]
+        ),
+        endpoint_url=ENDPOINT_URL,
+        prediction_query=None,
+        gold_query="""
+        SELECT ?paper WHERE {
+          ?paper orkgp:P31 ?contribution .
+        }
+        """,
+        allowed_kg_refs=ALLOWED_KG_REFS,
+        enable_pgmr_metrics=True,
+    )
+
+    assert validation["pgmr_unmapped_placeholders"]["comparable"] is False
+    assert (
+        validation["pgmr_unmapped_placeholders"]["reason"]
+        == "prediction_query_missing"
+    )
+
+def test_metric_runner_marks_pgmr_metric_not_applicable_for_non_pgmr_mode() -> None:
+    validation = build_validation_metrics(
+        has_extracted_query=True,
+        prediction_query_form="select",
+        gold_query_form="select",
+        prediction_execution=ok_select(
+            [
+                {"paper": uri("http://orkg.org/orkg/resource/R1")},
+            ]
+        ),
+        gold_execution=ok_select(
+            [
+                {"paper": uri("http://orkg.org/orkg/resource/R1")},
+            ]
+        ),
+        endpoint_url=ENDPOINT_URL,
+        prediction_query="""
+        SELECT ?paper WHERE {
+          ?contribution {{NLP_TASK_PROPERTY}} ?task .
+        }
+        """,
+        gold_query="""
+        SELECT ?paper WHERE {
+          ?paper orkgp:P31 ?contribution .
+        }
+        """,
+        allowed_kg_refs=ALLOWED_KG_REFS,
+        enable_pgmr_metrics=False,
+    )
+
+    metric = validation["pgmr_unmapped_placeholders"]
+
+    assert metric["comparable"] is False
+    assert metric["value"] is None
+    assert metric["has_unmapped_placeholders"] is None
+    assert metric["unmapped_placeholder_count"] is None
+    assert metric["unmapped_placeholders"] == []
+    assert metric["reason"] == "not_pgmr_mode"

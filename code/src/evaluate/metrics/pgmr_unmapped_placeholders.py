@@ -55,6 +55,22 @@ def extract_pgmr_unmapped_placeholders(query_text: str | None) -> list[str]:
     return sorted(placeholders)
 
 
+
+def build_pgmr_unmapped_placeholders_not_applicable(
+    *,
+    reason: str = "not_pgmr_mode",
+) -> dict[str, Any]:
+    return {
+        "metric": "pgmr_unmapped_placeholders",
+        "type": "pgmr_based",
+        "comparable": False,
+        "value": None,
+        "has_unmapped_placeholders": None,
+        "unmapped_placeholder_count": None,
+        "unmapped_placeholders": [],
+        "reason": reason,
+    }
+
 def compute_pgmr_unmapped_placeholders(
     *,
     prediction_query: str | None,
