@@ -20,6 +20,7 @@ from src.evaluate.metrics.answer_value_exact_match import (
 from src.evaluate.metrics.answer_value_precision_recall_f1 import (
     compute_answer_value_precision_recall_f1,
 )
+from src.evaluate.metrics.kg_ref_match import compute_kg_ref_match
 
 
 def build_validation_metrics(
@@ -30,6 +31,8 @@ def build_validation_metrics(
     prediction_execution: dict[str, Any] | None,
     gold_execution: dict[str, Any] | None,
     endpoint_url: str | None,
+    prediction_query: str | None = None,
+    gold_query: str | None = None,
 ) -> dict[str, Any]:
     prediction_execution_for_status = prediction_execution or {}
     gold_execution_for_status = gold_execution or {}
@@ -81,6 +84,30 @@ def build_validation_metrics(
         gold_execution=gold_execution,
     )
 
+    kg_ref_match = compute_kg_ref_match(
+        prediction_query=prediction_query,
+        gold_query=gold_query,
+        ref_kind="all",
+    )
+
+    predicate_ref_match = compute_kg_ref_match(
+        prediction_query=prediction_query,
+        gold_query=gold_query,
+        ref_kind="predicate",
+    )
+
+    class_ref_match = compute_kg_ref_match(
+        prediction_query=prediction_query,
+        gold_query=gold_query,
+        ref_kind="class",
+    )
+
+    resource_ref_match = compute_kg_ref_match(
+        prediction_query=prediction_query,
+        gold_query=gold_query,
+        ref_kind="resource",
+    )
+
     primary_error_category = compute_primary_error_category(
         has_extracted_query=has_extracted_query,
         prediction_query_form=prediction_query_form,
@@ -101,5 +128,9 @@ def build_validation_metrics(
         "answer_precision_recall_f1": answer_precision_recall_f1,
         "answer_value_exact_match": answer_value_exact_match,
         "answer_value_precision_recall_f1": answer_value_precision_recall_f1,
+        "kg_ref_match": kg_ref_match,
+        "predicate_ref_match": predicate_ref_match,
+        "class_ref_match": class_ref_match,
+        "resource_ref_match": resource_ref_match,
         "primary_error_category": primary_error_category,
     }

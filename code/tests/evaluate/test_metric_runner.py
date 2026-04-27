@@ -118,7 +118,7 @@ def test_metric_runner_marks_prediction_execution_error() -> None:
     assert validation["primary_error_category"] == "prediction_execution_error"
 
     assert validation["answer_value_exact_match"]["comparable"] is False
-    
+
     assert validation["answer_value_exact_match"]["value"] is None
     assert validation["answer_value_exact_match"]["reason"] == "prediction_error"
 
@@ -251,3 +251,104 @@ def test_metric_runner_computes_value_only_metrics_for_different_variable_names(
         validation["answer_value_precision_recall_f1"]["comparison_mode"]
         == "value_only"
     )
+
+
+def test_metric_runner_computes_kg_reference_metrics() -> None:
+    prediction_query = """
+    SELECT ?paper WHERE {
+      ?paper orkgp:P31 ?contribution .
+      ?contribution a orkgc:C121001 .
+      ?contribution orkgp:P181004 ?taskType .
+    }
+    """
+
+    gold_query = """
+    SELECT ?paper WHERE {
+      ?paper orkgp:P31 ?contribution .
+      ?contribution a orkgc:C121001 .
+      ?contribution orkgp:P181003 ?task .
+    }
+    """
+
+    validation = build_validation_metrics(
+        has_extracted_query=True,
+        prediction_query_form="select",
+        gold_query_form="select",
+        prediction_execution=ok_select(
+            [
+                {"paper": uri("http://orkg.org/orkg/resource/R1")},
+            ]
+        ),
+        gold_execution=ok_select(
+            [
+                {"paper": uri("http://orkg.org/orkg/resource/R1")},
+            ]
+        ),
+        endpoint_url=ENDPOINT_URL,
+        prediction_query=prediction_query,
+        gold_query=gold_query,
+    )
+
+    assert validation["kg_ref_match"]["comparable"] is True
+    assert validation["kg_ref_match"]["ref_kind"] == "all"
+    assert validation["kg_ref_match"]["matched_refs"] == [
+        "orkgc:C121001",
+        "orkgp:P31",
+    ]
+    assert validation["kg_ref_match"]["missing_gold_refs"] == ["orkgp:P181003"]
+    assert validation["kg_ref_match"]["extra_predicted_refs"] == ["orkgp:P181004"]
+    assert validation["kg_ref_match"]["f1"] == 0.6667
+
+    assert validation["predicate_ref_match"]["comparable"] is True
+    assert validation["predicate_ref_match"]["ref_kind"] == "predicate"
+    assert validation["predicate_ref_match"]["matched_refs"] == ["orkgp:P31"]
+    assert validation["predicate_ref_match"]["missing_gold_refs"] == ["orkgp:P181003"]
+    assert validation["predicate_ref_match"]["extra_predicted_refs"] == [
+        "orkgp:P181004"
+    ]
+    assert validation["predicate_ref_match"]["f1"] == 0.5
+
+    assert validation["class_ref_match"]["comparable"] is True
+    assert validation["class_ref_match"]["ref_kind"] == "class"
+    assert validation["class_ref_match"]["matched_refs"] == ["orkgc:C121001"]
+    assert validation["class_ref_match"]["f1"] == 1.0
+
+    assert validation["resource_ref_match"]["comparable"] is True
+    assert validation["resource_ref_match"]["ref_kind"] == "resource"
+    assert validation["resource_ref_match"]["prediction_ref_count"] == 0
+    assert validation["resource_ref_match"]["gold_ref_count"] == 0
+    assert validation["resource_ref_match"]["f1"] == 1.0
+
+
+def test_metric_runner_marks_kg_reference_metrics_not_comparable_without_prediction_query() -> None:
+    validation = build_validation_metrics(
+        has_extracted_query=False,
+        prediction_query_form=None,
+        gold_query_form="select",
+        prediction_execution=None,
+        gold_execution=ok_select(
+            [
+                {"paper": uri("http://orkg.org/orkg/resource/R1")},
+            ]
+        ),
+        endpoint_url=ENDPOINT_URL,
+        prediction_query=None,
+        gold_query="""
+        SELECT ?paper WHERE {
+          ?paper orkgp:P31 ?contribution .
+          ?contribution a orkgc:C121001 .
+        }
+        """,
+    )
+
+    assert validation["kg_ref_match"]["comparable"] is False
+    assert validation["kg_ref_match"]["reason"] == "prediction_query_missing"
+
+    assert validation["predicate_ref_match"]["comparable"] is False
+    assert validation["predicate_ref_match"]["reason"] == "prediction_query_missing"
+
+    assert validation["class_ref_match"]["comparable"] is False
+    assert validation["class_ref_match"]["reason"] == "prediction_query_missing"
+
+    assert validation["resource_ref_match"]["comparable"] is False
+    assert validation["resource_ref_match"]["reason"] == "prediction_query_missing"

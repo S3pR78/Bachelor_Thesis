@@ -362,6 +362,8 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
             prediction_execution=query_execution,
             gold_execution=gold_execution,
             endpoint_url=args.sparql_endpoint,
+            prediction_query=extracted_query,
+            gold_query=gold_query,
         )
 
         result_entry = build_raw_result_entry(
