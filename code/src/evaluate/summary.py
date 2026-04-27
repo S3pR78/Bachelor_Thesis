@@ -82,6 +82,68 @@ def _get_validation_metric(result: dict, metric_name: str) -> dict | None:
     metric = validation.get(metric_name)
     return metric if isinstance(metric, dict) else None
 
+def _build_pgmr_unmapped_placeholders_summary(results: list[dict]) -> dict:
+    metrics = [
+        _get_validation_metric(result, "pgmr_unmapped_placeholders")
+        for result in results
+    ]
+    metrics = [metric for metric in metrics if metric is not None]
+
+    comparable_metrics = [
+        metric for metric in metrics if metric.get("comparable") is True
+    ]
+    non_comparable_metrics = [
+        metric for metric in metrics if metric.get("comparable") is not True
+    ]
+
+    not_pgmr_mode_count = sum(
+        1 for metric in non_comparable_metrics
+        if metric.get("reason") == "not_pgmr_mode"
+    )
+
+    unmapped_item_count = sum(
+        1 for metric in comparable_metrics
+        if metric.get("has_unmapped_placeholders") is True
+    )
+    clean_item_count = sum(
+        1 for metric in comparable_metrics
+        if metric.get("has_unmapped_placeholders") is False
+    )
+
+    placeholder_counts = [
+        metric.get("unmapped_placeholder_count")
+        for metric in comparable_metrics
+        if isinstance(metric.get("unmapped_placeholder_count"), (int, float))
+    ]
+
+    comparable_count = len(comparable_metrics)
+    non_comparable_count = len(non_comparable_metrics)
+
+    total_unmapped_placeholder_count = int(sum(placeholder_counts))
+    mean_unmapped_placeholder_count = (
+        None
+        if not placeholder_counts
+        else round(sum(placeholder_counts) / len(placeholder_counts), 4)
+    )
+
+    unmapped_item_rate = (
+        None
+        if comparable_count == 0
+        else round(unmapped_item_count / comparable_count, 4)
+    )
+
+    return {
+        "metric_name": "pgmr_unmapped_placeholders",
+        "type": "pgmr_based",
+        "comparable_count": comparable_count,
+        "non_comparable_count": non_comparable_count,
+        "not_pgmr_mode_count": not_pgmr_mode_count,
+        "unmapped_item_count": unmapped_item_count,
+        "clean_item_count": clean_item_count,
+        "unmapped_item_rate": unmapped_item_rate,
+        "total_unmapped_placeholder_count": total_unmapped_placeholder_count,
+        "mean_unmapped_placeholder_count": mean_unmapped_placeholder_count,
+    }
 
 def _build_uri_hallucination_summary(results: list[dict]) -> dict:
     metrics = [
@@ -297,6 +359,7 @@ def _build_core_metrics_summary(results: list[dict[str, Any]]) -> dict[str, Any]
         ),
 
         "uri_hallucination": _build_uri_hallucination_summary(results),
+        "pgmr_unmapped_placeholders": _build_pgmr_unmapped_placeholders_summary(results),
     }
 
 

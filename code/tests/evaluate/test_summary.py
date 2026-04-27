@@ -677,3 +677,107 @@ def test_summary_aggregates_uri_hallucination() -> None:
     assert metric["total_hallucinated_ref_count"] == 1
     assert metric["mean_hallucinated_ref_count"] == 0.5
     assert metric["mean_hallucinated_ref_rate"] == 0.125
+
+def test_summary_aggregates_pgmr_unmapped_placeholders() -> None:
+    first_validation = validation_block(
+        exact_match=1.0,
+        precision=1.0,
+        recall=1.0,
+        f1=1.0,
+        prediction_execution_success=1.0,
+        category="success",
+    )
+    first_validation["pgmr_unmapped_placeholders"] = {
+        "metric": "pgmr_unmapped_placeholders",
+        "type": "pgmr_based",
+        "comparable": True,
+        "value": 0.0,
+        "has_unmapped_placeholders": False,
+        "unmapped_placeholder_count": 0,
+        "unmapped_placeholders": [],
+    }
+
+    second_validation = validation_block(
+        exact_match=0.0,
+        precision=0.0,
+        recall=0.0,
+        f1=0.0,
+        prediction_execution_success=1.0,
+        category="answer_mismatch",
+    )
+    second_validation["pgmr_unmapped_placeholders"] = {
+        "metric": "pgmr_unmapped_placeholders",
+        "type": "pgmr_based",
+        "comparable": True,
+        "value": 1.0,
+        "has_unmapped_placeholders": True,
+        "unmapped_placeholder_count": 2,
+        "unmapped_placeholders": [
+            "<UNKNOWN_CLASS>",
+            "{{NLP_TASK_PROPERTY}}",
+        ],
+    }
+
+    third_validation = validation_block(
+        exact_match=0.0,
+        precision=0.0,
+        recall=0.0,
+        f1=0.0,
+        prediction_execution_success=1.0,
+        category="answer_mismatch",
+    )
+    third_validation["pgmr_unmapped_placeholders"] = {
+        "metric": "pgmr_unmapped_placeholders",
+        "type": "pgmr_based",
+        "comparable": False,
+        "value": None,
+        "has_unmapped_placeholders": None,
+        "unmapped_placeholder_count": None,
+        "unmapped_placeholders": [],
+        "reason": "not_pgmr_mode",
+    }
+
+    results = [
+        result_item(
+            family="nlp4re",
+            source_dataset="pgmr_test",
+            query_type="SELECT",
+            answer_type="resources",
+            query_shape="single_hop",
+            complexity_level="easy",
+            validation=first_validation,
+        ),
+        result_item(
+            family="nlp4re",
+            source_dataset="pgmr_test",
+            query_type="SELECT",
+            answer_type="resources",
+            query_shape="single_hop",
+            complexity_level="easy",
+            validation=second_validation,
+        ),
+        result_item(
+            family="nlp4re",
+            source_dataset="direct_test",
+            query_type="SELECT",
+            answer_type="resources",
+            query_shape="single_hop",
+            complexity_level="easy",
+            validation=third_validation,
+        ),
+    ]
+
+    summary = build_benchmark_summary(results)
+
+    metric = summary["metrics"]["pgmr_unmapped_placeholders"]
+
+    assert metric["metric_name"] == "pgmr_unmapped_placeholders"
+    assert metric["type"] == "pgmr_based"
+    assert metric["comparable_count"] == 2
+    assert metric["non_comparable_count"] == 1
+    assert metric["not_pgmr_mode_count"] == 1
+    assert metric["unmapped_item_count"] == 1
+    assert metric["clean_item_count"] == 1
+    assert metric["unmapped_item_rate"] == 0.5
+    assert metric["total_unmapped_placeholder_count"] == 2
+    assert metric["mean_unmapped_placeholder_count"] == 1.0
