@@ -1,0 +1,191 @@
+from __future__ import annotations
+
+from src.evaluate.metric_runner import build_validation_metrics
+
+
+ENDPOINT_URL = "https://www.orkg.org/triplestore"
+
+
+def uri(value: str) -> dict:
+    return {
+        "type": "uri",
+        "value": value,
+    }
+
+
+def ok_select(bindings: list[dict]) -> dict:
+    return {
+        "status": "ok",
+        "result_type": "select",
+        "response_json": {
+            "head": {"vars": []},
+            "results": {"bindings": bindings},
+        },
+    }
+
+
+def error_execution(reason: str = "endpoint_bad_request") -> dict:
+    return {
+        "status": "error",
+        "error": reason,
+    }
+
+
+def test_metric_runner_builds_successful_validation_block() -> None:
+    prediction_execution = ok_select(
+        [
+            {"paper": uri("http://orkg.org/orkg/resource/R1")},
+        ]
+    )
+    gold_execution = ok_select(
+        [
+            {"paper": uri("http://orkg.org/orkg/resource/R1")},
+        ]
+    )
+
+    validation = build_validation_metrics(
+        has_extracted_query=True,
+        prediction_query_form="select",
+        gold_query_form="select",
+        prediction_execution=prediction_execution,
+        gold_execution=gold_execution,
+        endpoint_url=ENDPOINT_URL,
+    )
+
+    assert validation["query_extracted"]["value"] == 1.0
+    assert validation["supported_query_form"]["value"] == 1.0
+    assert validation["query_form_match"]["value"] == 1.0
+    assert validation["prediction_execution_success"]["value"] == 1.0
+    assert validation["gold_execution_success"]["value"] == 1.0
+
+    assert validation["answer_exact_match"]["comparable"] is True
+    assert validation["answer_exact_match"]["value"] == 1.0
+
+    assert validation["answer_precision_recall_f1"]["comparable"] is True
+    assert validation["answer_precision_recall_f1"]["precision"] == 1.0
+    assert validation["answer_precision_recall_f1"]["recall"] == 1.0
+    assert validation["answer_precision_recall_f1"]["f1"] == 1.0
+
+    # Current behavior may be None for a fully successful item.
+    # We keep this explicit so we can decide whether to change it to "success".
+    assert validation["primary_error_category"] is None
+
+
+def test_metric_runner_marks_prediction_execution_error() -> None:
+    validation = build_validation_metrics(
+        has_extracted_query=True,
+        prediction_query_form="select",
+        gold_query_form="select",
+        prediction_execution=error_execution(),
+        gold_execution=ok_select(
+            [
+                {"paper": uri("http://orkg.org/orkg/resource/R1")},
+            ]
+        ),
+        endpoint_url=ENDPOINT_URL,
+    )
+
+    assert validation["query_extracted"]["value"] == 1.0
+    assert validation["supported_query_form"]["value"] == 1.0
+    assert validation["query_form_match"]["value"] == 1.0
+
+    assert validation["prediction_execution_success"]["comparable"] is True
+    assert validation["prediction_execution_success"]["value"] == 0.0
+
+    assert validation["gold_execution_success"]["comparable"] is True
+    assert validation["gold_execution_success"]["value"] == 1.0
+
+    assert validation["answer_exact_match"]["comparable"] is False
+    assert validation["answer_exact_match"]["value"] is None
+    assert validation["answer_exact_match"]["reason"] == "prediction_error"
+
+    assert validation["answer_precision_recall_f1"]["comparable"] is False
+    assert validation["answer_precision_recall_f1"]["value"] is None
+    assert validation["answer_precision_recall_f1"]["reason"] == "prediction_error"
+
+    assert validation["primary_error_category"] == "prediction_execution_error"
+
+
+def test_metric_runner_marks_answer_mismatch_for_executable_wrong_answer() -> None:
+    prediction_execution = ok_select(
+        [
+            {"paper": uri("http://orkg.org/orkg/resource/R1")},
+        ]
+    )
+    gold_execution = ok_select(
+        [
+            {"paper": uri("http://orkg.org/orkg/resource/R2")},
+        ]
+    )
+
+    validation = build_validation_metrics(
+        has_extracted_query=True,
+        prediction_query_form="select",
+        gold_query_form="select",
+        prediction_execution=prediction_execution,
+        gold_execution=gold_execution,
+        endpoint_url=ENDPOINT_URL,
+    )
+
+    assert validation["prediction_execution_success"]["value"] == 1.0
+    assert validation["gold_execution_success"]["value"] == 1.0
+
+    assert validation["answer_exact_match"]["comparable"] is True
+    assert validation["answer_exact_match"]["value"] == 0.0
+
+    assert validation["answer_precision_recall_f1"]["comparable"] is True
+    assert validation["answer_precision_recall_f1"]["precision"] == 0.0
+    assert validation["answer_precision_recall_f1"]["recall"] == 0.0
+    assert validation["answer_precision_recall_f1"]["f1"] == 0.0
+
+    assert validation["primary_error_category"] == "answer_mismatch"
+
+
+def test_metric_runner_marks_extraction_failure() -> None:
+    validation = build_validation_metrics(
+        has_extracted_query=False,
+        prediction_query_form=None,
+        gold_query_form="select",
+        prediction_execution=None,
+        gold_execution=ok_select(
+            [
+                {"paper": uri("http://orkg.org/orkg/resource/R1")},
+            ]
+        ),
+        endpoint_url=ENDPOINT_URL,
+    )
+
+    assert validation["query_extracted"]["value"] == 0.0
+
+    assert validation["supported_query_form"]["comparable"] is False
+    assert validation["supported_query_form"]["reason"] == "no_extracted_query"
+
+    assert validation["prediction_execution_success"]["comparable"] is False
+    assert (
+        validation["prediction_execution_success"]["reason"]
+        == "unsupported_or_missing_prediction_query"
+    )
+
+    assert validation["answer_exact_match"]["comparable"] is False
+    assert validation["answer_exact_match"]["reason"] == "prediction_missing"
+
+    assert validation["primary_error_category"] == "extraction_failure"
+
+
+def test_metric_runner_marks_no_endpoint_as_not_comparable() -> None:
+    validation = build_validation_metrics(
+        has_extracted_query=True,
+        prediction_query_form="select",
+        gold_query_form="select",
+        prediction_execution=None,
+        gold_execution=None,
+        endpoint_url=None,
+    )
+
+    assert validation["prediction_execution_success"]["comparable"] is False
+    assert validation["prediction_execution_success"]["reason"] == "no_endpoint_configured"
+
+    assert validation["gold_execution_success"]["comparable"] is False
+    assert validation["gold_execution_success"]["reason"] == "no_endpoint_configured"
+
+    assert validation["primary_error_category"] == "not_evaluated_no_endpoint"

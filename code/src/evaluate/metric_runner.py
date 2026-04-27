@@ -25,8 +25,8 @@ def build_validation_metrics(
     gold_execution: dict[str, Any] | None,
     endpoint_url: str | None,
 ) -> dict[str, Any]:
-    prediction_execution = prediction_execution or {}
-    gold_execution = gold_execution or {}
+    prediction_execution_for_status = prediction_execution or {}
+    gold_execution_for_status = gold_execution or {}
 
     query_extracted = compute_query_extracted(
         has_extracted_query=has_extracted_query,
@@ -45,13 +45,13 @@ def build_validation_metrics(
     prediction_execution_success = compute_prediction_execution_success(
         has_extracted_query=has_extracted_query,
         prediction_query_form=prediction_query_form,
-        prediction_execution=prediction_execution,
+        prediction_execution=prediction_execution_for_status,
         endpoint_url=endpoint_url,
     )
 
     gold_execution_success = compute_gold_execution_success(
         gold_query_form=gold_query_form,
-        gold_execution=gold_execution,
+        gold_execution=gold_execution_for_status,
         endpoint_url=endpoint_url,
     )
 
@@ -69,8 +69,8 @@ def build_validation_metrics(
         has_extracted_query=has_extracted_query,
         prediction_query_form=prediction_query_form,
         gold_query_form=gold_query_form,
-        prediction_execution=prediction_execution,
-        gold_execution=gold_execution,
+        prediction_execution=prediction_execution_for_status,
+        gold_execution=gold_execution_for_status,
         answer_exact_match=answer_exact_match,
         endpoint_url=endpoint_url,
     )
