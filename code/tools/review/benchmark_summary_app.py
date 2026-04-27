@@ -1,5 +1,6 @@
+from __future__ import annotations
+
 import json
-from pathlib import Path
 from typing import Any
 
 import pandas as pd
@@ -8,16 +9,54 @@ import streamlit as st
 st.set_page_config(page_title="Benchmark Summary Viewer", layout="wide")
 
 PERCENT_METRICS = {
+    # Extraction / execution
     "query_extracted": "Query extracted",
     "supported_query_form": "Supported query form",
     "query_form_match": "Query form match",
     "prediction_execution_success": "Prediction execution",
     "gold_execution_success": "Gold execution",
+
+    # Strict answer-based metrics
     "answer_exact_match": "Answer exact match",
     "answer_precision": "Answer precision",
     "answer_recall": "Answer recall",
     "answer_f1": "Answer F1",
+
+    # Value-only answer-based metrics
+    "answer_value_exact_match": "Answer value exact match",
+    "answer_value_precision": "Answer value precision",
+    "answer_value_recall": "Answer value recall",
+    "answer_value_f1": "Answer value F1",
+
+    # KG-reference metrics
+    "kg_ref_precision": "KG ref precision",
+    "kg_ref_recall": "KG ref recall",
+    "kg_ref_f1": "KG ref F1",
+
+    "predicate_ref_precision": "Predicate ref precision",
+    "predicate_ref_recall": "Predicate ref recall",
+    "predicate_ref_f1": "Predicate ref F1",
+
+    "class_ref_precision": "Class ref precision",
+    "class_ref_recall": "Class ref recall",
+    "class_ref_f1": "Class ref F1",
+
+    "resource_ref_precision": "Resource ref precision",
+    "resource_ref_recall": "Resource ref recall",
+    "resource_ref_f1": "Resource ref F1",
 }
+
+QUICK_READ_METRICS = [
+    ("query_extracted", "Query extracted"),
+    ("supported_query_form", "Supported form"),
+    ("query_form_match", "Query form match"),
+    ("prediction_execution_success", "Prediction execution"),
+    ("answer_exact_match", "Answer exact match"),
+    ("answer_f1", "Answer F1"),
+    ("answer_value_f1", "Answer value F1"),
+    ("predicate_ref_f1", "Predicate ref F1"),
+    ("class_ref_f1", "Class ref F1"),
+]
 
 SLICE_ORDER = [
     "family",
@@ -60,6 +99,26 @@ def number(value: Any, digits: int = 4) -> str:
         return "—"
 
 
+def get_summary_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    """Return the actual benchmark summary object.
+
+    Stored files usually look like:
+    {
+      "run_metadata": {...},
+      "summary": {
+        "metrics": {...},
+        ...
+      }
+    }
+
+    Some tests or older helpers may already pass the inner summary directly.
+    """
+    summary = payload.get("summary")
+    if isinstance(summary, dict):
+        return summary
+    return payload
+
+
 def build_run_label(filename: str, payload: dict[str, Any]) -> str:
     run_metadata = payload.get("run_metadata", {}) or {}
 
@@ -72,6 +131,8 @@ def build_run_label(filename: str, payload: dict[str, Any]) -> str:
         parts.append(str(model))
     if prompt_mode:
         parts.append(str(prompt_mode))
+    if dataset:
+        parts.append(str(dataset).split("/")[-1])
 
     if parts:
         return " / ".join(parts)
@@ -90,7 +151,7 @@ def extract_loaded_runs(uploaded_files) -> list[dict[str, Any]]:
             continue
 
         run_metadata = payload.get("run_metadata", {}) or {}
-        summary = payload.get("summary", {}) or {}
+        summary = get_summary_payload(payload)
 
         runs.append(
             {
@@ -130,7 +191,7 @@ def build_comparison_metrics_table(runs: list[dict[str, Any]]) -> pd.DataFrame:
         row = {"Metric": metric_label}
 
         for run in runs:
-            metric = (run["metrics"].get(metric_key) or {})
+            metric = run["metrics"].get(metric_key) or {}
             row[run["label"]] = percent(metric.get("mean"))
 
         rows.append(row)
@@ -143,7 +204,7 @@ def build_comparison_metrics_numeric(runs: list[dict[str, Any]]) -> pd.DataFrame
 
     for metric_key, metric_label in PERCENT_METRICS.items():
         for run in runs:
-            metric = (run["metrics"].get(metric_key) or {})
+            metric = run["metrics"].get(metric_key) or {}
             value = percent_number(metric.get("mean"))
 
             rows.append(
@@ -171,7 +232,9 @@ def build_delta_table(runs: list[dict[str, Any]], baseline_label: str) -> pd.Dat
 
         row = {
             "Metric": metric_label,
-            f"Baseline ({baseline_label})": "—" if baseline_value is None else f"{baseline_value:.1f}%",
+            f"Baseline ({baseline_label})": (
+                "—" if baseline_value is None else f"{baseline_value:.1f}%"
+            ),
         }
 
         for run in runs:
@@ -223,22 +286,140 @@ def build_error_comparison_table(runs: list[dict[str, Any]]) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
+def build_diagnostic_table(metrics: dict[str, Any]) -> pd.DataFrame:
+    rows: list[dict[str, Any]] = []
+
+    uri_metric = metrics.get("uri_hallucination")
+    if isinstance(uri_metric, dict):
+        rows.append(
+            {
+                "Diagnostic": "URI hallucination",
+                "Comparable items": uri_metric.get("comparable_count", 0),
+                "Non-comparable items": uri_metric.get("non_comparable_count", 0),
+                "Affected item rate": percent(uri_metric.get("hallucinated_item_rate")),
+                "Affected items": uri_metric.get("hallucinated_item_count", "—"),
+                "Clean items": uri_metric.get("clean_item_count", "—"),
+                "Total findings": uri_metric.get("total_hallucinated_ref_count", "—"),
+                "Mean finding count": number(
+                    uri_metric.get("mean_hallucinated_ref_count"), 4
+                ),
+                "Mean finding rate": percent(
+                    uri_metric.get("mean_hallucinated_ref_rate")
+                ),
+            }
+        )
+
+    pgmr_metric = metrics.get("pgmr_unmapped_placeholders")
+    if isinstance(pgmr_metric, dict):
+        rows.append(
+            {
+                "Diagnostic": "PGMR unmapped placeholders",
+                "Comparable items": pgmr_metric.get("comparable_count", 0),
+                "Non-comparable items": pgmr_metric.get("non_comparable_count", 0),
+                "Affected item rate": percent(pgmr_metric.get("unmapped_item_rate")),
+                "Affected items": pgmr_metric.get("unmapped_item_count", "—"),
+                "Clean items": pgmr_metric.get("clean_item_count", "—"),
+                "Total findings": pgmr_metric.get(
+                    "total_unmapped_placeholder_count", "—"
+                ),
+                "Mean finding count": number(
+                    pgmr_metric.get("mean_unmapped_placeholder_count"), 4
+                ),
+                "Mean finding rate": "—",
+                "Not PGMR mode": pgmr_metric.get("not_pgmr_mode_count", "—"),
+            }
+        )
+
+    return pd.DataFrame(rows)
+
+
+def build_diagnostic_comparison_table(runs: list[dict[str, Any]]) -> pd.DataFrame:
+    rows: list[dict[str, Any]] = []
+
+    diagnostic_specs = [
+        (
+            "URI hallucination item rate",
+            "uri_hallucination",
+            "hallucinated_item_rate",
+            percent,
+        ),
+        (
+            "URI mean hallucinated ref rate",
+            "uri_hallucination",
+            "mean_hallucinated_ref_rate",
+            percent,
+        ),
+        (
+            "URI total hallucinated refs",
+            "uri_hallucination",
+            "total_hallucinated_ref_count",
+            lambda value: "—" if value is None else str(value),
+        ),
+        (
+            "PGMR unmapped item rate",
+            "pgmr_unmapped_placeholders",
+            "unmapped_item_rate",
+            percent,
+        ),
+        (
+            "PGMR total unmapped placeholders",
+            "pgmr_unmapped_placeholders",
+            "total_unmapped_placeholder_count",
+            lambda value: "—" if value is None else str(value),
+        ),
+        (
+            "PGMR not-PGMR-mode count",
+            "pgmr_unmapped_placeholders",
+            "not_pgmr_mode_count",
+            lambda value: "—" if value is None else str(value),
+        ),
+    ]
+
+    for label, metric_key, field_key, formatter in diagnostic_specs:
+        row = {"Diagnostic": label}
+        for run in runs:
+            metric = run["metrics"].get(metric_key) or {}
+            row[run["label"]] = formatter(metric.get(field_key))
+        rows.append(row)
+
+    return pd.DataFrame(rows)
+
+
 def build_slice_table(slice_payload: dict[str, Any]) -> pd.DataFrame:
     rows = []
     for slice_value, payload in (slice_payload or {}).items():
         metrics = payload.get("metrics", {}) or {}
         response_time = payload.get("response_time_seconds", {}) or {}
         error_categories = payload.get("error_categories", {}) or {}
-        top_error = max(error_categories.items(), key=lambda x: x[1])[0] if error_categories else "—"
+        top_error = (
+            max(error_categories.items(), key=lambda x: x[1])[0]
+            if error_categories
+            else "—"
+        )
 
         rows.append(
             {
                 "Value": slice_value,
                 "Items": payload.get("item_count", 0),
-                "Query extracted": percent((metrics.get("query_extracted") or {}).get("mean")),
-                "Prediction execution": percent((metrics.get("prediction_execution_success") or {}).get("mean")),
-                "Exact match": percent((metrics.get("answer_exact_match") or {}).get("mean")),
+                "Query extracted": percent(
+                    (metrics.get("query_extracted") or {}).get("mean")
+                ),
+                "Prediction execution": percent(
+                    (metrics.get("prediction_execution_success") or {}).get("mean")
+                ),
+                "Exact match": percent(
+                    (metrics.get("answer_exact_match") or {}).get("mean")
+                ),
                 "Answer F1": percent((metrics.get("answer_f1") or {}).get("mean")),
+                "Answer value F1": percent(
+                    (metrics.get("answer_value_f1") or {}).get("mean")
+                ),
+                "Predicate ref F1": percent(
+                    (metrics.get("predicate_ref_f1") or {}).get("mean")
+                ),
+                "Class ref F1": percent(
+                    (metrics.get("class_ref_f1") or {}).get("mean")
+                ),
                 "Avg response time (s)": number(response_time.get("mean_seconds"), 3),
                 "Top error": top_error,
             }
@@ -246,7 +427,9 @@ def build_slice_table(slice_payload: dict[str, Any]) -> pd.DataFrame:
 
     df = pd.DataFrame(rows)
     if not df.empty:
-        df = df.sort_values(by=["Items", "Value"], ascending=[False, True]).reset_index(drop=True)
+        df = df.sort_values(by=["Items", "Value"], ascending=[False, True]).reset_index(
+            drop=True
+        )
     return df
 
 
@@ -328,28 +511,39 @@ def render_overview_comparison(runs: list[dict[str, Any]]) -> None:
 def render_health_bar(metrics: dict[str, Any]) -> None:
     st.subheader("Quick read")
 
-    quick = pd.DataFrame(
-        {
-            "Metric": [
-                "Query extracted",
-                "Supported form",
-                "Query form match",
-                "Prediction execution",
-                "Answer exact match",
-                "Answer F1",
-            ],
-            "Score": [
-                (metrics.get("query_extracted") or {}).get("mean", 0.0),
-                (metrics.get("supported_query_form") or {}).get("mean", 0.0),
-                (metrics.get("query_form_match") or {}).get("mean", 0.0),
-                (metrics.get("prediction_execution_success") or {}).get("mean", 0.0),
-                (metrics.get("answer_exact_match") or {}).get("mean", 0.0),
-                (metrics.get("answer_f1") or {}).get("mean", 0.0),
-            ],
-        }
-    )
+    rows = []
+    for metric_key, metric_label in QUICK_READ_METRICS:
+        value = (metrics.get(metric_key) or {}).get("mean")
+        rows.append(
+            {
+                "Metric": metric_label,
+                "Score": 0.0 if value is None else float(value),
+            }
+        )
+
+    quick = pd.DataFrame(rows)
 
     st.bar_chart(quick.set_index("Metric"))
+
+
+def render_diagnostics(metrics: dict[str, Any]) -> None:
+    diagnostic_df = build_diagnostic_table(metrics)
+
+    if diagnostic_df.empty:
+        return
+
+    st.subheader("Diagnostic metrics")
+    st.dataframe(diagnostic_df, use_container_width=True, hide_index=True)
+
+    uri_metric = metrics.get("uri_hallucination")
+    if isinstance(uri_metric, dict):
+        with st.expander("URI hallucination details", expanded=False):
+            st.json(uri_metric)
+
+    pgmr_metric = metrics.get("pgmr_unmapped_placeholders")
+    if isinstance(pgmr_metric, dict):
+        with st.expander("PGMR unmapped placeholder details", expanded=False):
+            st.json(pgmr_metric)
 
 
 def render_comparison_view(runs: list[dict[str, Any]]) -> None:
@@ -374,6 +568,10 @@ def render_comparison_view(runs: list[dict[str, Any]]) -> None:
         chart_df = numeric_df[numeric_df["Metric"] == selected_chart_metric]
         chart_df = chart_df.set_index("Run")[["Score"]]
         st.bar_chart(chart_df)
+
+    st.subheader("Diagnostic metric comparison")
+    diagnostic_comparison_df = build_diagnostic_comparison_table(runs)
+    st.dataframe(diagnostic_comparison_df, use_container_width=True, hide_index=True)
 
     st.subheader("Delta comparison")
     baseline_label = st.selectbox(
@@ -446,6 +644,8 @@ def render_single_view(run: dict[str, Any]) -> None:
         if not error_df.empty:
             chart_df = error_df.set_index("Error category")
             st.bar_chart(chart_df)
+
+    render_diagnostics(metrics)
 
     st.subheader("Slice analysis")
     slices = summary.get("slices", {}) or {}
