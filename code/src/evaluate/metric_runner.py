@@ -14,6 +14,12 @@ from src.evaluate.metrics.primary_error_category import compute_primary_error_ca
 from src.evaluate.metrics.query_extracted import compute_query_extracted
 from src.evaluate.metrics.query_form_match import compute_query_form_match
 from src.evaluate.metrics.supported_query_form import compute_supported_query_form
+from src.evaluate.metrics.answer_value_exact_match import (
+    compute_answer_value_exact_match,
+)
+from src.evaluate.metrics.answer_value_precision_recall_f1 import (
+    compute_answer_value_precision_recall_f1,
+)
 
 
 def build_validation_metrics(
@@ -65,6 +71,16 @@ def build_validation_metrics(
         gold_execution=gold_execution,
     )
 
+    answer_value_exact_match = compute_answer_value_exact_match(
+        prediction_execution=prediction_execution,
+        gold_execution=gold_execution,
+    )
+
+    answer_value_precision_recall_f1 = compute_answer_value_precision_recall_f1(
+        prediction_execution=prediction_execution,
+        gold_execution=gold_execution,
+    )
+
     primary_error_category = compute_primary_error_category(
         has_extracted_query=has_extracted_query,
         prediction_query_form=prediction_query_form,
@@ -83,5 +99,7 @@ def build_validation_metrics(
         "gold_execution_success": gold_execution_success,
         "answer_exact_match": answer_exact_match,
         "answer_precision_recall_f1": answer_precision_recall_f1,
+        "answer_value_exact_match": answer_value_exact_match,
+        "answer_value_precision_recall_f1": answer_value_precision_recall_f1,
         "primary_error_category": primary_error_category,
     }

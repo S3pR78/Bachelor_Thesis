@@ -66,6 +66,19 @@ def test_metric_runner_builds_successful_validation_block() -> None:
     assert validation["answer_precision_recall_f1"]["recall"] == 1.0
     assert validation["answer_precision_recall_f1"]["f1"] == 1.0
 
+    assert validation["answer_value_exact_match"]["comparable"] is True
+    assert validation["answer_value_exact_match"]["value"] == 1.0
+    assert validation["answer_value_exact_match"]["comparison_mode"] == "value_only"
+
+    assert validation["answer_value_precision_recall_f1"]["comparable"] is True
+    assert validation["answer_value_precision_recall_f1"]["precision"] == 1.0
+    assert validation["answer_value_precision_recall_f1"]["recall"] == 1.0
+    assert validation["answer_value_precision_recall_f1"]["f1"] == 1.0
+    assert (
+        validation["answer_value_precision_recall_f1"]["comparison_mode"]
+        == "value_only"
+    )
+
 
     assert validation["primary_error_category"] == "success"
 
@@ -103,6 +116,15 @@ def test_metric_runner_marks_prediction_execution_error() -> None:
     assert validation["answer_precision_recall_f1"]["reason"] == "prediction_error"
 
     assert validation["primary_error_category"] == "prediction_execution_error"
+
+    assert validation["answer_value_exact_match"]["comparable"] is False
+    
+    assert validation["answer_value_exact_match"]["value"] is None
+    assert validation["answer_value_exact_match"]["reason"] == "prediction_error"
+
+    assert validation["answer_value_precision_recall_f1"]["comparable"] is False
+    assert validation["answer_value_precision_recall_f1"]["value"] is None
+    assert validation["answer_value_precision_recall_f1"]["reason"] == "prediction_error"
 
 
 def test_metric_runner_marks_answer_mismatch_for_executable_wrong_answer() -> None:
@@ -188,3 +210,44 @@ def test_metric_runner_marks_no_endpoint_as_not_comparable() -> None:
     assert validation["gold_execution_success"]["reason"] == "no_endpoint_configured"
 
     assert validation["primary_error_category"] == "not_evaluated_no_endpoint"
+
+
+def test_metric_runner_computes_value_only_metrics_for_different_variable_names() -> None:
+    prediction_execution = ok_select(
+        [
+            {"name": uri("http://orkg.org/orkg/resource/R1")},
+        ]
+    )
+    gold_execution = ok_select(
+        [
+            {"paper": uri("http://orkg.org/orkg/resource/R1")},
+        ]
+    )
+
+    validation = build_validation_metrics(
+        has_extracted_query=True,
+        prediction_query_form="select",
+        gold_query_form="select",
+        prediction_execution=prediction_execution,
+        gold_execution=gold_execution,
+        endpoint_url=ENDPOINT_URL,
+    )
+
+    assert validation["answer_exact_match"]["comparable"] is True
+    assert validation["answer_exact_match"]["value"] == 0.0
+
+    assert validation["answer_precision_recall_f1"]["comparable"] is True
+    assert validation["answer_precision_recall_f1"]["f1"] == 0.0
+
+    assert validation["answer_value_exact_match"]["comparable"] is True
+    assert validation["answer_value_exact_match"]["value"] == 1.0
+    assert validation["answer_value_exact_match"]["comparison_mode"] == "value_only"
+
+    assert validation["answer_value_precision_recall_f1"]["comparable"] is True
+    assert validation["answer_value_precision_recall_f1"]["precision"] == 1.0
+    assert validation["answer_value_precision_recall_f1"]["recall"] == 1.0
+    assert validation["answer_value_precision_recall_f1"]["f1"] == 1.0
+    assert (
+        validation["answer_value_precision_recall_f1"]["comparison_mode"]
+        == "value_only"
+    )
