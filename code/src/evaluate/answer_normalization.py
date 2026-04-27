@@ -69,7 +69,12 @@ def _normalize_binding_value(value_obj: dict[str, Any]) -> tuple[str, str, str, 
     return (value_type, value, datatype, language)
 
 
-def _normalize_select_rows(response_json: dict[str, Any]) -> frozenset[tuple[tuple[str, str, str, str, str], ...]]:
+def _normalize_select_rows(
+    response_json: dict[str, Any],
+    *,
+    include_variable_names: bool = True,
+) -> frozenset[tuple[tuple[str, ...], ...]]:
+    
     results = response_json.get("results", {})
     bindings = results.get("bindings", [])
 
@@ -89,16 +94,28 @@ def _normalize_select_rows(response_json: dict[str, Any]) -> frozenset[tuple[tup
                 raise ValueError("Each bound value must be a dict.")
 
             value_type, value, datatype, language = _normalize_binding_value(value_obj)
-            normalized_row.append(
-                (str(variable_name), value_type, value, datatype, language)
-            )
+            if include_variable_names:
+                normalized_row.append(
+                    (str(variable_name), value_type, value, datatype, language)
+                )
+            else:
+                normalized_row.append(
+                    (value_type, value, datatype, language)
+                )
 
         normalized_rows.append(tuple(sorted(normalized_row)))
 
     return frozenset(normalized_rows)
 
 
-def normalize_execution_result(execution_result: dict[str, Any] | None) -> dict[str, Any]:
+def normalize_execution_result(
+    execution_result: dict[str, Any] | None,
+    *,
+    select_mode: str = "strict",
+) -> dict[str, Any]:
+    
+    if select_mode not in {"strict", "value_only"}:
+        raise ValueError("select_mode must be either 'strict' or 'value_only'.")
     if execution_result is None:
         return {"kind": "missing"}
 
@@ -139,11 +156,15 @@ def normalize_execution_result(execution_result: dict[str, Any] | None) -> dict[
         }
 
     if result_type == "select":
-        normalized_rows = _normalize_select_rows(response_json)
+        normalized_rows = _normalize_select_rows(
+            response_json,
+            include_variable_names=(select_mode == "strict"),
+        )
         return {
             "kind": "select",
             "rows": normalized_rows,
             "row_count": len(normalized_rows),
+            "select_mode": select_mode,
         }
 
     return {
