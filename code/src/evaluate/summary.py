@@ -164,6 +164,66 @@ def _build_core_metrics_summary(results: list[dict[str, Any]]) -> dict[str, Any]
             "answer_value_precision_recall_f1",
             value_field="f1",
         ),
+        "kg_ref_precision": _build_metric_summary(
+            results,
+            "kg_ref_match",
+            value_field="precision",
+        ),
+        "kg_ref_recall": _build_metric_summary(
+            results,
+            "kg_ref_match",
+            value_field="recall",
+        ),
+        "kg_ref_f1": _build_metric_summary(
+            results,
+            "kg_ref_match",
+            value_field="f1",
+        ),
+        "predicate_ref_precision": _build_metric_summary(
+            results,
+            "predicate_ref_match",
+            value_field="precision",
+        ),
+        "predicate_ref_recall": _build_metric_summary(
+            results,
+            "predicate_ref_match",
+            value_field="recall",
+        ),
+        "predicate_ref_f1": _build_metric_summary(
+            results,
+            "predicate_ref_match",
+            value_field="f1",
+        ),
+        "class_ref_precision": _build_metric_summary(
+            results,
+            "class_ref_match",
+            value_field="precision",
+        ),
+        "class_ref_recall": _build_metric_summary(
+            results,
+            "class_ref_match",
+            value_field="recall",
+        ),
+        "class_ref_f1": _build_metric_summary(
+            results,
+            "class_ref_match",
+            value_field="f1",
+        ),
+        "resource_ref_precision": _build_metric_summary(
+            results,
+            "resource_ref_match",
+            value_field="precision",
+        ),
+        "resource_ref_recall": _build_metric_summary(
+            results,
+            "resource_ref_match",
+            value_field="recall",
+        ),
+        "resource_ref_f1": _build_metric_summary(
+            results,
+            "resource_ref_match",
+            value_field="f1",
+        ),
     }
 
 

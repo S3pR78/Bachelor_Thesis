@@ -401,3 +401,157 @@ def test_summary_response_time_statistics() -> None:
         "max_seconds": 4.0,
         "total_seconds": 6.0,
     }
+
+
+def kg_ref_metric(
+    metric_key: str,
+    *,
+    ref_kind: str,
+    precision: float,
+    recall: float,
+    f1: float,
+) -> dict:
+    return {
+        "metric": "kg_ref_match",
+        "type": "query_based",
+        "comparable": True,
+        "value": f1,
+        "precision": precision,
+        "recall": recall,
+        "f1": f1,
+        "ref_kind": ref_kind,
+        "matched_ref_count": 1,
+        "prediction_ref_count": 1,
+        "gold_ref_count": 1,
+        "missing_gold_refs": [],
+        "extra_predicted_refs": [],
+        "matched_refs": [],
+    }
+
+
+def test_summary_maps_kg_reference_metric_fields() -> None:
+    first_validation = validation_block(
+        exact_match=1.0,
+        precision=1.0,
+        recall=1.0,
+        f1=1.0,
+        prediction_execution_success=1.0,
+        category="success",
+    )
+    first_validation.update(
+        {
+            "kg_ref_match": kg_ref_metric(
+                "kg_ref_match",
+                ref_kind="all",
+                precision=1.0,
+                recall=1.0,
+                f1=1.0,
+            ),
+            "predicate_ref_match": kg_ref_metric(
+                "predicate_ref_match",
+                ref_kind="predicate",
+                precision=0.5,
+                recall=0.5,
+                f1=0.5,
+            ),
+            "class_ref_match": kg_ref_metric(
+                "class_ref_match",
+                ref_kind="class",
+                precision=1.0,
+                recall=1.0,
+                f1=1.0,
+            ),
+            "resource_ref_match": kg_ref_metric(
+                "resource_ref_match",
+                ref_kind="resource",
+                precision=1.0,
+                recall=1.0,
+                f1=1.0,
+            ),
+        }
+    )
+
+    second_validation = validation_block(
+        exact_match=0.0,
+        precision=0.0,
+        recall=0.0,
+        f1=0.0,
+        prediction_execution_success=1.0,
+        category="answer_mismatch",
+    )
+    second_validation.update(
+        {
+            "kg_ref_match": kg_ref_metric(
+                "kg_ref_match",
+                ref_kind="all",
+                precision=0.0,
+                recall=0.0,
+                f1=0.0,
+            ),
+            "predicate_ref_match": kg_ref_metric(
+                "predicate_ref_match",
+                ref_kind="predicate",
+                precision=1.0,
+                recall=1.0,
+                f1=1.0,
+            ),
+            "class_ref_match": kg_ref_metric(
+                "class_ref_match",
+                ref_kind="class",
+                precision=0.0,
+                recall=0.0,
+                f1=0.0,
+            ),
+            "resource_ref_match": kg_ref_metric(
+                "resource_ref_match",
+                ref_kind="resource",
+                precision=0.5,
+                recall=0.5,
+                f1=0.5,
+            ),
+        }
+    )
+
+    results = [
+        result_item(
+            family="nlp4re",
+            source_dataset="final_test",
+            query_type="SELECT",
+            answer_type="resources",
+            query_shape="single_hop",
+            complexity_level="easy",
+            validation=first_validation,
+        ),
+        result_item(
+            family="empirical_research_practice",
+            source_dataset="final_test",
+            query_type="SELECT",
+            answer_type="resources",
+            query_shape="multi_hop",
+            complexity_level="medium",
+            validation=second_validation,
+        ),
+    ]
+
+    summary = build_benchmark_summary(results)
+    metrics = summary["metrics"]
+
+    assert metrics["kg_ref_precision"]["mean"] == 0.5
+    assert metrics["kg_ref_recall"]["mean"] == 0.5
+    assert metrics["kg_ref_f1"]["mean"] == 0.5
+
+    assert metrics["predicate_ref_precision"]["mean"] == 0.75
+    assert metrics["predicate_ref_recall"]["mean"] == 0.75
+    assert metrics["predicate_ref_f1"]["mean"] == 0.75
+
+    assert metrics["class_ref_precision"]["mean"] == 0.5
+    assert metrics["class_ref_recall"]["mean"] == 0.5
+    assert metrics["class_ref_f1"]["mean"] == 0.5
+
+    assert metrics["resource_ref_precision"]["mean"] == 0.75
+    assert metrics["resource_ref_recall"]["mean"] == 0.75
+    assert metrics["resource_ref_f1"]["mean"] == 0.75
+
+    assert metrics["kg_ref_precision"]["value_field"] == "precision"
+    assert metrics["kg_ref_recall"]["value_field"] == "recall"
+    assert metrics["kg_ref_f1"]["value_field"] == "f1"
