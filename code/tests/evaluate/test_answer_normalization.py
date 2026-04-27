@@ -327,3 +327,141 @@ def test_invalid_select_mode_raises_value_error() -> None:
             ok_select([]),
             select_mode="unknown",
         )
+
+def test_value_only_select_mode_ignores_variable_names() -> None:
+    by_name_variable = normalize_execution_result(
+        ok_select(
+            [
+                {
+                    "name": lit("Smith"),
+                }
+            ]
+        ),
+        select_mode="value_only",
+    )
+
+    by_lastname_variable = normalize_execution_result(
+        ok_select(
+            [
+                {
+                    "nachname": lit("Smith"),
+                }
+            ]
+        ),
+        select_mode="value_only",
+    )
+
+    assert by_name_variable == by_lastname_variable
+
+
+def test_strict_select_mode_keeps_variable_names() -> None:
+    by_name_variable = normalize_execution_result(
+        ok_select(
+            [
+                {
+                    "name": lit("Smith"),
+                }
+            ]
+        ),
+        select_mode="strict",
+    )
+
+    by_lastname_variable = normalize_execution_result(
+        ok_select(
+            [
+                {
+                    "nachname": lit("Smith"),
+                }
+            ]
+        ),
+        select_mode="strict",
+    )
+
+    assert by_name_variable != by_lastname_variable
+
+
+def test_default_select_mode_is_strict() -> None:
+    default_mode = normalize_execution_result(
+        ok_select(
+            [
+                {
+                    "name": lit("Smith"),
+                }
+            ]
+        )
+    )
+
+    explicit_strict_mode = normalize_execution_result(
+        ok_select(
+            [
+                {
+                    "name": lit("Smith"),
+                }
+            ]
+        ),
+        select_mode="strict",
+    )
+
+    assert default_mode == explicit_strict_mode
+
+
+def test_value_only_select_mode_preserves_multi_column_row_content() -> None:
+    prediction = normalize_execution_result(
+        ok_select(
+            [
+                {
+                    "name": lit("Smith"),
+                    "paper": uri("http://orkg.org/orkg/resource/R1"),
+                }
+            ]
+        ),
+        select_mode="value_only",
+    )
+
+    gold = normalize_execution_result(
+        ok_select(
+            [
+                {
+                    "surname": lit("Smith"),
+                    "publication": uri("http://orkg.org/orkg/resource/R1"),
+                }
+            ]
+        ),
+        select_mode="value_only",
+    )
+
+    assert prediction == gold
+
+
+def test_value_only_select_mode_still_detects_wrong_values() -> None:
+    prediction = normalize_execution_result(
+        ok_select(
+            [
+                {
+                    "name": lit("Smith"),
+                }
+            ]
+        ),
+        select_mode="value_only",
+    )
+
+    gold = normalize_execution_result(
+        ok_select(
+            [
+                {
+                    "nachname": lit("Miller"),
+                }
+            ]
+        ),
+        select_mode="value_only",
+    )
+
+    assert prediction != gold
+
+
+def test_invalid_select_mode_raises_value_error() -> None:
+    with pytest.raises(ValueError):
+        normalize_execution_result(
+            ok_select([]),
+            select_mode="unknown",
+        )
