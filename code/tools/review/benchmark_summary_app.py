@@ -16,6 +16,13 @@ PERCENT_METRICS = {
     "prediction_execution_success": "Prediction execution",
     "gold_execution_success": "Gold execution",
 
+    # Query text / structure metrics
+    "query_normalized_exact_match": "Query normalized exact match",
+    "query_bleu": "Query BLEU",
+    "sparql_structure_precision": "SPARQL structure precision",
+    "sparql_structure_recall": "SPARQL structure recall",
+    "sparql_structure_f1": "SPARQL structure F1",
+
     # Strict answer-based metrics
     "answer_exact_match": "Answer exact match",
     "answer_precision": "Answer precision",
@@ -46,16 +53,61 @@ PERCENT_METRICS = {
     "resource_ref_f1": "Resource ref F1",
 }
 
-QUICK_READ_METRICS = [
-    ("query_extracted", "Query extracted"),
-    ("supported_query_form", "Supported form"),
-    ("query_form_match", "Query form match"),
-    ("prediction_execution_success", "Prediction execution"),
-    ("answer_exact_match", "Answer exact match"),
-    ("answer_f1", "Answer F1"),
-    ("answer_value_f1", "Answer value F1"),
-    ("predicate_ref_f1", "Predicate ref F1"),
-    ("class_ref_f1", "Class ref F1"),
+METRIC_GROUPS = {
+    "Extraction / execution": [
+        "query_extracted",
+        "supported_query_form",
+        "query_form_match",
+        "prediction_execution_success",
+        "gold_execution_success",
+    ],
+    "Query text / structure": [
+        "query_normalized_exact_match",
+        "query_bleu",
+        "sparql_structure_precision",
+        "sparql_structure_recall",
+        "sparql_structure_f1",
+    ],
+    "Strict answer-based": [
+        "answer_exact_match",
+        "answer_precision",
+        "answer_recall",
+        "answer_f1",
+    ],
+    "Value-only answer-based": [
+        "answer_value_exact_match",
+        "answer_value_precision",
+        "answer_value_recall",
+        "answer_value_f1",
+    ],
+    "KG references": [
+        "kg_ref_precision",
+        "kg_ref_recall",
+        "kg_ref_f1",
+        "predicate_ref_precision",
+        "predicate_ref_recall",
+        "predicate_ref_f1",
+        "class_ref_precision",
+        "class_ref_recall",
+        "class_ref_f1",
+        "resource_ref_precision",
+        "resource_ref_recall",
+        "resource_ref_f1",
+    ],
+}
+
+DEFAULT_QUICK_READ_METRICS = [
+    "query_extracted",
+    "supported_query_form",
+    "query_form_match",
+    "prediction_execution_success",
+    "query_normalized_exact_match",
+    "sparql_structure_f1",
+    "answer_exact_match",
+    "answer_f1",
+    "answer_value_f1",
+    "predicate_ref_f1",
+    "class_ref_f1",
 ]
 
 SLICE_ORDER = [
@@ -66,6 +118,8 @@ SLICE_ORDER = [
     "query_shape",
     "complexity_level",
 ]
+
+METRIC_FILTER_PREFIX = "metric_filter__"
 
 
 def load_summary(file_obj) -> dict[str, Any]:
@@ -167,9 +221,77 @@ def extract_loaded_runs(uploaded_files) -> list[dict[str, Any]]:
     return runs
 
 
-def build_metrics_table(metrics: dict[str, Any]) -> pd.DataFrame:
+def _set_all_metric_checkboxes(value: bool) -> None:
+    for metric_key in PERCENT_METRICS:
+        st.session_state[f"{METRIC_FILTER_PREFIX}{metric_key}"] = value
+
+
+def _sync_select_all_checkbox() -> None:
+    select_all = bool(st.session_state.get("metric_filter_select_all", True))
+    _set_all_metric_checkboxes(select_all)
+
+
+def _sync_individual_metric_checkboxes() -> None:
+    all_selected = all(
+        bool(st.session_state.get(f"{METRIC_FILTER_PREFIX}{metric_key}", True))
+        for metric_key in PERCENT_METRICS
+    )
+    st.session_state["metric_filter_select_all"] = all_selected
+
+
+def initialize_metric_filter_state() -> None:
+    if st.session_state.get("metric_filter_initialized"):
+        return
+
+    st.session_state["metric_filter_select_all"] = True
+    _set_all_metric_checkboxes(True)
+    st.session_state["metric_filter_initialized"] = True
+
+
+def render_metric_filter_sidebar() -> list[str]:
+    initialize_metric_filter_state()
+
+    st.sidebar.header("Metric filter")
+    st.sidebar.caption(
+        "Wähle aus, welche Kriterien in Tabellen, Charts, Deltas und Slice-Vergleichen angezeigt werden."
+    )
+
+    st.sidebar.checkbox(
+        "Select all metrics",
+        key="metric_filter_select_all",
+        on_change=_sync_select_all_checkbox,
+    )
+
+    selected_metric_keys: list[str] = []
+
+    for group_name, metric_keys in METRIC_GROUPS.items():
+        with st.sidebar.expander(group_name, expanded=True):
+            for metric_key in metric_keys:
+                if metric_key not in PERCENT_METRICS:
+                    continue
+
+                st.checkbox(
+                    PERCENT_METRICS[metric_key],
+                    key=f"{METRIC_FILTER_PREFIX}{metric_key}",
+                    on_change=_sync_individual_metric_checkboxes,
+                )
+
+                if st.session_state.get(f"{METRIC_FILTER_PREFIX}{metric_key}", False):
+                    selected_metric_keys.append(metric_key)
+
+    if not selected_metric_keys:
+        st.sidebar.warning("Keine Metrik ausgewählt. Tabellen werden leer angezeigt.")
+
+    return selected_metric_keys
+
+
+def build_metrics_table(
+    metrics: dict[str, Any],
+    selected_metric_keys: list[str],
+) -> pd.DataFrame:
     rows = []
-    for key, label in PERCENT_METRICS.items():
+    for key in selected_metric_keys:
+        label = PERCENT_METRICS[key]
         metric = metrics.get(key, {}) or {}
         rows.append(
             {
@@ -184,10 +306,14 @@ def build_metrics_table(metrics: dict[str, Any]) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
-def build_comparison_metrics_table(runs: list[dict[str, Any]]) -> pd.DataFrame:
+def build_comparison_metrics_table(
+    runs: list[dict[str, Any]],
+    selected_metric_keys: list[str],
+) -> pd.DataFrame:
     rows = []
 
-    for metric_key, metric_label in PERCENT_METRICS.items():
+    for metric_key in selected_metric_keys:
+        metric_label = PERCENT_METRICS[metric_key]
         row = {"Metric": metric_label}
 
         for run in runs:
@@ -199,10 +325,14 @@ def build_comparison_metrics_table(runs: list[dict[str, Any]]) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
-def build_comparison_metrics_numeric(runs: list[dict[str, Any]]) -> pd.DataFrame:
+def build_comparison_metrics_numeric(
+    runs: list[dict[str, Any]],
+    selected_metric_keys: list[str],
+) -> pd.DataFrame:
     rows = []
 
-    for metric_key, metric_label in PERCENT_METRICS.items():
+    for metric_key in selected_metric_keys:
+        metric_label = PERCENT_METRICS[metric_key]
         for run in runs:
             metric = run["metrics"].get(metric_key) or {}
             value = percent_number(metric.get("mean"))
@@ -218,14 +348,19 @@ def build_comparison_metrics_numeric(runs: list[dict[str, Any]]) -> pd.DataFrame
     return pd.DataFrame(rows)
 
 
-def build_delta_table(runs: list[dict[str, Any]], baseline_label: str) -> pd.DataFrame:
+def build_delta_table(
+    runs: list[dict[str, Any]],
+    baseline_label: str,
+    selected_metric_keys: list[str],
+) -> pd.DataFrame:
     baseline_run = next((run for run in runs if run["label"] == baseline_label), None)
     if baseline_run is None:
         return pd.DataFrame()
 
     rows = []
 
-    for metric_key, metric_label in PERCENT_METRICS.items():
+    for metric_key in selected_metric_keys:
+        metric_label = PERCENT_METRICS[metric_key]
         baseline_value = percent_number(
             (baseline_run["metrics"].get(metric_key) or {}).get("mean")
         )
@@ -407,6 +542,10 @@ def build_slice_table(slice_payload: dict[str, Any]) -> pd.DataFrame:
                 "Prediction execution": percent(
                     (metrics.get("prediction_execution_success") or {}).get("mean")
                 ),
+                "Query BLEU": percent((metrics.get("query_bleu") or {}).get("mean")),
+                "SQM-lite F1": percent(
+                    (metrics.get("sparql_structure_f1") or {}).get("mean")
+                ),
                 "Exact match": percent(
                     (metrics.get("answer_exact_match") or {}).get("mean")
                 ),
@@ -508,21 +647,30 @@ def render_overview_comparison(runs: list[dict[str, Any]]) -> None:
     st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
 
 
-def render_health_bar(metrics: dict[str, Any]) -> None:
+def render_health_bar(metrics: dict[str, Any], selected_metric_keys: list[str]) -> None:
     st.subheader("Quick read")
 
+    quick_keys = [
+        metric_key
+        for metric_key in DEFAULT_QUICK_READ_METRICS
+        if metric_key in selected_metric_keys
+    ]
+
+    if not quick_keys:
+        st.info("Keine Quick-read-Metriken ausgewählt.")
+        return
+
     rows = []
-    for metric_key, metric_label in QUICK_READ_METRICS:
+    for metric_key in quick_keys:
         value = (metrics.get(metric_key) or {}).get("mean")
         rows.append(
             {
-                "Metric": metric_label,
+                "Metric": PERCENT_METRICS[metric_key],
                 "Score": 0.0 if value is None else float(value),
             }
         )
 
     quick = pd.DataFrame(rows)
-
     st.bar_chart(quick.set_index("Metric"))
 
 
@@ -546,28 +694,31 @@ def render_diagnostics(metrics: dict[str, Any]) -> None:
             st.json(pgmr_metric)
 
 
-def render_comparison_view(runs: list[dict[str, Any]]) -> None:
+def render_comparison_view(
+    runs: list[dict[str, Any]],
+    selected_metric_keys: list[str],
+) -> None:
     render_overview_comparison(runs)
 
     st.subheader("Overall metric comparison")
-    comparison_df = build_comparison_metrics_table(runs)
+    comparison_df = build_comparison_metrics_table(runs, selected_metric_keys)
     st.dataframe(comparison_df, use_container_width=True, hide_index=True)
 
-    numeric_df = build_comparison_metrics_numeric(runs)
+    numeric_df = build_comparison_metrics_numeric(runs, selected_metric_keys)
     numeric_df = numeric_df.dropna(subset=["Score"])
 
     if not numeric_df.empty:
         selected_chart_metric = st.selectbox(
             "Metric für Chart auswählen",
-            list(PERCENT_METRICS.values()),
-            index=list(PERCENT_METRICS.values()).index("Answer F1")
-            if "Answer F1" in PERCENT_METRICS.values()
-            else 0,
+            list(dict.fromkeys(numeric_df["Metric"].tolist())),
+            index=0,
         )
 
         chart_df = numeric_df[numeric_df["Metric"] == selected_chart_metric]
         chart_df = chart_df.set_index("Run")[["Score"]]
         st.bar_chart(chart_df)
+    else:
+        st.info("Keine numerischen Metriken für den Chart ausgewählt.")
 
     st.subheader("Diagnostic metric comparison")
     diagnostic_comparison_df = build_diagnostic_comparison_table(runs)
@@ -579,7 +730,7 @@ def render_comparison_view(runs: list[dict[str, Any]]) -> None:
         [run["label"] for run in runs],
         index=0,
     )
-    delta_df = build_delta_table(runs, baseline_label)
+    delta_df = build_delta_table(runs, baseline_label, selected_metric_keys)
     st.dataframe(delta_df, use_container_width=True, hide_index=True)
 
     st.subheader("Error category comparison")
@@ -599,14 +750,16 @@ def render_comparison_view(runs: list[dict[str, Any]]) -> None:
         st.info("Keine Slice-Daten vorhanden.")
         return
 
+    if not selected_metric_keys:
+        st.info("Keine Metrik für Slice-Vergleich ausgewählt.")
+        return
+
     selected_slice = st.selectbox("Slice auswählen", available_slice_keys)
 
     selected_metric_label = st.selectbox(
         "Slice-Metrik auswählen",
-        list(PERCENT_METRICS.values()),
-        index=list(PERCENT_METRICS.values()).index("Answer F1")
-        if "Answer F1" in PERCENT_METRICS.values()
-        else 0,
+        [PERCENT_METRICS[key] for key in selected_metric_keys],
+        index=0,
     )
 
     selected_metric_key = next(
@@ -623,19 +776,26 @@ def render_comparison_view(runs: list[dict[str, Any]]) -> None:
     st.dataframe(slice_comparison_df, use_container_width=True, hide_index=True)
 
 
-def render_single_view(run: dict[str, Any]) -> None:
+def render_single_view(
+    run: dict[str, Any],
+    selected_metric_keys: list[str],
+) -> None:
     run_metadata = run["run_metadata"]
     summary = run["summary"]
     metrics = run["metrics"]
 
     render_overview_single(run_metadata, summary)
-    render_health_bar(metrics)
+    render_health_bar(metrics, selected_metric_keys)
 
     left, right = st.columns([2, 1])
 
     with left:
         st.subheader("Overall metrics")
-        st.dataframe(build_metrics_table(metrics), use_container_width=True, hide_index=True)
+        st.dataframe(
+            build_metrics_table(metrics, selected_metric_keys),
+            use_container_width=True,
+            hide_index=True,
+        )
 
     with right:
         st.subheader("Error categories")
@@ -669,6 +829,8 @@ def main() -> None:
         "Bei mehreren Dateien werden die Runs miteinander verglichen."
     )
 
+    selected_metric_keys = render_metric_filter_sidebar()
+
     uploaded_files = st.file_uploader(
         "Eine oder mehrere benchmark_summary.json hochladen",
         type=["json"],
@@ -697,9 +859,9 @@ def main() -> None:
             run["label"] = f"{run['label']} ({run['filename']})"
 
     if len(runs) == 1:
-        render_single_view(runs[0])
+        render_single_view(runs[0], selected_metric_keys)
     else:
-        render_comparison_view(runs)
+        render_comparison_view(runs, selected_metric_keys)
 
         with st.expander("Raw summaries", expanded=False):
             selected_run = st.selectbox(
