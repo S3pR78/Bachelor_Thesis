@@ -103,6 +103,8 @@ def generate_response_with_session(session: dict, final_prompt: str) -> dict[str
             "max_new_tokens",
             128,
         ),
+        do_sample=model_config.get("generation", {}).get("do_sample", False),
+        temperature=model_config.get("generation", {}).get("temperature", 0.0),
     )
 
     return {
