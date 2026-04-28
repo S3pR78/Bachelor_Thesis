@@ -974,3 +974,104 @@ def test_summary_maps_query_text_and_structure_metrics() -> None:
     assert metrics["sparql_structure_precision"]["value_field"] == "precision"
     assert metrics["sparql_structure_recall"]["value_field"] == "recall"
     assert metrics["sparql_structure_f1"]["value_field"] == "f1"
+
+
+def test_summary_maps_answer_cell_value_metrics() -> None:
+    first_validation = validation_block(
+        exact_match=1.0,
+        precision=1.0,
+        recall=1.0,
+        f1=1.0,
+        prediction_execution_success=1.0,
+        category="success",
+    )
+    first_validation["answer_cell_value_precision_recall_f1"] = {
+        "metric": "answer_cell_value_precision_recall_f1",
+        "type": "answer_based",
+        "comparable": True,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "comparison_mode": "cell_value_only_unique",
+    }
+
+    second_validation = validation_block(
+        exact_match=0.0,
+        precision=0.0,
+        recall=0.0,
+        f1=0.0,
+        prediction_execution_success=1.0,
+        category="answer_mismatch",
+    )
+    second_validation["answer_cell_value_precision_recall_f1"] = {
+        "metric": "answer_cell_value_precision_recall_f1",
+        "type": "answer_based",
+        "comparable": True,
+        "precision": 0.3333,
+        "recall": 0.5,
+        "f1": 0.4,
+        "comparison_mode": "cell_value_only_unique",
+    }
+
+    third_validation = validation_block(
+        exact_match=0.0,
+        precision=0.0,
+        recall=0.0,
+        f1=0.0,
+        prediction_execution_success=0.0,
+        category="prediction_execution_error",
+    )
+    third_validation["answer_cell_value_precision_recall_f1"] = {
+        "metric": "answer_cell_value_precision_recall_f1",
+        "type": "answer_based",
+        "comparable": False,
+        "precision": None,
+        "recall": None,
+        "f1": None,
+        "reason": "prediction_error",
+        "comparison_mode": "cell_value_only_unique",
+    }
+
+    results = [
+        result_item(
+            family="nlp4re",
+            source_dataset="final_test",
+            query_type="SELECT",
+            answer_type="resources",
+            query_shape="single_hop",
+            complexity_level="easy",
+            validation=first_validation,
+        ),
+        result_item(
+            family="nlp4re",
+            source_dataset="final_test",
+            query_type="SELECT",
+            answer_type="resources",
+            query_shape="single_hop",
+            complexity_level="easy",
+            validation=second_validation,
+        ),
+        result_item(
+            family="empirical_research_practice",
+            source_dataset="final_test",
+            query_type="SELECT",
+            answer_type="resources",
+            query_shape="multi_hop",
+            complexity_level="medium",
+            validation=third_validation,
+        ),
+    ]
+
+    summary = build_benchmark_summary(results)
+    metrics = summary["metrics"]
+
+    assert metrics["answer_cell_value_precision"]["mean"] == 0.6666
+    assert metrics["answer_cell_value_recall"]["mean"] == 0.75
+    assert metrics["answer_cell_value_f1"]["mean"] == 0.7
+
+    assert metrics["answer_cell_value_precision"]["value_field"] == "precision"
+    assert metrics["answer_cell_value_recall"]["value_field"] == "recall"
+    assert metrics["answer_cell_value_f1"]["value_field"] == "f1"
+
+    assert metrics["answer_cell_value_f1"]["comparable_count"] == 2
+    assert metrics["answer_cell_value_f1"]["non_comparable_count"] == 1

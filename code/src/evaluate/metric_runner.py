@@ -3,6 +3,9 @@ from __future__ import annotations
 from typing import Any
 
 from src.evaluate.metrics.answer_exact_match import compute_answer_exact_match
+from src.evaluate.metrics.answer_cell_value_precision_recall_f1 import (
+    compute_answer_cell_value_precision_recall_f1,
+)
 from src.evaluate.metrics.answer_precision_recall_f1 import (
     compute_answer_precision_recall_f1,
 )
@@ -99,6 +102,12 @@ def build_validation_metrics(
         gold_execution=gold_execution,
     )
 
+    answer_cell_value_precision_recall_f1 = compute_answer_cell_value_precision_recall_f1(
+        prediction_execution=prediction_execution,
+        gold_execution=gold_execution,
+    )
+
+
     kg_ref_match = compute_kg_ref_match(
         prediction_query=prediction_query,
         gold_query=gold_query,
@@ -175,6 +184,7 @@ def build_validation_metrics(
         "answer_precision_recall_f1": answer_precision_recall_f1,
         "answer_value_exact_match": answer_value_exact_match,
         "answer_value_precision_recall_f1": answer_value_precision_recall_f1,
+        "answer_cell_value_precision_recall_f1": answer_cell_value_precision_recall_f1,
         "kg_ref_match": kg_ref_match,
         "predicate_ref_match": predicate_ref_match,
         "class_ref_match": class_ref_match,

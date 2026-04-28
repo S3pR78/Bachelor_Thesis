@@ -107,6 +107,16 @@ def test_metric_runner_builds_successful_validation_block() -> None:
         == "value_only"
     )
 
+
+    assert validation["answer_cell_value_precision_recall_f1"]["comparable"] is True
+    assert validation["answer_cell_value_precision_recall_f1"]["precision"] == 1.0
+    assert validation["answer_cell_value_precision_recall_f1"]["recall"] == 1.0
+    assert validation["answer_cell_value_precision_recall_f1"]["f1"] == 1.0
+    assert (
+        validation["answer_cell_value_precision_recall_f1"]["comparison_mode"]
+        == "cell_value_only_unique"
+    )
+
     assert validation["uri_hallucination"]["comparable"] is True
     assert validation["uri_hallucination"]["value"] == 0.0
     assert validation["uri_hallucination"]["has_hallucination"] is False
@@ -321,6 +331,16 @@ def test_metric_runner_computes_value_only_metrics_for_different_variable_names(
     assert (
         validation["answer_value_precision_recall_f1"]["comparison_mode"]
         == "value_only"
+    )
+
+
+    assert validation["answer_cell_value_precision_recall_f1"]["comparable"] is True
+    assert validation["answer_cell_value_precision_recall_f1"]["precision"] == 1.0
+    assert validation["answer_cell_value_precision_recall_f1"]["recall"] == 1.0
+    assert validation["answer_cell_value_precision_recall_f1"]["f1"] == 1.0
+    assert (
+        validation["answer_cell_value_precision_recall_f1"]["comparison_mode"]
+        == "cell_value_only_unique"
     )
 
 
@@ -674,3 +694,64 @@ def test_metric_runner_computes_query_text_and_structure_metrics_for_partial_mat
     assert validation["sparql_structure_match"]["extra_predicted_patterns"] == [
         "?VAR orkgp:P181004 ?VAR"
     ]
+
+
+def test_metric_runner_computes_answer_cell_value_f1_for_different_table_shapes() -> None:
+    prediction_execution = ok_select(
+        [
+            {
+                "paper": uri("http://orkg.org/orkg/resource/R1"),
+                "year": {
+                    "type": "typed-literal",
+                    "value": "1993",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+                },
+                "label": {
+                    "type": "literal",
+                    "value": "Paper A",
+                },
+            }
+        ]
+    )
+    gold_execution = ok_select(
+        [
+            {
+                "paper": uri("http://orkg.org/orkg/resource/R1"),
+                "year": {
+                    "type": "typed-literal",
+                    "value": "1994",
+                    "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+                },
+            }
+        ]
+    )
+
+    validation = build_validation_metrics(
+        has_extracted_query=True,
+        prediction_query_form="select",
+        gold_query_form="select",
+        prediction_execution=prediction_execution,
+        gold_execution=gold_execution,
+        endpoint_url=ENDPOINT_URL,
+        prediction_query="""
+        SELECT ?paper ?year ?label WHERE {
+          ?paper orkgp:P31 ?contribution .
+        }
+        """,
+        gold_query="""
+        SELECT ?paper ?year WHERE {
+          ?paper orkgp:P31 ?contribution .
+        }
+        """,
+        allowed_kg_refs=ALLOWED_KG_REFS,
+    )
+
+    metric = validation["answer_cell_value_precision_recall_f1"]
+
+    assert metric["comparable"] is True
+    assert metric["precision"] == 0.3333
+    assert metric["recall"] == 0.5
+    assert metric["f1"] == 0.4
+    assert metric["prediction_value_count"] == 3
+    assert metric["gold_value_count"] == 2
+    assert metric["true_positive_value_count"] == 1

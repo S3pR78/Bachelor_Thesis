@@ -27,6 +27,9 @@ PERCENT_METRICS = {
     "answer_value_precision": "Answer value precision",
     "answer_value_recall": "Answer value recall",
     "answer_value_f1": "Answer value F1",
+    "answer_cell_value_precision": "Answer cell value precision",
+    "answer_cell_value_recall": "Answer cell value recall",
+    "answer_cell_value_f1": "Answer cell value F1",
     "kg_ref_precision": "KG ref precision",
     "kg_ref_recall": "KG ref recall",
     "kg_ref_f1": "KG ref F1",
@@ -67,6 +70,9 @@ METRIC_GROUPS = {
         "answer_value_precision",
         "answer_value_recall",
         "answer_value_f1",
+        "answer_cell_value_precision",
+        "answer_cell_value_recall",
+        "answer_cell_value_f1",
     ],
     "KG references": [
         "kg_ref_precision",
@@ -148,7 +154,7 @@ Strict answer metrics include SELECT variable names.
 
 ### 4. Value-only answer metrics
 
-These compare returned values while ignoring SELECT variable names.
+These compare returned values while ignoring SELECT variable names. Cell-value metrics are even more relaxed: they compare unique individual returned values independently of rows and columns.
 
 They answer: *Is the answer content correct even if variable names differ?*
 

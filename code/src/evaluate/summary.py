@@ -321,6 +321,21 @@ def _build_core_metrics_summary(results: list[dict[str, Any]]) -> dict[str, Any]
             "answer_value_precision_recall_f1",
             value_field="f1",
         ),
+        "answer_cell_value_precision": _build_metric_summary(
+            results,
+            "answer_cell_value_precision_recall_f1",
+            value_field="precision",
+        ),
+        "answer_cell_value_recall": _build_metric_summary(
+            results,
+            "answer_cell_value_precision_recall_f1",
+            value_field="recall",
+        ),
+        "answer_cell_value_f1": _build_metric_summary(
+            results,
+            "answer_cell_value_precision_recall_f1",
+            value_field="f1",
+        ),
         "kg_ref_precision": _build_metric_summary(
             results,
             "kg_ref_match",
