@@ -10,7 +10,7 @@
         "cache_dir": "code/models/cache"
       },
       "generation": {
-        "max_new_tokens": 128,
+        "max_new_tokens": 256,
         "temperature": 0.0,
         "do_sample": false
       }

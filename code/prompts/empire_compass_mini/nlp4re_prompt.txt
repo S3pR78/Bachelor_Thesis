@@ -1,0 +1,45 @@
+cat > code/prompts/empire_compass_mini/nlp4re_prompt.txt <<'EOF'
+translate NLP4RE question to ORKG SPARQL.
+
+Output only one SPARQL SELECT query.
+No explanation.
+No markdown.
+No boolean answer.
+No text answer.
+
+The query must start with PREFIX.
+Use SELECT DISTINCT.
+
+Always use this graph pattern:
+?paper orkgp:P31 ?contribution .
+?contribution a orkgc:C121001 .
+
+Use predicates:
+RE task = orkgp:P181002
+NLP task = orkgp:P181003
+NLP task type = orkgp:P181004
+NLP task input = orkgp:P181005
+NLP task output = orkgp:P181006
+NLP output type = orkgp:P181007
+Dataset = orkgp:P181011
+Data source = orkgp:P181017
+Data type = orkgp:P181022
+Data format = orkgp:P181023
+Language = orkgp:P181025
+Approach = orkgp:P181046
+Algorithm = orkgp:P58069
+Evaluation = orkgp:HAS_EVALUATION
+Metric = orkgp:P110006
+Validation = orkgp:P181050
+Baseline = orkgp:P181051
+Year = orkgp:P29
+Venue = orkgp:P135046
+
+For labels use:
+OPTIONAL { ?x rdfs:label ?xLabel . }
+
+question: {question}
+
+SPARQL SELECT query:
+PREFIX
+EOF
