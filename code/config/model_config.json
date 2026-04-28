@@ -81,8 +81,9 @@
       "interface": "chat",
       "variant": "original",
       "generation": {
-        "max_new_tokens": 512,
-        "temperature": 0.0
+        "max_new_tokens": 1024,
+        "temperature": 0.0,
+        "max_output_tokens": 1024
       },
       "api": {
         "api_key_env": "OPENAI_API_KEY"
@@ -94,8 +95,9 @@
       "interface": "chat",
       "variant": "original",
       "generation": {
-        "max_new_tokens": 512,
-        "temperature": 0.0
+        "max_new_tokens": 1024,
+        "temperature": 0.0,
+        "max_output_tokens": 1024
       },
       "api": {
         "api_key_env": "OPENAI_API_KEY"
@@ -107,8 +109,9 @@
       "interface": "chat",
       "variant": "original",
       "generation": {
-        "max_new_tokens": 512,
-        "temperature": 0.0
+        "max_new_tokens": 1024,
+        "temperature": 0.0,
+        "max_output_tokens": 1024
       },
       "api": {
         "api_key_env": "OPENAI_API_KEY"
@@ -129,6 +132,5 @@
         "do_sample": false
       }
     }
-
   }
 }

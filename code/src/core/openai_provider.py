@@ -37,8 +37,8 @@ def create_openai_client(env_var_name: str = "OPENAI_API_KEY") -> OpenAI:
 def generate_raw_response_openai(
     model_id: str,
     prompt: str,
-    max_output_tokens: int = 256,
-    temperature: float = 0.0,
+    max_output_tokens: int = 1024,
+    temperature: Optional[float] = None,
     developer_message: Optional[str] = None,
     env_var_name: str = "OPENAI_API_KEY",
 ) -> str:
@@ -63,12 +63,18 @@ def generate_raw_response_openai(
 
     messages.append({"role": "user", "content": prompt.strip()})
 
-    completion = client.chat.completions.create(
-        model=model_id.strip(),
-        messages=messages,
-        max_tokens=max_output_tokens,
-        temperature=temperature,
-    )
+    request_kwargs = {
+        "model": model_id.strip(),
+        "messages": messages,
+        "max_completion_tokens": max_output_tokens,
+    }
+
+    # GPT-5-style models may reject explicit sampling parameters.
+    # For temperature=0.0 we omit the parameter instead of sending it.
+    if temperature is not None and float(temperature) != 0.0:
+        request_kwargs["temperature"] = temperature
+
+    completion = client.chat.completions.create(**request_kwargs)
 
     message = completion.choices[0].message.content
 
