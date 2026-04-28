@@ -669,8 +669,8 @@ def test_metric_runner_computes_query_text_and_structure_metrics_for_partial_mat
     assert validation["sparql_structure_match"]["recall"] == 0.6667
     assert validation["sparql_structure_match"]["f1"] == 0.6667
     assert validation["sparql_structure_match"]["missing_gold_patterns"] == [
-        "?contribution orkgp:P181003 ?task"
+        "?VAR orkgp:P181003 ?VAR"
     ]
     assert validation["sparql_structure_match"]["extra_predicted_patterns"] == [
-        "?contribution orkgp:P181004 ?taskType"
+        "?VAR orkgp:P181004 ?VAR"
     ]

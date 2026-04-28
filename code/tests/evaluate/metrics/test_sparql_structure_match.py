@@ -23,9 +23,49 @@ def test_extract_sparql_structure_patterns_from_where_body() -> None:
     patterns = extract_sparql_structure_patterns(query)
 
     assert patterns == [
-        "?paper orkgp:P31 ?contribution",
-        "?contribution a orkgc:C121001",
-        "?contribution orkgp:P181003 ?task",
+        "?VAR orkgp:P31 ?VAR",
+        "?VAR a orkgc:C121001",
+        "?VAR orkgp:P181003 ?VAR",
+    ]
+
+
+def test_extract_expands_semicolon_property_lists() -> None:
+    query = """
+    SELECT ?paper WHERE {
+      ?paper orkgp:P31 ?contribution ;
+             orkgp:P29 ?year .
+      ?contribution a orkgc:C27001 ;
+                    orkgp:P135046 ?serie .
+    }
+    """
+
+    patterns = extract_sparql_structure_patterns(query)
+
+    assert patterns == [
+        "?VAR orkgp:P31 ?VAR",
+        "?VAR orkgp:P29 ?VAR",
+        "?VAR a orkgc:C27001",
+        "?VAR orkgp:P135046 ?VAR",
+    ]
+
+
+def test_extract_flattens_nested_optional_blocks() -> None:
+    query = """
+    SELECT ?paper WHERE {
+      OPTIONAL {
+        ?contribution orkgp:P39099 ?threats .
+        OPTIONAL { ?threats orkgp:P55034 ?external . }
+        OPTIONAL { ?threats orkgp:P55035 ?internal }
+      }
+    }
+    """
+
+    patterns = extract_sparql_structure_patterns(query)
+
+    assert patterns == [
+        "?VAR orkgp:P39099 ?VAR",
+        "?VAR orkgp:P55034 ?VAR",
+        "?VAR orkgp:P55035 ?VAR",
     ]
 
 
@@ -96,10 +136,10 @@ def test_sparql_structure_match_detects_partial_overlap() -> None:
     assert metric["recall"] == 0.6667
     assert metric["f1"] == 0.6667
     assert metric["missing_gold_patterns"] == [
-        "?contribution orkgp:P181003 ?task"
+        "?VAR orkgp:P181003 ?VAR"
     ]
     assert metric["extra_predicted_patterns"] == [
-        "?contribution orkgp:P181004 ?taskType"
+        "?VAR orkgp:P181004 ?VAR"
     ]
 
 
@@ -125,6 +165,44 @@ def test_sparql_structure_match_handles_optional_pattern_text() -> None:
 
     assert metric["comparable"] is True
     assert metric["f1"] == 1.0
+
+
+def test_sparql_structure_match_is_not_sensitive_to_output_variable_names() -> None:
+    prediction = """
+    SELECT ?paper WHERE {
+      ?threats orkgp:P55034 ?externalValidity .
+    }
+    """
+
+    gold = """
+    SELECT ?paper WHERE {
+      ?threats orkgp:P55034 ?external .
+    }
+    """
+
+    metric = compute_sparql_structure_match(
+        prediction_query=prediction,
+        gold_query=gold,
+    )
+
+    assert metric["comparable"] is True
+    assert metric["f1"] == 1.0
+
+
+def test_sparql_structure_match_keeps_filter_as_pattern() -> None:
+    query = """
+    SELECT ?paper WHERE {
+      ?serie rdfs:label ?venue_name .
+      FILTER (?venue_name = "IEEE International Requirements Engineering Conference"^^xsd:string)
+    }
+    """
+
+    patterns = extract_sparql_structure_patterns(query)
+
+    assert patterns == [
+        "?VAR rdfs:label ?VAR",
+        'FILTER ( ?VAR = "IEEE International Requirements Engineering Conference"^^xsd:string )',
+    ]
 
 
 def test_sparql_structure_match_is_not_comparable_without_prediction() -> None:
