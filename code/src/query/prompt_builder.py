@@ -87,9 +87,15 @@ def get_empire_compass_mini_prompt_path_for_family(family: str) -> Path:
             "empire_compass_mini_nlp4re_prompt",
         )
 
+    if normalized_family == "empirical_research":
+        return _get_configured_path_first(
+            "prompts.empire_compass_mini_empirical_research_prompt",
+            "empire_compass_mini_empirical_research_prompt",
+        )
+
     raise ValueError(
         "No Empire Compass mini prompt is configured for family "
-        f"'{family}' yet. Available mini families: nlp4re."
+        f"'{family}' yet. Available mini families: nlp4re, empirical_research_practice."
     )
 
 

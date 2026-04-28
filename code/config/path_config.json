@@ -43,5 +43,6 @@
   "prompts.empire_compass_runner_script": "code/prompts/empire_compass/generator/run_prompt_generator.ts",
   "prompts.empire_compass_runner_tsconfig": "code/prompts/empire_compass/tsconfig.json",
   "outputs.evaluation_runs": "code/outputs/evaluation_runs",
-  "prompts.empire_compass_mini_nlp4re_prompt": "code/prompts/empire_compass_mini/nlp4re_prompt.txt"
+  "prompts.empire_compass_mini_nlp4re_prompt": "code/prompts/empire_compass_mini/nlp4re_prompt.txt",
+  "prompts.empire_compass_mini_empirical_research_prompt": "code/prompts/empire_compass_mini/empirical_research_prompt.txt"
 }
