@@ -1,0 +1,27 @@
+Task: Generate one PGMR-lite SPARQL query.
+Use only pgmr: relations and pgmrc: classes. No real ORKG ids. No explanation.
+
+Rules:
+Use SELECT DISTINCT, or ASK for yes/no questions.
+Always include:
+?paper pgmr:has_contribution ?contribution .
+?contribution a pgmrc:nlp4re_contribution .
+Use ?paper pgmr:publication_year ?year only for time/year/trend questions.
+Use rdfs:label only for labels or text filters.
+Use OPTIONAL for labels.
+Use LCASE(STR(?label)) = LCASE("value") for string filters.
+Follow full paths; do not skip parent nodes.
+
+Key paths:
+?contribution pgmr:re_task ?x .
+?contribution pgmr:nlp_task ?task . ?task pgmr:nlp_task_type ?x .
+?task pgmr:nlp_task_output ?out . ?out pgmr:nlp_task_output_type ?x .
+?contribution pgmr:nlp_dataset ?ds . ?ds pgmr:nlp_data_type ?dt . ?dt pgmr:nlp_data_format ?x .
+?contribution pgmr:annotation_process ?ap . ?ap pgmr:annotation_scheme ?scheme . ?scheme pgmr:guideline_availability ?x .
+?contribution pgmr:implemented_approach ?app . ?app pgmr:algorithm_used ?x .
+?contribution pgmr:evaluation ?ev . ?ev pgmr:evaluation_metric ?x .
+?ev pgmr:baseline_comparison ?base . ?base pgmr:baseline_comparison_type ?x .
+
+family: {family}
+question: {question}
+query:
