@@ -1,0 +1,34 @@
+﻿Metric,gpt_5_4 / empire_compass / test.json,mistral_7b_instruct / empire_compass / test.json,t5_base / empire_compass_mini / test.json,qwen25_coder_7b_instruct / empire_compass / test.json
+Query extracted,100.0%,98.7%,64.6%,100.0%
+Supported query form,100.0%,100.0%,100.0%,100.0%
+Query form match,87.3%,87.2%,90.2%,87.3%
+Prediction execution,97.5%,61.5%,0.0%,87.3%
+Gold execution,100.0%,100.0%,100.0%,100.0%
+Query normalized exact match,0.0%,0.0%,0.0%,0.0%
+Query BLEU,32.0%,15.0%,4.7%,16.7%
+SPARQL structure precision,78.8%,68.7%,0.0%,79.8%
+SPARQL structure recall,71.4%,47.8%,0.0%,56.1%
+SPARQL structure F1,72.4%,54.5%,0.0%,64.2%
+Answer exact match,1.3%,2.1%,—,1.5%
+Answer precision,3.3%,2.1%,—,2.2%
+Answer recall,3.4%,2.1%,—,2.9%
+Answer F1,3.2%,2.1%,—,2.5%
+Answer value exact match,5.2%,2.1%,—,2.9%
+Answer value precision,13.7%,2.1%,—,7.5%
+Answer value recall,13.8%,2.1%,—,8.9%
+Answer value F1,13.6%,2.1%,—,8.0%
+Answer cell value precision,52.8%,6.2%,—,23.5%
+Answer cell value recall,55.5%,5.0%,—,20.3%
+Answer cell value F1,47.4%,5.1%,—,19.2%
+KG ref precision,95.9%,87.8%,39.4%,89.8%
+KG ref recall,89.0%,66.5%,28.4%,75.7%
+KG ref F1,91.6%,74.1%,32.1%,80.8%
+Predicate ref precision,95.3%,84.9%,27.9%,87.5%
+Predicate ref recall,87.1%,60.0%,19.6%,71.9%
+Predicate ref F1,90.1%,68.2%,22.2%,77.2%
+Class ref precision,100.0%,98.7%,76.5%,94.9%
+Class ref recall,100.0%,98.7%,76.5%,94.9%
+Class ref F1,100.0%,98.7%,76.5%,94.9%
+Resource ref precision,100.0%,100.0%,100.0%,100.0%
+Resource ref recall,100.0%,100.0%,100.0%,100.0%
+Resource ref F1,100.0%,100.0%,100.0%,100.0%
