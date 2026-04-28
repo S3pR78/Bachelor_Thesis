@@ -396,7 +396,7 @@ def initialize_metric_filter_state() -> None:
 def render_metric_filter_sidebar() -> list[str]:
     initialize_metric_filter_state()
     st.sidebar.header("Metric filter")
-    st.sidebar.caption("Wähle aus, welche Kriterien in Tabellen, Charts, Deltas und Slice-Vergleichen angezeigt werden.")
+    st.sidebar.caption("checkboxes to select which metrics to display in the tables and charts. Metrics are grouped by category, but you can select any combination of metrics across groups.")
     st.sidebar.checkbox("Select all metrics", key="metric_filter_select_all", on_change=_sync_select_all_checkbox)
 
     selected_metric_keys: list[str] = []
@@ -411,7 +411,7 @@ def render_metric_filter_sidebar() -> list[str]:
                 if st.session_state.get(f"{METRIC_FILTER_PREFIX}{metric_key}", False):
                     selected_metric_keys.append(metric_key)
     if not selected_metric_keys:
-        st.sidebar.warning("Keine Metrik ausgewählt. Tabellen werden leer angezeigt.")
+        st.sidebar.warning("at least one metric must be selected")
     return selected_metric_keys
 
 
