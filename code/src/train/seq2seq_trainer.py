@@ -61,9 +61,10 @@ def load_training_examples_from_run_config(
     limit: int | None = None,
 ) -> list[dict[str, str]]:
     dataset_config = run_config["dataset"]
-    prompt_template = run_config["prompt"]["template"]
+    prompt_config = run_config["prompt"]
     target_field = dataset_config["target_field"]
     required_status = dataset_config.get("required_status")
+    filters = dataset_config.get("filters")
 
     if split == "train":
         dataset_path = Path(dataset_config["train_path"])
@@ -76,9 +77,10 @@ def load_training_examples_from_run_config(
 
     return build_training_examples(
         entries=entries,
-        prompt_template=prompt_template,
+        prompt_config=prompt_config,
         target_field=target_field,
         required_status=required_status,
+        filters=filters,
         limit=limit,
     )
 

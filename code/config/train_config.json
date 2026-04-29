@@ -127,6 +127,82 @@
         "base_dir": "code/models/google-t5_t5-base/finetuned",
         "run_name": "pgmr_lite_v5_meta_para_30ep"
       }
+    },
+    "t5_base_pgmr_mini_both_families_v1": {
+      "model": "t5_base",
+      "method": "full_finetune",
+      "task": "pgmr_mini",
+      "dataset": {
+        "train_path": "code/data/dataset/pgmr/final/train.json",
+        "validation_path": "code/data/dataset/pgmr/final/validation.json",
+        "target_field": "gold_pgmr_sparql",
+        "filters": {
+          "pgmr_status": "ok"
+        }
+      },
+      "prompt": {
+        "template_by_family": {
+          "nlp4re": "code/prompts/pgmr_mini/nlp4re_prompt.txt",
+          "empirical_research_practice": "code/prompts/pgmr_mini/empirical_research_prompt.txt"
+        }
+      },
+      "training": {
+        "num_train_epochs": 30,
+        "learning_rate": 5e-05,
+        "per_device_train_batch_size": 4,
+        "per_device_eval_batch_size": 4,
+        "gradient_accumulation_steps": 2,
+        "max_source_length": 768,
+        "max_target_length": 512,
+        "logging_steps": 25,
+        "evaluation_strategy": "epoch",
+        "save_strategy": "epoch",
+        "save_total_limit": 2,
+        "fp16": true,
+        "seed": 42
+      },
+      "output": {
+        "base_dir": "code/models/google-t5_t5-base/finetuned",
+        "run_name": "pgmr_mini_pathmap_both_families_30ep_src768"
+      }
+    },
+    "t5_base_empire_compass_mini_both_families_v1": {
+      "model": "t5_base",
+      "method": "full_finetune",
+      "task": "direct_sparql_empire_compass_mini",
+      "dataset": {
+        "train_path": "code/data/dataset/final/train.json",
+        "validation_path": "code/data/dataset/final/validation.json",
+        "target_field": "gold_sparql",
+        "filters": {
+          "gold_status": "validated"
+        }
+      },
+      "prompt": {
+        "template_by_family": {
+          "nlp4re": "code/prompts/empire_compass_mini/nlp4re_prompt.txt",
+          "empirical_research_practice": "code/prompts/empire_compass_mini/empirical_research_prompt.txt"
+        }
+      },
+      "training": {
+        "num_train_epochs": 12,
+        "learning_rate": 5e-05,
+        "per_device_train_batch_size": 4,
+        "per_device_eval_batch_size": 4,
+        "gradient_accumulation_steps": 2,
+        "max_source_length": 512,
+        "max_target_length": 512,
+        "logging_steps": 25,
+        "evaluation_strategy": "epoch",
+        "save_strategy": "epoch",
+        "save_total_limit": 2,
+        "fp16": true,
+        "seed": 42
+      },
+      "output": {
+        "base_dir": "code/models/google-t5_t5-base/finetuned",
+        "run_name": "empire_compass_mini_both_families_v1"
+      }
     }
   }
 }
