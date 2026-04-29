@@ -9,6 +9,7 @@ from src.utils.config_loader import get_configured_path, load_json_config
 
 EMPIRE_COMPASS_MODE = "empire_compass"
 EMPIRE_COMPASS_MINI_MODE = "empire_compass_mini"
+PGMR_MINI_MODE = "pgmr_mini"
 
 EMPIRE_COMPASS_QUESTION_PLACEHOLDER = "[Research Question]"
 MINI_QUESTION_PLACEHOLDER = "{question}"
@@ -42,7 +43,7 @@ def normalize_empire_compass_family(family: str) -> str:
 
 
 def validate_query_args(args) -> None:
-    if args.prompt_mode in {EMPIRE_COMPASS_MODE, EMPIRE_COMPASS_MINI_MODE} and not args.family:
+    if args.prompt_mode in {EMPIRE_COMPASS_MODE, EMPIRE_COMPASS_MINI_MODE, PGMR_MINI_MODE} and not args.family:
         raise ValueError(
             f"The --family argument is required when using the '{args.prompt_mode}' prompt mode."
         )
@@ -98,6 +99,29 @@ def get_empire_compass_mini_prompt_path_for_family(family: str) -> Path:
         f"'{family}' yet. Available mini families: nlp4re, empirical_research_practice."
     )
 
+
+
+def get_pgmr_mini_prompt_path_for_family(family: str) -> Path:
+    normalized = family.strip().lower()
+
+    if normalized == "nlp4re":
+        return get_configured_path("prompts.pgmr_mini_nlp4re_prompt")
+
+    if normalized in {"empirical_research", "empirical_research_practice"}:
+        return get_configured_path("prompts.pgmr_mini_empirical_research_prompt")
+
+    raise ValueError(
+        "No PGMR-mini prompt is configured for family "
+        f"{family!r}. Available families: nlp4re, empirical_research_practice."
+    )
+
+
+def build_pgmr_mini_prompt(prompt_path: Path, family: str, question: str) -> str:
+    prompt_text = load_text_file(prompt_path)
+    return prompt_text.format(
+        family=family,
+        question=question.strip(),
+    )
 
 def ensure_empire_compass_prompt_exists(family: str, prompt_path: Path) -> None:
     if prompt_path.exists() and prompt_path.is_file():
@@ -177,13 +201,14 @@ def build_empire_compass_mini_prompt(prompt_path: Path, question: str) -> str:
 
 def build_final_prompt_for_question(
     question: str,
-    prompt_mode: str,
+    prompt_mode: str | None,
     family: str | None,
 ) -> str:
     if not isinstance(question, str) or not question.strip():
         raise ValueError("question must be a non-empty string.")
 
-    final_prompt = question.strip()
+    if not prompt_mode:
+        return question.strip()
 
     if prompt_mode == EMPIRE_COMPASS_MODE:
         if not family:
@@ -196,9 +221,9 @@ def build_final_prompt_for_question(
         print(f"Expected prompt path: {prompt_output_path}")
 
         ensure_empire_compass_prompt_exists(family, prompt_output_path)
-        final_prompt = build_empire_compass_prompt(prompt_output_path, question)
+        return build_empire_compass_prompt(prompt_output_path, question)
 
-    elif prompt_mode == EMPIRE_COMPASS_MINI_MODE:
+    if prompt_mode == EMPIRE_COMPASS_MINI_MODE:
         if not family:
             raise ValueError(
                 "family must be provided when using 'empire_compass_mini' prompt mode."
@@ -209,6 +234,24 @@ def build_final_prompt_for_question(
         print(f"Empire Compass mini family: {family}")
         print(f"Mini prompt path: {prompt_path}")
 
-        final_prompt = build_empire_compass_mini_prompt(prompt_path, question)
+        return build_empire_compass_mini_prompt(prompt_path, question)
 
-    return final_prompt
+    if prompt_mode == PGMR_MINI_MODE:
+        if not family:
+            raise ValueError(
+                "family must be provided when using 'pgmr_mini' prompt mode."
+            )
+
+        prompt_path = get_pgmr_mini_prompt_path_for_family(family)
+
+        print(f"PGMR mini family: {family}")
+        print(f"PGMR mini prompt path: {prompt_path}")
+
+        return build_pgmr_mini_prompt(
+            prompt_path=prompt_path,
+            family=family,
+            question=question,
+        )
+
+    return question.strip()
+

@@ -44,5 +44,9 @@
   "prompts.empire_compass_runner_tsconfig": "code/prompts/empire_compass/tsconfig.json",
   "outputs.evaluation_runs": "code/outputs/evaluation_runs",
   "prompts.empire_compass_mini_nlp4re_prompt": "code/prompts/empire_compass_mini/nlp4re_prompt.txt",
-  "prompts.empire_compass_mini_empirical_research_prompt": "code/prompts/empire_compass_mini/empirical_research_prompt.txt"
+  "prompts.empire_compass_mini_empirical_research_prompt": "code/prompts/empire_compass_mini/empirical_research_prompt.txt",
+  "prompts.pgmr_mini_nlp4re_prompt": "code/prompts/pgmr_mini/nlp4re_prompt.txt",
+  "prompts.pgmr_mini_empirical_research_prompt": "code/prompts/pgmr_mini/empirical_research_prompt.txt",
+  "prompts.pgmr_nlp4re_prompt": "code/prompts/pgmr/nlp4re_prompt.txt",
+  "prompts.pgmr_empirical_research_prompt": "code/prompts/pgmr/empirical_research_prompt.txt"
 }
