@@ -36,7 +36,7 @@ Year = orkgp:P29
 Venue = orkgp:P135046
 
 For labels use:
-OPTIONAL { ?x rdfs:label ?xLabel . }
+OPTIONAL {{ ?x rdfs:label ?xLabel . }}
 
 question: {question}
 
