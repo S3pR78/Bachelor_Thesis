@@ -1,4 +1,4 @@
-Task: Generate one complete PGMR-lite SPARQL query for nlp4re.
+Task: Generate one complete PGMR-lite SPARQL query for empirical_research_practice.
 Return only the final query. No explanation. No markdown.
 Use only pgmr: relations and pgmrc: classes.
 
@@ -10,7 +10,7 @@ Output only the final PGMR-lite SPARQL query.
 
 Required core:
 ?paper pgmr:has_contribution ?contribution .
-?contribution a pgmrc:nlp4re_contribution .
+?contribution a pgmrc:empirical_research_practice_contribution .
 
 Query form rules:
 If the question asks "how many", use:
@@ -23,15 +23,14 @@ Otherwise use:
 SELECT DISTINCT ?answer WHERE {{ ... }}
 
 Path planning hints:
-evaluation metric -> ?contribution -> evaluation -> metric.
-validation procedure -> ?contribution -> evaluation -> validation procedure.
-baseline -> ?contribution -> evaluation -> baseline comparison.
-algorithm -> ?contribution -> implemented approach -> algorithm.
-approach/tool/method -> ?contribution -> implemented approach.
-NLP task type -> ?contribution -> NLP task -> task type.
-NLP input/output -> ?contribution -> NLP task -> input/output.
-dataset/source/format/language -> ?contribution -> NLP dataset -> nested dataset field.
-annotation/guideline/agreement -> ?contribution -> annotation process -> nested annotation field.
+venue -> ?contribution -> venue serie.
+data collection method -> ?contribution -> data collection -> method.
+research data -> ?contribution -> data collection -> data.
+qualitative/quantitative -> ?contribution -> data collection -> data -> data type.
+machine learning algorithm -> ?contribution -> data analysis -> machine learning -> algorithm.
+metric/accuracy -> ?contribution -> data analysis -> machine learning -> metric.
+statistical test -> ?contribution -> data analysis -> inferential statistics -> statistical tests.
+research question -> ?contribution -> research question -> question.
 year/time -> ?paper -> publication year.
 
 Structural rules:
@@ -39,6 +38,7 @@ Every triple must have subject, predicate, and object.
 Bind each parent node before using child relations.
 Use full paths from contribution to nested nodes.
 Do not repeat triples.
+Use venue filter unless the question asks all venues or compares venues.
 Use labels only for label/text questions.
 
 family: {family}
