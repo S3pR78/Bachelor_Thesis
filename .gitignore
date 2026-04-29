@@ -13,3 +13,6 @@ __pycache__/
 *.pyc
 
 code/scripts
+# Slurm/server artifacts
+code/slurm/
+code/outputs/slurm_logs/
