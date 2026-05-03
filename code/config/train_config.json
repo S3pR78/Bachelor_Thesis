@@ -1,12 +1,12 @@
 {
   "schema_version": "train_config_schema_v1",
   "runs": {
-    "t5_base_pgmr_mini_both_families_v1": {
+    "t5_base_pgmr_mini_10ep_src768": {
       "model": "t5_base",
       "method": "full_finetune",
       "task": "pgmr_mini",
       "dataset": {
-        "train_path": "code/data/dataset/pgmr/final/train.json",
+        "train_path": "code/data/dataset/pgmr/final/train_augmented_with_paraphrases.json",
         "validation_path": "code/data/dataset/pgmr/final/validation.json",
         "target_field": "gold_pgmr_sparql",
         "filters": {
@@ -17,7 +17,7 @@
         "mode": "pgmr_mini"
       },
       "training": {
-        "num_train_epochs": 30,
+        "num_train_epochs": 10,
         "learning_rate": 5e-05,
         "per_device_train_batch_size": 4,
         "per_device_eval_batch_size": 4,
@@ -28,12 +28,13 @@
         "evaluation_strategy": "epoch",
         "save_strategy": "epoch",
         "save_total_limit": 2,
-        "fp16": true,
+        "fp16": false,
+        "bf16": true,
         "seed": 42
       },
       "output": {
         "base_dir": "code/models/google-t5_t5-base/finetuned",
-        "run_name": "pgmr_mini_pathmap_both_families_30ep_src768"
+        "run_name": "pgmr_mini_30ep_src768"
       }
     }
   }
