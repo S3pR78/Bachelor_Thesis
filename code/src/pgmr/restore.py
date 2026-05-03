@@ -19,6 +19,13 @@ MANUAL_FALLBACK_MAP: dict[str, str] = {
     # Safe alias observed in model output:
     # gold PGMR uses pgmr:statistical_tests -> orkgp:P35133.
     "pgmr:statistical_test": "orkgp:P35133",
+
+    # Alias tokens observed in T5 PGMR-mini pathmap outputs.
+    # These aliases map model-generated placeholder variants to existing
+    # canonical PGMR memory predicates.
+    "pgmr:scheme_availability": "orkgp:P181038",
+    "pgmr:question_answer": "orkgp:P57004",
+    "pgmr:requirements_engineering_Task": "orkgp:P181002",
 }
 
 
