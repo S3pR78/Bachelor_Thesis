@@ -6,6 +6,19 @@ from pathlib import Path
 from string import Formatter
 from typing import Any
 
+from src.query.prompt_builder import (
+    EMPIRE_COMPASS_MINI_MODE,
+    EMPIRE_COMPASS_MODE,
+    PGMR_MINI_MODE,
+    build_empire_compass_mini_prompt,
+    build_empire_compass_prompt,
+    build_final_prompt_for_question,
+    build_pgmr_mini_prompt,
+    ensure_empire_compass_prompt_exists,
+    get_empire_compass_mini_prompt_path_for_family,
+    get_empire_compass_profile_for_family,
+    get_pgmr_mini_prompt_path_for_family,
+)
 from src.train.config import get_train_run_config, load_train_config
 
 
@@ -60,22 +73,12 @@ def read_prompt_template_reference(template_ref: Any) -> str:
 
 
 def resolve_prompt_template(entry: dict[str, Any], prompt_config: str | dict[str, Any]) -> str:
-    """Resolve prompt template for one dataset entry.
+    """
+    Resolve legacy prompt template for one dataset entry.
 
-    Supported config formats:
-
-    Old:
-      "prompt": {
-        "template": "..."
-      }
-
-    New:
-      "prompt": {
-        "template_by_family": {
-          "nlp4re": "code/prompts/.../nlp4re_prompt.txt",
-          "empirical_research_practice": "code/prompts/.../empirical_research_prompt.txt"
-        }
-      }
+    Legacy supported config formats:
+    - "prompt": {"template": "..."}
+    - "prompt": {"template_by_family": {"nlp4re": "code/prompts/..."}}
     """
     if isinstance(prompt_config, str):
         return read_prompt_template_reference(prompt_config)
@@ -102,7 +105,9 @@ def resolve_prompt_template(entry: dict[str, Any], prompt_config: str | dict[str
     if "template" in prompt_config:
         return read_prompt_template_reference(prompt_config["template"])
 
-    raise ValueError("Prompt config must contain either 'template' or 'template_by_family'.")
+    raise ValueError(
+        "Prompt config must contain either 'mode', 'template', or 'template_by_family'."
+    )
 
 
 def entry_matches_filters(entry: dict[str, Any], filters: dict[str, Any] | None) -> bool:
@@ -117,7 +122,10 @@ def entry_matches_filters(entry: dict[str, Any], filters: dict[str, Any] | None)
     return True
 
 
-def build_training_input(entry: dict[str, Any], prompt_template: str) -> str:
+def build_training_input_from_template(
+    entry: dict[str, Any],
+    prompt_template: str,
+) -> str:
     if not isinstance(prompt_template, str) or not prompt_template.strip():
         raise ValueError("prompt_template must be a non-empty string.")
 
@@ -142,22 +150,93 @@ def build_training_input(entry: dict[str, Any], prompt_template: str) -> str:
     return prompt_template.format(**format_values)
 
 
+def build_training_input_from_prompt_mode(
+    entry: dict[str, Any],
+    prompt_mode: str,
+) -> str:
+    question = str(entry.get("question", "")).strip()
+    family = str(entry.get("family", "")).strip()
+
+    if not question:
+        raise ValueError(f"Missing question for entry id={entry.get('id')}")
+
+    if prompt_mode in {
+        EMPIRE_COMPASS_MODE,
+        EMPIRE_COMPASS_MINI_MODE,
+        PGMR_MINI_MODE,
+    } and not family:
+        raise ValueError(
+            f"Missing family for prompt_mode={prompt_mode!r} "
+            f"and entry id={entry.get('id')}"
+        )
+
+    if prompt_mode == PGMR_MINI_MODE:
+        prompt_path = get_pgmr_mini_prompt_path_for_family(family)
+        return build_pgmr_mini_prompt(
+            prompt_path=prompt_path,
+            family=family,
+            question=question,
+        )
+
+    if prompt_mode == EMPIRE_COMPASS_MINI_MODE:
+        prompt_path = get_empire_compass_mini_prompt_path_for_family(family)
+        return build_empire_compass_mini_prompt(
+            prompt_path=prompt_path,
+            question=question,
+        )
+
+    if prompt_mode == EMPIRE_COMPASS_MODE:
+        profile = get_empire_compass_profile_for_family(family)
+        prompt_path = Path(profile["output_txt_path"])
+        ensure_empire_compass_prompt_exists(family, prompt_path)
+        return build_empire_compass_prompt(
+            prompt_path=prompt_path,
+            question=question,
+        )
+
+    # zero_shot / few_shot currently fall back to the plain question in
+    # query.prompt_builder. Keep that behavior for training consistency.
+    return build_final_prompt_for_question(
+        question=question,
+        prompt_mode=prompt_mode,
+        family=family or None,
+    )
+
+
+def build_training_input(
+    entry: dict[str, Any],
+    prompt_config: str | dict[str, Any],
+) -> str:
+    if isinstance(prompt_config, dict) and "mode" in prompt_config:
+        return build_training_input_from_prompt_mode(
+            entry=entry,
+            prompt_mode=str(prompt_config["mode"]).strip(),
+        )
+
+    prompt_template = resolve_prompt_template(entry, prompt_config)
+    return build_training_input_from_template(entry, prompt_template)
+
+
 def build_training_examples(
     entries: list[dict[str, Any]],
     prompt_config: str | dict[str, Any] | None = None,
     target_field: str = "",
-    required_status: str | None = None,
     filters: dict[str, Any] | None = None,
     limit: int | None = None,
     prompt_template: str | None = None,
+    required_status: str | None = None,
 ) -> list[dict[str, str]]:
-    """Build seq2seq training examples.
+    """
+    Build training examples.
 
-    Backward compatible:
-    - old caller can pass prompt_template
-    - new caller can pass prompt_config
-    - old config can use required_status for pgmr_status
-    - new config can use filters={"pgmr_status": "ok"}
+    Preferred config:
+    - "prompt": {"mode": "pgmr_mini"}
+
+    Legacy compatibility:
+    - prompt_template argument
+    - "prompt": {"template": "..."}
+    - "prompt": {"template_by_family": {...}}
+    - required_status mapped to filters["pgmr_status"]
     """
     if prompt_config is None:
         prompt_config = prompt_template
@@ -185,13 +264,11 @@ def build_training_examples(
         if not target:
             continue
 
-        prompt_template_for_entry = resolve_prompt_template(entry, prompt_config)
-
         examples.append(
             {
                 "id": str(entry.get("id", "")),
                 "family": str(entry.get("family", "")),
-                "input_text": build_training_input(entry, prompt_template_for_entry),
+                "input_text": build_training_input(entry, prompt_config),
                 "target_text": target,
             }
         )
@@ -223,7 +300,6 @@ def main() -> None:
 
     config = load_train_config(args.config)
     run_config = get_train_run_config(config, args.run)
-
     dataset_config = run_config["dataset"]
     prompt_config = run_config["prompt"]
 
@@ -239,7 +315,6 @@ def main() -> None:
         entries=entries,
         prompt_config=prompt_config,
         target_field=dataset_config["target_field"],
-        required_status=dataset_config.get("required_status"),
         filters=dataset_config.get("filters"),
         limit=args.limit,
     )
@@ -248,8 +323,8 @@ def main() -> None:
     print(f"Preview examples: {len(examples)}")
     print(f"Dataset path: {dataset_path}")
     print(f"Target field: {dataset_config['target_field']}")
-    print(f"Required status: {dataset_config.get('required_status')}")
     print(f"Filters: {dataset_config.get('filters')}")
+    print(f"Prompt mode: {prompt_config.get('mode') if isinstance(prompt_config, dict) else None}")
 
     for example in examples:
         print("\n" + "=" * 80)
