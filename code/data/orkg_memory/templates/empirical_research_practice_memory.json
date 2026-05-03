@@ -1068,5 +1068,57 @@
       "url"
     ],
     "notes": "Nested under 'data'. Under which URL(s) can the data be found?"
+  },
+  {
+    "family": "empirical_research_practice",
+    "template_id": "R186491",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P44108",
+    "label": "maximal value",
+    "placeholder": "pgmr:maximal_value",
+    "aliases": [
+      "maximal value",
+      "maximum"
+    ],
+    "notes": "Alias for pgmr:maximum. Added to tolerate model-generated PGMR placeholder variants during deterministic restore."
+  },
+  {
+    "family": "empirical_research_practice",
+    "template_id": "R186491",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P44107",
+    "label": "minimal value",
+    "placeholder": "pgmr:minimal_value",
+    "aliases": [
+      "minimal value",
+      "minimum"
+    ],
+    "notes": "Alias for pgmr:minimum. Added to tolerate model-generated PGMR placeholder variants during deterministic restore."
+  },
+  {
+    "family": "empirical_research_practice",
+    "template_id": "R186491",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P41928",
+    "label": "research question type",
+    "placeholder": "pgmr:research_question_type",
+    "aliases": [
+      "question type",
+      "research question type"
+    ],
+    "notes": "Alias for pgmr:question_type. Added to tolerate model-generated PGMR placeholder variants during deterministic restore."
+  },
+  {
+    "family": "empirical_research_practice",
+    "template_id": "R186491",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P44139",
+    "label": "question wording",
+    "placeholder": "pgmr:question_wording",
+    "aliases": [
+      "question",
+      "question wording"
+    ],
+    "notes": "Alias for pgmr:question. Added to tolerate model-generated PGMR placeholder variants during deterministic restore."
   }
 ]

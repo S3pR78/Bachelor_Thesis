@@ -926,5 +926,117 @@
       "resource description"
     ],
     "notes": "Common ORKG metadata predicate occurring in the NLP4RE benchmark queries."
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181006",
+    "label": "nlp input output",
+    "placeholder": "pgmr:nlp_input_output",
+    "aliases": [
+      "NLP task output",
+      "nlp input output",
+      "nlp task output"
+    ],
+    "notes": "Alias for pgmr:nlp_task_output. Added to tolerate model-generated PGMR placeholder variants during deterministic restore."
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181005",
+    "label": "nlp task input type",
+    "placeholder": "pgmr:nlp_task_input_type",
+    "aliases": [
+      "NLP task input",
+      "nlp task input",
+      "nlp task input type"
+    ],
+    "notes": "Alias for pgmr:nlp_task_input. Added to tolerate model-generated PGMR placeholder variants during deterministic restore."
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181002",
+    "label": "requirements engineering task",
+    "placeholder": "pgmr:requirements_engineering_task",
+    "aliases": [
+      "RE task",
+      "re task",
+      "requirements engineering task"
+    ],
+    "notes": "Alias for pgmr:re_task. Added to tolerate model-generated PGMR placeholder variants during deterministic restore."
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181038",
+    "label": "scheme guideline availability",
+    "placeholder": "pgmr:scheme_guideline_availability",
+    "aliases": [
+      "Guideline availability",
+      "guideline availability",
+      "scheme guideline availability"
+    ],
+    "notes": "Alias for pgmr:guideline_availability. Added to tolerate model-generated PGMR placeholder variants during deterministic restore."
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181044",
+    "label": "conflict resolution statement",
+    "placeholder": "pgmr:conflict_resolution_statement",
+    "aliases": [
+      "Conflict resolution",
+      "conflict resolution",
+      "conflict resolution statement"
+    ],
+    "notes": "Alias for pgmr:conflict_resolution. Added to tolerate model-generated PGMR placeholder variants during deterministic restore."
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181030",
+    "label": "dataset location type",
+    "placeholder": "pgmr:dataset_location_type",
+    "aliases": [
+      "Location type",
+      "dataset location location type",
+      "dataset location type",
+      "location type"
+    ],
+    "notes": "Alias for pgmr:dataset_location_location_type. Added to tolerate model-generated PGMR placeholder variants during deterministic restore."
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P1003",
+    "label": "dataset url",
+    "placeholder": "pgmr:dataset_url",
+    "aliases": [
+      "dataset url",
+      "url"
+    ],
+    "notes": "Alias for pgmr:url. Added to tolerate model-generated PGMR placeholder variants during deterministic restore."
+  },
+  {
+    "family": "nlp4re",
+    "template_id": "R1544125",
+    "kind": "relation",
+    "canonical_uri": "orkgp:P181029",
+    "label": "location type",
+    "placeholder": "pgmr:location_type",
+    "aliases": [
+      "Location type",
+      "location type",
+      "release location type"
+    ],
+    "notes": "Alias for pgmr:release_location_type. Added to tolerate model-generated PGMR placeholder variants during deterministic restore."
   }
 ]

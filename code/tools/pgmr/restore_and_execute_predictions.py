@@ -102,36 +102,92 @@ def extract_mapping_pairs_from_object(obj: Any) -> dict[str, str]:
     return mapping
 
 
-def load_memory_mapping(memory_dir: Path | None) -> dict[str, str]:
-    if memory_dir is None:
-        return {}
+def load_memory_mapping(memory_dir: Path) -> dict[str, dict[str, str]]:
+    """Load PGMR placeholder mappings grouped by template family.
 
-    if not memory_dir.exists():
-        return {}
+    Memory files are lists of records with:
+    - family
+    - placeholder
+    - canonical_uri
 
-    mapping: dict[str, str] = {}
+    The mapping also stores canonicalized pgmr placeholders, so generated
+    variants such as pgmr:NLP_task can be restored through pgmr:nlp_task.
+    """
+    memory: dict[str, dict[str, str]] = {}
 
-    for path in sorted(memory_dir.rglob("*.json")):
-        try:
-            data = load_json(path)
-        except Exception:
+    for memory_path in sorted(memory_dir.glob("*_memory.json")):
+        with memory_path.open("r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        if not isinstance(data, list):
             continue
 
-        mapping.update(extract_mapping_pairs_from_object(data))
+        fallback_family = memory_path.stem.removesuffix("_memory")
+
+        for item in data:
+            if not isinstance(item, dict):
+                continue
+
+            family = str(item.get("family") or fallback_family).strip()
+            placeholder = item.get("placeholder")
+            canonical_uri = item.get("canonical_uri")
+
+            if not family:
+                continue
+
+            if not isinstance(placeholder, str) or not placeholder.strip():
+                continue
+
+            if not isinstance(canonical_uri, str) or not canonical_uri.strip():
+                continue
+
+            family_mapping = memory.setdefault(family, {})
+            family_mapping[placeholder] = canonical_uri
+            family_mapping[canonicalize_pgmr_token(placeholder)] = canonical_uri
+
+    return memory
+
+
+def build_entry_mapping(entry: dict, memory: dict[str, dict[str, str]]) -> dict[str, str]:
+    """Build the placeholder mapping for one dataset entry.
+
+    The family-specific memory is used first. Common placeholders that occur in
+    both template families, such as pgmr:has_contribution and
+    pgmr:publication_year, are included through the family memory files.
+    """
+    family = str(entry.get("family", "")).strip()
+    if not family:
+        return {}
+
+    mapping = dict(memory.get(family, {}))
+
+    # Be tolerant when callers pass metadata with nested family information.
+    metadata = entry.get("entry_metadata")
+    if isinstance(metadata, dict):
+        metadata_family = str(metadata.get("family", "")).strip()
+        if metadata_family and metadata_family != family:
+            mapping.update(memory.get(metadata_family, {}))
 
     return mapping
 
 
-def build_entry_mapping(entry: dict[str, Any], memory_mapping: dict[str, str]) -> dict[str, str]:
-    mapping = dict(MANUAL_FALLBACK_MAP)
-    mapping.update(memory_mapping)
+def canonicalize_pgmr_token(token: str) -> str:
+    """Normalize model-generated PGMR placeholder casing.
 
-    # Entry-specific mappings should win if present.
-    for field in ["pgmr_replaced_terms", "pgmr_mappings", "pgmr_mapping", "replaced_terms"]:
-        if field in entry:
-            mapping.update(extract_mapping_pairs_from_object(entry[field]))
+    Some causal LMs generate placeholders such as pgmr:NLP_task
+    although the PGMR memory uses pgmr:nlp_task. The PGMR namespace is
+    an intermediate representation, so lowercasing pgmr local names is
+    safe before deterministic restoration.
+    """
+    if ":" not in token:
+        return token
 
-    return mapping
+    prefix, local_name = token.split(":", 1)
+
+    if prefix == "pgmr":
+        return f"{prefix}:{local_name.lower()}"
+
+    return token
 
 
 def restore_pgmr_query(pgmr_query: str, mapping: dict[str, str]) -> tuple[str, list[str]]:
@@ -139,15 +195,21 @@ def restore_pgmr_query(pgmr_query: str, mapping: dict[str, str]) -> tuple[str, l
 
     def replace_token(match: re.Match[str]) -> str:
         token = match.group(0)
+
         replacement = mapping.get(token)
+        if replacement is not None:
+            return replacement
 
-        if replacement is None:
-            missing.append(token)
-            return token
+        canonical_token = canonicalize_pgmr_token(token)
+        replacement = mapping.get(canonical_token)
+        if replacement is not None:
+            return replacement
 
-        return replacement
+        missing.append(token)
+        return token
 
     restored = PGMR_TOKEN_PATTERN.sub(replace_token, pgmr_query)
+
     return restored, sorted(set(missing))
 
 
