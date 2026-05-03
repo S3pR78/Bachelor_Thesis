@@ -34,6 +34,40 @@ def get_model_dir(model_config: dict) -> Path:
     return model_dir
 
 
+
+def get_adapter_dir(model_config: dict) -> Path | None:
+    """Resolve optional PEFT adapter directory from model configuration."""
+    adapter_path = model_config.get("adapter_path")
+    if adapter_path is None:
+        adapter_path = model_config.get("paths", {}).get("adapter_path")
+
+    if not adapter_path:
+        return None
+
+    path = Path(adapter_path)
+    if not path.exists() or not path.is_dir():
+        raise FileNotFoundError(f"Adapter directory not found: {path}")
+
+    return path
+
+
+def _attach_peft_adapter(model, adapter_dir: Path):
+    """Attach a LoRA/QLoRA adapter to an already loaded base model."""
+    try:
+        from peft import PeftModel
+    except ImportError as exc:
+        raise ImportError(
+            "Loading LoRA/QLoRA adapters requires peft. "
+            "Install it with: pip install peft"
+        ) from exc
+
+    return PeftModel.from_pretrained(
+        model,
+        str(adapter_dir),
+        local_files_only=True,
+    )
+
+
 def get_model_architecture(model_config: dict) -> str:
     architecture = model_config.get("interface")
     if not architecture:
@@ -83,12 +117,12 @@ def _load_seq2seq_model(model_dir: Path):
     return model
 
 
-def _load_causal_lm_model(model_dir: Path):
+def _load_causal_lm_model(model_dir: Path, adapter_dir: Path | None = None):
     dtype = _get_torch_dtype()
 
     # Preferred path for 7B models. device_map="auto" needs accelerate.
     try:
-        return AutoModelForCausalLM.from_pretrained(
+        model = AutoModelForCausalLM.from_pretrained(
             model_dir,
             local_files_only=True,
             torch_dtype=dtype,
@@ -96,22 +130,23 @@ def _load_causal_lm_model(model_dir: Path):
             low_cpu_mem_usage=True,
         )
     except (ImportError, ValueError) as exc:
-        print(
-            "Warning: loading causal_lm without device_map='auto'. "
-            f"Reason: {exc}"
+        print(f"Warning: loading causal_lm without device_map='auto'. Reason: {exc}")
+        model = AutoModelForCausalLM.from_pretrained(
+            model_dir,
+            local_files_only=True,
+            torch_dtype=dtype,
         )
+        model.to(_get_generation_device())
 
-    model = AutoModelForCausalLM.from_pretrained(
-        model_dir,
-        local_files_only=True,
-        torch_dtype=dtype,
-    )
-    model.to(_get_generation_device())
+    if adapter_dir is not None:
+        model = _attach_peft_adapter(model, adapter_dir)
+
     return model
 
 
 def load_model_and_tokenizer(model_config: dict):
     model_dir = get_model_dir(model_config)
+    adapter_dir = get_adapter_dir(model_config)
     architecture = get_model_architecture(model_config)
 
     tokenizer = _load_tokenizer(model_dir)
@@ -119,7 +154,7 @@ def load_model_and_tokenizer(model_config: dict):
     if architecture == "seq2seq":
         model = _load_seq2seq_model(model_dir)
     elif architecture == "causal_lm":
-        model = _load_causal_lm_model(model_dir)
+        model = _load_causal_lm_model(model_dir, adapter_dir=adapter_dir)
     else:
         raise ValueError(
             f"Unsupported model architecture: {architecture}. "
