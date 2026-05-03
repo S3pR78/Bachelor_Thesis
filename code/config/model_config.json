@@ -179,6 +179,22 @@
         "temperature": 0.0,
         "do_sample": false
       }
+    },
+    "qwen25_coder_7b_pgmr_mini_qlora": {
+      "provider": "huggingface",
+      "model_id": "Qwen/Qwen2.5-Coder-7B-Instruct",
+      "interface": "causal_lm",
+      "variant": "original",
+      "paths": {
+        "model_root": "code/models",
+        "cache_dir": "code/models/cache"
+      },
+      "generation": {
+        "max_new_tokens": 512,
+        "temperature": 0.0,
+        "do_sample": false
+      },
+      "adapter_path": "code/models/Qwen_Qwen2.5-Coder-7B-Instruct/finetuned/pgmr_mini_qlora_3ep/20260503_213958/final_adapter"
     }
   }
 }

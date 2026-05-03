@@ -37,7 +37,7 @@
         "run_name": "pgmr_mini_15ep_src768"
       }
     },
-    "qwen25_coder_7b_pgmr_mini_qlora_smoke": {
+    "qwen25_coder_7b_pgmr_mini_qlora_3ep": {
       "model": "qwen25_coder_7b_instruct",
       "method": "qlora",
       "task": "pgmr_mini",
@@ -53,7 +53,7 @@
         "mode": "pgmr_mini"
       },
       "training": {
-        "num_train_epochs": 1,
+        "num_train_epochs": 3,
         "learning_rate": 0.0002,
         "per_device_train_batch_size": 1,
         "per_device_eval_batch_size": 1,
@@ -96,69 +96,7 @@
       },
       "output": {
         "base_dir": "code/models/Qwen_Qwen2.5-Coder-7B-Instruct/finetuned",
-        "run_name": "pgmr_mini_qlora_smoke"
-      }
-    },
-    "qwen25_coder_7b_pgmr_mini_qlora_10ep": {
-      "model": "qwen25_coder_7b_instruct",
-      "method": "qlora",
-      "task": "pgmr_mini",
-      "dataset": {
-        "train_path": "code/data/dataset/pgmr/final/train_with_paraphrases.json",
-        "validation_path": "code/data/dataset/pgmr/final/validation.json",
-        "target_field": "gold_pgmr_sparql",
-        "filters": {
-          "pgmr_status": "ok"
-        }
-      },
-      "prompt": {
-        "mode": "pgmr_mini"
-      },
-      "training": {
-        "num_train_epochs": 10,
-        "learning_rate": 0.0002,
-        "per_device_train_batch_size": 1,
-        "per_device_eval_batch_size": 1,
-        "gradient_accumulation_steps": 8,
-        "max_prompt_length": 1024,
-        "max_target_length": 512,
-        "logging_steps": 10,
-        "evaluation_strategy": "epoch",
-        "save_strategy": "epoch",
-        "save_total_limit": 2,
-        "fp16": true,
-        "bf16": false,
-        "gradient_checkpointing": true,
-        "use_qlora": true,
-        "load_in_4bit": true,
-        "optim": "paged_adamw_8bit",
-        "lr_scheduler_type": "cosine",
-        "warmup_ratio": 0.03,
-        "seed": 42
-      },
-      "lora": {
-        "r": 16,
-        "alpha": 32,
-        "dropout": 0.05,
-        "target_modules": [
-          "q_proj",
-          "k_proj",
-          "v_proj",
-          "o_proj",
-          "gate_proj",
-          "up_proj",
-          "down_proj"
-        ]
-      },
-      "quantization": {
-        "load_in_4bit": true,
-        "bnb_4bit_quant_type": "nf4",
-        "bnb_4bit_use_double_quant": true,
-        "bnb_4bit_compute_dtype": "float16"
-      },
-      "output": {
-        "base_dir": "code/models/Qwen_Qwen2.5-Coder-7B-Instruct/finetuned",
-        "run_name": "pgmr_mini_qlora_10ep"
+        "run_name": "pgmr_mini_qlora_3ep"
       }
     },
     "mistral_7b_pgmr_mini_qlora_smoke": {
