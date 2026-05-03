@@ -28,8 +28,10 @@ def run_query_task(args: argparse.Namespace) -> int:
         prompt_mode=args.prompt_mode,
         family=args.family,
         ace_playbook_path=getattr(args, "ace_playbook", None),
+        ace_playbook_dir=getattr(args, "ace_playbook_dir", None),
         ace_mode=getattr(args, "ace_mode", None),
         ace_max_bullets=getattr(args, "ace_max_bullets", 0),
+        model_name=getattr(args, "model", None),
     )
 
     print("Running query task with args:", args)
@@ -116,6 +118,12 @@ def build_parser() -> argparse.ArgumentParser:
         help="Optional ACE playbook JSON file to prepend as adaptive context.",
     )
     query_parser.add_argument(
+        "--ace-playbook-dir",
+        required=False,
+        default=None,
+        help="Optional ACE playbook directory for model/family-aware routing.",
+    )
+    query_parser.add_argument(
         "--ace-mode",
         required=False,
         choices=["pgmr_lite", "direct_sparql", "any"],
@@ -188,6 +196,12 @@ def build_parser() -> argparse.ArgumentParser:
         required=False,
         default=None,
         help="Optional ACE playbook JSON file to prepend as adaptive context.",
+    )
+    evaluate_parser.add_argument(
+        "--ace-playbook-dir",
+        required=False,
+        default=None,
+        help="Optional ACE playbook directory for model/family-aware routing.",
     )
     evaluate_parser.add_argument(
         "--ace-mode",

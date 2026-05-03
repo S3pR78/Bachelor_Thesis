@@ -270,9 +270,10 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
         summary_output_path=summary_output_path,
     )
     run_metadata["prediction_format"] = prediction_format
-    if getattr(args, "ace_playbook", None):
+    if getattr(args, "ace_playbook", None) or getattr(args, "ace_playbook_dir", None):
         run_metadata["ace"] = {
             "playbook_path": getattr(args, "ace_playbook", None),
+            "playbook_dir": getattr(args, "ace_playbook_dir", None),
             "mode": getattr(args, "ace_mode", None),
             "max_bullets": getattr(args, "ace_max_bullets", 0),
         }
@@ -335,8 +336,10 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
                 family=family,
                 prompt_mode=args.prompt_mode,
                 ace_playbook_path=getattr(args, "ace_playbook", None),
+                ace_playbook_dir=getattr(args, "ace_playbook_dir", None),
                 ace_mode=getattr(args, "ace_mode", None),
                 ace_max_bullets=getattr(args, "ace_max_bullets", 0),
+                model_name=getattr(args, "model", None),
             )
         else:
             final_prompt = build_final_prompt_for_question(
@@ -344,8 +347,10 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
                 prompt_mode=args.prompt_mode,
                 family=family,
                 ace_playbook_path=getattr(args, "ace_playbook", None),
+                ace_playbook_dir=getattr(args, "ace_playbook_dir", None),
                 ace_mode=getattr(args, "ace_mode", None),
                 ace_max_bullets=getattr(args, "ace_max_bullets", 0),
+                model_name=getattr(args, "model", None),
             )
 
         response_started_at = datetime.now(timezone.utc)

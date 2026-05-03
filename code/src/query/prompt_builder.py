@@ -6,6 +6,7 @@ from pathlib import Path
 
 from src.utils.config_loader import get_configured_path, load_json_config
 from src.ace.rendering import render_ace_context
+from src.ace.routing import resolve_ace_playbook_path
 
 
 EMPIRE_COMPASS_MODE = "empire_compass"
@@ -214,18 +215,17 @@ def append_ace_context_to_prompt(
     family: str | None,
     prompt_mode: str | None,
     ace_playbook_path: str | None = None,
+    ace_playbook_dir: str | None = None,
     ace_mode: str | None = None,
     ace_max_bullets: int = 0,
     ace_include_patterns: bool = True,
+    model_name: str | None = None,
 ) -> str:
     """Prepend a compact ACE playbook block to an already-built prompt.
 
     The function is intentionally small and optional:
     if no playbook path or no bullets are requested, it returns the original prompt.
     """
-    if not ace_playbook_path:
-        return prompt
-
     if ace_max_bullets <= 0:
         return prompt
 
@@ -234,8 +234,19 @@ def append_ace_context_to_prompt(
 
     resolved_ace_mode = ace_mode or infer_ace_mode(prompt_mode)
 
+    resolved_playbook_path = resolve_ace_playbook_path(
+        ace_playbook_path=ace_playbook_path,
+        ace_playbook_dir=ace_playbook_dir,
+        family=family,
+        mode=resolved_ace_mode,
+        model_name=model_name,
+    )
+
+    if not resolved_playbook_path:
+        return prompt
+
     ace_context = render_ace_context(
-        playbook_path=ace_playbook_path,
+        playbook_path=resolved_playbook_path,
         family=family,
         mode=resolved_ace_mode,
         max_bullets=ace_max_bullets,
@@ -253,9 +264,11 @@ def build_final_prompt_for_question(
     prompt_mode: str | None,
     family: str | None,
     ace_playbook_path: str | None = None,
+    ace_playbook_dir: str | None = None,
     ace_mode: str | None = None,
     ace_max_bullets: int = 0,
     ace_include_patterns: bool = True,
+    model_name: str | None = None,
 ) -> str:
     if not isinstance(question, str) or not question.strip():
         raise ValueError("question must be a non-empty string.")
@@ -317,7 +330,9 @@ def build_final_prompt_for_question(
         family=family,
         prompt_mode=prompt_mode,
         ace_playbook_path=ace_playbook_path,
+        ace_playbook_dir=ace_playbook_dir,
         ace_mode=ace_mode,
         ace_max_bullets=ace_max_bullets,
         ace_include_patterns=ace_include_patterns,
+        model_name=model_name,
     )
