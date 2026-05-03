@@ -1,0 +1,30 @@
+{
+  "schema_version": "ace_playbook_v1",
+  "family": "nlp4re",
+  "mode": "pgmr_lite",
+  "metadata": {
+    "description": "Initial ACE playbook for NLP4RE PGMR-lite experiments."
+  },
+  "bullets": [
+    {
+      "family": "global",
+      "mode": "any",
+      "category": "output_format",
+      "title": "Return only the query",
+      "content": "Return only the final SPARQL or PGMR-lite query. Do not add explanations.",
+      "bullet_type": "hard_rule",
+      "priority": 100
+    },
+    {
+      "family": "nlp4re",
+      "mode": "pgmr_lite",
+      "category": "contribution_pattern",
+      "title": "Use NLP4RE contribution pattern",
+      "content": "Connect papers to contributions before accessing NLP4RE-specific fields.",
+      "bullet_type": "template_pattern",
+      "positive_pattern": "?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:nlp4re_contribution .",
+      "avoid": "Do not attach NLP task, dataset, metric, or output properties directly to ?paper.",
+      "priority": 90
+    }
+  ]
+}
