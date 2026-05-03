@@ -1,0 +1,264 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ORKG training configuration schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "runs"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "train_config_schema_v1"
+    },
+    "runs": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/run"
+      }
+    }
+  },
+  "$defs": {
+    "run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["model", "method", "task", "dataset", "prompt", "training", "output"],
+      "properties": {
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "method": {
+          "type": "string",
+          "enum": [
+            "full_finetune",
+            "lora",
+            "qlora",
+            "causal_lm_lora",
+            "causal_lm_qlora"
+          ]
+        },
+        "task": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dataset": {
+          "$ref": "#/$defs/dataset"
+        },
+        "prompt": {
+          "$ref": "#/$defs/prompt"
+        },
+        "training": {
+          "$ref": "#/$defs/training"
+        },
+        "lora": {
+          "$ref": "#/$defs/lora"
+        },
+        "quantization": {
+          "$ref": "#/$defs/quantization"
+        },
+        "output": {
+          "$ref": "#/$defs/output"
+        }
+      }
+    },
+    "dataset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["train_path", "validation_path", "target_field"],
+      "properties": {
+        "train_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "validation_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target_field": {
+          "type": "string",
+          "enum": ["gold_pgmr_sparql", "gold_sparql"]
+        },
+        "filters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": ["string", "number", "boolean"]
+          }
+        }
+      }
+    },
+    "prompt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode"],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "pgmr_mini",
+            "empire_compass",
+            "empire_compass_mini",
+            "zero_shot",
+            "few_shot"
+          ]
+        }
+      }
+    },
+    "training": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "num_train_epochs",
+        "learning_rate",
+        "per_device_train_batch_size",
+        "per_device_eval_batch_size",
+        "gradient_accumulation_steps",
+        "max_target_length",
+        "logging_steps",
+        "evaluation_strategy",
+        "save_strategy",
+        "save_total_limit",
+        "fp16",
+        "seed"
+      ],
+      "properties": {
+        "num_train_epochs": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "learning_rate": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "per_device_train_batch_size": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "per_device_eval_batch_size": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "gradient_accumulation_steps": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_source_length": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_prompt_length": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_target_length": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "logging_steps": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "evaluation_strategy": {
+          "type": "string",
+          "enum": ["no", "steps", "epoch"]
+        },
+        "save_strategy": {
+          "type": "string",
+          "enum": ["no", "steps", "epoch"]
+        },
+        "save_total_limit": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "fp16": {
+          "type": "boolean"
+        },
+        "bf16": {
+          "type": "boolean"
+        },
+        "gradient_checkpointing": {
+          "type": "boolean"
+        },
+        "use_qlora": {
+          "type": "boolean"
+        },
+        "load_in_4bit": {
+          "type": "boolean"
+        },
+        "optim": {
+          "type": "string"
+        },
+        "lr_scheduler_type": {
+          "type": "string"
+        },
+        "warmup_ratio": {
+          "type": "number",
+          "minimum": 0
+        },
+        "seed": {
+          "type": "integer"
+        }
+      }
+    },
+    "lora": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["r", "alpha", "dropout", "target_modules"],
+      "properties": {
+        "r": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "alpha": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "dropout": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "target_modules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "quantization": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "load_in_4bit": {
+          "type": "boolean"
+        },
+        "bnb_4bit_quant_type": {
+          "type": "string",
+          "enum": ["nf4", "fp4"]
+        },
+        "bnb_4bit_use_double_quant": {
+          "type": "boolean"
+        },
+        "bnb_4bit_compute_dtype": {
+          "type": "string",
+          "enum": ["float16", "bfloat16", "float32"]
+        }
+      }
+    },
+    "output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["base_dir", "run_name"],
+      "properties": {
+        "base_dir": {
+          "type": "string",
+          "minLength": 1
+        },
+        "run_name": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}
