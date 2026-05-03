@@ -12,7 +12,8 @@
       "paper contribution",
       "links paper to contribution"
     ],
-    "notes": "Common ORKG predicate. ORKG label: contribution. Used in benchmark queries to link a paper to a contribution."
+    "notes": "Common ORKG predicate. ORKG label: contribution. Used in benchmark queries to link a paper to a contribution.",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -26,7 +27,8 @@
       "year",
       "published year"
     ],
-    "notes": "Common ORKG predicate. ORKG label: publication year. Used for paper-level publication year metadata."
+    "notes": "Common ORKG predicate. ORKG label: publication year. Used for paper-level publication year metadata.",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -38,7 +40,8 @@
     "aliases": [
       "metric"
     ],
-    "notes": "Class used by template predicate P2006."
+    "notes": "Class used by template predicate P2006.",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -50,7 +53,8 @@
     "aliases": [
       "descriptive statistic"
     ],
-    "notes": "Class used by template predicate P56048."
+    "notes": "Class used by template predicate P56048.",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -62,7 +66,8 @@
     "aliases": [
       "empirical research practice contribution"
     ],
-    "notes": "Root contribution class for the empirical_research_practice template."
+    "notes": "Root contribution class for the empirical_research_practice template.",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -74,7 +79,8 @@
     "aliases": [
       "threats to validity"
     ],
-    "notes": "Class used by template predicate P39099."
+    "notes": "Class used by template predicate P39099.",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -86,7 +92,8 @@
     "aliases": [
       "data collection"
     ],
-    "notes": "Class used by template predicate P56008."
+    "notes": "Class used by template predicate P56008.",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -98,7 +105,8 @@
     "aliases": [
       "research question"
     ],
-    "notes": "Class used by template predicate P37330."
+    "notes": "Class used by template predicate P37330.",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -110,7 +118,8 @@
     "aliases": [
       "data analysis"
     ],
-    "notes": "Class used by template predicate P15124."
+    "notes": "Class used by template predicate P15124.",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -122,7 +131,8 @@
     "aliases": [
       "inferential statistics"
     ],
-    "notes": "Class used by template predicate P56043."
+    "notes": "Class used by template predicate P56043.",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -134,7 +144,8 @@
     "aliases": [
       "hypothesis"
     ],
-    "notes": "Class used by template predicate P30001."
+    "notes": "Class used by template predicate P30001.",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -146,7 +157,8 @@
     "aliases": [
       "measures of frequency"
     ],
-    "notes": "Class used by template predicate P56049."
+    "notes": "Class used by template predicate P56049.",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -158,7 +170,8 @@
     "aliases": [
       "subquestion"
     ],
-    "notes": "Class used by template predicate P57000."
+    "notes": "Class used by template predicate P57000.",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -170,7 +183,8 @@
     "aliases": [
       "research question answer"
     ],
-    "notes": "Class used by template predicate P57004."
+    "notes": "Class used by template predicate P57004.",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -182,7 +196,8 @@
     "aliases": [
       "measures of central tendency"
     ],
-    "notes": "Class used by template predicate P57005."
+    "notes": "Class used by template predicate P57005.",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -194,7 +209,8 @@
     "aliases": [
       "measures of dispersion or variation"
     ],
-    "notes": "Class used by template predicate P57008."
+    "notes": "Class used by template predicate P57008.",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -206,7 +222,8 @@
     "aliases": [
       "measures of position"
     ],
-    "notes": "Class used by template predicate P57010."
+    "notes": "Class used by template predicate P57010.",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -218,7 +235,8 @@
     "aliases": [
       "machine learning"
     ],
-    "notes": "Class used by template predicate P57016."
+    "notes": "Class used by template predicate P57016.",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -230,7 +248,8 @@
     "aliases": [
       "research data"
     ],
-    "notes": "Class used by template predicate DATA."
+    "notes": "Class used by template predicate DATA.",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -242,7 +261,8 @@
     "aliases": [
       "data type"
     ],
-    "notes": "Class used by template predicate P7055."
+    "notes": "Class used by template predicate P7055.",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -254,7 +274,8 @@
     "aliases": [
       "hypothesis type"
     ],
-    "notes": "Class used by template predicate P41703."
+    "notes": "Class used by template predicate P41703.",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -266,7 +287,8 @@
     "aliases": [
       "data collection method"
     ],
-    "notes": "Class used by template predicate P1005."
+    "notes": "Class used by template predicate P1005.",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -278,7 +300,8 @@
     "aliases": [
       "problem"
     ],
-    "notes": "Class used by template predicate P32."
+    "notes": "Class used by template predicate P32.",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -291,7 +314,8 @@
       "data",
       "research data"
     ],
-    "notes": "Nested under 'data collection'. What is reported about the collected data in the publication?"
+    "notes": "Nested under 'data collection'. What is reported about the collected data in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -304,7 +328,8 @@
       "data collection method",
       "method"
     ],
-    "notes": "Nested under 'data collection'. What is the data collection method reported in the publication?"
+    "notes": "Nested under 'data collection'. What is the data collection method reported in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -316,7 +341,8 @@
     "aliases": [
       "venue serie"
     ],
-    "notes": "In which conference venue is the publication published?"
+    "notes": "In which conference venue is the publication published?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -328,7 +354,8 @@
     "aliases": [
       "mentioned"
     ],
-    "notes": "Nested under 'threat to validity'. Are threats to validity mentioned but not classified?"
+    "notes": "Nested under 'threat to validity'. Are threats to validity mentioned but not classified?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -340,7 +367,8 @@
     "aliases": [
       "method name"
     ],
-    "notes": "Nested under 'method'. What is the exact name of the method for data collection reported in the publication?"
+    "notes": "Nested under 'method'. What is the exact name of the method for data collection reported in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -352,7 +380,8 @@
     "aliases": [
       "data analysis"
     ],
-    "notes": "What is reported about the data analysis in the publication?"
+    "notes": "What is reported about the data analysis in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -364,7 +393,8 @@
     "aliases": [
       "accuracy"
     ],
-    "notes": "Nested under 'metric'. Is accuracy reported in the publication?"
+    "notes": "Nested under 'metric'. Is accuracy reported in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -377,7 +407,8 @@
       "algorithm",
       "machine learning algorithm"
     ],
-    "notes": "Nested under 'machine learning'. What machine learning algorithms are reported in the publication?"
+    "notes": "Nested under 'machine learning'. What machine learning algorithms are reported in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -389,7 +420,8 @@
     "aliases": [
       "metric"
     ],
-    "notes": "Nested under 'machine learning'. What metrics are reported for the machine learning reported in the publication?"
+    "notes": "Nested under 'machine learning'. What metrics are reported for the machine learning reported in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -401,7 +433,8 @@
     "aliases": [
       "hypothesis"
     ],
-    "notes": "Nested under 'inferential statistics'. What hypothesis is reported in the publication?"
+    "notes": "Nested under 'inferential statistics'. What hypothesis is reported in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -413,7 +446,8 @@
     "aliases": [
       "precision"
     ],
-    "notes": "Nested under 'metric'. Is precision reported in the publication?"
+    "notes": "Nested under 'metric'. Is precision reported in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -426,7 +460,8 @@
       "problem",
       "research problem"
     ],
-    "notes": "What is the research problem under consideration in the publication?"
+    "notes": "What is the research problem under consideration in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -438,7 +473,8 @@
     "aliases": [
       "null hypothesis"
     ],
-    "notes": "Nested under 'Hypothesis type'. Is the reported hypothesis the null hypothesis?"
+    "notes": "Nested under 'Hypothesis type'. Is the reported hypothesis the null hypothesis?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -450,7 +486,8 @@
     "aliases": [
       "alternative hypothesis"
     ],
-    "notes": "Nested under 'Hypothesis type'. Is the reported hypothesis the alternative hypothesis?"
+    "notes": "Nested under 'Hypothesis type'. Is the reported hypothesis the alternative hypothesis?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -463,7 +500,8 @@
       "statistical technique",
       "statistical tests"
     ],
-    "notes": "Nested under 'inferential statistics'. What statistical tests is reported in the publication?"
+    "notes": "Nested under 'inferential statistics'. What statistical tests is reported in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -475,7 +513,8 @@
     "aliases": [
       "research question"
     ],
-    "notes": "What is the research question reported in the publication?"
+    "notes": "What is the research question reported in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -488,7 +527,8 @@
       "threat to validity",
       "threats to validity"
     ],
-    "notes": "What threats to validity are reported in a publication?"
+    "notes": "What threats to validity are reported in a publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -500,7 +540,8 @@
     "aliases": [
       "range"
     ],
-    "notes": "Nested under 'measures of dispersion or variation'. Is range as a measure of dispersion or variation reported in the publication?"
+    "notes": "Nested under 'measures of dispersion or variation'. Is range as a measure of dispersion or variation reported in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -512,7 +553,8 @@
     "aliases": [
       "hypothesis type"
     ],
-    "notes": "Nested under 'hypothesis'. What is the type of the hypothesis reported in the publication?"
+    "notes": "Nested under 'hypothesis'. What is the type of the hypothesis reported in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -522,9 +564,13 @@
     "label": "question type",
     "placeholder": "pgmr:question_type",
     "aliases": [
-      "question type"
+      "question type",
+      "research question type"
     ],
-    "notes": "Nested under 'research  question '. What is the type of the research question?"
+    "notes": "Nested under 'research  question '. What is the type of the research question? Alias note: Alias for pgmr:question_type. Added to tolerate model-generated PGMR placeholder variants during deterministic restore.",
+    "placeholder_aliases": [
+      "pgmr:research_question_type"
+    ]
   },
   {
     "family": "empirical_research_practice",
@@ -536,7 +582,8 @@
     "aliases": [
       "standard deviation"
     ],
-    "notes": "Nested under 'measures of dispersion or variation'. Is standard deviation as a measure of dispersion or variation reported in the publication?"
+    "notes": "Nested under 'measures of dispersion or variation'. Is standard deviation as a measure of dispersion or variation reported in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -546,9 +593,13 @@
     "label": "minimum",
     "placeholder": "pgmr:minimum",
     "aliases": [
-      "minimum"
+      "minimum",
+      "minimal value"
     ],
-    "notes": "Nested under 'measures of central tendency'. Is minimum as a measure of central tendency reported in the publication?"
+    "notes": "Nested under 'measures of central tendency'. Is minimum as a measure of central tendency reported in the publication? Alias note: Alias for pgmr:minimum. Added to tolerate model-generated PGMR placeholder variants during deterministic restore.",
+    "placeholder_aliases": [
+      "pgmr:minimal_value"
+    ]
   },
   {
     "family": "empirical_research_practice",
@@ -558,9 +609,13 @@
     "label": "maximum",
     "placeholder": "pgmr:maximum",
     "aliases": [
-      "maximum"
+      "maximum",
+      "maximal value"
     ],
-    "notes": "Nested under 'measures of central tendency'. Is maximum as a measure of central tendency reported in the publication?"
+    "notes": "Nested under 'measures of central tendency'. Is maximum as a measure of central tendency reported in the publication? Alias note: Alias for pgmr:maximum. Added to tolerate model-generated PGMR placeholder variants during deterministic restore.",
+    "placeholder_aliases": [
+      "pgmr:maximal_value"
+    ]
   },
   {
     "family": "empirical_research_practice",
@@ -570,9 +625,13 @@
     "label": "question",
     "placeholder": "pgmr:question",
     "aliases": [
-      "question"
+      "question",
+      "question wording"
     ],
-    "notes": "Nested under 'research  question '. What is the research question reported in the publication?"
+    "notes": "Nested under 'research  question '. What is the research question reported in the publication? Alias note: Alias for pgmr:question. Added to tolerate model-generated PGMR placeholder variants during deterministic restore.",
+    "placeholder_aliases": [
+      "pgmr:question_wording"
+    ]
   },
   {
     "family": "empirical_research_practice",
@@ -584,7 +643,8 @@
     "aliases": [
       "mean"
     ],
-    "notes": "Nested under 'measures of central tendency'. Is mean as a measure of central tendency reported in the publication?"
+    "notes": "Nested under 'measures of central tendency'. Is mean as a measure of central tendency reported in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -596,7 +656,8 @@
     "aliases": [
       "recall"
     ],
-    "notes": "Nested under 'metric'. Is recall reported in the publication?"
+    "notes": "Nested under 'metric'. Is recall reported in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -608,7 +669,8 @@
     "aliases": [
       "count"
     ],
-    "notes": "Nested under 'measures of frequency'. Is count as a measure of frequency reported in the publication?"
+    "notes": "Nested under 'measures of frequency'. Is count as a measure of frequency reported in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -620,7 +682,8 @@
     "aliases": [
       "external validity"
     ],
-    "notes": "Nested under 'threat to validity'. Are threats to external validity reported?"
+    "notes": "Nested under 'threat to validity'. Are threats to external validity reported?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -632,7 +695,8 @@
     "aliases": [
       "internal validity"
     ],
-    "notes": "Nested under 'threat to validity'. Are threats to internal validity reported?"
+    "notes": "Nested under 'threat to validity'. Are threats to internal validity reported?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -644,7 +708,8 @@
     "aliases": [
       "conclusion validity"
     ],
-    "notes": "Nested under 'threat to validity'. Are threats to conclusion validity reported?"
+    "notes": "Nested under 'threat to validity'. Are threats to conclusion validity reported?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -656,7 +721,8 @@
     "aliases": [
       "construct validity"
     ],
-    "notes": "Nested under 'threat to validity'. Are threats to construct validity reported?"
+    "notes": "Nested under 'threat to validity'. Are threats to construct validity reported?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -668,7 +734,8 @@
     "aliases": [
       "hidden in text"
     ],
-    "notes": "Nested under 'research  question '. Is the research question reported in the publication hidden in the text?"
+    "notes": "Nested under 'research  question '. Is the research question reported in the publication hidden in the text?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -680,7 +747,8 @@
     "aliases": [
       "highlighted in text"
     ],
-    "notes": "Nested under 'research  question '. Is the research question reported in the publication highlighted in the text?"
+    "notes": "Nested under 'research  question '. Is the research question reported in the publication highlighted in the text?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -692,7 +760,8 @@
     "aliases": [
       "data collection"
     ],
-    "notes": "What is reported about the data collection in the publication?"
+    "notes": "What is reported about the data collection in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -704,7 +773,8 @@
     "aliases": [
       "inferential statistics"
     ],
-    "notes": "Nested under 'data analysis'. What is reported about inferential statistics used for data analysis in the publication?"
+    "notes": "Nested under 'data analysis'. What is reported about inferential statistics used for data analysis in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -716,7 +786,8 @@
     "aliases": [
       "hypothesis statement"
     ],
-    "notes": "Nested under 'hypothesis'. What hypothesis statement is reported in the publication?"
+    "notes": "Nested under 'hypothesis'. What hypothesis statement is reported in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -729,7 +800,8 @@
       "descriptive statistic",
       "descriptive statistics"
     ],
-    "notes": "Nested under 'data analysis'. What is reported about descriptive statistics used for data analysis in the publication?"
+    "notes": "Nested under 'data analysis'. What is reported about descriptive statistics used for data analysis in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -741,7 +813,8 @@
     "aliases": [
       "measures of frequency"
     ],
-    "notes": "Nested under 'descriptive statistics'. What measures of frequency are reported in the publication?"
+    "notes": "Nested under 'descriptive statistics'. What measures of frequency are reported in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -753,7 +826,8 @@
     "aliases": [
       "percent"
     ],
-    "notes": "Nested under 'measures of frequency'. Is percent as a measure of frequency reported in the publication?"
+    "notes": "Nested under 'measures of frequency'. Is percent as a measure of frequency reported in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -765,7 +839,8 @@
     "aliases": [
       "subquestion"
     ],
-    "notes": "Nested under 'research  question '. What is the subquestion of the research question reported in the publication?"
+    "notes": "Nested under 'research  question '. What is the subquestion of the research question reported in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -777,7 +852,8 @@
     "aliases": [
       "research paradigm"
     ],
-    "notes": "What is the underlying research paradigm of the publication?"
+    "notes": "What is the underlying research paradigm of the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -789,7 +865,8 @@
     "aliases": [
       "research question answer"
     ],
-    "notes": "How is the answer to the research question reported in the publication?"
+    "notes": "How is the answer to the research question reported in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -801,7 +878,8 @@
     "aliases": [
       "measures of central tendency"
     ],
-    "notes": "Nested under 'descriptive statistics'. What measures of central tendency are reported in the publication?"
+    "notes": "Nested under 'descriptive statistics'. What measures of central tendency are reported in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -813,7 +891,8 @@
     "aliases": [
       "median"
     ],
-    "notes": "Nested under 'measures of central tendency'. Is median as a measure of central tendency reported in the publication?"
+    "notes": "Nested under 'measures of central tendency'. Is median as a measure of central tendency reported in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -825,7 +904,8 @@
     "aliases": [
       "mode"
     ],
-    "notes": "Nested under 'measures of central tendency'. Is mode as a measure of central tendency reported in the publication?"
+    "notes": "Nested under 'measures of central tendency'. Is mode as a measure of central tendency reported in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -837,7 +917,8 @@
     "aliases": [
       "measures of dispersion or variation"
     ],
-    "notes": "Nested under 'descriptive statistics'. What measures of dispersion or variation are reported in the publication?"
+    "notes": "Nested under 'descriptive statistics'. What measures of dispersion or variation are reported in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -849,7 +930,8 @@
     "aliases": [
       "variance"
     ],
-    "notes": "Nested under 'measures of dispersion or variation'. Is variance as a measure of dispersion or variation reported in the publication?"
+    "notes": "Nested under 'measures of dispersion or variation'. Is variance as a measure of dispersion or variation reported in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -861,7 +943,8 @@
     "aliases": [
       "measures of position"
     ],
-    "notes": "Nested under 'descriptive statistics'. What measures of position are reported in the publication?"
+    "notes": "Nested under 'descriptive statistics'. What measures of position are reported in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -873,7 +956,8 @@
     "aliases": [
       "machine learning"
     ],
-    "notes": "Nested under 'data analysis'. What is reported about machine learing used for data analysis in the publication?"
+    "notes": "Nested under 'data analysis'. What is reported about machine learing used for data analysis in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -885,7 +969,8 @@
     "aliases": [
       "qualitative"
     ],
-    "notes": "Nested under 'Data type'. Is the collected data reported in the publication qualitative?"
+    "notes": "Nested under 'Data type'. Is the collected data reported in the publication qualitative?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -897,7 +982,8 @@
     "aliases": [
       "quantitative"
     ],
-    "notes": "Nested under 'Data type'. Is the collected data reported in the publication quantitative?"
+    "notes": "Nested under 'Data type'. Is the collected data reported in the publication quantitative?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -909,7 +995,8 @@
     "aliases": [
       "boxplot"
     ],
-    "notes": "Nested under 'measures of position'. Is boxplot reported in the publication?"
+    "notes": "Nested under 'measures of position'. Is boxplot reported in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -921,7 +1008,8 @@
     "aliases": [
       "reliability"
     ],
-    "notes": "Nested under 'threat to validity'. Are threats to reliability reported?"
+    "notes": "Nested under 'threat to validity'. Are threats to reliability reported?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -934,7 +1022,8 @@
       "f score",
       "f-score"
     ],
-    "notes": "Nested under 'metric'. Is f-score reported in the publication?"
+    "notes": "Nested under 'metric'. Is f-score reported in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -946,7 +1035,8 @@
     "aliases": [
       "generalizability"
     ],
-    "notes": "Nested under 'threat to validity'. Are threats to generalizability reported?"
+    "notes": "Nested under 'threat to validity'. Are threats to generalizability reported?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -958,7 +1048,8 @@
     "aliases": [
       "content validity"
     ],
-    "notes": "Nested under 'threat to validity'. Are threats to content validity reported?"
+    "notes": "Nested under 'threat to validity'. Are threats to content validity reported?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -970,7 +1061,8 @@
     "aliases": [
       "data type"
     ],
-    "notes": "Nested under 'data'. What is the type of the collected data reported in the publication?"
+    "notes": "Nested under 'data'. What is the type of the collected data reported in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -982,7 +1074,8 @@
     "aliases": [
       "method type"
     ],
-    "notes": "Nested under 'method'. What is the type of method is used for data collection in the publication?"
+    "notes": "Nested under 'method'. What is the type of method is used for data collection in the publication?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -994,7 +1087,8 @@
     "aliases": [
       "descriptive validity"
     ],
-    "notes": "Nested under 'threat to validity'. Are threats to descriptive validity reported?"
+    "notes": "Nested under 'threat to validity'. Are threats to descriptive validity reported?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -1006,7 +1100,8 @@
     "aliases": [
       "theoretical validity"
     ],
-    "notes": "Nested under 'threat to validity'. Are threats to theoretical validity reported?"
+    "notes": "Nested under 'threat to validity'. Are threats to theoretical validity reported?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -1018,7 +1113,8 @@
     "aliases": [
       "repeatability"
     ],
-    "notes": "Nested under 'threat to validity'. Are threats to repeatability reported?"
+    "notes": "Nested under 'threat to validity'. Are threats to repeatability reported?",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -1030,7 +1126,8 @@
     "aliases": [
       "same as"
     ],
-    "notes": "Nested under 'research problem'. same as"
+    "notes": "Nested under 'research problem'. same as",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -1042,7 +1139,8 @@
     "aliases": [
       "description"
     ],
-    "notes": "Nested under 'research problem'. description"
+    "notes": "Nested under 'research problem'. description",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -1055,7 +1153,8 @@
       "problem",
       "sub problem"
     ],
-    "notes": "Nested under 'research problem'. Sub Problem"
+    "notes": "Nested under 'research problem'. Sub Problem",
+    "placeholder_aliases": []
   },
   {
     "family": "empirical_research_practice",
@@ -1067,58 +1166,7 @@
     "aliases": [
       "url"
     ],
-    "notes": "Nested under 'data'. Under which URL(s) can the data be found?"
-  },
-  {
-    "family": "empirical_research_practice",
-    "template_id": "R186491",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P44108",
-    "label": "maximal value",
-    "placeholder": "pgmr:maximal_value",
-    "aliases": [
-      "maximal value",
-      "maximum"
-    ],
-    "notes": "Alias for pgmr:maximum. Added to tolerate model-generated PGMR placeholder variants during deterministic restore."
-  },
-  {
-    "family": "empirical_research_practice",
-    "template_id": "R186491",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P44107",
-    "label": "minimal value",
-    "placeholder": "pgmr:minimal_value",
-    "aliases": [
-      "minimal value",
-      "minimum"
-    ],
-    "notes": "Alias for pgmr:minimum. Added to tolerate model-generated PGMR placeholder variants during deterministic restore."
-  },
-  {
-    "family": "empirical_research_practice",
-    "template_id": "R186491",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P41928",
-    "label": "research question type",
-    "placeholder": "pgmr:research_question_type",
-    "aliases": [
-      "question type",
-      "research question type"
-    ],
-    "notes": "Alias for pgmr:question_type. Added to tolerate model-generated PGMR placeholder variants during deterministic restore."
-  },
-  {
-    "family": "empirical_research_practice",
-    "template_id": "R186491",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P44139",
-    "label": "question wording",
-    "placeholder": "pgmr:question_wording",
-    "aliases": [
-      "question",
-      "question wording"
-    ],
-    "notes": "Alias for pgmr:question. Added to tolerate model-generated PGMR placeholder variants during deterministic restore."
+    "notes": "Nested under 'data'. Under which URL(s) can the data be found?",
+    "placeholder_aliases": []
   }
 ]

@@ -12,7 +12,8 @@
       "paper contribution",
       "links paper to contribution"
     ],
-    "notes": "Common ORKG predicate. ORKG label: contribution. Used in benchmark queries to link a paper to a contribution."
+    "notes": "Common ORKG predicate. ORKG label: contribution. Used in benchmark queries to link a paper to a contribution.",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -26,7 +27,8 @@
       "year",
       "published year"
     ],
-    "notes": "Common ORKG predicate. ORKG label: publication year. Used for paper-level publication year metadata."
+    "notes": "Common ORKG predicate. ORKG label: publication year. Used for paper-level publication year metadata.",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -38,7 +40,8 @@
     "aliases": [
       "nlp4re contribution"
     ],
-    "notes": "Root contribution class for the nlp4re template."
+    "notes": "Root contribution class for the nlp4re template.",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -50,7 +53,8 @@
     "aliases": [
       "nlp task"
     ],
-    "notes": "Class used by template predicate P181003."
+    "notes": "Class used by template predicate P181003.",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -62,7 +66,8 @@
     "aliases": [
       "nlp task output"
     ],
-    "notes": "Class used by template predicate P181006."
+    "notes": "Class used by template predicate P181006.",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -74,7 +79,8 @@
     "aliases": [
       "nlp dataset"
     ],
-    "notes": "Class used by template predicate P181011."
+    "notes": "Class used by template predicate P181011.",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -86,7 +92,8 @@
     "aliases": [
       "nlp data source"
     ],
-    "notes": "Class used by template predicate P181017."
+    "notes": "Class used by template predicate P181017.",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -98,7 +105,8 @@
     "aliases": [
       "nlp data type"
     ],
-    "notes": "Class used by template predicate P181022."
+    "notes": "Class used by template predicate P181022.",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -110,7 +118,8 @@
     "aliases": [
       "license"
     ],
-    "notes": "Class used by template predicate license."
+    "notes": "Class used by template predicate license.",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -122,7 +131,8 @@
     "aliases": [
       "nlp dataset location"
     ],
-    "notes": "Class used by template predicate P181028."
+    "notes": "Class used by template predicate P181028.",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -134,7 +144,8 @@
     "aliases": [
       "annotation process"
     ],
-    "notes": "Class used by template predicate P181031."
+    "notes": "Class used by template predicate P181031.",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -146,7 +157,8 @@
     "aliases": [
       "annotator"
     ],
-    "notes": "Class used by template predicate P181032."
+    "notes": "Class used by template predicate P181032.",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -158,7 +170,8 @@
     "aliases": [
       "annotation scheme"
     ],
-    "notes": "Class used by template predicate P181036."
+    "notes": "Class used by template predicate P181036.",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -170,7 +183,8 @@
     "aliases": [
       "annotator agreement"
     ],
-    "notes": "Class used by template predicate P181041."
+    "notes": "Class used by template predicate P181041.",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -182,7 +196,8 @@
     "aliases": [
       "implemented approach"
     ],
-    "notes": "Class used by template predicate P181046."
+    "notes": "Class used by template predicate P181046.",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -194,7 +209,8 @@
     "aliases": [
       "release"
     ],
-    "notes": "Class used by template predicate release."
+    "notes": "Class used by template predicate release.",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -206,7 +222,8 @@
     "aliases": [
       "evaluation"
     ],
-    "notes": "Class used by template predicate HAS_EVALUATION."
+    "notes": "Class used by template predicate HAS_EVALUATION.",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -218,7 +235,8 @@
     "aliases": [
       "baseline comparison"
     ],
-    "notes": "Class used by template predicate P181051."
+    "notes": "Class used by template predicate P181051.",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -230,7 +248,8 @@
     "aliases": [
       "evaluation"
     ],
-    "notes": "What evaluation did you apply for your study?"
+    "notes": "What evaluation did you apply for your study?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -240,9 +259,13 @@
     "label": "url",
     "placeholder": "pgmr:url",
     "aliases": [
-      "url"
+      "url",
+      "dataset url"
     ],
-    "notes": "Nested under 'Dataset location'. Provide a URL to the dataset, if available, or to the original paper that proposed the dataset"
+    "notes": "Nested under 'Dataset location'. Provide a URL to the dataset, if available, or to the original paper that proposed the dataset Alias note: Alias for pgmr:url. Added to tolerate model-generated PGMR placeholder variants during deterministic restore.",
+    "placeholder_aliases": [
+      "pgmr:dataset_url"
+    ]
   },
   {
     "family": "nlp4re",
@@ -255,7 +278,8 @@
       "evaluation metric",
       "metric"
     ],
-    "notes": "Nested under 'Evaluation'. What metrics are used to evaluate the implemented approach(?"
+    "notes": "Nested under 'Evaluation'. What metrics are used to evaluate the implemented approach(?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -265,9 +289,14 @@
     "label": "RE task",
     "placeholder": "pgmr:re_task",
     "aliases": [
-      "re task"
+      "re task",
+      "RE task",
+      "requirements engineering task"
     ],
-    "notes": "What requirements engineering task is your study addressing?"
+    "notes": "What requirements engineering task is your study addressing? Alias note: Alias for pgmr:re_task. Added to tolerate model-generated PGMR placeholder variants during deterministic restore.",
+    "placeholder_aliases": [
+      "pgmr:requirements_engineering_task"
+    ]
   },
   {
     "family": "nlp4re",
@@ -279,7 +308,8 @@
     "aliases": [
       "nlp task"
     ],
-    "notes": "What natural language processing task is your study tackling?"
+    "notes": "What natural language processing task is your study tackling?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -291,7 +321,8 @@
     "aliases": [
       "nlp task type"
     ],
-    "notes": "Nested under 'NLP task'. What type of natural language processing task is your study tackling?"
+    "notes": "Nested under 'NLP task'. What type of natural language processing task is your study tackling?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -301,9 +332,14 @@
     "label": "NLP task input",
     "placeholder": "pgmr:nlp_task_input",
     "aliases": [
-      "nlp task input"
+      "nlp task input",
+      "NLP task input",
+      "nlp task input type"
     ],
-    "notes": "Nested under 'NLP task'. What is the input of your natural language processing task?"
+    "notes": "Nested under 'NLP task'. What is the input of your natural language processing task? Alias note: Alias for pgmr:nlp_task_input. Added to tolerate model-generated PGMR placeholder variants during deterministic restore.",
+    "placeholder_aliases": [
+      "pgmr:nlp_task_input_type"
+    ]
   },
   {
     "family": "nlp4re",
@@ -313,9 +349,14 @@
     "label": "NLP task output",
     "placeholder": "pgmr:nlp_task_output",
     "aliases": [
-      "nlp task output"
+      "nlp task output",
+      "NLP task output",
+      "nlp input output"
     ],
-    "notes": "Nested under 'NLP task'. What is the output of your natural language processing task?"
+    "notes": "Nested under 'NLP task'. What is the output of your natural language processing task? Alias note: Alias for pgmr:nlp_task_output. Added to tolerate model-generated PGMR placeholder variants during deterministic restore.",
+    "placeholder_aliases": [
+      "pgmr:nlp_input_output"
+    ]
   },
   {
     "family": "nlp4re",
@@ -327,7 +368,8 @@
     "aliases": [
       "nlp task output type"
     ],
-    "notes": "Nested under 'NLP task output'. What is the output type of your natural language processing task?"
+    "notes": "Nested under 'NLP task output'. What is the output type of your natural language processing task?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -339,7 +381,8 @@
     "aliases": [
       "nlp task output classification label"
     ],
-    "notes": "Nested under 'NLP task output'. What is the output label that can be assigned in your natural language processing classification task?"
+    "notes": "Nested under 'NLP task output'. What is the output label that can be assigned in your natural language processing classification task?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -351,7 +394,8 @@
     "aliases": [
       "nlp task output extracted element"
     ],
-    "notes": "Nested under 'NLP task output'. What is the type of the element extracted in your natural language processing information extraction task?"
+    "notes": "Nested under 'NLP task output'. What is the type of the element extracted in your natural language processing information extraction task?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -364,7 +408,8 @@
       "nlp task output translation mapping cardinality",
       "nlp task translation mapping cardinality"
     ],
-    "notes": "Nested under 'NLP task output'. What is the translation mapping cardinality between the initial input and final output in your natural language processing translation task?"
+    "notes": "Nested under 'NLP task output'. What is the translation mapping cardinality between the initial input and final output in your natural language processing translation task?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -376,7 +421,8 @@
     "aliases": [
       "nlp dataset"
     ],
-    "notes": "What natural language processing dataset is your study using?"
+    "notes": "What natural language processing dataset is your study using?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -388,7 +434,8 @@
     "aliases": [
       "nlp data item"
     ],
-    "notes": "Nested under 'NLP dataset'. How many data items do you process? Please report the numerical information and details about all the data that is used in your evaluation."
+    "notes": "Nested under 'NLP dataset'. How many data items do you process? Please report the numerical information and details about all the data that is used in your evaluation.",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -400,7 +447,8 @@
     "aliases": [
       "nlp data production time"
     ],
-    "notes": "Nested under 'NLP dataset'. In which year or interval of year were the data produced?"
+    "notes": "Nested under 'NLP dataset'. In which year or interval of year were the data produced?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -412,7 +460,8 @@
     "aliases": [
       "nlp data source"
     ],
-    "notes": "Nested under 'NLP dataset'. What is the source of the data?"
+    "notes": "Nested under 'NLP dataset'. What is the source of the data?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -424,7 +473,8 @@
     "aliases": [
       "nlp data source type"
     ],
-    "notes": "Nested under 'NLP data source'. What is the source type of the data?"
+    "notes": "Nested under 'NLP data source'. What is the source type of the data?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -436,7 +486,8 @@
     "aliases": [
       "number of data sources"
     ],
-    "notes": "Nested under 'NLP data source'. From how many different sources your data comes from?"
+    "notes": "Nested under 'NLP data source'. From how many different sources your data comes from?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -449,7 +500,8 @@
       "data source domain",
       "nlp data source domain"
     ],
-    "notes": "Nested under 'NLP data source'. Please list which domains your data belongs to (e.g., automotive, satellite, entertainment, information systems)."
+    "notes": "Nested under 'NLP data source'. Please list which domains your data belongs to (e.g., automotive, satellite, entertainment, information systems).",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -461,7 +513,8 @@
     "aliases": [
       "nlp data abstraction level"
     ],
-    "notes": "Nested under 'NLP dataset'. What is the level of abstraction of the data (not limited to requirements)?"
+    "notes": "Nested under 'NLP dataset'. What is the level of abstraction of the data (not limited to requirements)?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -473,7 +526,8 @@
     "aliases": [
       "nlp data type"
     ],
-    "notes": "Nested under 'NLP dataset'. What is the type of the data?"
+    "notes": "Nested under 'NLP dataset'. What is the type of the data?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -485,7 +539,8 @@
     "aliases": [
       "nlp data format"
     ],
-    "notes": "Nested under 'NLP data type'. What is the format of the data?"
+    "notes": "Nested under 'NLP data type'. What is the format of the data?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -497,7 +552,8 @@
     "aliases": [
       "rigor of data format"
     ],
-    "notes": "Nested under 'NLP data type'. How rigorous is the format of the data?"
+    "notes": "Nested under 'NLP data type'. How rigorous is the format of the data?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -509,7 +565,8 @@
     "aliases": [
       "natural language"
     ],
-    "notes": "Nested under 'NLP data type'. What is the natural language of the data (if applicable) ?"
+    "notes": "Nested under 'NLP data type'. What is the natural language of the data (if applicable) ?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -521,7 +578,8 @@
     "aliases": [
       "public availability"
     ],
-    "notes": "Nested under 'License'. Is the dataset publicly available?"
+    "notes": "Nested under 'License'. Is the dataset publicly available?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -533,7 +591,8 @@
     "aliases": [
       "license type"
     ],
-    "notes": "Nested under 'Implemented approach'. What license has been used?"
+    "notes": "Nested under 'Implemented approach'. What license has been used?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -546,7 +605,8 @@
       "dataset location",
       "nlp dataset location"
     ],
-    "notes": "Nested under 'NLP dataset'. Where is the dataset stored?"
+    "notes": "Nested under 'NLP dataset'. Where is the dataset stored?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -557,9 +617,13 @@
     "placeholder": "pgmr:release_location_type",
     "aliases": [
       "location type",
-      "release location type"
+      "release location type",
+      "Location type"
     ],
-    "notes": "Nested under 'Release'. How is the tool released?"
+    "notes": "Nested under 'Release'. How is the tool released? Alias note: Alias for pgmr:release_location_type. Added to tolerate model-generated PGMR placeholder variants during deterministic restore.",
+    "placeholder_aliases": [
+      "pgmr:location_type"
+    ]
   },
   {
     "family": "nlp4re",
@@ -570,9 +634,14 @@
     "placeholder": "pgmr:dataset_location_location_type",
     "aliases": [
       "dataset location location type",
-      "location type"
+      "location type",
+      "Location type",
+      "dataset location type"
     ],
-    "notes": "Nested under 'Dataset location'. Where is the dataset stored?"
+    "notes": "Nested under 'Dataset location'. Where is the dataset stored? Alias note: Alias for pgmr:dataset_location_location_type. Added to tolerate model-generated PGMR placeholder variants during deterministic restore.",
+    "placeholder_aliases": [
+      "pgmr:dataset_location_type"
+    ]
   },
   {
     "family": "nlp4re",
@@ -584,7 +653,8 @@
     "aliases": [
       "annotation process"
     ],
-    "notes": "What annotation process did you use for your dataset?"
+    "notes": "What annotation process did you use for your dataset?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -596,7 +666,8 @@
     "aliases": [
       "annotator"
     ],
-    "notes": "Nested under 'Annotation process'. Who are the annotators of your dataset?"
+    "notes": "Nested under 'Annotation process'. Who are the annotators of your dataset?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -608,7 +679,8 @@
     "aliases": [
       "annotator assignment"
     ],
-    "notes": "Nested under 'Annotator'. How are the entries annotated assigned to the annotators?"
+    "notes": "Nested under 'Annotator'. How are the entries annotated assigned to the annotators?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -620,7 +692,8 @@
     "aliases": [
       "level of application domain experience"
     ],
-    "notes": "Nested under 'Annotator'. What is the average level of application domain experience of the annotators?"
+    "notes": "Nested under 'Annotator'. What is the average level of application domain experience of the annotators?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -632,7 +705,8 @@
     "aliases": [
       "annotator identity"
     ],
-    "notes": "Nested under 'Annotator'. Who are the annotators?"
+    "notes": "Nested under 'Annotator'. Who are the annotators?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -644,7 +718,8 @@
     "aliases": [
       "annotation scheme"
     ],
-    "notes": "Nested under 'Annotation process'. What is the annotation scheme used for your dataset?"
+    "notes": "Nested under 'Annotation process'. What is the annotation scheme used for your dataset?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -656,7 +731,8 @@
     "aliases": [
       "scheme establishement"
     ],
-    "notes": "Nested under 'Annotation scheme'. How was the annotation scheme established among the annotators?"
+    "notes": "Nested under 'Annotation scheme'. How was the annotation scheme established among the annotators?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -666,9 +742,14 @@
     "label": "Guideline availability",
     "placeholder": "pgmr:guideline_availability",
     "aliases": [
-      "guideline availability"
+      "guideline availability",
+      "Guideline availability",
+      "scheme guideline availability"
     ],
-    "notes": "Nested under 'Annotation scheme'. Did you make the written guidelines public?"
+    "notes": "Nested under 'Annotation scheme'. Did you make the written guidelines public? Alias note: Alias for pgmr:guideline_availability. Added to tolerate model-generated PGMR placeholder variants during deterministic restore.",
+    "placeholder_aliases": [
+      "pgmr:scheme_guideline_availability"
+    ]
   },
   {
     "family": "nlp4re",
@@ -680,7 +761,8 @@
     "aliases": [
       "shared material"
     ],
-    "notes": "Nested under 'Annotation process'. Did you share other information that could support the annotators other than the elements to annotate?"
+    "notes": "Nested under 'Annotation process'. Did you share other information that could support the annotators other than the elements to annotate?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -692,7 +774,8 @@
     "aliases": [
       "fatigue mitigation technique"
     ],
-    "notes": "Nested under 'Annotation process'. Did you employ techniques to mitigate fatigue effects during the annotation sessions?"
+    "notes": "Nested under 'Annotation process'. Did you employ techniques to mitigate fatigue effects during the annotation sessions?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -704,7 +787,8 @@
     "aliases": [
       "annotator agreement"
     ],
-    "notes": "Nested under 'Annotation process'. What annotator agreement did you apply for your dataset?"
+    "notes": "Nested under 'Annotation process'. What annotator agreement did you apply for your dataset?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -716,7 +800,8 @@
     "aliases": [
       "intercoder reliability metric"
     ],
-    "notes": "Nested under 'Annotator agreement'. What are the metrics used to measure intercoder reliability?"
+    "notes": "Nested under 'Annotator agreement'. What are the metrics used to measure intercoder reliability?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -726,9 +811,14 @@
     "label": "Conflict resolution",
     "placeholder": "pgmr:conflict_resolution",
     "aliases": [
-      "conflict resolution"
+      "conflict resolution",
+      "Conflict resolution",
+      "conflict resolution statement"
     ],
-    "notes": "Nested under 'Annotator agreement'. How were conflicts resolved?"
+    "notes": "Nested under 'Annotator agreement'. How were conflicts resolved? Alias note: Alias for pgmr:conflict_resolution. Added to tolerate model-generated PGMR placeholder variants during deterministic restore.",
+    "placeholder_aliases": [
+      "pgmr:conflict_resolution_statement"
+    ]
   },
   {
     "family": "nlp4re",
@@ -740,7 +830,8 @@
     "aliases": [
       "measured agreement"
     ],
-    "notes": "Nested under 'Annotator agreement'. What is the measured agreement?"
+    "notes": "Nested under 'Annotator agreement'. What is the measured agreement?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -752,7 +843,8 @@
     "aliases": [
       "implemented approach"
     ],
-    "notes": "What approach did you implement for your study?"
+    "notes": "What approach did you implement for your study?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -764,7 +856,8 @@
     "aliases": [
       "running requirement"
     ],
-    "notes": "Nested under 'Implemented approach'. What needs to be done for running the implemented approach?"
+    "notes": "Nested under 'Implemented approach'. What needs to be done for running the implemented approach?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -776,7 +869,8 @@
     "aliases": [
       "dependency"
     ],
-    "notes": "Nested under 'Implemented approach'. What type of dependencies does the implemented approach have?"
+    "notes": "Nested under 'Implemented approach'. What type of dependencies does the implemented approach have?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -788,7 +882,8 @@
     "aliases": [
       "release format"
     ],
-    "notes": "Nested under 'Release'. What has been released?"
+    "notes": "Nested under 'Release'. What has been released?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -800,7 +895,8 @@
     "aliases": [
       "validation procedure"
     ],
-    "notes": "Nested under 'Evaluation'. What is the validation procedure?"
+    "notes": "Nested under 'Evaluation'. What is the validation procedure?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -812,7 +908,8 @@
     "aliases": [
       "baseline comparison"
     ],
-    "notes": "Nested under 'Evaluation'. What is the baseline comparison applied in the evaluation of an implemented approach?"
+    "notes": "Nested under 'Evaluation'. What is the baseline comparison applied in the evaluation of an implemented approach?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -825,7 +922,8 @@
       "baseline comparison  type",
       "baseline comparison type"
     ],
-    "notes": "Nested under 'Baseline comparison'. What baseline do you compare against?"
+    "notes": "Nested under 'Baseline comparison'. What baseline do you compare against?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -837,7 +935,8 @@
     "aliases": [
       "baseline comparison detail"
     ],
-    "notes": "Nested under 'Baseline comparison'. Please provide more details about the baseline you compare against, if any."
+    "notes": "Nested under 'Baseline comparison'. Please provide more details about the baseline you compare against, if any.",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -850,7 +949,8 @@
       "documentation",
       "documentation type"
     ],
-    "notes": "Nested under 'Implemented approach'. What type of documentation has been provided alongside the implemented approach?"
+    "notes": "Nested under 'Implemented approach'. What type of documentation has been provided alongside the implemented approach?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -862,7 +962,8 @@
     "aliases": [
       "approach type"
     ],
-    "notes": "Nested under 'Implemented approach'. What is the type of the implemented approach?"
+    "notes": "Nested under 'Implemented approach'. What is the type of the implemented approach?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -875,7 +976,8 @@
       "algorithm",
       "algorithm used"
     ],
-    "notes": "Nested under 'Implemented approach'. What algorithms are used in the implemented approach?"
+    "notes": "Nested under 'Implemented approach'. What algorithms are used in the implemented approach?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -887,7 +989,8 @@
     "aliases": [
       "number of annotators"
     ],
-    "notes": "Nested under 'Annotator'. How many annotators have been involved in your annotation process?"
+    "notes": "Nested under 'Annotator'. How many annotators have been involved in your annotation process?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -899,7 +1002,8 @@
     "aliases": [
       "license"
     ],
-    "notes": "Nested under 'NLP dataset'. What license has been used?"
+    "notes": "Nested under 'NLP dataset'. What license has been used?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -911,7 +1015,8 @@
     "aliases": [
       "release"
     ],
-    "notes": "Nested under 'Implemented approach'. How was the implemented approach released?"
+    "notes": "Nested under 'Implemented approach'. How was the implemented approach released?",
+    "placeholder_aliases": []
   },
   {
     "family": "nlp4re",
@@ -925,118 +1030,7 @@
       "text description",
       "resource description"
     ],
-    "notes": "Common ORKG metadata predicate occurring in the NLP4RE benchmark queries."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181006",
-    "label": "nlp input output",
-    "placeholder": "pgmr:nlp_input_output",
-    "aliases": [
-      "NLP task output",
-      "nlp input output",
-      "nlp task output"
-    ],
-    "notes": "Alias for pgmr:nlp_task_output. Added to tolerate model-generated PGMR placeholder variants during deterministic restore."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181005",
-    "label": "nlp task input type",
-    "placeholder": "pgmr:nlp_task_input_type",
-    "aliases": [
-      "NLP task input",
-      "nlp task input",
-      "nlp task input type"
-    ],
-    "notes": "Alias for pgmr:nlp_task_input. Added to tolerate model-generated PGMR placeholder variants during deterministic restore."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181002",
-    "label": "requirements engineering task",
-    "placeholder": "pgmr:requirements_engineering_task",
-    "aliases": [
-      "RE task",
-      "re task",
-      "requirements engineering task"
-    ],
-    "notes": "Alias for pgmr:re_task. Added to tolerate model-generated PGMR placeholder variants during deterministic restore."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181038",
-    "label": "scheme guideline availability",
-    "placeholder": "pgmr:scheme_guideline_availability",
-    "aliases": [
-      "Guideline availability",
-      "guideline availability",
-      "scheme guideline availability"
-    ],
-    "notes": "Alias for pgmr:guideline_availability. Added to tolerate model-generated PGMR placeholder variants during deterministic restore."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181044",
-    "label": "conflict resolution statement",
-    "placeholder": "pgmr:conflict_resolution_statement",
-    "aliases": [
-      "Conflict resolution",
-      "conflict resolution",
-      "conflict resolution statement"
-    ],
-    "notes": "Alias for pgmr:conflict_resolution. Added to tolerate model-generated PGMR placeholder variants during deterministic restore."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181030",
-    "label": "dataset location type",
-    "placeholder": "pgmr:dataset_location_type",
-    "aliases": [
-      "Location type",
-      "dataset location location type",
-      "dataset location type",
-      "location type"
-    ],
-    "notes": "Alias for pgmr:dataset_location_location_type. Added to tolerate model-generated PGMR placeholder variants during deterministic restore."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P1003",
-    "label": "dataset url",
-    "placeholder": "pgmr:dataset_url",
-    "aliases": [
-      "dataset url",
-      "url"
-    ],
-    "notes": "Alias for pgmr:url. Added to tolerate model-generated PGMR placeholder variants during deterministic restore."
-  },
-  {
-    "family": "nlp4re",
-    "template_id": "R1544125",
-    "kind": "relation",
-    "canonical_uri": "orkgp:P181029",
-    "label": "location type",
-    "placeholder": "pgmr:location_type",
-    "aliases": [
-      "Location type",
-      "location type",
-      "release location type"
-    ],
-    "notes": "Alias for pgmr:release_location_type. Added to tolerate model-generated PGMR placeholder variants during deterministic restore."
+    "notes": "Common ORKG metadata predicate occurring in the NLP4RE benchmark queries.",
+    "placeholder_aliases": []
   }
 ]
