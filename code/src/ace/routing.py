@@ -21,16 +21,16 @@ def resolve_ace_playbook_path(
     mode: str | None,
     model_name: str | None = None,
 ) -> str | None:
-    """Resolve the ACE playbook path for a model/family/mode.
+    """Resolve an ACE playbook for model/family/mode.
 
     Priority:
     1. explicit --ace-playbook path
     2. model-specific playbook:
        <dir>/<model>/<family>_<mode>_playbook.json
     3. shared playbook:
+       <dir>/shared/<family>_<mode>_playbook.json
+    4. legacy fallback:
        <dir>/<family>_<mode>_playbook.json
-    4. family-only shared playbook:
-       <dir>/<family>_playbook.json
     """
     if ace_playbook_path:
         return ace_playbook_path
@@ -46,11 +46,21 @@ def resolve_ace_playbook_path(
     candidates: list[Path] = []
 
     if safe_model:
-        candidates.append(root / safe_model / f"{safe_family}_{safe_mode}_playbook.json")
-        candidates.append(root / safe_model / f"{safe_family}_playbook.json")
+        candidates.extend(
+            [
+                root / safe_model / f"{safe_family}_{safe_mode}_playbook.json",
+                root / safe_model / f"{safe_family}_playbook.json",
+            ]
+        )
 
-    candidates.append(root / f"{safe_family}_{safe_mode}_playbook.json")
-    candidates.append(root / f"{safe_family}_playbook.json")
+    candidates.extend(
+        [
+            root / "shared" / f"{safe_family}_{safe_mode}_playbook.json",
+            root / "shared" / f"{safe_family}_playbook.json",
+            root / f"{safe_family}_{safe_mode}_playbook.json",
+            root / f"{safe_family}_playbook.json",
+        ]
+    )
 
     for candidate in candidates:
         if candidate.exists():
