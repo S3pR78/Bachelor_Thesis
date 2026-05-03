@@ -22,7 +22,10 @@ from src.query.inference_session import (
     generate_response_with_session,
     prepare_inference_session,
 )
-from src.query.prompt_builder import build_final_prompt_for_question
+from src.query.prompt_builder import (
+    append_ace_context_to_prompt,
+    build_final_prompt_for_question,
+)
 from src.sparql.execution import detect_sparql_query_type, execute_sparql_query
 from src.sparql.prefixes import prepend_orkg_prefixes
 
@@ -267,6 +270,13 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
         summary_output_path=summary_output_path,
     )
     run_metadata["prediction_format"] = prediction_format
+    if getattr(args, "ace_playbook", None):
+        run_metadata["ace"] = {
+            "playbook_path": getattr(args, "ace_playbook", None),
+            "mode": getattr(args, "ace_mode", None),
+            "max_bullets": getattr(args, "ace_max_bullets", 0),
+        }
+
 
     if prediction_format == "pgmr_lite":
         run_metadata["pgmr_memory_dir"] = getattr(
@@ -320,11 +330,22 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
 
         if args.prompt_mode == "pgmr_lite_meta":
             final_prompt = _build_pgmr_lite_meta_prompt(entry)
+            final_prompt = append_ace_context_to_prompt(
+                prompt=final_prompt,
+                family=family,
+                prompt_mode=args.prompt_mode,
+                ace_playbook_path=getattr(args, "ace_playbook", None),
+                ace_mode=getattr(args, "ace_mode", None),
+                ace_max_bullets=getattr(args, "ace_max_bullets", 0),
+            )
         else:
             final_prompt = build_final_prompt_for_question(
                 question=question,
                 prompt_mode=args.prompt_mode,
                 family=family,
+                ace_playbook_path=getattr(args, "ace_playbook", None),
+                ace_mode=getattr(args, "ace_mode", None),
+                ace_max_bullets=getattr(args, "ace_max_bullets", 0),
             )
 
         response_started_at = datetime.now(timezone.utc)

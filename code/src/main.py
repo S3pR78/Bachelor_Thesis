@@ -27,6 +27,9 @@ def run_query_task(args: argparse.Namespace) -> int:
         question=args.question,
         prompt_mode=args.prompt_mode,
         family=args.family,
+        ace_playbook_path=getattr(args, "ace_playbook", None),
+        ace_mode=getattr(args, "ace_mode", None),
+        ace_max_bullets=getattr(args, "ace_max_bullets", 0),
     )
 
     print("Running query task with args:", args)
@@ -105,6 +108,28 @@ def build_parser() -> argparse.ArgumentParser:
     query_parser.add_argument("--pgmr-memory-dir",default="code/data/orkg_memory/templates", help="Directory containing PGMR memory/mapping files.")
 
 
+    
+    query_parser.add_argument(
+        "--ace-playbook",
+        required=False,
+        default=None,
+        help="Optional ACE playbook JSON file to prepend as adaptive context.",
+    )
+    query_parser.add_argument(
+        "--ace-mode",
+        required=False,
+        choices=["pgmr_lite", "direct_sparql", "any"],
+        default=None,
+        help="ACE playbook mode to use. Defaults to an inferred mode from prompt-mode.",
+    )
+    query_parser.add_argument(
+        "--ace-max-bullets",
+        required=False,
+        type=int,
+        default=0,
+        help="Maximum number of ACE playbook bullets to prepend. 0 disables ACE.",
+    )
+
     query_parser.set_defaults(func=run_query_task)
 
 
@@ -157,6 +182,28 @@ def build_parser() -> argparse.ArgumentParser:
         "Path to local ORKG/PGMR memory used for URI hallucination checks. "
         "Defaults to code/data/orkg_memory/templates."
     ),)
+    
+    evaluate_parser.add_argument(
+        "--ace-playbook",
+        required=False,
+        default=None,
+        help="Optional ACE playbook JSON file to prepend as adaptive context.",
+    )
+    evaluate_parser.add_argument(
+        "--ace-mode",
+        required=False,
+        choices=["pgmr_lite", "direct_sparql", "any"],
+        default=None,
+        help="ACE playbook mode to use. Defaults to an inferred mode from prompt-mode.",
+    )
+    evaluate_parser.add_argument(
+        "--ace-max-bullets",
+        required=False,
+        type=int,
+        default=0,
+        help="Maximum number of ACE playbook bullets to prepend. 0 disables ACE.",
+    )
+
     evaluate_parser.set_defaults(func=run_evaluate_task)
     # evaluation files can be added as arguments here, e.g., --predictions, --references
     

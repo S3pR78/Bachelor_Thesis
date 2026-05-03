@@ -5,6 +5,7 @@ import subprocess
 from pathlib import Path
 
 from src.utils.config_loader import get_configured_path, load_json_config
+from src.ace.rendering import render_ace_context
 
 
 EMPIRE_COMPASS_MODE = "empire_compass"
@@ -199,20 +200,74 @@ def build_empire_compass_mini_prompt(prompt_path: Path, question: str) -> str:
     )
 
 
+def infer_ace_mode(prompt_mode: str | None) -> str:
+    """Infer a default ACE playbook mode from the existing prompt mode."""
+    normalized = (prompt_mode or "").strip().lower()
+    if "pgmr" in normalized:
+        return "pgmr_lite"
+    return "direct_sparql"
+
+
+def append_ace_context_to_prompt(
+    *,
+    prompt: str,
+    family: str | None,
+    prompt_mode: str | None,
+    ace_playbook_path: str | None = None,
+    ace_mode: str | None = None,
+    ace_max_bullets: int = 0,
+    ace_include_patterns: bool = True,
+) -> str:
+    """Prepend a compact ACE playbook block to an already-built prompt.
+
+    The function is intentionally small and optional:
+    if no playbook path or no bullets are requested, it returns the original prompt.
+    """
+    if not ace_playbook_path:
+        return prompt
+
+    if ace_max_bullets <= 0:
+        return prompt
+
+    if not family:
+        return prompt
+
+    resolved_ace_mode = ace_mode or infer_ace_mode(prompt_mode)
+
+    ace_context = render_ace_context(
+        playbook_path=ace_playbook_path,
+        family=family,
+        mode=resolved_ace_mode,
+        max_bullets=ace_max_bullets,
+        include_patterns=ace_include_patterns,
+    ).strip()
+
+    if not ace_context:
+        return prompt
+
+    return f"{ace_context}\n\n{prompt.strip()}"
+
+
 def build_final_prompt_for_question(
     question: str,
     prompt_mode: str | None,
     family: str | None,
+    ace_playbook_path: str | None = None,
+    ace_mode: str | None = None,
+    ace_max_bullets: int = 0,
+    ace_include_patterns: bool = True,
 ) -> str:
     if not isinstance(question, str) or not question.strip():
         raise ValueError("question must be a non-empty string.")
 
     if not prompt_mode:
-        return question.strip()
+        final_prompt = question.strip()
 
-    if prompt_mode == EMPIRE_COMPASS_MODE:
+    elif prompt_mode == EMPIRE_COMPASS_MODE:
         if not family:
-            raise ValueError("family must be provided when using 'empire_compass' prompt mode.")
+            raise ValueError(
+                "family must be provided when using 'empire_compass' prompt mode."
+            )
 
         profile = get_empire_compass_profile_for_family(family)
         prompt_output_path = Path(profile["output_txt_path"])
@@ -221,9 +276,10 @@ def build_final_prompt_for_question(
         print(f"Expected prompt path: {prompt_output_path}")
 
         ensure_empire_compass_prompt_exists(family, prompt_output_path)
-        return build_empire_compass_prompt(prompt_output_path, question)
 
-    if prompt_mode == EMPIRE_COMPASS_MINI_MODE:
+        final_prompt = build_empire_compass_prompt(prompt_output_path, question)
+
+    elif prompt_mode == EMPIRE_COMPASS_MINI_MODE:
         if not family:
             raise ValueError(
                 "family must be provided when using 'empire_compass_mini' prompt mode."
@@ -234,9 +290,9 @@ def build_final_prompt_for_question(
         print(f"Empire Compass mini family: {family}")
         print(f"Mini prompt path: {prompt_path}")
 
-        return build_empire_compass_mini_prompt(prompt_path, question)
+        final_prompt = build_empire_compass_mini_prompt(prompt_path, question)
 
-    if prompt_mode == PGMR_MINI_MODE:
+    elif prompt_mode == PGMR_MINI_MODE:
         if not family:
             raise ValueError(
                 "family must be provided when using 'pgmr_mini' prompt mode."
@@ -247,11 +303,21 @@ def build_final_prompt_for_question(
         print(f"PGMR mini family: {family}")
         print(f"PGMR mini prompt path: {prompt_path}")
 
-        return build_pgmr_mini_prompt(
+        final_prompt = build_pgmr_mini_prompt(
             prompt_path=prompt_path,
             family=family,
             question=question,
         )
 
-    return question.strip()
+    else:
+        final_prompt = question.strip()
 
+    return append_ace_context_to_prompt(
+        prompt=final_prompt,
+        family=family,
+        prompt_mode=prompt_mode,
+        ace_playbook_path=ace_playbook_path,
+        ace_mode=ace_mode,
+        ace_max_bullets=ace_max_bullets,
+        ace_include_patterns=ace_include_patterns,
+    )
