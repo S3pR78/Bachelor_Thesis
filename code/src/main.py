@@ -7,7 +7,7 @@ from src.query.prompt_builder import (
     build_final_prompt_for_question,
     validate_query_args,
 )
-from src.train.seq2seq_trainer import run_seq2seq_training
+from src.train.runner import run_training
 from src.pgmr.postprocess import postprocess_pgmr_query
 from src.pgmr.restore import restore_pgmr_query
 
@@ -72,7 +72,7 @@ def run_query_task(args: argparse.Namespace) -> int:
 
 def run_train_task(args: argparse.Namespace) -> int:
 
-    run_seq2seq_training(
+    run_training(
         train_config_path=args.train_config,
         run_name=args.run,
         max_train_samples=args.max_train_samples,
