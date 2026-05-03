@@ -15,24 +15,32 @@ from src.core.download_manager import get_original_model_dir
 
 
 def get_model_dir(model_config: dict) -> Path:
-    """
-    Resolve the local model directory from the model configuration.
+    """Resolve local model directory.
 
-    Default:
-        code/models/<provider_model_id>/original
-
-    Custom variant example:
-        code/models/<provider_model_id>/finetuned/.../final_model
+    Priority:
+    1. paths.model_path or top-level model_path
+    2. paths.finetuned_path when variant == "finetuned"
+    3. default: paths.model_root / normalized(model_id) / variant
     """
-    base_model_dir = get_original_model_dir(model_config).parent
-    variant = str(model_config.get("variant", "original")).strip() or "original"
-    model_dir = base_model_dir / variant
+    paths = model_config.get("paths", {})
+
+    explicit_path = model_config.get("model_path") or paths.get("model_path")
+    if explicit_path:
+        model_dir = Path(explicit_path)
+    else:
+        variant = model_config.get("variant", "original")
+
+        if variant == "finetuned" and paths.get("finetuned_path"):
+            model_dir = Path(paths["finetuned_path"])
+        else:
+            model_root = Path(paths.get("model_root", "code/models"))
+            model_id = model_config["model_id"]
+            model_dir = model_root / normalize_model_id(model_id) / variant
 
     if not model_dir.exists() or not model_dir.is_dir():
         raise FileNotFoundError(f"Model directory not found: {model_dir}")
 
     return model_dir
-
 
 
 def get_adapter_dir(model_config: dict) -> Path | None:
