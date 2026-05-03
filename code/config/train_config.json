@@ -42,7 +42,7 @@
       "method": "qlora",
       "task": "pgmr_mini",
       "dataset": {
-        "train_path": "code/data/dataset/pgmr/final/train.json",
+        "train_path": "code/data/dataset/pgmr/final/train_with_paraphrases.json",
         "validation_path": "code/data/dataset/pgmr/final/validation.json",
         "target_field": "gold_pgmr_sparql",
         "filters": {
@@ -104,7 +104,7 @@
       "method": "qlora",
       "task": "pgmr_mini",
       "dataset": {
-        "train_path": "code/data/dataset/pgmr/final/train.json",
+        "train_path": "code/data/dataset/pgmr/final/train_with_paraphrases.json",
         "validation_path": "code/data/dataset/pgmr/final/validation.json",
         "target_field": "gold_pgmr_sparql",
         "filters": {
@@ -166,7 +166,7 @@
       "method": "qlora",
       "task": "pgmr_mini",
       "dataset": {
-        "train_path": "code/data/dataset/pgmr/final/train.json",
+        "train_path": "code/data/dataset/pgmr/final/train_with_paraphrases.json",
         "validation_path": "code/data/dataset/pgmr/final/validation.json",
         "target_field": "gold_pgmr_sparql",
         "filters": {
@@ -228,7 +228,7 @@
       "method": "qlora",
       "task": "pgmr_mini",
       "dataset": {
-        "train_path": "code/data/dataset/pgmr/final/train.json",
+        "train_path": "code/data/dataset/pgmr/final/train_with_paraphrases.json",
         "validation_path": "code/data/dataset/pgmr/final/validation.json",
         "target_field": "gold_pgmr_sparql",
         "filters": {
@@ -290,7 +290,7 @@
       "method": "qlora",
       "task": "direct_sparql",
       "dataset": {
-        "train_path": "code/data/dataset/final/train.json",
+        "train_path": "code/data/dataset/final/train_with_paraphrases.json",
         "validation_path": "code/data/dataset/final/validation.json",
         "target_field": "gold_sparql",
         "filters": {}
@@ -350,7 +350,7 @@
       "method": "qlora",
       "task": "direct_sparql",
       "dataset": {
-        "train_path": "code/data/dataset/final/train.json",
+        "train_path": "code/data/dataset/final/train_with_paraphrases.json",
         "validation_path": "code/data/dataset/final/validation.json",
         "target_field": "gold_sparql",
         "filters": {}
@@ -410,7 +410,7 @@
       "method": "qlora",
       "task": "pgmr_mini",
       "dataset": {
-        "train_path": "code/data/dataset/pgmr/final/train.json",
+        "train_path": "code/data/dataset/pgmr/final/train_with_paraphrases.json",
         "validation_path": "code/data/dataset/pgmr/final/validation.json",
         "target_field": "gold_pgmr_sparql",
         "filters": {
@@ -472,7 +472,7 @@
       "method": "qlora",
       "task": "direct_sparql",
       "dataset": {
-        "train_path": "code/data/dataset/final/train.json",
+        "train_path": "code/data/dataset/final/train_with_paraphrases.json",
         "validation_path": "code/data/dataset/final/validation.json",
         "target_field": "gold_sparql",
         "filters": {}
