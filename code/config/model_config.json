@@ -178,6 +178,22 @@
         "do_sample": false,
         "num_beams": 4
       }
+    },
+    "t5_base_pgmr_mini_10ep_src768": {
+      "provider": "huggingface",
+      "model_id": "google-t5/t5-base",
+      "interface": "seq2seq",
+      "variant": "finetuned",
+      "paths": {
+        "model_root": "code/models",
+        "cache_dir": "code/models/cache",
+        "finetuned_path": "code/models/google-t5_t5-base/finetuned/pgmr_mini_10ep_src768/20260503_112503/final_model"
+      },
+      "generation": {
+        "max_new_tokens": 512,
+        "temperature": 0.0,
+        "do_sample": false
+      }
     }
   }
 }
