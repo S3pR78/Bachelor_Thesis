@@ -14,6 +14,11 @@ from transformers import (
 from src.core.download_manager import get_original_model_dir
 
 
+def normalize_model_id(model_id: str) -> str:
+    """Convert Hugging Face model ids into local folder names."""
+    return model_id.replace("/", "_")
+
+
 def get_model_dir(model_config: dict) -> Path:
     """Resolve local model directory.
 
