@@ -132,85 +132,6 @@
         "do_sample": false
       }
     },
-    "t5_base_pgmr_mini_both_families_v1": {
-      "provider": "huggingface",
-      "model_id": "google-t5/t5-base",
-      "interface": "seq2seq",
-      "variant": "finetuned/pgmr_mini_both_families_v1/20260429_200117/final_model",
-      "paths": {
-        "model_root": "code/models",
-        "cache_dir": "code/models/cache"
-      },
-      "generation": {
-        "max_new_tokens": 512,
-        "temperature": 0.0,
-        "do_sample": false
-      }
-    },
-    "t5_base_pgmr_mini_structure_30ep": {
-      "provider": "huggingface",
-      "model_id": "google-t5/t5-base",
-      "interface": "seq2seq",
-      "variant": "finetuned/pgmr_mini_structure_both_families_30ep/20260429_203651/final_model",
-      "paths": {
-        "model_root": "code/models",
-        "cache_dir": "code/models/cache"
-      },
-      "generation": {
-        "max_new_tokens": 512,
-        "temperature": 0.0,
-        "do_sample": false,
-        "num_beams": 4
-      }
-    },
-    "t5_base_pgmr_mini_pathmap_30ep": {
-      "provider": "huggingface",
-      "model_id": "google-t5/t5-base",
-      "interface": "seq2seq",
-      "variant": "finetuned/pgmr_mini_pathmap_both_families_30ep_src768/20260429_213132/final_model",
-      "paths": {
-        "model_root": "code/models",
-        "cache_dir": "code/models/cache"
-      },
-      "generation": {
-        "max_new_tokens": 512,
-        "temperature": 0.0,
-        "do_sample": false,
-        "num_beams": 4
-      }
-    },
-    "t5_base_pgmr_mini_10ep_src768": {
-      "provider": "huggingface",
-      "model_id": "google-t5/t5-base",
-      "interface": "seq2seq",
-      "variant": "finetuned",
-      "paths": {
-        "model_root": "code/models",
-        "cache_dir": "code/models/cache",
-        "finetuned_path": "code/models/google-t5_t5-base/finetuned/pgmr_mini_10ep_src768/20260503_112503/final_model"
-      },
-      "generation": {
-        "max_new_tokens": 512,
-        "temperature": 0.0,
-        "do_sample": false
-      }
-    },
-    "t5_base_pgmr_mini_15ep_src768": {
-      "provider": "huggingface",
-      "model_id": "google-t5/t5-base",
-      "interface": "seq2seq",
-      "variant": "finetuned",
-      "paths": {
-        "model_root": "code/models",
-        "cache_dir": "code/models/cache",
-        "finetuned_path": "code/models/google-t5_t5-base/finetuned/pgmr_mini_15ep_src768/20260503_125302/final_model"
-      },
-      "generation": {
-        "max_new_tokens": 512,
-        "temperature": 0.0,
-        "do_sample": false
-      }
-    },
     "qwen25_coder_7b_pgmr_mini_qlora_3ep": {
       "provider": "huggingface",
       "model_id": "Qwen/Qwen2.5-Coder-7B-Instruct",
@@ -242,6 +163,22 @@
         "do_sample": false
       },
       "adapter_path": "code/models/Qwen_Qwen2.5-Coder-7B-Instruct/finetuned/empire_compass_qlora_3ep/20260503_161141/final_adapter"
+    },
+    "t5_base_pgmr_mini_resplit_15ep": {
+      "provider": "huggingface",
+      "model_id": "google-t5/t5-base",
+      "interface": "seq2seq",
+      "variant": "finetuned",
+      "paths": {
+        "model_root": "code/models",
+        "cache_dir": "code/models/cache",
+        "finetuned_path": "code/models/google-t5_t5-base/finetuned/pgmr_mini_15ep_src768/20260503_195547/final_model"
+      },
+      "generation": {
+        "max_new_tokens": 512,
+        "temperature": 0.0,
+        "do_sample": false
+      }
     }
   }
 }

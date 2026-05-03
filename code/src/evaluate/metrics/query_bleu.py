@@ -97,6 +97,11 @@ def compute_query_bleu(
         for order in range(1, max_order + 1)
     ]
 
+    # BLEU is zero if any modified n-gram precision is zero.
+    # Avoid math.log(0), which would crash evaluation for valid but dissimilar queries.
+    if any(precision <= 0 for precision in precisions):
+        return 0.0
+
     log_precision_sum = sum(math.log(precision) for precision in precisions)
     geometric_mean = math.exp(log_precision_sum / max_order)
 
