@@ -149,6 +149,14 @@ class AceDelta:
             evidence=dict(payload.get("evidence", {})),
         )
 
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "operation": self.operation,
+            "bullet": self.bullet.to_dict(),
+            "reason": self.reason,
+            "evidence": self.evidence,
+        }
+
 
 @dataclass
 class AcePlaybook:
