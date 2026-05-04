@@ -8,6 +8,7 @@ import time
 from pathlib import Path
 
 from src.ace.offline_loop import (
+    create_family_filtered_dataset,
     ensure_no_test_adaptation,
     find_latest_benchmark_raw,
     run_trace_reflect_curate,
@@ -140,6 +141,14 @@ def main() -> None:
         dataset_path=args.dataset,
         allow_test_adaptation=args.allow_test_adaptation,
     )
+
+    if args.family:
+        filtered_dataset_path = create_family_filtered_dataset(
+            dataset_path=args.dataset,
+            family=args.family,
+        )
+        print(f"Using family-filtered ACE dataset: {filtered_dataset_path}")
+        args.dataset = str(filtered_dataset_path)
 
     for iteration in range(1, args.iterations + 1):
         print()

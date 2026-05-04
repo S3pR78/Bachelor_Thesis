@@ -29,6 +29,50 @@ def ensure_no_test_adaptation(
         )
 
 
+def create_family_filtered_dataset(
+    *,
+    dataset_path: str | Path,
+    family: str | None,
+    output_dir: str | Path = "code/outputs/ace_filtered_datasets",
+) -> Path:
+    """Create a temporary dataset containing only one template family.
+
+    This prevents ACE adaptation runs from evaluating unrelated families when
+    a family-specific playbook is being learned.
+    """
+    source_path = Path(dataset_path)
+
+    if not family:
+        return source_path
+
+    data = json.loads(source_path.read_text(encoding="utf-8"))
+    if not isinstance(data, list):
+        raise ValueError(f"Expected dataset list in {source_path}")
+
+    filtered = [
+        item for item in data
+        if str(item.get("family")) == str(family)
+    ]
+
+    if not filtered:
+        raise ValueError(
+            f"No items for family '{family}' found in dataset {source_path}"
+        )
+
+    target_dir = Path(output_dir)
+    target_dir.mkdir(parents=True, exist_ok=True)
+
+    safe_family = str(family).replace("/", "_")
+    target_path = target_dir / f"{source_path.stem}__{safe_family}.json"
+
+    target_path.write_text(
+        json.dumps(filtered, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+
+    return target_path
+
+
 def find_latest_benchmark_raw(
     *,
     outputs_root: str | Path = "code/outputs/evaluation_runs",

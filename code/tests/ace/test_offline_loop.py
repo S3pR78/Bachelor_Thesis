@@ -6,6 +6,7 @@ from pathlib import Path
 import pytest
 
 from src.ace.offline_loop import (
+    create_family_filtered_dataset,
     ensure_no_test_adaptation,
     find_latest_benchmark_raw,
     run_trace_reflect_curate,
@@ -87,3 +88,31 @@ def test_run_trace_reflect_curate_updates_playbook(tmp_path: Path) -> None:
     assert (raw_path.parent / "ace_error_traces.json").exists()
     assert (raw_path.parent / "ace_deltas.json").exists()
     assert (raw_path.parent / "ace_iteration_summary.json").exists()
+
+
+def test_create_family_filtered_dataset(tmp_path: Path) -> None:
+    dataset_path = tmp_path / "ace_playbook.json"
+    output_dir = tmp_path / "filtered"
+
+    dataset_path.write_text(
+        json.dumps(
+            [
+                {"id": "1", "family": "nlp4re", "question": "A"},
+                {"id": "2", "family": "empirical_research_practice", "question": "B"},
+                {"id": "3", "family": "nlp4re", "question": "C"},
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+    filtered_path = create_family_filtered_dataset(
+        dataset_path=dataset_path,
+        family="nlp4re",
+        output_dir=output_dir,
+    )
+
+    filtered = json.loads(filtered_path.read_text(encoding="utf-8"))
+
+    assert len(filtered) == 2
+    assert {item["id"] for item in filtered} == {"1", "3"}
+    assert all(item["family"] == "nlp4re" for item in filtered)
