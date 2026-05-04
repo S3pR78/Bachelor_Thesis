@@ -12,6 +12,7 @@ from src.ace.routing import resolve_ace_playbook_path
 EMPIRE_COMPASS_MODE = "empire_compass"
 EMPIRE_COMPASS_MINI_MODE = "empire_compass_mini"
 PGMR_MINI_MODE = "pgmr_mini"
+PGMR_MODE = "pgmr"
 
 EMPIRE_COMPASS_QUESTION_PLACEHOLDER = "[Research Question]"
 MINI_QUESTION_PLACEHOLDER = "{question}"
@@ -45,7 +46,12 @@ def normalize_empire_compass_family(family: str) -> str:
 
 
 def validate_query_args(args) -> None:
-    if args.prompt_mode in {EMPIRE_COMPASS_MODE, EMPIRE_COMPASS_MINI_MODE, PGMR_MINI_MODE} and not args.family:
+    if args.prompt_mode in {
+        EMPIRE_COMPASS_MODE,
+        EMPIRE_COMPASS_MINI_MODE,
+        PGMR_MINI_MODE,
+        PGMR_MODE,
+    } and not args.family:
         raise ValueError(
             f"The --family argument is required when using the '{args.prompt_mode}' prompt mode."
         )
@@ -118,7 +124,30 @@ def get_pgmr_mini_prompt_path_for_family(family: str) -> Path:
     )
 
 
+def get_pgmr_prompt_path_for_family(family: str) -> Path:
+    normalized = family.strip().lower()
+
+    if normalized == "nlp4re":
+        return get_configured_path("prompts.pgmr_nlp4re_prompt")
+
+    if normalized in {"empirical_research", "empirical_research_practice"}:
+        return get_configured_path("prompts.pgmr_empirical_research_prompt")
+
+    raise ValueError(
+        "No PGMR prompt is configured for family "
+        f"{family!r}. Available families: nlp4re, empirical_research_practice."
+    )
+
+
 def build_pgmr_mini_prompt(prompt_path: Path, family: str, question: str) -> str:
+    prompt_text = load_text_file(prompt_path)
+    return prompt_text.format(
+        family=family,
+        question=question.strip(),
+    )
+
+
+def build_pgmr_prompt(prompt_path: Path, family: str, question: str) -> str:
     prompt_text = load_text_file(prompt_path)
     return prompt_text.format(
         family=family,
@@ -204,7 +233,7 @@ def build_empire_compass_mini_prompt(prompt_path: Path, question: str) -> str:
 def infer_ace_mode(prompt_mode: str | None) -> str:
     """Infer a default ACE playbook mode from the existing prompt mode."""
     normalized = (prompt_mode or "").strip().lower()
-    if "pgmr" in normalized:
+    if normalized == PGMR_MODE or "pgmr" in normalized:
         return "pgmr_lite"
     return "direct_sparql"
 
@@ -317,6 +346,23 @@ def build_final_prompt_for_question(
         print(f"PGMR mini prompt path: {prompt_path}")
 
         final_prompt = build_pgmr_mini_prompt(
+            prompt_path=prompt_path,
+            family=family,
+            question=question,
+        )
+
+    elif prompt_mode == PGMR_MODE:
+        if not family:
+            raise ValueError(
+                "family must be provided when using 'pgmr' prompt mode."
+            )
+
+        prompt_path = get_pgmr_prompt_path_for_family(family)
+
+        print(f"PGMR family: {family}")
+        print(f"PGMR prompt path: {prompt_path}")
+
+        final_prompt = build_pgmr_prompt(
             prompt_path=prompt_path,
             family=family,
             question=question,

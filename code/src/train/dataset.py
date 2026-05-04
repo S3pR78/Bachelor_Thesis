@@ -10,14 +10,17 @@ from src.query.prompt_builder import (
     EMPIRE_COMPASS_MINI_MODE,
     EMPIRE_COMPASS_MODE,
     PGMR_MINI_MODE,
+    PGMR_MODE,
     build_empire_compass_mini_prompt,
     build_empire_compass_prompt,
     build_final_prompt_for_question,
     build_pgmr_mini_prompt,
+    build_pgmr_prompt,
     ensure_empire_compass_prompt_exists,
     get_empire_compass_mini_prompt_path_for_family,
     get_empire_compass_profile_for_family,
     get_pgmr_mini_prompt_path_for_family,
+    get_pgmr_prompt_path_for_family,
 )
 from src.train.config import get_train_run_config, load_train_config
 
@@ -164,6 +167,7 @@ def build_training_input_from_prompt_mode(
         EMPIRE_COMPASS_MODE,
         EMPIRE_COMPASS_MINI_MODE,
         PGMR_MINI_MODE,
+        PGMR_MODE,
     } and not family:
         raise ValueError(
             f"Missing family for prompt_mode={prompt_mode!r} "
@@ -173,6 +177,14 @@ def build_training_input_from_prompt_mode(
     if prompt_mode == PGMR_MINI_MODE:
         prompt_path = get_pgmr_mini_prompt_path_for_family(family)
         return build_pgmr_mini_prompt(
+            prompt_path=prompt_path,
+            family=family,
+            question=question,
+        )
+
+    if prompt_mode == PGMR_MODE:
+        prompt_path = get_pgmr_prompt_path_for_family(family)
+        return build_pgmr_prompt(
             prompt_path=prompt_path,
             family=family,
             question=question,

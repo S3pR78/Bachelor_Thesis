@@ -401,7 +401,8 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
         prediction_format = str(getattr(args, "prediction_format", "") or "").lower()
 
         enable_pgmr_metrics = (
-            "pgmr" in prompt_mode
+            prompt_mode == "pgmr"
+            or "pgmr" in prompt_mode
             or "pgmr" in prediction_format
         )
 
