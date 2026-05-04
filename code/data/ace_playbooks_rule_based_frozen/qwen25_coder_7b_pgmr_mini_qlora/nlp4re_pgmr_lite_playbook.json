@@ -1,0 +1,305 @@
+{
+  "schema_version": "ace_playbook_v1",
+  "family": "nlp4re",
+  "mode": "pgmr_lite",
+  "created_at_utc": "2026-05-03T22:06:27.267903+00:00",
+  "updated_at_utc": "2026-05-04T11:15:19.544939+00:00",
+  "metadata": {
+    "description": "Initial shared ACE playbook for NLP4RE PGMR-lite experiments.",
+    "source": "manual_initial_shared_playbook"
+  },
+  "bullets": [
+    {
+      "id": "global_any_output_format_initial",
+      "family": "global",
+      "mode": "any",
+      "category": "output_format",
+      "title": "Return only the query",
+      "content": "Return only the final SPARQL or PGMR-lite query. Do not add explanations, markdown, or reasoning text.",
+      "bullet_type": "hard_rule",
+      "priority": 100,
+      "enabled": true,
+      "positive_pattern": null,
+      "avoid": "Do not answer in natural language.",
+      "applicability": [],
+      "source": {
+        "type": "manual_initial_rule"
+      },
+      "evidence_item_ids": [],
+      "helpful_count": 0,
+      "harmful_count": 0,
+      "created_at_utc": "2026-05-03T22:06:27.267903+00:00",
+      "updated_at_utc": "2026-05-03T22:06:27.267903+00:00"
+    },
+    {
+      "id": "nlp4re_pgmr_lite_pgmr_format_initial",
+      "family": "nlp4re",
+      "mode": "pgmr_lite",
+      "category": "pgmr_format",
+      "title": "Use PGMR-lite placeholders only",
+      "content": "Use pgmr:/pgmrc: placeholders from the PGMR prompt or memory. Do not generate real ORKG IDs in PGMR-lite mode.",
+      "bullet_type": "hard_rule",
+      "priority": 95,
+      "enabled": true,
+      "positive_pattern": null,
+      "avoid": "Do not mix pgmr:/pgmrc: placeholders with orkgp:/orkgc:/orkgr: identifiers.",
+      "applicability": [],
+      "source": {
+        "type": "manual_initial_rule"
+      },
+      "evidence_item_ids": [],
+      "helpful_count": 0,
+      "harmful_count": 0,
+      "created_at_utc": "2026-05-03T22:06:27.267903+00:00",
+      "updated_at_utc": "2026-05-03T22:06:27.267903+00:00"
+    },
+    {
+      "id": "nlp4re_pgmr_lite_contribution_pattern_initial",
+      "family": "nlp4re",
+      "mode": "pgmr_lite",
+      "category": "contribution_pattern",
+      "title": "Use NLP4RE contribution pattern",
+      "content": "Connect papers to NLP4RE contributions before accessing family-specific fields.",
+      "bullet_type": "template_pattern",
+      "priority": 90,
+      "enabled": true,
+      "positive_pattern": "?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:nlp4re_contribution .",
+      "avoid": "Do not attach NLP task, dataset, metric, evaluation, approach, or output properties directly to ?paper.",
+      "applicability": [],
+      "source": {
+        "type": "manual_initial_rule"
+      },
+      "evidence_item_ids": [],
+      "helpful_count": 0,
+      "harmful_count": 0,
+      "created_at_utc": "2026-05-03T22:06:27.267903+00:00",
+      "updated_at_utc": "2026-05-03T22:06:27.267903+00:00"
+    },
+    {
+      "id": "nlp4re_pgmr_lite_no_extracted_query_1fcacffff3",
+      "family": "nlp4re",
+      "mode": "pgmr_lite",
+      "category": "no_extracted_query",
+      "title": "Return only the final query",
+      "content": "The output must be only one complete SPARQL or PGMR-lite query, without explanation, markdown prose, or analysis.",
+      "bullet_type": "validation_lesson",
+      "priority": 103,
+      "enabled": true,
+      "positive_pattern": null,
+      "avoid": "Do not answer in natural language and do not include reasoning text before the query.",
+      "applicability": [],
+      "source": {
+        "type": "ace_reflector",
+        "trace_path": "code/outputs/evaluation_runs/qwen25_coder_7b_pgmr_mini_qlora/pgmr_mini__ace_playbook__nlp4re__20260504_104131/ace_error_traces.json",
+        "support_count": 8
+      },
+      "evidence_item_ids": [
+        "815",
+        "810",
+        "811",
+        "812",
+        "813"
+      ],
+      "helpful_count": 0,
+      "harmful_count": 0,
+      "created_at_utc": "2026-05-04T11:15:19.507762+00:00",
+      "updated_at_utc": "2026-05-04T11:15:19.544280+00:00"
+    },
+    {
+      "id": "nlp4re_pgmr_lite_pgmr_unmapped_placeholders_53d261b0c3",
+      "family": "nlp4re",
+      "mode": "pgmr_lite",
+      "category": "pgmr_unmapped_placeholders",
+      "title": "Use only known PGMR placeholders",
+      "content": "Use only pgmr:/pgmrc: placeholders that are defined in the PGMR prompt or memory for the current family.",
+      "bullet_type": "validation_lesson",
+      "priority": 102,
+      "enabled": true,
+      "positive_pattern": null,
+      "avoid": "Do not invent new pgmr:/pgmrc: tokens and do not mix PGMR placeholders with real ORKG IDs.",
+      "applicability": [],
+      "source": {
+        "type": "ace_reflector",
+        "trace_path": "code/outputs/evaluation_runs/qwen25_coder_7b_pgmr_mini_qlora/pgmr_mini__ace_playbook__nlp4re__20260504_104131/ace_error_traces.json",
+        "support_count": 25
+      },
+      "evidence_item_ids": [
+        "809",
+        "817",
+        "808",
+        "775",
+        "795"
+      ],
+      "helpful_count": 0,
+      "harmful_count": 0,
+      "created_at_utc": "2026-05-04T11:15:19.507870+00:00",
+      "updated_at_utc": "2026-05-04T11:15:19.544389+00:00"
+    },
+    {
+      "id": "nlp4re_pgmr_lite_pgmr_restore_error_1d345a55bf",
+      "family": "nlp4re",
+      "mode": "pgmr_lite",
+      "category": "pgmr_restore_error",
+      "title": "Generate restorable PGMR-lite",
+      "content": "The PGMR-lite query must use valid placeholders, complete triple patterns, and the expected paper-to-contribution structure so it can be deterministically restored.",
+      "bullet_type": "validation_lesson",
+      "priority": 98,
+      "enabled": true,
+      "positive_pattern": null,
+      "avoid": "Do not output partial PGMR, unknown placeholders, or a mixture of PGMR and direct ORKG identifiers.",
+      "applicability": [],
+      "source": {
+        "type": "ace_reflector",
+        "trace_path": "code/outputs/evaluation_runs/qwen25_coder_7b_pgmr_mini_qlora/pgmr_mini__ace_playbook__nlp4re__20260504_104131/ace_error_traces.json",
+        "support_count": 8
+      },
+      "evidence_item_ids": [
+        "815",
+        "810",
+        "811",
+        "812",
+        "813"
+      ],
+      "helpful_count": 0,
+      "harmful_count": 0,
+      "created_at_utc": "2026-05-04T11:15:19.507818+00:00",
+      "updated_at_utc": "2026-05-04T11:15:19.544466+00:00"
+    },
+    {
+      "id": "nlp4re_pgmr_lite_answer_mismatch_02046329c9",
+      "family": "nlp4re",
+      "mode": "pgmr_lite",
+      "category": "answer_mismatch",
+      "title": "Preserve all semantic constraints from the question",
+      "content": "Include the requested entity type, template family, filters, and returned variable so the execution result matches the question semantics.",
+      "bullet_type": "validation_lesson",
+      "priority": 88,
+      "enabled": true,
+      "positive_pattern": null,
+      "avoid": "Do not produce a broad executable query that ignores the requested field or filter.",
+      "applicability": [],
+      "source": {
+        "type": "ace_reflector",
+        "trace_path": "code/outputs/evaluation_runs/qwen25_coder_7b_pgmr_mini_qlora/pgmr_mini__ace_playbook__nlp4re__20260504_104131/ace_error_traces.json",
+        "support_count": 11
+      },
+      "evidence_item_ids": [
+        "809",
+        "817",
+        "808",
+        "775",
+        "370"
+      ],
+      "helpful_count": 0,
+      "harmful_count": 0,
+      "created_at_utc": "2026-05-04T11:15:19.507501+00:00",
+      "updated_at_utc": "2026-05-04T11:15:19.544534+00:00"
+    },
+    {
+      "id": "nlp4re_pgmr_lite_endpoint_bad_request_d96696afc5",
+      "family": "nlp4re",
+      "mode": "pgmr_lite",
+      "category": "endpoint_bad_request",
+      "title": "Generate executable complete queries",
+      "content": "Ensure the query has balanced braces, declared variables, valid triple patterns, and no unfinished FILTER, OPTIONAL, or SELECT clauses.",
+      "bullet_type": "validation_lesson",
+      "priority": 83,
+      "enabled": true,
+      "positive_pattern": null,
+      "avoid": "Do not return truncated queries or isolated triple patterns without SELECT/ASK and WHERE.",
+      "applicability": [],
+      "source": {
+        "type": "ace_reflector",
+        "trace_path": "code/outputs/evaluation_runs/qwen25_coder_7b_pgmr_mini_qlora/pgmr_mini__ace_playbook__nlp4re__20260504_104131/ace_error_traces.json",
+        "support_count": 1
+      },
+      "evidence_item_ids": [
+        "801"
+      ],
+      "helpful_count": 0,
+      "harmful_count": 0,
+      "created_at_utc": "2026-05-04T11:15:19.507645+00:00",
+      "updated_at_utc": "2026-05-04T11:15:19.544601+00:00"
+    },
+    {
+      "id": "nlp4re_pgmr_lite_predicate_ref_mismatch_2ec30c974d",
+      "family": "nlp4re",
+      "mode": "pgmr_lite",
+      "category": "predicate_ref_mismatch",
+      "title": "Use the correct predicate for the requested role",
+      "content": "Choose predicates according to the semantic role in the question, such as task, dataset, metric, output, evaluation, year, venue, or contribution link.",
+      "bullet_type": "validation_lesson",
+      "priority": 83,
+      "enabled": true,
+      "positive_pattern": null,
+      "avoid": "Do not replace one template field with a similar-looking but semantically different predicate.",
+      "applicability": [],
+      "source": {
+        "type": "ace_reflector",
+        "trace_path": "code/outputs/evaluation_runs/qwen25_coder_7b_pgmr_mini_qlora/pgmr_mini__ace_playbook__nlp4re__20260504_104131/ace_error_traces.json",
+        "support_count": 3
+      },
+      "evidence_item_ids": [
+        "809",
+        "817",
+        "808"
+      ],
+      "helpful_count": 0,
+      "harmful_count": 0,
+      "created_at_utc": "2026-05-04T11:15:19.507921+00:00",
+      "updated_at_utc": "2026-05-04T11:15:19.544728+00:00"
+    },
+    {
+      "id": "nlp4re_pgmr_lite_prediction_execution_error_cb1ca769ee",
+      "family": "nlp4re",
+      "mode": "pgmr_lite",
+      "category": "prediction_execution_error",
+      "title": "Generate executable complete queries",
+      "content": "Ensure the query has balanced braces, declared variables, valid triple patterns, and no unfinished FILTER, OPTIONAL, or SELECT clauses.",
+      "bullet_type": "validation_lesson",
+      "priority": 83,
+      "enabled": true,
+      "positive_pattern": null,
+      "avoid": "Do not return truncated queries or isolated triple patterns without SELECT/ASK and WHERE.",
+      "applicability": [],
+      "source": {
+        "type": "ace_reflector",
+        "trace_path": "code/outputs/evaluation_runs/qwen25_coder_7b_pgmr_mini_qlora/pgmr_mini__ace_playbook__nlp4re__20260504_104131/ace_error_traces.json",
+        "support_count": 1
+      },
+      "evidence_item_ids": [
+        "801"
+      ],
+      "helpful_count": 0,
+      "harmful_count": 0,
+      "created_at_utc": "2026-05-04T11:15:19.508014+00:00",
+      "updated_at_utc": "2026-05-04T11:15:19.544833+00:00"
+    },
+    {
+      "id": "nlp4re_pgmr_lite_endpoint_uri_too_long_8974e242e3",
+      "family": "nlp4re",
+      "mode": "pgmr_lite",
+      "category": "endpoint_uri_too_long",
+      "title": "Keep generated queries compact",
+      "content": "Avoid unnecessarily long repeated patterns and do not duplicate the same triple patterns or filters.",
+      "bullet_type": "validation_lesson",
+      "priority": 71,
+      "enabled": true,
+      "positive_pattern": null,
+      "avoid": "Do not generate repeated long UNION or duplicated blocks unless required by the question.",
+      "applicability": [],
+      "source": {
+        "type": "ace_reflector",
+        "trace_path": "code/outputs/evaluation_runs/qwen25_coder_7b_pgmr_mini_qlora/pgmr_mini__ace_playbook__nlp4re__20260504_104131/ace_error_traces.json",
+        "support_count": 1
+      },
+      "evidence_item_ids": [
+        "816"
+      ],
+      "helpful_count": 0,
+      "harmful_count": 0,
+      "created_at_utc": "2026-05-04T11:15:19.507707+00:00",
+      "updated_at_utc": "2026-05-04T11:15:19.544931+00:00"
+    }
+  ]
+}
