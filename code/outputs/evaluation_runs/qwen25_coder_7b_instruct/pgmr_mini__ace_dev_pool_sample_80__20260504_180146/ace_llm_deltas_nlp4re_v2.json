@@ -19,13 +19,12 @@
     "family": "nlp4re",
     "mode": "pgmr_lite",
     "category": "filter_pattern",
-    "title": "Keep triple patterns outside FILTER",
-    "content": "Use FILTER only for expressions over bound variables. Write subject-relation-object triples outside FILTER, then filter labels or values.",
-    "avoid": "Do not write FILTER(?x pgmr:relation pgmr:value).",
-    "priority": 124,
+    "title": "Keep FILTER expressions simple",
+    "content": "Use FILTER only for expressions over bound variables. Avoid complex FILTER conditions that mix multiple predicates.",
+    "avoid": "Do not write FILTER with multiple predicates or conditions.",
+    "priority": 115,
     "evidence_item_ids": [
-      "211",
-      "518"
+      "798"
     ],
     "source": {
       "type": "llm_assisted_reflector",
@@ -37,12 +36,11 @@
     "mode": "pgmr_lite",
     "category": "triple_structure",
     "title": "Do not use relation-like tokens as objects",
-    "content": "A PGMR triple must be subject relation object. For named concepts, bind a variable and filter its rdfs:label.",
+    "content": "A PGMR triple must be subject relation object. Ensure that predicates are not used as objects in triples.",
     "avoid": "Do not write ?x pgmr:relation pgmr:concept.",
     "priority": 123,
     "evidence_item_ids": [
-      "333",
-      "132"
+      "333"
     ],
     "source": {
       "type": "llm_assisted_reflector",
@@ -58,7 +56,6 @@
     "avoid": "Do not skip parent nodes when querying nested fields.",
     "priority": 115,
     "evidence_item_ids": [
-      "211",
       "518"
     ],
     "source": {
@@ -75,8 +72,7 @@
     "avoid": "Do not use incorrect or misspelled predicate references.",
     "priority": 120,
     "evidence_item_ids": [
-      "397",
-      "333"
+      "397"
     ],
     "source": {
       "type": "llm_assisted_reflector",
@@ -92,7 +88,6 @@
     "avoid": "Do not use generic or incorrect placeholders that do not match the expected output.",
     "priority": 115,
     "evidence_item_ids": [
-      "518",
       "587"
     ],
     "source": {

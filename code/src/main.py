@@ -8,8 +8,12 @@ from src.query.prompt_builder import (
     validate_query_args,
 )
 from src.train.runner import run_training
-from src.pgmr.postprocess import postprocess_pgmr_query
 from src.pgmr.restore import restore_pgmr_query
+
+from src.ace.llm_pipeline import (
+    add_arguments as add_ace_llm_arguments,
+    execute_llm_assisted_ace,
+)
 
 
 """
@@ -245,6 +249,14 @@ def build_parser() -> argparse.ArgumentParser:
 
     evaluate_parser.set_defaults(func=run_evaluate_task)
     # evaluation files can be added as arguments here, e.g., --predictions, --references
+
+
+    ace_llm_parser = subparsers.add_parser(
+        "ace-llm",
+        help="Run LLM-assisted ACE from an evaluation run directory.",
+    )
+    add_ace_llm_arguments(ace_llm_parser)
+    ace_llm_parser.set_defaults(func=execute_llm_assisted_ace)
     
     return parser
 

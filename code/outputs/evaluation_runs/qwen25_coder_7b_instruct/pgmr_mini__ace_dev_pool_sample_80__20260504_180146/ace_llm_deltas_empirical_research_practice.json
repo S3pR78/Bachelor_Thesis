@@ -1,0 +1,104 @@
+[
+  {
+    "family": "empirical_research_practice",
+    "mode": "pgmr_lite",
+    "category": "filter_pattern",
+    "title": "Keep FILTER conditions valid",
+    "content": "Use FILTER only for expressions over bound variables. Do not use FILTER for predicates that should be part of the triple pattern.",
+    "avoid": "Do not write FILTER(?contribution pgmr:mentioned pgmr:recall).",
+    "priority": 120,
+    "evidence_item_ids": [
+      "192",
+      "504"
+    ],
+    "source": {
+      "type": "llm_assisted_reflector",
+      "model": "gpt-4o-mini"
+    }
+  },
+  {
+    "family": "empirical_research_practice",
+    "mode": "pgmr_lite",
+    "category": "nested_path",
+    "title": "Bind parent nodes before child fields",
+    "content": "For nested fields, bind the parent node first. For example, use contribution -> data analysis -> machine learning before accessing metrics.",
+    "avoid": "Do not skip parent nodes when accessing nested fields.",
+    "priority": 115,
+    "evidence_item_ids": [
+      "192",
+      "291"
+    ],
+    "source": {
+      "type": "llm_assisted_reflector",
+      "model": "gpt-4o-mini"
+    }
+  },
+  {
+    "family": "empirical_research_practice",
+    "mode": "pgmr_lite",
+    "category": "label_filter",
+    "title": "Use label filters for specific validity threats",
+    "content": "When filtering for validity threats, bind the relevant node and filter its rdfs:label instead of using generic mentions.",
+    "avoid": "Do not use generic mentions for filtering validity threats.",
+    "priority": 120,
+    "evidence_item_ids": [
+      "192",
+      "504"
+    ],
+    "source": {
+      "type": "llm_assisted_reflector",
+      "model": "gpt-4o-mini"
+    }
+  },
+  {
+    "family": "empirical_research_practice",
+    "mode": "pgmr_lite",
+    "category": "triple_structure",
+    "title": "Avoid using relation-like tokens as objects",
+    "content": "A PGMR triple must be subject relation object. For named concepts, bind a variable and filter its rdfs:label.",
+    "avoid": "Do not write ?x pgmr:relation pgmr:concept.",
+    "priority": 123,
+    "evidence_item_ids": [
+      "633",
+      "271"
+    ],
+    "source": {
+      "type": "llm_assisted_reflector",
+      "model": "gpt-4o-mini"
+    }
+  },
+  {
+    "family": "empirical_research_practice",
+    "mode": "pgmr_lite",
+    "category": "query_form_mismatch",
+    "title": "Use COUNT for distinct counts of papers",
+    "content": "For counting distinct papers, use COUNT(DISTINCT ?paper) instead of incorrect counting methods.",
+    "avoid": "Do not use incorrect counting methods for distinct papers.",
+    "priority": 120,
+    "evidence_item_ids": [
+      "192",
+      "291"
+    ],
+    "source": {
+      "type": "llm_assisted_reflector",
+      "model": "gpt-4o-mini"
+    }
+  },
+  {
+    "family": "empirical_research_practice",
+    "mode": "pgmr_lite",
+    "category": "filter_pattern",
+    "title": "Keep triple patterns outside FILTER",
+    "content": "Use FILTER only for expressions over bound variables. Write subject-relation-object triples outside FILTER.",
+    "avoid": "Do not write FILTER(?x pgmr:relation pgmr:value).",
+    "priority": 124,
+    "evidence_item_ids": [
+      "192",
+      "504"
+    ],
+    "source": {
+      "type": "llm_assisted_reflector",
+      "model": "gpt-4o-mini"
+    }
+  }
+]

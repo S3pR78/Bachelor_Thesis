@@ -1,0 +1,797 @@
+Du bist ein LLM-assisted Reflector für eine Bachelorarbeit zu Text-to-SPARQL auf ORKG-Templates.
+
+Aufgabe:
+Analysiere Fehler-Traces eines lokalen Base-Modells und erzeuge kurze, konkrete ACE-Playbook-Regeln.
+
+Kontext:
+- Lokales Modell: qwen25_coder_7b_instruct
+- Familie: empirical_research_practice
+- Modus: pgmr_lite
+- Repräsentation: PGMR-lite mit pgmr:/pgmrc:-Platzhaltern
+- Die Regeln werden später in den Prompt eingefügt.
+- Diese Traces stammen aus einem ACE-Development-Sample, NICHT aus dem finalen Benchmark.
+
+Arbeitsweise:
+Für jeden Trace sollst du vergleichen:
+1. die natürliche Frage,
+2. die gold_sparql Struktur,
+3. raw_model_output,
+4. extracted_query/restored_query,
+5. categories, metrics und error_text.
+
+Finde zuerst den konkreten strukturellen Fehler im Modelloutput.
+Generalisiere danach nur wiederkehrende oder klare Fehler zu kurzen ACE-Regeln.
+
+Sehr wichtig:
+- Erzeuge KEINE generischen Regeln wie "Return only the query", "Use valid placeholders", "No markdown", "Generate executable queries".
+- Erzeuge konkrete Struktur-, Pfad-, Mapping-, Label-Filter-, FILTER-, Triple-Structure- oder Placeholder-Choice-Regeln.
+- Schreibe KEINE korrigierten Queries.
+- Kopiere KEINE echten ORKG-IDs in PGMR-lite-Regeln.
+- Wenn gold_sparql echte ORKG-IDs enthält, übersetze die Beobachtung in eine PGMR-lite-Strukturregel.
+- Verwende keine Regeln, die nur sagen, dass die Query "besser" oder "gültig" sein soll.
+- Regeln sollen kurz sein, weil sie in den Prompt kommen.
+- Dedupliziere ähnliche Regeln.
+- Ausgabe NUR als valides JSON-Array, keine Markdown-Erklärung.
+
+Family hints for empirical_research_practice:
+- Core PGMR pattern: ?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:empirical_research_practice_contribution .
+- A PGMR triple must be subject relation object.
+- Do not use relation-like pgmr:/pgmrc: tokens as objects of another pgmr: relation.
+- For named concepts such as accuracy, recall, construct validity, or internal validity, bind a variable and filter its rdfs:label instead of inventing pgmr:/pgmrc: objects.
+- Do not put triple patterns inside FILTER. FILTER is only for expressions over already bound variables.
+- Venue questions use the contribution venue path.
+- Data collection questions use contribution -> data collection -> method/data.
+- Data analysis questions use contribution -> data analysis -> machine learning/statistics -> requested field.
+- Validity threat questions should bind the validity/threat node and filter labels when a specific threat type is requested.
+
+Gute Regel-Beispiele:
+[
+  {
+    "category": "filter_pattern",
+    "title": "Keep triple patterns outside FILTER",
+    "content": "Use FILTER only for expressions over bound variables. Write subject-relation-object triples outside FILTER, then filter labels or values.",
+    "avoid": "Do not write FILTER(?x pgmr:relation pgmr:value).",
+    "priority": 124,
+    "evidence_item_ids": ["example_id"]
+  },
+  {
+    "category": "triple_structure",
+    "title": "Do not use relation-like tokens as objects",
+    "content": "A PGMR triple must be subject relation object. For named concepts, bind a variable and filter its rdfs:label.",
+    "avoid": "Do not write ?x pgmr:relation pgmr:concept.",
+    "priority": 123,
+    "evidence_item_ids": ["example_id"]
+  },
+  {
+    "category": "label_filter",
+    "title": "Use label filters for named concepts",
+    "content": "For named concepts such as classification or construct validity, bind the relevant node and filter its rdfs:label.",
+    "avoid": "Do not invent pgmr:/pgmrc: objects for named concepts.",
+    "priority": 118,
+    "evidence_item_ids": ["example_id"]
+  }
+]
+
+Schlechte Regeln:
+[
+  {
+    "category": "output_format",
+    "title": "Return only the query",
+    "content": "Return only the final query.",
+    "avoid": "Do not explain.",
+    "priority": 120,
+    "evidence_item_ids": []
+  },
+  {
+    "category": "query_form_mismatch",
+    "title": "Avoid unsupported query forms",
+    "content": "Ensure the query form matches the expected structure.",
+    "avoid": "Do not use unsupported forms.",
+    "priority": 120,
+    "evidence_item_ids": []
+  }
+]
+
+Regel-Schema:
+[
+  {
+    "category": "nested_path | predicate_ref_mismatch | answer_mismatch | query_form_mismatch | placeholder_choice | label_filter | contribution_pattern | filter_pattern | triple_structure",
+    "title": "short imperative title",
+    "content": "one concise rule, max 35 words",
+    "avoid": "one concise anti-pattern, max 25 words",
+    "priority": 90-125,
+    "evidence_item_ids": ["id1", "id2"]
+  }
+]
+
+Maximal 8 Regeln.
+
+Aktuelles Playbook:
+[
+  {
+    "title": "Use Empirical Research Practice contribution pattern",
+    "category": "contribution_pattern",
+    "content": "Always connect the paper to the contribution with ?paper pgmr:has_contribution ?contribution . and type the contribution as pgmrc:empirical_research_practice_contribution . Attach empirical template fields such as venue, research question, data collection, data analysis, validity threats, and variables to ?contribution or properly bound nested nodes.",
+    "avoid": "Do not attach empirical template fields directly to ?paper except publication year.",
+    "priority": 120,
+    "source": {
+      "type": "manual_clean_base_initialization"
+    }
+  },
+  {
+    "title": "Use full empirical nested paths",
+    "category": "nested_path",
+    "content": "For empirical nested fields, first bind the parent node from ?contribution and then bind the requested child field. Examples: data collection questions use contribution -> data collection -> method/data; machine learning questions use contribution -> data analysis -> machine learning -> algorithm/metric; statistical test questions use contribution -> data analysis -> inferential statistics -> statistical tests.",
+    "avoid": "Do not skip parent nodes when asking for nested empirical fields.",
+    "priority": 115,
+    "source": {
+      "type": "manual_clean_base_initialization"
+    }
+  },
+  {
+    "title": "Bind specific metrics instead of using generic placeholders",
+    "category": "placeholder_choice",
+    "content": "For metrics like accuracy, bind specific nodes instead of using generic placeholders like pgmr:data_analysis/pgmr:metric.",
+    "avoid": "Do not use generic placeholders for specific metrics.",
+    "priority": 120,
+    "source": {
+      "type": "llm_assisted_reflector"
+    }
+  },
+  {
+    "title": "Use label filters for specific validity threats",
+    "category": "label_filter",
+    "content": "When filtering for validity threats, use specific labels like pgmr:construct_validity instead of generic mentions.",
+    "avoid": "Do not use generic mentions for filtering validity threats.",
+    "priority": 120,
+    "source": {
+      "type": "llm_assisted_reflector"
+    }
+  },
+  {
+    "title": "Use COUNT for distinct counts of papers",
+    "category": "query_form_mismatch",
+    "content": "For counting distinct papers, use COUNT(DISTINCT ?paper) instead of incorrect counting methods.",
+    "avoid": "Do not use incorrect counting methods for distinct papers.",
+    "priority": 120,
+    "source": {
+      "type": "llm_assisted_reflector"
+    }
+  },
+  {
+    "title": "Use FILTER for specific conditions",
+    "category": "query_form_mismatch",
+    "content": "Use FILTER for specific conditions like publication year instead of incorrect predicates.",
+    "avoid": "Do not use incorrect predicates for filtering conditions.",
+    "priority": 120,
+    "source": {
+      "type": "llm_assisted_reflector"
+    }
+  }
+]
+
+Fehler-Traces:
+[
+  {
+    "item_id": "636",
+    "family": "empirical_research_practice",
+    "question": "In which years were papers published that report a boxplot and variance?",
+    "categories": [
+      "no_extracted_query",
+      "pgmr_restore_error"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": null,
+      "query_form_match": null,
+      "query_extracted": 0.0,
+      "supported_query_form": null,
+      "pgmr_unmapped_placeholders": null,
+      "class_ref_match": null,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": null
+    },
+    "raw_model_output": "```sparql\nSELECT DISTINCT ?paper ?publicationYear WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:empirical_research_practice_contribution .\n  ?contribution pgmr:mentioned pgmr:boxplot .\n  ?contribution pgmr:measured pgmr:variance .\n  ?paper pgmr:publication_year ?publicationYear .\n}\n```",
+    "extracted_query": null,
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?year\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C27001 .\n  ?contribution orkgp:P135046 ?venue .\n  ?venue rdfs:label ?venueName .\n  ?paper orkgp:P29 ?year .\n  ?contribution orkgp:P15124 ?dataAnalysis .\n  ?dataAnalysis orkgp:P56048 ?descriptiveStatistic .\n  ?descriptiveStatistic orkgp:P57008 ?dispersionVariation .\n  ?dispersionVariation orkgp:P57009 ?variance .\n  ?descriptiveStatistic orkgp:P57010 ?positionMeasure .\n  ?positionMeasure orkgp:P59065 ?boxplot .\n  FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\"))\n  FILTER(LCASE(STR(?variance)) IN (\"true\", \"yes\", \"1\"))\n  FILTER(LCASE(STR(?boxplot)) IN (\"true\", \"yes\", \"1\"))\n}\nORDER BY ?year",
+    "error_text": null,
+    "source": {
+      "raw_path": "code/outputs/evaluation_runs/qwen25_coder_7b_instruct/pgmr_mini__ace_dev_pool_sample_80__20260504_180146/benchmark_raw.json",
+      "record_index": 12
+    }
+  },
+  {
+    "item_id": "487",
+    "family": "empirical_research_practice",
+    "question": "Which papers report an accuracy metric but do not report recall?",
+    "categories": [
+      "pgmr_unmapped_placeholders",
+      "predicate_ref_mismatch",
+      "query_form_mismatch",
+      "unsupported_query_form"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": 0.8333,
+      "query_form_match": 0.0,
+      "query_extracted": 1.0,
+      "supported_query_form": 0.0,
+      "pgmr_unmapped_placeholders": 0.0,
+      "class_ref_match": 1.0,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": 1.0
+    },
+    "raw_model_output": "```sparql\nSELECT DISTINCT ?paper ?paperLabel \nWHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:empirical_research_practice_contribution .\n  ?contribution pgmr:data_analysis/pgmr:metric pgmr:accuracy .\n  FILTER NOT EXISTS {\n    ?contribution pgmr:data_analysis/pgmr:metric pgmr:recall .\n  }\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}\n```",
+    "extracted_query": "```sparql SELECT DISTINCT ?paper ?paperLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P15124/orkgp:P2006 orkgp:P18048 . FILTER NOT EXISTS { ?contribution orkgp:P15124/orkgp:P2006 orkgp:P5073 . } OPTIONAL { ?paper rdfs:label ?paperLabel . } } ```",
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?paper ?paperLabel\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C27001 .\n  ?contribution orkgp:P135046 ?venue .\n  ?venue rdfs:label ?venueName .\n  ?contribution orkgp:P15124 ?dataAnalysis .\n  ?dataAnalysis orkgp:P57016 ?machineLearning .\n  ?machineLearning orkgp:P2006 ?metric .\n  ?metric orkgp:P18048 ?accuracy .\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n  FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\"))\n  FILTER(LCASE(STR(?accuracy)) IN (\"true\", \"yes\", \"1\"))\n  FILTER NOT EXISTS { ?metric orkgp:P5073 ?anyRecall . }\n}\nORDER BY ?paperLabel",
+    "error_text": null,
+    "source": {
+      "raw_path": "code/outputs/evaluation_runs/qwen25_coder_7b_instruct/pgmr_mini__ace_dev_pool_sample_80__20260504_180146/benchmark_raw.json",
+      "record_index": 1
+    }
+  },
+  {
+    "item_id": "633",
+    "family": "empirical_research_practice",
+    "question": "In which years were papers published that mention construct validity and conclusion validity?",
+    "categories": [
+      "pgmr_unmapped_placeholders",
+      "predicate_ref_mismatch",
+      "query_form_mismatch",
+      "unsupported_query_form"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": 0.7273,
+      "query_form_match": 0.0,
+      "query_extracted": 1.0,
+      "supported_query_form": 0.0,
+      "pgmr_unmapped_placeholders": 0.0,
+      "class_ref_match": 1.0,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": 1.0
+    },
+    "raw_model_output": "```sparql\nSELECT DISTINCT ?paper ?publicationYear WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:empirical_research_practice_contribution .\n  ?contribution pgmr:mentioned pgmr:construct_validity .\n  ?contribution pgmr:mentioned pgmr:conclusion_validity .\n  ?paper pgmr:publication_year ?publicationYear .\n}\n```",
+    "extracted_query": "```sparql SELECT DISTINCT ?paper ?publicationYear WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P145000 orkgp:P55037 . ?contribution orkgp:P145000 orkgp:P55036 . ?paper orkgp:P29 ?publicationYear . } ```",
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?year\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C27001 .\n  ?contribution orkgp:P135046 ?venue .\n  ?venue rdfs:label ?venueName .\n  ?paper orkgp:P29 ?year .\n  ?contribution orkgp:P39099 ?threats .\n  ?threats orkgp:P55037 ?constructValidity .\n  ?threats orkgp:P55036 ?conclusionValidity .\n  FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\"))\n  FILTER(LCASE(STR(?constructValidity)) IN (\"true\", \"yes\", \"1\"))\n  FILTER(LCASE(STR(?conclusionValidity)) IN (\"true\", \"yes\", \"1\"))\n}\nORDER BY ?year",
+    "error_text": null,
+    "source": {
+      "raw_path": "code/outputs/evaluation_runs/qwen25_coder_7b_instruct/pgmr_mini__ace_dev_pool_sample_80__20260504_180146/benchmark_raw.json",
+      "record_index": 2
+    }
+  },
+  {
+    "item_id": "192",
+    "family": "empirical_research_practice",
+    "question": "How many papers reported both recall and precision but not accuracy?",
+    "categories": [
+      "pgmr_unmapped_placeholders",
+      "predicate_ref_mismatch",
+      "query_form_mismatch",
+      "unsupported_query_form"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": 0.6154,
+      "query_form_match": 0.0,
+      "query_extracted": 1.0,
+      "supported_query_form": 0.0,
+      "pgmr_unmapped_placeholders": 0.0,
+      "class_ref_match": 1.0,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": 1.0
+    },
+    "raw_model_output": "```sparql\nSELECT (COUNT(DISTINCT ?paper) AS ?count) WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:empirical_research_practice_contribution .\n  FILTER(?contribution pgmr:mentioned pgmr:recall && ?contribution pgmr:mentioned pgmr:precision && !?contribution pgmr:mentioned pgmr:accuracy)\n}\n```",
+    "extracted_query": "```sparql SELECT (COUNT(DISTINCT ?paper) AS ?count) WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . FILTER(?contribution orkgp:P145000 orkgp:P5073 && ?contribution orkgp:P145000 orkgp:P3004 && !?contribution orkgp:P145000 orkgp:P18048) } ```",
+    "restored_query": null,
+    "gold_sparql": "SELECT (COUNT(DISTINCT ?paper) AS ?count)\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C27001 .\n  ?contribution orkgp:P135046 ?venue .\n  ?venue rdfs:label ?venueName .\n  ?contribution orkgp:P15124 ?dataAnalysis .\n  ?dataAnalysis orkgp:P57016 ?machineLearning .\n  ?machineLearning orkgp:P2006 ?metric .\n  ?metric orkgp:P5073 ?recall .\n  ?metric orkgp:P3004 ?precision .\n  FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\"))\n  FILTER(LCASE(STR(?recall)) IN (\"true\", \"yes\", \"1\"))\n  FILTER(LCASE(STR(?precision)) IN (\"true\", \"yes\", \"1\"))\n  FILTER NOT EXISTS { ?metric orkgp:P18048 ?anyAccuracy . }\n}",
+    "error_text": null,
+    "source": {
+      "raw_path": "code/outputs/evaluation_runs/qwen25_coder_7b_instruct/pgmr_mini__ace_dev_pool_sample_80__20260504_180146/benchmark_raw.json",
+      "record_index": 8
+    }
+  },
+  {
+    "item_id": "588",
+    "family": "empirical_research_practice",
+    "question": "Which papers published after 2018 reported both recall and precision but no accuracy?",
+    "categories": [
+      "no_extracted_query",
+      "pgmr_restore_error"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": null,
+      "query_form_match": null,
+      "query_extracted": 0.0,
+      "supported_query_form": null,
+      "pgmr_unmapped_placeholders": null,
+      "class_ref_match": null,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": null
+    },
+    "raw_model_output": "```sparql\nSELECT DISTINCT ?paper ?paperLabel \nWHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:empirical_research_practice_contribution .\n  ?contribution pgmr:research_question ?question .\n  ?question pgmr:question_type \"research_question\" ;\n             pgmr:mention pgmr:recall , pgmr:precision ;\n             pgmr:hidden_in_text pgmr:accuracy .\n  FILTER(?paper pgmr:publication_year > 2018)\n}\n```",
+    "extracted_query": null,
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?paper ?paperLabel\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C27001 .\n  ?contribution orkgp:P135046 ?venue .\n  ?venue rdfs:label ?venueName .\n  ?paper orkgp:P29 ?year .\n  ?contribution orkgp:P15124 ?dataAnalysis .\n  ?dataAnalysis orkgp:P57016 ?machineLearning .\n  ?machineLearning orkgp:P2006 ?metric .\n  ?metric orkgp:P5073 ?recall .\n  ?metric orkgp:P3004 ?precision .\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n  FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\"))\n  FILTER(xsd:integer(STR(?year)) > 2018)\n  FILTER(LCASE(STR(?recall)) IN (\"true\", \"yes\", \"1\"))\n  FILTER(LCASE(STR(?precision)) IN (\"true\", \"yes\", \"1\"))\n  FILTER NOT EXISTS { ?metric orkgp:P18048 ?anyAccuracy . }\n}\nORDER BY ?paperLabel",
+    "error_text": null,
+    "source": {
+      "raw_path": "code/outputs/evaluation_runs/qwen25_coder_7b_instruct/pgmr_mini__ace_dev_pool_sample_80__20260504_180146/benchmark_raw.json",
+      "record_index": 14
+    }
+  },
+  {
+    "item_id": "314",
+    "family": "empirical_research_practice",
+    "question": "How many papers report an alternative hypothesis and a hypothesis statement?",
+    "categories": [
+      "pgmr_unmapped_placeholders",
+      "predicate_ref_mismatch",
+      "query_form_mismatch",
+      "unsupported_query_form"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": 0.5455,
+      "query_form_match": 0.0,
+      "query_extracted": 1.0,
+      "supported_query_form": 0.0,
+      "pgmr_unmapped_placeholders": 0.0,
+      "class_ref_match": 1.0,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": 1.0
+    },
+    "raw_model_output": "```sparql\nSELECT (COUNT(DISTINCT ?contribution) AS ?count) WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:empirical_research_practice_contribution ;\n                pgmr:alternative_hypothesis ?alternativeHypothesis ;\n                pgmr:hypothesis_statement ?hypothesisStatement .\n}\n```",
+    "extracted_query": "```sparql SELECT (COUNT(DISTINCT ?contribution) AS ?count) WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 ; orkgp:P35107 ?alternativeHypothesis ; orkgp:P56046 ?hypothesisStatement . } ```",
+    "restored_query": null,
+    "gold_sparql": "SELECT (COUNT(DISTINCT ?paper) AS ?count)\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C27001 .\n  ?contribution orkgp:P135046 ?venue .\n  ?venue rdfs:label ?venueName .\n  ?contribution orkgp:P15124 ?dataAnalysis .\n  ?dataAnalysis orkgp:P56043 ?inferentialStatistics .\n  ?inferentialStatistics orkgp:P30001 ?hypothesis .\n  ?hypothesis orkgp:P56046 ?hypothesisStatement .\n  ?hypothesis orkgp:P41703 ?hypothesisType .\n  ?hypothesisType orkgp:P35107 ?alternativeHypothesis .\n  FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\"))\n  FILTER(LCASE(STR(?alternativeHypothesis)) IN (\"true\", \"yes\", \"1\"))\n}",
+    "error_text": null,
+    "source": {
+      "raw_path": "code/outputs/evaluation_runs/qwen25_coder_7b_instruct/pgmr_mini__ace_dev_pool_sample_80__20260504_180146/benchmark_raw.json",
+      "record_index": 13
+    }
+  },
+  {
+    "item_id": "480",
+    "family": "empirical_research_practice",
+    "question": "Which papers report a research question whose text mentions \"requirements\"?",
+    "categories": [
+      "pgmr_unmapped_placeholders",
+      "predicate_ref_mismatch",
+      "query_form_mismatch",
+      "unsupported_query_form"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": 0.6667,
+      "query_form_match": 0.0,
+      "query_extracted": 1.0,
+      "supported_query_form": 0.0,
+      "pgmr_unmapped_placeholders": 0.0,
+      "class_ref_match": 1.0,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": 1.0
+    },
+    "raw_model_output": "```sparql\nSELECT DISTINCT ?paper ?paperLabel WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:empirical_research_practice_contribution .\n  ?contribution pgmr:research_question ?researchQuestion .\n  FILTER(CONTAINS(?researchQuestion, \"requirements\")) .\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}\n```",
+    "extracted_query": "```sparql SELECT DISTINCT ?paper ?paperLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P37330 ?researchQuestion . FILTER(CONTAINS(?researchQuestion, \"requirements\")) . OPTIONAL { ?paper rdfs:label ?paperLabel . } } ```",
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?paper ?paperLabel\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C27001 .\n  ?contribution orkgp:P135046 ?venue .\n  ?venue rdfs:label ?venueName .\n  ?contribution orkgp:P37330 ?researchQuestion .\n  ?researchQuestion orkgp:P44139 ?questionText .\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n  FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\"))\n  FILTER(CONTAINS(LCASE(STR(?questionText)), \"requirements\"))\n}\nORDER BY ?paperLabel",
+    "error_text": null,
+    "source": {
+      "raw_path": "code/outputs/evaluation_runs/qwen25_coder_7b_instruct/pgmr_mini__ace_dev_pool_sample_80__20260504_180146/benchmark_raw.json",
+      "record_index": 18
+    }
+  },
+  {
+    "item_id": "107",
+    "family": "empirical_research_practice",
+    "question": "What problem descriptions are reported in papers that mention both content validity and descriptive validity threats?",
+    "categories": [
+      "no_extracted_query",
+      "pgmr_restore_error"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": null,
+      "query_form_match": null,
+      "query_extracted": 0.0,
+      "supported_query_form": null,
+      "pgmr_unmapped_placeholders": null,
+      "class_ref_match": null,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": null
+    },
+    "raw_model_output": "```sparql\nSELECT DISTINCT ?paper ?description WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:empirical_research_practice_contribution .\n  ?contribution pgmr:mentioned pgmrc:content_validity .\n  ?contribution pgmr:mentioned pgmrc:descriptive_validity .\n  ?contribution pgmr:description ?description .\n}\n```",
+    "extracted_query": null,
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?problemDescription\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C27001 .\n  ?contribution orkgp:P135046 ?venue .\n  ?venue rdfs:label ?venueName .\n  ?contribution orkgp:P39099 ?threats .\n  ?threats orkgp:P68005 ?contentValidity .\n  ?threats orkgp:P97000 ?descriptiveValidity .\n  ?contribution orkgp:P32 ?problem .\n  ?problem orkgp:description ?problemDescription .\n  FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\"))\n  FILTER(LCASE(STR(?contentValidity)) IN (\"true\", \"yes\", \"1\"))\n  FILTER(LCASE(STR(?descriptiveValidity)) IN (\"true\", \"yes\", \"1\"))\n}\nORDER BY ?problemDescription",
+    "error_text": null,
+    "source": {
+      "raw_path": "code/outputs/evaluation_runs/qwen25_coder_7b_instruct/pgmr_mini__ace_dev_pool_sample_80__20260504_180146/benchmark_raw.json",
+      "record_index": 19
+    }
+  },
+  {
+    "item_id": "476",
+    "family": "empirical_research_practice",
+    "question": "Which years are reported for empirical papers that include a data collection method type?",
+    "categories": [
+      "no_extracted_query",
+      "pgmr_restore_error"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": null,
+      "query_form_match": null,
+      "query_extracted": 0.0,
+      "supported_query_form": null,
+      "pgmr_unmapped_placeholders": null,
+      "class_ref_match": null,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": null
+    },
+    "raw_model_output": "```sparql\nSELECT DISTINCT ?paper ?publicationYear WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:empirical_research_practice_contribution .\n  ?contribution pgmr:data_collection_method ?method .\n  ?method pgmr:type ?methodType .\n  ?paper pgmr:publication_year ?publicationYear .\n}\n```",
+    "extracted_query": null,
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?year\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C27001 .\n  ?contribution orkgp:P135046 ?venue .\n  ?venue rdfs:label ?venueName .\n  ?paper orkgp:P29 ?year .\n  ?contribution orkgp:P56008 ?dataCollection .\n  ?dataCollection orkgp:P1005 ?dataCollectionMethod .\n  ?dataCollectionMethod orkgp:P94003 ?methodType .\n  ?methodType rdfs:label ?methodTypeLabel .\n  FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\"))\n}\nORDER BY ?year",
+    "error_text": null,
+    "source": {
+      "raw_path": "code/outputs/evaluation_runs/qwen25_coder_7b_instruct/pgmr_mini__ace_dev_pool_sample_80__20260504_180146/benchmark_raw.json",
+      "record_index": 21
+    }
+  },
+  {
+    "item_id": "443",
+    "family": "empirical_research_practice",
+    "question": "What data type labels are reported for papers whose data collection method name contains survey?",
+    "categories": [
+      "no_extracted_query",
+      "pgmr_restore_error"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": null,
+      "query_form_match": null,
+      "query_extracted": 0.0,
+      "supported_query_form": null,
+      "pgmr_unmapped_placeholders": null,
+      "class_ref_match": null,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": null
+    },
+    "raw_model_output": "```sparql\nSELECT DISTINCT ?dataTypeLabel WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:empirical_research_practice_contribution .\n  ?contribution pgmr:data_collection_method ?method .\n  ?method pgmr:name ?methodName .\n  FILTER(CONTAINS(?methodName, \"survey\")) .\n  ?contribution pgmr:data_collection/pgmr:data/pgmr:data_type ?dataType .\n  OPTIONAL { ?dataType rdfs:label ?dataTypeLabel . }\n}\n```",
+    "extracted_query": null,
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?dataType ?dataTypeLabel\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C27001 .\n  ?contribution orkgp:P135046 ?venue .\n  ?venue rdfs:label ?venueName .\n  ?contribution orkgp:P56008 ?dataCollection .\n  ?dataCollection orkgp:DATA ?researchData .\n  ?researchData orkgp:P7055 ?dataType .\n  ?dataCollection orkgp:P1005 ?dataCollectionMethod .\n  ?dataCollectionMethod orkgp:P145012 ?methodName .\n  ?dataType rdfs:label ?dataTypeLabel .\n  FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\"))\n  FILTER(CONTAINS(LCASE(STR(?methodName)), \"survey\"))\n}\nORDER BY ?dataTypeLabel",
+    "error_text": null,
+    "source": {
+      "raw_path": "code/outputs/evaluation_runs/qwen25_coder_7b_instruct/pgmr_mini__ace_dev_pool_sample_80__20260504_180146/benchmark_raw.json",
+      "record_index": 22
+    }
+  },
+  {
+    "item_id": "199",
+    "family": "empirical_research_practice",
+    "question": "How many distinct data collection method names are reported in papers with quantitative data?",
+    "categories": [
+      "no_extracted_query",
+      "pgmr_restore_error"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": null,
+      "query_form_match": null,
+      "query_extracted": 0.0,
+      "supported_query_form": null,
+      "pgmr_unmapped_placeholders": null,
+      "class_ref_match": null,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": null
+    },
+    "raw_model_output": "```sparql\nSELECT (COUNT(DISTINCT ?method_name) AS ?count) WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:empirical_research_practice_contribution .\n  ?contribution pgmr:data_collection ?data_collection .\n  ?data_collection pgmr:data_type pgmr:quantitative .\n  ?data_collection pgmr:method ?method .\n  ?method pgmr:name ?method_name .\n}\n```",
+    "extracted_query": null,
+    "restored_query": null,
+    "gold_sparql": "SELECT (COUNT(DISTINCT ?paper) AS ?count)\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C27001 .\n  ?contribution orkgp:P135046 ?venue .\n  ?venue rdfs:label ?venueName .\n  ?contribution orkgp:P56008 ?dataCollection .\n  ?dataCollection orkgp:DATA ?researchData .\n  ?researchData orkgp:P7055 ?dataType .\n  ?dataType orkgp:P57039 ?quantitative .\n  ?dataCollection orkgp:P1005 ?dataCollectionMethod .\n  ?dataCollectionMethod orkgp:P145012 ?methodName .\n  FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\"))\n  FILTER(LCASE(STR(?quantitative)) IN (\"true\", \"yes\", \"1\"))\n}",
+    "error_text": null,
+    "source": {
+      "raw_path": "code/outputs/evaluation_runs/qwen25_coder_7b_instruct/pgmr_mini__ace_dev_pool_sample_80__20260504_180146/benchmark_raw.json",
+      "record_index": 26
+    }
+  },
+  {
+    "item_id": "291",
+    "family": "empirical_research_practice",
+    "question": "How many machine learning metrics are reported in papers that use machine learning analysis?",
+    "categories": [
+      "pgmr_unmapped_placeholders",
+      "predicate_ref_mismatch",
+      "query_form_mismatch",
+      "unsupported_query_form"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": 0.8889,
+      "query_form_match": 0.0,
+      "query_extracted": 1.0,
+      "supported_query_form": 0.0,
+      "pgmr_unmapped_placeholders": 0.0,
+      "class_ref_match": 1.0,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": 1.0
+    },
+    "raw_model_output": "```sparql\nSELECT (COUNT(DISTINCT ?metric) AS ?count) WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:empirical_research_practice_contribution .\n  ?contribution pgmr:data_analysis ?data_analysis .\n  ?data_analysis pgmr:machine_learning ?machine_learning .\n  ?machine_learning pgmr:metric ?metric .\n}\n```",
+    "extracted_query": "```sparql SELECT (COUNT(DISTINCT ?metric) AS ?count) WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P15124 ?data_analysis . ?data_analysis orkgp:P57016 ?machine_learning . ?machine_learning orkgp:P2006 ?metric . } ```",
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?metric ?metricLabel\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C27001 .\n  ?contribution orkgp:P135046 ?venue .\n  ?venue rdfs:label ?venueName .\n  ?contribution orkgp:P15124 ?dataAnalysis .\n  ?dataAnalysis orkgp:P57016 ?machineLearning .\n  ?machineLearning orkgp:P2006 ?metric .\n  ?metric rdfs:label ?metricLabel .\n  FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\"))\n}\nORDER BY ?metricLabel",
+    "error_text": null,
+    "source": {
+      "raw_path": "code/outputs/evaluation_runs/qwen25_coder_7b_instruct/pgmr_mini__ace_dev_pool_sample_80__20260504_180146/benchmark_raw.json",
+      "record_index": 28
+    }
+  },
+  {
+    "item_id": "689",
+    "family": "empirical_research_practice",
+    "question": "What measures of central tendency are reported for papers that use descriptive statistics?",
+    "categories": [
+      "pgmr_unmapped_placeholders",
+      "predicate_ref_mismatch",
+      "query_form_mismatch",
+      "unsupported_query_form"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": 0.8889,
+      "query_form_match": 0.0,
+      "query_extracted": 1.0,
+      "supported_query_form": 0.0,
+      "pgmr_unmapped_placeholders": 0.0,
+      "class_ref_match": 1.0,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": 1.0
+    },
+    "raw_model_output": "```sparql\nSELECT DISTINCT ?measureOfCentralTendency ?measureOfCentralTendencyLabel WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:empirical_research_practice_contribution .\n  ?contribution pgmr:data_analysis ?dataAnalysis .\n  ?dataAnalysis pgmr:descriptive_statistics ?descriptiveStats .\n  ?descriptiveStats pgmr:measures_of_central_tendency ?measureOfCentralTendency .\n  OPTIONAL { ?measureOfCentralTendency rdfs:label ?measureOfCentralTendencyLabel . }\n}\n```",
+    "extracted_query": "```sparql SELECT DISTINCT ?measureOfCentralTendency ?measureOfCentralTendencyLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P15124 ?dataAnalysis . ?dataAnalysis orkgp:P56048 ?descriptiveStats . ?descriptiveStats orkgp:P57005 ?measureOfCentralTendency . OPTIONAL { ?measureOfCentralTendency rdfs:label ?measureOfCentralTendencyLabel . } } ```",
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?centralTendency ?centralTendencyLabel\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C27001 .\n  ?contribution orkgp:P135046 ?venue .\n  ?venue rdfs:label ?venueName .\n  ?contribution orkgp:P15124 ?dataAnalysis .\n  ?dataAnalysis orkgp:P56048 ?descriptiveStatistic .\n  ?descriptiveStatistic orkgp:P57005 ?centralTendency .\n  ?centralTendency rdfs:label ?centralTendencyLabel .\n  FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\"))\n}\nORDER BY ?centralTendencyLabel",
+    "error_text": null,
+    "source": {
+      "raw_path": "code/outputs/evaluation_runs/qwen25_coder_7b_instruct/pgmr_mini__ace_dev_pool_sample_80__20260504_180146/benchmark_raw.json",
+      "record_index": 31
+    }
+  },
+  {
+    "item_id": "271",
+    "family": "empirical_research_practice",
+    "question": "Which papers report both a mean and a standard deviation?",
+    "categories": [
+      "pgmr_unmapped_placeholders",
+      "predicate_ref_mismatch",
+      "query_form_mismatch",
+      "unsupported_query_form"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": 0.7692,
+      "query_form_match": 0.0,
+      "query_extracted": 1.0,
+      "supported_query_form": 0.0,
+      "pgmr_unmapped_placeholders": 0.0,
+      "class_ref_match": 1.0,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": 1.0
+    },
+    "raw_model_output": "```sparql\nSELECT DISTINCT ?paper ?paperLabel \nWHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:empirical_research_practice_contribution .\n  ?contribution pgmr:data_analysis ?dataAnalysis .\n  ?dataAnalysis pgmr:measures_of_central_tendency ?measure .\n  FILTER(?measure = pgmr:mean || ?measure = pgmr:standard_deviation)\n}\nOPTIONAL { ?paper rdfs:label ?paperLabel . }\n```",
+    "extracted_query": "```sparql SELECT DISTINCT ?paper ?paperLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P15124 ?dataAnalysis . ?dataAnalysis orkgp:P57005 ?measure . FILTER(?measure = orkgp:P47000 || ?measure = orkgp:P44087) } OPTIONAL { ?paper rdfs:label ?paperLabel . } ```",
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?paper ?paperLabel\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C27001 .\n  ?contribution orkgp:P135046 ?venue .\n  ?venue rdfs:label ?venueName .\n  ?contribution orkgp:P15124 ?dataAnalysis .\n  ?dataAnalysis orkgp:P56048 ?descriptiveStatistic .\n  ?descriptiveStatistic orkgp:P57005 ?centralTendency .\n  ?centralTendency orkgp:P47000 ?mean .\n  ?descriptiveStatistic orkgp:P57008 ?dispersionVariation .\n  ?dispersionVariation orkgp:P44087 ?standardDeviation .\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n  FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\"))\n  FILTER(LCASE(STR(?mean)) IN (\"true\", \"yes\", \"1\"))\n  FILTER(LCASE(STR(?standardDeviation)) IN (\"true\", \"yes\", \"1\"))\n}\nORDER BY ?paperLabel",
+    "error_text": null,
+    "source": {
+      "raw_path": "code/outputs/evaluation_runs/qwen25_coder_7b_instruct/pgmr_mini__ace_dev_pool_sample_80__20260504_180146/benchmark_raw.json",
+      "record_index": 32
+    }
+  },
+  {
+    "item_id": "264",
+    "family": "empirical_research_practice",
+    "question": "Which research questions are reported in papers that also state a hypothesis?",
+    "categories": [
+      "pgmr_unmapped_placeholders",
+      "predicate_ref_mismatch",
+      "query_form_mismatch",
+      "unsupported_query_form"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": 0.5455,
+      "query_form_match": 0.0,
+      "query_extracted": 1.0,
+      "supported_query_form": 0.0,
+      "pgmr_unmapped_placeholders": 0.0,
+      "class_ref_match": 1.0,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": 1.0
+    },
+    "raw_model_output": "```sparql\nSELECT DISTINCT ?paper ?paperLabel ?researchQuestion ?hypothesisStatement WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:empirical_research_practice_contribution .\n  ?contribution pgmr:research_question ?researchQuestion .\n  ?contribution pgmr:hypothesis ?hypothesis .\n  ?hypothesis pgmr:hypothesis_statement ?hypothesisStatement .\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}\n```",
+    "extracted_query": "```sparql SELECT DISTINCT ?paper ?paperLabel ?researchQuestion ?hypothesisStatement WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P37330 ?researchQuestion . ?contribution orkgp:P30001 ?hypothesis . ?hypothesis orkgp:P56046 ?hypothesisStatement . OPTIONAL { ?paper rdfs:label ?paperLabel . } } ```",
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?researchQuestion ?questionText\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C27001 .\n  ?contribution orkgp:P135046 ?venue .\n  ?venue rdfs:label ?venueName .\n  ?contribution orkgp:P15124 ?dataAnalysis .\n  ?dataAnalysis orkgp:P56043 ?inferentialStatistics .\n  ?inferentialStatistics orkgp:P30001 ?hypothesis .\n  ?contribution orkgp:P37330 ?researchQuestion .\n  ?researchQuestion orkgp:P44139 ?questionText .\n  FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\"))\n}\nORDER BY ?questionText",
+    "error_text": null,
+    "source": {
+      "raw_path": "code/outputs/evaluation_runs/qwen25_coder_7b_instruct/pgmr_mini__ace_dev_pool_sample_80__20260504_180146/benchmark_raw.json",
+      "record_index": 33
+    }
+  },
+  {
+    "item_id": "184",
+    "family": "empirical_research_practice",
+    "question": "What data collection URLs are reported for papers that reported quantitative data and a research question answer?",
+    "categories": [
+      "pgmr_unmapped_placeholders",
+      "predicate_ref_mismatch",
+      "query_form_mismatch",
+      "unsupported_query_form"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": 0.7143,
+      "query_form_match": 0.0,
+      "query_extracted": 1.0,
+      "supported_query_form": 0.0,
+      "pgmr_unmapped_placeholders": 0.0,
+      "class_ref_match": 1.0,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": 1.0
+    },
+    "raw_model_output": "```sparql\nSELECT DISTINCT ?url WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:empirical_research_practice_contribution ;\n                pgmr:data_type pgmr:quantitative ;\n                pgmr:research_question_answer ?question_answer .\n  ?question_answer pgmr:hidden_in_text ?hidden_text .\n  FILTER(CONTAINS(?hidden_text, \"URL\"))\n  ?hidden_text pgmr:url ?url .\n}\n```",
+    "extracted_query": "```sparql SELECT DISTINCT ?url WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 ; orkgp:P7055 orkgp:P57039 ; orkgp:P57004 ?question_answer . ?question_answer orkgp:P55038 ?hidden_text . FILTER(CONTAINS(?hidden_text, \"URL\")) ?hidden_text orkgp:url ?url . } ```",
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?dataUrl\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C27001 .\n  ?contribution orkgp:P135046 ?venue .\n  ?venue rdfs:label ?venueName .\n  ?contribution orkgp:P56008 ?dataCollection .\n  ?dataCollection orkgp:DATA ?researchData .\n  ?researchData orkgp:P7055 ?dataType .\n  ?dataType orkgp:P57039 ?quantitative .\n  ?researchData orkgp:url ?dataUrl .\n  ?contribution orkgp:P57004 ?researchQuestionAnswer .\n  FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\"))\n  FILTER(LCASE(STR(?quantitative)) IN (\"true\", \"yes\", \"1\"))\n}\nORDER BY ?dataUrl",
+    "error_text": null,
+    "source": {
+      "raw_path": "code/outputs/evaluation_runs/qwen25_coder_7b_instruct/pgmr_mini__ace_dev_pool_sample_80__20260504_180146/benchmark_raw.json",
+      "record_index": 37
+    }
+  },
+  {
+    "item_id": "504",
+    "family": "empirical_research_practice",
+    "question": "Which papers mention threats to validity but do not classify any of them as construct, internal, external, conclusion, reliability, generalizability, repeatability, content, descriptive, or theoretical validity?",
+    "categories": [
+      "no_extracted_query",
+      "pgmr_restore_error"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": null,
+      "query_form_match": null,
+      "query_extracted": 0.0,
+      "supported_query_form": null,
+      "pgmr_unmapped_placeholders": null,
+      "class_ref_match": null,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": null
+    },
+    "raw_model_output": "```sparql\nSELECT DISTINCT ?paper ?paperLabel WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:empirical_research_practice_contribution .\n  FILTER NOT EXISTS {\n    ?contribution pgmr:classifies_threat_to_validity pgmr:construct_validity .\n  }\n  FILTER NOT EXISTS {\n    ?contribution pgmr:classifies_threat_to_validity pgmr:internal_validity .\n  }\n  FILTER NOT EXISTS {\n    ?contribution pgmr:classifies_threat_to_validity pgmr:external_validity .\n  }\n  FILTER NOT EXISTS {\n    ?contribution pgmr:classifies_threat_to_validity pgmr:conclusion_validity .\n  }\n  FILTER NOT EXISTS {\n    ?contribution pgmr:classifies_threat_to_validity pgmr:reliability .\n  }\n  FILTER NOT EXISTS {\n    ?contribution pgmr:classifies_threat_to_validity pgmr:generalizability .\n  }\n  FILTER NOT EXISTS {\n    ?contribution pgmr:classifies_threat_to_validity pgmr:repeatability .\n  }\n  FILTER NOT EXISTS {\n    ?contribution pgmr:classifies_threat_to_validity pgmr:content_validity .\n  }\n  FILTER NOT EXISTS {\n    ?contribution pgmr:classifies_threat_to_validity pgmr:descriptive_validity .\n  }\n  FILTER NOT EXISTS {\n    ?contribution pgmr:classifies_threat_to_validity pgmr:theoretical_validity .\n  }\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}\n```",
+    "extracted_query": null,
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?paper ?paperLabel\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C27001 .\n  ?contribution orkgp:P135046 ?venue .\n  ?venue rdfs:label ?venueName .\n  FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\"))\n  ?contribution orkgp:P39099 ?threats .\n  ?threats orkgp:P145000 ?mentionedThreat .\n  FILTER(LCASE(STR(?mentionedThreat)) IN (\"true\", \"yes\", \"1\"))\n  FILTER NOT EXISTS { ?threats orkgp:P55037 ?anyConstructValidity . }\n  FILTER NOT EXISTS { ?threats orkgp:P55035 ?anyInternalValidity . }\n  FILTER NOT EXISTS { ?threats orkgp:P55034 ?anyExternalValidity . }\n  FILTER NOT EXISTS { ?threats orkgp:P55036 ?anyConclusionValidity . }\n  FILTER NOT EXISTS { ?threats orkgp:P59109 ?anyReliability . }\n  FILTER NOT EXISTS { ?threats orkgp:P60006 ?anyGeneralizability . }\n  FILTER NOT EXISTS { ?threats orkgp:P97002 ?anyRepeatability . }\n  FILTER NOT EXISTS { ?threats orkgp:P68005 ?anyContentValidity . }\n  FILTER NOT EXISTS { ?threats orkgp:P97000 ?anyDescriptiveValidity . }\n  FILTER NOT EXISTS { ?threats orkgp:P97001 ?anyTheoreticalValidity . }\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}\nORDER BY ?paperLabel",
+    "error_text": null,
+    "source": {
+      "raw_path": "code/outputs/evaluation_runs/qwen25_coder_7b_instruct/pgmr_mini__ace_dev_pool_sample_80__20260504_180146/benchmark_raw.json",
+      "record_index": 39
+    }
+  },
+  {
+    "item_id": "485",
+    "family": "empirical_research_practice",
+    "question": "Which papers report either mean or median in their descriptive statistics?",
+    "categories": [
+      "pgmr_unmapped_placeholders",
+      "predicate_ref_mismatch",
+      "query_form_mismatch",
+      "unsupported_query_form"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": 0.8333,
+      "query_form_match": 0.0,
+      "query_extracted": 1.0,
+      "supported_query_form": 0.0,
+      "pgmr_unmapped_placeholders": 0.0,
+      "class_ref_match": 1.0,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": 1.0
+    },
+    "raw_model_output": "```sparql\nSELECT DISTINCT ?paper ?paperLabel WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:empirical_research_practice_contribution .\n  ?contribution pgmr:data_analysis ?dataAnalysis .\n  ?dataAnalysis pgmr:descriptive_statistics ?descriptiveStats .\n  FILTER(?descriptiveStats = pgmr:mean || ?descriptiveStats = pgmr:median)\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}\n```",
+    "extracted_query": "```sparql SELECT DISTINCT ?paper ?paperLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P15124 ?dataAnalysis . ?dataAnalysis orkgp:P56048 ?descriptiveStats . FILTER(?descriptiveStats = orkgp:P47000 || ?descriptiveStats = orkgp:P57006) OPTIONAL { ?paper rdfs:label ?paperLabel . } } ```",
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?paper ?paperLabel\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C27001 .\n  ?contribution orkgp:P135046 ?venue .\n  ?venue rdfs:label ?venueName .\n  FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\"))\n  ?contribution orkgp:P15124 ?dataAnalysis .\n  ?dataAnalysis orkgp:P56048 ?descriptiveStatistic .\n  ?descriptiveStatistic orkgp:P57005 ?centralTendency .\n  { ?centralTendency orkgp:P47000 ?mean . FILTER(LCASE(STR(?mean)) IN (\"true\", \"yes\", \"1\")) }\n  UNION\n  { ?centralTendency orkgp:P57006 ?median . FILTER(LCASE(STR(?median)) IN (\"true\", \"yes\", \"1\")) }\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}\nORDER BY ?paperLabel",
+    "error_text": null,
+    "source": {
+      "raw_path": "code/outputs/evaluation_runs/qwen25_coder_7b_instruct/pgmr_mini__ace_dev_pool_sample_80__20260504_180146/benchmark_raw.json",
+      "record_index": 40
+    }
+  },
+  {
+    "item_id": "98",
+    "family": "empirical_research_practice",
+    "question": "What is the research question text reported in papers that include a subquestion and an alternative hypothesis?",
+    "categories": [
+      "no_extracted_query",
+      "pgmr_restore_error"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": null,
+      "query_form_match": null,
+      "query_extracted": 0.0,
+      "supported_query_form": null,
+      "pgmr_unmapped_placeholders": null,
+      "class_ref_match": null,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": null
+    },
+    "raw_model_output": "```sparql\nSELECT DISTINCT ?paper ?paperLabel ?researchQuestionText WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:empirical_research_practice_contribution .\n  ?contribution pgmr:includes_subquestion ?subquestion .\n  ?contribution pgmr:includes_alternative_hypothesis ?alternativeHypothesis .\n  ?contribution pgmr:research_question ?researchQuestion .\n  ?researchQuestion pgmr:text ?researchQuestionText .\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}\n```",
+    "extracted_query": null,
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?researchQuestion ?questionText\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C27001 .\n  ?contribution orkgp:P135046 ?venue .\n  ?venue rdfs:label ?venueName .\n  ?contribution orkgp:P15124 ?dataAnalysis .\n  ?dataAnalysis orkgp:P56043 ?inferentialStatistics .\n  ?inferentialStatistics orkgp:P30001 ?hypothesis .\n  ?hypothesis orkgp:P41703 ?hypothesisType .\n  ?hypothesisType orkgp:P35107 ?alternativeHypothesis .\n  ?contribution orkgp:P37330 ?researchQuestion .\n  ?researchQuestion orkgp:P44139 ?questionText .\n  ?researchQuestion orkgp:P57000 ?subquestion .\n  ?subquestion orkgp:P44139 ?subquestionText .\n  FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\"))\n  FILTER(LCASE(STR(?alternativeHypothesis)) IN (\"true\", \"yes\", \"1\"))\n}\nORDER BY ?questionText",
+    "error_text": null,
+    "source": {
+      "raw_path": "code/outputs/evaluation_runs/qwen25_coder_7b_instruct/pgmr_mini__ace_dev_pool_sample_80__20260504_180146/benchmark_raw.json",
+      "record_index": 43
+    }
+  },
+  {
+    "item_id": "44",
+    "family": "empirical_research_practice",
+    "question": "Which hypotheses are explicitly marked as alternative hypotheses?",
+    "categories": [
+      "no_extracted_query",
+      "pgmr_restore_error"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": null,
+      "query_form_match": null,
+      "query_extracted": 0.0,
+      "supported_query_form": null,
+      "pgmr_unmapped_placeholders": null,
+      "class_ref_match": null,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": null
+    },
+    "raw_model_output": "```sparql\nSELECT DISTINCT ?hypothesis ?hypothesisLabel WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:empirical_research_practice_contribution ;\n                pgmr:hypothesis ?hypothesis .\n  ?hypothesis pgmr:type pgmrc:alternative_hypothesis .\n  OPTIONAL { ?hypothesis rdfs:label ?hypothesisLabel . }\n}\n```",
+    "extracted_query": null,
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?hypothesis ?hypothesisStatement\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C27001 .\n  ?contribution orkgp:P135046 ?venue .\n  ?venue rdfs:label ?venueName .\n  ?contribution orkgp:P15124 ?dataAnalysis .\n  ?dataAnalysis orkgp:P56043 ?inferentialStatistics .\n  ?inferentialStatistics orkgp:P30001 ?hypothesis .\n  ?hypothesis orkgp:P41703 ?hypothesisType .\n  ?hypothesisType orkgp:P35107 ?alternativeHypothesis .\n  ?hypothesis orkgp:P56046 ?hypothesisStatement .\n  FILTER(LCASE(STR(?venueName)) = LCASE(\"IEEE International Requirements Engineering Conference\"))\n  FILTER(LCASE(STR(?alternativeHypothesis)) IN (\"true\", \"yes\", \"1\"))\n}\nORDER BY ?hypothesisStatement",
+    "error_text": null,
+    "source": {
+      "raw_path": "code/outputs/evaluation_runs/qwen25_coder_7b_instruct/pgmr_mini__ace_dev_pool_sample_80__20260504_180146/benchmark_raw.json",
+      "record_index": 44
+    }
+  }
+]
