@@ -1,0 +1,623 @@
+Du bist ein LLM-assisted Reflector für eine Bachelorarbeit zu Text-to-SPARQL auf ORKG-Templates.
+
+Aufgabe:
+Analysiere Fehler-Traces eines lokalen Base-Modells und erzeuge kurze, konkrete ACE-Playbook-Regeln.
+
+Kontext:
+- Lokales Modell: qwen25_coder_7b_instruct
+- Familie: nlp4re
+- Modus: pgmr_lite
+- Repräsentation: PGMR-lite mit pgmr:/pgmrc:-Platzhaltern
+- Die Regeln werden später in den Prompt eingefügt.
+- Diese Traces stammen aus einem ACE-Development-Sample, nicht aus dem finalen Benchmark.
+
+Sehr wichtig:
+- Erzeuge KEINE generischen Regeln wie "Return only the query", "Use valid placeholders", "No markdown".
+- Erzeuge konkrete Struktur-, Pfad-, Mapping-, Label-Filter- oder Placeholder-Choice-Regeln.
+- Regeln sollen kurz sein, weil sie in den Prompt kommen.
+- Dedupliziere ähnliche Regeln.
+- Nutze nur Informationen aus den Traces, Family hints und dem aktuellen Playbook.
+- Schreibe keine Gold-SPARQLs um.
+- Ausgabe NUR als valides JSON-Array, keine Markdown-Erklärung.
+
+Family hints for nlp4re:
+- Core pattern: ?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:nlp4re_contribution .
+- NLP task type questions often need a task node and a task type/label filter, not invented pgmrc classes.
+- Evaluation questions often require contribution -> evaluation -> metric/baseline/validation.
+- Dataset questions often require contribution -> NLP dataset -> nested dataset field.
+
+Gute Regel-Beispiele:
+[
+  {
+    "category": "label_filter",
+    "title": "Use label filters for NLP task types",
+    "content": "For NLP task type questions such as classification, bind the task type node and filter its label instead of inventing a pgmrc: class.",
+    "avoid": "Do not output invented or misspelled task-type classes.",
+    "priority": 118,
+    "evidence_item_ids": ["521"]
+  }
+]
+
+Schlechte Regeln:
+[
+  {
+    "category": "output_format",
+    "title": "Return only the query",
+    "content": "Return only the final query.",
+    "avoid": "Do not explain.",
+    "priority": 120,
+    "evidence_item_ids": []
+  }
+]
+
+Regel-Schema:
+[
+  {
+    "category": "nested_path | predicate_ref_mismatch | answer_mismatch | query_form_mismatch | placeholder_choice | label_filter | contribution_pattern",
+    "title": "short imperative title",
+    "content": "one concise rule, max 35 words",
+    "avoid": "one concise anti-pattern, max 25 words",
+    "priority": 90-125,
+    "evidence_item_ids": ["id1", "id2"]
+  }
+]
+
+Maximal 8 Regeln.
+
+Aktuelles Playbook:
+[
+  {
+    "title": "Use NLP4RE contribution pattern",
+    "category": "contribution_pattern",
+    "content": "Always connect the paper to the contribution with ?paper pgmr:has_contribution ?contribution . and type the contribution as pgmrc:nlp4re_contribution . Attach NLP4RE template fields to ?contribution or to properly bound nested nodes.",
+    "avoid": "Do not attach NLP4RE template fields directly to ?paper except publication year.",
+    "priority": 120
+  },
+  {
+    "title": "Use full nested NLP4RE paths",
+    "category": "nested_path",
+    "content": "For nested NLP4RE fields, first bind the parent node from ?contribution and then bind the requested child field. Examples: evaluation questions use contribution -> evaluation -> metric/baseline/validation; NLP task questions use contribution -> NLP task -> input/output/task type; dataset questions use contribution -> NLP dataset -> dataset field.",
+    "avoid": "Do not skip parent nodes when asking for nested fields.",
+    "priority": 115
+  }
+]
+
+Fehler-Traces:
+[
+  {
+    "item_id": "521",
+    "family": "nlp4re",
+    "question": "Which papers tackle a classification NLP task?",
+    "categories": [
+      "no_extracted_query",
+      "pgmr_restore_error"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": null,
+      "query_form_match": null,
+      "query_extracted": 0.0,
+      "supported_query_form": null,
+      "pgmr_unmapped_placeholders": null,
+      "class_ref_match": null,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": null
+    },
+    "raw_model_output": "SELECT DISTINCT ?paper ?paperLabel WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:nlp4re_contribution .\n  ?contribution pgmr:NLP_task ?task .\n  ?task pgmr:NLP_task_type pgmrc:classificaiton .\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}",
+    "extracted_query": null,
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?paper ?paperLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181003 ?task . ?task orkgp:P181004 ?taskType . ?taskType rdfs:label ?taskTypeLabel . FILTER(REGEX(LCASE(STR(?taskTypeLabel)), \"classification\")) OPTIONAL { ?paper rdfs:label ?paperLabel } } ORDER BY ?paperLabel",
+    "error_text": null
+  },
+  {
+    "item_id": "397",
+    "family": "nlp4re",
+    "question": "Which papers do not provide any release URL for their implemented approach?",
+    "categories": [
+      "answer_mismatch",
+      "pgmr_unmapped_placeholders",
+      "predicate_ref_mismatch"
+    ],
+    "metrics": {
+      "answer_exact_match": 0.0,
+      "predicate_ref_match": 0.8571,
+      "query_form_match": 1.0,
+      "query_extracted": 1.0,
+      "supported_query_form": 1.0,
+      "pgmr_unmapped_placeholders": 0.0,
+      "class_ref_match": 1.0,
+      "prediction_execution_success": 1.0,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": 1.0
+    },
+    "raw_model_output": "SELECT DISTINCT ?paper ?paperLabel WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:nlp4re_contribution .\n  FILTER NOT EXISTS {\n    ?contribution pgmr:implemented_approach/pgmr:url ?url .\n  }\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}",
+    "extracted_query": "SELECT DISTINCT ?paper ?paperLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . FILTER NOT EXISTS { ?contribution orkgp:P181046/orkgp:P1003 ?url . } OPTIONAL { ?paper rdfs:label ?paperLabel . } }",
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?paper ?paperLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . FILTER NOT EXISTS { ?contribution orkgp:P181046 ?approach . ?approach orkgp:release ?release . ?release orkgp:P1003 ?url . } OPTIONAL { ?paper rdfs:label ?paperLabel . } } ORDER BY ?paperLabel",
+    "error_text": null
+  },
+  {
+    "item_id": "333",
+    "family": "nlp4re",
+    "question": "What release URLs are given for implemented approaches that are released as source code?",
+    "categories": [
+      "pgmr_unmapped_placeholders",
+      "predicate_ref_mismatch",
+      "query_form_mismatch",
+      "unsupported_query_form"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": 0.8889,
+      "query_form_match": 0.0,
+      "query_extracted": 1.0,
+      "supported_query_form": 0.0,
+      "pgmr_unmapped_placeholders": 0.0,
+      "class_ref_match": 1.0,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": 1.0
+    },
+    "raw_model_output": "```sparql\nSELECT DISTINCT ?release_url WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:nlp4re_contribution .\n  ?contribution pgmr:implemented_approach ?approach .\n  ?approach pgmr:release ?release .\n  ?release pgmr:url ?release_url .\n}\n```",
+    "extracted_query": "```sparql SELECT DISTINCT ?release_url WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181046 ?approach . ?approach orkgp:release ?release . ?release orkgp:P1003 ?release_url . } ```",
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?url WHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181046 ?approach .\n  ?approach orkgp:release ?release .\n  ?release orkgp:P181049 ?releaseFormat ;\n    orkgp:P1003 ?url .\n  ?releaseFormat rdfs:label ?releaseFormatLabel .\n  FILTER(CONTAINS(LCASE(STR(?releaseFormatLabel)), 'source code'))\n}",
+    "error_text": null
+  },
+  {
+    "item_id": "211",
+    "family": "nlp4re",
+    "question": "Which papers report more annotators than data sources?",
+    "categories": [
+      "answer_mismatch",
+      "pgmr_unmapped_placeholders",
+      "predicate_ref_mismatch"
+    ],
+    "metrics": {
+      "answer_exact_match": 0.0,
+      "predicate_ref_match": 0.6,
+      "query_form_match": 1.0,
+      "query_extracted": 1.0,
+      "supported_query_form": 1.0,
+      "pgmr_unmapped_placeholders": 0.0,
+      "class_ref_match": 1.0,
+      "prediction_execution_success": 1.0,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": 1.0
+    },
+    "raw_model_output": "SELECT DISTINCT ?paper ?paperLabel WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:nlp4re_contribution .\n  ?contribution pgmr:number_of_annotators ?numAnnotators .\n  ?contribution pgmr:number_of_data_sources ?numDataSources .\n  FILTER(?numAnnotators > ?numDataSources)\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}",
+    "extracted_query": "SELECT DISTINCT ?paper ?paperLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P59120 ?numAnnotators . ?contribution orkgp:P181019 ?numDataSources . FILTER(?numAnnotators > ?numDataSources) OPTIONAL { ?paper rdfs:label ?paperLabel . } }",
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?paper ?paperLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181031 ?annotationProc . ?annotationProc orkgp:P181032 ?annotator . ?annotator orkgp:P59120 ?numAnnotators . ?contribution orkgp:P181011 ?dataset . ?dataset orkgp:P181017 ?source . ?source orkgp:P181019 ?numSources . FILTER(xsd:decimal(?numAnnotators) > xsd:decimal(?numSources)) OPTIONAL { ?paper rdfs:label ?paperLabel } }",
+    "error_text": null
+  },
+  {
+    "item_id": "518",
+    "family": "nlp4re",
+    "question": "In which year was the dataset produced for contributions whose natural language is English?",
+    "categories": [
+      "pgmr_unmapped_placeholders",
+      "predicate_ref_mismatch",
+      "query_form_mismatch",
+      "unsupported_query_form"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": 0.5,
+      "query_form_match": 0.0,
+      "query_extracted": 1.0,
+      "supported_query_form": 0.0,
+      "pgmr_unmapped_placeholders": 0.0,
+      "class_ref_match": 1.0,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": 1.0
+    },
+    "raw_model_output": "```sparql\nSELECT DISTINCT ?paper ?paperLabel WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:nlp4re_contribution .\n  ?contribution pgmr:natural_language \"English\" .\n  ?paper pgmr:publication_year ?year .\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}\n```",
+    "extracted_query": "```sparql SELECT DISTINCT ?paper ?paperLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181025 \"English\" . ?paper orkgp:P29 ?year . OPTIONAL { ?paper rdfs:label ?paperLabel . } } ```",
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?productionTime WHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 .\n  ?contribution orkgp:P181011 ?datasetTemplate .\n  ?datasetTemplate orkgp:P181022 ?dataTypeTemplate .\n  ?dataTypeTemplate orkgp:P181025 ?language .\n  ?language rdfs:label ?languageLabel .\n  FILTER(LCASE(STR(?languageLabel)) = LCASE(\"english\"))\n  ?datasetTemplate orkgp:P181016 ?productionTime .\n}",
+    "error_text": null
+  },
+  {
+    "item_id": "165",
+    "family": "nlp4re",
+    "question": "In which year were the datasets produced for contributions that also report a number of annotators and an annotator assignment?",
+    "categories": [
+      "no_extracted_query",
+      "pgmr_restore_error"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": null,
+      "query_form_match": null,
+      "query_extracted": 0.0,
+      "supported_query_form": null,
+      "pgmr_unmapped_placeholders": null,
+      "class_ref_match": null,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": null
+    },
+    "raw_model_output": "```sparql\nSELECT DISTINCT ?paper ?paperLabel ?nlpDatasetLocation ?numberOfAnnotators ?annotatorAssignment WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:nlp4re_contribution ;\n                pgmr:number_of_annotators ?numberOfAnnotators ;\n                pgmr:annotator_assignment ?annotatorAssignment .\n  ?contribution pgmr:used_nlp_dataset ?nlpDataset .\n  ?nlpDataset pgmr:nlp_dataset_location ?nlpDatasetLocation .\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}\n```",
+    "extracted_query": null,
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?answer WHERE {\n  ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181031 ?process . ?process orkgp:P181032 ?annotator . ?annotator orkgp:P59120 ?numAnnotators . ?annotator orkgp:P181033 ?assignment . ?dataset orkgp:P181016 ?answer . ?contribution orkgp:P181011 ?dataset . }",
+    "error_text": null
+  },
+  {
+    "item_id": "132",
+    "family": "nlp4re",
+    "question": "Which NLP task output types are reported for contributions whose datasets specify both a data format and a natural language?",
+    "categories": [
+      "no_extracted_query",
+      "pgmr_restore_error"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": null,
+      "query_form_match": null,
+      "query_extracted": 0.0,
+      "supported_query_form": null,
+      "pgmr_unmapped_placeholders": null,
+      "class_ref_match": null,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": null
+    },
+    "raw_model_output": "```sparql\nSELECT DISTINCT ?outputType ?outputTypeLabel WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:nlp4re_contribution .\n  ?contribution pgmr:used_dataset ?dataset .\n  ?dataset pgmr:nlp_data_format ?format .\n  ?dataset pgmr:natural_language ?language .\n  ?contribution pgmr:nlp_task_output ?output .\n  ?output pgmr:nlp_task_output_type ?outputType .\n  OPTIONAL { ?outputType rdfs:label ?outputTypeLabel . }\n}\n```",
+    "extracted_query": null,
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?answer ?answerLabel WHERE {\n  ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?dataset . ?dataset orkgp:P181022 ?dtype . ?dtype orkgp:P181023 ?format . ?dtype orkgp:P181025 ?lang . ?contribution orkgp:P181003 ?task . ?task orkgp:P181006 ?output . ?output orkgp:P181007 ?answer . OPTIONAL { ?answer rdfs:label ?answerLabel } }",
+    "error_text": null
+  },
+  {
+    "item_id": "812",
+    "family": "nlp4re",
+    "question": "What is the most common format of textual requirements?",
+    "categories": [
+      "pgmr_unmapped_placeholders",
+      "predicate_ref_mismatch",
+      "query_form_mismatch",
+      "unsupported_query_form"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": 0.6667,
+      "query_form_match": 0.0,
+      "query_extracted": 1.0,
+      "supported_query_form": 0.0,
+      "pgmr_unmapped_placeholders": 0.0,
+      "class_ref_match": 1.0,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": 1.0
+    },
+    "raw_model_output": "```sparql\nSELECT DISTINCT ?nlp_data_format WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:nlp4re_contribution .\n  ?contribution pgmr:nlp_data_format ?nlp_data_format .\n}\n```",
+    "extracted_query": "```sparql SELECT DISTINCT ?nlp_data_format WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181023 ?nlp_data_format . } ```",
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?contribution ?paper ?paperLabel ?NLPdataformatLabel\n    WHERE {\n        ?paper orkgp:P31 ?contribution .\n        ?contribution rdf:type orkgc:C121001;\n                 orkgp:P181011 ?NLPdataset .\n        ?NLPdataset orkgp:P181022 ?NLPdatatype .\n        ?NLPdatatype orkgp:P181023 ?NLPdataformat .\n\n        OPTIONAL {?paper rdfs:label ?paperLabel .}\n        OPTIONAL {?NLPdataformat rdfs:label ?NLPdataformatLabel .}\n    } ORDER BY ?contribution",
+    "error_text": null
+  },
+  {
+    "item_id": "798",
+    "family": "nlp4re",
+    "question": "Which Papers contain both information about the natural language of NLP data and information about the NLP data format, and which Papers report only one of these?",
+    "categories": [
+      "pgmr_unmapped_placeholders",
+      "predicate_ref_mismatch",
+      "query_form_mismatch",
+      "unsupported_query_form"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": 0.75,
+      "query_form_match": 0.0,
+      "query_extracted": 1.0,
+      "supported_query_form": 0.0,
+      "pgmr_unmapped_placeholders": 0.0,
+      "class_ref_match": 1.0,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": 1.0
+    },
+    "raw_model_output": "```sparql\nSELECT DISTINCT ?paper ?paperLabel WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:nlp4re_contribution .\n  FILTER (\n    (EXISTS { ?contribution pgmr:natural_language ?language . } &&\n     EXISTS { ?contribution pgmr:nlp_data_format ?format . })\n    ||\n    (!EXISTS { ?contribution pgmr:natural_language ?language . }) &&\n    (!EXISTS { ?contribution pgmr:nlp_data_format ?format . })\n  )\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}\n```",
+    "extracted_query": "```sparql SELECT DISTINCT ?paper ?paperLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . FILTER ( (EXISTS { ?contribution orkgp:P181025 ?language . } && EXISTS { ?contribution orkgp:P181023 ?format . }) || (!EXISTS { ?contribution orkgp:P181025 ?language . }) && (!EXISTS { ?contribution orkgp:P181023 ?format . }) ) OPTIONAL { ?paper rdfs:label ?paperLabel . } } ```",
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?paper ?paperLabel ?reportingStatus\nWHERE {\n    {\n        ?paper orkgp:P31 ?contribution .\n        ?contribution a orkgc:C121001 .\n        ?contribution orkgp:P181011 ?NLPdataset .\n        ?NLPdataset orkgp:P181022 ?NLPdatatype .\n\n        ?NLPdatatype orkgp:P181025 ?naturalLanguage .\n        ?NLPdatatype orkgp:P181023 ?dataFormat .\n        ?dataFormat rdfs:label ?dataFormatLabel .\n\n        FILTER(LCASE(STR(?naturalLanguage)) != \"not reported\")\n        FILTER(LCASE(STR(?dataFormatLabel)) != \"not reported\")\n\n        BIND(\"both\" AS ?reportingStatus)\n    }\n  UNION\n    {\n        ?paper orkgp:P31 ?contribution .\n        ?contribution a orkgc:C121001 .\n        ?contribution orkgp:P181011 ?NLPdataset .\n        ?NLPdataset orkgp:P181022 ?NLPdatatype .\n\n        ?NLPdatatype orkgp:P181025 ?naturalLanguage .\n        FILTER(LCASE(STR(?naturalLanguage)) != \"not reported\")\n\n        FILTER NOT EXISTS {\n        ?NLPdatatype orkgp:P181023 ?dataFormat .\n        ?dataFormat rdfs:label ?dataFormatLabel .\n        FILTER(LCASE(STR(?dataFormatLabel)) != \"not reported\")\n        }\n\n        BIND(\"only natural language\" AS ?reportingStatus)\n    }\n  UNION\n    {\n        ?paper orkgp:P31 ?contribution .\n        ?contribution a orkgc:C121001 .\n        ?contribution orkgp:P181011 ?NLPdataset .\n        ?NLPdataset orkgp:P181022 ?NLPdatatype .\n\n        ?NLPdatatype orkgp:P181023 ?dataFormat .\n        ?dataFormat rdfs:label ?dataFormatLabel .\n        FILTER(LCASE(STR(?dataFormatLabel)) != \"not reported\")\n\n        FILTER NOT EXISTS {\n        ?NLPdatatype orkgp:P181025 ?naturalLanguage .\n        FILTER(LCASE(STR(?naturalLanguage)) != \"not reported\")\n        }\n\n        BIND(\"only data format\" AS ?reportingStatus)\n    }\n\n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}\nORDER BY ?reportingSta\n...[truncated]",
+    "error_text": null
+  },
+  {
+    "item_id": "662",
+    "family": "nlp4re",
+    "question": "In which year were papers published that make annotation guidelines public?",
+    "categories": [
+      "pgmr_unmapped_placeholders",
+      "predicate_ref_mismatch",
+      "query_form_mismatch",
+      "unsupported_query_form"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": 0.8889,
+      "query_form_match": 0.0,
+      "query_extracted": 1.0,
+      "supported_query_form": 0.0,
+      "pgmr_unmapped_placeholders": 0.0,
+      "class_ref_match": 1.0,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": 1.0
+    },
+    "raw_model_output": "```sparql\nSELECT DISTINCT ?paper ?paperLabel WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:nlp4re_contribution .\n  ?contribution pgmr:annotation_process ?annotation_process .\n  ?annotation_process pgmr:guideline_availability \"public\" .\n  ?paper pgmr:publication_year ?publication_year .\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}\n```",
+    "extracted_query": "```sparql SELECT DISTINCT ?paper ?paperLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181031 ?annotation_process . ?annotation_process orkgp:P181038 \"public\" . ?paper orkgp:P29 ?publication_year . OPTIONAL { ?paper rdfs:label ?paperLabel . } } ```",
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?year WHERE {\n  ?paper orkgp:P31 ?contribution ;\n    orkgp:P29 ?year .\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181031 ?annotationProcess .\n  ?annotationProcess orkgp:P181036 ?annotationScheme .\n  ?annotationScheme orkgp:P181038 ?guidelineAvailability .\n  ?guidelineAvailability rdfs:label ?guidelineAvailabilityLabel .\n  FILTER(LCASE(STR(?guidelineAvailabilityLabel)) = LCASE(\"yes\"))\n}",
+    "error_text": null
+  },
+  {
+    "item_id": "168",
+    "family": "nlp4re",
+    "question": "In which year were the datasets produced for contributions that also report a release format and a dependency?",
+    "categories": [
+      "no_extracted_query",
+      "pgmr_restore_error"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": null,
+      "query_form_match": null,
+      "query_extracted": 0.0,
+      "supported_query_form": null,
+      "pgmr_unmapped_placeholders": null,
+      "class_ref_match": null,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": null
+    },
+    "raw_model_output": "```sparql\nSELECT DISTINCT ?paper ?paperLabel ?year ?releaseFormat ?dependency WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:nlp4re_contribution ;\n                pgmr:reported_release_format ?releaseFormat ;\n                pgmr:reported_dependency ?dependency .\n  ?paper pgmr:publication_year ?year .\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}\n```",
+    "extracted_query": null,
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?answer WHERE {\n  ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?dataset . ?dataset orkgp:P181016 ?answer . ?contribution orkgp:P181046 ?approach . ?approach orkgp:release ?release . ?release orkgp:P181049 ?releaseFormat . ?approach orkgp:P181048 ?dependency . }",
+    "error_text": null
+  },
+  {
+    "item_id": "341",
+    "family": "nlp4re",
+    "question": "What dependency types are reported for implemented approaches that are released on GitHub?",
+    "categories": [
+      "no_extracted_query",
+      "pgmr_restore_error"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": null,
+      "query_form_match": null,
+      "query_extracted": 0.0,
+      "supported_query_form": null,
+      "pgmr_unmapped_placeholders": null,
+      "class_ref_match": null,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": null
+    },
+    "raw_model_output": "```sparql\nSELECT DISTINCT ?dependencyType WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:nlp4re_contribution ;\n                pgmr:implemented_approach ?approach .\n  ?approach pgmr:release ?release ;\n             pgmr:release_location_type \"GitHub\" ;\n             pgmr:dependency ?dependency .\n  ?dependency pgmr:type ?dependencyType .\n}\n```",
+    "extracted_query": null,
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT (COALESCE(?dependencyLabel, STR(?dependency)) AS ?dependencyValue) WHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181046 ?approach .\n  ?approach orkgp:release ?release ;\n    orkgp:P181048 ?dependency .\n  ?release orkgp:P1003 ?url .\n  FILTER(CONTAINS(LCASE(STR(?url)), 'github'))\n  OPTIONAL { ?dependency rdfs:label ?dependencyLabel . }\n}",
+    "error_text": null
+  },
+  {
+    "item_id": "587",
+    "family": "nlp4re",
+    "question": "In which year were the datasets produced for contributions that also specify a dataset location and a release URL?",
+    "categories": [
+      "no_extracted_query",
+      "pgmr_restore_error"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": null,
+      "query_form_match": null,
+      "query_extracted": 0.0,
+      "supported_query_form": null,
+      "pgmr_unmapped_placeholders": null,
+      "class_ref_match": null,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": null
+    },
+    "raw_model_output": "```sparql\nSELECT DISTINCT ?paper ?publicationYear WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:nlp4re_contribution ;\n                pgmr:specified_dataset_location ?datasetLocation ;\n                pgmr:specified_release_url ?releaseUrl .\n  ?paper pgmr:publication_year ?publicationYear .\n}\n```",
+    "extracted_query": null,
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?answer WHERE {\n  ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?dataset . ?dataset orkgp:P181016 ?answer . ?dataset orkgp:P181028 ?location . ?location orkgp:P1003 ?datasetUrl . ?contribution orkgp:P181046 ?approach . ?approach orkgp:release ?release . ?release orkgp:P1003 ?toolUrl . }",
+    "error_text": null
+  },
+  {
+    "item_id": "399",
+    "family": "nlp4re",
+    "question": "What documentation types are reported alongside implemented approaches?",
+    "categories": [
+      "no_extracted_query",
+      "pgmr_restore_error"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": null,
+      "query_form_match": null,
+      "query_extracted": 0.0,
+      "supported_query_form": null,
+      "pgmr_unmapped_placeholders": null,
+      "class_ref_match": null,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": null
+    },
+    "raw_model_output": "SELECT DISTINCT ?documentType ?documentTypeLabel WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:nlp4re_contribution .\n  ?contribution pgmr:implemented_approach ?approach .\n  ?approach pgmr:documentation ?documentation .\n  ?documentation pgmr:type ?documentType .\n  OPTIONAL { ?documentType rdfs:label ?documentTypeLabel . }\n}",
+    "extracted_query": null,
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?docLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181046 ?approach . ?approach orkgp:P41835 ?doc . ?doc rdfs:label ?docLabel . } ORDER BY ?docLabel",
+    "error_text": null
+  },
+  {
+    "item_id": "1",
+    "family": "nlp4re",
+    "question": "Which data source domains are associated with datasets that list at least two different data sources?",
+    "categories": [
+      "no_extracted_query",
+      "pgmr_restore_error"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": null,
+      "query_form_match": null,
+      "query_extracted": 0.0,
+      "supported_query_form": null,
+      "pgmr_unmapped_placeholders": null,
+      "class_ref_match": null,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": null
+    },
+    "raw_model_output": "```sparql\nSELECT DISTINCT ?domain WHERE {\n  ?dataset pgmr:nlp_dataset_location ?location .\n  ?location pgmr:dataset_location_location_type ?type .\n  FILTER(?type = pgmrc:nlp_dataset_location_type_domain).\n  ?dataset pgmr:nlp_data_source ?source .\n  GROUP BY ?domain HAVING COUNT(DISTINCT ?source) >= 2\n}\n```",
+    "extracted_query": null,
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?domain ?domainLabel WHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181011 ?dataset .\n  ?dataset orkgp:P181017 ?source .\n  ?source orkgp:P181019 ?numSources ;\n          orkgp:P181020 ?domain .\n  OPTIONAL { ?domain rdfs:label ?domainLabel . }\n  FILTER(xsd:integer(?numSources) >= 2)\n}",
+    "error_text": null
+  },
+  {
+    "item_id": "645",
+    "family": "nlp4re",
+    "question": "In which year were papers published that use the Reuters-21578 dataset?",
+    "categories": [
+      "no_extracted_query",
+      "pgmr_restore_error"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": null,
+      "query_form_match": null,
+      "query_extracted": 0.0,
+      "supported_query_form": null,
+      "pgmr_unmapped_placeholders": null,
+      "class_ref_match": null,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": null
+    },
+    "raw_model_output": "SELECT DISTINCT ?paper ?paperLabel WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:nlp4re_contribution .\n  ?contribution pgmr:used_dataset ?dataset .\n  ?dataset a pgmrc:nlp_dataset .\n  ?dataset pgmr:name \"Reuters-21578\" .\n  ?paper pgmr:publication_year ?year .\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}",
+    "extracted_query": null,
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?year WHERE {\n  ?paper orkgp:P31 ?contribution ;\n    orkgp:P29 ?year .\n  ?contribution a orkgc:C121001 ;\n    orkgp:P181011 ?dataset .\n  ?dataset rdfs:label ?datasetLabel .\n  FILTER(LCASE(STR(?datasetLabel)) = LCASE('reuters-21578'))\n}",
+    "error_text": null
+  },
+  {
+    "item_id": "364",
+    "family": "nlp4re",
+    "question": "What level of application domain experience is reported for annotators?",
+    "categories": [
+      "pgmr_unmapped_placeholders",
+      "predicate_ref_mismatch",
+      "query_form_mismatch",
+      "unsupported_query_form"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": 0.8571,
+      "query_form_match": 0.0,
+      "query_extracted": 1.0,
+      "supported_query_form": 0.0,
+      "pgmr_unmapped_placeholders": 0.0,
+      "class_ref_match": 1.0,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": 1.0
+    },
+    "raw_model_output": "```sparql\nSELECT DISTINCT ?paper ?paperLabel ?levelOfApplicationDomainExperience WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:nlp4re_contribution .\n  ?contribution pgmr:annotation_process ?annotationProcess .\n  ?annotationProcess pgmr:level_of_application_domain_experience ?levelOfApplicationDomainExperience .\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}\n```",
+    "extracted_query": "```sparql SELECT DISTINCT ?paper ?paperLabel ?levelOfApplicationDomainExperience WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181031 ?annotationProcess . ?annotationProcess orkgp:P181034 ?levelOfApplicationDomainExperience . OPTIONAL { ?paper rdfs:label ?paperLabel . } } ```",
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?domainExperience WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181031 ?annotationProcess . ?annotationProcess orkgp:P181032 ?annotator . ?annotator orkgp:P181034 ?domainExperience . }",
+    "error_text": null
+  },
+  {
+    "item_id": "784",
+    "family": "nlp4re",
+    "question": "Which combinations of Approach type and Algorithm are reported most frequently, and which specific papers belong to each of these combinations?",
+    "categories": [
+      "pgmr_unmapped_placeholders",
+      "query_form_mismatch",
+      "unsupported_query_form"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": 1.0,
+      "query_form_match": 0.0,
+      "query_extracted": 1.0,
+      "supported_query_form": 0.0,
+      "pgmr_unmapped_placeholders": 0.0,
+      "class_ref_match": 1.0,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": 1.0
+    },
+    "raw_model_output": "```sparql\nSELECT DISTINCT ?approachType ?algorithm ?paper ?paperLabel \nWHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:nlp4re_contribution ;\n                pgmr:implemented_approach ?approach .\n  ?approach pgmr:approach_type ?approachType ;\n             pgmr:algorithm_used ?algorithm .\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}\nORDER BY DESC(?approachType) DESC(?algorithm)\nLIMIT 10\n```",
+    "extracted_query": "```sparql SELECT DISTINCT ?approachType ?algorithm ?paper ?paperLabel WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 ; orkgp:P181046 ?approach . ?approach orkgp:P5043 ?approachType ; orkgp:P58069 ?algorithm . OPTIONAL { ?paper rdfs:label ?paperLabel . } } ORDER BY DESC(?approachType) DESC(?algorithm) LIMIT 10 ```",
+    "restored_query": null,
+    "gold_sparql": "SELECT\n  ?approachType\n  ?approachTypeLabel\n  ?algorithm\n  ?algorithmLabel\n  ?paperCount\n  (GROUP_CONCAT(DISTINCT ?paperLabel; SEPARATOR=\" | \") AS ?papers)\nWHERE {\n\n  {\n    SELECT\n      ?approachType\n      ?algorithm\n      (COUNT(DISTINCT ?paper) AS ?paperCount)\n    WHERE {\n      ?paper orkgp:P31 ?contribution .\n\n      ?contribution a orkgc:C121001 ;\n                    orkgp:P181046 ?implementedApproach .\n\n      ?implementedApproach orkgp:P5043 ?approachType ;\n                           orkgp:P58069 ?algorithm .\n    }\n    GROUP BY ?approachType ?algorithm\n  }\n\n  {\n    SELECT (MAX(?cnt) AS ?maxCount)\n    WHERE {\n      {\n        SELECT\n          ?approachType2\n          ?algorithm2\n          (COUNT(DISTINCT ?paper2) AS ?cnt)\n        WHERE {\n          ?paper2 orkgp:P31 ?contribution2 .\n\n          ?contribution2 a orkgc:C121001 ;\n                         orkgp:P181046 ?implementedApproach2 .\n\n          ?implementedApproach2 orkgp:P5043 ?approachType2 ;\n                                orkgp:P58069 ?algorithm2 .\n        }\n        GROUP BY ?approachType2 ?algorithm2\n      }\n    }\n  }\n\n  FILTER(?paperCount = ?maxCount)\n\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 ;\n                orkgp:P181046 ?implementedApproach .\n  ?implementedApproach orkgp:P5043 ?approachType ;\n                       orkgp:P58069 ?algorithm .\n\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n  OPTIONAL { ?approachType rdfs:label ?approachTypeLabel . }\n  OPTIONAL { ?algorithm rdfs:label ?algorithmLabel . }\n}\nGROUP BY\n  ?approachType ?approachTypeLabel\n  ?algorithm ?algorithmLabel\n  ?paperCount\nORDER BY DESC(?paperCount) ?approachTypeLabel ?algorithmLabel",
+    "error_text": null
+  },
+  {
+    "item_id": "157",
+    "family": "nlp4re",
+    "question": "How many annotators are reported for annotation processes that also share additional material and a fatigue mitigation technique?",
+    "categories": [
+      "no_extracted_query",
+      "pgmr_restore_error"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": null,
+      "query_form_match": null,
+      "query_extracted": 0.0,
+      "supported_query_form": null,
+      "pgmr_unmapped_placeholders": null,
+      "class_ref_match": null,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": null
+    },
+    "raw_model_output": "```sparql\nSELECT (COUNT(DISTINCT ?annotator) AS ?count) WHERE {\n  ?contribution pgmr:has_annotation_process ?annotation_process ;\n                pgmr:shared_material ?shared_material ;\n                pgmr:fatigue_mitigation_technique ?fatigue_mitigation_technique .\n  ?annotation_process pgmr:has_annotator ?annotator .\n}\n```",
+    "extracted_query": null,
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?answer WHERE {\n  ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181031 ?process . ?process orkgp:P181039 ?sharedMaterial . ?process orkgp:P181040 ?fatigueMitigation . ?process orkgp:P181032 ?annotator . ?annotator orkgp:P59120 ?answer . }",
+    "error_text": null
+  },
+  {
+    "item_id": "554",
+    "family": "nlp4re",
+    "question": "Which papers report a dataset source with both a source type and a domain, and what source type and domain are reported?",
+    "categories": [
+      "pgmr_unmapped_placeholders",
+      "query_form_mismatch",
+      "unsupported_query_form"
+    ],
+    "metrics": {
+      "answer_exact_match": null,
+      "predicate_ref_match": 1.0,
+      "query_form_match": 0.0,
+      "query_extracted": 1.0,
+      "supported_query_form": 0.0,
+      "pgmr_unmapped_placeholders": 0.0,
+      "class_ref_match": 1.0,
+      "prediction_execution_success": null,
+      "gold_execution_success": 1.0,
+      "resource_ref_match": 1.0
+    },
+    "raw_model_output": "```sparql\nSELECT DISTINCT ?paper ?sourceType ?domain WHERE {\n  ?paper pgmr:has_contribution ?contribution .\n  ?contribution a pgmrc:nlp4re_contribution .\n  ?contribution pgmr:nlp_dataset ?dataset .\n  ?dataset pgmr:nlp_data_source ?source .\n  ?source pgmr:nlp_data_source_type ?sourceType ;\n           pgmr:nlp_data_source_domain ?domain .\n}\n```",
+    "extracted_query": "```sparql SELECT DISTINCT ?paper ?sourceType ?domain WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 . ?contribution orkgp:P181011 ?dataset . ?dataset orkgp:P181017 ?source . ?source orkgp:P181018 ?sourceType ; orkgp:P181020 ?domain . } ```",
+    "restored_query": null,
+    "gold_sparql": "SELECT DISTINCT ?paper ?paperLabel ?sourceTypeLabel ?domainLabel\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 .\n  ?contribution orkgp:P181011 ?dataset .\n  ?dataset orkgp:P181017 ?dataSource .\n  ?dataSource orkgp:P181018 ?sourceType .\n  ?dataSource orkgp:P181020 ?domain .\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n  OPTIONAL { ?sourceType rdfs:label ?sourceTypeLabel . }\n  OPTIONAL { ?domain rdfs:label ?domainLabel . }\n}\nORDER BY ?paperLabel ?sourceTypeLabel ?domainLabel",
+    "error_text": null
+  }
+]
