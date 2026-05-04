@@ -3,10 +3,11 @@
   "family": "empirical_research_practice",
   "mode": "pgmr_lite",
   "created_at_utc": "2026-05-04T17:03:21.619508+00:00",
-  "updated_at_utc": "2026-05-04T17:03:21.619508+00:00",
+  "updated_at_utc": "2026-05-04T18:35:17.882457+00:00",
   "metadata": {
     "description": "Clean initial PGMR-lite ACE playbook for qwen25_coder_7b_instruct / empirical_research_practice.",
-    "source": "manual_clean_base_initialization"
+    "source": "manual_clean_base_initialization",
+    "last_llm_import_at_utc": "2026-05-04T18:35:17.882457+00:00"
   },
   "bullets": [
     {
@@ -48,6 +49,98 @@
       "harmful_count": 0,
       "created_at_utc": "2026-05-04T17:03:21.619508+00:00",
       "updated_at_utc": "2026-05-04T17:03:21.619508+00:00"
+    },
+    {
+      "id": "empirical_research_practice_pgmr_lite_llm_c3d84d5c03",
+      "family": "empirical_research_practice",
+      "mode": "pgmr_lite",
+      "category": "placeholder_choice",
+      "title": "Bind specific metrics instead of using generic placeholders",
+      "content": "For metrics like accuracy, bind specific nodes instead of using generic placeholders like pgmr:data_analysis/pgmr:metric.",
+      "bullet_type": "rule",
+      "priority": 120,
+      "enabled": true,
+      "avoid": "Do not use generic placeholders for specific metrics.",
+      "positive_pattern": "",
+      "applicability": "empirical_research_practice pgmr_lite queries.",
+      "source": "llm_assisted_reflector",
+      "source_model": "gpt-4o-mini",
+      "evidence_item_ids": [
+        "487"
+      ],
+      "helpful_count": 0,
+      "harmful_count": 0,
+      "created_at_utc": "2026-05-04T18:35:17.882457+00:00",
+      "updated_at_utc": "2026-05-04T18:35:17.882457+00:00"
+    },
+    {
+      "id": "empirical_research_practice_pgmr_lite_llm_6e7644965d",
+      "family": "empirical_research_practice",
+      "mode": "pgmr_lite",
+      "category": "label_filter",
+      "title": "Use label filters for specific validity threats",
+      "content": "When filtering for validity threats, use specific labels like pgmr:construct_validity instead of generic mentions.",
+      "bullet_type": "rule",
+      "priority": 120,
+      "enabled": true,
+      "avoid": "Do not use generic mentions for filtering validity threats.",
+      "positive_pattern": "",
+      "applicability": "empirical_research_practice pgmr_lite queries.",
+      "source": "llm_assisted_reflector",
+      "source_model": "gpt-4o-mini",
+      "evidence_item_ids": [
+        "107"
+      ],
+      "helpful_count": 0,
+      "harmful_count": 0,
+      "created_at_utc": "2026-05-04T18:35:17.882457+00:00",
+      "updated_at_utc": "2026-05-04T18:35:17.882457+00:00"
+    },
+    {
+      "id": "empirical_research_practice_pgmr_lite_llm_c1c39fa727",
+      "family": "empirical_research_practice",
+      "mode": "pgmr_lite",
+      "category": "query_form_mismatch",
+      "title": "Use COUNT for distinct counts of papers",
+      "content": "For counting distinct papers, use COUNT(DISTINCT ?paper) instead of incorrect counting methods.",
+      "bullet_type": "rule",
+      "priority": 120,
+      "enabled": true,
+      "avoid": "Do not use incorrect counting methods for distinct papers.",
+      "positive_pattern": "",
+      "applicability": "empirical_research_practice pgmr_lite queries.",
+      "source": "llm_assisted_reflector",
+      "source_model": "gpt-4o-mini",
+      "evidence_item_ids": [
+        "192"
+      ],
+      "helpful_count": 0,
+      "harmful_count": 0,
+      "created_at_utc": "2026-05-04T18:35:17.882457+00:00",
+      "updated_at_utc": "2026-05-04T18:35:17.882457+00:00"
+    },
+    {
+      "id": "empirical_research_practice_pgmr_lite_llm_e1c01df7b9",
+      "family": "empirical_research_practice",
+      "mode": "pgmr_lite",
+      "category": "query_form_mismatch",
+      "title": "Use FILTER for specific conditions",
+      "content": "Use FILTER for specific conditions like publication year instead of incorrect predicates.",
+      "bullet_type": "rule",
+      "priority": 120,
+      "enabled": true,
+      "avoid": "Do not use incorrect predicates for filtering conditions.",
+      "positive_pattern": "",
+      "applicability": "empirical_research_practice pgmr_lite queries.",
+      "source": "llm_assisted_reflector",
+      "source_model": "gpt-4o-mini",
+      "evidence_item_ids": [
+        "588"
+      ],
+      "helpful_count": 0,
+      "harmful_count": 0,
+      "created_at_utc": "2026-05-04T18:35:17.882457+00:00",
+      "updated_at_utc": "2026-05-04T18:35:17.882457+00:00"
     }
   ]
 }
