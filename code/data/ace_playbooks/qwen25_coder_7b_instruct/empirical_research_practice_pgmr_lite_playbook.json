@@ -1,0 +1,53 @@
+{
+  "schema_version": "ace_playbook_v1",
+  "family": "empirical_research_practice",
+  "mode": "pgmr_lite",
+  "created_at_utc": "2026-05-04T17:03:21.619508+00:00",
+  "updated_at_utc": "2026-05-04T17:03:21.619508+00:00",
+  "metadata": {
+    "description": "Clean initial PGMR-lite ACE playbook for qwen25_coder_7b_instruct / empirical_research_practice.",
+    "source": "manual_clean_base_initialization"
+  },
+  "bullets": [
+    {
+      "id": "empirical_research_practice_pgmr_lite_contribution_pattern_initial",
+      "family": "empirical_research_practice",
+      "mode": "pgmr_lite",
+      "category": "contribution_pattern",
+      "title": "Use Empirical Research Practice contribution pattern",
+      "content": "Always connect the paper to the contribution with ?paper pgmr:has_contribution ?contribution . and type the contribution as pgmrc:empirical_research_practice_contribution . Attach empirical template fields such as venue, research question, data collection, data analysis, validity threats, and variables to ?contribution or properly bound nested nodes.",
+      "bullet_type": "rule",
+      "priority": 120,
+      "enabled": true,
+      "avoid": "Do not attach empirical template fields directly to ?paper except publication year.",
+      "positive_pattern": "?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:empirical_research_practice_contribution .",
+      "applicability": "All empirical research practice PGMR-lite queries.",
+      "source": "manual_clean_base_initialization",
+      "evidence_item_ids": [],
+      "helpful_count": 0,
+      "harmful_count": 0,
+      "created_at_utc": "2026-05-04T17:03:21.619508+00:00",
+      "updated_at_utc": "2026-05-04T17:03:21.619508+00:00"
+    },
+    {
+      "id": "empirical_research_practice_pgmr_lite_nested_paths_initial",
+      "family": "empirical_research_practice",
+      "mode": "pgmr_lite",
+      "category": "nested_path",
+      "title": "Use full empirical nested paths",
+      "content": "For empirical nested fields, first bind the parent node from ?contribution and then bind the requested child field. Examples: data collection questions use contribution -> data collection -> method/data; machine learning questions use contribution -> data analysis -> machine learning -> algorithm/metric; statistical test questions use contribution -> data analysis -> inferential statistics -> statistical tests.",
+      "bullet_type": "rule",
+      "priority": 115,
+      "enabled": true,
+      "avoid": "Do not skip parent nodes when asking for nested empirical fields.",
+      "positive_pattern": "?contribution pgmr:data_analysis ?analysis . ?analysis pgmr:machine_learning ?ml . ?ml pgmr:machine_learning_algorithm ?answer .",
+      "applicability": "Empirical research practice nested-field questions.",
+      "source": "manual_clean_base_initialization",
+      "evidence_item_ids": [],
+      "helpful_count": 0,
+      "harmful_count": 0,
+      "created_at_utc": "2026-05-04T17:03:21.619508+00:00",
+      "updated_at_utc": "2026-05-04T17:03:21.619508+00:00"
+    }
+  ]
+}
