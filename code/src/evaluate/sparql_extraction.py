@@ -13,14 +13,27 @@ def _strip_code_fences(text: str) -> str:
     stripped = text.strip()
 
     fenced_match = re.search(
-        r"```(?:sparql|sql)?\s*(.*?)```",
+        r"^\s*```[a-zA-Z0-9_-]*\s*(.*?)\s*```\s*$",
         stripped,
         flags=re.IGNORECASE | re.DOTALL,
     )
     if fenced_match:
         return fenced_match.group(1).strip()
 
-    return stripped
+    stripped = re.sub(
+        r"^\s*```[a-zA-Z0-9_-]*\s*",
+        "",
+        stripped,
+        flags=re.IGNORECASE,
+    )
+    stripped = re.sub(
+        r"\s*```\s*$",
+        "",
+        stripped,
+        flags=re.IGNORECASE,
+    )
+
+    return stripped.strip()
 
 
 def _remove_comment_lines(text: str) -> str:

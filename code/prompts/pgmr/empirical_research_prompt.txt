@@ -33,6 +33,12 @@ statistical test -> ?contribution -> data analysis -> inferential statistics -> 
 research question -> ?contribution -> research question -> question.
 year/time -> ?paper -> publication year.
 
+Triple rule:
+Use subject relation object.
+Do not write ?x pgmr:relation pgmr:concept .
+For named concepts, bind ?value and filter rdfs:label.
+Do not put triples inside FILTER.
+
 Structural rules:
 Every triple must have subject, predicate, and object.
 Bind each parent node before using child relations.

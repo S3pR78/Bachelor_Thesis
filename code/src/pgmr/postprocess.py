@@ -12,6 +12,19 @@ SOLUTION_MODIFIER_PATTERN = re.compile(
 def normalize_spaces(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
+def strip_markdown_fences(text: str) -> str:
+    cleaned = text.strip()
+
+    cleaned = re.sub(
+        r"^\s*```(?:sparql|sql|ttl|turtle)?\s*",
+        "",
+        cleaned,
+        flags=re.IGNORECASE,
+    )
+    cleaned = re.sub(r"\s*```\s*$", "", cleaned)
+
+    return cleaned.strip()
+
 
 def split_solution_modifiers(text: str) -> tuple[str, str]:
     match = SOLUTION_MODIFIER_PATTERN.search(text)
@@ -107,11 +120,19 @@ def wrap_bare_optional_patterns(query: str) -> str:
 
     return pattern.sub(repl, query)
 
-
 def postprocess_pgmr_query(query: str) -> str:
-    fixed = normalize_spaces(query)
+    fixed = strip_markdown_fences(query)
+    fixed = normalize_spaces(fixed)
+
+    # normalize_spaces can turn fenced markdown into one line:
+    # ```sparql SELECT ... ```
+    fixed = strip_markdown_fences(fixed)
+
     fixed = add_missing_where_braces(fixed)
     fixed = wrap_bare_optional_patterns(fixed)
     fixed = move_solution_modifiers_outside_where(fixed)
+
+    fixed = normalize_spaces(fixed)
+    fixed = strip_markdown_fences(fixed)
     fixed = normalize_spaces(fixed)
     return fixed

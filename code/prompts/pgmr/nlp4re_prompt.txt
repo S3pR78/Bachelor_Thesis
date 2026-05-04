@@ -34,6 +34,12 @@ dataset/source/format/language -> ?contribution -> NLP dataset -> nested dataset
 annotation/guideline/agreement -> ?contribution -> annotation process -> nested annotation field.
 year/time -> ?paper -> publication year.
 
+Triple rule:
+Use subject relation object.
+Do not write ?x pgmr:relation pgmr:concept .
+For named concepts, bind ?value and filter rdfs:label.
+Do not put triples inside FILTER.
+
 Structural rules:
 Every triple must have subject, predicate, and object.
 Bind each parent node before using child relations.

@@ -34,6 +34,12 @@ dataset/source/format/language -> ?contribution -> NLP dataset -> nested dataset
 annotation/guideline/agreement -> ?contribution -> annotation process -> nested annotation field.
 year/time -> ?paper -> publication year.
 
+Triple rule:
+Use subject relation object.
+Do not write ?x pgmr:relation pgmr:concept .
+For named concepts, bind ?value and filter rdfs:label.
+Do not put triples inside FILTER.
+
 Structural rules:
 Every triple must have subject, predicate, and object.
 Bind each parent node before using child relations.
@@ -41,83 +47,6 @@ Use full paths from contribution to nested nodes.
 Do not repeat triples.
 Use labels only for label/text questions.
 
-Allowed core PGMR-lite placeholders:
-pgmr:algorithm_used
-pgmr:annotation_process
-pgmr:annotation_scheme
-pgmr:annotator
-pgmr:annotator_agreement
-pgmr:annotator_assignment
-pgmr:annotator_identity
-pgmr:approach_type
-pgmr:baseline_comparison
-pgmr:baseline_comparison_detail
-pgmr:baseline_comparison_type
-pgmr:conflict_resolution
-pgmr:dataset_location
-pgmr:dataset_location_location_type
-pgmr:dependency
-pgmr:description
-pgmr:documentation
-pgmr:evaluation
-pgmr:evaluation_metric
-pgmr:fatigue_mitigation_technique
-pgmr:guideline_availability
-pgmr:has_contribution
-pgmr:implemented_approach
-pgmr:intercoder_reliability_metric
-pgmr:level_of_application_domain_experience
-pgmr:license
-pgmr:license_type
-pgmr:measured_agreement
-pgmr:natural_language
-pgmr:nlp_data_abstraction_level
-pgmr:nlp_data_format
-pgmr:nlp_data_item
-pgmr:nlp_data_production_time
-pgmr:nlp_data_source
-pgmr:nlp_data_source_domain
-pgmr:nlp_data_source_type
-pgmr:nlp_data_type
-pgmr:nlp_dataset
-pgmr:nlp_task
-pgmr:nlp_task_input
-pgmr:nlp_task_output
-pgmr:nlp_task_output_classification_label
-pgmr:nlp_task_output_extracted_element
-pgmr:nlp_task_output_translation_mapping_cardinality
-pgmr:nlp_task_output_type
-pgmr:nlp_task_type
-pgmr:number_of_annotators
-pgmr:number_of_data_sources
-pgmr:public_availability
-pgmr:publication_year
-pgmr:re_task
-pgmr:release
-pgmr:release_format
-pgmr:release_location_type
-pgmr:rigor_of_data_format
-pgmr:running_requirement
-pgmr:scheme_establishement
-pgmr:shared_material
-pgmr:url
-pgmr:validation_procedure
-pgmrc:annotation_process
-pgmrc:annotation_scheme
-pgmrc:annotator
-pgmrc:annotator_agreement
-pgmrc:baseline_comparison
-pgmrc:evaluation
-pgmrc:implemented_approach
-pgmrc:license
-pgmrc:nlp4re_contribution
-pgmrc:nlp_data_source
-pgmrc:nlp_data_type
-pgmrc:nlp_dataset
-pgmrc:nlp_dataset_location
-pgmrc:nlp_task
-pgmrc:nlp_task_output
-pgmrc:release
 
 family: {family}
 question: {question}
