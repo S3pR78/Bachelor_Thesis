@@ -1,0 +1,45 @@
+{
+  "raw_path": "code/outputs/evaluation_runs/t5_base_pgmr_mini_15ep/pgmr_mini__ace_playbook__nlp4re__20260504_103252/benchmark_raw.json",
+  "trace_path": "code/outputs/evaluation_runs/t5_base_pgmr_mini_15ep/pgmr_mini__ace_playbook__nlp4re__20260504_103252/ace_error_traces.json",
+  "delta_path": "code/outputs/evaluation_runs/t5_base_pgmr_mini_15ep/pgmr_mini__ace_playbook__nlp4re__20260504_103252/ace_deltas.json",
+  "playbook_path": "code/data/ace_playbooks/t5_base_pgmr_mini_15ep/nlp4re_pgmr_lite_playbook.json",
+  "mode": "pgmr_lite",
+  "family": "nlp4re",
+  "split": null,
+  "trace_count": 33,
+  "error_trace_count": 33,
+  "category_counts": {
+    "pgmr_unmapped_placeholders": 29,
+    "answer_mismatch": 21,
+    "predicate_ref_mismatch": 8,
+    "no_extracted_query": 4,
+    "pgmr_restore_error": 4,
+    "query_form_mismatch": 4,
+    "endpoint_bad_request": 2,
+    "prediction_execution_error": 2,
+    "gold_execution_error": 1
+  },
+  "delta_count": 8,
+  "curation": {
+    "source_delta_path": "code/outputs/evaluation_runs/t5_base_pgmr_mini_15ep/pgmr_mini__ace_playbook__nlp4re__20260504_103252/ace_deltas.json",
+    "playbook_path": "code/data/ace_playbooks/t5_base_pgmr_mini_15ep/nlp4re_pgmr_lite_playbook.json",
+    "output_path": "code/data/ace_playbooks/t5_base_pgmr_mini_15ep/nlp4re_pgmr_lite_playbook.json",
+    "before_bullet_count": 3,
+    "after_bullet_count": 11,
+    "candidate_delta_count": 8,
+    "applied_delta_count": 8,
+    "skipped_delta_count": 0,
+    "skipped_reasons": {},
+    "applied_delta_ids": [
+      "nlp4re_pgmr_lite_pgmr_unmapped_placeholders_53d261b0c3",
+      "nlp4re_pgmr_lite_no_extracted_query_1fcacffff3",
+      "nlp4re_pgmr_lite_pgmr_restore_error_1d345a55bf",
+      "nlp4re_pgmr_lite_query_form_mismatch_12f85f3110",
+      "nlp4re_pgmr_lite_answer_mismatch_02046329c9",
+      "nlp4re_pgmr_lite_predicate_ref_mismatch_2ec30c974d",
+      "nlp4re_pgmr_lite_endpoint_bad_request_d96696afc5",
+      "nlp4re_pgmr_lite_prediction_execution_error_cb1ca769ee"
+    ]
+  },
+  "created_at_epoch": 1777890991.7787297
+}

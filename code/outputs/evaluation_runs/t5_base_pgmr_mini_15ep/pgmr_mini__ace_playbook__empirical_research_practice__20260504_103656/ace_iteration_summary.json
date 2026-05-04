@@ -1,0 +1,38 @@
+{
+  "raw_path": "code/outputs/evaluation_runs/t5_base_pgmr_mini_15ep/pgmr_mini__ace_playbook__empirical_research_practice__20260504_103656/benchmark_raw.json",
+  "trace_path": "code/outputs/evaluation_runs/t5_base_pgmr_mini_15ep/pgmr_mini__ace_playbook__empirical_research_practice__20260504_103656/ace_error_traces.json",
+  "delta_path": "code/outputs/evaluation_runs/t5_base_pgmr_mini_15ep/pgmr_mini__ace_playbook__empirical_research_practice__20260504_103656/ace_deltas.json",
+  "playbook_path": "code/data/ace_playbooks/t5_base_pgmr_mini_15ep/empirical_research_practice_pgmr_lite_playbook.json",
+  "mode": "pgmr_lite",
+  "family": "empirical_research_practice",
+  "split": null,
+  "trace_count": 26,
+  "error_trace_count": 26,
+  "category_counts": {
+    "pgmr_unmapped_placeholders": 26,
+    "answer_mismatch": 13,
+    "predicate_ref_mismatch": 13,
+    "endpoint_bad_request": 1,
+    "prediction_execution_error": 1
+  },
+  "delta_count": 5,
+  "curation": {
+    "source_delta_path": "code/outputs/evaluation_runs/t5_base_pgmr_mini_15ep/pgmr_mini__ace_playbook__empirical_research_practice__20260504_103656/ace_deltas.json",
+    "playbook_path": "code/data/ace_playbooks/t5_base_pgmr_mini_15ep/empirical_research_practice_pgmr_lite_playbook.json",
+    "output_path": "code/data/ace_playbooks/t5_base_pgmr_mini_15ep/empirical_research_practice_pgmr_lite_playbook.json",
+    "before_bullet_count": 3,
+    "after_bullet_count": 8,
+    "candidate_delta_count": 5,
+    "applied_delta_count": 5,
+    "skipped_delta_count": 0,
+    "skipped_reasons": {},
+    "applied_delta_ids": [
+      "empirical_research_practice_pgmr_lite_pgmr_unmapped_placeholders_5e6d4d46c4",
+      "empirical_research_practice_pgmr_lite_predicate_ref_mismatch_58ed2a93f9",
+      "empirical_research_practice_pgmr_lite_answer_mismatch_95fc4efc2f",
+      "empirical_research_practice_pgmr_lite_endpoint_bad_request_54588f3046",
+      "empirical_research_practice_pgmr_lite_prediction_execution_error_2ad0740929"
+    ]
+  },
+  "created_at_epoch": 1777891268.4035769
+}
