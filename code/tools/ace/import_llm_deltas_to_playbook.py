@@ -76,7 +76,10 @@ def as_bullet(rule: dict[str, Any], family: str, mode: str, now: str) -> dict[st
         "avoid": avoid,
         "positive_pattern": "",
         "applicability": f"{family} {mode} queries.",
-        "source": "llm_assisted_reflector",
+        "source": {
+            "type": "llm_assisted_reflector",
+            "model": rule.get("source_model"),
+        },
         "source_model": rule.get("source_model"),
         "evidence_item_ids": [str(x) for x in rule.get("evidence_item_ids", [])],
         "helpful_count": 0,

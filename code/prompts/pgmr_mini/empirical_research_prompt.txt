@@ -44,3 +44,139 @@ Use labels only for label/text questions.
 family: {family}
 question: {question}
 query:
+Task: Generate one complete PGMR-lite SPARQL query for empirical_research_practice.
+Return only the final query. No explanation. No markdown.
+Use only pgmr: relations and pgmrc: classes.
+
+Before writing the query, internally decompose the question into smaller parts.
+Build a private path map from the contribution node to the requested target.
+Use this path map to decide which parent nodes and relations are needed.
+Do not output your reasoning or the path map.
+Output only the final PGMR-lite SPARQL query.
+
+Required core:
+?paper pgmr:has_contribution ?contribution .
+?contribution a pgmrc:empirical_research_practice_contribution .
+
+Query form rules:
+If the question asks "how many", use:
+SELECT (COUNT(DISTINCT ?contribution) AS ?count) WHERE {{ ... }}
+If the question asks for papers/studies/contributions, use:
+SELECT DISTINCT ?paper ?paperLabel WHERE {{ ... OPTIONAL {{ ?paper rdfs:label ?paperLabel . }} }}
+If the question is yes/no, use:
+ASK WHERE {{ ... }}
+Otherwise use:
+SELECT DISTINCT ?answer WHERE {{ ... }}
+
+Path planning hints:
+venue -> ?contribution -> venue serie.
+data collection method -> ?contribution -> data collection -> method.
+research data -> ?contribution -> data collection -> data.
+qualitative/quantitative -> ?contribution -> data collection -> data -> data type.
+machine learning algorithm -> ?contribution -> data analysis -> machine learning -> algorithm.
+metric/accuracy -> ?contribution -> data analysis -> machine learning -> metric.
+statistical test -> ?contribution -> data analysis -> inferential statistics -> statistical tests.
+research question -> ?contribution -> research question -> question.
+year/time -> ?paper -> publication year.
+
+Structural rules:
+Every triple must have subject, predicate, and object.
+Bind each parent node before using child relations.
+Use full paths from contribution to nested nodes.
+Do not repeat triples.
+Use venue filter unless the question asks all venues or compares venues.
+Use labels only for label/text questions.
+
+Allowed core PGMR-lite placeholders:
+pgmr:accuracy
+pgmr:algorithm
+pgmr:alternative_hypothesis
+pgmr:boxplot
+pgmr:conclusion_validity
+pgmr:construct_validity
+pgmr:content_validity
+pgmr:count
+pgmr:data
+pgmr:data_analysis
+pgmr:data_collection
+pgmr:data_type
+pgmr:description
+pgmr:descriptive_statistics
+pgmr:descriptive_validity
+pgmr:external_validity
+pgmr:f_score
+pgmr:generalizability
+pgmr:has_contribution
+pgmr:hidden_in_text
+pgmr:highlighted_in_text
+pgmr:hypothesis
+pgmr:hypothesis_statement
+pgmr:hypothesis_type
+pgmr:inferential_statistics
+pgmr:internal_validity
+pgmr:machine_learning
+pgmr:maximum
+pgmr:mean
+pgmr:measures_of_central_tendency
+pgmr:measures_of_dispersion_or_variation
+pgmr:measures_of_frequency
+pgmr:measures_of_position
+pgmr:median
+pgmr:mentioned
+pgmr:method
+pgmr:method_name
+pgmr:method_type
+pgmr:metric
+pgmr:minimum
+pgmr:mode
+pgmr:null_hypothesis
+pgmr:percent
+pgmr:precision
+pgmr:publication_year
+pgmr:qualitative
+pgmr:quantitative
+pgmr:question
+pgmr:question_type
+pgmr:range
+pgmr:recall
+pgmr:reliability
+pgmr:repeatability
+pgmr:research_paradigm
+pgmr:research_problem
+pgmr:research_question
+pgmr:research_question_answer
+pgmr:same_as
+pgmr:standard_deviation
+pgmr:statistical_tests
+pgmr:sub_problem
+pgmr:subquestion
+pgmr:theoretical_validity
+pgmr:threat_to_validity
+pgmr:url
+pgmr:variance
+pgmr:venue_serie
+pgmrc:data_analysis
+pgmrc:data_collection
+pgmrc:data_collection_method
+pgmrc:data_type
+pgmrc:descriptive_statistic
+pgmrc:empirical_research_practice_contribution
+pgmrc:hypothesis
+pgmrc:hypothesis_type
+pgmrc:inferential_statistics
+pgmrc:machine_learning
+pgmrc:measures_of_central_tendency
+pgmrc:measures_of_dispersion_or_variation
+pgmrc:measures_of_frequency
+pgmrc:measures_of_position
+pgmrc:metric
+pgmrc:problem
+pgmrc:research_data
+pgmrc:research_question
+pgmrc:research_question_answer
+pgmrc:subquestion
+pgmrc:threats_to_validity
+
+family: {family}
+question: {question}
+query:

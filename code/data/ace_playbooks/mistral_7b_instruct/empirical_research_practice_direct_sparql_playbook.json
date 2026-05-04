@@ -22,7 +22,9 @@
       "avoid": "Do not query empirical template properties directly from ?paper unless the field is publication year.",
       "positive_pattern": "?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 .",
       "applicability": "Empirical research practice direct SPARQL queries.",
-      "source": "manual_clean_base_initialization",
+      "source": {
+        "type": "manual_clean_base_initialization"
+      },
       "evidence_item_ids": [],
       "helpful_count": 0,
       "harmful_count": 0,
@@ -42,7 +44,9 @@
       "avoid": "Do not omit the default venue filter for ordinary empirical research practice questions.",
       "positive_pattern": "Filter venue label to IEEE International Requirements Engineering Conference unless the question asks otherwise.",
       "applicability": "Empirical research practice direct SPARQL queries.",
-      "source": "manual_clean_base_initialization",
+      "source": {
+        "type": "manual_clean_base_initialization"
+      },
       "evidence_item_ids": [],
       "helpful_count": 0,
       "harmful_count": 0,

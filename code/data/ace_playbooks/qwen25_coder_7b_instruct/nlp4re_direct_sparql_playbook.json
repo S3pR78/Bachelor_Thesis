@@ -22,7 +22,9 @@
       "avoid": "Do not query NLP4RE template properties directly from ?paper unless the field is publication year.",
       "positive_pattern": "?paper orkgp:P31 ?contribution . ?contribution a orkgc:C121001 .",
       "applicability": "NLP4RE direct SPARQL queries.",
-      "source": "manual_clean_base_initialization",
+      "source": {
+        "type": "manual_clean_base_initialization"
+      },
       "evidence_item_ids": [],
       "helpful_count": 0,
       "harmful_count": 0,
@@ -42,7 +44,9 @@
       "avoid": "Do not skip intermediate template nodes.",
       "positive_pattern": "Bind contribution, then nested evaluation/task/dataset nodes, then the requested answer.",
       "applicability": "NLP4RE nested direct SPARQL queries.",
-      "source": "manual_clean_base_initialization",
+      "source": {
+        "type": "manual_clean_base_initialization"
+      },
       "evidence_item_ids": [],
       "helpful_count": 0,
       "harmful_count": 0,

@@ -23,7 +23,9 @@
       "avoid": "Do not attach empirical template fields directly to ?paper except publication year.",
       "positive_pattern": "?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:empirical_research_practice_contribution .",
       "applicability": "All empirical research practice PGMR-lite queries.",
-      "source": "manual_clean_base_initialization",
+      "source": {
+        "type": "manual_clean_base_initialization"
+      },
       "evidence_item_ids": [],
       "helpful_count": 0,
       "harmful_count": 0,
@@ -43,7 +45,9 @@
       "avoid": "Do not skip parent nodes when asking for nested empirical fields.",
       "positive_pattern": "?contribution pgmr:data_analysis ?analysis . ?analysis pgmr:machine_learning ?ml . ?ml pgmr:machine_learning_algorithm ?answer .",
       "applicability": "Empirical research practice nested-field questions.",
-      "source": "manual_clean_base_initialization",
+      "source": {
+        "type": "manual_clean_base_initialization"
+      },
       "evidence_item_ids": [],
       "helpful_count": 0,
       "harmful_count": 0,
@@ -63,7 +67,9 @@
       "avoid": "Do not use generic placeholders for specific metrics.",
       "positive_pattern": "",
       "applicability": "empirical_research_practice pgmr_lite queries.",
-      "source": "llm_assisted_reflector",
+      "source": {
+        "type": "llm_assisted_reflector"
+      },
       "source_model": "gpt-4o-mini",
       "evidence_item_ids": [
         "487"
@@ -86,7 +92,9 @@
       "avoid": "Do not use generic mentions for filtering validity threats.",
       "positive_pattern": "",
       "applicability": "empirical_research_practice pgmr_lite queries.",
-      "source": "llm_assisted_reflector",
+      "source": {
+        "type": "llm_assisted_reflector"
+      },
       "source_model": "gpt-4o-mini",
       "evidence_item_ids": [
         "107"
@@ -109,7 +117,9 @@
       "avoid": "Do not use incorrect counting methods for distinct papers.",
       "positive_pattern": "",
       "applicability": "empirical_research_practice pgmr_lite queries.",
-      "source": "llm_assisted_reflector",
+      "source": {
+        "type": "llm_assisted_reflector"
+      },
       "source_model": "gpt-4o-mini",
       "evidence_item_ids": [
         "192"
@@ -132,7 +142,9 @@
       "avoid": "Do not use incorrect predicates for filtering conditions.",
       "positive_pattern": "",
       "applicability": "empirical_research_practice pgmr_lite queries.",
-      "source": "llm_assisted_reflector",
+      "source": {
+        "type": "llm_assisted_reflector"
+      },
       "source_model": "gpt-4o-mini",
       "evidence_item_ids": [
         "588"

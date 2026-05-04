@@ -23,7 +23,9 @@
       "avoid": "Do not attach NLP4RE template fields directly to ?paper except publication year.",
       "positive_pattern": "?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:nlp4re_contribution .",
       "applicability": "All NLP4RE PGMR-lite queries.",
-      "source": "manual_clean_base_initialization",
+      "source": {
+        "type": "manual_clean_base_initialization"
+      },
       "evidence_item_ids": [],
       "helpful_count": 0,
       "harmful_count": 0,
@@ -43,7 +45,9 @@
       "avoid": "Do not skip parent nodes when asking for nested fields.",
       "positive_pattern": "?contribution pgmr:evaluation ?evaluation . ?evaluation pgmr:evaluation_metric ?answer .",
       "applicability": "NLP4RE nested-field questions.",
-      "source": "manual_clean_base_initialization",
+      "source": {
+        "type": "manual_clean_base_initialization"
+      },
       "evidence_item_ids": [],
       "helpful_count": 0,
       "harmful_count": 0,
@@ -63,7 +67,9 @@
       "avoid": "Do not use misspelled labels like 'classificaiton'.",
       "positive_pattern": "",
       "applicability": "nlp4re pgmr_lite queries.",
-      "source": "llm_assisted_reflector",
+      "source": {
+        "type": "llm_assisted_reflector"
+      },
       "source_model": "gpt-4o-mini",
       "evidence_item_ids": [
         "521"
@@ -86,7 +92,9 @@
       "avoid": "Do not skip parent nodes when querying nested fields.",
       "positive_pattern": "",
       "applicability": "nlp4re pgmr_lite queries.",
-      "source": "llm_assisted_reflector",
+      "source": {
+        "type": "llm_assisted_reflector"
+      },
       "source_model": "gpt-4o-mini",
       "evidence_item_ids": [
         "333",
@@ -110,7 +118,9 @@
       "avoid": "Do not attach fields directly to ?paper except for publication year.",
       "positive_pattern": "",
       "applicability": "nlp4re pgmr_lite queries.",
-      "source": "llm_assisted_reflector",
+      "source": {
+        "type": "llm_assisted_reflector"
+      },
       "source_model": "gpt-4o-mini",
       "evidence_item_ids": [
         "211",
@@ -134,7 +144,9 @@
       "avoid": "Do not use incorrect or misspelled predicate references.",
       "positive_pattern": "",
       "applicability": "nlp4re pgmr_lite queries.",
-      "source": "llm_assisted_reflector",
+      "source": {
+        "type": "llm_assisted_reflector"
+      },
       "source_model": "gpt-4o-mini",
       "evidence_item_ids": [
         "397",
@@ -158,7 +170,9 @@
       "avoid": "Do not use generic or incorrect placeholders that do not match the expected output.",
       "positive_pattern": "",
       "applicability": "nlp4re pgmr_lite queries.",
-      "source": "llm_assisted_reflector",
+      "source": {
+        "type": "llm_assisted_reflector"
+      },
       "source_model": "gpt-4o-mini",
       "evidence_item_ids": [
         "587",

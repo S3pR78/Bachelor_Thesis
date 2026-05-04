@@ -22,7 +22,9 @@
       "avoid": "Do not invent new pgmr: or pgmrc: names.",
       "positive_pattern": "?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:nlp4re_contribution .",
       "applicability": "NLP4RE PGMR-lite queries, especially for small models.",
-      "source": "manual_clean_base_initialization",
+      "source": {
+        "type": "manual_clean_base_initialization"
+      },
       "evidence_item_ids": [],
       "helpful_count": 0,
       "harmful_count": 0,
@@ -42,7 +44,9 @@
       "avoid": "Do not attach NLP4RE template fields directly to ?paper except publication year.",
       "positive_pattern": "?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:nlp4re_contribution .",
       "applicability": "All NLP4RE PGMR-lite queries.",
-      "source": "manual_clean_base_initialization",
+      "source": {
+        "type": "manual_clean_base_initialization"
+      },
       "evidence_item_ids": [],
       "helpful_count": 0,
       "harmful_count": 0,
@@ -62,7 +66,9 @@
       "avoid": "Do not skip parent nodes when asking for nested fields.",
       "positive_pattern": "?contribution pgmr:evaluation ?evaluation . ?evaluation pgmr:evaluation_metric ?answer .",
       "applicability": "NLP4RE nested-field questions.",
-      "source": "manual_clean_base_initialization",
+      "source": {
+        "type": "manual_clean_base_initialization"
+      },
       "evidence_item_ids": [],
       "helpful_count": 0,
       "harmful_count": 0,

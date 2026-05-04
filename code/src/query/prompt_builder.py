@@ -383,5 +383,5 @@ def build_final_prompt_for_question(
         model_name=model_name,
     )
 
-    #print(f"Final prompt:\n{end_prompt}\n{'-'*40}")
+    print(f"Final prompt:\n{end_prompt}\n{'-'*40}")
     return end_prompt
