@@ -325,7 +325,7 @@ def build_final_prompt_for_question(
     else:
         final_prompt = question.strip()
 
-    return append_ace_context_to_prompt(
+    end_prompt = append_ace_context_to_prompt(
         prompt=final_prompt,
         family=family,
         prompt_mode=prompt_mode,
@@ -336,3 +336,6 @@ def build_final_prompt_for_question(
         ace_include_patterns=ace_include_patterns,
         model_name=model_name,
     )
+
+    print(f"Final prompt:\n{end_prompt}\n{'-'*40}")
+    return end_prompt
