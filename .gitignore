@@ -16,3 +16,7 @@ code/scripts
 # Slurm/server artifacts
 code/slurm/
 code/outputs/slurm_logs/
+# ACE adaptation transient artifacts
+code/outputs/evaluation_runs/**/pgmr_mini__ace_playbook__*/benchmark_raw.json
+code/outputs/evaluation_runs/**/pgmr_mini__ace_playbook__*/ace_deltas.json
+code/outputs/ace_filtered_datasets/
