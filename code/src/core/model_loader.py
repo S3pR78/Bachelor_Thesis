@@ -208,6 +208,14 @@ def prepare_generation_inputs(tokenizer, model, prompt: str) -> dict[str, Any]:
         return_tensors="pt",
         truncation=True,
     )
+    import os
+
+    if os.environ.get("DEBUG_TOKEN_LENGTH") == "1":
+        print("[TOKEN DEBUG] formatted prompt chars:", len(formatted_prompt))
+        print("[TOKEN DEBUG] input_ids shape:", tuple(inputs["input_ids"].shape))
+        print("[TOKEN DEBUG] tokenized input length:", inputs["input_ids"].shape[-1])
+        print("[TOKEN DEBUG] tokenizer.model_max_length:", getattr(tokenizer, "model_max_length", None))
+        print("[TOKEN DEBUG] model is_encoder_decoder:", bool(getattr(model.config, "is_encoder_decoder", False)))
 
     # Works for normal .to(device) models and for most device_map="auto" cases.
     first_param_device = next(model.parameters()).device
