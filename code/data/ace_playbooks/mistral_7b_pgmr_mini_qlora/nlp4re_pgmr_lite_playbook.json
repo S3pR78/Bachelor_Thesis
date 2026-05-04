@@ -18,7 +18,7 @@
       "content": "Return only the final SPARQL or PGMR-lite query. Do not add explanations, markdown, or reasoning text.",
       "bullet_type": "hard_rule",
       "priority": 100,
-      "enabled": true,
+      "enabled": false,
       "positive_pattern": null,
       "avoid": "Do not answer in natural language.",
       "applicability": [],
@@ -29,7 +29,8 @@
       "helpful_count": 0,
       "harmful_count": 0,
       "created_at_utc": "2026-05-03T22:06:27.267903+00:00",
-      "updated_at_utc": "2026-05-03T22:06:27.267903+00:00"
+      "updated_at_utc": "2026-05-04T15:42:47.252269+00:00",
+      "curation_note": "Disabled because the base PGMR-mini prompt already contains this generic output/format instruction."
     },
     {
       "id": "nlp4re_pgmr_lite_pgmr_format_initial",
@@ -40,7 +41,7 @@
       "content": "Use pgmr:/pgmrc: placeholders from the PGMR prompt or memory. Do not generate real ORKG IDs in PGMR-lite mode.",
       "bullet_type": "hard_rule",
       "priority": 95,
-      "enabled": true,
+      "enabled": false,
       "positive_pattern": null,
       "avoid": "Do not mix pgmr:/pgmrc: placeholders with orkgp:/orkgc:/orkgr: identifiers.",
       "applicability": [],
@@ -51,7 +52,8 @@
       "helpful_count": 0,
       "harmful_count": 0,
       "created_at_utc": "2026-05-03T22:06:27.267903+00:00",
-      "updated_at_utc": "2026-05-03T22:06:27.267903+00:00"
+      "updated_at_utc": "2026-05-04T15:42:47.252269+00:00",
+      "curation_note": "Disabled because the base PGMR-mini prompt already contains this generic output/format instruction."
     },
     {
       "id": "nlp4re_pgmr_lite_contribution_pattern_initial",
@@ -61,7 +63,7 @@
       "title": "Use NLP4RE contribution pattern",
       "content": "Connect papers to NLP4RE contributions before accessing family-specific fields.",
       "bullet_type": "template_pattern",
-      "priority": 90,
+      "priority": 120,
       "enabled": true,
       "positive_pattern": "?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:nlp4re_contribution .",
       "avoid": "Do not attach NLP task, dataset, metric, evaluation, approach, or output properties directly to ?paper.",
@@ -73,7 +75,8 @@
       "helpful_count": 0,
       "harmful_count": 0,
       "created_at_utc": "2026-05-03T22:06:27.267903+00:00",
-      "updated_at_utc": "2026-05-03T22:06:27.267903+00:00"
+      "updated_at_utc": "2026-05-04T15:42:47.252269+00:00",
+      "curation_note": "Highest priority because structural contribution binding is central for NLP4RE."
     },
     {
       "id": "nlp4re_pgmr_lite_no_extracted_query_1fcacffff3",
@@ -84,7 +87,7 @@
       "content": "The output must be only one complete SPARQL or PGMR-lite query, without explanation, markdown prose, or analysis.",
       "bullet_type": "validation_lesson",
       "priority": 102,
-      "enabled": true,
+      "enabled": false,
       "positive_pattern": null,
       "avoid": "Do not answer in natural language and do not include reasoning text before the query.",
       "applicability": [],
@@ -103,7 +106,8 @@
       "helpful_count": 0,
       "harmful_count": 0,
       "created_at_utc": "2026-05-04T12:56:56.330796+00:00",
-      "updated_at_utc": "2026-05-04T12:56:56.343606+00:00"
+      "updated_at_utc": "2026-05-04T15:42:47.252269+00:00",
+      "curation_note": "Disabled because the base PGMR-mini prompt already contains this generic output/format instruction."
     },
     {
       "id": "nlp4re_pgmr_lite_pgmr_unmapped_placeholders_53d261b0c3",
@@ -113,7 +117,7 @@
       "title": "Use only known PGMR placeholders",
       "content": "Use only pgmr:/pgmrc: placeholders that are defined in the PGMR prompt or memory for the current family.",
       "bullet_type": "validation_lesson",
-      "priority": 102,
+      "priority": 100,
       "enabled": true,
       "positive_pattern": null,
       "avoid": "Do not invent new pgmr:/pgmrc: tokens and do not mix PGMR placeholders with real ORKG IDs.",
@@ -133,7 +137,8 @@
       "helpful_count": 0,
       "harmful_count": 0,
       "created_at_utc": "2026-05-04T12:56:56.330849+00:00",
-      "updated_at_utc": "2026-05-04T12:56:56.343708+00:00"
+      "updated_at_utc": "2026-05-04T15:42:47.252269+00:00",
+      "curation_note": "Keep placeholder control, but below structural rules for larger models."
     },
     {
       "id": "nlp4re_pgmr_lite_pgmr_restore_error_1d345a55bf",
@@ -143,7 +148,7 @@
       "title": "Generate restorable PGMR-lite",
       "content": "The PGMR-lite query must use valid placeholders, complete triple patterns, and the expected paper-to-contribution structure so it can be deterministically restored.",
       "bullet_type": "validation_lesson",
-      "priority": 97,
+      "priority": 95,
       "enabled": true,
       "positive_pattern": null,
       "avoid": "Do not output partial PGMR, unknown placeholders, or a mixture of PGMR and direct ORKG identifiers.",
@@ -163,7 +168,7 @@
       "helpful_count": 0,
       "harmful_count": 0,
       "created_at_utc": "2026-05-04T12:56:56.330824+00:00",
-      "updated_at_utc": "2026-05-04T12:56:56.343785+00:00"
+      "updated_at_utc": "2026-05-04T15:42:47.252269+00:00"
     },
     {
       "id": "nlp4re_pgmr_lite_answer_mismatch_02046329c9",
@@ -173,7 +178,7 @@
       "title": "Preserve all semantic constraints from the question",
       "content": "Include the requested entity type, template family, filters, and returned variable so the execution result matches the question semantics.",
       "bullet_type": "validation_lesson",
-      "priority": 88,
+      "priority": 112,
       "enabled": true,
       "positive_pattern": null,
       "avoid": "Do not produce a broad executable query that ignores the requested field or filter.",
@@ -193,7 +198,8 @@
       "helpful_count": 0,
       "harmful_count": 0,
       "created_at_utc": "2026-05-04T12:56:56.330677+00:00",
-      "updated_at_utc": "2026-05-04T12:56:56.343851+00:00"
+      "updated_at_utc": "2026-05-04T15:42:47.252269+00:00",
+      "curation_note": "Prioritize semantic constraints over generic format rules."
     },
     {
       "id": "nlp4re_pgmr_lite_predicate_ref_mismatch_2ec30c974d",
@@ -203,7 +209,7 @@
       "title": "Use the correct predicate for the requested role",
       "content": "Choose predicates according to the semantic role in the question, such as task, dataset, metric, output, evaluation, year, venue, or contribution link.",
       "bullet_type": "validation_lesson",
-      "priority": 84,
+      "priority": 115,
       "enabled": true,
       "positive_pattern": null,
       "avoid": "Do not replace one template field with a similar-looking but semantically different predicate.",
@@ -222,7 +228,8 @@
       "helpful_count": 0,
       "harmful_count": 0,
       "created_at_utc": "2026-05-04T12:56:56.330875+00:00",
-      "updated_at_utc": "2026-05-04T12:56:56.343920+00:00"
+      "updated_at_utc": "2026-05-04T15:42:47.252269+00:00",
+      "curation_note": "Prioritize concrete predicate-role corrections over generic output rules."
     },
     {
       "id": "nlp4re_pgmr_lite_endpoint_bad_request_d96696afc5",
@@ -232,7 +239,7 @@
       "title": "Generate executable complete queries",
       "content": "Ensure the query has balanced braces, declared variables, valid triple patterns, and no unfinished FILTER, OPTIONAL, or SELECT clauses.",
       "bullet_type": "validation_lesson",
-      "priority": 83,
+      "priority": 90,
       "enabled": true,
       "positive_pattern": null,
       "avoid": "Do not return truncated queries or isolated triple patterns without SELECT/ASK and WHERE.",
@@ -248,7 +255,7 @@
       "helpful_count": 0,
       "harmful_count": 0,
       "created_at_utc": "2026-05-04T12:56:56.330740+00:00",
-      "updated_at_utc": "2026-05-04T12:56:56.343994+00:00"
+      "updated_at_utc": "2026-05-04T15:42:47.252269+00:00"
     },
     {
       "id": "nlp4re_pgmr_lite_prediction_execution_error_cb1ca769ee",
@@ -258,7 +265,7 @@
       "title": "Generate executable complete queries",
       "content": "Ensure the query has balanced braces, declared variables, valid triple patterns, and no unfinished FILTER, OPTIONAL, or SELECT clauses.",
       "bullet_type": "validation_lesson",
-      "priority": 83,
+      "priority": 90,
       "enabled": true,
       "positive_pattern": null,
       "avoid": "Do not return truncated queries or isolated triple patterns without SELECT/ASK and WHERE.",
@@ -274,7 +281,7 @@
       "helpful_count": 0,
       "harmful_count": 0,
       "created_at_utc": "2026-05-04T12:56:56.330918+00:00",
-      "updated_at_utc": "2026-05-04T12:56:56.344074+00:00"
+      "updated_at_utc": "2026-05-04T15:42:47.252269+00:00"
     },
     {
       "id": "nlp4re_pgmr_lite_endpoint_uri_too_long_8974e242e3",
@@ -284,7 +291,7 @@
       "title": "Keep generated queries compact",
       "content": "Avoid unnecessarily long repeated patterns and do not duplicate the same triple patterns or filters.",
       "bullet_type": "validation_lesson",
-      "priority": 71,
+      "priority": 80,
       "enabled": true,
       "positive_pattern": null,
       "avoid": "Do not generate repeated long UNION or duplicated blocks unless required by the question.",
@@ -300,7 +307,7 @@
       "helpful_count": 0,
       "harmful_count": 0,
       "created_at_utc": "2026-05-04T12:56:56.330770+00:00",
-      "updated_at_utc": "2026-05-04T12:56:56.344167+00:00"
+      "updated_at_utc": "2026-05-04T15:42:47.252269+00:00"
     }
   ]
 }

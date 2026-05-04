@@ -18,7 +18,7 @@
       "content": "Return only the final SPARQL or PGMR-lite query. Do not add explanations, markdown, or reasoning text.",
       "bullet_type": "hard_rule",
       "priority": 100,
-      "enabled": true,
+      "enabled": false,
       "positive_pattern": null,
       "avoid": "Do not answer in natural language.",
       "applicability": [],
@@ -29,7 +29,8 @@
       "helpful_count": 0,
       "harmful_count": 0,
       "created_at_utc": "2026-05-03T22:06:27.268635+00:00",
-      "updated_at_utc": "2026-05-03T22:06:27.268635+00:00"
+      "updated_at_utc": "2026-05-04T15:48:54.833465+00:00",
+      "curation_note": "Disabled because the base PGMR-mini prompt already contains this generic output/format instruction."
     },
     {
       "id": "empirical_research_practice_pgmr_lite_pgmr_format_initial",
@@ -40,7 +41,7 @@
       "content": "Use pgmr:/pgmrc: placeholders from the PGMR prompt or memory. Do not generate real ORKG IDs in PGMR-lite mode.",
       "bullet_type": "hard_rule",
       "priority": 95,
-      "enabled": true,
+      "enabled": false,
       "positive_pattern": null,
       "avoid": "Do not mix pgmr:/pgmrc: placeholders with orkgp:/orkgc:/orkgr: identifiers.",
       "applicability": [],
@@ -51,7 +52,8 @@
       "helpful_count": 0,
       "harmful_count": 0,
       "created_at_utc": "2026-05-03T22:06:27.268635+00:00",
-      "updated_at_utc": "2026-05-03T22:06:27.268635+00:00"
+      "updated_at_utc": "2026-05-04T15:48:54.833465+00:00",
+      "curation_note": "Disabled because the base PGMR-mini prompt already contains this generic output/format instruction."
     },
     {
       "id": "empirical_research_practice_pgmr_lite_contribution_pattern_initial",
@@ -61,7 +63,7 @@
       "title": "Use Empirical Research Practice contribution pattern",
       "content": "Connect papers to empirical research practice contributions before accessing family-specific fields.",
       "bullet_type": "template_pattern",
-      "priority": 90,
+      "priority": 120,
       "enabled": true,
       "positive_pattern": "?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:empirical_research_practice_contribution .",
       "avoid": "Do not attach empirical research, venue, method, practice, or evidence properties directly to ?paper.",
@@ -73,7 +75,8 @@
       "helpful_count": 0,
       "harmful_count": 0,
       "created_at_utc": "2026-05-03T22:06:27.268635+00:00",
-      "updated_at_utc": "2026-05-03T22:06:27.268635+00:00"
+      "updated_at_utc": "2026-05-04T15:48:54.833465+00:00",
+      "curation_note": "Highest priority because empirical queries require paper-to-contribution structure."
     },
     {
       "id": "empirical_research_practice_pgmr_lite_pgmr_unmapped_placeholders_5e6d4d46c4",
@@ -83,7 +86,7 @@
       "title": "Use only known PGMR placeholders",
       "content": "Use only pgmr:/pgmrc: placeholders that are defined in the PGMR prompt or memory for the current family.",
       "bullet_type": "validation_lesson",
-      "priority": 102,
+      "priority": 100,
       "enabled": true,
       "positive_pattern": null,
       "avoid": "Do not invent new pgmr:/pgmrc: tokens and do not mix PGMR placeholders with real ORKG IDs.",
@@ -103,7 +106,8 @@
       "helpful_count": 0,
       "harmful_count": 0,
       "created_at_utc": "2026-05-04T14:03:03.140303+00:00",
-      "updated_at_utc": "2026-05-04T14:03:03.149115+00:00"
+      "updated_at_utc": "2026-05-04T15:48:54.833465+00:00",
+      "curation_note": "Keep placeholder control, but below structural rules for larger models."
     },
     {
       "id": "empirical_research_practice_pgmr_lite_no_extracted_query_6bf765d2e5",
@@ -114,7 +118,7 @@
       "content": "The output must be only one complete SPARQL or PGMR-lite query, without explanation, markdown prose, or analysis.",
       "bullet_type": "validation_lesson",
       "priority": 96,
-      "enabled": true,
+      "enabled": false,
       "positive_pattern": null,
       "avoid": "Do not answer in natural language and do not include reasoning text before the query.",
       "applicability": [],
@@ -129,7 +133,8 @@
       "helpful_count": 0,
       "harmful_count": 0,
       "created_at_utc": "2026-05-04T14:03:03.140250+00:00",
-      "updated_at_utc": "2026-05-04T14:03:03.149176+00:00"
+      "updated_at_utc": "2026-05-04T15:48:54.833465+00:00",
+      "curation_note": "Disabled because the base PGMR-mini prompt already contains this generic output/format instruction."
     },
     {
       "id": "empirical_research_practice_pgmr_lite_pgmr_restore_error_5bf4a5cec7",
@@ -139,7 +144,7 @@
       "title": "Generate restorable PGMR-lite",
       "content": "The PGMR-lite query must use valid placeholders, complete triple patterns, and the expected paper-to-contribution structure so it can be deterministically restored.",
       "bullet_type": "validation_lesson",
-      "priority": 91,
+      "priority": 96,
       "enabled": true,
       "positive_pattern": null,
       "avoid": "Do not output partial PGMR, unknown placeholders, or a mixture of PGMR and direct ORKG identifiers.",
@@ -155,7 +160,7 @@
       "helpful_count": 0,
       "harmful_count": 0,
       "created_at_utc": "2026-05-04T14:03:03.140276+00:00",
-      "updated_at_utc": "2026-05-04T14:03:03.149220+00:00"
+      "updated_at_utc": "2026-05-04T15:48:54.833465+00:00"
     },
     {
       "id": "empirical_research_practice_pgmr_lite_missing_venue_filter_742d9752be",
@@ -165,7 +170,7 @@
       "title": "Include venue label filters when requested",
       "content": "When the question restricts results to a venue or conference, include the venue relation, label binding, and label FILTER.",
       "bullet_type": "validation_lesson",
-      "priority": 87,
+      "priority": 118,
       "enabled": true,
       "positive_pattern": "?contribution pgmr:venue ?venue . ?venue rdfs:label ?venue_name . FILTER(LCASE(STR(?venue_name)) = LCASE(\"IEEE International Requirements Engineering Conference\"))",
       "avoid": "Use the venue placeholder defined in the PGMR memory/prompt; do not invent a new venue token.",
@@ -181,7 +186,8 @@
       "helpful_count": 0,
       "harmful_count": 0,
       "created_at_utc": "2026-05-04T14:03:03.140220+00:00",
-      "updated_at_utc": "2026-05-04T14:03:03.149264+00:00"
+      "updated_at_utc": "2026-05-04T15:48:54.833465+00:00",
+      "curation_note": "High priority because empirical queries usually require the default venue filter."
     },
     {
       "id": "empirical_research_practice_pgmr_lite_predicate_ref_mismatch_58ed2a93f9",
@@ -191,7 +197,7 @@
       "title": "Use the correct predicate for the requested role",
       "content": "Choose predicates according to the semantic role in the question, such as task, dataset, metric, output, evaluation, year, venue, or contribution link.",
       "bullet_type": "validation_lesson",
-      "priority": 86,
+      "priority": 115,
       "enabled": true,
       "positive_pattern": null,
       "avoid": "Do not replace one template field with a similar-looking but semantically different predicate.",
@@ -211,7 +217,8 @@
       "helpful_count": 0,
       "harmful_count": 0,
       "created_at_utc": "2026-05-04T14:03:03.140328+00:00",
-      "updated_at_utc": "2026-05-04T14:03:03.149303+00:00"
+      "updated_at_utc": "2026-05-04T15:48:54.833465+00:00",
+      "curation_note": "Prioritize concrete predicate-role corrections over generic output rules."
     },
     {
       "id": "empirical_research_practice_pgmr_lite_answer_mismatch_95fc4efc2f",
@@ -221,7 +228,7 @@
       "title": "Preserve all semantic constraints from the question",
       "content": "Include the requested entity type, template family, filters, and returned variable so the execution result matches the question semantics.",
       "bullet_type": "validation_lesson",
-      "priority": 84,
+      "priority": 112,
       "enabled": true,
       "positive_pattern": null,
       "avoid": "Do not produce a broad executable query that ignores the requested field or filter.",
@@ -241,7 +248,8 @@
       "helpful_count": 0,
       "harmful_count": 0,
       "created_at_utc": "2026-05-04T14:03:03.140156+00:00",
-      "updated_at_utc": "2026-05-04T14:03:03.149344+00:00"
+      "updated_at_utc": "2026-05-04T15:48:54.833465+00:00",
+      "curation_note": "Prioritize preserving semantic constraints from the question."
     }
   ]
 }
