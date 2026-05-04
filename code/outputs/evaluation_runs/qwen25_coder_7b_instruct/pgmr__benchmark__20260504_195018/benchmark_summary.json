@@ -1,0 +1,4891 @@
+{
+  "run_metadata": {
+    "model_name": "qwen25_coder_7b_instruct",
+    "dataset_path": "code/data/dataset/pgmr/final/benchmark.json",
+    "prompt_mode": "pgmr",
+    "requested_limit": null,
+    "run_dir": "/nfs/home/moghadarians/repos/Bachelor_Thesis/code/outputs/evaluation_runs/qwen25_coder_7b_instruct/pgmr__benchmark__20260504_195018",
+    "output_path": "/nfs/home/moghadarians/repos/Bachelor_Thesis/code/outputs/evaluation_runs/qwen25_coder_7b_instruct/pgmr__benchmark__20260504_195018/benchmark_raw.json",
+    "started_at_utc": "2026-05-04T19:50:18.261582+00:00",
+    "total_items": 51,
+    "summary_output_path": "/nfs/home/moghadarians/repos/Bachelor_Thesis/code/outputs/evaluation_runs/qwen25_coder_7b_instruct/pgmr__benchmark__20260504_195018/benchmark_summary.json",
+    "prediction_format": "pgmr_lite",
+    "ace": {
+      "playbook_path": null,
+      "playbook_dir": "code/data/ace_playbooks",
+      "mode": "pgmr_lite",
+      "max_bullets": 3
+    },
+    "pgmr_memory_dir": "code/data/orkg_memory/templates",
+    "finished_at_utc": "2026-05-04T19:54:04.540082+00:00",
+    "completed_items": 51,
+    "cost_summary": {
+      "total_prompt_tokens": 0,
+      "total_completion_tokens": 0,
+      "total_tokens": 0,
+      "total_cached_tokens": 0,
+      "total_estimated_cost_usd": 0.0,
+      "priced_items": 0,
+      "mean_cost_per_priced_item_usd": null
+    }
+  },
+  "summary": {
+    "total_items": 51,
+    "metrics": {
+      "query_extracted": {
+        "metric_name": "query_extracted",
+        "value_field": "value",
+        "comparable_count": 51,
+        "non_comparable_count": 0,
+        "mean": 0.6667,
+        "success_count": 34,
+        "failure_count": 17,
+        "success_rate": 0.6667
+      },
+      "supported_query_form": {
+        "metric_name": "supported_query_form",
+        "value_field": "value",
+        "comparable_count": 34,
+        "non_comparable_count": 17,
+        "mean": 0.0,
+        "success_count": 0,
+        "failure_count": 34,
+        "success_rate": 0.0
+      },
+      "query_form_match": {
+        "metric_name": "query_form_match",
+        "value_field": "value",
+        "comparable_count": 34,
+        "non_comparable_count": 17,
+        "mean": 0.0,
+        "success_count": 0,
+        "failure_count": 34,
+        "success_rate": 0.0
+      },
+      "prediction_execution_success": {
+        "metric_name": "prediction_execution_success",
+        "value_field": "value",
+        "comparable_count": 0,
+        "non_comparable_count": 51,
+        "mean": null
+      },
+      "query_normalized_exact_match": {
+        "metric_name": "query_normalized_exact_match",
+        "value_field": "value",
+        "comparable_count": 34,
+        "non_comparable_count": 17,
+        "mean": 0.0,
+        "success_count": 0,
+        "failure_count": 34,
+        "success_rate": 0.0
+      },
+      "query_bleu": {
+        "metric_name": "query_bleu",
+        "value_field": "bleu",
+        "comparable_count": 34,
+        "non_comparable_count": 17,
+        "mean": 0.1655
+      },
+      "sparql_structure_precision": {
+        "metric_name": "sparql_structure_match",
+        "value_field": "precision",
+        "comparable_count": 34,
+        "non_comparable_count": 17,
+        "mean": 0.9268
+      },
+      "sparql_structure_recall": {
+        "metric_name": "sparql_structure_match",
+        "value_field": "recall",
+        "comparable_count": 34,
+        "non_comparable_count": 17,
+        "mean": 0.499
+      },
+      "sparql_structure_f1": {
+        "metric_name": "sparql_structure_match",
+        "value_field": "f1",
+        "comparable_count": 34,
+        "non_comparable_count": 17,
+        "mean": 0.627
+      },
+      "gold_execution_success": {
+        "metric_name": "gold_execution_success",
+        "value_field": "value",
+        "comparable_count": 51,
+        "non_comparable_count": 0,
+        "mean": 1.0,
+        "success_count": 51,
+        "failure_count": 0,
+        "success_rate": 1.0
+      },
+      "answer_exact_match": {
+        "metric_name": "answer_exact_match",
+        "value_field": "value",
+        "comparable_count": 0,
+        "non_comparable_count": 51,
+        "mean": null
+      },
+      "answer_precision": {
+        "metric_name": "answer_precision_recall_f1",
+        "value_field": "precision",
+        "comparable_count": 0,
+        "non_comparable_count": 51,
+        "mean": null
+      },
+      "answer_recall": {
+        "metric_name": "answer_precision_recall_f1",
+        "value_field": "recall",
+        "comparable_count": 0,
+        "non_comparable_count": 51,
+        "mean": null
+      },
+      "answer_f1": {
+        "metric_name": "answer_precision_recall_f1",
+        "value_field": "f1",
+        "comparable_count": 0,
+        "non_comparable_count": 51,
+        "mean": null
+      },
+      "answer_value_exact_match": {
+        "metric_name": "answer_value_exact_match",
+        "value_field": "value",
+        "comparable_count": 0,
+        "non_comparable_count": 51,
+        "mean": null
+      },
+      "answer_value_precision": {
+        "metric_name": "answer_value_precision_recall_f1",
+        "value_field": "precision",
+        "comparable_count": 0,
+        "non_comparable_count": 51,
+        "mean": null
+      },
+      "answer_value_recall": {
+        "metric_name": "answer_value_precision_recall_f1",
+        "value_field": "recall",
+        "comparable_count": 0,
+        "non_comparable_count": 51,
+        "mean": null
+      },
+      "answer_value_f1": {
+        "metric_name": "answer_value_precision_recall_f1",
+        "value_field": "f1",
+        "comparable_count": 0,
+        "non_comparable_count": 51,
+        "mean": null
+      },
+      "answer_cell_value_precision": {
+        "metric_name": "answer_cell_value_precision_recall_f1",
+        "value_field": "precision",
+        "comparable_count": 0,
+        "non_comparable_count": 51,
+        "mean": null
+      },
+      "answer_cell_value_recall": {
+        "metric_name": "answer_cell_value_precision_recall_f1",
+        "value_field": "recall",
+        "comparable_count": 0,
+        "non_comparable_count": 51,
+        "mean": null
+      },
+      "answer_cell_value_f1": {
+        "metric_name": "answer_cell_value_precision_recall_f1",
+        "value_field": "f1",
+        "comparable_count": 0,
+        "non_comparable_count": 51,
+        "mean": null
+      },
+      "kg_ref_precision": {
+        "metric_name": "kg_ref_match",
+        "value_field": "precision",
+        "comparable_count": 34,
+        "non_comparable_count": 17,
+        "mean": 0.9843
+      },
+      "kg_ref_recall": {
+        "metric_name": "kg_ref_match",
+        "value_field": "recall",
+        "comparable_count": 34,
+        "non_comparable_count": 17,
+        "mean": 0.7482
+      },
+      "kg_ref_f1": {
+        "metric_name": "kg_ref_match",
+        "value_field": "f1",
+        "comparable_count": 34,
+        "non_comparable_count": 17,
+        "mean": 0.826
+      },
+      "predicate_ref_precision": {
+        "metric_name": "predicate_ref_match",
+        "value_field": "precision",
+        "comparable_count": 34,
+        "non_comparable_count": 17,
+        "mean": 0.9853
+      },
+      "predicate_ref_recall": {
+        "metric_name": "predicate_ref_match",
+        "value_field": "recall",
+        "comparable_count": 34,
+        "non_comparable_count": 17,
+        "mean": 0.7033
+      },
+      "predicate_ref_f1": {
+        "metric_name": "predicate_ref_match",
+        "value_field": "f1",
+        "comparable_count": 34,
+        "non_comparable_count": 17,
+        "mean": 0.7896
+      },
+      "class_ref_precision": {
+        "metric_name": "class_ref_match",
+        "value_field": "precision",
+        "comparable_count": 34,
+        "non_comparable_count": 17,
+        "mean": 0.9853
+      },
+      "class_ref_recall": {
+        "metric_name": "class_ref_match",
+        "value_field": "recall",
+        "comparable_count": 34,
+        "non_comparable_count": 17,
+        "mean": 1.0,
+        "success_count": 34,
+        "failure_count": 0,
+        "success_rate": 1.0
+      },
+      "class_ref_f1": {
+        "metric_name": "class_ref_match",
+        "value_field": "f1",
+        "comparable_count": 34,
+        "non_comparable_count": 17,
+        "mean": 0.9902
+      },
+      "resource_ref_precision": {
+        "metric_name": "resource_ref_match",
+        "value_field": "precision",
+        "comparable_count": 34,
+        "non_comparable_count": 17,
+        "mean": 1.0,
+        "success_count": 34,
+        "failure_count": 0,
+        "success_rate": 1.0
+      },
+      "resource_ref_recall": {
+        "metric_name": "resource_ref_match",
+        "value_field": "recall",
+        "comparable_count": 34,
+        "non_comparable_count": 17,
+        "mean": 1.0,
+        "success_count": 34,
+        "failure_count": 0,
+        "success_rate": 1.0
+      },
+      "resource_ref_f1": {
+        "metric_name": "resource_ref_match",
+        "value_field": "f1",
+        "comparable_count": 34,
+        "non_comparable_count": 17,
+        "mean": 1.0,
+        "success_count": 34,
+        "failure_count": 0,
+        "success_rate": 1.0
+      },
+      "uri_hallucination": {
+        "metric_name": "uri_hallucination",
+        "type": "query_based",
+        "comparable_count": 34,
+        "non_comparable_count": 17,
+        "hallucinated_item_count": 0,
+        "clean_item_count": 34,
+        "hallucinated_item_rate": 0.0,
+        "total_hallucinated_ref_count": 0,
+        "mean_hallucinated_ref_count": 0.0,
+        "mean_hallucinated_ref_rate": 0.0
+      },
+      "pgmr_unmapped_placeholders": {
+        "metric_name": "pgmr_unmapped_placeholders",
+        "type": "pgmr_based",
+        "comparable_count": 34,
+        "non_comparable_count": 17,
+        "not_pgmr_mode_count": 0,
+        "unmapped_item_count": 0,
+        "clean_item_count": 34,
+        "unmapped_item_rate": 0.0,
+        "total_unmapped_placeholder_count": 0,
+        "mean_unmapped_placeholder_count": 0.0
+      }
+    },
+    "error_categories": {
+      "extraction_failure": 17,
+      "unsupported_query_form": 34
+    },
+    "response_time_seconds": {
+      "count": 51,
+      "mean_seconds": 3.2299,
+      "min_seconds": 1.623,
+      "max_seconds": 10.0766,
+      "total_seconds": 164.7234
+    },
+    "slices": {
+      "family": {
+        "empirical_research_practice": {
+          "item_count": 26,
+          "metrics": {
+            "query_extracted": {
+              "metric_name": "query_extracted",
+              "value_field": "value",
+              "comparable_count": 26,
+              "non_comparable_count": 0,
+              "mean": 0.5385,
+              "success_count": 14,
+              "failure_count": 12,
+              "success_rate": 0.5385
+            },
+            "supported_query_form": {
+              "metric_name": "supported_query_form",
+              "value_field": "value",
+              "comparable_count": 14,
+              "non_comparable_count": 12,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 14,
+              "success_rate": 0.0
+            },
+            "query_form_match": {
+              "metric_name": "query_form_match",
+              "value_field": "value",
+              "comparable_count": 14,
+              "non_comparable_count": 12,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 14,
+              "success_rate": 0.0
+            },
+            "prediction_execution_success": {
+              "metric_name": "prediction_execution_success",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 26,
+              "mean": null
+            },
+            "query_normalized_exact_match": {
+              "metric_name": "query_normalized_exact_match",
+              "value_field": "value",
+              "comparable_count": 14,
+              "non_comparable_count": 12,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 14,
+              "success_rate": 0.0
+            },
+            "query_bleu": {
+              "metric_name": "query_bleu",
+              "value_field": "bleu",
+              "comparable_count": 14,
+              "non_comparable_count": 12,
+              "mean": 0.1529
+            },
+            "sparql_structure_precision": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "precision",
+              "comparable_count": 14,
+              "non_comparable_count": 12,
+              "mean": 0.974
+            },
+            "sparql_structure_recall": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "recall",
+              "comparable_count": 14,
+              "non_comparable_count": 12,
+              "mean": 0.4525
+            },
+            "sparql_structure_f1": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "f1",
+              "comparable_count": 14,
+              "non_comparable_count": 12,
+              "mean": 0.5976
+            },
+            "gold_execution_success": {
+              "metric_name": "gold_execution_success",
+              "value_field": "value",
+              "comparable_count": 26,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 26,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "answer_exact_match": {
+              "metric_name": "answer_exact_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 26,
+              "mean": null
+            },
+            "answer_precision": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 26,
+              "mean": null
+            },
+            "answer_recall": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 26,
+              "mean": null
+            },
+            "answer_f1": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 26,
+              "mean": null
+            },
+            "answer_value_exact_match": {
+              "metric_name": "answer_value_exact_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 26,
+              "mean": null
+            },
+            "answer_value_precision": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 26,
+              "mean": null
+            },
+            "answer_value_recall": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 26,
+              "mean": null
+            },
+            "answer_value_f1": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 26,
+              "mean": null
+            },
+            "answer_cell_value_precision": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 26,
+              "mean": null
+            },
+            "answer_cell_value_recall": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 26,
+              "mean": null
+            },
+            "answer_cell_value_f1": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 26,
+              "mean": null
+            },
+            "kg_ref_precision": {
+              "metric_name": "kg_ref_match",
+              "value_field": "precision",
+              "comparable_count": 14,
+              "non_comparable_count": 12,
+              "mean": 1.0,
+              "success_count": 14,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "kg_ref_recall": {
+              "metric_name": "kg_ref_match",
+              "value_field": "recall",
+              "comparable_count": 14,
+              "non_comparable_count": 12,
+              "mean": 0.6449
+            },
+            "kg_ref_f1": {
+              "metric_name": "kg_ref_match",
+              "value_field": "f1",
+              "comparable_count": 14,
+              "non_comparable_count": 12,
+              "mean": 0.754
+            },
+            "predicate_ref_precision": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "precision",
+              "comparable_count": 14,
+              "non_comparable_count": 12,
+              "mean": 1.0,
+              "success_count": 14,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "predicate_ref_recall": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "recall",
+              "comparable_count": 14,
+              "non_comparable_count": 12,
+              "mean": 0.5944
+            },
+            "predicate_ref_f1": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "f1",
+              "comparable_count": 14,
+              "non_comparable_count": 12,
+              "mean": 0.7065
+            },
+            "class_ref_precision": {
+              "metric_name": "class_ref_match",
+              "value_field": "precision",
+              "comparable_count": 14,
+              "non_comparable_count": 12,
+              "mean": 1.0,
+              "success_count": 14,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "class_ref_recall": {
+              "metric_name": "class_ref_match",
+              "value_field": "recall",
+              "comparable_count": 14,
+              "non_comparable_count": 12,
+              "mean": 1.0,
+              "success_count": 14,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "class_ref_f1": {
+              "metric_name": "class_ref_match",
+              "value_field": "f1",
+              "comparable_count": 14,
+              "non_comparable_count": 12,
+              "mean": 1.0,
+              "success_count": 14,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_precision": {
+              "metric_name": "resource_ref_match",
+              "value_field": "precision",
+              "comparable_count": 14,
+              "non_comparable_count": 12,
+              "mean": 1.0,
+              "success_count": 14,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_recall": {
+              "metric_name": "resource_ref_match",
+              "value_field": "recall",
+              "comparable_count": 14,
+              "non_comparable_count": 12,
+              "mean": 1.0,
+              "success_count": 14,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_f1": {
+              "metric_name": "resource_ref_match",
+              "value_field": "f1",
+              "comparable_count": 14,
+              "non_comparable_count": 12,
+              "mean": 1.0,
+              "success_count": 14,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "uri_hallucination": {
+              "metric_name": "uri_hallucination",
+              "type": "query_based",
+              "comparable_count": 14,
+              "non_comparable_count": 12,
+              "hallucinated_item_count": 0,
+              "clean_item_count": 14,
+              "hallucinated_item_rate": 0.0,
+              "total_hallucinated_ref_count": 0,
+              "mean_hallucinated_ref_count": 0.0,
+              "mean_hallucinated_ref_rate": 0.0
+            },
+            "pgmr_unmapped_placeholders": {
+              "metric_name": "pgmr_unmapped_placeholders",
+              "type": "pgmr_based",
+              "comparable_count": 14,
+              "non_comparable_count": 12,
+              "not_pgmr_mode_count": 0,
+              "unmapped_item_count": 0,
+              "clean_item_count": 14,
+              "unmapped_item_rate": 0.0,
+              "total_unmapped_placeholder_count": 0,
+              "mean_unmapped_placeholder_count": 0.0
+            }
+          },
+          "error_categories": {
+            "extraction_failure": 12,
+            "unsupported_query_form": 14
+          },
+          "response_time_seconds": {
+            "count": 26,
+            "mean_seconds": 3.0511,
+            "min_seconds": 1.623,
+            "max_seconds": 4.8075,
+            "total_seconds": 79.3292
+          }
+        },
+        "nlp4re": {
+          "item_count": 25,
+          "metrics": {
+            "query_extracted": {
+              "metric_name": "query_extracted",
+              "value_field": "value",
+              "comparable_count": 25,
+              "non_comparable_count": 0,
+              "mean": 0.8,
+              "success_count": 20,
+              "failure_count": 5,
+              "success_rate": 0.8
+            },
+            "supported_query_form": {
+              "metric_name": "supported_query_form",
+              "value_field": "value",
+              "comparable_count": 20,
+              "non_comparable_count": 5,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 20,
+              "success_rate": 0.0
+            },
+            "query_form_match": {
+              "metric_name": "query_form_match",
+              "value_field": "value",
+              "comparable_count": 20,
+              "non_comparable_count": 5,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 20,
+              "success_rate": 0.0
+            },
+            "prediction_execution_success": {
+              "metric_name": "prediction_execution_success",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 25,
+              "mean": null
+            },
+            "query_normalized_exact_match": {
+              "metric_name": "query_normalized_exact_match",
+              "value_field": "value",
+              "comparable_count": 20,
+              "non_comparable_count": 5,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 20,
+              "success_rate": 0.0
+            },
+            "query_bleu": {
+              "metric_name": "query_bleu",
+              "value_field": "bleu",
+              "comparable_count": 20,
+              "non_comparable_count": 5,
+              "mean": 0.1743
+            },
+            "sparql_structure_precision": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "precision",
+              "comparable_count": 20,
+              "non_comparable_count": 5,
+              "mean": 0.8938
+            },
+            "sparql_structure_recall": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "recall",
+              "comparable_count": 20,
+              "non_comparable_count": 5,
+              "mean": 0.5315
+            },
+            "sparql_structure_f1": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "f1",
+              "comparable_count": 20,
+              "non_comparable_count": 5,
+              "mean": 0.6475
+            },
+            "gold_execution_success": {
+              "metric_name": "gold_execution_success",
+              "value_field": "value",
+              "comparable_count": 25,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 25,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "answer_exact_match": {
+              "metric_name": "answer_exact_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 25,
+              "mean": null
+            },
+            "answer_precision": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 25,
+              "mean": null
+            },
+            "answer_recall": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 25,
+              "mean": null
+            },
+            "answer_f1": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 25,
+              "mean": null
+            },
+            "answer_value_exact_match": {
+              "metric_name": "answer_value_exact_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 25,
+              "mean": null
+            },
+            "answer_value_precision": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 25,
+              "mean": null
+            },
+            "answer_value_recall": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 25,
+              "mean": null
+            },
+            "answer_value_f1": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 25,
+              "mean": null
+            },
+            "answer_cell_value_precision": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 25,
+              "mean": null
+            },
+            "answer_cell_value_recall": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 25,
+              "mean": null
+            },
+            "answer_cell_value_f1": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 25,
+              "mean": null
+            },
+            "kg_ref_precision": {
+              "metric_name": "kg_ref_match",
+              "value_field": "precision",
+              "comparable_count": 20,
+              "non_comparable_count": 5,
+              "mean": 0.9733
+            },
+            "kg_ref_recall": {
+              "metric_name": "kg_ref_match",
+              "value_field": "recall",
+              "comparable_count": 20,
+              "non_comparable_count": 5,
+              "mean": 0.8204
+            },
+            "kg_ref_f1": {
+              "metric_name": "kg_ref_match",
+              "value_field": "f1",
+              "comparable_count": 20,
+              "non_comparable_count": 5,
+              "mean": 0.8763
+            },
+            "predicate_ref_precision": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "precision",
+              "comparable_count": 20,
+              "non_comparable_count": 5,
+              "mean": 0.975
+            },
+            "predicate_ref_recall": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "recall",
+              "comparable_count": 20,
+              "non_comparable_count": 5,
+              "mean": 0.7795
+            },
+            "predicate_ref_f1": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "f1",
+              "comparable_count": 20,
+              "non_comparable_count": 5,
+              "mean": 0.8477
+            },
+            "class_ref_precision": {
+              "metric_name": "class_ref_match",
+              "value_field": "precision",
+              "comparable_count": 20,
+              "non_comparable_count": 5,
+              "mean": 0.975
+            },
+            "class_ref_recall": {
+              "metric_name": "class_ref_match",
+              "value_field": "recall",
+              "comparable_count": 20,
+              "non_comparable_count": 5,
+              "mean": 1.0,
+              "success_count": 20,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "class_ref_f1": {
+              "metric_name": "class_ref_match",
+              "value_field": "f1",
+              "comparable_count": 20,
+              "non_comparable_count": 5,
+              "mean": 0.9833
+            },
+            "resource_ref_precision": {
+              "metric_name": "resource_ref_match",
+              "value_field": "precision",
+              "comparable_count": 20,
+              "non_comparable_count": 5,
+              "mean": 1.0,
+              "success_count": 20,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_recall": {
+              "metric_name": "resource_ref_match",
+              "value_field": "recall",
+              "comparable_count": 20,
+              "non_comparable_count": 5,
+              "mean": 1.0,
+              "success_count": 20,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_f1": {
+              "metric_name": "resource_ref_match",
+              "value_field": "f1",
+              "comparable_count": 20,
+              "non_comparable_count": 5,
+              "mean": 1.0,
+              "success_count": 20,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "uri_hallucination": {
+              "metric_name": "uri_hallucination",
+              "type": "query_based",
+              "comparable_count": 20,
+              "non_comparable_count": 5,
+              "hallucinated_item_count": 0,
+              "clean_item_count": 20,
+              "hallucinated_item_rate": 0.0,
+              "total_hallucinated_ref_count": 0,
+              "mean_hallucinated_ref_count": 0.0,
+              "mean_hallucinated_ref_rate": 0.0
+            },
+            "pgmr_unmapped_placeholders": {
+              "metric_name": "pgmr_unmapped_placeholders",
+              "type": "pgmr_based",
+              "comparable_count": 20,
+              "non_comparable_count": 5,
+              "not_pgmr_mode_count": 0,
+              "unmapped_item_count": 0,
+              "clean_item_count": 20,
+              "unmapped_item_rate": 0.0,
+              "total_unmapped_placeholder_count": 0,
+              "mean_unmapped_placeholder_count": 0.0
+            }
+          },
+          "error_categories": {
+            "extraction_failure": 5,
+            "unsupported_query_form": 20
+          },
+          "response_time_seconds": {
+            "count": 25,
+            "mean_seconds": 3.4158,
+            "min_seconds": 1.9355,
+            "max_seconds": 10.0766,
+            "total_seconds": 85.3942
+          }
+        }
+      },
+      "source_dataset": {
+        "EmpiRE_Compass": {
+          "item_count": 11,
+          "metrics": {
+            "query_extracted": {
+              "metric_name": "query_extracted",
+              "value_field": "value",
+              "comparable_count": 11,
+              "non_comparable_count": 0,
+              "mean": 0.7273,
+              "success_count": 8,
+              "failure_count": 3,
+              "success_rate": 0.7273
+            },
+            "supported_query_form": {
+              "metric_name": "supported_query_form",
+              "value_field": "value",
+              "comparable_count": 8,
+              "non_comparable_count": 3,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 8,
+              "success_rate": 0.0
+            },
+            "query_form_match": {
+              "metric_name": "query_form_match",
+              "value_field": "value",
+              "comparable_count": 8,
+              "non_comparable_count": 3,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 8,
+              "success_rate": 0.0
+            },
+            "prediction_execution_success": {
+              "metric_name": "prediction_execution_success",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 11,
+              "mean": null
+            },
+            "query_normalized_exact_match": {
+              "metric_name": "query_normalized_exact_match",
+              "value_field": "value",
+              "comparable_count": 8,
+              "non_comparable_count": 3,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 8,
+              "success_rate": 0.0
+            },
+            "query_bleu": {
+              "metric_name": "query_bleu",
+              "value_field": "bleu",
+              "comparable_count": 8,
+              "non_comparable_count": 3,
+              "mean": 0.0547
+            },
+            "sparql_structure_precision": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "precision",
+              "comparable_count": 8,
+              "non_comparable_count": 3,
+              "mean": 0.9583
+            },
+            "sparql_structure_recall": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "recall",
+              "comparable_count": 8,
+              "non_comparable_count": 3,
+              "mean": 0.3079
+            },
+            "sparql_structure_f1": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "f1",
+              "comparable_count": 8,
+              "non_comparable_count": 3,
+              "mean": 0.4522
+            },
+            "gold_execution_success": {
+              "metric_name": "gold_execution_success",
+              "value_field": "value",
+              "comparable_count": 11,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 11,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "answer_exact_match": {
+              "metric_name": "answer_exact_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 11,
+              "mean": null
+            },
+            "answer_precision": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 11,
+              "mean": null
+            },
+            "answer_recall": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 11,
+              "mean": null
+            },
+            "answer_f1": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 11,
+              "mean": null
+            },
+            "answer_value_exact_match": {
+              "metric_name": "answer_value_exact_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 11,
+              "mean": null
+            },
+            "answer_value_precision": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 11,
+              "mean": null
+            },
+            "answer_value_recall": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 11,
+              "mean": null
+            },
+            "answer_value_f1": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 11,
+              "mean": null
+            },
+            "answer_cell_value_precision": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 11,
+              "mean": null
+            },
+            "answer_cell_value_recall": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 11,
+              "mean": null
+            },
+            "answer_cell_value_f1": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 11,
+              "mean": null
+            },
+            "kg_ref_precision": {
+              "metric_name": "kg_ref_match",
+              "value_field": "precision",
+              "comparable_count": 8,
+              "non_comparable_count": 3,
+              "mean": 1.0,
+              "success_count": 8,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "kg_ref_recall": {
+              "metric_name": "kg_ref_match",
+              "value_field": "recall",
+              "comparable_count": 8,
+              "non_comparable_count": 3,
+              "mean": 0.438
+            },
+            "kg_ref_f1": {
+              "metric_name": "kg_ref_match",
+              "value_field": "f1",
+              "comparable_count": 8,
+              "non_comparable_count": 3,
+              "mean": 0.5771
+            },
+            "predicate_ref_precision": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "precision",
+              "comparable_count": 8,
+              "non_comparable_count": 3,
+              "mean": 1.0,
+              "success_count": 8,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "predicate_ref_recall": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "recall",
+              "comparable_count": 8,
+              "non_comparable_count": 3,
+              "mean": 0.3744
+            },
+            "predicate_ref_f1": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "f1",
+              "comparable_count": 8,
+              "non_comparable_count": 3,
+              "mean": 0.5061
+            },
+            "class_ref_precision": {
+              "metric_name": "class_ref_match",
+              "value_field": "precision",
+              "comparable_count": 8,
+              "non_comparable_count": 3,
+              "mean": 1.0,
+              "success_count": 8,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "class_ref_recall": {
+              "metric_name": "class_ref_match",
+              "value_field": "recall",
+              "comparable_count": 8,
+              "non_comparable_count": 3,
+              "mean": 1.0,
+              "success_count": 8,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "class_ref_f1": {
+              "metric_name": "class_ref_match",
+              "value_field": "f1",
+              "comparable_count": 8,
+              "non_comparable_count": 3,
+              "mean": 1.0,
+              "success_count": 8,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_precision": {
+              "metric_name": "resource_ref_match",
+              "value_field": "precision",
+              "comparable_count": 8,
+              "non_comparable_count": 3,
+              "mean": 1.0,
+              "success_count": 8,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_recall": {
+              "metric_name": "resource_ref_match",
+              "value_field": "recall",
+              "comparable_count": 8,
+              "non_comparable_count": 3,
+              "mean": 1.0,
+              "success_count": 8,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_f1": {
+              "metric_name": "resource_ref_match",
+              "value_field": "f1",
+              "comparable_count": 8,
+              "non_comparable_count": 3,
+              "mean": 1.0,
+              "success_count": 8,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "uri_hallucination": {
+              "metric_name": "uri_hallucination",
+              "type": "query_based",
+              "comparable_count": 8,
+              "non_comparable_count": 3,
+              "hallucinated_item_count": 0,
+              "clean_item_count": 8,
+              "hallucinated_item_rate": 0.0,
+              "total_hallucinated_ref_count": 0,
+              "mean_hallucinated_ref_count": 0.0,
+              "mean_hallucinated_ref_rate": 0.0
+            },
+            "pgmr_unmapped_placeholders": {
+              "metric_name": "pgmr_unmapped_placeholders",
+              "type": "pgmr_based",
+              "comparable_count": 8,
+              "non_comparable_count": 3,
+              "not_pgmr_mode_count": 0,
+              "unmapped_item_count": 0,
+              "clean_item_count": 8,
+              "unmapped_item_rate": 0.0,
+              "total_unmapped_placeholder_count": 0,
+              "mean_unmapped_placeholder_count": 0.0
+            }
+          },
+          "error_categories": {
+            "extraction_failure": 3,
+            "unsupported_query_form": 8
+          },
+          "response_time_seconds": {
+            "count": 11,
+            "mean_seconds": 2.9397,
+            "min_seconds": 1.623,
+            "max_seconds": 4.8075,
+            "total_seconds": 32.3368
+          }
+        },
+        "Hybrid_Empirical_Research": {
+          "item_count": 16,
+          "metrics": {
+            "query_extracted": {
+              "metric_name": "query_extracted",
+              "value_field": "value",
+              "comparable_count": 16,
+              "non_comparable_count": 0,
+              "mean": 0.4375,
+              "success_count": 7,
+              "failure_count": 9,
+              "success_rate": 0.4375
+            },
+            "supported_query_form": {
+              "metric_name": "supported_query_form",
+              "value_field": "value",
+              "comparable_count": 7,
+              "non_comparable_count": 9,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 7,
+              "success_rate": 0.0
+            },
+            "query_form_match": {
+              "metric_name": "query_form_match",
+              "value_field": "value",
+              "comparable_count": 7,
+              "non_comparable_count": 9,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 7,
+              "success_rate": 0.0
+            },
+            "prediction_execution_success": {
+              "metric_name": "prediction_execution_success",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 16,
+              "mean": null
+            },
+            "query_normalized_exact_match": {
+              "metric_name": "query_normalized_exact_match",
+              "value_field": "value",
+              "comparable_count": 7,
+              "non_comparable_count": 9,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 7,
+              "success_rate": 0.0
+            },
+            "query_bleu": {
+              "metric_name": "query_bleu",
+              "value_field": "bleu",
+              "comparable_count": 7,
+              "non_comparable_count": 9,
+              "mean": 0.2442
+            },
+            "sparql_structure_precision": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "precision",
+              "comparable_count": 7,
+              "non_comparable_count": 9,
+              "mean": 0.9481
+            },
+            "sparql_structure_recall": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "recall",
+              "comparable_count": 7,
+              "non_comparable_count": 9,
+              "mean": 0.571
+            },
+            "sparql_structure_f1": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "f1",
+              "comparable_count": 7,
+              "non_comparable_count": 9,
+              "mean": 0.7084
+            },
+            "gold_execution_success": {
+              "metric_name": "gold_execution_success",
+              "value_field": "value",
+              "comparable_count": 16,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 16,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "answer_exact_match": {
+              "metric_name": "answer_exact_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 16,
+              "mean": null
+            },
+            "answer_precision": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 16,
+              "mean": null
+            },
+            "answer_recall": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 16,
+              "mean": null
+            },
+            "answer_f1": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 16,
+              "mean": null
+            },
+            "answer_value_exact_match": {
+              "metric_name": "answer_value_exact_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 16,
+              "mean": null
+            },
+            "answer_value_precision": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 16,
+              "mean": null
+            },
+            "answer_value_recall": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 16,
+              "mean": null
+            },
+            "answer_value_f1": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 16,
+              "mean": null
+            },
+            "answer_cell_value_precision": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 16,
+              "mean": null
+            },
+            "answer_cell_value_recall": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 16,
+              "mean": null
+            },
+            "answer_cell_value_f1": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 16,
+              "mean": null
+            },
+            "kg_ref_precision": {
+              "metric_name": "kg_ref_match",
+              "value_field": "precision",
+              "comparable_count": 7,
+              "non_comparable_count": 9,
+              "mean": 1.0,
+              "success_count": 7,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "kg_ref_recall": {
+              "metric_name": "kg_ref_match",
+              "value_field": "recall",
+              "comparable_count": 7,
+              "non_comparable_count": 9,
+              "mean": 0.8217
+            },
+            "kg_ref_f1": {
+              "metric_name": "kg_ref_match",
+              "value_field": "f1",
+              "comparable_count": 7,
+              "non_comparable_count": 9,
+              "mean": 0.9014
+            },
+            "predicate_ref_precision": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "precision",
+              "comparable_count": 7,
+              "non_comparable_count": 9,
+              "mean": 1.0,
+              "success_count": 7,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "predicate_ref_recall": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "recall",
+              "comparable_count": 7,
+              "non_comparable_count": 9,
+              "mean": 0.7881
+            },
+            "predicate_ref_f1": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "f1",
+              "comparable_count": 7,
+              "non_comparable_count": 9,
+              "mean": 0.8803
+            },
+            "class_ref_precision": {
+              "metric_name": "class_ref_match",
+              "value_field": "precision",
+              "comparable_count": 7,
+              "non_comparable_count": 9,
+              "mean": 1.0,
+              "success_count": 7,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "class_ref_recall": {
+              "metric_name": "class_ref_match",
+              "value_field": "recall",
+              "comparable_count": 7,
+              "non_comparable_count": 9,
+              "mean": 1.0,
+              "success_count": 7,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "class_ref_f1": {
+              "metric_name": "class_ref_match",
+              "value_field": "f1",
+              "comparable_count": 7,
+              "non_comparable_count": 9,
+              "mean": 1.0,
+              "success_count": 7,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_precision": {
+              "metric_name": "resource_ref_match",
+              "value_field": "precision",
+              "comparable_count": 7,
+              "non_comparable_count": 9,
+              "mean": 1.0,
+              "success_count": 7,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_recall": {
+              "metric_name": "resource_ref_match",
+              "value_field": "recall",
+              "comparable_count": 7,
+              "non_comparable_count": 9,
+              "mean": 1.0,
+              "success_count": 7,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_f1": {
+              "metric_name": "resource_ref_match",
+              "value_field": "f1",
+              "comparable_count": 7,
+              "non_comparable_count": 9,
+              "mean": 1.0,
+              "success_count": 7,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "uri_hallucination": {
+              "metric_name": "uri_hallucination",
+              "type": "query_based",
+              "comparable_count": 7,
+              "non_comparable_count": 9,
+              "hallucinated_item_count": 0,
+              "clean_item_count": 7,
+              "hallucinated_item_rate": 0.0,
+              "total_hallucinated_ref_count": 0,
+              "mean_hallucinated_ref_count": 0.0,
+              "mean_hallucinated_ref_rate": 0.0
+            },
+            "pgmr_unmapped_placeholders": {
+              "metric_name": "pgmr_unmapped_placeholders",
+              "type": "pgmr_based",
+              "comparable_count": 7,
+              "non_comparable_count": 9,
+              "not_pgmr_mode_count": 0,
+              "unmapped_item_count": 0,
+              "clean_item_count": 7,
+              "unmapped_item_rate": 0.0,
+              "total_unmapped_placeholder_count": 0,
+              "mean_unmapped_placeholder_count": 0.0
+            }
+          },
+          "error_categories": {
+            "extraction_failure": 9,
+            "unsupported_query_form": 7
+          },
+          "response_time_seconds": {
+            "count": 16,
+            "mean_seconds": 3.1323,
+            "min_seconds": 2.1136,
+            "max_seconds": 3.9243,
+            "total_seconds": 50.117
+          }
+        },
+        "Hybrid_NLP4RE": {
+          "item_count": 24,
+          "metrics": {
+            "query_extracted": {
+              "metric_name": "query_extracted",
+              "value_field": "value",
+              "comparable_count": 24,
+              "non_comparable_count": 0,
+              "mean": 0.7917,
+              "success_count": 19,
+              "failure_count": 5,
+              "success_rate": 0.7917
+            },
+            "supported_query_form": {
+              "metric_name": "supported_query_form",
+              "value_field": "value",
+              "comparable_count": 19,
+              "non_comparable_count": 5,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 19,
+              "success_rate": 0.0
+            },
+            "query_form_match": {
+              "metric_name": "query_form_match",
+              "value_field": "value",
+              "comparable_count": 19,
+              "non_comparable_count": 5,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 19,
+              "success_rate": 0.0
+            },
+            "prediction_execution_success": {
+              "metric_name": "prediction_execution_success",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 24,
+              "mean": null
+            },
+            "query_normalized_exact_match": {
+              "metric_name": "query_normalized_exact_match",
+              "value_field": "value",
+              "comparable_count": 19,
+              "non_comparable_count": 5,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 19,
+              "success_rate": 0.0
+            },
+            "query_bleu": {
+              "metric_name": "query_bleu",
+              "value_field": "bleu",
+              "comparable_count": 19,
+              "non_comparable_count": 5,
+              "mean": 0.1832
+            },
+            "sparql_structure_precision": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "precision",
+              "comparable_count": 19,
+              "non_comparable_count": 5,
+              "mean": 0.9057
+            },
+            "sparql_structure_recall": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "recall",
+              "comparable_count": 19,
+              "non_comparable_count": 5,
+              "mean": 0.5529
+            },
+            "sparql_structure_f1": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "f1",
+              "comparable_count": 19,
+              "non_comparable_count": 5,
+              "mean": 0.6705
+            },
+            "gold_execution_success": {
+              "metric_name": "gold_execution_success",
+              "value_field": "value",
+              "comparable_count": 24,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 24,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "answer_exact_match": {
+              "metric_name": "answer_exact_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 24,
+              "mean": null
+            },
+            "answer_precision": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 24,
+              "mean": null
+            },
+            "answer_recall": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 24,
+              "mean": null
+            },
+            "answer_f1": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 24,
+              "mean": null
+            },
+            "answer_value_exact_match": {
+              "metric_name": "answer_value_exact_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 24,
+              "mean": null
+            },
+            "answer_value_precision": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 24,
+              "mean": null
+            },
+            "answer_value_recall": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 24,
+              "mean": null
+            },
+            "answer_value_f1": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 24,
+              "mean": null
+            },
+            "answer_cell_value_precision": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 24,
+              "mean": null
+            },
+            "answer_cell_value_recall": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 24,
+              "mean": null
+            },
+            "answer_cell_value_f1": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 24,
+              "mean": null
+            },
+            "kg_ref_precision": {
+              "metric_name": "kg_ref_match",
+              "value_field": "precision",
+              "comparable_count": 19,
+              "non_comparable_count": 5,
+              "mean": 0.9719
+            },
+            "kg_ref_recall": {
+              "metric_name": "kg_ref_match",
+              "value_field": "recall",
+              "comparable_count": 19,
+              "non_comparable_count": 5,
+              "mean": 0.8516
+            },
+            "kg_ref_f1": {
+              "metric_name": "kg_ref_match",
+              "value_field": "f1",
+              "comparable_count": 19,
+              "non_comparable_count": 5,
+              "mean": 0.903
+            },
+            "predicate_ref_precision": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "precision",
+              "comparable_count": 19,
+              "non_comparable_count": 5,
+              "mean": 0.9737
+            },
+            "predicate_ref_recall": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "recall",
+              "comparable_count": 19,
+              "non_comparable_count": 5,
+              "mean": 0.8105
+            },
+            "predicate_ref_f1": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "f1",
+              "comparable_count": 19,
+              "non_comparable_count": 5,
+              "mean": 0.8755
+            },
+            "class_ref_precision": {
+              "metric_name": "class_ref_match",
+              "value_field": "precision",
+              "comparable_count": 19,
+              "non_comparable_count": 5,
+              "mean": 0.9737
+            },
+            "class_ref_recall": {
+              "metric_name": "class_ref_match",
+              "value_field": "recall",
+              "comparable_count": 19,
+              "non_comparable_count": 5,
+              "mean": 1.0,
+              "success_count": 19,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "class_ref_f1": {
+              "metric_name": "class_ref_match",
+              "value_field": "f1",
+              "comparable_count": 19,
+              "non_comparable_count": 5,
+              "mean": 0.9825
+            },
+            "resource_ref_precision": {
+              "metric_name": "resource_ref_match",
+              "value_field": "precision",
+              "comparable_count": 19,
+              "non_comparable_count": 5,
+              "mean": 1.0,
+              "success_count": 19,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_recall": {
+              "metric_name": "resource_ref_match",
+              "value_field": "recall",
+              "comparable_count": 19,
+              "non_comparable_count": 5,
+              "mean": 1.0,
+              "success_count": 19,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_f1": {
+              "metric_name": "resource_ref_match",
+              "value_field": "f1",
+              "comparable_count": 19,
+              "non_comparable_count": 5,
+              "mean": 1.0,
+              "success_count": 19,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "uri_hallucination": {
+              "metric_name": "uri_hallucination",
+              "type": "query_based",
+              "comparable_count": 19,
+              "non_comparable_count": 5,
+              "hallucinated_item_count": 0,
+              "clean_item_count": 19,
+              "hallucinated_item_rate": 0.0,
+              "total_hallucinated_ref_count": 0,
+              "mean_hallucinated_ref_count": 0.0,
+              "mean_hallucinated_ref_rate": 0.0
+            },
+            "pgmr_unmapped_placeholders": {
+              "metric_name": "pgmr_unmapped_placeholders",
+              "type": "pgmr_based",
+              "comparable_count": 19,
+              "non_comparable_count": 5,
+              "not_pgmr_mode_count": 0,
+              "unmapped_item_count": 0,
+              "clean_item_count": 19,
+              "unmapped_item_rate": 0.0,
+              "total_unmapped_placeholder_count": 0,
+              "mean_unmapped_placeholder_count": 0.0
+            }
+          },
+          "error_categories": {
+            "extraction_failure": 5,
+            "unsupported_query_form": 19
+          },
+          "response_time_seconds": {
+            "count": 24,
+            "mean_seconds": 3.4279,
+            "min_seconds": 1.9355,
+            "max_seconds": 10.0766,
+            "total_seconds": 82.2696
+          }
+        }
+      },
+      "query_type": {
+        "factoid": {
+          "item_count": 36,
+          "metrics": {
+            "query_extracted": {
+              "metric_name": "query_extracted",
+              "value_field": "value",
+              "comparable_count": 36,
+              "non_comparable_count": 0,
+              "mean": 0.6111,
+              "success_count": 22,
+              "failure_count": 14,
+              "success_rate": 0.6111
+            },
+            "supported_query_form": {
+              "metric_name": "supported_query_form",
+              "value_field": "value",
+              "comparable_count": 22,
+              "non_comparable_count": 14,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 22,
+              "success_rate": 0.0
+            },
+            "query_form_match": {
+              "metric_name": "query_form_match",
+              "value_field": "value",
+              "comparable_count": 22,
+              "non_comparable_count": 14,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 22,
+              "success_rate": 0.0
+            },
+            "prediction_execution_success": {
+              "metric_name": "prediction_execution_success",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 36,
+              "mean": null
+            },
+            "query_normalized_exact_match": {
+              "metric_name": "query_normalized_exact_match",
+              "value_field": "value",
+              "comparable_count": 22,
+              "non_comparable_count": 14,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 22,
+              "success_rate": 0.0
+            },
+            "query_bleu": {
+              "metric_name": "query_bleu",
+              "value_field": "bleu",
+              "comparable_count": 22,
+              "non_comparable_count": 14,
+              "mean": 0.2059
+            },
+            "sparql_structure_precision": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "precision",
+              "comparable_count": 22,
+              "non_comparable_count": 14,
+              "mean": 0.9361
+            },
+            "sparql_structure_recall": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "recall",
+              "comparable_count": 22,
+              "non_comparable_count": 14,
+              "mean": 0.5301
+            },
+            "sparql_structure_f1": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "f1",
+              "comparable_count": 22,
+              "non_comparable_count": 14,
+              "mean": 0.6608
+            },
+            "gold_execution_success": {
+              "metric_name": "gold_execution_success",
+              "value_field": "value",
+              "comparable_count": 36,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 36,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "answer_exact_match": {
+              "metric_name": "answer_exact_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 36,
+              "mean": null
+            },
+            "answer_precision": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 36,
+              "mean": null
+            },
+            "answer_recall": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 36,
+              "mean": null
+            },
+            "answer_f1": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 36,
+              "mean": null
+            },
+            "answer_value_exact_match": {
+              "metric_name": "answer_value_exact_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 36,
+              "mean": null
+            },
+            "answer_value_precision": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 36,
+              "mean": null
+            },
+            "answer_value_recall": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 36,
+              "mean": null
+            },
+            "answer_value_f1": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 36,
+              "mean": null
+            },
+            "answer_cell_value_precision": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 36,
+              "mean": null
+            },
+            "answer_cell_value_recall": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 36,
+              "mean": null
+            },
+            "answer_cell_value_f1": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 36,
+              "mean": null
+            },
+            "kg_ref_precision": {
+              "metric_name": "kg_ref_match",
+              "value_field": "precision",
+              "comparable_count": 22,
+              "non_comparable_count": 14,
+              "mean": 0.9758
+            },
+            "kg_ref_recall": {
+              "metric_name": "kg_ref_match",
+              "value_field": "recall",
+              "comparable_count": 22,
+              "non_comparable_count": 14,
+              "mean": 0.7911
+            },
+            "kg_ref_f1": {
+              "metric_name": "kg_ref_match",
+              "value_field": "f1",
+              "comparable_count": 22,
+              "non_comparable_count": 14,
+              "mean": 0.8633
+            },
+            "predicate_ref_precision": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "precision",
+              "comparable_count": 22,
+              "non_comparable_count": 14,
+              "mean": 0.9773
+            },
+            "predicate_ref_recall": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "recall",
+              "comparable_count": 22,
+              "non_comparable_count": 14,
+              "mean": 0.7417
+            },
+            "predicate_ref_f1": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "f1",
+              "comparable_count": 22,
+              "non_comparable_count": 14,
+              "mean": 0.8267
+            },
+            "class_ref_precision": {
+              "metric_name": "class_ref_match",
+              "value_field": "precision",
+              "comparable_count": 22,
+              "non_comparable_count": 14,
+              "mean": 0.9773
+            },
+            "class_ref_recall": {
+              "metric_name": "class_ref_match",
+              "value_field": "recall",
+              "comparable_count": 22,
+              "non_comparable_count": 14,
+              "mean": 1.0,
+              "success_count": 22,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "class_ref_f1": {
+              "metric_name": "class_ref_match",
+              "value_field": "f1",
+              "comparable_count": 22,
+              "non_comparable_count": 14,
+              "mean": 0.9848
+            },
+            "resource_ref_precision": {
+              "metric_name": "resource_ref_match",
+              "value_field": "precision",
+              "comparable_count": 22,
+              "non_comparable_count": 14,
+              "mean": 1.0,
+              "success_count": 22,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_recall": {
+              "metric_name": "resource_ref_match",
+              "value_field": "recall",
+              "comparable_count": 22,
+              "non_comparable_count": 14,
+              "mean": 1.0,
+              "success_count": 22,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_f1": {
+              "metric_name": "resource_ref_match",
+              "value_field": "f1",
+              "comparable_count": 22,
+              "non_comparable_count": 14,
+              "mean": 1.0,
+              "success_count": 22,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "uri_hallucination": {
+              "metric_name": "uri_hallucination",
+              "type": "query_based",
+              "comparable_count": 22,
+              "non_comparable_count": 14,
+              "hallucinated_item_count": 0,
+              "clean_item_count": 22,
+              "hallucinated_item_rate": 0.0,
+              "total_hallucinated_ref_count": 0,
+              "mean_hallucinated_ref_count": 0.0,
+              "mean_hallucinated_ref_rate": 0.0
+            },
+            "pgmr_unmapped_placeholders": {
+              "metric_name": "pgmr_unmapped_placeholders",
+              "type": "pgmr_based",
+              "comparable_count": 22,
+              "non_comparable_count": 14,
+              "not_pgmr_mode_count": 0,
+              "unmapped_item_count": 0,
+              "clean_item_count": 22,
+              "unmapped_item_rate": 0.0,
+              "total_unmapped_placeholder_count": 0,
+              "mean_unmapped_placeholder_count": 0.0
+            }
+          },
+          "error_categories": {
+            "extraction_failure": 14,
+            "unsupported_query_form": 22
+          },
+          "response_time_seconds": {
+            "count": 36,
+            "mean_seconds": 2.989,
+            "min_seconds": 1.623,
+            "max_seconds": 6.2735,
+            "total_seconds": 107.6033
+          }
+        },
+        "non_factoid": {
+          "item_count": 15,
+          "metrics": {
+            "query_extracted": {
+              "metric_name": "query_extracted",
+              "value_field": "value",
+              "comparable_count": 15,
+              "non_comparable_count": 0,
+              "mean": 0.8,
+              "success_count": 12,
+              "failure_count": 3,
+              "success_rate": 0.8
+            },
+            "supported_query_form": {
+              "metric_name": "supported_query_form",
+              "value_field": "value",
+              "comparable_count": 12,
+              "non_comparable_count": 3,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 12,
+              "success_rate": 0.0
+            },
+            "query_form_match": {
+              "metric_name": "query_form_match",
+              "value_field": "value",
+              "comparable_count": 12,
+              "non_comparable_count": 3,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 12,
+              "success_rate": 0.0
+            },
+            "prediction_execution_success": {
+              "metric_name": "prediction_execution_success",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 15,
+              "mean": null
+            },
+            "query_normalized_exact_match": {
+              "metric_name": "query_normalized_exact_match",
+              "value_field": "value",
+              "comparable_count": 12,
+              "non_comparable_count": 3,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 12,
+              "success_rate": 0.0
+            },
+            "query_bleu": {
+              "metric_name": "query_bleu",
+              "value_field": "bleu",
+              "comparable_count": 12,
+              "non_comparable_count": 3,
+              "mean": 0.0914
+            },
+            "sparql_structure_precision": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "precision",
+              "comparable_count": 12,
+              "non_comparable_count": 3,
+              "mean": 0.9097
+            },
+            "sparql_structure_recall": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "recall",
+              "comparable_count": 12,
+              "non_comparable_count": 3,
+              "mean": 0.4419
+            },
+            "sparql_structure_f1": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "f1",
+              "comparable_count": 12,
+              "non_comparable_count": 3,
+              "mean": 0.5649
+            },
+            "gold_execution_success": {
+              "metric_name": "gold_execution_success",
+              "value_field": "value",
+              "comparable_count": 15,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 15,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "answer_exact_match": {
+              "metric_name": "answer_exact_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 15,
+              "mean": null
+            },
+            "answer_precision": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 15,
+              "mean": null
+            },
+            "answer_recall": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 15,
+              "mean": null
+            },
+            "answer_f1": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 15,
+              "mean": null
+            },
+            "answer_value_exact_match": {
+              "metric_name": "answer_value_exact_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 15,
+              "mean": null
+            },
+            "answer_value_precision": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 15,
+              "mean": null
+            },
+            "answer_value_recall": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 15,
+              "mean": null
+            },
+            "answer_value_f1": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 15,
+              "mean": null
+            },
+            "answer_cell_value_precision": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 15,
+              "mean": null
+            },
+            "answer_cell_value_recall": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 15,
+              "mean": null
+            },
+            "answer_cell_value_f1": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 15,
+              "mean": null
+            },
+            "kg_ref_precision": {
+              "metric_name": "kg_ref_match",
+              "value_field": "precision",
+              "comparable_count": 12,
+              "non_comparable_count": 3,
+              "mean": 1.0,
+              "success_count": 12,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "kg_ref_recall": {
+              "metric_name": "kg_ref_match",
+              "value_field": "recall",
+              "comparable_count": 12,
+              "non_comparable_count": 3,
+              "mean": 0.6694
+            },
+            "kg_ref_f1": {
+              "metric_name": "kg_ref_match",
+              "value_field": "f1",
+              "comparable_count": 12,
+              "non_comparable_count": 3,
+              "mean": 0.7574
+            },
+            "predicate_ref_precision": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "precision",
+              "comparable_count": 12,
+              "non_comparable_count": 3,
+              "mean": 1.0,
+              "success_count": 12,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "predicate_ref_recall": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "recall",
+              "comparable_count": 12,
+              "non_comparable_count": 3,
+              "mean": 0.6329
+            },
+            "predicate_ref_f1": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "f1",
+              "comparable_count": 12,
+              "non_comparable_count": 3,
+              "mean": 0.7215
+            },
+            "class_ref_precision": {
+              "metric_name": "class_ref_match",
+              "value_field": "precision",
+              "comparable_count": 12,
+              "non_comparable_count": 3,
+              "mean": 1.0,
+              "success_count": 12,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "class_ref_recall": {
+              "metric_name": "class_ref_match",
+              "value_field": "recall",
+              "comparable_count": 12,
+              "non_comparable_count": 3,
+              "mean": 1.0,
+              "success_count": 12,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "class_ref_f1": {
+              "metric_name": "class_ref_match",
+              "value_field": "f1",
+              "comparable_count": 12,
+              "non_comparable_count": 3,
+              "mean": 1.0,
+              "success_count": 12,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_precision": {
+              "metric_name": "resource_ref_match",
+              "value_field": "precision",
+              "comparable_count": 12,
+              "non_comparable_count": 3,
+              "mean": 1.0,
+              "success_count": 12,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_recall": {
+              "metric_name": "resource_ref_match",
+              "value_field": "recall",
+              "comparable_count": 12,
+              "non_comparable_count": 3,
+              "mean": 1.0,
+              "success_count": 12,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_f1": {
+              "metric_name": "resource_ref_match",
+              "value_field": "f1",
+              "comparable_count": 12,
+              "non_comparable_count": 3,
+              "mean": 1.0,
+              "success_count": 12,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "uri_hallucination": {
+              "metric_name": "uri_hallucination",
+              "type": "query_based",
+              "comparable_count": 12,
+              "non_comparable_count": 3,
+              "hallucinated_item_count": 0,
+              "clean_item_count": 12,
+              "hallucinated_item_rate": 0.0,
+              "total_hallucinated_ref_count": 0,
+              "mean_hallucinated_ref_count": 0.0,
+              "mean_hallucinated_ref_rate": 0.0
+            },
+            "pgmr_unmapped_placeholders": {
+              "metric_name": "pgmr_unmapped_placeholders",
+              "type": "pgmr_based",
+              "comparable_count": 12,
+              "non_comparable_count": 3,
+              "not_pgmr_mode_count": 0,
+              "unmapped_item_count": 0,
+              "clean_item_count": 12,
+              "unmapped_item_rate": 0.0,
+              "total_unmapped_placeholder_count": 0,
+              "mean_unmapped_placeholder_count": 0.0
+            }
+          },
+          "error_categories": {
+            "extraction_failure": 3,
+            "unsupported_query_form": 12
+          },
+          "response_time_seconds": {
+            "count": 15,
+            "mean_seconds": 3.808,
+            "min_seconds": 2.1563,
+            "max_seconds": 10.0766,
+            "total_seconds": 57.1201
+          }
+        }
+      },
+      "answer_type": {
+        "boolean": {
+          "item_count": 3,
+          "metrics": {
+            "query_extracted": {
+              "metric_name": "query_extracted",
+              "value_field": "value",
+              "comparable_count": 3,
+              "non_comparable_count": 0,
+              "mean": 0.6667,
+              "success_count": 2,
+              "failure_count": 1,
+              "success_rate": 0.6667
+            },
+            "supported_query_form": {
+              "metric_name": "supported_query_form",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 1,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 2,
+              "success_rate": 0.0
+            },
+            "query_form_match": {
+              "metric_name": "query_form_match",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 1,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 2,
+              "success_rate": 0.0
+            },
+            "prediction_execution_success": {
+              "metric_name": "prediction_execution_success",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 3,
+              "mean": null
+            },
+            "query_normalized_exact_match": {
+              "metric_name": "query_normalized_exact_match",
+              "value_field": "value",
+              "comparable_count": 2,
+              "non_comparable_count": 1,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 2,
+              "success_rate": 0.0
+            },
+            "query_bleu": {
+              "metric_name": "query_bleu",
+              "value_field": "bleu",
+              "comparable_count": 2,
+              "non_comparable_count": 1,
+              "mean": 0.1365
+            },
+            "sparql_structure_precision": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "precision",
+              "comparable_count": 2,
+              "non_comparable_count": 1,
+              "mean": 0.7709
+            },
+            "sparql_structure_recall": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "recall",
+              "comparable_count": 2,
+              "non_comparable_count": 1,
+              "mean": 0.3854
+            },
+            "sparql_structure_f1": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "f1",
+              "comparable_count": 2,
+              "non_comparable_count": 1,
+              "mean": 0.5139
+            },
+            "gold_execution_success": {
+              "metric_name": "gold_execution_success",
+              "value_field": "value",
+              "comparable_count": 3,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 3,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "answer_exact_match": {
+              "metric_name": "answer_exact_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 3,
+              "mean": null
+            },
+            "answer_precision": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 3,
+              "mean": null
+            },
+            "answer_recall": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 3,
+              "mean": null
+            },
+            "answer_f1": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 3,
+              "mean": null
+            },
+            "answer_value_exact_match": {
+              "metric_name": "answer_value_exact_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 3,
+              "mean": null
+            },
+            "answer_value_precision": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 3,
+              "mean": null
+            },
+            "answer_value_recall": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 3,
+              "mean": null
+            },
+            "answer_value_f1": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 3,
+              "mean": null
+            },
+            "answer_cell_value_precision": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 3,
+              "mean": null
+            },
+            "answer_cell_value_recall": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 3,
+              "mean": null
+            },
+            "answer_cell_value_f1": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 3,
+              "mean": null
+            },
+            "kg_ref_precision": {
+              "metric_name": "kg_ref_match",
+              "value_field": "precision",
+              "comparable_count": 2,
+              "non_comparable_count": 1,
+              "mean": 0.9
+            },
+            "kg_ref_recall": {
+              "metric_name": "kg_ref_match",
+              "value_field": "recall",
+              "comparable_count": 2,
+              "non_comparable_count": 1,
+              "mean": 0.8334
+            },
+            "kg_ref_f1": {
+              "metric_name": "kg_ref_match",
+              "value_field": "f1",
+              "comparable_count": 2,
+              "non_comparable_count": 1,
+              "mean": 0.8637
+            },
+            "predicate_ref_precision": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "precision",
+              "comparable_count": 2,
+              "non_comparable_count": 1,
+              "mean": 1.0,
+              "success_count": 2,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "predicate_ref_recall": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "recall",
+              "comparable_count": 2,
+              "non_comparable_count": 1,
+              "mean": 0.8
+            },
+            "predicate_ref_f1": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "f1",
+              "comparable_count": 2,
+              "non_comparable_count": 1,
+              "mean": 0.875
+            },
+            "class_ref_precision": {
+              "metric_name": "class_ref_match",
+              "value_field": "precision",
+              "comparable_count": 2,
+              "non_comparable_count": 1,
+              "mean": 0.75
+            },
+            "class_ref_recall": {
+              "metric_name": "class_ref_match",
+              "value_field": "recall",
+              "comparable_count": 2,
+              "non_comparable_count": 1,
+              "mean": 1.0,
+              "success_count": 2,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "class_ref_f1": {
+              "metric_name": "class_ref_match",
+              "value_field": "f1",
+              "comparable_count": 2,
+              "non_comparable_count": 1,
+              "mean": 0.8334
+            },
+            "resource_ref_precision": {
+              "metric_name": "resource_ref_match",
+              "value_field": "precision",
+              "comparable_count": 2,
+              "non_comparable_count": 1,
+              "mean": 1.0,
+              "success_count": 2,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_recall": {
+              "metric_name": "resource_ref_match",
+              "value_field": "recall",
+              "comparable_count": 2,
+              "non_comparable_count": 1,
+              "mean": 1.0,
+              "success_count": 2,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_f1": {
+              "metric_name": "resource_ref_match",
+              "value_field": "f1",
+              "comparable_count": 2,
+              "non_comparable_count": 1,
+              "mean": 1.0,
+              "success_count": 2,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "uri_hallucination": {
+              "metric_name": "uri_hallucination",
+              "type": "query_based",
+              "comparable_count": 2,
+              "non_comparable_count": 1,
+              "hallucinated_item_count": 0,
+              "clean_item_count": 2,
+              "hallucinated_item_rate": 0.0,
+              "total_hallucinated_ref_count": 0,
+              "mean_hallucinated_ref_count": 0.0,
+              "mean_hallucinated_ref_rate": 0.0
+            },
+            "pgmr_unmapped_placeholders": {
+              "metric_name": "pgmr_unmapped_placeholders",
+              "type": "pgmr_based",
+              "comparable_count": 2,
+              "non_comparable_count": 1,
+              "not_pgmr_mode_count": 0,
+              "unmapped_item_count": 0,
+              "clean_item_count": 2,
+              "unmapped_item_rate": 0.0,
+              "total_unmapped_placeholder_count": 0,
+              "mean_unmapped_placeholder_count": 0.0
+            }
+          },
+          "error_categories": {
+            "extraction_failure": 1,
+            "unsupported_query_form": 2
+          },
+          "response_time_seconds": {
+            "count": 3,
+            "mean_seconds": 2.5626,
+            "min_seconds": 2.1136,
+            "max_seconds": 3.2478,
+            "total_seconds": 7.6879
+          }
+        },
+        "list": {
+          "item_count": 13,
+          "metrics": {
+            "query_extracted": {
+              "metric_name": "query_extracted",
+              "value_field": "value",
+              "comparable_count": 13,
+              "non_comparable_count": 0,
+              "mean": 0.5385,
+              "success_count": 7,
+              "failure_count": 6,
+              "success_rate": 0.5385
+            },
+            "supported_query_form": {
+              "metric_name": "supported_query_form",
+              "value_field": "value",
+              "comparable_count": 7,
+              "non_comparable_count": 6,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 7,
+              "success_rate": 0.0
+            },
+            "query_form_match": {
+              "metric_name": "query_form_match",
+              "value_field": "value",
+              "comparable_count": 7,
+              "non_comparable_count": 6,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 7,
+              "success_rate": 0.0
+            },
+            "prediction_execution_success": {
+              "metric_name": "prediction_execution_success",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 13,
+              "mean": null
+            },
+            "query_normalized_exact_match": {
+              "metric_name": "query_normalized_exact_match",
+              "value_field": "value",
+              "comparable_count": 7,
+              "non_comparable_count": 6,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 7,
+              "success_rate": 0.0
+            },
+            "query_bleu": {
+              "metric_name": "query_bleu",
+              "value_field": "bleu",
+              "comparable_count": 7,
+              "non_comparable_count": 6,
+              "mean": 0.3075
+            },
+            "sparql_structure_precision": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "precision",
+              "comparable_count": 7,
+              "non_comparable_count": 6,
+              "mean": 0.9643
+            },
+            "sparql_structure_recall": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "recall",
+              "comparable_count": 7,
+              "non_comparable_count": 6,
+              "mean": 0.6059
+            },
+            "sparql_structure_f1": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "f1",
+              "comparable_count": 7,
+              "non_comparable_count": 6,
+              "mean": 0.7412
+            },
+            "gold_execution_success": {
+              "metric_name": "gold_execution_success",
+              "value_field": "value",
+              "comparable_count": 13,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 13,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "answer_exact_match": {
+              "metric_name": "answer_exact_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 13,
+              "mean": null
+            },
+            "answer_precision": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 13,
+              "mean": null
+            },
+            "answer_recall": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 13,
+              "mean": null
+            },
+            "answer_f1": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 13,
+              "mean": null
+            },
+            "answer_value_exact_match": {
+              "metric_name": "answer_value_exact_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 13,
+              "mean": null
+            },
+            "answer_value_precision": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 13,
+              "mean": null
+            },
+            "answer_value_recall": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 13,
+              "mean": null
+            },
+            "answer_value_f1": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 13,
+              "mean": null
+            },
+            "answer_cell_value_precision": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 13,
+              "mean": null
+            },
+            "answer_cell_value_recall": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 13,
+              "mean": null
+            },
+            "answer_cell_value_f1": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 13,
+              "mean": null
+            },
+            "kg_ref_precision": {
+              "metric_name": "kg_ref_match",
+              "value_field": "precision",
+              "comparable_count": 7,
+              "non_comparable_count": 6,
+              "mean": 0.9524
+            },
+            "kg_ref_recall": {
+              "metric_name": "kg_ref_match",
+              "value_field": "recall",
+              "comparable_count": 7,
+              "non_comparable_count": 6,
+              "mean": 0.7826
+            },
+            "kg_ref_f1": {
+              "metric_name": "kg_ref_match",
+              "value_field": "f1",
+              "comparable_count": 7,
+              "non_comparable_count": 6,
+              "mean": 0.8573
+            },
+            "predicate_ref_precision": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "precision",
+              "comparable_count": 7,
+              "non_comparable_count": 6,
+              "mean": 0.9286
+            },
+            "predicate_ref_recall": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "recall",
+              "comparable_count": 7,
+              "non_comparable_count": 6,
+              "mean": 0.7214
+            },
+            "predicate_ref_f1": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "f1",
+              "comparable_count": 7,
+              "non_comparable_count": 6,
+              "mean": 0.8092
+            },
+            "class_ref_precision": {
+              "metric_name": "class_ref_match",
+              "value_field": "precision",
+              "comparable_count": 7,
+              "non_comparable_count": 6,
+              "mean": 1.0,
+              "success_count": 7,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "class_ref_recall": {
+              "metric_name": "class_ref_match",
+              "value_field": "recall",
+              "comparable_count": 7,
+              "non_comparable_count": 6,
+              "mean": 1.0,
+              "success_count": 7,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "class_ref_f1": {
+              "metric_name": "class_ref_match",
+              "value_field": "f1",
+              "comparable_count": 7,
+              "non_comparable_count": 6,
+              "mean": 1.0,
+              "success_count": 7,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_precision": {
+              "metric_name": "resource_ref_match",
+              "value_field": "precision",
+              "comparable_count": 7,
+              "non_comparable_count": 6,
+              "mean": 1.0,
+              "success_count": 7,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_recall": {
+              "metric_name": "resource_ref_match",
+              "value_field": "recall",
+              "comparable_count": 7,
+              "non_comparable_count": 6,
+              "mean": 1.0,
+              "success_count": 7,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_f1": {
+              "metric_name": "resource_ref_match",
+              "value_field": "f1",
+              "comparable_count": 7,
+              "non_comparable_count": 6,
+              "mean": 1.0,
+              "success_count": 7,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "uri_hallucination": {
+              "metric_name": "uri_hallucination",
+              "type": "query_based",
+              "comparable_count": 7,
+              "non_comparable_count": 6,
+              "hallucinated_item_count": 0,
+              "clean_item_count": 7,
+              "hallucinated_item_rate": 0.0,
+              "total_hallucinated_ref_count": 0,
+              "mean_hallucinated_ref_count": 0.0,
+              "mean_hallucinated_ref_rate": 0.0
+            },
+            "pgmr_unmapped_placeholders": {
+              "metric_name": "pgmr_unmapped_placeholders",
+              "type": "pgmr_based",
+              "comparable_count": 7,
+              "non_comparable_count": 6,
+              "not_pgmr_mode_count": 0,
+              "unmapped_item_count": 0,
+              "clean_item_count": 7,
+              "unmapped_item_rate": 0.0,
+              "total_unmapped_placeholder_count": 0,
+              "mean_unmapped_placeholder_count": 0.0
+            }
+          },
+          "error_categories": {
+            "extraction_failure": 6,
+            "unsupported_query_form": 7
+          },
+          "response_time_seconds": {
+            "count": 13,
+            "mean_seconds": 2.9119,
+            "min_seconds": 1.9901,
+            "max_seconds": 4.2749,
+            "total_seconds": 37.8553
+          }
+        },
+        "mixed": {
+          "item_count": 35,
+          "metrics": {
+            "query_extracted": {
+              "metric_name": "query_extracted",
+              "value_field": "value",
+              "comparable_count": 35,
+              "non_comparable_count": 0,
+              "mean": 0.7143,
+              "success_count": 25,
+              "failure_count": 10,
+              "success_rate": 0.7143
+            },
+            "supported_query_form": {
+              "metric_name": "supported_query_form",
+              "value_field": "value",
+              "comparable_count": 25,
+              "non_comparable_count": 10,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 25,
+              "success_rate": 0.0
+            },
+            "query_form_match": {
+              "metric_name": "query_form_match",
+              "value_field": "value",
+              "comparable_count": 25,
+              "non_comparable_count": 10,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 25,
+              "success_rate": 0.0
+            },
+            "prediction_execution_success": {
+              "metric_name": "prediction_execution_success",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 35,
+              "mean": null
+            },
+            "query_normalized_exact_match": {
+              "metric_name": "query_normalized_exact_match",
+              "value_field": "value",
+              "comparable_count": 25,
+              "non_comparable_count": 10,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 25,
+              "success_rate": 0.0
+            },
+            "query_bleu": {
+              "metric_name": "query_bleu",
+              "value_field": "bleu",
+              "comparable_count": 25,
+              "non_comparable_count": 10,
+              "mean": 0.1281
+            },
+            "sparql_structure_precision": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "precision",
+              "comparable_count": 25,
+              "non_comparable_count": 10,
+              "mean": 0.9288
+            },
+            "sparql_structure_recall": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "recall",
+              "comparable_count": 25,
+              "non_comparable_count": 10,
+              "mean": 0.4781
+            },
+            "sparql_structure_f1": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "f1",
+              "comparable_count": 25,
+              "non_comparable_count": 10,
+              "mean": 0.604
+            },
+            "gold_execution_success": {
+              "metric_name": "gold_execution_success",
+              "value_field": "value",
+              "comparable_count": 35,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 35,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "answer_exact_match": {
+              "metric_name": "answer_exact_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 35,
+              "mean": null
+            },
+            "answer_precision": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 35,
+              "mean": null
+            },
+            "answer_recall": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 35,
+              "mean": null
+            },
+            "answer_f1": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 35,
+              "mean": null
+            },
+            "answer_value_exact_match": {
+              "metric_name": "answer_value_exact_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 35,
+              "mean": null
+            },
+            "answer_value_precision": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 35,
+              "mean": null
+            },
+            "answer_value_recall": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 35,
+              "mean": null
+            },
+            "answer_value_f1": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 35,
+              "mean": null
+            },
+            "answer_cell_value_precision": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 35,
+              "mean": null
+            },
+            "answer_cell_value_recall": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 35,
+              "mean": null
+            },
+            "answer_cell_value_f1": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 35,
+              "mean": null
+            },
+            "kg_ref_precision": {
+              "metric_name": "kg_ref_match",
+              "value_field": "precision",
+              "comparable_count": 25,
+              "non_comparable_count": 10,
+              "mean": 1.0,
+              "success_count": 25,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "kg_ref_recall": {
+              "metric_name": "kg_ref_match",
+              "value_field": "recall",
+              "comparable_count": 25,
+              "non_comparable_count": 10,
+              "mean": 0.7317
+            },
+            "kg_ref_f1": {
+              "metric_name": "kg_ref_match",
+              "value_field": "f1",
+              "comparable_count": 25,
+              "non_comparable_count": 10,
+              "mean": 0.8142
+            },
+            "predicate_ref_precision": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "precision",
+              "comparable_count": 25,
+              "non_comparable_count": 10,
+              "mean": 1.0,
+              "success_count": 25,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "predicate_ref_recall": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "recall",
+              "comparable_count": 25,
+              "non_comparable_count": 10,
+              "mean": 0.6905
+            },
+            "predicate_ref_f1": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "f1",
+              "comparable_count": 25,
+              "non_comparable_count": 10,
+              "mean": 0.7772
+            },
+            "class_ref_precision": {
+              "metric_name": "class_ref_match",
+              "value_field": "precision",
+              "comparable_count": 25,
+              "non_comparable_count": 10,
+              "mean": 1.0,
+              "success_count": 25,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "class_ref_recall": {
+              "metric_name": "class_ref_match",
+              "value_field": "recall",
+              "comparable_count": 25,
+              "non_comparable_count": 10,
+              "mean": 1.0,
+              "success_count": 25,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "class_ref_f1": {
+              "metric_name": "class_ref_match",
+              "value_field": "f1",
+              "comparable_count": 25,
+              "non_comparable_count": 10,
+              "mean": 1.0,
+              "success_count": 25,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_precision": {
+              "metric_name": "resource_ref_match",
+              "value_field": "precision",
+              "comparable_count": 25,
+              "non_comparable_count": 10,
+              "mean": 1.0,
+              "success_count": 25,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_recall": {
+              "metric_name": "resource_ref_match",
+              "value_field": "recall",
+              "comparable_count": 25,
+              "non_comparable_count": 10,
+              "mean": 1.0,
+              "success_count": 25,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_f1": {
+              "metric_name": "resource_ref_match",
+              "value_field": "f1",
+              "comparable_count": 25,
+              "non_comparable_count": 10,
+              "mean": 1.0,
+              "success_count": 25,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "uri_hallucination": {
+              "metric_name": "uri_hallucination",
+              "type": "query_based",
+              "comparable_count": 25,
+              "non_comparable_count": 10,
+              "hallucinated_item_count": 0,
+              "clean_item_count": 25,
+              "hallucinated_item_rate": 0.0,
+              "total_hallucinated_ref_count": 0,
+              "mean_hallucinated_ref_count": 0.0,
+              "mean_hallucinated_ref_rate": 0.0
+            },
+            "pgmr_unmapped_placeholders": {
+              "metric_name": "pgmr_unmapped_placeholders",
+              "type": "pgmr_based",
+              "comparable_count": 25,
+              "non_comparable_count": 10,
+              "not_pgmr_mode_count": 0,
+              "unmapped_item_count": 0,
+              "clean_item_count": 25,
+              "unmapped_item_rate": 0.0,
+              "total_unmapped_placeholder_count": 0,
+              "mean_unmapped_placeholder_count": 0.0
+            }
+          },
+          "error_categories": {
+            "extraction_failure": 10,
+            "unsupported_query_form": 25
+          },
+          "response_time_seconds": {
+            "count": 35,
+            "mean_seconds": 3.4051,
+            "min_seconds": 1.623,
+            "max_seconds": 10.0766,
+            "total_seconds": 119.1802
+          }
+        }
+      },
+      "query_shape": {
+        "forest": {
+          "item_count": 1,
+          "metrics": {
+            "query_extracted": {
+              "metric_name": "query_extracted",
+              "value_field": "value",
+              "comparable_count": 1,
+              "non_comparable_count": 0,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 1,
+              "success_rate": 0.0
+            },
+            "supported_query_form": {
+              "metric_name": "supported_query_form",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "mean": null
+            },
+            "query_form_match": {
+              "metric_name": "query_form_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "mean": null
+            },
+            "prediction_execution_success": {
+              "metric_name": "prediction_execution_success",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "mean": null
+            },
+            "query_normalized_exact_match": {
+              "metric_name": "query_normalized_exact_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "mean": null
+            },
+            "query_bleu": {
+              "metric_name": "query_bleu",
+              "value_field": "bleu",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "mean": null
+            },
+            "sparql_structure_precision": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "mean": null
+            },
+            "sparql_structure_recall": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "mean": null
+            },
+            "sparql_structure_f1": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "mean": null
+            },
+            "gold_execution_success": {
+              "metric_name": "gold_execution_success",
+              "value_field": "value",
+              "comparable_count": 1,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 1,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "answer_exact_match": {
+              "metric_name": "answer_exact_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "mean": null
+            },
+            "answer_precision": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "mean": null
+            },
+            "answer_recall": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "mean": null
+            },
+            "answer_f1": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "mean": null
+            },
+            "answer_value_exact_match": {
+              "metric_name": "answer_value_exact_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "mean": null
+            },
+            "answer_value_precision": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "mean": null
+            },
+            "answer_value_recall": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "mean": null
+            },
+            "answer_value_f1": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "mean": null
+            },
+            "answer_cell_value_precision": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "mean": null
+            },
+            "answer_cell_value_recall": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "mean": null
+            },
+            "answer_cell_value_f1": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "mean": null
+            },
+            "kg_ref_precision": {
+              "metric_name": "kg_ref_match",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "mean": null
+            },
+            "kg_ref_recall": {
+              "metric_name": "kg_ref_match",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "mean": null
+            },
+            "kg_ref_f1": {
+              "metric_name": "kg_ref_match",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "mean": null
+            },
+            "predicate_ref_precision": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "mean": null
+            },
+            "predicate_ref_recall": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "mean": null
+            },
+            "predicate_ref_f1": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "mean": null
+            },
+            "class_ref_precision": {
+              "metric_name": "class_ref_match",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "mean": null
+            },
+            "class_ref_recall": {
+              "metric_name": "class_ref_match",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "mean": null
+            },
+            "class_ref_f1": {
+              "metric_name": "class_ref_match",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "mean": null
+            },
+            "resource_ref_precision": {
+              "metric_name": "resource_ref_match",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "mean": null
+            },
+            "resource_ref_recall": {
+              "metric_name": "resource_ref_match",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "mean": null
+            },
+            "resource_ref_f1": {
+              "metric_name": "resource_ref_match",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "mean": null
+            },
+            "uri_hallucination": {
+              "metric_name": "uri_hallucination",
+              "type": "query_based",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "hallucinated_item_count": 0,
+              "clean_item_count": 0,
+              "hallucinated_item_rate": null,
+              "total_hallucinated_ref_count": 0,
+              "mean_hallucinated_ref_count": null,
+              "mean_hallucinated_ref_rate": null
+            },
+            "pgmr_unmapped_placeholders": {
+              "metric_name": "pgmr_unmapped_placeholders",
+              "type": "pgmr_based",
+              "comparable_count": 0,
+              "non_comparable_count": 1,
+              "not_pgmr_mode_count": 0,
+              "unmapped_item_count": 0,
+              "clean_item_count": 0,
+              "unmapped_item_rate": null,
+              "total_unmapped_placeholder_count": 0,
+              "mean_unmapped_placeholder_count": null
+            }
+          },
+          "error_categories": {
+            "extraction_failure": 1
+          },
+          "response_time_seconds": {
+            "count": 1,
+            "mean_seconds": 3.8708,
+            "min_seconds": 3.8708,
+            "max_seconds": 3.8708,
+            "total_seconds": 3.8708
+          }
+        },
+        "tree": {
+          "item_count": 50,
+          "metrics": {
+            "query_extracted": {
+              "metric_name": "query_extracted",
+              "value_field": "value",
+              "comparable_count": 50,
+              "non_comparable_count": 0,
+              "mean": 0.68,
+              "success_count": 34,
+              "failure_count": 16,
+              "success_rate": 0.68
+            },
+            "supported_query_form": {
+              "metric_name": "supported_query_form",
+              "value_field": "value",
+              "comparable_count": 34,
+              "non_comparable_count": 16,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 34,
+              "success_rate": 0.0
+            },
+            "query_form_match": {
+              "metric_name": "query_form_match",
+              "value_field": "value",
+              "comparable_count": 34,
+              "non_comparable_count": 16,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 34,
+              "success_rate": 0.0
+            },
+            "prediction_execution_success": {
+              "metric_name": "prediction_execution_success",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 50,
+              "mean": null
+            },
+            "query_normalized_exact_match": {
+              "metric_name": "query_normalized_exact_match",
+              "value_field": "value",
+              "comparable_count": 34,
+              "non_comparable_count": 16,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 34,
+              "success_rate": 0.0
+            },
+            "query_bleu": {
+              "metric_name": "query_bleu",
+              "value_field": "bleu",
+              "comparable_count": 34,
+              "non_comparable_count": 16,
+              "mean": 0.1655
+            },
+            "sparql_structure_precision": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "precision",
+              "comparable_count": 34,
+              "non_comparable_count": 16,
+              "mean": 0.9268
+            },
+            "sparql_structure_recall": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "recall",
+              "comparable_count": 34,
+              "non_comparable_count": 16,
+              "mean": 0.499
+            },
+            "sparql_structure_f1": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "f1",
+              "comparable_count": 34,
+              "non_comparable_count": 16,
+              "mean": 0.627
+            },
+            "gold_execution_success": {
+              "metric_name": "gold_execution_success",
+              "value_field": "value",
+              "comparable_count": 50,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 50,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "answer_exact_match": {
+              "metric_name": "answer_exact_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 50,
+              "mean": null
+            },
+            "answer_precision": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 50,
+              "mean": null
+            },
+            "answer_recall": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 50,
+              "mean": null
+            },
+            "answer_f1": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 50,
+              "mean": null
+            },
+            "answer_value_exact_match": {
+              "metric_name": "answer_value_exact_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 50,
+              "mean": null
+            },
+            "answer_value_precision": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 50,
+              "mean": null
+            },
+            "answer_value_recall": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 50,
+              "mean": null
+            },
+            "answer_value_f1": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 50,
+              "mean": null
+            },
+            "answer_cell_value_precision": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 50,
+              "mean": null
+            },
+            "answer_cell_value_recall": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 50,
+              "mean": null
+            },
+            "answer_cell_value_f1": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 50,
+              "mean": null
+            },
+            "kg_ref_precision": {
+              "metric_name": "kg_ref_match",
+              "value_field": "precision",
+              "comparable_count": 34,
+              "non_comparable_count": 16,
+              "mean": 0.9843
+            },
+            "kg_ref_recall": {
+              "metric_name": "kg_ref_match",
+              "value_field": "recall",
+              "comparable_count": 34,
+              "non_comparable_count": 16,
+              "mean": 0.7482
+            },
+            "kg_ref_f1": {
+              "metric_name": "kg_ref_match",
+              "value_field": "f1",
+              "comparable_count": 34,
+              "non_comparable_count": 16,
+              "mean": 0.826
+            },
+            "predicate_ref_precision": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "precision",
+              "comparable_count": 34,
+              "non_comparable_count": 16,
+              "mean": 0.9853
+            },
+            "predicate_ref_recall": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "recall",
+              "comparable_count": 34,
+              "non_comparable_count": 16,
+              "mean": 0.7033
+            },
+            "predicate_ref_f1": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "f1",
+              "comparable_count": 34,
+              "non_comparable_count": 16,
+              "mean": 0.7896
+            },
+            "class_ref_precision": {
+              "metric_name": "class_ref_match",
+              "value_field": "precision",
+              "comparable_count": 34,
+              "non_comparable_count": 16,
+              "mean": 0.9853
+            },
+            "class_ref_recall": {
+              "metric_name": "class_ref_match",
+              "value_field": "recall",
+              "comparable_count": 34,
+              "non_comparable_count": 16,
+              "mean": 1.0,
+              "success_count": 34,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "class_ref_f1": {
+              "metric_name": "class_ref_match",
+              "value_field": "f1",
+              "comparable_count": 34,
+              "non_comparable_count": 16,
+              "mean": 0.9902
+            },
+            "resource_ref_precision": {
+              "metric_name": "resource_ref_match",
+              "value_field": "precision",
+              "comparable_count": 34,
+              "non_comparable_count": 16,
+              "mean": 1.0,
+              "success_count": 34,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_recall": {
+              "metric_name": "resource_ref_match",
+              "value_field": "recall",
+              "comparable_count": 34,
+              "non_comparable_count": 16,
+              "mean": 1.0,
+              "success_count": 34,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_f1": {
+              "metric_name": "resource_ref_match",
+              "value_field": "f1",
+              "comparable_count": 34,
+              "non_comparable_count": 16,
+              "mean": 1.0,
+              "success_count": 34,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "uri_hallucination": {
+              "metric_name": "uri_hallucination",
+              "type": "query_based",
+              "comparable_count": 34,
+              "non_comparable_count": 16,
+              "hallucinated_item_count": 0,
+              "clean_item_count": 34,
+              "hallucinated_item_rate": 0.0,
+              "total_hallucinated_ref_count": 0,
+              "mean_hallucinated_ref_count": 0.0,
+              "mean_hallucinated_ref_rate": 0.0
+            },
+            "pgmr_unmapped_placeholders": {
+              "metric_name": "pgmr_unmapped_placeholders",
+              "type": "pgmr_based",
+              "comparable_count": 34,
+              "non_comparable_count": 16,
+              "not_pgmr_mode_count": 0,
+              "unmapped_item_count": 0,
+              "clean_item_count": 34,
+              "unmapped_item_rate": 0.0,
+              "total_unmapped_placeholder_count": 0,
+              "mean_unmapped_placeholder_count": 0.0
+            }
+          },
+          "error_categories": {
+            "extraction_failure": 16,
+            "unsupported_query_form": 34
+          },
+          "response_time_seconds": {
+            "count": 50,
+            "mean_seconds": 3.2171,
+            "min_seconds": 1.623,
+            "max_seconds": 10.0766,
+            "total_seconds": 160.8526
+          }
+        }
+      },
+      "complexity_level": {
+        "high": {
+          "item_count": 21,
+          "metrics": {
+            "query_extracted": {
+              "metric_name": "query_extracted",
+              "value_field": "value",
+              "comparable_count": 21,
+              "non_comparable_count": 0,
+              "mean": 0.5714,
+              "success_count": 12,
+              "failure_count": 9,
+              "success_rate": 0.5714
+            },
+            "supported_query_form": {
+              "metric_name": "supported_query_form",
+              "value_field": "value",
+              "comparable_count": 12,
+              "non_comparable_count": 9,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 12,
+              "success_rate": 0.0
+            },
+            "query_form_match": {
+              "metric_name": "query_form_match",
+              "value_field": "value",
+              "comparable_count": 12,
+              "non_comparable_count": 9,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 12,
+              "success_rate": 0.0
+            },
+            "prediction_execution_success": {
+              "metric_name": "prediction_execution_success",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 21,
+              "mean": null
+            },
+            "query_normalized_exact_match": {
+              "metric_name": "query_normalized_exact_match",
+              "value_field": "value",
+              "comparable_count": 12,
+              "non_comparable_count": 9,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 12,
+              "success_rate": 0.0
+            },
+            "query_bleu": {
+              "metric_name": "query_bleu",
+              "value_field": "bleu",
+              "comparable_count": 12,
+              "non_comparable_count": 9,
+              "mean": 0.1527
+            },
+            "sparql_structure_precision": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "precision",
+              "comparable_count": 12,
+              "non_comparable_count": 9,
+              "mean": 0.9419
+            },
+            "sparql_structure_recall": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "recall",
+              "comparable_count": 12,
+              "non_comparable_count": 9,
+              "mean": 0.4345
+            },
+            "sparql_structure_f1": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "f1",
+              "comparable_count": 12,
+              "non_comparable_count": 9,
+              "mean": 0.5732
+            },
+            "gold_execution_success": {
+              "metric_name": "gold_execution_success",
+              "value_field": "value",
+              "comparable_count": 21,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 21,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "answer_exact_match": {
+              "metric_name": "answer_exact_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 21,
+              "mean": null
+            },
+            "answer_precision": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 21,
+              "mean": null
+            },
+            "answer_recall": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 21,
+              "mean": null
+            },
+            "answer_f1": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 21,
+              "mean": null
+            },
+            "answer_value_exact_match": {
+              "metric_name": "answer_value_exact_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 21,
+              "mean": null
+            },
+            "answer_value_precision": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 21,
+              "mean": null
+            },
+            "answer_value_recall": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 21,
+              "mean": null
+            },
+            "answer_value_f1": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 21,
+              "mean": null
+            },
+            "answer_cell_value_precision": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 21,
+              "mean": null
+            },
+            "answer_cell_value_recall": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 21,
+              "mean": null
+            },
+            "answer_cell_value_f1": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 21,
+              "mean": null
+            },
+            "kg_ref_precision": {
+              "metric_name": "kg_ref_match",
+              "value_field": "precision",
+              "comparable_count": 12,
+              "non_comparable_count": 9,
+              "mean": 1.0,
+              "success_count": 12,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "kg_ref_recall": {
+              "metric_name": "kg_ref_match",
+              "value_field": "recall",
+              "comparable_count": 12,
+              "non_comparable_count": 9,
+              "mean": 0.6657
+            },
+            "kg_ref_f1": {
+              "metric_name": "kg_ref_match",
+              "value_field": "f1",
+              "comparable_count": 12,
+              "non_comparable_count": 9,
+              "mean": 0.7603
+            },
+            "predicate_ref_precision": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "precision",
+              "comparable_count": 12,
+              "non_comparable_count": 9,
+              "mean": 1.0,
+              "success_count": 12,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "predicate_ref_recall": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "recall",
+              "comparable_count": 12,
+              "non_comparable_count": 9,
+              "mean": 0.6284
+            },
+            "predicate_ref_f1": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "f1",
+              "comparable_count": 12,
+              "non_comparable_count": 9,
+              "mean": 0.7265
+            },
+            "class_ref_precision": {
+              "metric_name": "class_ref_match",
+              "value_field": "precision",
+              "comparable_count": 12,
+              "non_comparable_count": 9,
+              "mean": 1.0,
+              "success_count": 12,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "class_ref_recall": {
+              "metric_name": "class_ref_match",
+              "value_field": "recall",
+              "comparable_count": 12,
+              "non_comparable_count": 9,
+              "mean": 1.0,
+              "success_count": 12,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "class_ref_f1": {
+              "metric_name": "class_ref_match",
+              "value_field": "f1",
+              "comparable_count": 12,
+              "non_comparable_count": 9,
+              "mean": 1.0,
+              "success_count": 12,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_precision": {
+              "metric_name": "resource_ref_match",
+              "value_field": "precision",
+              "comparable_count": 12,
+              "non_comparable_count": 9,
+              "mean": 1.0,
+              "success_count": 12,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_recall": {
+              "metric_name": "resource_ref_match",
+              "value_field": "recall",
+              "comparable_count": 12,
+              "non_comparable_count": 9,
+              "mean": 1.0,
+              "success_count": 12,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_f1": {
+              "metric_name": "resource_ref_match",
+              "value_field": "f1",
+              "comparable_count": 12,
+              "non_comparable_count": 9,
+              "mean": 1.0,
+              "success_count": 12,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "uri_hallucination": {
+              "metric_name": "uri_hallucination",
+              "type": "query_based",
+              "comparable_count": 12,
+              "non_comparable_count": 9,
+              "hallucinated_item_count": 0,
+              "clean_item_count": 12,
+              "hallucinated_item_rate": 0.0,
+              "total_hallucinated_ref_count": 0,
+              "mean_hallucinated_ref_count": 0.0,
+              "mean_hallucinated_ref_rate": 0.0
+            },
+            "pgmr_unmapped_placeholders": {
+              "metric_name": "pgmr_unmapped_placeholders",
+              "type": "pgmr_based",
+              "comparable_count": 12,
+              "non_comparable_count": 9,
+              "not_pgmr_mode_count": 0,
+              "unmapped_item_count": 0,
+              "clean_item_count": 12,
+              "unmapped_item_rate": 0.0,
+              "total_unmapped_placeholder_count": 0,
+              "mean_unmapped_placeholder_count": 0.0
+            }
+          },
+          "error_categories": {
+            "extraction_failure": 9,
+            "unsupported_query_form": 12
+          },
+          "response_time_seconds": {
+            "count": 21,
+            "mean_seconds": 3.1286,
+            "min_seconds": 2.1136,
+            "max_seconds": 4.7175,
+            "total_seconds": 65.7007
+          }
+        },
+        "low": {
+          "item_count": 7,
+          "metrics": {
+            "query_extracted": {
+              "metric_name": "query_extracted",
+              "value_field": "value",
+              "comparable_count": 7,
+              "non_comparable_count": 0,
+              "mean": 0.8571,
+              "success_count": 6,
+              "failure_count": 1,
+              "success_rate": 0.8571
+            },
+            "supported_query_form": {
+              "metric_name": "supported_query_form",
+              "value_field": "value",
+              "comparable_count": 6,
+              "non_comparable_count": 1,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 6,
+              "success_rate": 0.0
+            },
+            "query_form_match": {
+              "metric_name": "query_form_match",
+              "value_field": "value",
+              "comparable_count": 6,
+              "non_comparable_count": 1,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 6,
+              "success_rate": 0.0
+            },
+            "prediction_execution_success": {
+              "metric_name": "prediction_execution_success",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 7,
+              "mean": null
+            },
+            "query_normalized_exact_match": {
+              "metric_name": "query_normalized_exact_match",
+              "value_field": "value",
+              "comparable_count": 6,
+              "non_comparable_count": 1,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 6,
+              "success_rate": 0.0
+            },
+            "query_bleu": {
+              "metric_name": "query_bleu",
+              "value_field": "bleu",
+              "comparable_count": 6,
+              "non_comparable_count": 1,
+              "mean": 0.2619
+            },
+            "sparql_structure_precision": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "precision",
+              "comparable_count": 6,
+              "non_comparable_count": 1,
+              "mean": 0.9583
+            },
+            "sparql_structure_recall": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "recall",
+              "comparable_count": 6,
+              "non_comparable_count": 1,
+              "mean": 0.6814
+            },
+            "sparql_structure_f1": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "f1",
+              "comparable_count": 6,
+              "non_comparable_count": 1,
+              "mean": 0.7934
+            },
+            "gold_execution_success": {
+              "metric_name": "gold_execution_success",
+              "value_field": "value",
+              "comparable_count": 7,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 7,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "answer_exact_match": {
+              "metric_name": "answer_exact_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 7,
+              "mean": null
+            },
+            "answer_precision": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 7,
+              "mean": null
+            },
+            "answer_recall": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 7,
+              "mean": null
+            },
+            "answer_f1": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 7,
+              "mean": null
+            },
+            "answer_value_exact_match": {
+              "metric_name": "answer_value_exact_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 7,
+              "mean": null
+            },
+            "answer_value_precision": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 7,
+              "mean": null
+            },
+            "answer_value_recall": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 7,
+              "mean": null
+            },
+            "answer_value_f1": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 7,
+              "mean": null
+            },
+            "answer_cell_value_precision": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 7,
+              "mean": null
+            },
+            "answer_cell_value_recall": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 7,
+              "mean": null
+            },
+            "answer_cell_value_f1": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 7,
+              "mean": null
+            },
+            "kg_ref_precision": {
+              "metric_name": "kg_ref_match",
+              "value_field": "precision",
+              "comparable_count": 6,
+              "non_comparable_count": 1,
+              "mean": 0.9445
+            },
+            "kg_ref_recall": {
+              "metric_name": "kg_ref_match",
+              "value_field": "recall",
+              "comparable_count": 6,
+              "non_comparable_count": 1,
+              "mean": 0.8361
+            },
+            "kg_ref_f1": {
+              "metric_name": "kg_ref_match",
+              "value_field": "f1",
+              "comparable_count": 6,
+              "non_comparable_count": 1,
+              "mean": 0.8836
+            },
+            "predicate_ref_precision": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "precision",
+              "comparable_count": 6,
+              "non_comparable_count": 1,
+              "mean": 0.9167
+            },
+            "predicate_ref_recall": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "recall",
+              "comparable_count": 6,
+              "non_comparable_count": 1,
+              "mean": 0.7778
+            },
+            "predicate_ref_f1": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "f1",
+              "comparable_count": 6,
+              "non_comparable_count": 1,
+              "mean": 0.8357
+            },
+            "class_ref_precision": {
+              "metric_name": "class_ref_match",
+              "value_field": "precision",
+              "comparable_count": 6,
+              "non_comparable_count": 1,
+              "mean": 1.0,
+              "success_count": 6,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "class_ref_recall": {
+              "metric_name": "class_ref_match",
+              "value_field": "recall",
+              "comparable_count": 6,
+              "non_comparable_count": 1,
+              "mean": 1.0,
+              "success_count": 6,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "class_ref_f1": {
+              "metric_name": "class_ref_match",
+              "value_field": "f1",
+              "comparable_count": 6,
+              "non_comparable_count": 1,
+              "mean": 1.0,
+              "success_count": 6,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_precision": {
+              "metric_name": "resource_ref_match",
+              "value_field": "precision",
+              "comparable_count": 6,
+              "non_comparable_count": 1,
+              "mean": 1.0,
+              "success_count": 6,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_recall": {
+              "metric_name": "resource_ref_match",
+              "value_field": "recall",
+              "comparable_count": 6,
+              "non_comparable_count": 1,
+              "mean": 1.0,
+              "success_count": 6,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_f1": {
+              "metric_name": "resource_ref_match",
+              "value_field": "f1",
+              "comparable_count": 6,
+              "non_comparable_count": 1,
+              "mean": 1.0,
+              "success_count": 6,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "uri_hallucination": {
+              "metric_name": "uri_hallucination",
+              "type": "query_based",
+              "comparable_count": 6,
+              "non_comparable_count": 1,
+              "hallucinated_item_count": 0,
+              "clean_item_count": 6,
+              "hallucinated_item_rate": 0.0,
+              "total_hallucinated_ref_count": 0,
+              "mean_hallucinated_ref_count": 0.0,
+              "mean_hallucinated_ref_rate": 0.0
+            },
+            "pgmr_unmapped_placeholders": {
+              "metric_name": "pgmr_unmapped_placeholders",
+              "type": "pgmr_based",
+              "comparable_count": 6,
+              "non_comparable_count": 1,
+              "not_pgmr_mode_count": 0,
+              "unmapped_item_count": 0,
+              "clean_item_count": 6,
+              "unmapped_item_rate": 0.0,
+              "total_unmapped_placeholder_count": 0,
+              "mean_unmapped_placeholder_count": 0.0
+            }
+          },
+          "error_categories": {
+            "extraction_failure": 1,
+            "unsupported_query_form": 6
+          },
+          "response_time_seconds": {
+            "count": 7,
+            "mean_seconds": 2.3747,
+            "min_seconds": 1.9901,
+            "max_seconds": 3.151,
+            "total_seconds": 16.6226
+          }
+        },
+        "medium": {
+          "item_count": 23,
+          "metrics": {
+            "query_extracted": {
+              "metric_name": "query_extracted",
+              "value_field": "value",
+              "comparable_count": 23,
+              "non_comparable_count": 0,
+              "mean": 0.6957,
+              "success_count": 16,
+              "failure_count": 7,
+              "success_rate": 0.6957
+            },
+            "supported_query_form": {
+              "metric_name": "supported_query_form",
+              "value_field": "value",
+              "comparable_count": 16,
+              "non_comparable_count": 7,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 16,
+              "success_rate": 0.0
+            },
+            "query_form_match": {
+              "metric_name": "query_form_match",
+              "value_field": "value",
+              "comparable_count": 16,
+              "non_comparable_count": 7,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 16,
+              "success_rate": 0.0
+            },
+            "prediction_execution_success": {
+              "metric_name": "prediction_execution_success",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 23,
+              "mean": null
+            },
+            "query_normalized_exact_match": {
+              "metric_name": "query_normalized_exact_match",
+              "value_field": "value",
+              "comparable_count": 16,
+              "non_comparable_count": 7,
+              "mean": 0.0,
+              "success_count": 0,
+              "failure_count": 16,
+              "success_rate": 0.0
+            },
+            "query_bleu": {
+              "metric_name": "query_bleu",
+              "value_field": "bleu",
+              "comparable_count": 16,
+              "non_comparable_count": 7,
+              "mean": 0.139
+            },
+            "sparql_structure_precision": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "precision",
+              "comparable_count": 16,
+              "non_comparable_count": 7,
+              "mean": 0.9036
+            },
+            "sparql_structure_recall": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "recall",
+              "comparable_count": 16,
+              "non_comparable_count": 7,
+              "mean": 0.479
+            },
+            "sparql_structure_f1": {
+              "metric_name": "sparql_structure_match",
+              "value_field": "f1",
+              "comparable_count": 16,
+              "non_comparable_count": 7,
+              "mean": 0.6049
+            },
+            "gold_execution_success": {
+              "metric_name": "gold_execution_success",
+              "value_field": "value",
+              "comparable_count": 23,
+              "non_comparable_count": 0,
+              "mean": 1.0,
+              "success_count": 23,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "answer_exact_match": {
+              "metric_name": "answer_exact_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 23,
+              "mean": null
+            },
+            "answer_precision": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 23,
+              "mean": null
+            },
+            "answer_recall": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 23,
+              "mean": null
+            },
+            "answer_f1": {
+              "metric_name": "answer_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 23,
+              "mean": null
+            },
+            "answer_value_exact_match": {
+              "metric_name": "answer_value_exact_match",
+              "value_field": "value",
+              "comparable_count": 0,
+              "non_comparable_count": 23,
+              "mean": null
+            },
+            "answer_value_precision": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 23,
+              "mean": null
+            },
+            "answer_value_recall": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 23,
+              "mean": null
+            },
+            "answer_value_f1": {
+              "metric_name": "answer_value_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 23,
+              "mean": null
+            },
+            "answer_cell_value_precision": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "precision",
+              "comparable_count": 0,
+              "non_comparable_count": 23,
+              "mean": null
+            },
+            "answer_cell_value_recall": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "recall",
+              "comparable_count": 0,
+              "non_comparable_count": 23,
+              "mean": null
+            },
+            "answer_cell_value_f1": {
+              "metric_name": "answer_cell_value_precision_recall_f1",
+              "value_field": "f1",
+              "comparable_count": 0,
+              "non_comparable_count": 23,
+              "mean": null
+            },
+            "kg_ref_precision": {
+              "metric_name": "kg_ref_match",
+              "value_field": "precision",
+              "comparable_count": 16,
+              "non_comparable_count": 7,
+              "mean": 0.9875
+            },
+            "kg_ref_recall": {
+              "metric_name": "kg_ref_match",
+              "value_field": "recall",
+              "comparable_count": 16,
+              "non_comparable_count": 7,
+              "mean": 0.777
+            },
+            "kg_ref_f1": {
+              "metric_name": "kg_ref_match",
+              "value_field": "f1",
+              "comparable_count": 16,
+              "non_comparable_count": 7,
+              "mean": 0.8536
+            },
+            "predicate_ref_precision": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "precision",
+              "comparable_count": 16,
+              "non_comparable_count": 7,
+              "mean": 1.0,
+              "success_count": 16,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "predicate_ref_recall": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "recall",
+              "comparable_count": 16,
+              "non_comparable_count": 7,
+              "mean": 0.7316
+            },
+            "predicate_ref_f1": {
+              "metric_name": "predicate_ref_match",
+              "value_field": "f1",
+              "comparable_count": 16,
+              "non_comparable_count": 7,
+              "mean": 0.8196
+            },
+            "class_ref_precision": {
+              "metric_name": "class_ref_match",
+              "value_field": "precision",
+              "comparable_count": 16,
+              "non_comparable_count": 7,
+              "mean": 0.9688
+            },
+            "class_ref_recall": {
+              "metric_name": "class_ref_match",
+              "value_field": "recall",
+              "comparable_count": 16,
+              "non_comparable_count": 7,
+              "mean": 1.0,
+              "success_count": 16,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "class_ref_f1": {
+              "metric_name": "class_ref_match",
+              "value_field": "f1",
+              "comparable_count": 16,
+              "non_comparable_count": 7,
+              "mean": 0.9792
+            },
+            "resource_ref_precision": {
+              "metric_name": "resource_ref_match",
+              "value_field": "precision",
+              "comparable_count": 16,
+              "non_comparable_count": 7,
+              "mean": 1.0,
+              "success_count": 16,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_recall": {
+              "metric_name": "resource_ref_match",
+              "value_field": "recall",
+              "comparable_count": 16,
+              "non_comparable_count": 7,
+              "mean": 1.0,
+              "success_count": 16,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "resource_ref_f1": {
+              "metric_name": "resource_ref_match",
+              "value_field": "f1",
+              "comparable_count": 16,
+              "non_comparable_count": 7,
+              "mean": 1.0,
+              "success_count": 16,
+              "failure_count": 0,
+              "success_rate": 1.0
+            },
+            "uri_hallucination": {
+              "metric_name": "uri_hallucination",
+              "type": "query_based",
+              "comparable_count": 16,
+              "non_comparable_count": 7,
+              "hallucinated_item_count": 0,
+              "clean_item_count": 16,
+              "hallucinated_item_rate": 0.0,
+              "total_hallucinated_ref_count": 0,
+              "mean_hallucinated_ref_count": 0.0,
+              "mean_hallucinated_ref_rate": 0.0
+            },
+            "pgmr_unmapped_placeholders": {
+              "metric_name": "pgmr_unmapped_placeholders",
+              "type": "pgmr_based",
+              "comparable_count": 16,
+              "non_comparable_count": 7,
+              "not_pgmr_mode_count": 0,
+              "unmapped_item_count": 0,
+              "clean_item_count": 16,
+              "unmapped_item_rate": 0.0,
+              "total_unmapped_placeholder_count": 0,
+              "mean_unmapped_placeholder_count": 0.0
+            }
+          },
+          "error_categories": {
+            "extraction_failure": 7,
+            "unsupported_query_form": 16
+          },
+          "response_time_seconds": {
+            "count": 23,
+            "mean_seconds": 3.5826,
+            "min_seconds": 1.623,
+            "max_seconds": 10.0766,
+            "total_seconds": 82.4001
+          }
+        }
+      }
+    },
+    "costs": {
+      "total_prompt_tokens": 0,
+      "total_completion_tokens": 0,
+      "total_tokens": 0,
+      "total_cached_tokens": 0,
+      "total_estimated_cost_usd": 0.0,
+      "priced_items": 0,
+      "mean_cost_per_priced_item_usd": null
+    }
+  }
+}
