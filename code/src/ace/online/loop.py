@@ -19,6 +19,7 @@ from src.ace.online.selection import (
     select_dataset_items,
     selected_item_ids,
 )
+from src.ace.online.reporting import OnlineAceReporter
 from src.ace.online.trace import OnlineAceTraceWriter, build_empty_summary
 
 
@@ -349,6 +350,9 @@ def run_online_ace_loop(
         print(json.dumps(selected_ids, indent=2))
         return 0
 
+    reporter = OnlineAceReporter()
+    reporter.start(metadata)
+
     if hooks is None:
         from src.ace.online.pipeline import build_online_ace_hooks
 
@@ -374,9 +378,16 @@ def run_online_ace_loop(
     initial_attempts: list[dict[str, Any]] = []
     final_attempts: list[dict[str, Any]] = []
 
-    for item in selected_items:
+    for item_index, item in enumerate(selected_items, start=1):
         item_id = str(item.get("id"))
         item_family = str(item.get("family") or config.family or "")
+        reporter.item_header(
+            index=item_index,
+            total=len(selected_items),
+            item_id=item_id,
+            family=item_family,
+            question=item.get("question"),
+        )
         question_snapshot = cost_tracker.snapshot()
         item_trace: dict[str, Any] = {
             "item_id": item_id,
@@ -533,6 +544,7 @@ def run_online_ace_loop(
                 "reflection_cost": reflection_cost,
             }
             item_trace["iterations"].append(attempt_trace)
+            reporter.iteration(attempt_trace)
 
             if solved:
                 break
@@ -554,6 +566,38 @@ def run_online_ace_loop(
             item_trace["iterations"][-1][
                 "cumulative_cost_after_item"
             ] = cumulative_cost
+
+        item_helpful_rule_ids = sorted(
+            {
+                rule_id
+                for attempt in item_trace["iterations"]
+                for rule_id in attempt.get("helpful_rule_ids", [])
+            }
+        )
+        item_harmful_rule_ids = sorted(
+            {
+                rule_id
+                for attempt in item_trace["iterations"]
+                for rule_id in attempt.get("harmful_rule_ids", [])
+            }
+        )
+        item_disabled_rule_ids = sorted(
+            {
+                rule_id
+                for attempt in item_trace["iterations"]
+                for rule_id in attempt.get("disabled_rule_ids", [])
+            }
+        )
+        reporter.item_context_update(
+            helpful_rule_ids=item_helpful_rule_ids,
+            harmful_rule_ids=item_harmful_rule_ids,
+            disabled_rule_ids=item_disabled_rule_ids,
+            enabled_rule_count=context.enabled_rule_count(),
+        )
+        reporter.item_costs(
+            question_cost=question_cost,
+            cumulative_cost=cumulative_cost,
+        )
 
         trace_writer.add_item_trace(item_trace)
 
@@ -577,5 +621,6 @@ def run_online_ace_loop(
         playbook_payload=context.to_playbook_dict(),
         cost_summary=cost_summary,
     )
+    reporter.final(summary)
 
     return 0

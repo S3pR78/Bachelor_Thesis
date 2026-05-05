@@ -28,5 +28,6 @@ code/tests/ace/*
 !code/tests/ace/test_online_loop.py
 !code/tests/ace/test_online_pipeline.py
 !code/tests/ace/test_online_reflector.py
+!code/tests/ace/test_online_reporting.py
 !code/tests/ace/test_online_selection.py
 !code/tests/ace/test_online_trace.py
