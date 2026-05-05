@@ -53,16 +53,19 @@ cd /path/to/BT
 export PYTHONPATH=code
 ```
 
-There is currently no pinned `requirements.txt` or `pyproject.toml` in the repository. From imports in the source, the project commonly needs:
+Install the Python dependencies from the pinned requirements file:
 
 ```bash
-pip install torch transformers huggingface_hub openai python-dotenv requests pandas streamlit
+python -m pip install -r requirements.txt
 ```
 
-For LoRA/QLoRA training or adapter loading, also install:
+The file was exported from the local `orkg-pipeline` environment and includes the packages needed for evaluation, OpenAI-backed generation, tests, and LoRA/QLoRA training.
+
+If you want to recreate the Conda environment used for this project, including Python 3.11 and Node.js for the Empire Compass prompt generator, run:
 
 ```bash
-pip install peft accelerate bitsandbytes
+conda env create -f environment.yml
+conda activate orkg-pipeline
 ```
 
 OpenAI-backed tools require an API key. The code loads a repo-root `.env` file, so this works:
@@ -199,8 +202,6 @@ Tests live in `code/tests/` and are written for `pytest`.
 ```bash
 PYTHONPATH=code pytest code/tests
 ```
-
-In the current environment I could not run tests because `pytest` is not installed.
 
 ## Known Setup Notes
 
