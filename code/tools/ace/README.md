@@ -1,6 +1,11 @@
 # ACE Tools
 
-ACE means Adaptive Context Engineering in this repository. The ACE workflow turns repeated model failures into compact playbook rules that can be prepended to future prompts.
+ACE means Adaptive Context Engineering in this repository. ACE workflows turn repeated model failures into compact playbook rules that can be prepended to future prompts.
+
+There are two ACE workflow types:
+
+- Offline ACE-style playbook construction: run a full evaluation, inspect errors afterward, and derive or curate playbook rules from that completed run.
+- Online ACE: update the in-memory context during a run, retry the same failed question with the new rule, and carry the improved context forward to later questions.
 
 ## Scripts
 
@@ -10,8 +15,9 @@ ACE means Adaptive Context Engineering in this repository. The ACE workflow turn
 | `inspect_errors_for_ace.py` | Read `benchmark_raw.json`, extract failed or weak examples, and write ACE error traces for later reflection. |
 | `curate_ace_playbook.py` | Apply a delta report to an ACE playbook and produce a curated playbook JSON. |
 | `import_llm_deltas_to_playbook.py` | Import LLM-generated candidate rules into an existing playbook, with family/mode metadata and a cap on newly imported rules. |
+| `online/run_online_ace_loop.py` | Run the true per-question online ACE loop. The wrapper only parses CLI arguments and calls `src.ace.online`. |
 
-## Typical Workflow
+## Offline Workflow
 
 1. Run an evaluation:
 
@@ -72,3 +78,31 @@ Examples:
 ## Note
 
 The main CLI mode `ace-llm` orchestrates trace building, LLM reflection, and importing. In this checkout, the source package for LLM reflection exists at `code/src/ace/llm_reflector.py`; check the orchestrated script path before relying on fully automatic ACE imports.
+
+## Online Workflow
+
+Online ACE source lives under `code/src/ace/online/`. The CLI requires an
+explicit `--initial-playbook` path and writes the final online playbook to the
+run output directory instead of overwriting the source playbook.
+
+Example dry-run:
+
+```bash
+PYTHONPATH=code python code/tools/ace/online/run_online_ace_loop.py \
+  --model qwen25_coder_7b_pgmr_qlora \
+  --dataset code/data/dataset/pgmr/final/ace_playbook.json \
+  --prompt-mode pgmr_mini \
+  --prediction-format pgmr_lite \
+  --sparql-endpoint https://www.orkg.org/triplestore \
+  --initial-playbook code/data/ace_playbooks/online/qwen25_coder_7b_pgmr_qlora/pgmr_mini/nlp4re__pgmr_lite_playbook.json \
+  --output-dir code/outputs/ace_online_runs/dry_run \
+  --family nlp4re \
+  --iterations 3 \
+  --limit 10 \
+  --shuffle \
+  --sample-seed 42 \
+  --dry-run
+```
+
+The full command removes `--dry-run` and may load a local model, call OpenAI for
+reflection, and query the configured SPARQL endpoint.
