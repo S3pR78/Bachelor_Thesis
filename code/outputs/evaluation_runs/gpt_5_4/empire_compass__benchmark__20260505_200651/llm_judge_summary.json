@@ -1,0 +1,21 @@
+{
+  "num_input_items": 51,
+  "num_judged_items": 51,
+  "num_skipped_items": 0,
+  "judge_model": "gpt-4o-mini",
+  "prediction_field_mode": "auto",
+  "mean_intent_score": 1.9803921568627452,
+  "mean_schema_score": 1.9607843137254901,
+  "mean_projection_score": 1.4509803921568627,
+  "mean_constraint_score": 1.4509803921568627,
+  "mean_aggregation_score": 0.803921568627451,
+  "mean_overall_score": 7.647058823529412,
+  "verdict_counts": {
+    "correct": 11,
+    "partially_correct": 40
+  },
+  "prediction_field_used_counts": {
+    "extracted_query": 51
+  },
+  "skip_reason_counts": {}
+}
