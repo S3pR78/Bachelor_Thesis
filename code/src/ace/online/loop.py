@@ -350,11 +350,9 @@ def run_online_ace_loop(
         return 0
 
     if hooks is None:
-        raise NotImplementedError(
-            "Online ACE loop requires generation/evaluation/reflection hooks in "
-            "this skeleton step. Real pipeline hooks will be added later; use "
-            "--dry-run to validate dataset selection."
-        )
+        from src.ace.online.pipeline import build_online_ace_hooks
+
+        hooks = build_online_ace_hooks(config)
 
     context = OnlineAceContext.load(
         initial_playbook_path=config.initial_playbook,
@@ -415,6 +413,18 @@ def run_online_ace_loop(
                     iteration=iteration,
                     generation=generation,
                 )
+            )
+            generation.update(
+                {
+                    "extracted_query": evaluation.get("extracted_query")
+                    or generation.get("extracted_query"),
+                    "pgmr_restored_query": evaluation.get("pgmr_restored_query")
+                    or generation.get("pgmr_restored_query"),
+                    "selected_prediction_query": evaluation.get(
+                        "selected_prediction_query"
+                    )
+                    or generation.get("selected_prediction_query"),
+                }
             )
             quality_score = compute_quality_score(evaluation)
             total_attempts += 1
