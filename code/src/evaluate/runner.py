@@ -329,13 +329,14 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
     for index, entry in enumerate(entries, start=1):
         selected = select_entry_fields(
             entry,
-            ["id", "uid", "family", "question", "gold_sparql"],
+            ["id", "uid", "family", "question", "gold_sparql", "gold_pgmr_sparql"],
         )
         entry_metadata = select_entry_fields(entry, ENTRY_METADATA_FIELDS)
 
         entry_id = str(selected.get("id") or selected.get("uid") or f"item_{index}")
         question = selected["question"]
         gold_query = selected["gold_sparql"]
+        gold_pgmr_query = selected.get("gold_pgmr_sparql")
         family = selected["family"]
 
         if args.prompt_mode == "pgmr_lite_meta":
@@ -424,6 +425,8 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
             endpoint_url=args.sparql_endpoint,
             prediction_query=extracted_query,
             gold_query=gold_query,
+            prediction_pgmr_query=prediction_payload["pgmr_postprocessed_query"],
+            gold_pgmr_query=gold_pgmr_query,
             allowed_kg_refs=allowed_kg_refs,
             enable_pgmr_metrics=enable_pgmr_metrics,
         )
@@ -433,6 +436,7 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
             question=question,
             gold_query=gold_query,
         )
+        result_entry["gold_pgmr_query"] = gold_pgmr_query
         result_entry["entry_metadata"] = entry_metadata
         result_entry["prediction_format"] = prediction_format
         result_entry["raw_model_output"] = raw_model_output

@@ -68,6 +68,7 @@ def _build_metric_summary(
         "metric_name": metric_name,
         "value_field": value_field,
         "comparable_count": comparable_count,
+        "valid_count": comparable_count,
         "non_comparable_count": non_comparable_count,
         "mean": _mean(values),
     }
@@ -273,6 +274,36 @@ def _build_core_metrics_summary(results: list[dict[str, Any]]) -> dict[str, Any]
             results,
             "query_bleu",
             value_field="bleu",
+        ),
+        "query_rouge1_f1": _build_metric_summary(
+            results,
+            "query_rouge1_f1",
+            value_field="f1",
+        ),
+        "query_rouge2_f1": _build_metric_summary(
+            results,
+            "query_rouge2_f1",
+            value_field="f1",
+        ),
+        "query_rougeL_f1": _build_metric_summary(
+            results,
+            "query_rougeL_f1",
+            value_field="f1",
+        ),
+        "pgmr_rouge1_f1": _build_metric_summary(
+            results,
+            "pgmr_rouge1_f1",
+            value_field="f1",
+        ),
+        "pgmr_rouge2_f1": _build_metric_summary(
+            results,
+            "pgmr_rouge2_f1",
+            value_field="f1",
+        ),
+        "pgmr_rougeL_f1": _build_metric_summary(
+            results,
+            "pgmr_rougeL_f1",
+            value_field="f1",
         ),
         "sparql_structure_precision": _build_metric_summary(
             results,

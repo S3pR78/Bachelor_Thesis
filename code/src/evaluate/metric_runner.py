@@ -36,6 +36,7 @@ from src.evaluate.metrics.query_normalized_exact_match import (
     compute_query_normalized_exact_match,
 )
 from src.evaluate.metrics.query_bleu import compute_query_bleu
+from src.evaluate.metrics.query_rouge import compute_query_rouge_scores
 from src.evaluate.metrics.sparql_structure_match import (
     compute_sparql_structure_match,
 )
@@ -51,6 +52,8 @@ def build_validation_metrics(
     endpoint_url: str | None,
     prediction_query: str | None = None,
     gold_query: str | None = None,
+    prediction_pgmr_query: str | None = None,
+    gold_pgmr_query: str | None = None,
     allowed_kg_refs: set[str] | frozenset[str] | None = None,
     enable_pgmr_metrics: bool = False,
 ) -> dict[str, Any]:
@@ -165,6 +168,25 @@ def build_validation_metrics(
         gold_query=gold_query,
     )
 
+    query_rouge_scores = compute_query_rouge_scores(
+        prediction_query=prediction_query,
+        gold_query=gold_query,
+        metric_prefix="query",
+    )
+
+    if enable_pgmr_metrics and gold_pgmr_query:
+        pgmr_rouge_scores = compute_query_rouge_scores(
+            prediction_query=prediction_pgmr_query,
+            gold_query=gold_pgmr_query,
+            metric_prefix="pgmr",
+        )
+    else:
+        pgmr_rouge_scores = compute_query_rouge_scores(
+            prediction_query=None,
+            gold_query=gold_pgmr_query,
+            metric_prefix="pgmr",
+        )
+
     sparql_structure_match = compute_sparql_structure_match(
         prediction_query=prediction_query,
         gold_query=gold_query,
@@ -200,6 +222,8 @@ def build_validation_metrics(
         "pgmr_unmapped_placeholders": pgmr_unmapped_placeholders,
         "query_normalized_exact_match": query_normalized_exact_match,
         "query_bleu": query_bleu,
+        **query_rouge_scores,
+        **pgmr_rouge_scores,
         "sparql_structure_match": sparql_structure_match,
         "primary_error_category": primary_error_category,
     }
