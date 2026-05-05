@@ -1,3 +1,5 @@
+"""Load local Hugging Face models and generate raw model responses."""
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -82,6 +84,7 @@ def _attach_peft_adapter(model, adapter_dir: Path):
 
 
 def get_model_architecture(model_config: dict) -> str:
+    """Return the configured inference interface name."""
     architecture = model_config.get("interface")
     if not architecture:
         raise ValueError("Model interface must be specified in the configuration.")
@@ -158,6 +161,7 @@ def _load_causal_lm_model(model_dir: Path, adapter_dir: Path | None = None):
 
 
 def load_model_and_tokenizer(model_config: dict):
+    """Load the configured local model/tokenizer pair for inference."""
     model_dir = get_model_dir(model_config)
     adapter_dir = get_adapter_dir(model_config)
     architecture = get_model_architecture(model_config)
@@ -198,6 +202,7 @@ def _format_prompt_for_model(tokenizer, model, prompt: str) -> str:
 
 
 def prepare_generation_inputs(tokenizer, model, prompt: str) -> dict[str, Any]:
+    """Tokenize a prompt and move inputs to the model's active device."""
     if not isinstance(prompt, str) or not prompt.strip():
         raise ValueError("Prompt must be a non-empty string.")
 
@@ -230,6 +235,7 @@ def generate_raw_response(
     do_sample: bool = False,
     temperature: float = 0.0,
 ) -> str:
+    """Run model.generate and return only the generated answer text."""
     model.eval()
 
     is_encoder_decoder = bool(getattr(model.config, "is_encoder_decoder", False))

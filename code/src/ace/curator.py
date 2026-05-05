@@ -1,3 +1,5 @@
+"""Curate ACE delta reports before applying them to playbooks."""
+
 from __future__ import annotations
 
 import json
@@ -15,6 +17,7 @@ from src.ace.playbook import (
 
 @dataclass
 class CurationSummary:
+    """Counts what changed or was skipped during playbook curation."""
     source_delta_path: str
     playbook_path: str
     output_path: str
@@ -46,6 +49,7 @@ class CurationSummary:
 
 
 def load_delta_report(path: str | Path) -> dict[str, Any]:
+    """Load and minimally validate an ACE delta report JSON file."""
     delta_path = Path(path)
     payload = json.loads(delta_path.read_text(encoding="utf-8"))
 
@@ -128,6 +132,7 @@ def curate_delta_report(
     max_deltas: int | None = None,
     allowed_categories: set[str] | None = None,
 ) -> tuple[AcePlaybook, CurationSummary]:
+    """Filter, sort, and apply candidate deltas to a playbook object."""
     delta_payloads = delta_report.get("deltas", [])
 
     summary = CurationSummary(

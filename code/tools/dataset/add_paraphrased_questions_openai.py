@@ -1,3 +1,5 @@
+"""Generate paraphrased questions for dataset entries with OpenAI."""
+
 from __future__ import annotations
 
 import argparse

@@ -1,3 +1,5 @@
+"""Build prompt/target examples from dataset entries for training."""
+
 from __future__ import annotations
 
 import argparse
@@ -26,6 +28,7 @@ from src.train.config import get_train_run_config, load_train_config
 
 
 def load_dataset(path: Path) -> list[dict[str, Any]]:
+    """Load a training dataset stored as a JSON list."""
     if not path.exists() or not path.is_file():
         raise FileNotFoundError(f"Dataset not found: {path}")
 
@@ -39,6 +42,7 @@ def load_dataset(path: Path) -> list[dict[str, Any]]:
 
 
 def format_prompt_value(value: Any) -> str:
+    """Convert dataset field values into stable prompt-template text."""
     if value is None:
         return "none"
 
@@ -114,6 +118,7 @@ def resolve_prompt_template(entry: dict[str, Any], prompt_config: str | dict[str
 
 
 def entry_matches_filters(entry: dict[str, Any], filters: dict[str, Any] | None) -> bool:
+    """Return whether one dataset entry satisfies configured filters."""
     if not filters:
         return True
 
@@ -129,6 +134,7 @@ def build_training_input_from_template(
     entry: dict[str, Any],
     prompt_template: str,
 ) -> str:
+    """Fill a legacy string-template prompt from entry fields."""
     if not isinstance(prompt_template, str) or not prompt_template.strip():
         raise ValueError("prompt_template must be a non-empty string.")
 
@@ -157,6 +163,7 @@ def build_training_input_from_prompt_mode(
     entry: dict[str, Any],
     prompt_mode: str,
 ) -> str:
+    """Build training input using one of the standard prompt modes."""
     question = str(entry.get("question", "")).strip()
     family = str(entry.get("family", "")).strip()
 

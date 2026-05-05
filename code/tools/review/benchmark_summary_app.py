@@ -1,3 +1,5 @@
+"""Streamlit app for inspecting benchmark summaries and raw runs."""
+
 from __future__ import annotations
 
 import json

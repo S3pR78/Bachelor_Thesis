@@ -1,3 +1,5 @@
+"""Transform dataset gold SPARQL into PGMR-lite target queries."""
+
 from __future__ import annotations
 
 import argparse

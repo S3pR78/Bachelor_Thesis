@@ -1,3 +1,5 @@
+"""Download/cache Hugging Face model snapshots into the local model tree."""
+
 from pathlib import Path
 from huggingface_hub import snapshot_download
 
@@ -47,6 +49,7 @@ def get_model_id(model_config: dict) -> str:
 
 
 def get_model_root(model_config: dict) -> Path:
+    """Resolve the local root directory where model families are stored."""
 
     paths_config = model_config.get("paths", {})
 
@@ -75,6 +78,7 @@ def get_model_family_dir(model_config: dict) -> Path:
     return model_root / safe_model_name
 
 def get_original_model_dir(model_config: dict) -> Path:
+    """Return the conventional directory for an original downloaded model."""
     return get_model_family_dir(model_config) / "original"
 
 

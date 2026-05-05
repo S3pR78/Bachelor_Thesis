@@ -1,3 +1,5 @@
+"""Build ACE error traces from benchmark raw evaluation output."""
+
 from __future__ import annotations
 
 import argparse

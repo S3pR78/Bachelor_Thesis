@@ -1,3 +1,5 @@
+"""Normalize gold SPARQL text inside dataset entries."""
+
 from __future__ import annotations
 
 import argparse

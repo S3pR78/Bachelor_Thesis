@@ -1,3 +1,5 @@
+"""OpenAI client helpers used by prompt-generation and reflection workflows."""
+
 import os
 from pathlib import Path
 from typing import Optional
@@ -13,6 +15,7 @@ DEFAULT_OPENAI_DEVELOPER_MESSAGE = (
 
 
 def get_openai_api_key(env_var_name: str = "OPENAI_API_KEY") -> str:
+    """Load an API key from repo-root `.env` or the process environment."""
     repo_root = Path(__file__).resolve().parents[3]
     dotenv_path = repo_root / ".env"
 
@@ -30,6 +33,7 @@ def get_openai_api_key(env_var_name: str = "OPENAI_API_KEY") -> str:
 
 
 def create_openai_client(env_var_name: str = "OPENAI_API_KEY") -> OpenAI:
+    """Create an OpenAI client using the configured API-key variable."""
     api_key = get_openai_api_key(env_var_name=env_var_name)
     return OpenAI(api_key=api_key)
 
@@ -42,6 +46,7 @@ def generate_raw_response_openai(
     developer_message: Optional[str] = None,
     env_var_name: str = "OPENAI_API_KEY",
 ) -> str:
+    """Send one chat completion request and return the message text."""
     if not isinstance(model_id, str) or not model_id.strip():
         raise ValueError("model_id must be a non-empty string.")
 

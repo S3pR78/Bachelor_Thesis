@@ -1,3 +1,5 @@
+"""LoRA/QLoRA training runner for causal language models."""
+
 from __future__ import annotations
 
 import inspect
@@ -25,6 +27,7 @@ SUPPORTED_METHODS = {"lora", "qlora", "causal_lm_lora", "causal_lm_qlora"}
 
 
 def _resolve_model_source(model_entry: dict[str, Any]) -> tuple[str, bool]:
+    """Use a local model directory when present, otherwise fall back to model_id."""
     try:
         return str(get_model_dir(model_entry)), True
     except FileNotFoundError:
@@ -61,6 +64,7 @@ def _load_tokenizer(model_source: str, cache_dir: str | None, local_files_only: 
 
 
 def _build_bnb_config(run_config: dict[str, Any]):
+    """Build bitsandbytes 4-bit quantization config for QLoRA runs."""
     import torch
     from transformers import BitsAndBytesConfig
 

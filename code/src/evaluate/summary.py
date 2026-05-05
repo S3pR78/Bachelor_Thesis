@@ -1,3 +1,5 @@
+"""Aggregate per-example evaluation results into benchmark summaries."""
+
 from __future__ import annotations
 
 from collections import Counter, defaultdict
@@ -24,6 +26,7 @@ def _numeric_metric_values(
     metric_name: str,
     value_field: str = "value",
 ) -> tuple[list[float], int, int]:
+    """Collect comparable numeric metric values and comparable counts."""
     comparable_values: list[float] = []
     comparable_count = 0
     non_comparable_count = 0
@@ -54,6 +57,7 @@ def _build_metric_summary(
     metric_name: str,
     value_field: str = "value",
 ) -> dict[str, Any]:
+    """Summarize one numeric metric across all result entries."""
     values, comparable_count, non_comparable_count = _numeric_metric_values(
         results=results,
         metric_name=metric_name,
@@ -83,6 +87,7 @@ def _get_validation_metric(result: dict, metric_name: str) -> dict | None:
     return metric if isinstance(metric, dict) else None
 
 def _build_pgmr_unmapped_placeholders_summary(results: list[dict]) -> dict:
+    """Summarize unresolved PGMR placeholder diagnostics."""
     metrics = [
         _get_validation_metric(result, "pgmr_unmapped_placeholders")
         for result in results
@@ -146,6 +151,7 @@ def _build_pgmr_unmapped_placeholders_summary(results: list[dict]) -> dict:
     }
 
 def _build_uri_hallucination_summary(results: list[dict]) -> dict:
+    """Summarize predicted ORKG references that are outside local memory."""
     metrics = [
         _get_validation_metric(result, "uri_hallucination")
         for result in results
@@ -250,6 +256,7 @@ def _build_error_category_counts(results: list[dict[str, Any]]) -> dict[str, int
 
 
 def _build_core_metrics_summary(results: list[dict[str, Any]]) -> dict[str, Any]:
+    """Build the main metric block for benchmark_summary.json."""
     return {
         "query_extracted": _build_metric_summary(results, "query_extracted"),
         "supported_query_form": _build_metric_summary(results, "supported_query_form"),

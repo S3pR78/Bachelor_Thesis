@@ -1,3 +1,5 @@
+"""Restore PGMR-lite placeholders to executable ORKG compact identifiers."""
+
 from __future__ import annotations
 
 import json
@@ -31,6 +33,7 @@ MANUAL_FALLBACK_MAP: dict[str, str] = {
 
 @dataclass(frozen=True)
 class RestoreResult:
+    """Restoration output plus diagnostics for unresolved placeholders."""
     restored_query: str
     missing_mapping_tokens: list[str]
     remaining_pgmr_tokens: list[str]
@@ -43,6 +46,7 @@ def load_json(path: Path) -> Any:
 
 
 def find_strings(obj: Any) -> list[str]:
+    """Collect strings recursively from nested memory JSON structures."""
     values: list[str] = []
 
     if isinstance(obj, str):
@@ -58,6 +62,7 @@ def find_strings(obj: Any) -> list[str]:
 
 
 def extract_mapping_pairs_from_object(obj: Any) -> dict[str, str]:
+    """Infer one-token PGMR-to-ORKG pairs from a memory JSON object."""
     mapping: dict[str, str] = {}
 
     def walk(value: Any) -> None:
@@ -88,6 +93,7 @@ def extract_mapping_pairs_from_object(obj: Any) -> dict[str, str]:
 
 
 def load_memory_mapping(memory_dir: Path) -> dict[str, str]:
+    """Build a flat PGMR token to ORKG token mapping from memory files."""
     if not memory_dir.exists():
         raise FileNotFoundError(f"PGMR memory directory not found: {memory_dir}")
 
@@ -111,6 +117,7 @@ def build_restore_mapping(memory_dir: Path) -> dict[str, str]:
 
 
 def restore_pgmr_query(pgmr_query: str, memory_dir: Path) -> RestoreResult:
+    """Replace mapped PGMR tokens and report any tokens still unresolved."""
     mapping = build_restore_mapping(memory_dir)
     missing: list[str] = []
 

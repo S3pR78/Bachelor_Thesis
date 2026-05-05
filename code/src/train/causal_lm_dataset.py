@@ -1,3 +1,5 @@
+"""Dataset and collator helpers for causal-LM prompt/target fine-tuning."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -8,6 +10,7 @@ from torch.utils.data import Dataset
 
 
 def build_causal_lm_prompt(tokenizer: Any, prompt: str) -> str:
+    """Wrap a task prompt in the model's chat format when available."""
     prompt = prompt.strip()
     if not prompt:
         raise ValueError("prompt must be non-empty.")
@@ -57,6 +60,7 @@ def tokenize_prompt_target_example(
     max_prompt_length: int,
     max_target_length: int,
 ) -> dict[str, list[int]]:
+    """Tokenize prompt and target while masking prompt tokens from loss."""
     if max_prompt_length <= 0:
         raise ValueError("max_prompt_length must be positive.")
 

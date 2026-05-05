@@ -1,3 +1,5 @@
+"""Export a JSON report of dataset field distributions."""
+
 from __future__ import annotations
 
 import argparse

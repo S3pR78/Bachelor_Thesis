@@ -1,3 +1,5 @@
+"""Dispatch configured training runs to the correct trainer implementation."""
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -23,6 +25,7 @@ def run_training(
     override_epochs: int | None = None,
     dry_run: bool = False,
 ) -> int:
+    """Run the selected training method from train_config.json."""
     train_config = load_train_config(train_config_path)
     run_config = get_train_run_config(train_config, run_name)
 

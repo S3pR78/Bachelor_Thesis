@@ -1,3 +1,5 @@
+"""Extract ORKG predicates/classes/resources from SPARQL query text."""
+
 from __future__ import annotations
 
 import re

@@ -1,3 +1,5 @@
+"""Collect ORKG terms that are not covered by PGMR memory templates."""
+
 from __future__ import annotations
 
 import argparse

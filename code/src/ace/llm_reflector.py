@@ -1,3 +1,5 @@
+"""Ask an LLM to propose ACE playbook deltas from error traces."""
+
 from __future__ import annotations
 
 import json
@@ -34,6 +36,7 @@ ALLOWED_LLM_CATEGORIES = {
 
 
 def load_trace_report(path: str | Path) -> dict[str, Any]:
+    """Load an ACE trace report produced from evaluation errors."""
     trace_path = Path(path)
     payload = json.loads(trace_path.read_text(encoding="utf-8"))
     if not isinstance(payload, dict):
@@ -79,6 +82,7 @@ def select_error_traces(
     mode: str | None,
     max_traces: int,
 ) -> list[dict[str, Any]]:
+    """Select the highest-signal error traces for one family/mode."""
     traces = []
 
     for trace in trace_report.get("traces", []):
@@ -110,6 +114,7 @@ def build_llm_reflection_prompt(
     generator_model: str | None,
     max_traces: int = 12,
 ) -> str:
+    """Build the reflection prompt sent to the LLM."""
     traces = select_error_traces(
         trace_report,
         family=family,

@@ -1,3 +1,5 @@
+"""Restore PGMR-lite predictions and optionally execute restored SPARQL."""
+
 from __future__ import annotations
 
 import argparse

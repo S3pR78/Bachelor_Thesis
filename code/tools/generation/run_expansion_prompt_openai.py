@@ -1,3 +1,5 @@
+"""Run an assembled dataset-expansion prompt through OpenAI."""
+
 from __future__ import annotations
 
 import argparse

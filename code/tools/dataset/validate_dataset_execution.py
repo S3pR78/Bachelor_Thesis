@@ -1,3 +1,5 @@
+"""Execute dataset gold queries and export a validation report."""
+
 from __future__ import annotations
 
 import argparse

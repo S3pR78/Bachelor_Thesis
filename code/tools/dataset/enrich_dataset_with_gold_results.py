@@ -1,3 +1,5 @@
+"""Execute gold SPARQL queries and store their result payloads."""
+
 from __future__ import annotations
 
 import argparse

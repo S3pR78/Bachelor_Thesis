@@ -1,3 +1,5 @@
+"""Collect all per-example evaluation metrics into one validation payload."""
+
 from __future__ import annotations
 
 from typing import Any
@@ -52,9 +54,11 @@ def build_validation_metrics(
     allowed_kg_refs: set[str] | frozenset[str] | None = None,
     enable_pgmr_metrics: bool = False,
 ) -> dict[str, Any]:
+    """Compute the complete metric set for one prediction/gold query pair."""
     prediction_execution_for_status = prediction_execution or {}
     gold_execution_for_status = gold_execution or {}
 
+    # Query-status metrics can be computed even when endpoint execution is off.
     query_extracted = compute_query_extracted(
         has_extracted_query=has_extracted_query,
     )
@@ -108,6 +112,7 @@ def build_validation_metrics(
     )
 
 
+    # KG-reference metrics check whether the model used the expected ORKG refs.
     kg_ref_match = compute_kg_ref_match(
         prediction_query=prediction_query,
         gold_query=gold_query,
@@ -140,6 +145,7 @@ def build_validation_metrics(
         checked_ref_kinds=("predicate", "class"),
     )
 
+    # PGMR placeholder diagnostics only make sense in PGMR-producing runs.
     if enable_pgmr_metrics:
         pgmr_unmapped_placeholders = compute_pgmr_unmapped_placeholders(
             prediction_query=prediction_query,
@@ -164,6 +170,7 @@ def build_validation_metrics(
         gold_query=gold_query,
     )
 
+    # A single coarse category makes error inspection easier in summaries.
     primary_error_category = compute_primary_error_category(
         has_extracted_query=has_extracted_query,
         prediction_query_form=prediction_query_form,

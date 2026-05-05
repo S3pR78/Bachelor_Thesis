@@ -1,3 +1,5 @@
+"""Create ACE-oriented train/validation/playbook/benchmark splits."""
+
 from __future__ import annotations
 
 import argparse

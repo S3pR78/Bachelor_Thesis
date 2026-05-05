@@ -1,3 +1,5 @@
+"""ACE playbook data structures and JSON serialization helpers."""
+
 from __future__ import annotations
 
 import hashlib
@@ -47,6 +49,7 @@ def stable_bullet_id(
 
 @dataclass
 class AceBullet:
+    """One prompt rule rendered into ACE context."""
     id: str
     family: str
     mode: str
@@ -129,6 +132,7 @@ class AceBullet:
 
 @dataclass
 class AceDelta:
+    """A proposed add/update/disable operation for one ACE bullet."""
     operation: str
     bullet: AceBullet
     reason: str = ""

@@ -1,3 +1,5 @@
+"""Offline ACE loop helpers for trace, reflection, and curation experiments."""
+
 from __future__ import annotations
 
 import json

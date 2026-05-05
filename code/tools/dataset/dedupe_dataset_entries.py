@@ -1,3 +1,5 @@
+"""Remove exact duplicate dataset entries and write a dedupe report."""
+
 from __future__ import annotations
 
 import argparse

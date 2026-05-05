@@ -1,3 +1,5 @@
+"""Import LLM-generated ACE rule candidates into an existing playbook."""
+
 import argparse
 import hashlib
 import json

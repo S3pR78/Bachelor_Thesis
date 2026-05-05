@@ -1,3 +1,5 @@
+"""Normalize SPARQL text for stable dataset storage/comparison."""
+
 from __future__ import annotations
 
 import re

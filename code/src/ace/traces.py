@@ -1,3 +1,5 @@
+"""Build ACE error traces from benchmark_raw.json evaluation outputs."""
+
 from __future__ import annotations
 
 import json
@@ -26,6 +28,7 @@ KNOWN_METRIC_KEYS = {
 
 @dataclass
 class AceTraceItem:
+    """One evaluation item reduced to the fields useful for ACE reflection."""
     item_id: str
     family: str | None
     split: str | None

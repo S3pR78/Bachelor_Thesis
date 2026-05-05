@@ -1,3 +1,5 @@
+"""Export split-specific dataset files from a split-annotated master file."""
+
 from __future__ import annotations
 
 import argparse

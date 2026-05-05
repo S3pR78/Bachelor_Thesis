@@ -1,3 +1,5 @@
+"""Resolve model/family/mode-specific ACE playbook files."""
+
 from __future__ import annotations
 
 import re

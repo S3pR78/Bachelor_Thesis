@@ -1,3 +1,5 @@
+"""Select green/yellow/red candidate pools from execution reviews."""
+
 from __future__ import annotations
 
 import argparse

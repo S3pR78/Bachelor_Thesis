@@ -1,3 +1,5 @@
+"""Single-call query generation helper used by the interactive query command."""
+
 from src.core.model_loader import load_model_and_tokenizer, generate_raw_response
 from src.core.openai_provider import generate_raw_response_openai
 from src.utils.config_loader import load_json_config, get_model_entry
@@ -7,6 +9,7 @@ CONFIG_PATH = "code/config/model_config.json"
 
 
 def generate_query_response(model_name: str, final_prompt: str) -> str:
+    """Generate one response without keeping an inference session alive."""
     full_model_config = load_json_config(CONFIG_PATH)
     model_config = get_model_entry(full_model_config, model_name)
 

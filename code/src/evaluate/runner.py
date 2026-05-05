@@ -1,3 +1,5 @@
+"""End-to-end benchmark evaluation runner."""
+
 from __future__ import annotations
 
 import argparse
@@ -79,6 +81,7 @@ def _format_prompt_value(value: Any) -> str:
 
 
 def _build_pgmr_lite_meta_prompt(entry: dict[str, Any]) -> str:
+    """Build the compact metadata prompt used by pgmr_lite_meta runs."""
     return (
         "task: text_to_pgmr_sparql\n"
         f"family: {_format_prompt_value(entry.get('family'))}\n"
@@ -92,6 +95,7 @@ def _build_pgmr_lite_meta_prompt(entry: dict[str, Any]) -> str:
 
 
 def _aggregate_costs(results: list[dict[str, Any]]) -> dict[str, Any]:
+    """Aggregate token/cost payloads stored on per-example results."""
     total_prompt_tokens = 0
     total_completion_tokens = 0
     total_total_tokens = 0
@@ -132,6 +136,7 @@ def _prepare_and_execute_query(
     query: str | None,
     endpoint_url: str | None,
 ) -> tuple[str | None, dict[str, Any]]:
+    """Prepare prefixes, detect query form, and optionally execute a query."""
     if not isinstance(query, str) or not query.strip():
         return None, {
             "status": "skipped",
@@ -190,6 +195,7 @@ def _build_prediction_query_from_model_output(
     prediction_format: str,
     pgmr_memory_mapping: dict[str, str] | None,
 ) -> dict[str, Any]:
+    """Convert raw model text into the query that should be evaluated."""
     if prediction_format != "pgmr_lite":
         extracted_query = extract_sparql_query(raw_model_output)
         return {
@@ -206,6 +212,7 @@ def _build_prediction_query_from_model_output(
 
     pgmr_postprocessed_query = postprocess_pgmr_query(raw_model_output)
 
+    # PGMR-lite predictions must be restored before SPARQL execution/metrics.
     entry_mapping = build_entry_mapping(entry, pgmr_memory_mapping or {})
     pgmr_restored_query, pgmr_missing_mapping_tokens = restore_pgmr_query(
         pgmr_postprocessed_query,
@@ -239,6 +246,7 @@ def _build_prediction_query_from_model_output(
 
 
 def execute_evaluate_task(args: argparse.Namespace) -> int:
+    """Run model inference, execution, metrics, and report writing."""
     print("Running evaluation task with args:", args)
 
     prediction_format = getattr(args, "prediction_format", "sparql")
@@ -303,6 +311,7 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
 
     results: list[dict[str, Any]] = []
 
+    # Local KG memory provides the allowlist for URI hallucination checks.
     kg_memory_path = Path(
     getattr(args, "kg_memory_path", "code/data/orkg_memory/templates")
 )

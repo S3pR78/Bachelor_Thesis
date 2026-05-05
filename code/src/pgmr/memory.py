@@ -1,3 +1,5 @@
+"""Load and validate PGMR memory templates used for placeholder mapping."""
+
 from __future__ import annotations
 
 import json
@@ -15,6 +17,7 @@ REQUIRED_MEMORY_FIELDS = {
 
 
 def load_memory_file(path: Path) -> list[dict[str, Any]]:
+    """Load one `*_memory.json` file."""
     if not path.exists() or not path.is_file():
         raise FileNotFoundError(f"Memory file not found: {path}")
 
@@ -28,6 +31,7 @@ def load_memory_file(path: Path) -> list[dict[str, Any]]:
 
 
 def load_memory_dir(memory_dir: Path) -> list[dict[str, Any]]:
+    """Load all memory template files from a directory."""
     if not memory_dir.exists() or not memory_dir.is_dir():
         raise FileNotFoundError(f"Memory directory not found: {memory_dir}")
 
@@ -43,6 +47,7 @@ def load_memory_dir(memory_dir: Path) -> list[dict[str, Any]]:
 
 
 def validate_memory_entries(entries: list[dict[str, Any]]) -> None:
+    """Validate the minimum schema and placeholder conventions for memory rows."""
     seen: set[tuple[str, str]] = set()
 
     for index, entry in enumerate(entries):

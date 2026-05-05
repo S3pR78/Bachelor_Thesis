@@ -1,3 +1,5 @@
+"""Assign dataset entries to final splits according to project rules."""
+
 from __future__ import annotations
 
 import argparse

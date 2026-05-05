@@ -1,3 +1,5 @@
+"""Transform executable ORKG SPARQL into PGMR-lite placeholder queries."""
+
 from __future__ import annotations
 
 import re
@@ -11,6 +13,7 @@ ORKG_COMPACT_URI_PATTERN = re.compile(
 
 @dataclass(frozen=True)
 class PgmrTransformResult:
+    """Result payload stored back into PGMR-transformed dataset entries."""
     pgmr_sparql: str
     status: str
     replaced_terms: list[str]
@@ -18,6 +21,7 @@ class PgmrTransformResult:
 
 
 def extract_orkg_compact_uris(sparql: str) -> list[str]:
+    """Return unique compact ORKG identifiers referenced by a query."""
     return sorted(set(ORKG_COMPACT_URI_PATTERN.findall(sparql)))
 
 
@@ -26,6 +30,7 @@ def transform_sparql_to_pgmr(
     family: str,
     uri_to_placeholder_by_family: dict[str, dict[str, str]],
 ) -> PgmrTransformResult:
+    """Replace family-known ORKG identifiers with PGMR placeholders."""
     if not sparql or not sparql.strip():
         return PgmrTransformResult(
             pgmr_sparql="",

@@ -1,3 +1,5 @@
+"""Full fine-tuning runner for seq2seq text-to-text models."""
+
 from __future__ import annotations
 
 import inspect
@@ -14,6 +16,7 @@ DEFAULT_MODEL_CONFIG_PATH = Path("code/config/model_config.json")
 
 
 def load_model_config(path: Path = DEFAULT_MODEL_CONFIG_PATH) -> dict[str, Any]:
+    """Load the model registry used by training runs."""
     if not path.exists() or not path.is_file():
         raise FileNotFoundError(f"Model config not found: {path}")
 
@@ -48,6 +51,7 @@ def save_json(path: Path, data: Any) -> None:
 
 
 def build_output_dir(run_config: dict[str, Any], run_name: str) -> Path:
+    """Create a timestamped output directory for one training run."""
     output_config = run_config["output"]
     base_dir = Path(output_config["base_dir"])
     configured_run_name = str(output_config.get("run_name", run_name))
@@ -60,6 +64,7 @@ def load_training_examples_from_run_config(
     split: str,
     limit: int | None = None,
 ) -> list[dict[str, str]]:
+    """Load train/validation examples according to one run config."""
     dataset_config = run_config["dataset"]
     prompt_config = run_config["prompt"]
     target_field = dataset_config["target_field"]

@@ -1,3 +1,5 @@
+"""Build model prompts from configured templates and optional ACE context."""
+
 from __future__ import annotations
 
 import shutil
@@ -32,6 +34,7 @@ def _get_configured_path_first(*keys: str) -> Path:
 
 
 def normalize_empire_compass_family(family: str) -> str:
+    """Normalize public family names to the keys used by prompt configs."""
     if not isinstance(family, str) or not family.strip():
         raise ValueError("family must be a non-empty string.")
 
@@ -46,6 +49,7 @@ def normalize_empire_compass_family(family: str) -> str:
 
 
 def validate_query_args(args) -> None:
+    """Check CLI argument combinations that depend on prompt mode."""
     if args.prompt_mode in {
         EMPIRE_COMPASS_MODE,
         EMPIRE_COMPASS_MINI_MODE,
@@ -155,6 +159,7 @@ def build_pgmr_prompt(prompt_path: Path, family: str, question: str) -> str:
     )
 
 def ensure_empire_compass_prompt_exists(family: str, prompt_path: Path) -> None:
+    """Generate the rendered Empire Compass prompt if it is missing locally."""
     if prompt_path.exists() and prompt_path.is_file():
         print("prompt file found.")
         return
@@ -299,6 +304,11 @@ def build_final_prompt_for_question(
     ace_include_patterns: bool = True,
     model_name: str | None = None,
 ) -> str:
+    """Build the complete prompt used by query/evaluation commands.
+
+    The selected prompt mode decides which template is loaded. ACE context is
+    added last so the same base prompt can be used with or without playbooks.
+    """
     if not isinstance(question, str) or not question.strip():
         raise ValueError("question must be a non-empty string.")
 

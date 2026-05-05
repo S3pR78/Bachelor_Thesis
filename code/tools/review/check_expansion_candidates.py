@@ -1,3 +1,5 @@
+"""Check generated expansion candidates for duplicates and schema issues."""
+
 from __future__ import annotations
 
 import argparse

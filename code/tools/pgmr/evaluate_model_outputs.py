@@ -1,3 +1,5 @@
+"""Generate and postprocess PGMR-lite predictions from a local model."""
+
 from __future__ import annotations
 
 import argparse

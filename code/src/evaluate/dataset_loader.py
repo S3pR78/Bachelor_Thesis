@@ -1,8 +1,9 @@
+"""Dataset loading and small profiling helpers for evaluation/reporting."""
+
 import json
 from typing import Any
 
 from src.utils.config_loader import get_configured_path
-
 
 
 def _filter_entries_by_field(
@@ -26,8 +27,7 @@ def load_dataset_from_config(dataset_key: str,
         gold_status: str | None = None,
         family: str | None = None,
         source_dataset: str | None = None) -> list[dict[str, Any]]:
-    
-    """Load a dataset from a JSON file specified in the path configuration. Optionally filter entries by review_status."""
+    """Load a configured dataset and apply optional metadata filters."""
     dataset_path = get_configured_path(dataset_key)
 
     with open(dataset_path, "r", encoding="utf-8") as f:
@@ -43,9 +43,6 @@ def load_dataset_from_config(dataset_key: str,
     
     return data
 
-
-
-"""Helper function to build a summary of the dataset loading process, including the number of entries and applied filters."""
 def build_dataset_load_summary(
     entries: list[dict[str, Any]],
     dataset_key: str,
@@ -54,6 +51,7 @@ def build_dataset_load_summary(
     family: str | None = None,
     source_dataset: str | None = None,
 ) -> dict[str, Any]:
+    """Summarize which dataset and filters produced the loaded entries."""
     return {
         "dataset_key": dataset_key,
         "num_entries": len(entries),
@@ -65,12 +63,11 @@ def build_dataset_load_summary(
         },
     }
 
-
-
 def get_unique_field_values(
     entries: list[dict[str, Any]],
     field_name: str,
 ) -> list[str]:
+    """Return sorted unique non-null values for one field."""
     unique_values = {
         entry.get(field_name)
         for entry in entries
@@ -79,12 +76,11 @@ def get_unique_field_values(
 
     return sorted(unique_values)
 
-
-"""Helper function to count occurrences of unique values in a specified field across a list of dictionary entries."""
 def count_field_values(
     entries: list[dict[str, Any]],
     field_name: str,
 ) -> dict[str, int]:
+    """Count non-null values for one field across entries."""
     counts: dict[str, int] = {}
 
     for entry in entries:
@@ -100,11 +96,11 @@ def count_field_values(
 
     return dict(sorted(counts.items()))
 
-"""Helper function to count the number of entries with missing values for a specified field across a list of dictionary entries."""
 def count_missing_field_values(
     entries: list[dict[str, Any]],
     field_name: str,
 ) -> int:
+    """Count entries where a field is missing or null."""
     missing_count = 0
 
     for entry in entries:
@@ -119,11 +115,11 @@ def count_missing_field_values(
 
     return missing_count
 
-"""Helper function to build a profile of a specific field in the dataset, including the number of unique values, count of missing values, and counts of each unique value."""
 def build_field_profile(
     entries: list[dict[str, Any]],
     field_name: str,
 ) -> dict[str, Any]:
+    """Build one compact profile for field coverage and value distribution."""
     value_counts = count_field_values(entries, field_name)
     missing_count = count_missing_field_values(entries, field_name)
 
@@ -135,11 +131,11 @@ def build_field_profile(
     }
 
 
-"""Helper function to build profiles for multiple specified fields in the dataset, returning a dictionary of field profiles keyed by field name."""
 def build_profiles_for_fields(
     entries: list[dict[str, Any]],
     field_names: list[str],
 ) -> dict[str, dict[str, Any]]:
+    """Build field profiles keyed by field name."""
     profiles: dict[str, dict[str, Any]] = {}
 
     for field_name in field_names:
@@ -147,10 +143,10 @@ def build_profiles_for_fields(
 
     return profiles
 
-"""Helper function to build standard benchmark profiles for a predefined set of fields in the dataset."""
 def build_standard_benchmark_profiles(
     entries: list[dict[str, Any]],
 ) -> dict[str, dict[str, Any]]:
+    """Build the standard field profiles used in benchmark reporting."""
     standard_fields = [
         "family",
         "source_dataset",
@@ -168,6 +164,7 @@ from pathlib import Path
 
 
 def get_dataset_entries(dataset_obj: object) -> list[dict]:
+    """Accept either a raw list or a common wrapped dataset object."""
     if isinstance(dataset_obj, list):
         return dataset_obj
 
@@ -184,6 +181,7 @@ def get_dataset_entries(dataset_obj: object) -> list[dict]:
 
 
 def load_evaluate_entries(dataset_path: str, limit: int | None = None) -> list[dict]:
+    """Load entries for benchmark evaluation from a JSON file."""
     path = Path(dataset_path)
 
     if not path.exists() or not path.is_file():
@@ -207,6 +205,7 @@ def select_entry_fields(
     entry: dict,
     field_names: list[str] | tuple[str, ...],
 ) -> dict:
+    """Copy a stable subset of fields into run output metadata."""
     if not isinstance(entry, dict):
         raise ValueError("entry must be a dictionary.")
 

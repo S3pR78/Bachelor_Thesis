@@ -1,3 +1,5 @@
+"""Run lightweight execution review for generated expansion candidates."""
+
 from __future__ import annotations
 
 import argparse

@@ -1,3 +1,5 @@
+"""Rule-based ACE reflector that derives playbook deltas from traces."""
+
 from __future__ import annotations
 
 import json
@@ -109,6 +111,7 @@ def _detect_missing_venue_filter(trace: dict[str, Any]) -> bool:
 
 
 def enrich_categories(trace: dict[str, Any]) -> list[str]:
+    """Add heuristic categories that are easier for rule generation to use."""
     categories = list(trace.get("categories") or [])
 
     if _detect_missing_contribution_pattern(trace):
@@ -344,6 +347,7 @@ def reflect_trace_report(
     min_support: int = 1,
     max_evidence_items: int = 5,
 ) -> dict[str, Any]:
+    """Build a deterministic ACE delta report from trace patterns."""
     grouped: dict[tuple[str, str, str], list[dict[str, Any]]] = defaultdict(list)
 
     for trace in trace_report.get("traces", []):

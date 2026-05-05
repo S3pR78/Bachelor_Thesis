@@ -1,3 +1,5 @@
+"""Enrich selected expansion candidates with dataset metadata fields."""
+
 from __future__ import annotations
 
 import argparse

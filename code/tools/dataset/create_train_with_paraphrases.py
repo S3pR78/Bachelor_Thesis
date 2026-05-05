@@ -1,3 +1,5 @@
+"""Expand training data by turning paraphrases into extra examples."""
+
 from __future__ import annotations
 
 import argparse

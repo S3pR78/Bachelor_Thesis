@@ -1,3 +1,5 @@
+"""Lightweight cleanup for model-generated PGMR-lite/SPARQL text."""
+
 from __future__ import annotations
 
 import re
@@ -35,6 +37,7 @@ def split_solution_modifiers(text: str) -> tuple[str, str]:
 
 
 def add_missing_where_braces(query: str) -> str:
+    """Wrap a bare WHERE body in braces when the model omitted them."""
     text = query.strip()
 
     match = re.search(r"\bWHERE\b", text, flags=re.IGNORECASE)
@@ -60,6 +63,7 @@ def add_missing_where_braces(query: str) -> str:
 
 
 def move_solution_modifiers_outside_where(query: str) -> str:
+    """Move GROUP BY/LIMIT/etc. out of the WHERE body when needed."""
     text = query.strip()
 
     where_match = re.search(r"\bWHERE\s*\{", text, flags=re.IGNORECASE)
@@ -106,6 +110,7 @@ def move_solution_modifiers_outside_where(query: str) -> str:
 
 
 def wrap_bare_optional_patterns(query: str) -> str:
+    """Turn `OPTIONAL ?s ?p ?o` into legal `OPTIONAL { ?s ?p ?o . }`."""
     pattern = re.compile(
         r"\bOPTIONAL\s+(?!\{)"
         r"(\?[A-Za-z_][A-Za-z0-9_]*\s+"
@@ -121,6 +126,7 @@ def wrap_bare_optional_patterns(query: str) -> str:
     return pattern.sub(repl, query)
 
 def postprocess_pgmr_query(query: str) -> str:
+    """Apply the PGMR cleanup steps used before restoration/execution."""
     fixed = strip_markdown_fences(query)
     fixed = normalize_spaces(fixed)
 

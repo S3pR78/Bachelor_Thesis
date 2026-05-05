@@ -1,3 +1,5 @@
+"""Sample reproducible subsets from a dataset JSON file."""
+
 from __future__ import annotations
 
 import argparse

@@ -1,3 +1,5 @@
+"""SPARQL query-form detection and endpoint execution helpers."""
+
 from __future__ import annotations
 
 import re
@@ -5,6 +7,7 @@ import requests
 
 
 def detect_sparql_query_type(query: str) -> str:
+    """Detect the outer SPARQL query form after removing PREFIX lines."""
     if not isinstance(query, str) or not query.strip():
         raise ValueError("query must be a non-empty string.")
 
@@ -33,6 +36,7 @@ def execute_sparql_query(
     endpoint_url: str,
     timeout_seconds: int = 60,
 ) -> dict:
+    """Execute a SPARQL query and return the endpoint JSON response."""
     if not isinstance(query, str) or not query.strip():
         raise ValueError("query must be a non-empty string.")
 

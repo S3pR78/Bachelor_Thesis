@@ -1,3 +1,5 @@
+"""Reusable inference sessions for benchmark evaluation."""
+
 from __future__ import annotations
 
 from typing import Any
@@ -12,11 +14,13 @@ CONFIG_PATH = "code/config/model_config.json"
 
 
 def prepare_inference_session(model_name: str) -> dict:
+    """Load the configured provider once and reuse it for many prompts."""
     full_model_config = load_json_config(CONFIG_PATH)
     model_config = get_model_entry(full_model_config, model_name)
     provider = model_config.get("provider", "").strip().lower()
 
     if provider == "openai":
+        # OpenAI sessions keep only the lightweight client and config.
         env_var_name = model_config.get("api", {}).get(
             "env_var_name",
             "OPENAI_API_KEY",
@@ -30,6 +34,7 @@ def prepare_inference_session(model_name: str) -> dict:
             "env_var_name": env_var_name,
         }
 
+    # Local models are loaded once per evaluation run to avoid repeated startup.
     tokenizer, model = load_model_and_tokenizer(model_config)
     return {
         "provider": provider,
@@ -41,6 +46,7 @@ def prepare_inference_session(model_name: str) -> dict:
 
 
 def _extract_openai_usage(completion: Any) -> dict[str, Any] | None:
+    """Normalize SDK usage objects into plain dictionaries for cost summaries."""
     usage = getattr(completion, "usage", None)
     if usage is None:
         return None
@@ -59,6 +65,7 @@ def _extract_openai_usage(completion: Any) -> dict[str, Any] | None:
 
 
 def generate_response_with_session(session: dict, final_prompt: str) -> dict[str, Any]:
+    """Generate one response using a prepared OpenAI or local-model session."""
     provider = session["provider"]
     model_config = session["model_config"]
 

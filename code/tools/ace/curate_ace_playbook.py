@@ -1,3 +1,5 @@
+"""Apply curated ACE deltas to a playbook from the command line."""
+
 from __future__ import annotations
 
 import argparse

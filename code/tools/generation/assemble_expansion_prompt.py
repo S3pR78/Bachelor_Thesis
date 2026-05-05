@@ -1,3 +1,5 @@
+"""Assemble dataset-expansion prompts from base, wrapper, and run files."""
+
 from __future__ import annotations
 
 import argparse

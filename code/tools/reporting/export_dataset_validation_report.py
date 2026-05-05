@@ -1,3 +1,5 @@
+"""Export a JSON validation report for dataset/schema quality."""
+
 from __future__ import annotations
 
 import argparse

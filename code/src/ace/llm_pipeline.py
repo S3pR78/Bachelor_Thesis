@@ -1,3 +1,5 @@
+"""CLI pipeline for LLM-assisted ACE playbook updates."""
+
 from __future__ import annotations
 
 import argparse
@@ -16,6 +18,7 @@ FAMILIES = [
 
 
 def run_command(cmd: list[str]) -> None:
+    """Print and run one subprocess command used by the ACE pipeline."""
     print("\n$", " ".join(cmd))
     subprocess.run(cmd, check=True)
 
@@ -25,6 +28,7 @@ def load_json(path: Path) -> Any:
 
 
 def print_rules(deltas_path: Path) -> None:
+    """Print generated candidate rules for human review."""
     if not deltas_path.exists():
         print(f"No deltas found: {deltas_path}")
         return
@@ -95,6 +99,7 @@ def edit_file(path: Path) -> None:
 
 
 def validate_deltas(path: Path) -> None:
+    """Validate the minimal shape of LLM-generated ACE rules."""
     data = load_json(path)
 
     if not isinstance(data, list):
@@ -176,6 +181,7 @@ def add_arguments(parser: argparse.ArgumentParser) -> None:
 
 
 def execute_llm_assisted_ace(args: argparse.Namespace) -> None:
+    """Run trace building, LLM reflection, review, and optional import."""
     raw_path = args.run_dir / "benchmark_raw.json"
     trace_path = args.run_dir / "ace_error_traces.json"
 
