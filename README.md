@@ -79,7 +79,7 @@ export OPENAI_API_KEY=...
 
 Do not commit your real `.env` file.
 
-Empire Compass prompt generation uses Node/TypeScript assets under `code/prompts/empire_compass/`, so Node.js/npm are needed if those prompts must be regenerated.
+Empire Compass prompt generation uses Node/TypeScript assets under `code/prompts/empire_compass/`, so Node.js/npm are needed if those prompts must be regenerated. The generator was adapted from the Empire Compass repository; for more information, see <https://github.com/okarras/empire-Compass/>.
 
 ## Main CLI
 

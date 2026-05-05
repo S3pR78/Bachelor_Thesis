@@ -40,6 +40,8 @@ PYTHONPATH=code python code/src/main.py query \
 
 Paths are resolved through `code/config/path_config.json`.
 
+The TypeScript generator in `empire_compass/` was copied/adapted from the Empire Compass repository. For more information about the original generator, see <https://github.com/okarras/empire-Compass/>.
+
 ## Dataset Expansion Prompts
 
 Dataset expansion prompts are built from:
