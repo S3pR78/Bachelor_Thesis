@@ -23,5 +23,6 @@ code/outputs/ace_filtered_datasets/
 code/tests/*
 !code/tests/ace/
 code/tests/ace/*
+!code/tests/ace/test_online_context.py
 !code/tests/ace/test_online_costs.py
 !code/tests/ace/test_online_selection.py

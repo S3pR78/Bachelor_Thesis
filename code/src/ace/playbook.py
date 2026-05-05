@@ -66,6 +66,11 @@ class AceBullet:
     evidence_item_ids: list[str] = field(default_factory=list)
     helpful_count: int = 0
     harmful_count: int = 0
+    disabled_reason: str | None = None
+    last_helpful_item_id: str | None = None
+    last_helpful_delta: float | None = None
+    last_harmful_item_id: str | None = None
+    last_harmful_delta: float | None = None
     created_at_utc: str = field(default_factory=utc_now_iso)
     updated_at_utc: str = field(default_factory=utc_now_iso)
 
@@ -103,6 +108,11 @@ class AceBullet:
             evidence_item_ids=list(payload.get("evidence_item_ids", [])),
             helpful_count=int(payload.get("helpful_count", 0)),
             harmful_count=int(payload.get("harmful_count", 0)),
+            disabled_reason=payload.get("disabled_reason"),
+            last_helpful_item_id=payload.get("last_helpful_item_id"),
+            last_helpful_delta=payload.get("last_helpful_delta"),
+            last_harmful_item_id=payload.get("last_harmful_item_id"),
+            last_harmful_delta=payload.get("last_harmful_delta"),
             created_at_utc=str(payload.get("created_at_utc") or utc_now_iso()),
             updated_at_utc=str(payload.get("updated_at_utc") or utc_now_iso()),
         )
@@ -125,6 +135,11 @@ class AceBullet:
             "evidence_item_ids": self.evidence_item_ids,
             "helpful_count": self.helpful_count,
             "harmful_count": self.harmful_count,
+            "disabled_reason": self.disabled_reason,
+            "last_helpful_item_id": self.last_helpful_item_id,
+            "last_helpful_delta": self.last_helpful_delta,
+            "last_harmful_item_id": self.last_harmful_item_id,
+            "last_harmful_delta": self.last_harmful_delta,
             "created_at_utc": self.created_at_utc,
             "updated_at_utc": self.updated_at_utc,
         }
@@ -301,6 +316,23 @@ class AcePlaybook:
         )
         old.helpful_count += new_bullet.helpful_count
         old.harmful_count += new_bullet.harmful_count
+        old.disabled_reason = new_bullet.disabled_reason or old.disabled_reason
+        old.last_helpful_item_id = (
+            new_bullet.last_helpful_item_id or old.last_helpful_item_id
+        )
+        old.last_helpful_delta = (
+            new_bullet.last_helpful_delta
+            if new_bullet.last_helpful_delta is not None
+            else old.last_helpful_delta
+        )
+        old.last_harmful_item_id = (
+            new_bullet.last_harmful_item_id or old.last_harmful_item_id
+        )
+        old.last_harmful_delta = (
+            new_bullet.last_harmful_delta
+            if new_bullet.last_harmful_delta is not None
+            else old.last_harmful_delta
+        )
         old.source = {**old.source, **new_bullet.source}
         old.updated_at_utc = utc_now_iso()
 
