@@ -20,3 +20,5 @@ code/outputs/slurm_logs/
 code/outputs/evaluation_runs/**/pgmr_mini__ace_playbook__*/benchmark_raw.json
 code/outputs/evaluation_runs/**/pgmr_mini__ace_playbook__*/ace_deltas.json
 code/outputs/ace_filtered_datasets/
+
+code/tests/
