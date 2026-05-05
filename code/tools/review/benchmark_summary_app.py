@@ -18,9 +18,15 @@ PERCENT_METRICS = {
     "gold_execution_success": "Gold execution",
     "query_normalized_exact_match": "Query normalized exact match",
     "query_bleu": "Query BLEU",
+    "query_rouge1_f1": "Query ROUGE-1 F1",
+    "query_rouge2_f1": "Query ROUGE-2 F1",
+    "query_rougeL_f1": "Query ROUGE-L F1",
     "sparql_structure_precision": "SPARQL structure precision",
     "sparql_structure_recall": "SPARQL structure recall",
     "sparql_structure_f1": "SPARQL structure F1",
+    "pgmr_rouge1_f1": "PGMR ROUGE-1 F1",
+    "pgmr_rouge2_f1": "PGMR ROUGE-2 F1",
+    "pgmr_rougeL_f1": "PGMR ROUGE-L F1",
     "answer_exact_match": "Answer exact match",
     "answer_precision": "Answer precision",
     "answer_recall": "Answer recall",
@@ -57,9 +63,17 @@ METRIC_GROUPS = {
     "Query text / structure": [
         "query_normalized_exact_match",
         "query_bleu",
+        "query_rouge1_f1",
+        "query_rouge2_f1",
+        "query_rougeL_f1",
         "sparql_structure_precision",
         "sparql_structure_recall",
         "sparql_structure_f1",
+    ],
+    "PGMR text similarity": [
+        "pgmr_rouge1_f1",
+        "pgmr_rouge2_f1",
+        "pgmr_rougeL_f1",
     ],
     "Strict answer-based": [
         "answer_exact_match",
@@ -98,6 +112,8 @@ QUICK_READ_METRICS = [
     "query_form_match",
     "prediction_execution_success",
     "query_normalized_exact_match",
+    "query_rougeL_f1",
+    "query_rouge2_f1",
     "sparql_structure_f1",
     "answer_exact_match",
     "answer_f1",
@@ -113,6 +129,15 @@ SLICE_ORDER = [
     "answer_type",
     "query_shape",
     "complexity_level",
+]
+
+LLM_JUDGE_SCORE_FIELDS = [
+    ("mean_intent_score", "Intent", 2),
+    ("mean_schema_score", "Schema", 2),
+    ("mean_projection_score", "Projection", 2),
+    ("mean_constraint_score", "Constraint", 2),
+    ("mean_aggregation_score", "Aggregation", 2),
+    ("mean_overall_score", "Overall", 10),
 ]
 
 METRIC_FILTER_PREFIX = "metric_filter__"
@@ -164,7 +189,10 @@ They answer: *Is the answer content correct even if variable names differ?*
 
 - **Query normalized exact match**: exact match after lightweight SPARQL text normalization.
 - **Query BLEU**: token-level similarity between predicted and gold SPARQL.
+- **Query ROUGE-1 / ROUGE-2 / ROUGE-L F1**: auxiliary token-overlap similarity between predicted and gold SPARQL after lightweight query normalization. ROUGE-1 uses unigrams, ROUGE-2 uses bigrams, and ROUGE-L uses longest common subsequence overlap.
 - **SPARQL structure F1 / SQM-lite**: structural overlap of extracted WHERE patterns.
+
+These text similarity metrics are diagnostic only. A high score means the query text is close to the gold query, but answer-based metrics are still the main correctness signal.
 
 ### 6. KG reference metrics
 
@@ -194,6 +222,18 @@ UNMAPPED_PREDICATE
 ```
 
 For direct SPARQL runs, this metric is marked as `not_pgmr_mode`.
+
+If a run contains gold PGMR SPARQL, the viewer can also show **PGMR ROUGE-1 / ROUGE-2 / ROUGE-L F1**. These compare the PGMR-stage query text and are useful for debugging PGMR-lite generation separately from final executable SPARQL.
+
+### 9. LLM judge summary
+
+If `benchmark_summary_with_llm_judge.json` or `llm_judge_summary.json` is uploaded, the viewer shows the post-hoc semantic judge scores in a separate section.
+
+- **Intent / schema / projection / constraint / aggregation**: mean rubric scores on a `0-2` scale.
+- **Overall**: mean semantic judge score on a `0-10` scale.
+- **Verdict counts**: number of judged items marked `correct`, `partially_correct`, or `incorrect`.
+
+These are LLM-based diagnostic scores over query text only. They are not execution results and are not exact string matching.
 
 ### Cost summary fields
 
@@ -229,6 +269,8 @@ For these metrics, higher is better:
 - Answer value precision / recall / F1
 - Query normalized exact match
 - Query BLEU
+- Query ROUGE-1 / ROUGE-2 / ROUGE-L F1
+- PGMR ROUGE-1 / ROUGE-2 / ROUGE-L F1, when applicable
 - SPARQL structure precision / recall / F1
 - KG ref precision / recall / F1
 - Predicate ref precision / recall / F1
@@ -267,6 +309,12 @@ The query text is similar to gold, but a small semantic difference may break the
 
 #### Low BLEU, high answer F1
 The query text differs from gold, but it still returns the correct answer.
+
+#### High ROUGE, low answer F1
+Large parts of the query overlap with gold text, but one important triple, filter, variable, or ORKG ID may still be wrong.
+
+#### Low ROUGE, high answer F1
+The model found a textually different query that is still semantically equivalent enough to return the right answer.
 
 #### High SQM-lite F1, low predicate ref F1
 The structure is similar to the gold query, but the ORKG identifiers differ.
@@ -340,6 +388,19 @@ def extract_cost_summary(run_metadata: dict[str, Any], summary: dict[str, Any]) 
     return {}
 
 
+def extract_llm_judge_summary(payload: dict[str, Any], summary: dict[str, Any]) -> dict[str, Any]:
+    for candidate in [
+        payload.get("llm_judge"),
+        summary.get("llm_judge"),
+        payload,
+    ]:
+        if not isinstance(candidate, dict):
+            continue
+        if "num_judged_items" in candidate or "mean_overall_score" in candidate:
+            return candidate
+    return {}
+
+
 def build_run_label(filename: str, payload: dict[str, Any]) -> str:
     run_metadata = payload.get("run_metadata", {}) or {}
     parts = []
@@ -363,6 +424,7 @@ def extract_loaded_runs(uploaded_files) -> list[dict[str, Any]]:
             continue
         run_metadata = payload.get("run_metadata", {}) or {}
         summary = get_summary_payload(payload)
+        llm_judge = extract_llm_judge_summary(payload, summary)
         runs.append(
             {
                 "filename": uploaded.name,
@@ -372,6 +434,7 @@ def extract_loaded_runs(uploaded_files) -> list[dict[str, Any]]:
                 "summary": summary,
                 "metrics": summary.get("metrics", {}) or {},
                 "cost_summary": extract_cost_summary(run_metadata, summary),
+                "llm_judge": llm_judge,
             }
         )
     return runs
@@ -538,6 +601,85 @@ def build_cost_comparison_table(runs: list[dict[str, Any]]) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
+def score(value: Any, max_value: int, digits: int = 2) -> str:
+    if value is None:
+        return "—"
+    try:
+        return f"{float(value):.{digits}f} / {max_value}"
+    except Exception:
+        return "—"
+
+
+def build_llm_judge_score_table(llm_judge: dict[str, Any]) -> pd.DataFrame:
+    rows = [
+        {
+            "Score": label,
+            "Mean": score(llm_judge.get(field), max_value),
+            "Scale": f"0-{max_value}",
+        }
+        for field, label, max_value in LLM_JUDGE_SCORE_FIELDS
+    ]
+    return pd.DataFrame(rows)
+
+
+def build_llm_judge_count_table(llm_judge: dict[str, Any]) -> pd.DataFrame:
+    verdict_counts = llm_judge.get("verdict_counts", {}) or {}
+    prediction_counts = llm_judge.get("prediction_field_used_counts", {}) or {}
+    skip_counts = llm_judge.get("skip_reason_counts", {}) or {}
+    rows = [
+        ("Judge model", llm_judge.get("judge_model")),
+        ("Prediction field mode", llm_judge.get("prediction_field_mode")),
+        ("Input items", llm_judge.get("num_input_items")),
+        ("Judged items", llm_judge.get("num_judged_items")),
+        ("Skipped items", llm_judge.get("num_skipped_items")),
+        ("Correct verdicts", verdict_counts.get("correct", 0)),
+        ("Partially correct verdicts", verdict_counts.get("partially_correct", 0)),
+        ("Incorrect verdicts", verdict_counts.get("incorrect", 0)),
+    ]
+    for field, count in prediction_counts.items():
+        rows.append((f"Prediction field: {field}", count))
+    for reason, count in skip_counts.items():
+        rows.append((f"Skip reason: {reason}", count))
+    return pd.DataFrame(
+        [{"Field": label, "Value": "—" if value is None else value} for label, value in rows]
+    )
+
+
+def build_llm_judge_comparison_table(runs: list[dict[str, Any]]) -> pd.DataFrame:
+    rows = []
+    for run in runs:
+        llm_judge = run.get("llm_judge") or {}
+        verdict_counts = llm_judge.get("verdict_counts", {}) or {}
+        row = {
+            "Run": run["label"],
+            "Judge model": llm_judge.get("judge_model", "—"),
+            "Judged": llm_judge.get("num_judged_items", "—"),
+            "Skipped": llm_judge.get("num_skipped_items", "—"),
+            "Overall": score(llm_judge.get("mean_overall_score"), 10),
+            "Intent": score(llm_judge.get("mean_intent_score"), 2),
+            "Schema": score(llm_judge.get("mean_schema_score"), 2),
+            "Projection": score(llm_judge.get("mean_projection_score"), 2),
+            "Constraint": score(llm_judge.get("mean_constraint_score"), 2),
+            "Aggregation": score(llm_judge.get("mean_aggregation_score"), 2),
+            "Correct": verdict_counts.get("correct", 0),
+            "Partial": verdict_counts.get("partially_correct", 0),
+            "Incorrect": verdict_counts.get("incorrect", 0),
+        }
+        rows.append(row)
+    return pd.DataFrame(rows)
+
+
+def build_llm_judge_comparison_numeric(runs: list[dict[str, Any]]) -> pd.DataFrame:
+    rows = []
+    for run in runs:
+        llm_judge = run.get("llm_judge") or {}
+        for field, label, _ in LLM_JUDGE_SCORE_FIELDS:
+            value = llm_judge.get(field)
+            if value is not None:
+                rows.append({"Run": run["label"], "Score": label, "Mean": float(value)})
+    return pd.DataFrame(rows)
+
+
 def build_diagnostic_table(metrics: dict[str, Any]) -> pd.DataFrame:
     rows = []
     uri = metrics.get("uri_hallucination")
@@ -687,14 +829,18 @@ def render_overview_comparison(runs: list[dict[str, Any]]) -> None:
 
 def render_health_bar(metrics: dict[str, Any], selected_metric_keys: list[str]) -> None:
     st.subheader("Quick read")
-    quick_keys = [key for key in QUICK_READ_METRICS if key in selected_metric_keys]
+    quick_keys = [key for key in QUICK_READ_METRICS if key in selected_metric_keys and key in metrics]
     if not quick_keys:
         st.info("Keine Quick-read-Metriken ausgewählt.")
         return
     rows = []
     for key in quick_keys:
         value = (metrics.get(key) or {}).get("mean")
-        rows.append({"Metric": PERCENT_METRICS[key], "Score": 0.0 if value is None else float(value)})
+        if value is not None:
+            rows.append({"Metric": PERCENT_METRICS[key], "Score": float(value)})
+    if not rows:
+        st.info("Keine vergleichbaren Quick-read-Metriken vorhanden.")
+        return
     st.bar_chart(pd.DataFrame(rows).set_index("Metric"))
 
 
@@ -711,10 +857,44 @@ def render_diagnostics(metrics: dict[str, Any]) -> None:
                 st.json(metric)
 
 
+def render_llm_judge_single(llm_judge: dict[str, Any]) -> None:
+    if not llm_judge:
+        return
+    st.subheader("LLM judge summary")
+    col1, col2, col3, col4 = st.columns(4)
+    col1.metric("Overall", score(llm_judge.get("mean_overall_score"), 10))
+    col2.metric("Judged", integer(llm_judge.get("num_judged_items")))
+    col3.metric("Skipped", integer(llm_judge.get("num_skipped_items")))
+    col4.metric("Judge model", llm_judge.get("judge_model", "—"))
+    left, right = st.columns([2, 1])
+    with left:
+        st.dataframe(build_llm_judge_score_table(llm_judge), use_container_width=True, hide_index=True)
+    with right:
+        st.dataframe(build_llm_judge_count_table(llm_judge), use_container_width=True, hide_index=True)
+    with st.expander("Raw LLM judge summary", expanded=False):
+        st.json(llm_judge)
+
+
+def render_llm_judge_comparison(runs: list[dict[str, Any]]) -> None:
+    if not any(run.get("llm_judge") for run in runs):
+        return
+    st.subheader("LLM judge comparison")
+    st.dataframe(build_llm_judge_comparison_table(runs), use_container_width=True, hide_index=True)
+    numeric_df = build_llm_judge_comparison_numeric(runs)
+    if not numeric_df.empty:
+        selected_score = st.selectbox(
+            "LLM judge score für Chart auswählen",
+            list(dict.fromkeys(numeric_df["Score"].tolist())),
+            index=0,
+        )
+        st.bar_chart(numeric_df[numeric_df["Score"] == selected_score].set_index("Run")[["Mean"]])
+
+
 def render_comparison_view(runs: list[dict[str, Any]], selected_metric_keys: list[str]) -> None:
     render_overview_comparison(runs)
     st.subheader("Cost comparison")
     st.dataframe(build_cost_comparison_table(runs), use_container_width=True, hide_index=True)
+    render_llm_judge_comparison(runs)
     st.subheader("Overall metric comparison")
     st.dataframe(build_comparison_metrics_table(runs, selected_metric_keys), use_container_width=True, hide_index=True)
 
@@ -757,18 +937,22 @@ def render_single_view(run: dict[str, Any], selected_metric_keys: list[str]) -> 
     summary = run["summary"]
     metrics = run["metrics"]
     render_overview_single(run)
-    render_health_bar(metrics, selected_metric_keys)
-    left, right = st.columns([2, 1])
-    with left:
-        st.subheader("Overall metrics")
-        st.dataframe(build_metrics_table(metrics, selected_metric_keys), use_container_width=True, hide_index=True)
-    with right:
-        st.subheader("Error categories")
-        error_df = build_error_table(summary.get("error_categories", {}))
-        st.dataframe(error_df, use_container_width=True, hide_index=True)
-        if not error_df.empty:
-            st.bar_chart(error_df.set_index("Error category"))
-    render_diagnostics(metrics)
+    if metrics:
+        render_health_bar(metrics, selected_metric_keys)
+        left, right = st.columns([2, 1])
+        with left:
+            st.subheader("Overall metrics")
+            st.dataframe(build_metrics_table(metrics, selected_metric_keys), use_container_width=True, hide_index=True)
+        with right:
+            st.subheader("Error categories")
+            error_df = build_error_table(summary.get("error_categories", {}))
+            st.dataframe(error_df, use_container_width=True, hide_index=True)
+            if not error_df.empty:
+                st.bar_chart(error_df.set_index("Error category"))
+        render_diagnostics(metrics)
+    else:
+        st.info("Keine Standard-Benchmark-Metriken in dieser Datei gefunden.")
+    render_llm_judge_single(run.get("llm_judge") or {})
     st.subheader("Slice analysis")
     slices = summary.get("slices", {}) or {}
     available_slice_keys = [key for key in SLICE_ORDER if key in slices] or list(slices.keys())
