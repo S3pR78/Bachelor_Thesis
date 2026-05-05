@@ -1,12 +1,12 @@
 {
   "schema_version": "train_config_schema_v1",
   "runs": {
-    "t5_base_pgmr_mini_15ep_src768": {
+    "t5_base_pgmr_mini_full_finetune_15ep": {
       "model": "t5_base",
       "method": "full_finetune",
       "task": "pgmr_mini",
       "dataset": {
-        "train_path": "code/data/dataset/pgmr/final/train_augmented_with_paraphrases.json",
+        "train_path": "code/data/dataset/pgmr/final/train_with_paraphrases.json",
         "validation_path": "code/data/dataset/pgmr/final/validation.json",
         "target_field": "gold_pgmr_sparql",
         "filters": {
@@ -34,13 +34,13 @@
       },
       "output": {
         "base_dir": "code/models/google-t5_t5-base/finetuned",
-        "run_name": "pgmr_mini_15ep_src768"
+        "run_name": "pgmr_mini_full_finetune_15ep"
       }
     },
-    "qwen25_coder_7b_pgmr_mini_qlora_3ep": {
+    "qwen25_coder_7b_pgmr_qlora_3ep": {
       "model": "qwen25_coder_7b_instruct",
       "method": "qlora",
-      "task": "pgmr_mini",
+      "task": "pgmr",
       "dataset": {
         "train_path": "code/data/dataset/pgmr/final/train_with_paraphrases.json",
         "validation_path": "code/data/dataset/pgmr/final/validation.json",
@@ -50,7 +50,7 @@
         }
       },
       "prompt": {
-        "mode": "pgmr_mini"
+        "mode": "pgmr"
       },
       "training": {
         "num_train_epochs": 3,
@@ -58,7 +58,7 @@
         "per_device_train_batch_size": 1,
         "per_device_eval_batch_size": 1,
         "gradient_accumulation_steps": 8,
-        "max_prompt_length": 1024,
+        "max_prompt_length": 2048,
         "max_target_length": 512,
         "logging_steps": 10,
         "evaluation_strategy": "epoch",
@@ -95,8 +95,8 @@
         "bnb_4bit_compute_dtype": "float16"
       },
       "output": {
-        "base_dir": "code/models/Qwen_Qwen2.5-Coder-7B-Instruct/finetuned",
-        "run_name": "pgmr_mini_qlora_3ep"
+        "base_dir": "code/models/Qwen25_Coder_7B_Instruct/finetuned",
+        "run_name": "pgmr_qlora_3ep"
       }
     },
     "qwen25_coder_7b_empire_compass_qlora_3ep": {
@@ -123,7 +123,7 @@
         "logging_steps": 10,
         "evaluation_strategy": "epoch",
         "save_strategy": "epoch",
-        "save_total_limit": 5,
+        "save_total_limit": 2,
         "fp16": true,
         "bf16": false,
         "gradient_checkpointing": true,
@@ -155,14 +155,14 @@
         "bnb_4bit_compute_dtype": "float16"
       },
       "output": {
-        "base_dir": "code/models/Qwen_Qwen2.5-Coder-7B-Instruct/finetuned",
+        "base_dir": "code/models/Qwen25_Coder_7B_Instruct/finetuned",
         "run_name": "empire_compass_qlora_3ep"
       }
     },
-    "mistral_7b_pgmr_mini_qlora_3ep": {
+    "mistral_7b_pgmr_qlora_3ep": {
       "model": "mistral_7b_instruct",
       "method": "qlora",
-      "task": "pgmr_mini",
+      "task": "pgmr",
       "dataset": {
         "train_path": "code/data/dataset/pgmr/final/train_with_paraphrases.json",
         "validation_path": "code/data/dataset/pgmr/final/validation.json",
@@ -172,7 +172,7 @@
         }
       },
       "prompt": {
-        "mode": "pgmr_mini"
+        "mode": "pgmr"
       },
       "training": {
         "num_train_epochs": 3,
@@ -180,12 +180,12 @@
         "per_device_train_batch_size": 1,
         "per_device_eval_batch_size": 1,
         "gradient_accumulation_steps": 8,
-        "max_prompt_length": 1024,
+        "max_prompt_length": 2048,
         "max_target_length": 512,
         "logging_steps": 10,
         "evaluation_strategy": "epoch",
         "save_strategy": "epoch",
-        "save_total_limit": 5,
+        "save_total_limit": 2,
         "fp16": true,
         "bf16": false,
         "gradient_checkpointing": true,
@@ -217,8 +217,8 @@
         "bnb_4bit_compute_dtype": "float16"
       },
       "output": {
-        "base_dir": "code/models/mistralai_Mistral-7B-Instruct-v0.3/finetuned",
-        "run_name": "pgmr_mini_qlora_3ep"
+        "base_dir": "code/models/Mistral_7B_Instruct/finetuned",
+        "run_name": "pgmr_qlora_3ep"
       }
     },
     "mistral_7b_empire_compass_qlora_3ep": {
@@ -245,7 +245,7 @@
         "logging_steps": 10,
         "evaluation_strategy": "epoch",
         "save_strategy": "epoch",
-        "save_total_limit": 5,
+        "save_total_limit": 2,
         "fp16": true,
         "bf16": false,
         "gradient_checkpointing": true,
@@ -277,7 +277,7 @@
         "bnb_4bit_compute_dtype": "float16"
       },
       "output": {
-        "base_dir": "code/models/mistralai_Mistral-7B-Instruct-v0.3/finetuned",
+        "base_dir": "code/models/Mistral_7B_Instruct/finetuned",
         "run_name": "empire_compass_qlora_3ep"
       }
     }

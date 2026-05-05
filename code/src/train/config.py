@@ -106,6 +106,7 @@ CAUSAL_LM_ADAPTER_METHODS = {
 }
 
 SUPPORTED_PROMPT_MODES = {
+    "pgmr",
     "pgmr_mini",
     "empire_compass",
     "empire_compass_mini",
