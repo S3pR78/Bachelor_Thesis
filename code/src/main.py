@@ -16,15 +16,12 @@ from src.ace.llm_pipeline import (
 )
 
 
-"""
-This function runs the query task based on the provided command-line arguments.
-It first validates the arguments, then builds the final prompt based on the question and selected prompt mode.
-It loads the model configuration from a JSON file and determines which provider to use (e.g., OpenAI or a local model).
-If the provider is OpenAI, it calls the function to generate a response using the OpenAI API. If the provider is not OpenAI, 
-it loads the local model and tokenizer, and generates
-a response using the local model. Finally, it prints the generated response and returns 0 to indicate successful execution.
-"""
 def run_query_task(args: argparse.Namespace) -> int:
+    """Generate one model response for a single natural-language question.
+
+    This is the quick manual path: build the selected prompt, call the
+    configured model, and optionally postprocess/restore PGMR-lite output.
+    """
     validate_query_args(args)
 
     final_prompt = build_final_prompt_for_question(
@@ -51,12 +48,14 @@ def run_query_task(args: argparse.Namespace) -> int:
 
     pgmr_query = response
 
+    # PGMR-lite output often needs cleanup before placeholder restoration.
     if getattr(args, "postprocess_pgmr", False) or getattr(args, "restore_pgmr", False):
         pgmr_query = postprocess_pgmr_query(response)
         print("="*80)
         print("\nPostprocessed PGMR:")
         print(pgmr_query)
 
+    # Restoration maps PGMR placeholders back to ORKG predicates/classes.
     if getattr(args, "restore_pgmr", False):
         restore_result = restore_pgmr_query(
             pgmr_query=pgmr_query,
@@ -80,6 +79,7 @@ def run_query_task(args: argparse.Namespace) -> int:
 
 
 def run_train_task(args: argparse.Namespace) -> int:
+    """Dispatch a configured training run from train_config.json."""
 
     run_training(
         train_config_path=args.train_config,
@@ -93,17 +93,21 @@ def run_train_task(args: argparse.Namespace) -> int:
     return 0
 
 def run_evaluate_task(args: argparse.Namespace) -> int:
+    """Run the benchmark/evaluation pipeline for one model and dataset."""
     return execute_evaluate_task(args)
 
 
 
 def build_parser() -> argparse.ArgumentParser:
+    """Build the top-level CLI parser and register all workflow subcommands."""
     parser = argparse.ArgumentParser(
         prog="orkg-sparql-pipeline",
         description="CLI entry point for the ORKG pipeline."
     )
 
     subparsers = parser.add_subparsers(dest="mode", required=True)
+
+    # Single-question inference command.
     query_parser = subparsers.add_parser("query", help="Run the query task.")
     query_parser.add_argument("--model", required=True, help="Model to use for querying.")
     query_parser.add_argument(
@@ -125,8 +129,7 @@ def build_parser() -> argparse.ArgumentParser:
     query_parser.add_argument("--restore-pgmr", action="store_true", help="Restore PGMR-lite placeholders to ORKG predicates/classes and print mapped SPARQL.")
     query_parser.add_argument("--pgmr-memory-dir",default="code/data/orkg_memory/templates", help="Directory containing PGMR memory/mapping files.")
 
-
-    
+    # ACE options are optional prompt context controls shared with evaluation.
     query_parser.add_argument(
         "--ace-playbook",
         required=False,
@@ -157,6 +160,7 @@ def build_parser() -> argparse.ArgumentParser:
     query_parser.set_defaults(func=run_query_task)
 
 
+    # Training command. Actual trainer selection happens in src.train.runner.
     train_parser = subparsers.add_parser("train", help="Run the training task.")
     train_parser.add_argument(
         "--run",
@@ -194,6 +198,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     train_parser.set_defaults(func=run_train_task)
 
+    # Dataset-level benchmark command with extraction, execution, and metrics.
     evaluate_parser = subparsers.add_parser("evaluate", help="Run the evaluation task.")
     evaluate_parser.add_argument("--model", required=True, help="Model to use for evaluation.")
     evaluate_parser.add_argument("--dataset", required=True, help="Dataset to use for evaluation.")
@@ -219,7 +224,8 @@ def build_parser() -> argparse.ArgumentParser:
         "Path to local ORKG/PGMR memory used for URI hallucination checks. "
         "Defaults to code/data/orkg_memory/templates."
     ),)
-    
+
+    # ACE can prepend model/family-specific playbook bullets to each prompt.
     evaluate_parser.add_argument(
         "--ace-playbook",
         required=False,
@@ -248,9 +254,9 @@ def build_parser() -> argparse.ArgumentParser:
     )
 
     evaluate_parser.set_defaults(func=run_evaluate_task)
-    # evaluation files can be added as arguments here, e.g., --predictions, --references
 
 
+    # LLM-assisted ACE starts from an existing evaluation run directory.
     ace_llm_parser = subparsers.add_parser(
         "ace-llm",
         help="Run LLM-assisted ACE from an evaluation run directory.",
