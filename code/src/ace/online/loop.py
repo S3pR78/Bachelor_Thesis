@@ -12,6 +12,12 @@ import json
 from pathlib import Path
 from typing import Any
 
+from src.ace.online.selection import (
+    load_dataset_items,
+    select_dataset_items,
+    selected_item_ids,
+)
+
 
 @dataclass(frozen=True)
 class OnlineAceConfig:
@@ -54,8 +60,20 @@ def run_online_ace_loop(config: OnlineAceConfig) -> int:
     in later steps.
     """
     if config.dry_run:
+        dataset_items = load_dataset_items(config.dataset)
+        selected_items = select_dataset_items(
+            dataset_items,
+            family=config.family,
+            limit=config.limit,
+            shuffle=config.shuffle,
+            sample_seed=config.sample_seed,
+        )
+
         print("Online ACE dry run configuration:")
         print(json.dumps(config.to_dict(), indent=2, sort_keys=True))
+        print()
+        print("Selected item IDs:")
+        print(json.dumps(selected_item_ids(selected_items), indent=2))
         return 0
 
     raise NotImplementedError(
@@ -63,4 +81,3 @@ def run_online_ace_loop(config: OnlineAceConfig) -> int:
         "Step 1 only adds the package structure and CLI skeleton; use --dry-run "
         "to validate argument parsing."
     )
-
