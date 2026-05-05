@@ -1,108 +1,72 @@
 # Dataset Workspace
 
-This directory contains the main dataset pipeline outputs and supporting data used for benchmark construction, training preparation, review, and final export.
+`code/data/dataset/` is the main workspace for benchmark and training data. It contains the complete lifecycle from source examples and generated candidates to reviewed working files and final experiment splits.
 
-## Directory overview
+## Directory Overview
 
-### `sources/`
-Original or source-aligned dataset material.
+| Path | Purpose |
+| --- | --- |
+| `sources/` | Source-aligned seed data and manually curated family-specific source files. |
+| `expansion/` | Generated candidate files, review outputs, selected pools, repair material, and expansion methodology. |
+| `working/` | Current active dataset files being edited, enriched, deduplicated, or split. |
+| `reports/` | Validation, distribution, deduplication, paraphrase, split, and execution reports. |
+| `final/` | Stable direct-SPARQL dataset exports used by experiments. |
+| `pgmr/` | PGMR-lite transformed dataset exports and mirrors of final splits. |
+| `archive/` | Historical datasets and obsolete snapshots kept for reproducibility. |
 
-Use this directory for:
-- original benchmark examples
-- manually curated source datasets
-- source-family-specific merged seed files
+## Final Splits
 
-This directory should contain data that acts as an input source for later processing steps, not the newest working dataset.
+The direct-SPARQL final files are:
 
-### `expansion/`
-Dataset expansion workspace.
+| File | Purpose |
+| --- | --- |
+| `final/train.json` | Main training split. |
+| `final/train_with_paraphrases.json` | Training split expanded with paraphrased questions. |
+| `final/validation.json` | Validation split for tuning/checking runs. |
+| `final/benchmark.json` | Benchmark/test split for final evaluation. |
+| `final/ace_dev_pool.json` | Development pool for ACE analysis. |
+| `final/ace_playbook.json` | Examples reserved for ACE playbook construction. |
+| `final/ace_dev_pool_sample_80.json` | Sampled ACE development subset. |
 
-This directory contains expansion-related artifacts such as:
-- generated candidates
-- execution reviews
-- selection pools
-- repair material
-- expansion plans and methodology notes
+The PGMR-lite equivalents live under:
 
-This is the main area for question/query generation and review before entries enter the main validated working pool.
+```text
+pgmr/final/
+```
 
-### `working/`
-Current active dataset working files.
+and include the same split names plus PGMR-specific fields.
 
-This is the most important directory during dataset construction.
-Use it for files that are currently being edited, reviewed, enriched, deduplicated, or prepared for splitting.
+## Entry Shape
 
-Examples:
-- current validated master dataset
-- manually reviewed working files
-- split-preparation files
+Final direct-SPARQL entries typically contain:
 
-If you are unsure where active work should happen, start here.
+- `id`, `source_dataset`, `source_id`, `family`, `split`, `language`
+- `question`, `paraphrased_questions`, `gold_sparql`
+- `query_type`, `answer_type`, `query_shape`, `special_types`, `query_components`
+- `complexity_level`, `ambiguity_risk`, `lexical_gap_risk`, `hallucination_risk`
+- `human_or_generated`, `review_status`, `gold_status`
+- `previous_split`, `ace_split`
 
-### `reports/`
-Reports, summaries, and analysis outputs.
+PGMR files add:
 
-Use this directory for:
-- deduplication reports
-- field distribution reports
-- validation reports
-- selection summaries
-- split statistics
+- `gold_pgmr_sparql`
+- `pgmr_status`
+- `pgmr_replaced_terms`
+- `pgmr_unmapped_terms`
 
-This directory should contain diagnostics and analysis outputs, not primary working datasets.
+## Recommended Workflow
 
-### `final/`
-Final exported datasets.
+1. Start from `sources/` and `expansion/`.
+2. Review and consolidate candidates.
+3. Move active merged data into `working/`.
+4. Generate validation and distribution reports into `reports/`.
+5. Export stable splits into `final/`.
+6. Transform final files into PGMR-lite under `pgmr/final/` when needed.
+7. Move superseded snapshots into `archive/`.
 
-Use this directory for finalized outputs such as:
-- benchmark test set
-- validation set
-- training set
-- training extended set
-- final benchmark-ready files used in experiments
+## Important Rules
 
-Only stable, intentionally exported dataset files should be stored here.
-
-### `archive/`
-Historical and inactive artifacts kept for reproducibility.
-
-Use this directory for:
-- old merged datasets
-- outdated intermediate files
-- older benchmark versions
-- historical working snapshots no longer part of the active workflow
-
-Files here should not be treated as the current source of truth.
-
-## Recommended workflow
-
-The intended high-level workflow is:
-
-1. start from `sources/` and `expansion/`
-2. review and consolidate entries
-3. move the active master pool into `working/`
-4. generate reports in `reports/`
-5. export finalized splits into `final/`
-6. move superseded or obsolete intermediate material into `archive/`
-
-## Source of truth
-
-At any given time, there should be a clearly identified current master working dataset inside `working/`.
-
-For example:
-- `working/master_validated_working.json`
-
-This file should be treated as the main basis for:
-- distribution analysis
-- split design
-- final export
-
-## Notes on benchmark quality
-
-Not all reviewed material has the same purpose.
-
-Typical distinction:
-- stronger reviewed items may be used for benchmark/test or validation
-- weaker but still useful items may be retained for training or reserve use
-
-This distinction should be reflected later in split strategy and final export decisions, not by mixing all files indiscriminately.
+- Treat `working/` as active and changeable.
+- Treat `final/` and `pgmr/final/` as stable experiment inputs.
+- Do not put generated prompt outputs or evaluation runs here.
+- Do not use raw expansion candidates directly for benchmark evaluation; review and validate them first.

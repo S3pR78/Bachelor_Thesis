@@ -1,38 +1,64 @@
 # Data Directory
 
-This directory contains the project data used throughout dataset construction, review, validation, analysis, and final export.
+`code/data/` stores the project data assets used by dataset construction, model evaluation, PGMR restoration, ACE playbooks, and analysis.
 
-## Purpose
+## Structure
 
-The `code/data/` directory is the central location for:
-- source benchmark data
-- dataset expansion artifacts
-- working dataset files
-- reports and analyses
-- final dataset exports
-- archived intermediate or historical data
+| Path | Purpose |
+| --- | --- |
+| `dataset/` | Main dataset workspace: sources, expansion artifacts, working files, reports, final exports, PGMR exports, and archives. |
+| `orkg_memory/` | Memory templates that map PGMR placeholders to ORKG predicates/classes and support grounding checks. |
+| `ace_playbooks/` | Active ACE playbooks grouped by model, family, and mode. |
+| `ace_playbooks_rule_based_frozen/` | Frozen historical/rule-based playbook snapshots for reproducibility and comparison. |
 
-The goal of this structure is to separate:
-- active working files
-- reusable source data
-- generated expansion material
-- final outputs
-- archived historical artifacts
+## Source Of Truth
 
-## Main structure
+For active direct-SPARQL dataset work, start with:
 
-- `dataset/`
-  Main dataset workspace. This is the most important subdirectory for benchmark and training data preparation.
+```text
+code/data/dataset/working/
+```
 
-## Working principle
+For stable direct-SPARQL exports used in experiments, use:
 
-In general:
-- active dataset work should happen inside `code/data/dataset/working/`
-- final exports should be stored inside `code/data/dataset/final/`
-- reports should be stored inside `code/data/dataset/reports/`
-- historical or outdated but still reproducible artifacts should be stored inside `code/data/dataset/archive/`
+```text
+code/data/dataset/final/
+```
 
-## Notes
+For stable PGMR-lite exports used in PGMR experiments, use:
 
-This directory has gone through several iterations during development.
-Some older files and structures are kept for reproducibility, but the current active workflow should always be documented in the relevant README files inside `dataset/`.
+```text
+code/data/dataset/pgmr/final/
+```
+
+For ORKG mapping/memory files, use:
+
+```text
+code/data/orkg_memory/templates/
+```
+
+## Dataset Families
+
+The active supported families are:
+
+- `nlp4re`
+- `empirical_research_practice`
+
+Many prompts, playbooks, memory files, and evaluation reports are split by these families.
+
+## Data Lifecycle
+
+1. Source or generated material starts in `dataset/sources/` or `dataset/expansion/`.
+2. Reviewed and consolidated data moves into `dataset/working/`.
+3. Analysis outputs go into `dataset/reports/`.
+4. Stable direct-SPARQL exports go into `dataset/final/`.
+5. PGMR-lite transformed exports go into `dataset/pgmr/final/`.
+6. Superseded historical files move into `dataset/archive/`.
+
+## Do Not Confuse
+
+- `dataset/expansion/` contains generated/review-stage candidates, not final benchmark data.
+- `dataset/working/` contains active construction files, not necessarily stable releases.
+- `dataset/final/` contains stable direct-SPARQL files used by experiments.
+- `dataset/pgmr/final/` contains stable PGMR-lite versions of those datasets.
+- `outputs/` outside `data/` contains run results, not source datasets.

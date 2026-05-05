@@ -1,16 +1,38 @@
-# Core Source Package
+# Core Package
 
-This package contains core integration utilities for model loading and provider access.
+`src/core/` contains model and provider integration code shared by query generation, evaluation, training, and OpenAI-backed tools.
 
 ## Modules
 
-- `download_manager.py`
-  - Handles downloading and caching of model files or data.
-- `model_loader.py`
-  - Loads model weights and config for local model execution.
-- `openai_provider.py`
-  - Provides an OpenAI interface for prompt-based generation.
+| Module | Purpose |
+| --- | --- |
+| `model_loader.py` | Loads local Hugging Face seq2seq or causal-LM models, optional PEFT adapters, tokenizers, and raw generation responses. |
+| `openai_provider.py` | Creates OpenAI clients and sends chat-completion requests. |
+| `download_manager.py` | Resolves/downloads original Hugging Face model snapshots into local model directories. |
 
-## Usage
+## Model Configuration
 
-These modules are used by higher-level pipeline components to abstract model and API details.
+Models are selected by keys from:
+
+```text
+code/config/model_config.json
+```
+
+Each model entry defines:
+
+- `provider`: `huggingface` or `openai`
+- `model_id`: provider model identifier
+- `interface`: `seq2seq`, `causal_lm`, or `chat`
+- local `paths`, such as `model_root`, `cache_dir`, and `finetuned_path`
+- optional `adapter_path` for LoRA/QLoRA models
+- generation settings such as `max_new_tokens`, `temperature`, and `do_sample`
+
+## Important Behavior
+
+Local Hugging Face models are loaded with `local_files_only=True`. If the configured model directory does not exist under `code/models/`, loading fails instead of downloading automatically during inference.
+
+OpenAI models require an API key environment variable, normally:
+
+```bash
+export OPENAI_API_KEY=...
+```

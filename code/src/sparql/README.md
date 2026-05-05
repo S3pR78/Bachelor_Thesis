@@ -1,16 +1,29 @@
-# SPARQL Source Package
+# SPARQL Package
 
-This package contains utilities for SPARQL query execution and normalization.
+`src/sparql/` contains shared SPARQL helpers for execution, prefix handling, query-form detection, and normalization.
 
 ## Modules
 
-- `execution.py`
-  - Executes SPARQL queries against the configured triplestore endpoint.
-- `normalization.py`
-  - Normalizes SPARQL query text for consistent comparison and evaluation.
-- `prefixes.py`
-  - Manages SPARQL prefix definitions used across the project.
+| Module | Purpose |
+| --- | --- |
+| `execution.py` | Executes SPARQL queries against a configured endpoint and detects query forms such as `SELECT` and `ASK`. |
+| `prefixes.py` | Prepends ORKG/RDF/RDFS/XSD prefixes used throughout the project. |
+| `normalization.py` | Normalizes SPARQL text for consistent storage, deduplication, and comparison. |
 
-## Usage
+## Default Endpoint
 
-These modules are shared by evaluation, dataset validation, and query restoration workflows.
+Many scripts use the ORKG triplestore:
+
+```text
+https://www.orkg.org/triplestore
+```
+
+Endpoint-based tools require network access. If no endpoint is provided to evaluation, execution can be skipped while query extraction and text metrics still run.
+
+## Used By
+
+- dataset execution validation
+- gold-result enrichment
+- benchmark evaluation
+- PGMR restoration/execution
+- query normalization and deduplication

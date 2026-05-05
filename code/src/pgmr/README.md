@@ -1,18 +1,41 @@
-# PGMR Source Package
+# PGMR Package
 
-This package contains utilities for PGMR-lite transformation, postprocessing, and SPARQL restoration.
+`src/pgmr/` contains reusable PGMR-lite logic. PGMR-lite replaces ORKG identifiers with placeholders so models can focus on query structure, then restores placeholders with memory files.
 
 ## Modules
 
-- `memory.py`
-  - Manages memory and placeholder state during PGMR processing.
-- `postprocess.py`
-  - Applies PGMR-specific cleanup and normalization to model output.
-- `restore.py`
-  - Restores PGMR placeholders to executable ORKG SPARQL.
-- `transform.py`
-  - Transforms dataset or model outputs between PGMR and SPARQL formats.
+| Module | Purpose |
+| --- | --- |
+| `transform.py` | Converts direct ORKG SPARQL into PGMR-lite form. |
+| `memory.py` | Loads memory templates and mapping data for supported families. |
+| `postprocess.py` | Cleans PGMR-lite model output into a more regular query string. |
+| `restore.py` | Restores PGMR placeholders back to executable ORKG SPARQL. |
 
-## Usage
+## Memory Files
 
-These modules are used by the PGMR evaluation and restore workflow under `code/tools/pgmr/`.
+Memory templates live in:
+
+```text
+code/data/orkg_memory/templates/
+```
+
+Current templates:
+
+- `nlp4re_memory.json`
+- `empirical_research_practice_memory.json`
+
+## How It Is Used
+
+The main CLI can postprocess and restore one generated PGMR query:
+
+```bash
+PYTHONPATH=code python code/src/main.py query \
+  --model gpt_4o_mini \
+  --prompt-mode pgmr_mini \
+  --family nlp4re \
+  --question "Which papers mention traceability?" \
+  --postprocess-pgmr \
+  --restore-pgmr
+```
+
+Dataset-scale PGMR workflows live under `code/tools/pgmr/`.

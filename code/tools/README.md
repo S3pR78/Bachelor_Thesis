@@ -1,46 +1,39 @@
 # Tools
 
-Dieses Verzeichnis enthält Hilfsskripte für den Datensatz- und Benchmark-Workflow der Bachelorarbeit.
+`code/tools/` contains workflow scripts for dataset construction, review, reporting, PGMR-lite processing, and ACE support. These scripts are less reusable than `code/src/`, but they are the practical entry points for most project work.
 
-## Workflow-Phasen
+Run tools from the repository root:
 
-### generation/
-Skripte zum Erzeugen neuer Kandidaten:
-- assemble_expansion_prompt.py
-- run_expansion_prompt_openai.py
+```bash
+PYTHONPATH=code python code/tools/<area>/<script>.py --help
+```
 
-### review/
-Skripte zur Prüfung und Selektion generierter Kandidaten:
-- check_expansion_candidates.py
-- review_expansion_candidates.py
-- select_green_candidates.py
+Some tools execute SPARQL against the ORKG endpoint or call OpenAI; those require network access and relevant credentials.
 
-### dataset/
-Skripte zur Nachbearbeitung und Anreicherung von Datensätzen:
-- dedupe_dataset_entries.py
-- normalize_sparql_in_dataset.py
-- enrich_selected_candidates.py
-- enrich_dataset_with_gold_results.py
+## Workflow Areas
 
+| Directory | Purpose | Start here when you need to... |
+| --- | --- | --- |
+| `generation/` | Build and run prompts for dataset expansion. | Generate new candidate question/query pairs. |
+| `review/` | Check, review, summarize, and select generated candidates. | Decide whether generated entries are green/yellow/red quality. |
+| `dataset/` | Normalize, enrich, deduplicate, validate, sample, and split datasets. | Prepare working datasets for final export. |
+| `pgmr/` | Convert SPARQL to PGMR-lite, evaluate PGMR model outputs, and restore predictions. | Work with placeholder-based query generation. |
+| `ace/` | Create ACE splits, inspect errors, curate/import playbook rules. | Improve model prompts based on observed errors. |
+| `reporting/` | Export dataset validation and field-distribution reports. | Generate documentation/analysis outputs. |
+| `legacy/` | Historical one-off scripts. | Read old workflows without treating them as current. |
 
+## Recommended High-Level Flow
 
-### pgmr/
+1. Generate candidates with `generation/`.
+2. Review and select candidates with `review/`.
+3. Enrich, normalize, validate, deduplicate, and split with `dataset/`.
+4. Transform final data to PGMR-lite with `pgmr/` if needed.
+5. Evaluate models with `code/src/main.py evaluate`.
+6. Use `ace/` tools to inspect errors and improve ACE playbooks.
+7. Export reports with `reporting/`.
 
-Skripte für PGMR-lite Datentransformation, Modelloutput-Evaluation und Restore nach ausführbarem ORKG-SPARQL:
+## Data Safety
 
-  * transform_dataset.py
-  * collect_unmapped_terms.py
-  * evaluate_model_outputs.py
-  * restore_and_execute_predictions.py
+Many tools write JSON outputs. Prefer writing to a new file first, then use `--overwrite` only when you intentionally want to replace an existing artifact.
 
-### reporting/
-Skripte zur Erstellung von Auswertungen und Berichten:
-- export_dataset_validation_report.py
-- export_dataset_field_distribution_report.py
-
-### legacy/
-Historische oder einmalige Skripte, die nicht mehr Teil des sauberen Hauptworkflows sind.
-
-## Grundregel
-
-Neue Tools sollen immer einer klaren Workflow-Phase zugeordnet werden und keine hartcodierten lokalen Pfade enthalten.
+Active working files should usually live in `code/data/dataset/working/`; final stable exports should live in `code/data/dataset/final/`; reports should live in `code/data/dataset/reports/`.

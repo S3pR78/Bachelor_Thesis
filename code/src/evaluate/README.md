@@ -1,38 +1,66 @@
-# Evaluation Source Package
+# Evaluation Package
 
-This package contains the evaluation pipeline and metrics used to score SPARQL predictions and PGMR-lite outputs.
+`src/evaluate/` implements the benchmark evaluation pipeline. It loads dataset entries, builds prompts, generates model outputs, extracts/restores queries, executes prediction and gold queries, computes metrics, and writes run summaries.
+
+## Main Entry
+
+The main entry point is `runner.py`, exposed as:
+
+```bash
+PYTHONPATH=code python code/src/main.py evaluate \
+  --model gpt_4o_mini \
+  --dataset code/data/dataset/final/benchmark.json \
+  --prompt-mode empire_compass_mini \
+  --prediction-format sparql
+```
+
+Outputs are written to:
+
+```text
+code/outputs/evaluation_runs/<model>/<run-name>/
+```
 
 ## Modules
 
-- `answer_metrics.py`
-  - Implements answer-based score calculations.
-- `answer_normalization.py`
-  - Normalizes SPARQL execution results for comparison.
-- `costs.py`
-  - Computes cost- or difficulty-related evaluation metrics.
-- `dataset_analysis.py`
-  - Performs dataset-level analysis and summary statistics.
-- `dataset_loader.py`
-  - Loads evaluation datasets and gold references.
-- `kg_memory.py`
-  - Manages knowledge graph reference memory for grounding checks.
-- `metric_runner.py`
-  - Drives execution of evaluation metrics on model outputs.
-- `metrics/`
-  - Contains individual metric implementations and diagnostic checks.
-- `query_elements.py`
-  - Parses query elements for structural comparison.
-- `query_text_normalization.py`
-  - Normalizes query text for similarity metrics.
-- `run_io.py`
-  - Input/output utilities for evaluation runs.
-- `runner.py`
-  - Orchestrates evaluation execution workflows.
-- `sparql_extraction.py`
-  - Extracts SPARQL queries from model outputs.
-- `summary.py`
-  - Aggregates metric results into summary reports.
+| Module | Purpose |
+| --- | --- |
+| `runner.py` | End-to-end evaluation orchestration. |
+| `dataset_loader.py` | Loads JSON datasets and selects fields from entries. |
+| `sparql_extraction.py` | Extracts SPARQL text from raw model output. |
+| `run_io.py` | Creates run directories and standard raw/summary output paths. |
+| `metric_runner.py` | Calls all configured metrics for one prediction/gold pair. |
+| `summary.py` | Aggregates per-example metrics into benchmark summaries. |
+| `answer_normalization.py` | Normalizes endpoint result values for answer comparison. |
+| `answer_metrics.py` | Shared answer-level scoring helpers. |
+| `query_text_normalization.py` | Normalizes SPARQL strings for text metrics. |
+| `query_elements.py` | Extracts ORKG classes/properties/resources and structural elements. |
+| `kg_memory.py` | Loads allowed ORKG references for grounding/URI hallucination checks. |
+| `costs.py` | Estimates provider token/cost payloads when usage data is available. |
+| `dataset_analysis.py` | Builds dataset validation and distribution reports. |
+| `analysis/` | Additional analysis helpers such as execution error breakdowns. |
+| `metrics/` | Individual metric implementations. |
 
-## Usage
+## Metrics
 
-The evaluation package is intended to be used by evaluation scripts and benchmark utilities under `code/tools/`.
+The evaluation pipeline checks several dimensions:
+
+- query extraction success
+- supported query form and query-form match
+- prediction and gold execution success
+- answer exact match and answer precision/recall/F1
+- normalized query exact match and BLEU-like query similarity
+- SPARQL structural match
+- KG reference matching and URI hallucination
+- PGMR unmapped placeholder diagnostics
+- primary error category
+
+## PGMR-lite Evaluation
+
+For PGMR-lite outputs, use:
+
+```bash
+--prediction-format pgmr_lite \
+--pgmr-memory-dir code/data/orkg_memory/templates
+```
+
+The runner postprocesses PGMR output, restores placeholders to ORKG identifiers, and evaluates the restored SPARQL.
