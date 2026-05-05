@@ -31,8 +31,16 @@ Each model entry defines:
 
 Local Hugging Face models are loaded with `local_files_only=True`. If the configured model directory does not exist under `code/models/`, loading fails instead of downloading automatically during inference.
 
-OpenAI models require an API key environment variable, normally:
+OpenAI models require an API key. `openai_provider.py` loads `.env` from the repository root, so this file works:
+
+```bash
+OPENAI_API_KEY=...
+```
+
+You can also set the same key as a shell environment variable:
 
 ```bash
 export OPENAI_API_KEY=...
 ```
+
+Do not commit your real `.env` file.

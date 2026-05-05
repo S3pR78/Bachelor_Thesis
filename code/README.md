@@ -28,7 +28,7 @@ For individual tools:
 PYTHONPATH=code python code/tools/<area>/<script>.py --help
 ```
 
-If a script uses local Hugging Face models, the model files must already exist under the path configured in `config/model_config.json`. OpenAI-backed scripts need `OPENAI_API_KEY`.
+If a script uses local Hugging Face models, the model files must already exist under the path configured in `config/model_config.json`. OpenAI-backed scripts need `OPENAI_API_KEY`, either exported in the shell or stored in a repo-root `.env` file.
 
 ## Entry Points
 

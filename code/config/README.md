@@ -28,7 +28,7 @@ Examples:
 - `mistral_7b_instruct`
 - `mistral_7b_pgmr_mini_qlora`
 
-OpenAI models use `provider: openai` and need `OPENAI_API_KEY`. Hugging Face/local models use paths under `code/models/` and are loaded locally.
+OpenAI models use `provider: openai` and need `OPENAI_API_KEY`. The key can be exported in the shell or stored in a repo-root `.env` file. Hugging Face/local models use paths under `code/models/` and are loaded locally.
 
 ## Training Runs
 

@@ -65,11 +65,19 @@ For LoRA/QLoRA training or adapter loading, also install:
 pip install peft accelerate bitsandbytes
 ```
 
-OpenAI-backed tools require:
+OpenAI-backed tools require an API key. The code loads a repo-root `.env` file, so this works:
+
+```bash
+OPENAI_API_KEY=...
+```
+
+You can also export the key in your shell:
 
 ```bash
 export OPENAI_API_KEY=...
 ```
+
+Do not commit your real `.env` file.
 
 Empire Compass prompt generation uses Node/TypeScript assets under `code/prompts/empire_compass/`, so Node.js/npm are needed if those prompts must be regenerated.
 
