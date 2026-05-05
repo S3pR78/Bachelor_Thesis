@@ -26,3 +26,4 @@ code/tests/ace/*
 !code/tests/ace/test_online_context.py
 !code/tests/ace/test_online_costs.py
 !code/tests/ace/test_online_selection.py
+!code/tests/ace/test_online_trace.py
