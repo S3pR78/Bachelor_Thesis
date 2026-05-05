@@ -12,7 +12,8 @@ The goal of the evaluation is not only to check whether a model returns a syntac
 6. KG-reference grounding metrics
 7. local-memory URI hallucination diagnostics
 8. PGMR-lite-specific diagnostics
-9. primary error categorization
+9. post-hoc LLM judge outputs
+10. primary error categorization
 
 The metrics are intentionally modular. Each metric is implemented in its own module under:
 
@@ -35,7 +36,7 @@ code/src/evaluate/summary.py
 and the interactive viewer is located at:
 
 ```text
-code/tools/benchmark_summary_app.py
+code/tools/review/benchmark_summary_app.py
 ```
 
 ---
@@ -88,11 +89,12 @@ Each metric is implemented in a small, testable module. This makes the evaluatio
 | Execution | `prediction_execution_success`, `gold_execution_success` |
 | Strict answer-based | `answer_exact_match`, `answer_precision_recall_f1` |
 | Value-only answer-based | `answer_value_exact_match`, `answer_value_precision_recall_f1` |
-| Query text | `query_normalized_exact_match`, `query_bleu` |
+| Query text | `query_normalized_exact_match`, `query_bleu`, `query_rouge1_f1`, `query_rouge2_f1`, `query_rougeL_f1` |
 | Query structure | `sparql_structure_match` |
 | KG references | `kg_ref_match`, `predicate_ref_match`, `class_ref_match`, `resource_ref_match` |
 | Hallucination | `uri_hallucination` |
-| PGMR-lite | `pgmr_unmapped_placeholders` |
+| PGMR-lite | `pgmr_unmapped_placeholders`, `pgmr_rouge1_f1`, `pgmr_rouge2_f1`, `pgmr_rougeL_f1` |
+| Post-hoc semantic judge | `intent_score`, `schema_score`, `projection_score`, `constraint_score`, `aggregation_score`, `overall_score`, `verdict` |
 | Diagnostics | `primary_error_category` |
 
 ---
@@ -320,6 +322,41 @@ Therefore, BLEU is included as a supporting metric, not as the primary correctne
 
 ---
 
+### `query_rouge1_f1`, `query_rouge2_f1`, `query_rougeL_f1`
+
+ROUGE query metrics compare the predicted SPARQL query against the gold SPARQL query after lightweight query normalization.
+
+They are implemented in:
+
+```text
+code/src/evaluate/metrics/query_rouge.py
+```
+
+Normalization for ROUGE:
+
+- removes Markdown code fences
+- removes SPARQL comments
+- removes or normalizes prefix/base declarations
+- normalizes whitespace
+- tokenizes SPARQL in a stable way
+- preserves query body order and does not reorder triples
+
+Metric variants:
+
+- `query_rouge1_f1`: unigram overlap F1
+- `query_rouge2_f1`: bigram overlap F1
+- `query_rougeL_f1`: longest common subsequence F1
+
+These are auxiliary textual similarity metrics. They help diagnose whether a generated query is close to the reference text, but they do not prove semantic correctness.
+
+Important interpretation notes:
+
+- high ROUGE can still hide a wrong predicate, filter, join, or aggregation
+- low ROUGE can still be acceptable if the query is semantically equivalent and answer-correct
+- answer-based metrics remain the primary correctness signal
+
+---
+
 ## 8. Query Structure Metric: SQM-Lite
 
 ### `sparql_structure_match`
@@ -529,7 +566,60 @@ This metric distinguishes PGMR mapping failures from ordinary SPARQL generation 
 
 ---
 
-## 12. Primary Error Category
+### `pgmr_rouge1_f1`, `pgmr_rouge2_f1`, `pgmr_rougeL_f1`
+
+PGMR ROUGE metrics are computed only when a gold PGMR query field is available, such as `gold_pgmr_sparql`.
+
+They compare the PGMR-stage prediction against the gold PGMR query and use the same ROUGE variants as the direct query metrics:
+
+- `pgmr_rouge1_f1`
+- `pgmr_rouge2_f1`
+- `pgmr_rougeL_f1`
+
+These metrics are useful for debugging PGMR-lite generation before final ORKG-SPARQL restoration.
+
+---
+
+## 12. Post-Hoc LLM Judge
+
+The LLM judge is not part of the deterministic evaluation loop. It is a post-hoc tool located at:
+
+```text
+code/tools/evaluate/run_llm_judge.py
+```
+
+It reads an existing `benchmark_raw.json` and writes:
+
+```text
+llm_judge_raw.json
+llm_judge_summary.json
+benchmark_summary_with_llm_judge.json
+```
+
+The judge receives only:
+
+- question
+- family
+- gold ORKG SPARQL
+- predicted/restored ORKG SPARQL
+
+It does not receive execution result tables.
+
+Item-level scores:
+
+- `intent_score`: `0-2`
+- `schema_score`: `0-2`
+- `projection_score`: `0-2`
+- `constraint_score`: `0-2`
+- `aggregation_score`: `0-2`
+- `overall_score`: `0-10`
+- `verdict`: `correct`, `partially_correct`, or `incorrect`
+
+Skipped items are scored as zero-score failures with `verdict = incorrect`. The summary means include skipped records as zeros, while `skip_reason_counts` and `zero_score_reason_counts` preserve why they were zero-scored.
+
+---
+
+## 13. Primary Error Category
 
 ### `primary_error_category`
 
@@ -552,7 +642,7 @@ This metric is designed for high-level error analysis and summary plots.
 
 ---
 
-## 13. Summary Aggregation
+## 14. Summary Aggregation
 
 The summary file aggregates all per-item validation metrics into:
 
@@ -571,12 +661,14 @@ The summary contains:
 - response time statistics
 - cost statistics for OpenAI runs
 - diagnostic summaries for URI hallucination and PGMR unmapped placeholders
+- ROUGE query similarity summaries
+- optional post-hoc LLM judge summaries in `benchmark_summary_with_llm_judge.json`
 
 The interactive viewer can display and compare multiple `benchmark_summary.json` files.
 
 ---
 
-## 14. Interpretation Guide
+## 15. Interpretation Guide
 
 ### Answer-based vs. query-based metrics
 
@@ -642,18 +734,19 @@ This distinction is important for comparing direct SPARQL generation and PGMR-li
 
 ---
 
-## 15. Recommended Reporting
+## 16. Recommended Reporting
 
 For thesis reporting, the following metric groups are recommended:
 
 1. extraction and execution metrics
 2. strict answer-based EM/F1
 3. value-only answer-based EM/F1
-4. query normalized exact match, BLEU, and SQM-lite
+4. query normalized exact match, BLEU, ROUGE, and SQM-lite
 5. predicate/class/resource reference F1
 6. URI hallucination rate
 7. PGMR unmapped placeholder rate for PGMR-lite runs
-8. primary error category distribution
+8. optional post-hoc LLM judge scores for semantic diagnosis
+9. primary error category distribution
 
 This combination provides a balanced evaluation of:
 

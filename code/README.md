@@ -43,6 +43,7 @@ Use `tools/` for data and reporting workflows:
 
 - `generation/`: assemble and run dataset expansion prompts
 - `review/`: inspect and select generated candidates
+- `evaluate/`: run post-hoc analysis over existing evaluation outputs
 - `dataset/`: normalize, enrich, deduplicate, validate, and split datasets
 - `pgmr/`: transform to PGMR-lite, evaluate PGMR-lite predictions, restore predictions
 - `ace/`: build splits, inspect errors, curate playbooks
@@ -55,3 +56,13 @@ Use `tools/` for data and reporting workflows:
 - Keep active dataset work in `data/dataset/working/`.
 - Keep stable exported splits in `data/dataset/final/` and `data/dataset/pgmr/final/`.
 - Keep generated evaluation outputs under `outputs/`; do not treat them as source datasets.
+
+## Evaluation Outputs
+
+A normal evaluation run writes `benchmark_raw.json` and `benchmark_summary.json`. Additional post-hoc tools may add companion files such as:
+
+- `llm_judge_raw.json`: per-item semantic LLM judge records
+- `llm_judge_summary.json`: aggregate semantic judge scores
+- `benchmark_summary_with_llm_judge.json`: original summary plus embedded LLM judge summary
+
+The original `benchmark_summary.json` is intentionally not overwritten.

@@ -1,6 +1,6 @@
 # Tools
 
-`code/tools/` contains workflow scripts for dataset construction, review, reporting, PGMR-lite processing, and ACE support. These scripts are less reusable than `code/src/`, but they are the practical entry points for most project work.
+`code/tools/` contains workflow scripts for dataset construction, evaluation analysis, review, reporting, PGMR-lite processing, and ACE support. These scripts are less reusable than `code/src/`, but they are the practical entry points for most project work.
 
 Run tools from the repository root:
 
@@ -16,6 +16,7 @@ Some tools execute SPARQL against the ORKG endpoint or call OpenAI; those requir
 | --- | --- | --- |
 | `generation/` | Build and run prompts for dataset expansion. | Generate new candidate question/query pairs. |
 | `review/` | Check, review, summarize, and select generated candidates. | Decide whether generated entries are green/yellow/red quality. |
+| `evaluate/` | Run post-hoc analysis over existing benchmark outputs. | Add semantic LLM judge scores without rerunning model inference. |
 | `dataset/` | Normalize, enrich, deduplicate, validate, sample, and split datasets. | Prepare working datasets for final export. |
 | `pgmr/` | Convert SPARQL to PGMR-lite, evaluate PGMR model outputs, and restore predictions. | Work with placeholder-based query generation. |
 | `ace/` | Create ACE splits, inspect errors, curate/import playbook rules. | Improve model prompts based on observed errors. |
@@ -29,8 +30,9 @@ Some tools execute SPARQL against the ORKG endpoint or call OpenAI; those requir
 3. Enrich, normalize, validate, deduplicate, and split with `dataset/`.
 4. Transform final data to PGMR-lite with `pgmr/` if needed.
 5. Evaluate models with `code/src/main.py evaluate`.
-6. Use `ace/` tools to inspect errors and improve ACE playbooks.
-7. Export reports with `reporting/`.
+6. Use `evaluate/` tools for post-hoc semantic judging when execution metrics need more explanation.
+7. Use `ace/` tools to inspect errors and improve ACE playbooks.
+8. Export reports with `reporting/`.
 
 ## Data Safety
 

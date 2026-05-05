@@ -48,11 +48,23 @@ The evaluation pipeline checks several dimensions:
 - supported query form and query-form match
 - prediction and gold execution success
 - answer exact match and answer precision/recall/F1
-- normalized query exact match and BLEU-like query similarity
+- normalized query exact match, BLEU-like query similarity, and ROUGE query similarity
 - SPARQL structural match
 - KG reference matching and URI hallucination
 - PGMR unmapped placeholder diagnostics
 - primary error category
+
+ROUGE metrics are auxiliary query-text diagnostics:
+
+- `query_rouge1_f1`
+- `query_rouge2_f1`
+- `query_rougeL_f1`
+
+For PGMR-lite runs with a gold PGMR query, the pipeline can also report:
+
+- `pgmr_rouge1_f1`
+- `pgmr_rouge2_f1`
+- `pgmr_rougeL_f1`
 
 ## PGMR-lite Evaluation
 
@@ -64,3 +76,17 @@ For PGMR-lite outputs, use:
 ```
 
 The runner postprocesses PGMR output, restores placeholders to ORKG identifiers, and evaluates the restored SPARQL.
+
+## Post-Hoc Semantic Judging
+
+The main evaluation loop intentionally stays deterministic and execution/metric based. For semantic LLM-based analysis after a run has finished, use:
+
+```bash
+PYTHONPATH=code python code/tools/evaluate/run_llm_judge.py \
+  --input code/outputs/evaluation_runs/<model>/<run>/benchmark_raw.json \
+  --output-dir code/outputs/evaluation_runs/<model>/<run> \
+  --judge-model gpt_4o_mini \
+  --prediction-field auto
+```
+
+This writes `llm_judge_raw.json`, `llm_judge_summary.json`, and, when `benchmark_summary.json` exists in the same directory, `benchmark_summary_with_llm_judge.json`.

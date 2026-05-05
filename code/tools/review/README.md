@@ -15,7 +15,7 @@ The goal is to separate:
 | `check_expansion_candidates.py` | Run automatic structural checks over generated candidates, including likely duplicate/format/query issues. |
 | `review_expansion_candidates.py` | Execute and review candidate SPARQL against the ORKG endpoint; writes review outputs. |
 | `select_green_candidates.py` | Merge/select candidates marked as green and write selected pools plus summaries. |
-| `benchmark_summary_app.py` | Streamlit app for interactively inspecting benchmark summaries and raw evaluation results. |
+| `benchmark_summary_app.py` | Streamlit app for interactively inspecting benchmark summaries, ROUGE metrics, diagnostics, and optional LLM judge summaries. |
 
 ## Typical Candidate Review Flow
 
@@ -48,8 +48,16 @@ PYTHONPATH=code python code/tools/review/select_green_candidates.py \
 Use the summary app to inspect evaluation outputs:
 
 ```bash
-PYTHONPATH=code streamlit run code/tools/review/benchmark_summary_app.py
+PYTHONPATH=code python -m streamlit run code/tools/review/benchmark_summary_app.py
 ```
+
+Upload one or more summary files:
+
+- `benchmark_summary.json` for normal evaluation metrics
+- `benchmark_summary_with_llm_judge.json` for normal metrics plus post-hoc LLM judge scores
+- `llm_judge_summary.json` for only the semantic judge summary
+
+The app keeps standard `0-1` metrics separate from LLM judge scores, because the judge uses `0-2` rubric scores and a `0-10` overall score.
 
 This app is for local review and analysis; it does not create final dataset exports.
 
