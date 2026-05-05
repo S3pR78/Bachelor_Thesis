@@ -8,11 +8,14 @@ from src.ace.online.loop import (
     is_solved,
     run_online_ace_loop,
 )
+from src.ace.online.reflector import OnlineAceReflector, OnlineReflectorConfig
 
 __all__ = [
     "OnlineAceConfig",
     "OnlineAceContext",
     "OnlineAceHooks",
+    "OnlineAceReflector",
+    "OnlineReflectorConfig",
     "compute_quality_score",
     "is_solved",
     "run_online_ace_loop",

@@ -67,6 +67,8 @@ class AceBullet:
     helpful_count: int = 0
     harmful_count: int = 0
     disabled_reason: str | None = None
+    source_item_id: str | None = None
+    source_iteration: int | None = None
     last_helpful_item_id: str | None = None
     last_helpful_delta: float | None = None
     last_harmful_item_id: str | None = None
@@ -109,6 +111,12 @@ class AceBullet:
             helpful_count=int(payload.get("helpful_count", 0)),
             harmful_count=int(payload.get("harmful_count", 0)),
             disabled_reason=payload.get("disabled_reason"),
+            source_item_id=payload.get("source_item_id"),
+            source_iteration=(
+                None
+                if payload.get("source_iteration") is None
+                else int(payload.get("source_iteration"))
+            ),
             last_helpful_item_id=payload.get("last_helpful_item_id"),
             last_helpful_delta=payload.get("last_helpful_delta"),
             last_harmful_item_id=payload.get("last_harmful_item_id"),
@@ -136,6 +144,8 @@ class AceBullet:
             "helpful_count": self.helpful_count,
             "harmful_count": self.harmful_count,
             "disabled_reason": self.disabled_reason,
+            "source_item_id": self.source_item_id,
+            "source_iteration": self.source_iteration,
             "last_helpful_item_id": self.last_helpful_item_id,
             "last_helpful_delta": self.last_helpful_delta,
             "last_harmful_item_id": self.last_harmful_item_id,
@@ -317,6 +327,12 @@ class AcePlaybook:
         old.helpful_count += new_bullet.helpful_count
         old.harmful_count += new_bullet.harmful_count
         old.disabled_reason = new_bullet.disabled_reason or old.disabled_reason
+        old.source_item_id = new_bullet.source_item_id or old.source_item_id
+        old.source_iteration = (
+            new_bullet.source_iteration
+            if new_bullet.source_iteration is not None
+            else old.source_iteration
+        )
         old.last_helpful_item_id = (
             new_bullet.last_helpful_item_id or old.last_helpful_item_id
         )
