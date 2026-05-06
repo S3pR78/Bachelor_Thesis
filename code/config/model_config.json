@@ -2,12 +2,13 @@
   "models": {
     "t5_base": {
       "provider": "huggingface",
-      "model_id": "t5_base",
+      "model_id": "google-t5/t5-base",
       "interface": "seq2seq",
       "variant": "original",
       "paths": {
         "model_root": "code/models",
-        "cache_dir": "code/models/cache"
+        "cache_dir": "code/models/cache",
+        "model_path": "code/models/t5_base/original"
       },
       "generation": {
         "max_new_tokens": 512,
@@ -17,12 +18,13 @@
     },
     "mistral_7b_instruct": {
       "provider": "huggingface",
-      "model_id": "Mistral_7B_Instruct",
+      "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
       "interface": "causal_lm",
       "variant": "original",
       "paths": {
         "model_root": "code/models",
-        "cache_dir": "code/models/cache"
+        "cache_dir": "code/models/cache",
+        "model_path": "code/models/Mistral_7B_Instruct/original"
       },
       "generation": {
         "max_new_tokens": 512,
@@ -32,12 +34,13 @@
     },
     "qwen25_coder_7b_instruct": {
       "provider": "huggingface",
-      "model_id": "Qwen25_Coder_7B_Instruct",
+      "model_id": "Qwen/Qwen2.5-Coder-7B-Instruct",
       "interface": "causal_lm",
       "variant": "original",
       "paths": {
         "model_root": "code/models",
-        "cache_dir": "code/models/cache"
+        "cache_dir": "code/models/cache",
+        "model_path": "code/models/Qwen25_Coder_7B_Instruct/original"
       },
       "generation": {
         "max_new_tokens": 512,
@@ -89,7 +92,7 @@
     },
     "t5_base_pgmr_mini_full_finetune": {
       "provider": "huggingface",
-      "model_id": "t5_base",
+      "model_id": "google-t5/t5-base",
       "interface": "seq2seq",
       "variant": "finetuned",
       "paths": {
@@ -105,12 +108,13 @@
     },
     "qwen25_coder_7b_pgmr_qlora": {
       "provider": "huggingface",
-      "model_id": "Qwen25_Coder_7B_Instruct",
+      "model_id": "Qwen/Qwen2.5-Coder-7B-Instruct",
       "interface": "causal_lm",
       "variant": "original",
       "paths": {
         "model_root": "code/models",
-        "cache_dir": "code/models/cache"
+        "cache_dir": "code/models/cache",
+        "model_path": "code/models/Qwen25_Coder_7B_Instruct/original"
       },
       "generation": {
         "max_new_tokens": 512,
@@ -121,12 +125,13 @@
     },
     "qwen25_coder_7b_empire_compass": {
       "provider": "huggingface",
-      "model_id": "Qwen25_Coder_7B_Instruct",
+      "model_id": "Qwen/Qwen2.5-Coder-7B-Instruct",
       "variant": "original",
       "interface": "causal_lm",
       "paths": {
         "model_root": "code/models",
-        "cache_dir": "code/models/cache"
+        "cache_dir": "code/models/cache",
+        "model_path": "code/models/Qwen25_Coder_7B_Instruct/original"
       },
       "generation": {
         "max_new_tokens": 768,
@@ -137,12 +142,13 @@
     },
     "mistral_7b_pgmr_qlora": {
       "provider": "huggingface",
-      "model_id": "Mistral_7B_Instruct",
+      "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
       "interface": "causal_lm",
       "variant": "original",
       "paths": {
         "model_root": "code/models",
-        "cache_dir": "code/models/cache"
+        "cache_dir": "code/models/cache",
+        "model_path": "code/models/Mistral_7B_Instruct/original"
       },
       "generation": {
         "max_new_tokens": 512,
@@ -153,12 +159,13 @@
     },
     "mistral_7b_empire_compass_qlora": {
       "provider": "huggingface",
-      "model_id": "Mistral_7B_Instruct",
+      "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
       "interface": "causal_lm",
       "variant": "original",
       "paths": {
         "model_root": "code/models",
-        "cache_dir": "code/models/cache"
+        "cache_dir": "code/models/cache",
+        "model_path": "code/models/Mistral_7B_Instruct/original"
       },
       "generation": {
         "max_new_tokens": 768,

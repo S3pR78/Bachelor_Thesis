@@ -224,6 +224,16 @@ def run_seq2seq_training(
     model_id = str(model_entry["model_id"])
     paths = model_entry.get("paths", {})
     cache_dir = paths.get("cache_dir")
+    model_source = model_id
+    local_files_only = False
+
+    model_path = paths.get("model_path")
+    if model_path:
+        model_path_obj = Path(model_path)
+        if not model_path_obj.exists() or not model_path_obj.is_dir():
+            raise FileNotFoundError(f"Configured model_path does not exist: {model_path_obj}")
+        model_source = str(model_path_obj)
+        local_files_only = True
 
     train_examples = load_training_examples_from_run_config(
         run_config,
@@ -240,6 +250,7 @@ def run_seq2seq_training(
     print("Task:", task)
     print("Model key:", model_key)
     print("Model id:", model_id)
+    print("Model source:", model_source)
     print("Train examples:", len(train_examples))
     print("Eval examples:", len(eval_examples))
 
@@ -273,12 +284,14 @@ def run_seq2seq_training(
     output_dir.mkdir(parents=True, exist_ok=True)
 
     tokenizer = AutoTokenizer.from_pretrained(
-        model_id,
+        model_source,
         cache_dir=cache_dir,
+        local_files_only=local_files_only,
     )
     model = AutoModelForSeq2SeqLM.from_pretrained(
-        model_id,
+        model_source,
         cache_dir=cache_dir,
+        local_files_only=local_files_only,
     )
 
     max_source_length = int(run_config["training"]["max_source_length"])
@@ -313,6 +326,7 @@ def run_seq2seq_training(
         "task": task,
         "model_key": model_key,
         "model_id": model_id,
+        "model_source": model_source,
         "method": method,
         "started_at_utc": datetime.now(timezone.utc).isoformat(),
         "train_examples": len(train_examples),
