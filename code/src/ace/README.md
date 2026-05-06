@@ -9,12 +9,12 @@
 | `playbook.py` | Dataclasses and JSON load/save helpers for ACE bullets, deltas, and playbooks. |
 | `rendering.py` | Converts a playbook into a compact prompt block. |
 | `routing.py` | Resolves the correct playbook path from model, family, and mode. |
-| `traces.py` | Builds and saves error trace reports from evaluation outputs. |
-| `reflector.py` | Offline rule reflection helpers that turn trace patterns into candidate deltas. |
-| `llm_reflector.py` | OpenAI-backed reflection that proposes playbook rule deltas from error traces. |
-| `curator.py` | Applies delta reports to playbooks and handles curation logic. |
-| `offline_loop.py` | Runs local/offline ACE iteration loops for debugging and playbook updates. |
-| `llm_pipeline.py` | CLI orchestration helper used by `main.py ace-llm`. |
+| `offline/` | Offline ACE-style trace building, reflection, curation, and LLM-assisted playbook construction. |
+| `online/` | True per-question online ACE loop, context management, reflection, reporting, and pipeline adapters. |
+
+The old flat offline import paths, such as `src.ace.traces` and
+`src.ace.llm_pipeline`, remain as compatibility wrappers around
+`src.ace.offline.*`.
 
 ## How ACE Is Used
 

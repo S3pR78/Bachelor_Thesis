@@ -5,7 +5,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from src.ace.traces import build_trace_report, save_trace_report
+from src.ace.offline.traces import build_trace_report, save_trace_report
 
 
 def _shorten(value: str | None, limit: int = 700) -> str:

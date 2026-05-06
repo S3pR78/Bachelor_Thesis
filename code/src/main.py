@@ -1,18 +1,13 @@
 import argparse
 from pathlib import Path
-from src.query.query_executor import generate_query_response
-from src.evaluate.runner import execute_evaluate_task
-from src.pgmr.postprocess import postprocess_pgmr_query
-from src.query.prompt_builder import (
-    build_final_prompt_for_question,
-    validate_query_args,
-)
-from src.train.runner import run_training
-from src.pgmr.restore import restore_pgmr_query
 
-from src.ace.llm_pipeline import (
+from src.ace.offline.llm_pipeline import (
     add_arguments as add_ace_llm_arguments,
     execute_llm_assisted_ace,
+)
+from src.ace.online.cli import (
+    add_arguments as add_online_ace_arguments,
+    execute_online_ace,
 )
 
 
@@ -22,6 +17,14 @@ def run_query_task(args: argparse.Namespace) -> int:
     This is the quick manual path: build the selected prompt, call the
     configured model, and optionally postprocess/restore PGMR-lite output.
     """
+    from src.pgmr.postprocess import postprocess_pgmr_query
+    from src.pgmr.restore import restore_pgmr_query
+    from src.query.prompt_builder import (
+        build_final_prompt_for_question,
+        validate_query_args,
+    )
+    from src.query.query_executor import generate_query_response
+
     validate_query_args(args)
 
     final_prompt = build_final_prompt_for_question(
@@ -80,6 +83,7 @@ def run_query_task(args: argparse.Namespace) -> int:
 
 def run_train_task(args: argparse.Namespace) -> int:
     """Dispatch a configured training run from train_config.json."""
+    from src.train.runner import run_training
 
     run_training(
         train_config_path=args.train_config,
@@ -94,6 +98,8 @@ def run_train_task(args: argparse.Namespace) -> int:
 
 def run_evaluate_task(args: argparse.Namespace) -> int:
     """Run the benchmark/evaluation pipeline for one model and dataset."""
+    from src.evaluate.runner import execute_evaluate_task
+
     return execute_evaluate_task(args)
 
 
@@ -263,6 +269,29 @@ def build_parser() -> argparse.ArgumentParser:
     )
     add_ace_llm_arguments(ace_llm_parser)
     ace_llm_parser.set_defaults(func=execute_llm_assisted_ace)
+
+    ace_parser = subparsers.add_parser(
+        "ace",
+        help="Run ACE workflows.",
+    )
+    ace_subparsers = ace_parser.add_subparsers(
+        dest="ace_workflow",
+        required=True,
+    )
+
+    ace_offline_parser = ace_subparsers.add_parser(
+        "offline",
+        help="Run offline ACE-style playbook construction.",
+    )
+    add_ace_llm_arguments(ace_offline_parser)
+    ace_offline_parser.set_defaults(func=execute_llm_assisted_ace)
+
+    ace_online_parser = ace_subparsers.add_parser(
+        "online",
+        help="Run the true per-question online ACE loop.",
+    )
+    add_online_ace_arguments(ace_online_parser)
+    ace_online_parser.set_defaults(func=execute_online_ace)
     
     return parser
 
@@ -274,10 +303,10 @@ def main() -> int:
 
     if not hasattr(args, "func"):
         parser.print_help()
-        return
+        return 0
 
-    args.func(args)
-    return 0
+    result = args.func(args)
+    return int(result or 0)
 
 
 

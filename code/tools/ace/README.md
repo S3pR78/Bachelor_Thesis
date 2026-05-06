@@ -19,6 +19,18 @@ There are two ACE workflow types:
 
 ## Offline Workflow
 
+The preferred main entrypoint is:
+
+```bash
+PYTHONPATH=code python code/src/main.py ace offline \
+  --run-dir code/outputs/evaluation_runs/<model>/<run> \
+  --model qwen25_coder_7b_instruct \
+  --mode pgmr_lite \
+  --playbook-dir code/data/ace_playbooks
+```
+
+The older `main.py ace-llm` command remains as a compatibility alias.
+
 1. Run an evaluation:
 
 ```bash
@@ -88,7 +100,7 @@ run output directory instead of overwriting the source playbook.
 Example dry-run:
 
 ```bash
-PYTHONPATH=code python code/tools/ace/online/run_online_ace_loop.py \
+PYTHONPATH=code python code/src/main.py ace online \
   --model qwen25_coder_7b_pgmr_qlora \
   --dataset code/data/dataset/pgmr/final/ace_playbook.json \
   --prompt-mode pgmr_mini \
@@ -106,3 +118,6 @@ PYTHONPATH=code python code/tools/ace/online/run_online_ace_loop.py \
 
 The full command removes `--dry-run` and may load a local model, call OpenAI for
 reflection, and query the configured SPARQL endpoint.
+
+The direct script `code/tools/ace/online/run_online_ace_loop.py` remains as a
+thin compatibility wrapper around `src.ace.online.cli`.

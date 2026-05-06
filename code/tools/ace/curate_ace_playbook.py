@@ -5,7 +5,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from src.ace.curator import apply_delta_report_to_playbook
+from src.ace.offline.curator import apply_delta_report_to_playbook
 
 
 def parse_args() -> argparse.Namespace:

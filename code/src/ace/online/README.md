@@ -28,10 +28,10 @@ trace writing, and cost tracking.
 
 ## Command
 
-The CLI wrapper is intentionally thin:
+The preferred main entrypoint is:
 
 ```bash
-PYTHONPATH=code python code/tools/ace/online/run_online_ace_loop.py \
+PYTHONPATH=code python code/src/main.py ace online \
   --model qwen25_coder_7b_pgmr_qlora \
   --dataset code/data/dataset/pgmr/final/ace_playbook.json \
   --prompt-mode pgmr_mini \
@@ -50,6 +50,8 @@ PYTHONPATH=code python code/tools/ace/online/run_online_ace_loop.py \
 
 Use `--dry-run` to validate argument parsing and deterministic item selection
 without loading a model, calling OpenAI, calling SPARQL, or writing run outputs.
+The direct script `code/tools/ace/online/run_online_ace_loop.py` is kept as a
+thin compatibility wrapper around `src.ace.online.cli`.
 
 ## Playbooks
 
