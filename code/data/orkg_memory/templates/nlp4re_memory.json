@@ -103,7 +103,8 @@
     "label": "NLP data type",
     "placeholder": "pgmrc:nlp_data_type",
     "aliases": [
-      "nlp data type"
+      "nlp data type",
+      "pgmrc:nlp_data_type_type"
     ],
     "notes": "Class used by template predicate P181022.",
     "placeholder_aliases": []
@@ -524,7 +525,8 @@
     "label": "NLP data type",
     "placeholder": "pgmr:nlp_data_type",
     "aliases": [
-      "nlp data type"
+      "nlp data type",
+      "pgmr:nlp_data_type_type"
     ],
     "notes": "Nested under 'NLP dataset'. What is the type of the data?",
     "placeholder_aliases": []
@@ -603,7 +605,8 @@
     "placeholder": "pgmr:dataset_location",
     "aliases": [
       "dataset location",
-      "nlp dataset location"
+      "nlp dataset location",
+      "pgmr:dataset_location_location"
     ],
     "notes": "Nested under 'NLP dataset'. Where is the dataset stored?",
     "placeholder_aliases": []

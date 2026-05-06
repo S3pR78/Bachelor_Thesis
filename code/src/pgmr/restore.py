@@ -3,14 +3,19 @@
 from __future__ import annotations
 
 import json
-import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-
-PGMR_TOKEN_PATTERN = re.compile(r"\b(?:pgmr|pgmrc):[A-Za-z_][A-Za-z0-9_]*\b")
-ORKG_TOKEN_PATTERN = re.compile(r"\b(?:orkgp|orkgc|orkgr):[A-Za-z0-9_]+\b")
+from src.pgmr.memory_resolver import (
+    ORKG_TOKEN_PATTERN,
+    PGMR_TOKEN_PATTERN,
+    PgmrMemoryEntry,
+    PgmrResolutionOptions,
+    build_memory_index,
+    load_pgmr_memory_by_family,
+    restore_pgmr_query_with_diagnostics,
+)
 
 
 MANUAL_FALLBACK_MAP: dict[str, str] = {
@@ -38,6 +43,10 @@ class RestoreResult:
     missing_mapping_tokens: list[str]
     remaining_pgmr_tokens: list[str]
     used_mapping_count: int
+    alias_mappings: list[dict[str, Any]] | None = None
+    auto_mappings: list[dict[str, Any]] | None = None
+    mapping_suggestions: list[dict[str, Any]] | None = None
+    unmapped_placeholders: list[str] | None = None
 
 
 def load_json(path: Path) -> Any:
@@ -116,27 +125,41 @@ def build_restore_mapping(memory_dir: Path) -> dict[str, str]:
     return mapping
 
 
-def restore_pgmr_query(pgmr_query: str, memory_dir: Path) -> RestoreResult:
+def restore_pgmr_query(
+    pgmr_query: str,
+    memory_dir: Path,
+    options: PgmrResolutionOptions | None = None,
+) -> RestoreResult:
     """Replace mapped PGMR tokens and report any tokens still unresolved."""
-    mapping = build_restore_mapping(memory_dir)
-    missing: list[str] = []
+    memory_by_family = load_pgmr_memory_by_family(memory_dir)
+    all_entries = [
+        entry
+        for index in memory_by_family.values()
+        for entry in index.entries
+    ]
+    all_entries.extend(
+        PgmrMemoryEntry(
+            family="__fallback__",
+            placeholder=placeholder,
+            canonical_uri=canonical_uri,
+        )
+        for placeholder, canonical_uri in MANUAL_FALLBACK_MAP.items()
+    )
+    memory_index = build_memory_index(all_entries)
 
-    def replace_token(match: re.Match[str]) -> str:
-        token = match.group(0)
-        replacement = mapping.get(token)
-
-        if replacement is None:
-            missing.append(token)
-            return token
-
-        return replacement
-
-    restored = PGMR_TOKEN_PATTERN.sub(replace_token, pgmr_query)
-    remaining = sorted(set(PGMR_TOKEN_PATTERN.findall(restored)))
+    result = restore_pgmr_query_with_diagnostics(
+        pgmr_query,
+        memory_index,
+        options,
+    )
 
     return RestoreResult(
-        restored_query=restored,
-        missing_mapping_tokens=sorted(set(missing)),
-        remaining_pgmr_tokens=remaining,
-        used_mapping_count=len(mapping),
+        restored_query=result.restored_query,
+        missing_mapping_tokens=result.missing_mapping_tokens,
+        remaining_pgmr_tokens=result.remaining_pgmr_tokens,
+        used_mapping_count=result.used_mapping_count,
+        alias_mappings=result.alias_mappings,
+        auto_mappings=result.auto_mappings,
+        mapping_suggestions=result.mapping_suggestions,
+        unmapped_placeholders=result.unmapped_placeholders,
     )

@@ -31,14 +31,14 @@ from src.query.prompt_builder import (
 from src.sparql.execution import detect_sparql_query_type, execute_sparql_query
 from src.sparql.prefixes import prepend_orkg_prefixes
 
-from tools.pgmr.evaluate_model_outputs import postprocess_pgmr_query
+from src.pgmr.memory_resolver import PgmrMemoryIndex, PgmrResolutionOptions
+from src.pgmr.postprocess import postprocess_pgmr_query
 from tools.pgmr.restore_and_execute_predictions import (
     build_entry_mapping,
     detect_basic_query_status,
     load_memory_mapping,
-    restore_pgmr_query,
+    restore_pgmr_query_with_diagnostics,
 )
-from pathlib import Path
 from src.evaluate.kg_memory import load_allowed_orkg_refs
 
 
@@ -193,7 +193,8 @@ def _build_prediction_query_from_model_output(
     raw_model_output: str,
     entry: dict[str, Any],
     prediction_format: str,
-    pgmr_memory_mapping: dict[str, str] | None,
+    pgmr_memory_mapping: dict[str, PgmrMemoryIndex] | None,
+    pgmr_resolution_options: PgmrResolutionOptions | None = None,
 ) -> dict[str, Any]:
     """Convert raw model text into the query that should be evaluated."""
     if prediction_format != "pgmr_lite":
@@ -207,6 +208,10 @@ def _build_prediction_query_from_model_output(
             "pgmr_restore_status": None,
             "pgmr_missing_mapping_tokens": [],
             "pgmr_remaining_tokens": [],
+            "pgmr_alias_mappings": [],
+            "pgmr_auto_mappings": [],
+            "pgmr_mapping_suggestions": [],
+            "pgmr_unmapped_placeholders": [],
             "pgmr_basic_status": None,
         }
 
@@ -214,10 +219,13 @@ def _build_prediction_query_from_model_output(
 
     # PGMR-lite predictions must be restored before SPARQL execution/metrics.
     entry_mapping = build_entry_mapping(entry, pgmr_memory_mapping or {})
-    pgmr_restored_query, pgmr_missing_mapping_tokens = restore_pgmr_query(
+    restore_result = restore_pgmr_query_with_diagnostics(
         pgmr_postprocessed_query,
         entry_mapping,
+        pgmr_resolution_options,
     )
+    pgmr_restored_query = restore_result.restored_query
+    pgmr_missing_mapping_tokens = restore_result.missing_mapping_tokens
     pgmr_restored_query = postprocess_pgmr_query(pgmr_restored_query)
 
     pgmr_basic_status = detect_basic_query_status(pgmr_restored_query)
@@ -241,6 +249,10 @@ def _build_prediction_query_from_model_output(
         "pgmr_restore_status": pgmr_restore_status,
         "pgmr_missing_mapping_tokens": pgmr_missing_mapping_tokens,
         "pgmr_remaining_tokens": pgmr_remaining_tokens,
+        "pgmr_alias_mappings": restore_result.alias_mappings,
+        "pgmr_auto_mappings": restore_result.auto_mappings,
+        "pgmr_mapping_suggestions": restore_result.mapping_suggestions,
+        "pgmr_unmapped_placeholders": restore_result.unmapped_placeholders,
         "pgmr_basic_status": pgmr_basic_status,
     }
 
@@ -293,6 +305,18 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
             "pgmr_memory_dir",
             "code/data/orkg_memory/templates",
         )
+        run_metadata["pgmr_similarity_mapping"] = bool(
+            getattr(args, "pgmr_similarity_mapping", False)
+        )
+        run_metadata["pgmr_auto_map_threshold"] = float(
+            getattr(args, "pgmr_auto_map_threshold", 0.90)
+        )
+        run_metadata["pgmr_suggestion_threshold"] = float(
+            getattr(args, "pgmr_suggestion_threshold", 0.75)
+        )
+        run_metadata["pgmr_min_margin"] = float(
+            getattr(args, "pgmr_min_margin", 0.08)
+        )
 
     print(f"Run directory: {run_dir}\n")
     print(f"Raw benchmark output path: {output_path}\n")
@@ -301,11 +325,24 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
 
     inference_session = prepare_inference_session(args.model)
 
-    pgmr_memory_mapping: dict[str, str] | None = None
+    pgmr_memory_mapping: dict[str, PgmrMemoryIndex] | None = None
+    pgmr_resolution_options: PgmrResolutionOptions | None = None
 
     if prediction_format == "pgmr_lite":
         pgmr_memory_mapping = load_memory_mapping(Path(args.pgmr_memory_dir))
         print(f"PGMR memory mappings loaded: {len(pgmr_memory_mapping)}")
+        pgmr_resolution_options = PgmrResolutionOptions(
+            enable_similarity_mapping=bool(
+                getattr(args, "pgmr_similarity_mapping", False)
+            ),
+            auto_map_threshold=float(
+                getattr(args, "pgmr_auto_map_threshold", 0.90)
+            ),
+            suggestion_threshold=float(
+                getattr(args, "pgmr_suggestion_threshold", 0.75)
+            ),
+            min_margin=float(getattr(args, "pgmr_min_margin", 0.08)),
+        )
 
     print(f"Inference provider: {inference_session['provider']}\n")
 
@@ -392,6 +429,7 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
             entry=entry,
             prediction_format=prediction_format,
             pgmr_memory_mapping=pgmr_memory_mapping,
+            pgmr_resolution_options=pgmr_resolution_options,
         )
 
         extracted_query = prediction_payload["extracted_query"]
@@ -458,6 +496,18 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
         ]
         result_entry["pgmr_remaining_tokens"] = prediction_payload[
             "pgmr_remaining_tokens"
+        ]
+        result_entry["pgmr_alias_mappings"] = prediction_payload[
+            "pgmr_alias_mappings"
+        ]
+        result_entry["pgmr_auto_mappings"] = prediction_payload[
+            "pgmr_auto_mappings"
+        ]
+        result_entry["pgmr_mapping_suggestions"] = prediction_payload[
+            "pgmr_mapping_suggestions"
+        ]
+        result_entry["pgmr_unmapped_placeholders"] = prediction_payload[
+            "pgmr_unmapped_placeholders"
         ]
         result_entry["pgmr_basic_status"] = prediction_payload[
             "pgmr_basic_status"

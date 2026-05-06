@@ -259,7 +259,8 @@
     "label": "data type",
     "placeholder": "pgmrc:data_type",
     "aliases": [
-      "data type"
+      "data type",
+      "pgmrc:data_type_type"
     ],
     "notes": "Class used by template predicate P7055.",
     "placeholder_aliases": []
@@ -326,7 +327,8 @@
     "placeholder": "pgmr:method",
     "aliases": [
       "data collection method",
-      "method"
+      "method",
+      "pgmr:method_method"
     ],
     "notes": "Nested under 'data collection'. What is the data collection method reported in the publication?",
     "placeholder_aliases": []
@@ -565,7 +567,8 @@
     "placeholder": "pgmr:question_type",
     "aliases": [
       "question type",
-      "research question type"
+      "research question type",
+      "pgmr:question_type_type"
     ],
     "notes": "Nested under 'research  question '. What is the type of the research question? Alias note: Alias for pgmr:question_type. Added to tolerate model-generated PGMR placeholder variants during deterministic restore.",
     "placeholder_aliases": [
@@ -1059,7 +1062,8 @@
     "label": "Data type",
     "placeholder": "pgmr:data_type",
     "aliases": [
-      "data type"
+      "data type",
+      "pgmr:data_type_type"
     ],
     "notes": "Nested under 'data'. What is the type of the collected data reported in the publication?",
     "placeholder_aliases": []
@@ -1072,7 +1076,8 @@
     "label": "method type",
     "placeholder": "pgmr:method_type",
     "aliases": [
-      "method type"
+      "method type",
+      "pgmr:method_type_type"
     ],
     "notes": "Nested under 'method'. What is the type of method is used for data collection in the publication?",
     "placeholder_aliases": []

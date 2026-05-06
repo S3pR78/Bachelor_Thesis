@@ -151,6 +151,56 @@ def _build_pgmr_unmapped_placeholders_summary(results: list[dict]) -> dict:
         "mean_unmapped_placeholder_count": mean_unmapped_placeholder_count,
     }
 
+
+def _count_pgmr_resolution_events(results: list[dict[str, Any]]) -> dict[str, int]:
+    """Count PGMR alias, similarity, suggestion, and unmapped diagnostics."""
+    alias_items = 0
+    auto_items = 0
+    suggested_items = 0
+    still_unmapped_items = 0
+
+    alias_placeholders = 0
+    auto_placeholders = 0
+    suggested_placeholders = 0
+    still_unmapped_placeholders = 0
+
+    for result in results:
+        alias_mappings = result.get("pgmr_alias_mappings") or []
+        auto_mappings = result.get("pgmr_auto_mappings") or []
+        suggestions = result.get("pgmr_mapping_suggestions") or []
+        unmapped = (
+            result.get("pgmr_unmapped_placeholders")
+            or result.get("pgmr_missing_mapping_tokens")
+            or []
+        )
+
+        if alias_mappings:
+            alias_items += 1
+            alias_placeholders += len(alias_mappings)
+
+        if auto_mappings:
+            auto_items += 1
+            auto_placeholders += len(auto_mappings)
+
+        if suggestions:
+            suggested_items += 1
+            suggested_placeholders += len(suggestions)
+
+        if unmapped:
+            still_unmapped_items += 1
+            still_unmapped_placeholders += len(unmapped)
+
+    return {
+        "pgmr_alias_mapped_item_count": alias_items,
+        "pgmr_alias_mapped_placeholder_count": alias_placeholders,
+        "pgmr_auto_mapped_item_count": auto_items,
+        "pgmr_auto_mapped_placeholder_count": auto_placeholders,
+        "pgmr_suggested_item_count": suggested_items,
+        "pgmr_suggested_placeholder_count": suggested_placeholders,
+        "pgmr_still_unmapped_item_count": still_unmapped_items,
+        "pgmr_still_unmapped_placeholder_count": still_unmapped_placeholders,
+    }
+
 def _build_uri_hallucination_summary(results: list[dict]) -> dict:
     """Summarize predicted ORKG references that are outside local memory."""
     metrics = [
@@ -481,10 +531,12 @@ def build_slice_summaries(
 
 
 def build_benchmark_summary(results: list[dict[str, Any]]) -> dict[str, Any]:
-    return {
+    summary = {
         "total_items": len(results),
         "metrics": _build_core_metrics_summary(results),
         "error_categories": _build_error_category_counts(results),
         "response_time_seconds": _build_response_time_summary(results),
         "slices": build_slice_summaries(results),
     }
+    summary.update(_count_pgmr_resolution_events(results))
+    return summary

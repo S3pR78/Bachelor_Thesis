@@ -4,18 +4,22 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
 from collections import Counter
 from pathlib import Path
 from typing import Any
 
+from src.pgmr.memory_resolver import (
+    ORKG_TOKEN_PATTERN,
+    PGMR_TOKEN_PATTERN,
+    PgmrMemoryIndex,
+    PgmrResolutionOptions,
+    build_entry_memory_index,
+    load_pgmr_memory_by_family,
+    restore_pgmr_query_with_diagnostics,
+)
+from src.pgmr.postprocess import postprocess_pgmr_query
 from src.sparql.execution import execute_sparql_query
 from src.sparql.prefixes import prepend_orkg_prefixes
-from tools.pgmr.evaluate_model_outputs import postprocess_pgmr_query
-
-
-PGMR_TOKEN_PATTERN = re.compile(r"\b(?:pgmr|pgmrc):[A-Za-z_][A-Za-z0-9_]*\b")
-ORKG_TOKEN_PATTERN = re.compile(r"\b(?:orkgp|orkgc|orkgr):[A-Za-z0-9_]+\b")
 
 
 MANUAL_FALLBACK_MAP = {
@@ -104,115 +108,37 @@ def extract_mapping_pairs_from_object(obj: Any) -> dict[str, str]:
     return mapping
 
 
-def load_memory_mapping(memory_dir: Path) -> dict[str, dict[str, str]]:
+def load_memory_mapping(memory_dir: Path) -> dict[str, PgmrMemoryIndex]:
     """Load PGMR placeholder mappings grouped by template family.
 
     Memory files are lists of records with:
     - family
     - placeholder
     - canonical_uri
-
-    The mapping also stores canonicalized pgmr placeholders, so generated
-    variants such as pgmr:NLP_task can be restored through pgmr:nlp_task.
     """
-    memory: dict[str, dict[str, str]] = {}
-
-    for memory_path in sorted(memory_dir.glob("*_memory.json")):
-        with memory_path.open("r", encoding="utf-8") as f:
-            data = json.load(f)
-
-        if not isinstance(data, list):
-            continue
-
-        fallback_family = memory_path.stem.removesuffix("_memory")
-
-        for item in data:
-            if not isinstance(item, dict):
-                continue
-
-            family = str(item.get("family") or fallback_family).strip()
-            placeholder = item.get("placeholder")
-            canonical_uri = item.get("canonical_uri")
-
-            if not family:
-                continue
-
-            if not isinstance(placeholder, str) or not placeholder.strip():
-                continue
-
-            if not isinstance(canonical_uri, str) or not canonical_uri.strip():
-                continue
-
-            family_mapping = memory.setdefault(family, {})
-            family_mapping[placeholder] = canonical_uri
-            family_mapping[canonicalize_pgmr_token(placeholder)] = canonical_uri
-
-    return memory
+    return load_pgmr_memory_by_family(memory_dir)
 
 
-def build_entry_mapping(entry: dict, memory: dict[str, dict[str, str]]) -> dict[str, str]:
+def build_entry_mapping(
+    entry: dict,
+    memory: dict[str, PgmrMemoryIndex],
+) -> PgmrMemoryIndex:
     """Build the placeholder mapping for one dataset entry.
 
     The family-specific memory is used first. Common placeholders that occur in
     both template families, such as pgmr:has_contribution and
     pgmr:publication_year, are included through the family memory files.
     """
-    family = str(entry.get("family", "")).strip()
-    if not family:
-        return {}
-
-    mapping = dict(memory.get(family, {}))
-
-    # Be tolerant when callers pass metadata with nested family information.
-    metadata = entry.get("entry_metadata")
-    if isinstance(metadata, dict):
-        metadata_family = str(metadata.get("family", "")).strip()
-        if metadata_family and metadata_family != family:
-            mapping.update(memory.get(metadata_family, {}))
-
-    return mapping
+    return build_entry_memory_index(entry, memory)
 
 
-def canonicalize_pgmr_token(token: str) -> str:
-    """Normalize model-generated PGMR placeholder casing.
-
-    Some causal LMs generate placeholders such as pgmr:NLP_task
-    although the PGMR memory uses pgmr:nlp_task. The PGMR namespace is
-    an intermediate representation, so lowercasing pgmr local names is
-    safe before deterministic restoration.
-    """
-    if ":" not in token:
-        return token
-
-    prefix, local_name = token.split(":", 1)
-
-    if prefix == "pgmr":
-        return f"{prefix}:{local_name.lower()}"
-
-    return token
-
-
-def restore_pgmr_query(pgmr_query: str, mapping: dict[str, str]) -> tuple[str, list[str]]:
-    missing: list[str] = []
-
-    def replace_token(match: re.Match[str]) -> str:
-        token = match.group(0)
-
-        replacement = mapping.get(token)
-        if replacement is not None:
-            return replacement
-
-        canonical_token = canonicalize_pgmr_token(token)
-        replacement = mapping.get(canonical_token)
-        if replacement is not None:
-            return replacement
-
-        missing.append(token)
-        return token
-
-    restored = PGMR_TOKEN_PATTERN.sub(replace_token, pgmr_query)
-
-    return restored, sorted(set(missing))
+def restore_pgmr_query(
+    pgmr_query: str,
+    mapping: PgmrMemoryIndex,
+    options: PgmrResolutionOptions | None = None,
+) -> tuple[str, list[str]]:
+    result = restore_pgmr_query_with_diagnostics(pgmr_query, mapping, options)
+    return result.restored_query, result.missing_mapping_tokens
 
 
 def detect_basic_query_status(query: str) -> dict[str, Any]:
@@ -283,6 +209,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--timeout-seconds", type=int, default=60)
     parser.add_argument("--limit", type=int, default=None)
     parser.add_argument("--prediction-field", default="postprocessed_prediction")
+    parser.add_argument("--pgmr-similarity-mapping", action="store_true")
+    parser.add_argument("--pgmr-auto-map-threshold", type=float, default=0.90)
+    parser.add_argument("--pgmr-suggestion-threshold", type=float, default=0.75)
+    parser.add_argument("--pgmr-min-margin", type=float, default=0.08)
     return parser.parse_args()
 
 
@@ -304,6 +234,12 @@ def main() -> None:
     selected_results = results[: args.limit] if args.limit is not None else results
 
     memory_mapping = load_memory_mapping(args.memory_dir)
+    resolution_options = PgmrResolutionOptions(
+        enable_similarity_mapping=bool(args.pgmr_similarity_mapping),
+        auto_map_threshold=float(args.pgmr_auto_map_threshold),
+        suggestion_threshold=float(args.pgmr_suggestion_threshold),
+        min_margin=float(args.pgmr_min_margin),
+    )
 
     output_results: list[dict[str, Any]] = []
     counters = Counter()
@@ -326,7 +262,13 @@ def main() -> None:
         pgmr_prediction = str(result.get(args.prediction_field, "")).strip()
 
         entry_mapping = build_entry_mapping(entry, memory_mapping)
-        restored_query, missing_tokens = restore_pgmr_query(pgmr_prediction, entry_mapping)
+        restore_result = restore_pgmr_query_with_diagnostics(
+            pgmr_prediction,
+            entry_mapping,
+            resolution_options,
+        )
+        restored_query = restore_result.restored_query
+        missing_tokens = restore_result.missing_mapping_tokens
         restored_query = postprocess_pgmr_query(restored_query)
         basic_status = detect_basic_query_status(restored_query)
 
@@ -363,6 +305,10 @@ def main() -> None:
                 "restored_prediction": restored_query,
                 "restore_status": restore_status,
                 "missing_mapping_tokens": missing_tokens,
+                "pgmr_alias_mappings": restore_result.alias_mappings,
+                "pgmr_auto_mappings": restore_result.auto_mappings,
+                "pgmr_mapping_suggestions": restore_result.mapping_suggestions,
+                "pgmr_unmapped_placeholders": restore_result.unmapped_placeholders,
                 "basic_status": basic_status,
                 "execution": execution,
             }
