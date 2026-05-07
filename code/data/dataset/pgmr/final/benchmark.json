@@ -23,9 +23,11 @@
     "number_of_patterns": 17,
     "query_components": [
       "SELECT",
+      "CONSTRUCT",
+      "OPTIONAL",
       "FILTER",
       "GROUP_BY",
-      "OPTIONAL"
+      "YEAR"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "low",
@@ -81,8 +83,9 @@
     "number_of_patterns": 17,
     "query_components": [
       "SELECT",
-      "FILTER",
-      "OPTIONAL"
+      "CONSTRUCT",
+      "OPTIONAL",
+      "FILTER"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "low",
@@ -140,9 +143,9 @@
     "number_of_patterns": 10,
     "query_components": [
       "SELECT",
-      "COUNT",
       "FILTER",
-      "GROUP_BY"
+      "GROUP_BY",
+      "COUNT"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -186,8 +189,9 @@
     "number_of_patterns": 31,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "ORDER_BY"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "high",
@@ -229,7 +233,6 @@
     ],
     "pgmr_unmapped_terms": []
   },
-
   {
     "id": "752",
     "source_dataset": "EmpiRE_Compass",
@@ -253,8 +256,8 @@
     "number_of_patterns": 9,
     "query_components": [
       "SELECT",
-      "FILTER",
-      "OPTIONAL"
+      "OPTIONAL",
+      "FILTER"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "high",
@@ -300,8 +303,8 @@
     "number_of_patterns": 10,
     "query_components": [
       "SELECT",
-      "FILTER",
-      "OPTIONAL"
+      "OPTIONAL",
+      "FILTER"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "low",
@@ -347,8 +350,8 @@
     "number_of_patterns": 10,
     "query_components": [
       "SELECT",
-      "FILTER",
-      "OPTIONAL"
+      "OPTIONAL",
+      "FILTER"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "high",
@@ -394,8 +397,8 @@
     "number_of_patterns": 10,
     "query_components": [
       "SELECT",
-      "FILTER",
-      "OPTIONAL"
+      "OPTIONAL",
+      "FILTER"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -442,8 +445,8 @@
     "number_of_patterns": 10,
     "query_components": [
       "SELECT",
-      "FILTER",
-      "OPTIONAL"
+      "OPTIONAL",
+      "FILTER"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "low",
@@ -490,8 +493,8 @@
     "number_of_patterns": 9,
     "query_components": [
       "SELECT",
-      "FILTER",
-      "OPTIONAL"
+      "OPTIONAL",
+      "FILTER"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "low",
@@ -538,8 +541,8 @@
     "number_of_patterns": 10,
     "query_components": [
       "SELECT",
-      "FILTER",
-      "OPTIONAL"
+      "OPTIONAL",
+      "FILTER"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -586,10 +589,11 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "ORDER_BY",
       "GROUP_BY",
-      "OPTIONAL"
+      "ORDER_BY"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "low",
@@ -634,9 +638,10 @@
     "number_of_patterns": 9,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "ORDER_BY",
-      "OPTIONAL"
+      "ORDER_BY"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "low",
@@ -686,11 +691,13 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "STR",
-      "ORDER_BY",
       "GROUP_BY",
-      "OPTIONAL"
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "low",
@@ -736,11 +743,13 @@
     "number_of_patterns": 9,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "STR",
-      "ORDER_BY",
       "GROUP_BY",
-      "OPTIONAL"
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "low",
@@ -786,10 +795,11 @@
     "number_of_patterns": 10,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "ORDER_BY",
       "GROUP_BY",
-      "OPTIONAL"
+      "ORDER_BY"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "low",
@@ -836,6 +846,7 @@
     "number_of_patterns": 11,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
       "ORDER_BY"
     ],
@@ -885,9 +896,10 @@
     "number_of_patterns": 11,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "ORDER_BY",
-      "OPTIONAL"
+      "ORDER_BY"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -936,9 +948,10 @@
     "number_of_patterns": 9,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "ORDER_BY",
-      "OPTIONAL"
+      "ORDER_BY"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -986,9 +999,10 @@
     "number_of_patterns": 10,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "ORDER_BY",
-      "OPTIONAL"
+      "ORDER_BY"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "low",
@@ -1041,12 +1055,13 @@
     "number_of_patterns": 11,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
       "FILTER",
-      "STR",
-      "ORDER_BY",
       "GROUP_BY",
-      "HAVING"
+      "ORDER_BY",
+      "HAVING",
+      "COUNT",
+      "STR"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -1096,10 +1111,11 @@
     "number_of_patterns": 11,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
-      "STR",
+      "GROUP_BY",
       "ORDER_BY",
-      "GROUP_BY"
+      "STR"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -1147,6 +1163,7 @@
     "number_of_patterns": 11,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
       "ORDER_BY"
     ],
@@ -1196,6 +1213,7 @@
     "number_of_patterns": 12,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
       "ORDER_BY"
     ],
@@ -1251,10 +1269,11 @@
     "query_components": [
       "SELECT",
       "ASK",
-      "COUNT",
+      "DISTINCT",
       "FILTER",
       "GROUP_BY",
-      "HAVING"
+      "HAVING",
+      "COUNT"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "low",
@@ -1306,11 +1325,12 @@
     "number_of_patterns": 25,
     "query_components": [
       "SELECT",
-      "COUNT",
-      "FILTER",
-      "ORDER_BY",
-      "GROUP_BY",
+      "DISTINCT",
       "OPTIONAL",
+      "FILTER",
+      "GROUP_BY",
+      "ORDER_BY",
+      "COUNT",
       "MAX"
     ],
     "complexity_level": "high",
@@ -1361,12 +1381,14 @@
     "number_of_patterns": 17,
     "query_components": [
       "SELECT",
-      "COUNT",
-      "FILTER",
-      "ORDER_BY",
-      "GROUP_BY",
+      "DISTINCT",
       "OPTIONAL",
-      "UNION"
+      "UNION",
+      "FILTER",
+      "BIND",
+      "GROUP_BY",
+      "ORDER_BY",
+      "COUNT"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -1398,7 +1420,7 @@
     ],
     "pgmr_unmapped_terms": []
   },
-    {
+  {
     "id": "751",
     "source_dataset": "Hybrid_Empirical_Research",
     "source_id": "empirical_research-0061",
@@ -1423,11 +1445,12 @@
     "number_of_patterns": 13,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "ORDER_BY",
       "GROUP_BY",
-      "OPTIONAL"
+      "ORDER_BY",
+      "COUNT"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "low",
@@ -1479,9 +1502,10 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
+      "DISTINCT",
+      "OPTIONAL",
       "GROUP_BY",
-      "OPTIONAL"
+      "ORDER_BY"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "low",
@@ -1527,10 +1551,11 @@
     "number_of_patterns": 11,
     "query_components": [
       "SELECT",
-      "COUNT",
-      "ORDER_BY",
+      "DISTINCT",
+      "OPTIONAL",
       "GROUP_BY",
-      "OPTIONAL"
+      "ORDER_BY",
+      "COUNT"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -1578,8 +1603,9 @@
     "number_of_patterns": 13,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "ORDER_BY"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "low",
@@ -1628,9 +1654,10 @@
     "number_of_patterns": 13,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
+      "DISTINCT",
+      "OPTIONAL",
       "GROUP_BY",
-      "OPTIONAL"
+      "ORDER_BY"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "low",
@@ -1681,11 +1708,12 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "COUNT",
-      "ORDER_BY",
+      "DISTINCT",
+      "OPTIONAL",
       "GROUP_BY",
+      "ORDER_BY",
       "HAVING",
-      "OPTIONAL"
+      "COUNT"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "low",
@@ -1734,10 +1762,11 @@
     "number_of_patterns": 27,
     "query_components": [
       "SELECT",
-      "STR",
-      "ORDER_BY",
+      "DISTINCT",
+      "OPTIONAL",
       "GROUP_BY",
-      "OPTIONAL"
+      "ORDER_BY",
+      "STR"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "low",
@@ -1787,9 +1816,10 @@
     "number_of_patterns": 9,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
+      "GROUP_BY",
       "ORDER_BY",
-      "GROUP_BY"
+      "COUNT"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -1836,10 +1866,11 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "STR",
       "ORDER_BY",
-      "OPTIONAL"
+      "STR"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "low",
@@ -1885,11 +1916,15 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "STR",
-      "ORDER_BY",
+      "BIND",
       "GROUP_BY",
-      "OPTIONAL"
+      "ORDER_BY",
+      "STR",
+      "LCASE",
+      "IF"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -1937,12 +1972,15 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
       "FILTER",
-      "STR",
-      "ORDER_BY",
+      "BIND",
       "GROUP_BY",
-      "MAX"
+      "ORDER_BY",
+      "COUNT",
+      "MAX",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -1988,11 +2026,15 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "STR",
-      "ORDER_BY",
+      "BIND",
       "GROUP_BY",
-      "OPTIONAL"
+      "ORDER_BY",
+      "STR",
+      "LCASE",
+      "IF"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "low",
@@ -2041,11 +2083,14 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "STR",
-      "ORDER_BY",
+      "BIND",
       "GROUP_BY",
-      "OPTIONAL"
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -2093,8 +2138,10 @@
     "query_components": [
       "ASK",
       "FILTER",
+      "NOT_EXISTS",
+      "EXISTS",
       "STR",
-      "NOT_EXISTS"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "low",
@@ -2143,8 +2190,10 @@
     "query_components": [
       "ASK",
       "FILTER",
+      "NOT_EXISTS",
+      "EXISTS",
       "STR",
-      "NOT_EXISTS"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "low",
@@ -2193,11 +2242,13 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "FILTER",
-      "STR",
-      "ORDER_BY",
+      "DISTINCT",
       "OPTIONAL",
-      "NOT_EXISTS"
+      "FILTER",
+      "NOT_EXISTS",
+      "EXISTS",
+      "ORDER_BY",
+      "STR"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "low",
@@ -2247,12 +2298,14 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "FILTER",
-      "STR",
-      "ORDER_BY",
-      "GROUP_BY",
+      "DISTINCT",
       "OPTIONAL",
-      "NOT_EXISTS"
+      "FILTER",
+      "NOT_EXISTS",
+      "EXISTS",
+      "GROUP_BY",
+      "ORDER_BY",
+      "STR"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "low",
@@ -2296,8 +2349,9 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "ORDER_BY"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "low",
@@ -2340,6 +2394,7 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "OPTIONAL"
     ],
     "complexity_level": "low",
@@ -2383,6 +2438,7 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "OPTIONAL"
     ],
     "complexity_level": "low",
@@ -2427,8 +2483,9 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "ORDER_BY"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "low",
@@ -2473,8 +2530,9 @@
     "number_of_patterns": 4,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "ORDER_BY"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "low",
@@ -2516,8 +2574,9 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "ORDER_BY"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "low",
@@ -2561,8 +2620,9 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "ORDER_BY"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "low",

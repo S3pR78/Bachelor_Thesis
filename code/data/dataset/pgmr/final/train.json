@@ -63,9 +63,10 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "ORDER_BY",
-      "OPTIONAL"
+      "ORDER_BY"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "low",
@@ -108,9 +109,10 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "ORDER_BY",
-      "OPTIONAL"
+      "ORDER_BY"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "low",
@@ -250,8 +252,9 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "ORDER_BY"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "low",
@@ -296,11 +299,12 @@
     "number_of_patterns": 9,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "ORDER_BY",
       "GROUP_BY",
-      "OPTIONAL"
+      "ORDER_BY",
+      "COUNT"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -348,11 +352,12 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "ORDER_BY",
       "GROUP_BY",
-      "OPTIONAL"
+      "ORDER_BY",
+      "COUNT"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -400,11 +405,12 @@
     "number_of_patterns": 9,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "ORDER_BY",
       "GROUP_BY",
-      "OPTIONAL"
+      "ORDER_BY",
+      "COUNT"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -452,11 +458,12 @@
     "number_of_patterns": 9,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "ORDER_BY",
       "GROUP_BY",
-      "OPTIONAL"
+      "ORDER_BY",
+      "COUNT"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -504,10 +511,11 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
       "FILTER",
+      "GROUP_BY",
       "ORDER_BY",
-      "GROUP_BY"
+      "COUNT"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "high",
@@ -555,12 +563,14 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "STR",
-      "ORDER_BY",
       "GROUP_BY",
-      "OPTIONAL"
+      "ORDER_BY",
+      "COUNT",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "high",
@@ -606,9 +616,9 @@
     "number_of_patterns": 11,
     "query_components": [
       "SELECT",
+      "OPTIONAL",
       "FILTER",
-      "ORDER_BY",
-      "OPTIONAL"
+      "ORDER_BY"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "high",
@@ -659,12 +669,14 @@
     "number_of_patterns": 10,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "STR",
-      "ORDER_BY",
+      "BIND",
       "GROUP_BY",
-      "OPTIONAL"
+      "ORDER_BY",
+      "COUNT",
+      "STR"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -714,10 +726,12 @@
     "number_of_patterns": 9,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
       "FILTER",
+      "GROUP_BY",
       "ORDER_BY",
-      "GROUP_BY"
+      "COUNT",
+      "YEAR"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -767,12 +781,14 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "STR",
-      "ORDER_BY",
+      "BIND",
       "GROUP_BY",
-      "OPTIONAL"
+      "ORDER_BY",
+      "COUNT",
+      "STR"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -820,10 +836,12 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
       "FILTER",
+      "GROUP_BY",
       "ORDER_BY",
-      "GROUP_BY"
+      "COUNT",
+      "YEAR"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -872,11 +890,12 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "ORDER_BY",
       "GROUP_BY",
-      "OPTIONAL"
+      "ORDER_BY",
+      "COUNT"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -929,11 +948,13 @@
     "number_of_patterns": 10,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
       "FILTER",
-      "STR",
+      "BIND",
+      "GROUP_BY",
       "ORDER_BY",
-      "GROUP_BY"
+      "COUNT",
+      "STR"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -985,10 +1006,13 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
       "FILTER",
+      "BIND",
+      "GROUP_BY",
       "ORDER_BY",
-      "GROUP_BY"
+      "COUNT",
+      "IF"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "low",
@@ -1036,10 +1060,14 @@
     "number_of_patterns": 12,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
       "FILTER",
+      "BIND",
+      "GROUP_BY",
       "ORDER_BY",
-      "GROUP_BY"
+      "COUNT",
+      "IF",
+      "YEAR"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -1090,11 +1118,12 @@
     "number_of_patterns": 9,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "ORDER_BY",
       "GROUP_BY",
-      "OPTIONAL"
+      "ORDER_BY",
+      "COUNT"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "low",
@@ -1145,11 +1174,12 @@
     "number_of_patterns": 13,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "ORDER_BY",
       "GROUP_BY",
-      "OPTIONAL"
+      "ORDER_BY",
+      "COUNT"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "low",
@@ -1196,10 +1226,11 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "FILTER",
-      "ORDER_BY",
+      "DISTINCT",
       "OPTIONAL",
-      "UNION"
+      "UNION",
+      "FILTER",
+      "ORDER_BY"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "low",
@@ -1245,10 +1276,11 @@
     "number_of_patterns": 10,
     "query_components": [
       "SELECT",
-      "FILTER",
-      "ORDER_BY",
+      "DISTINCT",
       "OPTIONAL",
-      "UNION"
+      "UNION",
+      "FILTER",
+      "ORDER_BY"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "low",
@@ -1302,12 +1334,14 @@
     "number_of_patterns": 30,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
       "FILTER",
-      "STR",
-      "ORDER_BY",
+      "BIND",
       "GROUP_BY",
-      "MAX"
+      "ORDER_BY",
+      "COUNT",
+      "MAX",
+      "STR"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "low",
@@ -1362,12 +1396,16 @@
     "number_of_patterns": 16,
     "query_components": [
       "SELECT",
-      "COUNT",
-      "FILTER",
-      "ORDER_BY",
-      "GROUP_BY",
+      "DISTINCT",
       "OPTIONAL",
-      "UNION"
+      "UNION",
+      "FILTER",
+      "EXISTS",
+      "BIND",
+      "GROUP_BY",
+      "ORDER_BY",
+      "COUNT",
+      "IF"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "low",
@@ -1422,11 +1460,14 @@
     "number_of_patterns": 15,
     "query_components": [
       "SELECT",
-      "FILTER",
-      "ORDER_BY",
-      "GROUP_BY",
       "OPTIONAL",
-      "MAX"
+      "FILTER",
+      "BIND",
+      "GROUP_BY",
+      "ORDER_BY",
+      "SUM",
+      "MAX",
+      "YEAR"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -1482,12 +1523,17 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
-      "COUNT",
-      "FILTER",
-      "ORDER_BY",
-      "GROUP_BY",
+      "DISTINCT",
       "OPTIONAL",
-      "MAX"
+      "FILTER",
+      "BIND",
+      "GROUP_BY",
+      "ORDER_BY",
+      "COUNT",
+      "MAX",
+      "BOUND",
+      "IF",
+      "YEAR"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "high",
@@ -1532,10 +1578,14 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "FILTER",
-      "STR",
+      "DISTINCT",
       "OPTIONAL",
-      "BIND"
+      "FILTER",
+      "BIND",
+      "STR",
+      "LCASE",
+      "CONTAINS",
+      "COALESCE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -1581,10 +1631,14 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
-      "FILTER",
-      "STR",
+      "DISTINCT",
       "OPTIONAL",
-      "BIND"
+      "FILTER",
+      "BIND",
+      "STR",
+      "LCASE",
+      "CONTAINS",
+      "COALESCE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -1630,9 +1684,11 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
       "FILTER",
-      "STR"
+      "COUNT",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -1680,7 +1736,11 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
-      "COUNT"
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -1728,7 +1788,11 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "COUNT"
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -1774,7 +1838,11 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
-      "COUNT"
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -1821,7 +1889,11 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
-      "COUNT"
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -1866,7 +1938,11 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
-      "COUNT"
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -1915,9 +1991,11 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
       "FILTER",
-      "STR"
+      "COUNT",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -1961,9 +2039,11 @@
     "number_of_patterns": 4,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
       "STR",
-      "OPTIONAL"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -2007,8 +2087,10 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
-      "STR"
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -2053,8 +2135,10 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
-      "STR"
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -2100,8 +2184,9 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
-      "FILTER",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -2146,8 +2231,11 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
-      "STR"
+      "STR",
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -2194,9 +2282,11 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
       "STR",
-      "OPTIONAL"
+      "COALESCE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -2243,9 +2333,12 @@
     "number_of_patterns": 4,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
       "STR",
-      "OPTIONAL"
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -2291,9 +2384,11 @@
     "number_of_patterns": 3,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
       "FILTER",
-      "STR"
+      "COUNT",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -2338,9 +2433,12 @@
     "number_of_patterns": 4,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
       "STR",
-      "OPTIONAL"
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -2385,9 +2483,12 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
       "STR",
-      "OPTIONAL"
+      "LCASE",
+      "COALESCE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -2435,9 +2536,12 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
       "FILTER",
-      "STR"
+      "COUNT",
+      "STR",
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -2482,9 +2586,13 @@
     "number_of_patterns": 4,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
       "STR",
-      "OPTIONAL"
+      "LCASE",
+      "CONTAINS",
+      "COALESCE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -2530,10 +2638,14 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "FILTER",
-      "STR",
+      "DISTINCT",
       "OPTIONAL",
-      "BIND"
+      "FILTER",
+      "BIND",
+      "STR",
+      "LCASE",
+      "CONTAINS",
+      "COALESCE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -2580,10 +2692,13 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "REGEX",
+      "ORDER_BY",
       "STR",
-      "ORDER_BY"
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -2630,10 +2745,13 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "REGEX",
+      "ORDER_BY",
       "STR",
-      "ORDER_BY"
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -2680,10 +2798,13 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "REGEX",
+      "ORDER_BY",
       "STR",
-      "ORDER_BY"
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -2730,10 +2851,13 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "REGEX",
+      "ORDER_BY",
       "STR",
-      "ORDER_BY"
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -2780,10 +2904,12 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "REGEX",
+      "ORDER_BY",
       "STR",
-      "ORDER_BY"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -2831,7 +2957,12 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -2877,9 +3008,11 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
+      "ORDER_BY",
       "STR",
-      "ORDER_BY"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -2927,7 +3060,11 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -2974,10 +3111,12 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
-      "REGEX",
+      "ORDER_BY",
       "STR",
-      "ORDER_BY"
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -3022,8 +3161,9 @@
     "number_of_patterns": 4,
     "query_components": [
       "SELECT",
-      "FILTER",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -3064,7 +3204,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -3109,7 +3256,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -3154,7 +3305,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -3197,7 +3352,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -3240,7 +3399,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -3282,7 +3445,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -3325,7 +3492,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -3367,7 +3538,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -3409,7 +3584,10 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -3450,7 +3628,10 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -3489,7 +3670,10 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -3529,7 +3713,10 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -3569,7 +3756,10 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -3609,7 +3799,10 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -3651,7 +3844,10 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -3692,7 +3888,10 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -3732,7 +3931,10 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -3772,7 +3974,10 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -3813,7 +4018,10 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -3860,6 +4068,7 @@
     "number_of_patterns": 2,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "COUNT"
     ],
     "complexity_level": "low",
@@ -3905,9 +4114,13 @@
     "number_of_patterns": 3,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
       "FILTER",
-      "STR"
+      "COUNT",
+      "STR",
+      "LCASE",
+      "CONTAINS",
+      "COALESCE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -3951,6 +4164,7 @@
     "number_of_patterns": 4,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER"
     ],
     "complexity_level": "low",
@@ -3994,7 +4208,15 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE",
+      "CONTAINS"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -4036,7 +4258,15 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -4079,7 +4309,14 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -4124,7 +4361,14 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -4169,7 +4413,14 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -4211,7 +4462,15 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -4254,7 +4513,14 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -4299,7 +4565,14 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -4344,7 +4617,15 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -4386,7 +4667,15 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE",
+      "CONTAINS"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -4429,7 +4718,14 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -4475,7 +4771,15 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -4514,7 +4818,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -4554,7 +4865,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -4595,7 +4913,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -4636,7 +4961,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -4681,7 +5013,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -4724,7 +5063,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -4766,7 +5112,16 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE",
+      "CONTAINS"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -4806,7 +5161,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -4846,7 +5208,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -4889,7 +5258,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -4930,7 +5306,15 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE",
+      "CONTAINS"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -4970,7 +5354,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -5011,7 +5402,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -5050,7 +5448,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -5090,7 +5495,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -5131,7 +5543,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -5172,7 +5591,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -5211,7 +5637,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -5248,7 +5681,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -5290,7 +5730,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -5331,7 +5778,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -5370,7 +5824,15 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE",
+      "CONTAINS"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -5411,7 +5873,14 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -5453,7 +5922,14 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -5494,7 +5970,14 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -5534,7 +6017,14 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -5572,7 +6062,14 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -5615,7 +6112,14 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -5657,7 +6161,14 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -5697,7 +6208,14 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -5739,7 +6257,14 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -5783,7 +6308,15 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -5827,7 +6360,15 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -5868,7 +6409,15 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -5911,7 +6460,15 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -5956,7 +6513,15 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -6000,7 +6565,15 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -6044,7 +6617,15 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -6089,7 +6670,15 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -6130,7 +6719,15 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -6169,7 +6766,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -6216,7 +6820,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -6261,7 +6872,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -6303,7 +6921,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -6343,7 +6968,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -6388,7 +7020,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -6430,7 +7069,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -6474,7 +7120,15 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -6518,7 +7172,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -6560,7 +7221,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -6603,7 +7271,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -6645,7 +7320,11 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "ORDER_BY"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -6687,7 +7366,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -6729,7 +7415,16 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "NOT_EXISTS",
+      "EXISTS",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -6769,7 +7464,16 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "NOT_EXISTS",
+      "EXISTS",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -6818,7 +7522,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -6859,7 +7570,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -6898,7 +7616,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -6941,7 +7666,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -6984,7 +7716,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -7026,7 +7765,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -7065,7 +7811,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -7108,7 +7861,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -7148,7 +7908,14 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -7191,7 +7958,14 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -7234,7 +8008,14 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -7276,7 +8057,14 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -7320,7 +8108,14 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -7360,7 +8155,14 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -7401,7 +8203,14 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -7445,7 +8254,10 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -7486,7 +8298,10 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -7527,7 +8342,10 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -7568,7 +8386,10 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -7610,7 +8431,10 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -7652,7 +8476,10 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -7694,7 +8521,10 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -7735,7 +8565,10 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -7777,7 +8610,10 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -7819,7 +8655,10 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -7861,7 +8700,10 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -7903,7 +8745,10 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -7946,7 +8791,10 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -7988,7 +8836,10 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -8032,7 +8883,15 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -8076,7 +8935,15 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE",
+      "CONTAINS"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -8120,7 +8987,14 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -8162,7 +9036,14 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -8207,7 +9088,15 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -8249,7 +9138,15 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -8291,7 +9188,15 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -8333,7 +9238,15 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -8375,7 +9288,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -8419,7 +9339,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -8461,7 +9388,15 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE",
+      "CONTAINS"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -8505,7 +9440,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -8548,7 +9490,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -8589,7 +9538,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -8635,7 +9591,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -8676,7 +9639,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -8719,7 +9689,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -8765,7 +9742,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -8805,7 +9789,16 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "NOT_EXISTS",
+      "EXISTS",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -8848,7 +9841,15 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE",
+      "CONTAINS"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -8890,7 +9891,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -8931,7 +9939,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -8974,7 +9989,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -9014,7 +10036,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -9053,7 +10082,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -9096,7 +10132,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -9138,7 +10181,16 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "NOT_EXISTS",
+      "EXISTS",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -9182,7 +10234,15 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE",
+      "CONTAINS"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -9225,7 +10285,14 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -9268,7 +10335,14 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -9308,7 +10382,14 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -9349,7 +10430,14 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -9393,7 +10481,14 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -9438,7 +10533,12 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -9482,7 +10582,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -9524,7 +10628,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -9568,7 +10676,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -9611,7 +10723,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -9653,7 +10769,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -9695,7 +10815,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -9737,7 +10861,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -9779,7 +10907,12 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -9821,7 +10954,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -9864,7 +11001,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -9904,7 +11045,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "BIND",
+      "STR",
+      "COALESCE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -9945,7 +11093,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "BIND",
+      "STR",
+      "COALESCE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -9985,7 +11140,12 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "BIND",
+      "STR"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -10025,7 +11185,10 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -10065,7 +11228,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "BIND",
+      "STR",
+      "COALESCE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -10104,7 +11274,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "BIND",
+      "STR",
+      "COALESCE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -10143,7 +11320,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "BIND",
+      "STR",
+      "COALESCE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -10184,7 +11368,12 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "BIND",
+      "STR"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -10224,7 +11413,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "BIND",
+      "STR",
+      "COALESCE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -10263,7 +11459,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "BIND",
+      "STR",
+      "COALESCE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -10303,7 +11506,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "BIND",
+      "STR",
+      "COALESCE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -10342,7 +11552,10 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -10383,7 +11596,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "BIND",
+      "STR",
+      "COALESCE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -10423,7 +11643,10 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -10463,7 +11686,10 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -10503,7 +11729,10 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -10543,7 +11772,11 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "COUNT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -10584,7 +11817,11 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "COUNT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -10624,7 +11861,11 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "COUNT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -10664,7 +11905,11 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "COUNT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -10703,7 +11948,11 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "COUNT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -10744,7 +11993,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "NOT_EXISTS",
+      "EXISTS",
+      "COUNT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -10784,7 +12040,11 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "COUNT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -10823,7 +12083,11 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "COUNT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -10863,7 +12127,12 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -10905,7 +12174,11 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -10948,7 +12221,10 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -10990,7 +12266,10 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -11030,7 +12309,10 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -11071,7 +12353,10 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -11111,7 +12396,11 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -11151,7 +12440,10 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -11190,7 +12482,10 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -11230,7 +12525,10 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -11272,7 +12570,14 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -11318,7 +12623,14 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -11363,7 +12675,14 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -11408,7 +12727,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "ORDER_BY"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -11448,7 +12771,14 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -11491,7 +12821,14 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -11533,7 +12870,14 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -11577,7 +12921,14 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -11619,7 +12970,15 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -11661,7 +13020,15 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -11704,7 +13071,14 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -11744,7 +13118,11 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "ORDER_BY"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -11782,7 +13160,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -11825,7 +13210,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -11865,7 +13257,15 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -11903,7 +13303,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -11945,7 +13352,11 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "ORDER_BY"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -11984,7 +13395,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -12025,7 +13443,15 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -12063,7 +13489,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -12105,7 +13538,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -12148,7 +13588,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -12190,7 +13637,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -12228,7 +13682,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -12267,7 +13728,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -12307,7 +13775,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -12349,7 +13824,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -12391,7 +13873,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -12432,7 +13921,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -12472,7 +13968,11 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "COUNT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -12511,7 +14011,14 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -12553,7 +14060,14 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -12592,7 +14106,14 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -12632,7 +14153,14 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -12671,7 +14199,14 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -12712,7 +14247,14 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -12751,7 +14293,14 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -12791,7 +14340,14 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -12838,7 +14394,11 @@
     "number_of_patterns": 4,
     "query_components": [
       "SELECT",
-      "COUNT"
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -12883,9 +14443,11 @@
     "number_of_patterns": 10,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
       "FILTER",
-      "STR"
+      "COUNT",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -12935,7 +14497,11 @@
     "number_of_patterns": 4,
     "query_components": [
       "SELECT",
-      "COUNT"
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -12978,6 +14544,7 @@
     "number_of_patterns": 3,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "OPTIONAL"
     ],
     "complexity_level": "low",
@@ -13022,8 +14589,10 @@
     "number_of_patterns": 3,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "STR",
-      "OPTIONAL"
+      "COALESCE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -13068,7 +14637,7 @@
     "number_of_patterns": 4,
     "query_components": [
       "SELECT",
-      "ASK",
+      "DISTINCT",
       "OPTIONAL"
     ],
     "complexity_level": "low",
@@ -13112,6 +14681,7 @@
     "number_of_patterns": 4,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER"
     ],
     "complexity_level": "low",
@@ -13154,7 +14724,8 @@
     "query_shape": "star",
     "number_of_patterns": 5,
     "query_components": [
-      "SELECT"
+      "SELECT",
+      "DISTINCT"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -13201,8 +14772,11 @@
     "number_of_patterns": 4,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
-      "STR"
+      "STR",
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -13244,7 +14818,8 @@
     "query_shape": "chain",
     "number_of_patterns": 3,
     "query_components": [
-      "SELECT"
+      "SELECT",
+      "DISTINCT"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -13287,6 +14862,7 @@
     "number_of_patterns": 4,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER"
     ],
     "complexity_level": "low",
@@ -13331,7 +14907,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -13371,7 +14951,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -13411,7 +14995,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -13452,7 +15040,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -13493,7 +15085,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -13534,7 +15130,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -13575,7 +15175,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -13615,7 +15219,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -13656,7 +15264,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -13697,7 +15309,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -13738,7 +15354,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -13779,7 +15399,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -13819,7 +15443,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -13858,7 +15486,10 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -13897,7 +15528,10 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -13936,7 +15570,10 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -13974,7 +15611,10 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -14013,7 +15653,10 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -14051,7 +15694,10 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -14089,7 +15735,10 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -14128,7 +15777,10 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -14167,7 +15819,10 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -14206,7 +15861,10 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -14245,7 +15903,10 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -14284,7 +15945,10 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -14322,7 +15986,10 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -14361,7 +16028,10 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -14400,7 +16070,11 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "COUNT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -14439,7 +16113,11 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "COUNT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -14478,7 +16156,11 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "COUNT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -14516,7 +16198,11 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "COUNT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -14554,7 +16240,11 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "COUNT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -14593,7 +16283,11 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "COUNT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -14632,7 +16326,11 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "COUNT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -14671,7 +16369,10 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -14711,7 +16412,10 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -14751,7 +16455,10 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -14791,7 +16498,10 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -14832,7 +16542,10 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -14872,7 +16585,10 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -14913,7 +16629,10 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -14955,7 +16674,16 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "REGEX",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -14996,7 +16724,14 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "GROUP_BY",
+      "ORDER_BY",
+      "MAX"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -15037,7 +16772,14 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "GROUP_BY",
+      "ORDER_BY",
+      "MAX"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -15078,7 +16820,13 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -15119,7 +16867,13 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -15160,7 +16914,15 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "NOT_EXISTS",
+      "EXISTS",
+      "ORDER_BY"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -15199,7 +16961,11 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "ORDER_BY"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -15239,7 +17005,11 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "ORDER_BY"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -15278,7 +17048,11 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "AVG"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -15317,7 +17091,11 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "AVG"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -15356,7 +17134,11 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "MAX"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -15395,7 +17177,15 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "AVG",
+      "REGEX",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -15435,7 +17225,12 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -15474,7 +17269,12 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -15513,7 +17313,15 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "REGEX",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -15551,7 +17359,15 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "AVG",
+      "REGEX",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -15592,7 +17408,15 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "MIN",
+      "REGEX",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -15632,7 +17456,15 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "AVG",
+      "REGEX",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -15672,7 +17504,15 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "MIN",
+      "REGEX",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -15712,7 +17552,15 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "MAX",
+      "REGEX",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -15752,7 +17600,11 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "ORDER_BY"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -15792,7 +17644,11 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "ORDER_BY"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -15832,7 +17688,15 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "MIN",
+      "REGEX",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -15872,7 +17736,11 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "MAX"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -15911,7 +17779,11 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "ORDER_BY"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -15951,7 +17823,15 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "MIN",
+      "REGEX",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -15990,7 +17870,15 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "MAX",
+      "REGEX",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -16030,7 +17918,11 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "ORDER_BY"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -16075,12 +17967,14 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "REGEX",
-      "STR",
       "ORDER_BY",
       "LIMIT",
-      "BIND"
+      "STR",
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -16127,12 +18021,14 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "REGEX",
-      "STR",
       "ORDER_BY",
       "LIMIT",
-      "BIND"
+      "STR",
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -16178,7 +18074,12 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -16223,7 +18124,12 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -16268,7 +18174,12 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -16313,8 +18224,13 @@
     "number_of_patterns": 11,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "UNION",
+      "FILTER",
       "ORDER_BY",
-      "UNION"
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -16361,7 +18277,11 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -16406,7 +18326,11 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -16452,10 +18376,12 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
-      "REGEX",
+      "ORDER_BY",
       "STR",
-      "ORDER_BY"
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -16503,10 +18429,12 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
-      "REGEX",
+      "ORDER_BY",
       "STR",
-      "ORDER_BY"
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -16552,7 +18480,11 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -16599,7 +18531,11 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -16648,9 +18584,13 @@
     "number_of_patterns": 4,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
       "FILTER",
-      "NOT_EXISTS"
+      "NOT_EXISTS",
+      "EXISTS",
+      "COUNT",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -16694,7 +18634,11 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
-      "COUNT"
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -16741,7 +18685,11 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "COUNT"
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -16787,7 +18735,11 @@
     "number_of_patterns": 3,
     "query_components": [
       "SELECT",
-      "COUNT"
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -16830,7 +18782,11 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
-      "COUNT"
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -16877,8 +18833,9 @@
     "query_components": [
       "SELECT",
       "FILTER",
+      "AVG",
       "STR",
-      "AVG"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -16929,9 +18886,9 @@
     "query_components": [
       "SELECT",
       "FILTER",
-      "REGEX",
+      "MIN",
       "STR",
-      "MIN"
+      "LCASE"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -16979,7 +18936,10 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
-      "AVG"
+      "FILTER",
+      "AVG",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -17024,7 +18984,10 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
-      "AVG"
+      "FILTER",
+      "AVG",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -17073,9 +19036,10 @@
     "query_components": [
       "SELECT",
       "FILTER",
-      "REGEX",
+      "MIN",
       "STR",
-      "MIN"
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -17122,7 +19086,10 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
-      "MIN"
+      "FILTER",
+      "MIN",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -17168,7 +19135,10 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
-      "MIN"
+      "FILTER",
+      "MIN",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -17216,7 +19186,10 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
-      "MIN"
+      "FILTER",
+      "MIN",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -17265,8 +19238,9 @@
     "query_components": [
       "SELECT",
       "FILTER",
+      "MIN",
       "STR",
-      "MIN"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -17317,9 +19291,9 @@
     "query_components": [
       "SELECT",
       "FILTER",
-      "REGEX",
+      "MIN",
       "STR",
-      "MIN"
+      "LCASE"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -17372,9 +19346,10 @@
     "query_components": [
       "SELECT",
       "FILTER",
-      "REGEX",
+      "MIN",
       "STR",
-      "MIN"
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -17426,7 +19401,10 @@
       "SELECT",
       "FILTER",
       "NOT_EXISTS",
-      "MIN"
+      "EXISTS",
+      "MIN",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -17481,7 +19459,12 @@
     "query_shape": "tree",
     "number_of_patterns": 7,
     "query_components": [
-      "SELECT"
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -17528,7 +19511,12 @@
     "query_shape": "tree",
     "number_of_patterns": 9,
     "query_components": [
-      "SELECT"
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -17577,7 +19565,12 @@
     "query_shape": "tree",
     "number_of_patterns": 7,
     "query_components": [
-      "SELECT"
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -17624,7 +19617,12 @@
     "query_shape": "tree",
     "number_of_patterns": 6,
     "query_components": [
-      "SELECT"
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -17671,7 +19669,12 @@
     "query_shape": "tree",
     "number_of_patterns": 5,
     "query_components": [
-      "SELECT"
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -17715,7 +19718,12 @@
     "query_shape": "tree",
     "number_of_patterns": 5,
     "query_components": [
-      "SELECT"
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -17760,7 +19768,12 @@
     "query_shape": "tree",
     "number_of_patterns": 6,
     "query_components": [
-      "SELECT"
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -17806,7 +19819,12 @@
     "query_shape": "tree",
     "number_of_patterns": 6,
     "query_components": [
-      "SELECT"
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -17851,7 +19869,12 @@
     "query_shape": "tree",
     "number_of_patterns": 5,
     "query_components": [
-      "SELECT"
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -17898,12 +19921,13 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "REGEX",
-      "STR",
       "ORDER_BY",
-      "LIMIT",
-      "OPTIONAL"
+      "STR",
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -17949,10 +19973,13 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "LIMIT",
+      "DISTINCT",
       "OPTIONAL",
-      "UNION"
+      "UNION",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -18002,9 +20029,9 @@
     "query_components": [
       "SELECT",
       "FILTER",
-      "REGEX",
+      "MIN",
       "STR",
-      "MIN"
+      "LCASE"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -18053,7 +20080,10 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "AVG"
+      "FILTER",
+      "AVG",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -18103,11 +20133,14 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
-      "FILTER",
-      "ORDER_BY",
-      "LIMIT",
+      "DISTINCT",
       "OPTIONAL",
-      "NOT_EXISTS"
+      "FILTER",
+      "NOT_EXISTS",
+      "EXISTS",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -18155,10 +20188,13 @@
     "number_of_patterns": 10,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "LIMIT",
+      "DISTINCT",
       "OPTIONAL",
-      "UNION"
+      "UNION",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -18208,7 +20244,10 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
-      "MIN"
+      "FILTER",
+      "MIN",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -18256,13 +20295,14 @@
     "number_of_patterns": 9,
     "query_components": [
       "SELECT",
-      "FILTER",
-      "REGEX",
-      "STR",
-      "ORDER_BY",
-      "LIMIT",
+      "DISTINCT",
       "OPTIONAL",
-      "NOT_EXISTS"
+      "FILTER",
+      "NOT_EXISTS",
+      "EXISTS",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -18311,12 +20351,13 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "REGEX",
-      "STR",
       "ORDER_BY",
-      "LIMIT",
-      "OPTIONAL"
+      "STR",
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -18362,9 +20403,13 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
+      "ORDER_BY",
       "STR",
-      "OPTIONAL"
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -18411,9 +20456,12 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
+      "ORDER_BY",
       "STR",
-      "OPTIONAL"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -18462,9 +20510,15 @@
     "number_of_patterns": 4,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
       "GROUP_BY",
-      "HAVING"
+      "ORDER_BY",
+      "HAVING",
+      "COUNT",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -18510,9 +20564,12 @@
     "number_of_patterns": 11,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
+      "ORDER_BY",
       "STR",
-      "OPTIONAL"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -18560,9 +20617,14 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "FILTER",
+      "DISTINCT",
       "OPTIONAL",
-      "NOT_EXISTS"
+      "FILTER",
+      "NOT_EXISTS",
+      "EXISTS",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -18609,8 +20671,11 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
-      "STR"
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -18661,10 +20726,14 @@
     "number_of_patterns": 12,
     "query_components": [
       "SELECT",
-      "FILTER",
-      "STR",
+      "DISTINCT",
       "OPTIONAL",
-      "NOT_EXISTS"
+      "FILTER",
+      "NOT_EXISTS",
+      "EXISTS",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -18712,7 +20781,12 @@
     "query_shape": "tree",
     "number_of_patterns": 7,
     "query_components": [
-      "SELECT"
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -18758,7 +20832,11 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "COUNT"
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -18805,8 +20883,11 @@
     "number_of_patterns": 10,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
-      "STR"
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -18856,7 +20937,12 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -18904,7 +20990,12 @@
     "number_of_patterns": 11,
     "query_components": [
       "SELECT",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -18954,9 +21045,14 @@
     "number_of_patterns": 15,
     "query_components": [
       "SELECT",
-      "FILTER",
+      "DISTINCT",
       "OPTIONAL",
-      "NOT_EXISTS"
+      "FILTER",
+      "NOT_EXISTS",
+      "EXISTS",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -19014,10 +21110,14 @@
     "number_of_patterns": 15,
     "query_components": [
       "SELECT",
-      "FILTER",
-      "STR",
+      "DISTINCT",
       "OPTIONAL",
-      "NOT_EXISTS"
+      "FILTER",
+      "NOT_EXISTS",
+      "EXISTS",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -19071,7 +21171,12 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -19119,7 +21224,12 @@
     "number_of_patterns": 9,
     "query_components": [
       "SELECT",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -19168,13 +21278,17 @@
     "number_of_patterns": 17,
     "query_components": [
       "SELECT",
-      "COUNT",
-      "FILTER",
-      "GROUP_BY",
+      "DISTINCT",
       "OPTIONAL",
       "UNION",
+      "FILTER",
+      "BIND",
+      "GROUP_BY",
+      "ORDER_BY",
+      "COUNT",
       "MAX",
-      "BIND"
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -19225,9 +21339,11 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
       "STR",
-      "OPTIONAL"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -19274,9 +21390,11 @@
     "number_of_patterns": 10,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
       "STR",
-      "OPTIONAL"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -19324,6 +21442,7 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER"
     ],
     "complexity_level": "medium",
@@ -19372,8 +21491,11 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
-      "STR"
+      "STR",
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -19418,7 +21540,8 @@
     "query_shape": "tree",
     "number_of_patterns": 6,
     "query_components": [
-      "SELECT"
+      "SELECT",
+      "DISTINCT"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -19464,8 +21587,10 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
-      "STR"
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -19513,8 +21638,11 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
-      "STR"
+      "STR",
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -19562,8 +21690,10 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
-      "STR"
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -19610,12 +21740,13 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
+      "ORDER_BY",
       "REGEX",
       "STR",
-      "ORDER_BY",
-      "LIMIT",
-      "OPTIONAL"
+      "LCASE"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -19661,11 +21792,13 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
+      "ORDER_BY",
       "REGEX",
       "STR",
-      "ORDER_BY",
-      "OPTIONAL"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -19801,9 +21934,9 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "LIMIT",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "ORDER_BY"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -19849,10 +21982,12 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "FILTER",
-      "ORDER_BY",
+      "DISTINCT",
       "OPTIONAL",
-      "NOT_EXISTS"
+      "FILTER",
+      "NOT_EXISTS",
+      "EXISTS",
+      "ORDER_BY"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -19899,12 +22034,13 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
+      "ORDER_BY",
       "REGEX",
       "STR",
-      "ORDER_BY",
-      "LIMIT",
-      "OPTIONAL"
+      "LCASE"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -19950,10 +22086,10 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "GROUP_BY",
-      "LIMIT",
+      "DISTINCT",
       "OPTIONAL",
+      "GROUP_BY",
+      "ORDER_BY",
       "MAX"
     ],
     "complexity_level": "high",
@@ -19999,6 +22135,7 @@
     "number_of_patterns": 9,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "OPTIONAL"
     ],
     "complexity_level": "medium",
@@ -20047,9 +22184,10 @@
     "number_of_patterns": 4,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
       "GROUP_BY",
-      "HAVING"
+      "HAVING",
+      "COUNT"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -20093,6 +22231,7 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "OPTIONAL"
     ],
     "complexity_level": "medium",
@@ -20140,9 +22279,11 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "FILTER",
+      "DISTINCT",
       "OPTIONAL",
-      "NOT_EXISTS"
+      "FILTER",
+      "NOT_EXISTS",
+      "EXISTS"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -20188,6 +22329,7 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "OPTIONAL"
     ],
     "complexity_level": "medium",
@@ -20235,9 +22377,11 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "STR",
+      "DISTINCT",
       "OPTIONAL",
-      "BIND"
+      "BIND",
+      "STR",
+      "COALESCE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -20284,9 +22428,11 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
-      "FILTER",
+      "DISTINCT",
       "OPTIONAL",
-      "NOT_EXISTS"
+      "FILTER",
+      "NOT_EXISTS",
+      "EXISTS"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -20331,8 +22477,9 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "ORDER_BY"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -20376,8 +22523,9 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "ORDER_BY"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -20421,8 +22569,9 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "ORDER_BY"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -20467,8 +22616,9 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "ORDER_BY"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -20512,8 +22662,9 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "ORDER_BY"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -20559,8 +22710,9 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "ORDER_BY"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -20605,6 +22757,7 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "ORDER_BY"
     ],
     "complexity_level": "low",
@@ -20650,6 +22803,7 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "ORDER_BY"
     ],
     "complexity_level": "low",
@@ -20694,8 +22848,9 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "ORDER_BY"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -20739,6 +22894,7 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "COUNT"
     ],
     "complexity_level": "low",
@@ -20784,10 +22940,12 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
-      "STR",
-      "ORDER_BY",
+      "DISTINCT",
       "OPTIONAL",
-      "BIND"
+      "BIND",
+      "ORDER_BY",
+      "STR",
+      "COALESCE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -20834,6 +22992,7 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "COUNT"
     ],
     "complexity_level": "medium",
@@ -20882,10 +23041,12 @@
     "number_of_patterns": 9,
     "query_components": [
       "SELECT",
-      "STR",
-      "ORDER_BY",
+      "DISTINCT",
       "OPTIONAL",
-      "BIND"
+      "BIND",
+      "ORDER_BY",
+      "STR",
+      "COALESCE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -20932,8 +23093,9 @@
     "number_of_patterns": 9,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "ORDER_BY"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -20978,8 +23140,9 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "ORDER_BY"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -21027,8 +23190,9 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "ORDER_BY"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -21075,12 +23239,15 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "FILTER",
-      "STR",
-      "ORDER_BY",
+      "DISTINCT",
       "OPTIONAL",
+      "FILTER",
       "NOT_EXISTS",
-      "BIND"
+      "EXISTS",
+      "BIND",
+      "ORDER_BY",
+      "STR",
+      "COALESCE"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -21127,9 +23294,12 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
       "STR",
-      "OPTIONAL"
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "low",
@@ -21186,9 +23356,13 @@
     "number_of_patterns": 9,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
       "STR",
-      "OPTIONAL"
+      "LCASE",
+      "CONTAINS",
+      "COALESCE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -21240,7 +23414,13 @@
     "query_shape": "chain",
     "number_of_patterns": 5,
     "query_components": [
-      "SELECT"
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -21295,8 +23475,14 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "NOT_EXISTS"
+      "NOT_EXISTS",
+      "EXISTS",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -21353,8 +23539,14 @@
     "number_of_patterns": 24,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "NOT_EXISTS"
+      "NOT_EXISTS",
+      "EXISTS",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "high",
@@ -21420,9 +23612,13 @@
     "number_of_patterns": 25,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
+      "NOT_EXISTS",
+      "EXISTS",
       "ORDER_BY",
-      "NOT_EXISTS"
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "high",
@@ -21487,6 +23683,7 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "OPTIONAL"
     ],
     "complexity_level": "medium",
@@ -21544,6 +23741,7 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "OPTIONAL"
     ],
     "complexity_level": "low",
@@ -21599,6 +23797,7 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "OPTIONAL"
     ],
     "complexity_level": "low",
@@ -21652,7 +23851,8 @@
     "query_shape": "tree",
     "number_of_patterns": 8,
     "query_components": [
-      "SELECT"
+      "SELECT",
+      "DISTINCT"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "low",
@@ -21708,7 +23908,8 @@
     "query_shape": "tree",
     "number_of_patterns": 8,
     "query_components": [
-      "SELECT"
+      "SELECT",
+      "DISTINCT"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "low",
@@ -21764,7 +23965,8 @@
     "query_shape": "tree",
     "number_of_patterns": 8,
     "query_components": [
-      "SELECT"
+      "SELECT",
+      "DISTINCT"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -21821,7 +24023,8 @@
     "query_shape": "tree",
     "number_of_patterns": 7,
     "query_components": [
-      "SELECT"
+      "SELECT",
+      "DISTINCT"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -21877,7 +24080,8 @@
     "query_shape": "tree",
     "number_of_patterns": 8,
     "query_components": [
-      "SELECT"
+      "SELECT",
+      "DISTINCT"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -21934,7 +24138,11 @@
     "number_of_patterns": 9,
     "query_components": [
       "SELECT",
-      "OPTIONAL"
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -21993,7 +24201,11 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "OPTIONAL"
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -22051,7 +24263,12 @@
     "number_of_patterns": 10,
     "query_components": [
       "SELECT",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -22113,9 +24330,12 @@
     "number_of_patterns": 12,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
+      "ORDER_BY",
       "STR",
-      "OPTIONAL"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -22174,7 +24394,12 @@
     "query_shape": "tree",
     "number_of_patterns": 7,
     "query_components": [
-      "SELECT"
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -22230,7 +24455,12 @@
     "query_shape": "tree",
     "number_of_patterns": 8,
     "query_components": [
-      "SELECT"
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "low",
@@ -22286,7 +24516,12 @@
     "query_shape": "tree",
     "number_of_patterns": 9,
     "query_components": [
-      "SELECT"
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -22344,7 +24579,12 @@
     "query_shape": "tree",
     "number_of_patterns": 7,
     "query_components": [
-      "SELECT"
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "low",
@@ -22406,10 +24646,13 @@
     "number_of_patterns": 12,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
-      "STR",
+      "NOT_EXISTS",
+      "EXISTS",
       "ORDER_BY",
-      "NOT_EXISTS"
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "high",
@@ -22468,7 +24711,11 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "low",
@@ -22528,9 +24775,11 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "FILTER",
+      "DISTINCT",
       "OPTIONAL",
-      "NOT_EXISTS"
+      "FILTER",
+      "NOT_EXISTS",
+      "EXISTS"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -22588,11 +24837,14 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "FILTER",
-      "STR",
+      "DISTINCT",
       "OPTIONAL",
+      "FILTER",
       "NOT_EXISTS",
-      "BIND"
+      "EXISTS",
+      "BIND",
+      "STR",
+      "COALESCE"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -22650,8 +24902,10 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
-      "NOT_EXISTS"
+      "NOT_EXISTS",
+      "EXISTS"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "high",
@@ -22704,7 +24958,12 @@
     "query_shape": "tree",
     "number_of_patterns": 8,
     "query_components": [
-      "SELECT"
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -22762,9 +25021,12 @@
     "number_of_patterns": 11,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
+      "ORDER_BY",
       "STR",
-      "ORDER_BY"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -22823,7 +25085,12 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -22879,9 +25146,13 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
+      "ORDER_BY",
       "STR",
-      "ORDER_BY"
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -22941,7 +25212,12 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -23002,7 +25278,12 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -23058,9 +25339,12 @@
     "number_of_patterns": 11,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
+      "ORDER_BY",
       "STR",
-      "ORDER_BY"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -23122,7 +25406,12 @@
     "number_of_patterns": 9,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -23180,7 +25469,12 @@
     "number_of_patterns": 9,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -23237,7 +25531,12 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -23292,7 +25591,12 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -23345,7 +25649,12 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -23401,9 +25710,12 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
+      "ORDER_BY",
       "STR",
-      "ORDER_BY"
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -23457,9 +25769,11 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
+      "ORDER_BY",
       "STR",
-      "ORDER_BY"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -23516,7 +25830,11 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -23571,7 +25889,11 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "low",
@@ -23628,7 +25950,11 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -23684,7 +26010,11 @@
     "number_of_patterns": 11,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -23744,9 +26074,11 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
+      "ORDER_BY",
       "STR",
-      "ORDER_BY"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -23803,7 +26135,11 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -23860,7 +26196,11 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -23913,7 +26253,13 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "VALUES",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -23976,7 +26322,11 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -24030,7 +26380,11 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -24086,9 +26440,11 @@
     "number_of_patterns": 9,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
+      "ORDER_BY",
       "STR",
-      "ORDER_BY"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -24147,7 +26503,11 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -24203,7 +26563,11 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -24261,7 +26625,11 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -24317,7 +26685,11 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -24376,7 +26748,11 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -24434,9 +26810,11 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
+      "ORDER_BY",
       "STR",
-      "ORDER_BY"
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -24488,7 +26866,11 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -24542,9 +26924,11 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
       "STR",
-      "OPTIONAL"
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -24598,9 +26982,12 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
       "STR",
-      "OPTIONAL"
+      "LCASE",
+      "COALESCE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -24656,8 +27043,10 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
-      "STR"
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -24714,8 +27103,10 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
-      "STR"
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -24770,8 +27161,10 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
-      "STR"
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -24823,8 +27216,10 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
-      "STR"
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "low",
@@ -24879,9 +27274,13 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
       "STR",
-      "OPTIONAL"
+      "LCASE",
+      "CONTAINS",
+      "COALESCE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -24935,8 +27334,10 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
-      "STR"
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -24992,9 +27393,11 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
       "STR",
-      "OPTIONAL"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "low",
@@ -25050,9 +27453,13 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
       "STR",
-      "OPTIONAL"
+      "LCASE",
+      "CONTAINS",
+      "COALESCE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -25107,8 +27514,11 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
-      "STR"
+      "STR",
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -25165,8 +27575,11 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
-      "STR"
+      "STR",
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -25220,9 +27633,13 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
       "STR",
-      "OPTIONAL"
+      "LCASE",
+      "CONTAINS",
+      "COALESCE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -25276,8 +27693,10 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
-      "STR"
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "low",
@@ -25334,9 +27753,12 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
       "STR",
-      "OPTIONAL"
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "low",
@@ -25391,8 +27813,11 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
-      "STR"
+      "STR",
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -25446,9 +27871,13 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
       "STR",
-      "OPTIONAL"
+      "LCASE",
+      "CONTAINS",
+      "COALESCE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "low",
@@ -25504,9 +27933,11 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
       "STR",
-      "OPTIONAL"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -25561,9 +27992,11 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
       "STR",
-      "OPTIONAL"
+      "COALESCE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -25617,8 +28050,11 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
-      "STR"
+      "STR",
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "low",
@@ -25674,8 +28110,10 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
-      "STR"
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -25730,8 +28168,10 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
-      "STR"
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -25787,9 +28227,12 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
       "STR",
-      "OPTIONAL"
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -25844,9 +28287,13 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
       "STR",
-      "OPTIONAL"
+      "LCASE",
+      "CONTAINS",
+      "COALESCE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -25902,8 +28349,11 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
-      "STR"
+      "STR",
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -25959,9 +28409,11 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
       "STR",
-      "OPTIONAL"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -26019,12 +28471,13 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
+      "ORDER_BY",
       "REGEX",
       "STR",
-      "ORDER_BY",
-      "LIMIT",
-      "OPTIONAL"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -26079,11 +28532,13 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
+      "ORDER_BY",
       "REGEX",
       "STR",
-      "ORDER_BY",
-      "OPTIONAL"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -26137,11 +28592,13 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
+      "ORDER_BY",
       "REGEX",
       "STR",
-      "ORDER_BY",
-      "OPTIONAL"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -26194,11 +28651,13 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
+      "ORDER_BY",
       "REGEX",
       "STR",
-      "ORDER_BY",
-      "OPTIONAL"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -26252,11 +28711,13 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
+      "ORDER_BY",
       "REGEX",
       "STR",
-      "ORDER_BY",
-      "OPTIONAL"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -26311,11 +28772,13 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
+      "ORDER_BY",
       "REGEX",
       "STR",
-      "ORDER_BY",
-      "OPTIONAL"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -26370,11 +28833,13 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
+      "ORDER_BY",
       "REGEX",
       "STR",
-      "ORDER_BY",
-      "OPTIONAL"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -26428,10 +28893,12 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
-      "FILTER",
-      "ORDER_BY",
+      "DISTINCT",
       "OPTIONAL",
-      "NOT_EXISTS"
+      "FILTER",
+      "NOT_EXISTS",
+      "EXISTS",
+      "ORDER_BY"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -26484,10 +28951,12 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
+      "ORDER_BY",
       "REGEX",
       "STR",
-      "ORDER_BY"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -26541,10 +29010,12 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
+      "ORDER_BY",
       "REGEX",
       "STR",
-      "ORDER_BY"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -26597,6 +29068,7 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "ORDER_BY"
     ],
     "complexity_level": "low",
@@ -26650,10 +29122,12 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
+      "ORDER_BY",
       "REGEX",
       "STR",
-      "ORDER_BY"
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -26706,10 +29180,12 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
+      "ORDER_BY",
       "REGEX",
       "STR",
-      "ORDER_BY"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -26763,10 +29239,12 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
+      "ORDER_BY",
       "REGEX",
       "STR",
-      "ORDER_BY"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -26820,10 +29298,12 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
+      "ORDER_BY",
       "REGEX",
       "STR",
-      "ORDER_BY"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -26877,10 +29357,12 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
+      "ORDER_BY",
       "REGEX",
       "STR",
-      "ORDER_BY"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -26934,10 +29416,12 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
+      "ORDER_BY",
       "REGEX",
       "STR",
-      "ORDER_BY"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -26992,10 +29476,13 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "REGEX",
+      "ORDER_BY",
       "STR",
-      "ORDER_BY"
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -27050,10 +29537,11 @@
     "number_of_patterns": 9,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
-      "REGEX",
+      "ORDER_BY",
       "STR",
-      "ORDER_BY"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -27110,8 +29598,11 @@
     "number_of_patterns": 15,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "FILTER",
       "ORDER_BY",
-      "UNION"
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -27166,9 +29657,13 @@
     "number_of_patterns": 15,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
+      "NOT_EXISTS",
+      "EXISTS",
       "ORDER_BY",
-      "NOT_EXISTS"
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "high",
@@ -27238,13 +29733,17 @@
     "number_of_patterns": 9,
     "query_components": [
       "SELECT",
-      "COUNT",
-      "FILTER",
-      "STR",
-      "ORDER_BY",
-      "GROUP_BY",
+      "DISTINCT",
       "OPTIONAL",
-      "MAX"
+      "FILTER",
+      "BIND",
+      "GROUP_BY",
+      "ORDER_BY",
+      "COUNT",
+      "MAX",
+      "STR",
+      "BOUND",
+      "IF"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "high",
@@ -27293,12 +29792,16 @@
     "number_of_patterns": 17,
     "query_components": [
       "SELECT",
-      "COUNT",
-      "FILTER",
-      "ORDER_BY",
-      "GROUP_BY",
+      "CONSTRUCT",
+      "DISTINCT",
       "OPTIONAL",
-      "UNION"
+      "UNION",
+      "FILTER",
+      "BIND",
+      "GROUP_BY",
+      "ORDER_BY",
+      "COUNT",
+      "IF"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -27359,12 +29862,16 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
-      "COUNT",
-      "FILTER",
-      "ORDER_BY",
-      "GROUP_BY",
+      "DISTINCT",
       "OPTIONAL",
-      "MAX"
+      "FILTER",
+      "BIND",
+      "GROUP_BY",
+      "ORDER_BY",
+      "COUNT",
+      "SUM",
+      "MAX",
+      "YEAR"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "low",
@@ -27413,11 +29920,15 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "COUNT",
-      "ORDER_BY",
-      "GROUP_BY",
+      "DISTINCT",
       "OPTIONAL",
-      "MAX"
+      "BIND",
+      "GROUP_BY",
+      "ORDER_BY",
+      "COUNT",
+      "MAX",
+      "BOUND",
+      "IF"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -27466,9 +29977,10 @@
     "number_of_patterns": 9,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "ORDER_BY",
-      "OPTIONAL"
+      "ORDER_BY"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -27519,12 +30031,16 @@
     "number_of_patterns": 17,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "CONSTRUCT",
+      "DISTINCT",
+      "UNION",
       "FILTER",
-      "ORDER_BY",
+      "BIND",
       "GROUP_BY",
+      "ORDER_BY",
       "HAVING",
-      "UNION"
+      "COUNT",
+      "YEAR"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -27584,12 +30100,13 @@
     "number_of_patterns": 13,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "ORDER_BY",
       "GROUP_BY",
+      "ORDER_BY",
       "HAVING",
-      "OPTIONAL"
+      "COUNT"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -27645,12 +30162,14 @@
     "number_of_patterns": 13,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "STR",
-      "ORDER_BY",
+      "BIND",
       "GROUP_BY",
-      "OPTIONAL"
+      "ORDER_BY",
+      "COUNT",
+      "STR"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -27702,11 +30221,14 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "COUNT",
-      "FILTER",
-      "ORDER_BY",
-      "GROUP_BY",
+      "DISTINCT",
       "OPTIONAL",
+      "FILTER",
+      "BIND",
+      "GROUP_BY",
+      "ORDER_BY",
+      "COUNT",
+      "SUM",
       "MAX"
     ],
     "complexity_level": "high",
@@ -27759,11 +30281,12 @@
     "number_of_patterns": 21,
     "query_components": [
       "SELECT",
-      "COUNT",
-      "FILTER",
-      "ORDER_BY",
-      "GROUP_BY",
+      "DISTINCT",
       "OPTIONAL",
+      "FILTER",
+      "GROUP_BY",
+      "ORDER_BY",
+      "COUNT",
       "MAX"
     ],
     "complexity_level": "high",
@@ -27813,11 +30336,12 @@
     "number_of_patterns": 18,
     "query_components": [
       "SELECT",
-      "COUNT",
-      "FILTER",
-      "ORDER_BY",
-      "GROUP_BY",
+      "DISTINCT",
       "OPTIONAL",
+      "FILTER",
+      "GROUP_BY",
+      "ORDER_BY",
+      "COUNT",
       "MAX"
     ],
     "complexity_level": "high",
@@ -27868,13 +30392,16 @@
     "number_of_patterns": 19,
     "query_components": [
       "SELECT",
-      "COUNT",
-      "FILTER",
-      "STR",
-      "ORDER_BY",
-      "GROUP_BY",
+      "DISTINCT",
       "OPTIONAL",
-      "MAX"
+      "FILTER",
+      "BIND",
+      "GROUP_BY",
+      "ORDER_BY",
+      "COUNT",
+      "MAX",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -27924,13 +30451,17 @@
     "number_of_patterns": 22,
     "query_components": [
       "SELECT",
-      "COUNT",
-      "FILTER",
-      "STR",
-      "ORDER_BY",
-      "GROUP_BY",
+      "DISTINCT",
       "OPTIONAL",
-      "MAX"
+      "FILTER",
+      "BIND",
+      "GROUP_BY",
+      "ORDER_BY",
+      "COUNT",
+      "MAX",
+      "STR",
+      "LCASE",
+      "IF"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -27979,12 +30510,16 @@
     "number_of_patterns": 22,
     "query_components": [
       "SELECT",
-      "FILTER",
-      "STR",
-      "ORDER_BY",
+      "DISTINCT",
       "OPTIONAL",
       "UNION",
-      "NOT_EXISTS"
+      "FILTER",
+      "NOT_EXISTS",
+      "EXISTS",
+      "BIND",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "low",
@@ -28033,12 +30568,15 @@
     "number_of_patterns": 11,
     "query_components": [
       "SELECT",
-      "FILTER",
-      "STR",
-      "ORDER_BY",
+      "DISTINCT",
       "OPTIONAL",
       "UNION",
-      "NOT_EXISTS"
+      "FILTER",
+      "NOT_EXISTS",
+      "EXISTS",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "low",
@@ -28086,13 +30624,14 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "STR",
-      "ORDER_BY",
       "GROUP_BY",
+      "ORDER_BY",
       "HAVING",
-      "OPTIONAL"
+      "COUNT",
+      "STR"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "low",
@@ -28137,13 +30676,14 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "STR",
-      "ORDER_BY",
       "GROUP_BY",
+      "ORDER_BY",
       "HAVING",
-      "OPTIONAL"
+      "COUNT",
+      "STR"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "low",

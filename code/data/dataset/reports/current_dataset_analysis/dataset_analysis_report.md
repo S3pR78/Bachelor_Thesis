@@ -1,10 +1,16 @@
 # Dataset Analysis Report
 
-Generated at UTC: `2026-05-07T12:30:48.494206+00:00`
+Generated at UTC: `2026-05-07T13:41:02.823091+00:00`
 
-## 1. Zweck dieses Reports
+## 1. Purpose of This Report
 
-Dieser Report analysiert den konsolidierten Master-Datensatz sowie die finalen experimentellen Direct-SPARQL- und PGMR-lite-Dateien. Die Master-Datei wird für globale Dataset-Statistiken verwendet. Die finalen JSON-Dateien werden separat ausgeparamet, weil ACE-Dateien und Paraphrasen-Dateien nicht einfach additiv als disjunkte Splits gezählt werden dürfen.
+This report analyzes the consolidated master dataset as well as the final experimental Direct-SPARQL and PGMR-lite files. The master file is used for global dataset statistics. The final JSON files are evaluated separately because ACE files and paraphrase files must not simply be counted additively as disjoint splits.
+
+## note:
+
+Note: `complexity_level` and `query_type` are heuristic, and `number_of_patterns` is not reliable and not correct everywhere. That is why they are not included in the dataset analysis.
+
+
 
 ## 2. Master Dataset
 
@@ -163,31 +169,40 @@ Path: `code/data/dataset/working/master_validated_with_paraphrases_split_v2_no_p
 
 #### `query_components`
 
-- Entries with non-empty list: **415**
-- Entries with empty list: **347**
+- Entries with non-empty list: **762**
+- Entries with empty list: **0**
 - Entries missing field: **0**
 
 | param | count |
 |---|---:|
-| `SELECT` | 406 |
-| `FILTER` | 248 |
-| `ORDER_BY` | 217 |
-| `OPTIONAL` | 198 |
-| `STR` | 169 |
-| `COUNT` | 74 |
-| `GROUP_BY` | 68 |
-| `REGEX` | 44 |
-| `NOT_EXISTS` | 33 |
-| `MAX` | 16 |
-| `MIN` | 15 |
-| `BIND` | 14 |
-| `LIMIT` | 14 |
-| `UNION` | 13 |
-| `ASK` | 11 |
+| `SELECT` | 753 |
+| `DISTINCT` | 718 |
+| `FILTER` | 534 |
+| `STR` | 466 |
+| `LCASE` | 428 |
+| `ORDER_BY` | 404 |
+| `OPTIONAL` | 309 |
+| `COUNT` | 140 |
+| `GROUP_BY` | 70 |
+| `CONTAINS` | 60 |
+| `BIND` | 49 |
+| `EXISTS` | 41 |
+| `NOT_EXISTS` | 40 |
+| `COALESCE` | 33 |
+| `REGEX` | 33 |
+| `MAX` | 23 |
+| `MIN` | 20 |
+| `UNION` | 12 |
+| `IF` | 11 |
+| `AVG` | 11 |
+| `ASK` | 10 |
+| `YEAR` | 9 |
 | `HAVING` | 9 |
-| `AVG` | 6 |
-| `IF` | 1 |
-| `<empty_list>` | 347 |
+| `BOUND` | 5 |
+| `CONSTRUCT` | 4 |
+| `SUM` | 3 |
+| `LIMIT` | 2 |
+| `VALUES` | 1 |
 
 
 ## 3. Direct-SPARQL Final Files
@@ -361,30 +376,40 @@ Path: `code/data/dataset/final/train.json`
 
 #### `query_components`
 
-- Entries with non-empty list: **302**
-- Entries with empty list: **300**
+- Entries with non-empty list: **602**
+- Entries with empty list: **0**
 - Entries missing field: **0**
 
 | param | count |
 |---|---:|
-| `SELECT` | 299 |
-| `FILTER` | 179 |
-| `ORDER_BY` | 146 |
-| `STR` | 130 |
-| `OPTIONAL` | 126 |
-| `COUNT` | 58 |
-| `GROUP_BY` | 38 |
-| `REGEX` | 38 |
-| `NOT_EXISTS` | 23 |
-| `MAX` | 13 |
-| `LIMIT` | 13 |
-| `UNION` | 12 |
-| `BIND` | 11 |
-| `MIN` | 11 |
-| `AVG` | 6 |
+| `SELECT` | 599 |
+| `DISTINCT` | 580 |
+| `FILTER` | 430 |
+| `STR` | 391 |
+| `LCASE` | 364 |
+| `ORDER_BY` | 308 |
+| `OPTIONAL` | 224 |
+| `COUNT` | 118 |
+| `CONTAINS` | 51 |
+| `GROUP_BY` | 40 |
+| `BIND` | 39 |
+| `EXISTS` | 30 |
+| `COALESCE` | 30 |
+| `NOT_EXISTS` | 29 |
+| `REGEX` | 29 |
+| `MAX` | 19 |
+| `MIN` | 15 |
+| `UNION` | 11 |
+| `AVG` | 11 |
+| `IF` | 8 |
+| `YEAR` | 7 |
 | `HAVING` | 6 |
-| `ASK` | 4 |
-| `<empty_list>` | 300 |
+| `ASK` | 3 |
+| `SUM` | 3 |
+| `BOUND` | 3 |
+| `LIMIT` | 2 |
+| `CONSTRUCT` | 2 |
+| `VALUES` | 1 |
 
 ### `train_with_paraphrases.json`
 
@@ -534,30 +559,40 @@ Path: `code/data/dataset/final/train_with_paraphrases.json`
 
 #### `query_components`
 
-- Entries with non-empty list: **604**
-- Entries with empty list: **600**
+- Entries with non-empty list: **1204**
+- Entries with empty list: **0**
 - Entries missing field: **0**
 
 | param | count |
 |---|---:|
-| `SELECT` | 598 |
-| `FILTER` | 358 |
-| `ORDER_BY` | 292 |
-| `STR` | 260 |
-| `OPTIONAL` | 252 |
-| `COUNT` | 116 |
-| `REGEX` | 76 |
-| `GROUP_BY` | 76 |
-| `NOT_EXISTS` | 46 |
-| `LIMIT` | 26 |
-| `MAX` | 26 |
-| `UNION` | 24 |
-| `MIN` | 22 |
-| `BIND` | 22 |
-| `AVG` | 12 |
+| `SELECT` | 1198 |
+| `DISTINCT` | 1160 |
+| `FILTER` | 860 |
+| `STR` | 782 |
+| `LCASE` | 728 |
+| `ORDER_BY` | 616 |
+| `OPTIONAL` | 448 |
+| `COUNT` | 236 |
+| `CONTAINS` | 102 |
+| `GROUP_BY` | 80 |
+| `BIND` | 78 |
+| `COALESCE` | 60 |
+| `EXISTS` | 60 |
+| `REGEX` | 58 |
+| `NOT_EXISTS` | 58 |
+| `MAX` | 38 |
+| `MIN` | 30 |
+| `AVG` | 22 |
+| `UNION` | 22 |
+| `IF` | 16 |
+| `YEAR` | 14 |
 | `HAVING` | 12 |
-| `ASK` | 8 |
-| `<empty_list>` | 600 |
+| `BOUND` | 6 |
+| `SUM` | 6 |
+| `ASK` | 6 |
+| `LIMIT` | 4 |
+| `CONSTRUCT` | 4 |
+| `VALUES` | 2 |
 
 ### `validation.json`
 
@@ -689,26 +724,30 @@ Path: `code/data/dataset/final/validation.json`
 
 #### `query_components`
 
-- Entries with non-empty list: **24**
-- Entries with empty list: **26**
+- Entries with non-empty list: **50**
+- Entries with empty list: **0**
 - Entries missing field: **0**
 
 | param | count |
 |---|---:|
-| `SELECT` | 24 |
-| `FILTER` | 14 |
-| `ORDER_BY` | 12 |
-| `STR` | 12 |
-| `OPTIONAL` | 10 |
-| `REGEX` | 4 |
+| `SELECT` | 50 |
+| `DISTINCT` | 47 |
+| `FILTER` | 34 |
+| `STR` | 33 |
+| `LCASE` | 31 |
+| `ORDER_BY` | 25 |
+| `OPTIONAL` | 17 |
+| `CONTAINS` | 8 |
+| `COUNT` | 6 |
 | `GROUP_BY` | 4 |
 | `MIN` | 3 |
-| `COUNT` | 3 |
+| `BIND` | 3 |
 | `NOT_EXISTS` | 2 |
-| `LIMIT` | 1 |
-| `BIND` | 1 |
-| `MAX` | 1 |
-| `<empty_list>` | 26 |
+| `EXISTS` | 2 |
+| `MAX` | 2 |
+| `REGEX` | 2 |
+| `COALESCE` | 2 |
+| `YEAR` | 1 |
 
 ### `benchmark.json`
 
@@ -848,17 +887,23 @@ Path: `code/data/dataset/final/benchmark.json`
 |---|---:|
 | `SELECT` | 49 |
 | `OPTIONAL` | 40 |
+| `DISTINCT` | 39 |
 | `ORDER_BY` | 36 |
 | `FILTER` | 34 |
 | `GROUP_BY` | 23 |
-| `STR` | 15 |
-| `COUNT` | 9 |
+| `STR` | 14 |
+| `COUNT` | 8 |
+| `LCASE` | 8 |
+| `BIND` | 5 |
 | `NOT_EXISTS` | 4 |
+| `EXISTS` | 4 |
+| `IF` | 3 |
 | `HAVING` | 3 |
 | `ASK` | 3 |
+| `CONSTRUCT` | 2 |
 | `MAX` | 2 |
-| `BIND` | 1 |
-| `IF` | 1 |
+| `YEAR` | 1 |
+| `BOUND` | 1 |
 
 ### `ace_playbook.json`
 
@@ -999,26 +1044,31 @@ Path: `code/data/dataset/final/ace_playbook.json`
 
 #### `query_components`
 
-- Entries with non-empty list: **38**
-- Entries with empty list: **21**
+- Entries with non-empty list: **59**
+- Entries with empty list: **0**
 - Entries missing field: **0**
 
 | param | count |
 |---|---:|
-| `SELECT` | 34 |
-| `ORDER_BY` | 23 |
-| `OPTIONAL` | 22 |
-| `FILTER` | 21 |
-| `STR` | 12 |
-| `NOT_EXISTS` | 4 |
-| `COUNT` | 4 |
+| `SELECT` | 55 |
+| `DISTINCT` | 52 |
+| `FILTER` | 36 |
+| `ORDER_BY` | 35 |
+| `OPTIONAL` | 28 |
+| `STR` | 28 |
+| `LCASE` | 25 |
+| `COUNT` | 8 |
+| `NOT_EXISTS` | 5 |
+| `EXISTS` | 5 |
 | `ASK` | 4 |
 | `GROUP_BY` | 3 |
+| `MIN` | 2 |
+| `BIND` | 2 |
 | `REGEX` | 2 |
-| `MIN` | 1 |
+| `BOUND` | 1 |
+| `CONTAINS` | 1 |
 | `UNION` | 1 |
-| `BIND` | 1 |
-| `<empty_list>` | 21 |
+| `COALESCE` | 1 |
 
 ### `ace_dev_pool.json`
 
@@ -1170,30 +1220,40 @@ Path: `code/data/dataset/final/ace_dev_pool.json`
 
 #### `query_components`
 
-- Entries with non-empty list: **364**
-- Entries with empty list: **347**
+- Entries with non-empty list: **711**
+- Entries with empty list: **0**
 - Entries missing field: **0**
 
 | param | count |
 |---|---:|
-| `SELECT` | 357 |
-| `FILTER` | 214 |
-| `ORDER_BY` | 181 |
-| `OPTIONAL` | 158 |
-| `STR` | 154 |
-| `COUNT` | 65 |
-| `GROUP_BY` | 45 |
-| `REGEX` | 44 |
-| `NOT_EXISTS` | 29 |
-| `MIN` | 15 |
-| `MAX` | 14 |
-| `LIMIT` | 14 |
-| `UNION` | 13 |
-| `BIND` | 13 |
-| `ASK` | 8 |
-| `AVG` | 6 |
+| `SELECT` | 704 |
+| `DISTINCT` | 679 |
+| `FILTER` | 500 |
+| `STR` | 452 |
+| `LCASE` | 420 |
+| `ORDER_BY` | 368 |
+| `OPTIONAL` | 269 |
+| `COUNT` | 132 |
+| `CONTAINS` | 60 |
+| `GROUP_BY` | 47 |
+| `BIND` | 44 |
+| `EXISTS` | 37 |
+| `NOT_EXISTS` | 36 |
+| `COALESCE` | 33 |
+| `REGEX` | 33 |
+| `MAX` | 21 |
+| `MIN` | 20 |
+| `UNION` | 12 |
+| `AVG` | 11 |
+| `YEAR` | 8 |
+| `IF` | 8 |
+| `ASK` | 7 |
 | `HAVING` | 6 |
-| `<empty_list>` | 347 |
+| `BOUND` | 4 |
+| `SUM` | 3 |
+| `LIMIT` | 2 |
+| `CONSTRUCT` | 2 |
+| `VALUES` | 1 |
 
 
 ## 4. PGMR-lite Final Files
@@ -1369,30 +1429,40 @@ Path: `code/data/dataset/pgmr/final/train.json`
 
 #### `query_components`
 
-- Entries with non-empty list: **302**
-- Entries with empty list: **300**
+- Entries with non-empty list: **602**
+- Entries with empty list: **0**
 - Entries missing field: **0**
 
 | param | count |
 |---|---:|
-| `SELECT` | 299 |
-| `FILTER` | 179 |
-| `ORDER_BY` | 146 |
-| `STR` | 130 |
-| `OPTIONAL` | 126 |
-| `COUNT` | 58 |
-| `GROUP_BY` | 38 |
-| `REGEX` | 38 |
-| `NOT_EXISTS` | 23 |
-| `MAX` | 13 |
-| `LIMIT` | 13 |
-| `UNION` | 12 |
-| `BIND` | 11 |
-| `MIN` | 11 |
-| `AVG` | 6 |
+| `SELECT` | 599 |
+| `DISTINCT` | 580 |
+| `FILTER` | 430 |
+| `STR` | 391 |
+| `LCASE` | 364 |
+| `ORDER_BY` | 308 |
+| `OPTIONAL` | 224 |
+| `COUNT` | 118 |
+| `CONTAINS` | 51 |
+| `GROUP_BY` | 40 |
+| `BIND` | 39 |
+| `EXISTS` | 30 |
+| `COALESCE` | 30 |
+| `NOT_EXISTS` | 29 |
+| `REGEX` | 29 |
+| `MAX` | 19 |
+| `MIN` | 15 |
+| `UNION` | 11 |
+| `AVG` | 11 |
+| `IF` | 8 |
+| `YEAR` | 7 |
 | `HAVING` | 6 |
-| `ASK` | 4 |
-| `<empty_list>` | 300 |
+| `ASK` | 3 |
+| `SUM` | 3 |
+| `BOUND` | 3 |
+| `LIMIT` | 2 |
+| `CONSTRUCT` | 2 |
+| `VALUES` | 1 |
 
 #### `pgmr_status`
 
@@ -1609,30 +1679,40 @@ Path: `code/data/dataset/pgmr/final/train_with_paraphrases.json`
 
 #### `query_components`
 
-- Entries with non-empty list: **604**
-- Entries with empty list: **600**
+- Entries with non-empty list: **1204**
+- Entries with empty list: **0**
 - Entries missing field: **0**
 
 | param | count |
 |---|---:|
-| `SELECT` | 598 |
-| `FILTER` | 358 |
-| `ORDER_BY` | 292 |
-| `STR` | 260 |
-| `OPTIONAL` | 252 |
-| `COUNT` | 116 |
-| `REGEX` | 76 |
-| `GROUP_BY` | 76 |
-| `NOT_EXISTS` | 46 |
-| `LIMIT` | 26 |
-| `MAX` | 26 |
-| `UNION` | 24 |
-| `MIN` | 22 |
-| `BIND` | 22 |
-| `AVG` | 12 |
+| `SELECT` | 1198 |
+| `DISTINCT` | 1160 |
+| `FILTER` | 860 |
+| `STR` | 782 |
+| `LCASE` | 728 |
+| `ORDER_BY` | 616 |
+| `OPTIONAL` | 448 |
+| `COUNT` | 236 |
+| `CONTAINS` | 102 |
+| `GROUP_BY` | 80 |
+| `BIND` | 78 |
+| `COALESCE` | 60 |
+| `EXISTS` | 60 |
+| `REGEX` | 58 |
+| `NOT_EXISTS` | 58 |
+| `MAX` | 38 |
+| `MIN` | 30 |
+| `AVG` | 22 |
+| `UNION` | 22 |
+| `IF` | 16 |
+| `YEAR` | 14 |
 | `HAVING` | 12 |
-| `ASK` | 8 |
-| `<empty_list>` | 600 |
+| `BOUND` | 6 |
+| `SUM` | 6 |
+| `ASK` | 6 |
+| `LIMIT` | 4 |
+| `CONSTRUCT` | 4 |
+| `VALUES` | 2 |
 
 #### `pgmr_status`
 
@@ -1831,26 +1911,30 @@ Path: `code/data/dataset/pgmr/final/validation.json`
 
 #### `query_components`
 
-- Entries with non-empty list: **24**
-- Entries with empty list: **26**
+- Entries with non-empty list: **50**
+- Entries with empty list: **0**
 - Entries missing field: **0**
 
 | param | count |
 |---|---:|
-| `SELECT` | 24 |
-| `FILTER` | 14 |
-| `ORDER_BY` | 12 |
-| `STR` | 12 |
-| `OPTIONAL` | 10 |
-| `REGEX` | 4 |
+| `SELECT` | 50 |
+| `DISTINCT` | 47 |
+| `FILTER` | 34 |
+| `STR` | 33 |
+| `LCASE` | 31 |
+| `ORDER_BY` | 25 |
+| `OPTIONAL` | 17 |
+| `CONTAINS` | 8 |
+| `COUNT` | 6 |
 | `GROUP_BY` | 4 |
 | `MIN` | 3 |
-| `COUNT` | 3 |
+| `BIND` | 3 |
 | `NOT_EXISTS` | 2 |
-| `LIMIT` | 1 |
-| `BIND` | 1 |
-| `MAX` | 1 |
-| `<empty_list>` | 26 |
+| `EXISTS` | 2 |
+| `MAX` | 2 |
+| `REGEX` | 2 |
+| `COALESCE` | 2 |
+| `YEAR` | 1 |
 
 #### `pgmr_status`
 
@@ -2057,15 +2141,22 @@ Path: `code/data/dataset/pgmr/final/benchmark.json`
 |---|---:|
 | `SELECT` | 49 |
 | `OPTIONAL` | 40 |
+| `DISTINCT` | 39 |
 | `FILTER` | 36 |
 | `ORDER_BY` | 36 |
 | `GROUP_BY` | 23 |
 | `STR` | 14 |
 | `COUNT` | 10 |
+| `LCASE` | 8 |
+| `BIND` | 5 |
 | `NOT_EXISTS` | 4 |
+| `EXISTS` | 4 |
 | `HAVING` | 3 |
 | `ASK` | 3 |
+| `CONSTRUCT` | 2 |
 | `MAX` | 2 |
+| `IF` | 2 |
+| `YEAR` | 1 |
 | `UNION` | 1 |
 
 #### `pgmr_status`
@@ -2276,26 +2367,31 @@ Path: `code/data/dataset/pgmr/final/ace_playbook.json`
 
 #### `query_components`
 
-- Entries with non-empty list: **38**
-- Entries with empty list: **21**
+- Entries with non-empty list: **59**
+- Entries with empty list: **0**
 - Entries missing field: **0**
 
 | param | count |
 |---|---:|
-| `SELECT` | 34 |
-| `ORDER_BY` | 23 |
-| `OPTIONAL` | 22 |
-| `FILTER` | 19 |
-| `STR` | 13 |
-| `NOT_EXISTS` | 4 |
+| `SELECT` | 55 |
+| `DISTINCT` | 52 |
+| `ORDER_BY` | 35 |
+| `FILTER` | 34 |
+| `OPTIONAL` | 28 |
+| `STR` | 28 |
+| `LCASE` | 25 |
+| `COUNT` | 6 |
+| `NOT_EXISTS` | 5 |
+| `EXISTS` | 5 |
 | `ASK` | 4 |
-| `COUNT` | 3 |
 | `GROUP_BY` | 3 |
+| `BOUND` | 2 |
+| `MIN` | 2 |
 | `REGEX` | 2 |
 | `BIND` | 2 |
-| `MIN` | 1 |
+| `CONTAINS` | 1 |
+| `COALESCE` | 1 |
 | `IF` | 1 |
-| `<empty_list>` | 21 |
 
 #### `pgmr_status`
 
@@ -2515,31 +2611,40 @@ Path: `code/data/dataset/pgmr/final/ace_dev_pool.json`
 
 #### `query_components`
 
-- Entries with non-empty list: **364**
-- Entries with empty list: **347**
+- Entries with non-empty list: **711**
+- Entries with empty list: **0**
 - Entries missing field: **0**
 
 | param | count |
 |---|---:|
-| `SELECT` | 357 |
-| `FILTER` | 212 |
-| `ORDER_BY` | 181 |
-| `OPTIONAL` | 158 |
-| `STR` | 155 |
-| `COUNT` | 64 |
-| `GROUP_BY` | 45 |
-| `REGEX` | 44 |
-| `NOT_EXISTS` | 29 |
-| `MIN` | 15 |
-| `MAX` | 14 |
-| `BIND` | 14 |
-| `LIMIT` | 14 |
-| `UNION` | 12 |
-| `ASK` | 8 |
-| `AVG` | 6 |
+| `SELECT` | 704 |
+| `DISTINCT` | 679 |
+| `FILTER` | 498 |
+| `STR` | 452 |
+| `LCASE` | 420 |
+| `ORDER_BY` | 368 |
+| `OPTIONAL` | 269 |
+| `COUNT` | 130 |
+| `CONTAINS` | 60 |
+| `GROUP_BY` | 47 |
+| `BIND` | 44 |
+| `EXISTS` | 37 |
+| `NOT_EXISTS` | 36 |
+| `COALESCE` | 33 |
+| `REGEX` | 33 |
+| `MAX` | 21 |
+| `MIN` | 20 |
+| `UNION` | 11 |
+| `AVG` | 11 |
+| `IF` | 9 |
+| `YEAR` | 8 |
+| `ASK` | 7 |
 | `HAVING` | 6 |
-| `IF` | 1 |
-| `<empty_list>` | 347 |
+| `BOUND` | 5 |
+| `SUM` | 3 |
+| `LIMIT` | 2 |
+| `CONSTRUCT` | 2 |
+| `VALUES` | 1 |
 
 #### `pgmr_status`
 
@@ -2609,8 +2714,8 @@ _Keine parame gefunden._
 
 ## 5. Interpretation Notes
 
-- The master file should be used for global statements about the dataset, e.g., total size, family distribution, sources, answer types, and complexity distribution.
-- The final Direct-SPARQL files should be described for the actual experimental use.
-- `train_with_paraphrases.json` is a training variant with additional linguistic variants and should not be counted as an additional amount of original questions.
-- `ace_dev_pool.json` is an ACE development pool and may overlap with other files. The overlap table shows which files contain common IDs.
-- The PGMR-lite files reflect the experimental files with additional placeholder-based target representation.
+- The master file should be used for global statements about the dataset, such as total size, family distribution, sources, answer types, and complexity distribution.
+- The final Direct-SPARQL files should be described for actual experimental use.
+- `train_with_paraphrases.json` is a training variant with additional linguistic variants and should not be counted as an additional set of original questions.
+- `ace_dev_pool.json` is an ACE development pool and may overlap with other files. The overlap table shows which files share IDs.
+- The PGMR-lite files mirror the experimental files with an additional placeholder-based target representation.

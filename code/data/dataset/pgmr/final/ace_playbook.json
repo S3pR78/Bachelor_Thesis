@@ -66,8 +66,9 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "ORDER_BY"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "low",
@@ -112,8 +113,9 @@
     "number_of_patterns": 9,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "ORDER_BY"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "high",
@@ -158,8 +160,9 @@
     "number_of_patterns": 15,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "ORDER_BY"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -255,8 +258,9 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "ORDER_BY"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -300,8 +304,9 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "ORDER_BY"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "high",
@@ -345,8 +350,9 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "ORDER_BY"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "low",
@@ -390,8 +396,9 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "ORDER_BY"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -435,8 +442,9 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "ORDER_BY"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -483,10 +491,12 @@
     "number_of_patterns": 9,
     "query_components": [
       "SELECT",
-      "FILTER",
-      "ORDER_BY",
+      "DISTINCT",
       "OPTIONAL",
-      "NOT_EXISTS"
+      "FILTER",
+      "NOT_EXISTS",
+      "EXISTS",
+      "ORDER_BY"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "low",
@@ -535,10 +545,12 @@
     "number_of_patterns": 10,
     "query_components": [
       "SELECT",
-      "FILTER",
-      "ORDER_BY",
+      "DISTINCT",
       "OPTIONAL",
-      "NOT_EXISTS"
+      "FILTER",
+      "NOT_EXISTS",
+      "EXISTS",
+      "ORDER_BY"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "low",
@@ -587,9 +599,11 @@
     "number_of_patterns": 11,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
-      "ORDER_BY",
-      "NOT_EXISTS"
+      "NOT_EXISTS",
+      "EXISTS",
+      "ORDER_BY"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "low",
@@ -639,10 +653,13 @@
     "number_of_patterns": 12,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "STR",
       "ORDER_BY",
-      "OPTIONAL"
+      "STR",
+      "LCASE",
+      "BOUND"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "low",
@@ -692,11 +709,12 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "ORDER_BY",
       "GROUP_BY",
-      "OPTIONAL"
+      "ORDER_BY",
+      "COUNT"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -743,8 +761,9 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "ORDER_BY"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "low",
@@ -791,7 +810,8 @@
     "query_components": [
       "ASK",
       "FILTER",
-      "STR"
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "low",
@@ -837,7 +857,8 @@
     "query_components": [
       "ASK",
       "FILTER",
-      "STR"
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "low",
@@ -885,7 +906,10 @@
     "query_components": [
       "ASK",
       "FILTER",
-      "STR"
+      "NOT_EXISTS",
+      "EXISTS",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "low",
@@ -969,7 +993,14 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -1012,7 +1043,14 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -1061,7 +1099,11 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -1119,7 +1161,10 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
-      "MIN"
+      "FILTER",
+      "MIN",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -1160,7 +1205,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -1199,7 +1251,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -1242,7 +1301,14 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "COUNT",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -1289,9 +1355,12 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "COUNT",
+      "DISTINCT",
       "FILTER",
-      "STR"
+      "COUNT",
+      "STR",
+      "LCASE",
+      "CONTAINS"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -1341,10 +1410,14 @@
     "number_of_patterns": 13,
     "query_components": [
       "SELECT",
-      "FILTER",
-      "STR",
+      "DISTINCT",
       "OPTIONAL",
-      "NOT_EXISTS"
+      "FILTER",
+      "NOT_EXISTS",
+      "EXISTS",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -1400,7 +1473,15 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -1445,7 +1526,15 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -1490,7 +1579,15 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -1533,7 +1630,12 @@
     "query_shape": "tree",
     "number_of_patterns": 9,
     "query_components": [
-      "SELECT"
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
@@ -1582,8 +1684,12 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "OPTIONAL"
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -1622,7 +1728,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -1668,7 +1781,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -1711,7 +1831,14 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -1752,6 +1879,7 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "ORDER_BY"
     ],
     "complexity_level": "low",
@@ -1805,7 +1933,11 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "ORDER_BY"
+      "DISTINCT",
+      "FILTER",
+      "ORDER_BY",
+      "STR",
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -1834,7 +1966,6 @@
     ],
     "pgmr_unmapped_terms": []
   },
-
   {
     "id": "336",
     "source_dataset": "Generated_NLP4RE",
@@ -1853,6 +1984,7 @@
     "number_of_patterns": 4,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER"
     ],
     "complexity_level": "low",
@@ -1894,7 +2026,10 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -1934,7 +2069,10 @@
     "answer_type": "date",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -1974,7 +2112,11 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "MIN"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -2013,7 +2155,10 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -2051,7 +2196,11 @@
     "answer_type": "number",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "COUNT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -2094,6 +2243,7 @@
     "number_of_patterns": 5,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "ORDER_BY"
     ],
     "complexity_level": "low",
@@ -2140,11 +2290,13 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
+      "ORDER_BY",
       "REGEX",
       "STR",
-      "ORDER_BY",
-      "OPTIONAL"
+      "LCASE"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "medium",
@@ -2186,7 +2338,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -2227,7 +2383,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -2270,7 +2430,11 @@
     "answer_type": "resource",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "OPTIONAL"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -2316,9 +2480,11 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
       "STR",
-      "OPTIONAL"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -2375,9 +2541,10 @@
     "number_of_patterns": 7,
     "query_components": [
       "SELECT",
+      "DISTINCT",
+      "OPTIONAL",
       "FILTER",
-      "STR",
-      "OPTIONAL"
+      "STR"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -2424,8 +2591,9 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "OPTIONAL"
+      "DISTINCT",
+      "OPTIONAL",
+      "ORDER_BY"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -2466,7 +2634,11 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT",
+      "ORDER_BY"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -2504,7 +2676,10 @@
     "answer_type": "string",
     "query_shape": "edge",
     "number_of_patterns": 1,
-    "query_components": [],
+    "query_components": [
+      "SELECT",
+      "DISTINCT"
+    ],
     "complexity_level": "low",
     "ambiguity_risk": "medium",
     "lexical_gap_risk": "medium",
@@ -2548,10 +2723,12 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
+      "DISTINCT",
       "FILTER",
+      "ORDER_BY",
       "REGEX",
       "STR",
-      "ORDER_BY"
+      "LCASE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -2605,9 +2782,11 @@
     "number_of_patterns": 8,
     "query_components": [
       "SELECT",
-      "STR",
+      "DISTINCT",
       "OPTIONAL",
-      "BIND"
+      "BIND",
+      "STR",
+      "COALESCE"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "medium",
@@ -2636,7 +2815,7 @@
     ],
     "pgmr_unmapped_terms": []
   },
-    {
+  {
     "id": "816",
     "source_dataset": "EmpiRE_Compass",
     "source_id": "nlp4re-0009",
@@ -2657,13 +2836,13 @@
     "number_of_patterns": 57,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
-      "GROUP_BY",
+      "DISTINCT",
       "OPTIONAL",
-      "STR",
       "BIND",
-      "IF",
-      "COUNT"
+      "GROUP_BY",
+      "ORDER_BY",
+      "BOUND",
+      "IF"
     ],
     "complexity_level": "high",
     "ambiguity_risk": "high",
@@ -2741,7 +2920,7 @@
     ],
     "pgmr_unmapped_terms": []
   },
-    {
+  {
     "id": "776",
     "source_dataset": "Hybrid_NLP4RE",
     "source_id": "nlp4re-0009",
@@ -2764,9 +2943,10 @@
     "number_of_patterns": 6,
     "query_components": [
       "SELECT",
-      "ORDER_BY",
+      "DISTINCT",
+      "OPTIONAL",
       "GROUP_BY",
-      "OPTIONAL"
+      "ORDER_BY"
     ],
     "complexity_level": "medium",
     "ambiguity_risk": "low",
