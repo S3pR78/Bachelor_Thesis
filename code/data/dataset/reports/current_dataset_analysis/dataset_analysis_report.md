@@ -1245,7 +1245,7 @@ Path: `code/data/dataset/final/ace_dev_pool.json`
 | `MIN` | 20 |
 | `UNION` | 12 |
 | `AVG` | 11 |
-| `YEAR` | 8 |
+ 
 | `IF` | 8 |
 | `ASK` | 7 |
 | `HAVING` | 6 |
@@ -2637,7 +2637,6 @@ Path: `code/data/dataset/pgmr/final/ace_dev_pool.json`
 | `UNION` | 11 |
 | `AVG` | 11 |
 | `IF` | 9 |
-| `YEAR` | 8 |
 | `ASK` | 7 |
 | `HAVING` | 6 |
 | `BOUND` | 5 |
