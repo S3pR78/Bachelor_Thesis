@@ -1,0 +1,1 @@
+# Qwen PGMR QLoRA with PGMR as prompt mode and pgmr_lite as prediction format. and similarity mapping enabled.

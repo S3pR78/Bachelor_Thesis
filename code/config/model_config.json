@@ -123,7 +123,7 @@
       },
       "adapter_path": "code/models/Qwen25_Coder_7B_Instruct/finetuned/pgmr_qlora_3ep/20260505_101002/checkpoint-302"
     },
-    "qwen25_coder_7b_empire_compass": {
+    "qwen25_coder_7b_empire_compass_qlora": {
       "provider": "huggingface",
       "model_id": "Qwen/Qwen2.5-Coder-7B-Instruct",
       "variant": "original",
