@@ -38,6 +38,8 @@ The family-specific base prompt provided grounding in the relevant ORKG template
 
 A key design choice was that generated candidate entries initially used a minimal format. Rather than asking the model to generate all metadata fields directly, candidate entries focused on core fields such as `id`, `question`, `gold_sparql`, `family`, and `answer_type`. This reduced the risk of mixing query generation quality with unreliable metadata labeling. Metadata enrichment was intentionally postponed to later processing steps.
 
+The large-scale candidate generation was performed through the OpenAI API using the configured `GPT-5.4-mini` model. The API key was provided through the local environment configuration and was not stored in the dataset files. This made it possible to generate larger batches in a reproducible script-based workflow while keeping credentials separate from the repository.
+
 ### 2.4 Batch- and Wave-Based Expansion
 
 Expansion was performed in multiple batches and later in larger waves. Some batches focused on standard coverage-oriented examples, while others emphasized more difficult cases, multi-hop structures, missing-information questions, comparisons, ranking, non-factoid questions, or special SPARQL components.
@@ -59,6 +61,8 @@ Generated candidates were categorized according to endpoint behavior:
 This distinction was useful because empty-result queries are not necessarily syntactically wrong, but they are weaker benchmark items. The green/yellow distinction therefore provided a more nuanced quality signal than a simple valid/invalid decision.
 
 Across the scaled generation runs, the selection stage produced 468 green candidates, 132 yellow candidates, and 0 red candidates. This indicated that the expansion process produced a large number of executable candidates, while still leaving room for quality-based selection.
+
+This execution-based filtering also affected some initially strong source candidates. A small number of EmpiRE-Compass and hybrid entries were removed or excluded from the final benchmark-oriented files because their gold queries could not be executed reliably against the ORKG endpoint. In some cases, the issue was not the conceptual relevance of the question, but the practical executability of the SPARQL query, for example when queries became too long for stable endpoint execution. Therefore, endpoint behavior became an additional practical quality criterion during dataset curation.
 
 ### 2.6 SPARQL Normalization and Exact Deduplication
 
@@ -94,7 +98,8 @@ This caveat is important because it avoids giving the impression that all metada
 
 After the dataset had been cleaned and validated, one paraphrased question was generated for each entry. This step was introduced only after stabilization, because generating paraphrases earlier would have risked propagating noise from unreviewed examples.
 
-The paraphrase generation followed strict constraints: the paraphrase had to preserve meaning, answer scope, constraints, negation, comparison, ranking, and missing-information logic. A smaller sample run was used first to identify issues such as identical paraphrases, incomplete responses, and punctuation mismatches. The tool was then improved using retries, validation rules, adjusted output-token limits, and cost tracking.
+The paraphrase generation followed strict constraints: the paraphrase had to preserve meaning, answer scope, constraints, negation, comparison, ranking, and missing-information logic.
+After generation, the paraphrases were reviewed to check whether the semantic meaning of the original question was preserved. This was important because even small wording changes can alter the intended answer scope in Text-to-SPARQL tasks. Paraphrases that changed the meaning, removed constraints, or introduced a different interpretation had to be corrected or rejected. A smaller sample run was used first to identify issues such as identical paraphrases, incomplete responses, and punctuation mismatches. The tool was then improved using retries, validation rules, adjusted output-token limits, and cost tracking.
 
 The final master dataset contains 762 entries and 762 paraphrase strings. Earlier notes recorded that 761 paraphrases were generated automatically and one required manual completion. In the current consolidated dataset, every master entry contains a paraphrased question.
 
@@ -219,7 +224,7 @@ The field `special_types` provides multi-label annotations for recurring query p
 |---|---:|
 | Entries with non-empty list | 497 |
 | Entries with empty list | 265 |
-| Entries missing field | 0 |
+
 
 The following table reports label frequencies. Since `special_types` is a multi-label field, the counts are not mutually exclusive classes. A single entry can contribute to several labels.
 
@@ -277,7 +282,6 @@ The following table reports component label frequencies. Like `special_types`, t
 | `IF` | 11 |
 | `AVG` | 11 |
 | `ASK` | 10 |
-| `YEAR` | 9 |
 | `HAVING` | 9 |
 | `BOUND` | 5 |
 | `CONSTRUCT` | 4 |
