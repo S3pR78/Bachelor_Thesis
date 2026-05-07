@@ -1,0 +1,1 @@
+# Mistral original Empire Compass as prompt and sparql as prediction format, evaluated on final benchmark.
