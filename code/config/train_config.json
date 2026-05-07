@@ -37,6 +37,42 @@
         "run_name": "pgmr_mini_full_finetune_15ep"
       }
     },
+    "t5_base_pgmr_mini_full_finetune_30ep": {
+      "model": "t5_base",
+      "method": "full_finetune",
+      "task": "pgmr_mini",
+      "dataset": {
+        "train_path": "code/data/dataset/pgmr/final/train_with_paraphrases.json",
+        "validation_path": "code/data/dataset/pgmr/final/validation.json",
+        "target_field": "gold_pgmr_sparql",
+        "filters": {
+          "pgmr_status": "ok"
+        }
+      },
+      "prompt": {
+        "mode": "pgmr_mini"
+      },
+      "training": {
+        "num_train_epochs": 30,
+        "learning_rate": 5e-05,
+        "per_device_train_batch_size": 4,
+        "per_device_eval_batch_size": 4,
+        "gradient_accumulation_steps": 2,
+        "max_source_length": 768,
+        "max_target_length": 512,
+        "logging_steps": 25,
+        "evaluation_strategy": "epoch",
+        "save_strategy": "epoch",
+        "save_total_limit": 2,
+        "fp16": false,
+        "bf16": true,
+        "seed": 42
+      },
+      "output": {
+        "base_dir": "code/models/google-t5_t5-base/finetuned",
+        "run_name": "pgmr_mini_full_finetune_30ep"
+      }
+    },
     "qwen25_coder_7b_pgmr_qlora_3ep": {
       "model": "qwen25_coder_7b_instruct",
       "method": "qlora",
