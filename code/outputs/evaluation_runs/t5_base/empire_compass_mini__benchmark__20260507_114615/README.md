@@ -1,0 +1,1 @@
+# T5 base original with empire_compass_mini as prompt
