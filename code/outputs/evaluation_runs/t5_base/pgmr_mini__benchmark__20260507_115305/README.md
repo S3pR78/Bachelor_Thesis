@@ -1,0 +1,1 @@
+# T5 base original with PGMR-mini as prompt mode and pgmr_lite as prediction format, with similarity mapping for PGMR and post-processing for PGMR.

@@ -1,1 +1,1 @@
-# T5 base original with empire_compass_mini as prompt
+# T5 base original with empire_compass_mini as prompt mode and empire_compass_mini and sparql as prediction format, without similarity mapping for PGMR.
