@@ -1,0 +1,1 @@
+# Qwen 2.5 original with PGMR as prompt mode and pgmr_lite as prediction format, with similarity mapping for PGMR.
