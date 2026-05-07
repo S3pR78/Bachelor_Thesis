@@ -8,6 +8,7 @@ from src.ace.online.reflector import (
     OnlineAceReflector,
     OnlineReflectorConfig,
     build_online_reflection_prompt,
+    is_concrete_online_rule,
     normalize_online_rule,
 )
 
@@ -93,6 +94,24 @@ def test_normalize_online_rule_fills_required_fields() -> None:
     assert rule["source"]["type"] == "online_llm_reflector"
 
 
+def test_normalize_online_rule_backfills_missing_title_and_content() -> None:
+    rule = normalize_online_rule(
+        {
+            "category": "predicate_ref_mismatch",
+            "positive_pattern": "?contribution pgmr:nlp_data_type ?type .",
+            "priority": 80,
+        },
+        family="nlp4re",
+        mode="pgmr_lite",
+        source_item_id="item-1",
+        source_iteration=0,
+    )
+
+    assert rule["title"] == "Use concrete query pattern"
+    assert rule["content"] == "?contribution pgmr:nlp_data_type ?type ."
+    assert rule["id"]
+
+
 def test_online_reflector_uses_injected_completion_without_openai_call(
     tmp_path: Path,
 ) -> None:
@@ -146,3 +165,95 @@ def test_online_reflector_uses_injected_completion_without_openai_call(
         "total_tokens": 168,
     }
     assert result["model"] == "gpt_4o_mini"
+
+
+def test_is_concrete_online_rule_requires_pattern_or_aggregation() -> None:
+    assert is_concrete_online_rule(
+        {
+            "title": "Use baseline path",
+            "content": "Add ?evaluation pgmr:baseline ?baseline .",
+        }
+    )
+    assert is_concrete_online_rule(
+        {
+            "title": "Count papers",
+            "content": "Use COUNT(?paper) with GROUP BY ?type.",
+        }
+    )
+    assert not is_concrete_online_rule(
+        {
+            "title": "Clarify baseline comparison requirements.",
+            "content": "Ensure requirements are clearly defined.",
+        }
+    )
+
+
+def test_online_reflector_regenerates_once_when_first_rule_is_vague(
+    tmp_path: Path,
+) -> None:
+    calls: list[dict] = []
+
+    def fake_completion(**kwargs) -> dict:
+        calls.append(kwargs)
+        if len(calls) == 1:
+            return {
+                "text": json.dumps(
+                    {
+                        "title": "Clarify baseline comparison requirements.",
+                        "content": "Ensure the baseline requirements are clear.",
+                        "category": "extraction",
+                    }
+                ),
+                "usage": {"prompt_tokens": 10, "completion_tokens": 5, "total_tokens": 15},
+            }
+        return {
+            "text": json.dumps(
+                {
+                    "title": "Count papers by type",
+                    "content": "For how-many questions, use COUNT(?paper) with GROUP BY ?type.",
+                    "category": "extraction",
+                }
+            ),
+            "usage": {"prompt_tokens": 12, "completion_tokens": 6, "total_tokens": 18},
+        }
+
+    reflector = OnlineAceReflector(
+        OnlineReflectorConfig(reflector_model="gpt_4o_mini"),
+        completion_fn=fake_completion,
+    )
+    result = reflector.reflect(_reflection_input(tmp_path))
+
+    assert len(calls) == 2
+    assert result["rule"]["content"].startswith("For how-many questions")
+    assert result["usage"] == {
+        "prompt_tokens": 22,
+        "completion_tokens": 11,
+        "total_tokens": 33,
+    }
+
+
+def test_online_reflector_returns_fallback_rule_instead_of_raising_on_repeated_vague_output(
+    tmp_path: Path,
+) -> None:
+    def fake_completion(**kwargs) -> dict:
+        return {
+            "text": json.dumps(
+                {
+                    "title": "Clarify requirements",
+                    "content": "Ensure requirements are clear.",
+                    "category": "extraction",
+                }
+            ),
+            "usage": {"prompt_tokens": 7, "completion_tokens": 3, "total_tokens": 10},
+        }
+
+    reflector = OnlineAceReflector(
+        OnlineReflectorConfig(reflector_model="gpt_4o_mini"),
+        completion_fn=fake_completion,
+    )
+    result = reflector.reflect(_reflection_input(tmp_path))
+
+    assert result.get("fallback_used") is True
+    assert "rule" in result
+    assert result["rule"]["title"]
+    assert result["rule"]["content"]

@@ -85,7 +85,18 @@ def format_iteration_report(attempt: dict[str, Any]) -> str:
             f"    Error category: {_value(attempt.get('error_category'), 'none')}",
             f"    Reflection used: {_fmt_bool(attempt.get('reflection_used'))}",
             f"    New rule added: {_fmt_bool(attempt.get('new_rule_added'))}",
+            f"    Rule merged: {_fmt_bool(attempt.get('rule_merged'))}",
+            (
+                "    Quality answer metric: "
+                f"{_value(attempt.get('quality_score_answer_metric_used'), 'none')}"
+            ),
             f"    Quality score: {_fmt_float(attempt.get('quality_score'))}",
+            f"    Quality delta: {_fmt_float(attempt.get('quality_score_delta'))}",
+            (
+                "    Proposed rule merged into: "
+                f"{_value(attempt.get('merged_into_rule_id'), 'none')}"
+            ),
+            f"    Merge reason: {_value(attempt.get('merge_reason'), 'none')}",
         ]
     )
 
@@ -124,9 +135,13 @@ def format_final_report(summary: dict[str, Any]) -> str:
             ),
             f"  Still unsolved: {int(summary.get('still_unsolved') or 0)}",
             f"  Rules added: {int(summary.get('rules_added') or 0)}",
+            f"  Rules proposed: {int(summary.get('rules_proposed') or 0)}",
+            f"  Rules merged: {int(summary.get('rules_merged') or 0)}",
+            f"  Duplicate rule count: {int(summary.get('duplicate_rule_count') or 0)}",
             f"  Rules kept enabled: {int(summary.get('rules_enabled') or 0)}",
             f"  Rules disabled: {int(summary.get('rules_disabled') or 0)}",
             f"  Rules deleted: {int(summary.get('rules_deleted') or 0)}",
+            f"  Top merged rules: {_format_top_merged_rules(summary.get('top_merged_rules'))}",
             f"  Top helpful rules: {_format_top_rules(summary.get('top_helpful_rules'))}",
             f"  Top harmful rules: {_format_top_rules(summary.get('top_harmful_rules'))}",
             (
@@ -156,6 +171,17 @@ def _format_top_rules(rules: Any) -> str:
 def _format_estimated_cost(value: Any) -> str:
     if value is None:
         return "unknown"
+
+
+def _format_top_merged_rules(rules: Any) -> str:
+    if not isinstance(rules, list) or not rules:
+        return "none"
+    formatted = []
+    for rule in rules[:5]:
+        if not isinstance(rule, dict):
+            continue
+        formatted.append(f"{rule.get('id')} ({int(rule.get('merged_count') or 0)})")
+    return ", ".join(formatted) if formatted else "none"
     try:
         return f"${float(value):.4f}"
     except (TypeError, ValueError):
@@ -221,4 +247,3 @@ class OnlineAceReporter:
 
     def final(self, summary: dict[str, Any]) -> None:
         self.emit(format_final_report(summary))
-

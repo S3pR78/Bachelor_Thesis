@@ -128,3 +128,146 @@ def test_context_deletes_harmful_rule_when_configured(tmp_path: Path) -> None:
     assert context.deleted_rule_ids() == ["bad"]
     assert context.to_playbook_dict()["deleted_rules"][0]["id"] == "bad"
 
+
+def test_context_merges_very_similar_enabled_rules_instead_of_adding_duplicate(
+    tmp_path: Path,
+) -> None:
+    context = OnlineAceContext.load(
+        initial_playbook_path=tmp_path / "missing.json",
+        family="nlp4re",
+        mode="pgmr_lite",
+    )
+    context.add_rule(
+        {
+            "id": "baseline_path_v1",
+            "family": "nlp4re",
+            "mode": "pgmr_lite",
+            "category": "extraction",
+            "title": "Use baseline type path",
+            "content": "Use ?evaluation pgmr:baseline ?baseline . then ?baseline pgmr:baseline_type ?type .",
+            "priority": 80,
+            "enabled": True,
+            "source_item_id": "item-1",
+            "source_iteration": 0,
+        }
+    )
+
+    merged = context.add_rule(
+        {
+            "id": "baseline_path_v2",
+            "family": "nlp4re",
+            "mode": "pgmr_lite",
+            "category": "extraction",
+            "title": "Use baseline-type path",
+            "content": "Use ?evaluation pgmr:baseline ?baseline . and ?baseline pgmr:baseline_type ?type .",
+            "priority": 85,
+            "enabled": True,
+            "source_item_id": "item-2",
+            "source_iteration": 1,
+        }
+    )
+
+    assert len(context.playbook.bullets) == 1
+    assert merged.id == "baseline_path_v1"
+    assert merged.priority == 85
+    assert merged.source_item_id == "item-2"
+    assert merged.source_iteration == 1
+
+
+def test_context_merges_by_same_pgmr_placeholder_set(tmp_path: Path) -> None:
+    context = OnlineAceContext.load(
+        initial_playbook_path=tmp_path / "missing.json",
+        family="nlp4re",
+        mode="pgmr_lite",
+    )
+    context.add_rule(
+        {
+            "id": "rule_a",
+            "family": "nlp4re",
+            "mode": "pgmr_lite",
+            "category": "projection",
+            "title": "Use NLP data type",
+            "content": "Use pgmr:nlp_data_type in projection logic.",
+            "priority": 80,
+            "enabled": True,
+        }
+    )
+    result = context.add_rule_with_result(
+        {
+            "id": "rule_b",
+            "family": "nlp4re",
+            "mode": "pgmr_lite",
+            "category": "projection",
+            "title": "Do not invent type placeholder",
+            "content": "Avoid wrong projection and use pgmr:nlp_data_type.",
+            "priority": 82,
+            "enabled": True,
+        }
+    )
+    assert result["rule_merged"] is True
+    assert result["merge_reason"] == "same PGMR placeholder set"
+    assert len(context.playbook.bullets) == 1
+
+
+def test_context_does_not_merge_unrelated_rules(tmp_path: Path) -> None:
+    context = OnlineAceContext.load(
+        initial_playbook_path=tmp_path / "missing.json",
+        family="nlp4re",
+        mode="pgmr_lite",
+    )
+    context.add_rule(_rule("one", priority=80))
+    result = context.add_rule_with_result(
+        {
+            "id": "two",
+            "family": "nlp4re",
+            "mode": "pgmr_lite",
+            "category": "aggregation",
+            "title": "Use COUNT for frequency questions",
+            "content": "Use COUNT(?paper) GROUP BY ?type for how-many questions.",
+            "priority": 85,
+            "enabled": True,
+        }
+    )
+    assert result["new_rule_added"] is True
+    assert result["rule_merged"] is False
+    assert len(context.playbook.bullets) == 2
+
+
+def test_context_merge_updates_evidence_and_pattern(tmp_path: Path) -> None:
+    context = OnlineAceContext.load(
+        initial_playbook_path=tmp_path / "missing.json",
+        family="nlp4re",
+        mode="pgmr_lite",
+    )
+    context.add_rule(
+        {
+            "id": "base",
+            "family": "nlp4re",
+            "mode": "pgmr_lite",
+            "category": "projection",
+            "title": "Use time variable",
+            "content": "Focus on ?dataProductionTime.",
+            "positive_pattern": None,
+            "priority": 80,
+            "enabled": True,
+            "source_item_id": "item-1",
+        }
+    )
+    merged = context.add_rule_with_result(
+        {
+            "id": "new",
+            "family": "nlp4re",
+            "mode": "pgmr_lite",
+            "category": "projection",
+            "title": "Use time variable path",
+            "content": "Focus on ?dataProductionTime and avoid ?nlpDataset projection.",
+            "positive_pattern": "?contribution pgmr:nlp_data_production_time ?dataProductionTime .",
+            "priority": 81,
+            "enabled": True,
+            "source_item_id": "item-2",
+        }
+    )
+    active = merged["rule"]
+    assert active.id == "base"
+    assert active.positive_pattern == "?contribution pgmr:nlp_data_production_time ?dataProductionTime ."
+    assert "item-2" in active.evidence_item_ids

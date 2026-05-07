@@ -123,7 +123,11 @@ def build_empty_summary(
         "solved_initially": 0,
         "solved_after_reflection": 0,
         "still_unsolved": 0,
+        "rules_proposed": 0,
         "rules_added": 0,
+        "rules_merged": 0,
+        "duplicate_rule_count": 0,
+        "top_merged_rules": [],
         "rules_enabled": 0,
         "rules_disabled": 0,
         "rules_deleted": 0,
@@ -134,4 +138,3 @@ def build_empty_summary(
         "improvements": {},
         "cost_summary": cost_summary,
     }
-

@@ -3,18 +3,22 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from difflib import SequenceMatcher
 from pathlib import Path
+import re
 from typing import Any
 
 from src.ace.playbook import (
     AceBullet,
     AcePlaybook,
     load_or_empty_playbook,
+    normalize_text,
     utc_now_iso,
 )
 
 
 HARMFUL_DISABLED_REASON = "harmful_in_online_ace"
+SIMILAR_RULE_THRESHOLD = 0.82
 
 
 @dataclass
@@ -93,6 +97,10 @@ class OnlineAceContext:
         ]
 
     def add_rule(self, rule_payload: dict[str, Any]) -> AceBullet:
+        """Backwards-compatible wrapper returning the active rule."""
+        return self.add_rule_with_result(rule_payload)["rule"]
+
+    def add_rule_with_result(self, rule_payload: dict[str, Any]) -> dict[str, Any]:
         """Add or merge one reflector-proposed rule into the active playbook."""
         bullet = AceBullet.from_dict(
             {
@@ -105,26 +113,54 @@ class OnlineAceContext:
             }
         )
 
+        merge_reason: str | None = None
         existing = self._find_rule(bullet.id)
+        if existing is None:
+            existing, merge_reason = self._find_similar_enabled_rule_with_reason(bullet)
         if existing is None:
             self.playbook.bullets.append(bullet)
             added = bullet
+            new_rule_added = True
+            rule_merged = False
         else:
             existing.title = bullet.title
             existing.content = bullet.content
             existing.category = bullet.category
             existing.priority = max(existing.priority, bullet.priority)
             existing.enabled = bullet.enabled
-            existing.positive_pattern = (
-                bullet.positive_pattern or existing.positive_pattern
+            if self._should_prefer_new_pattern(
+                existing.positive_pattern, bullet.positive_pattern
+            ):
+                existing.positive_pattern = bullet.positive_pattern
+            if not existing.avoid and bullet.avoid:
+                existing.avoid = bullet.avoid
+            source_item_id = bullet.source_item_id
+            if source_item_id and source_item_id not in existing.evidence_item_ids:
+                existing.evidence_item_ids.append(source_item_id)
+            existing.source_item_id = bullet.source_item_id or existing.source_item_id
+            existing.source_iteration = (
+                bullet.source_iteration
+                if bullet.source_iteration is not None
+                else existing.source_iteration
             )
-            existing.avoid = bullet.avoid or existing.avoid
+            existing.source = {**existing.source, **bullet.source}
             existing.updated_at_utc = utc_now_iso()
             added = existing
+            new_rule_added = False
+            rule_merged = True
 
         self.playbook.updated_at_utc = utc_now_iso()
         self.playbook.deduplicate()
-        return self._find_rule(added.id) or added
+        active = self._find_rule(added.id) or added
+        return {
+            "rule": active,
+            "new_rule_added": new_rule_added,
+            "rule_merged": rule_merged,
+            "merged_into_rule_id": active.id if rule_merged else None,
+            "merge_reason": merge_reason,
+            "proposed_rule": bullet.to_dict(),
+            "active_rule": active.to_dict(),
+        }
 
     def mark_helpful(
         self,
@@ -207,3 +243,70 @@ class OnlineAceContext:
         if rule is None:
             raise KeyError(f"Unknown ACE rule id: {rule_id}")
         return rule
+
+    def _find_similar_enabled_rule_with_reason(
+        self,
+        candidate: AceBullet,
+    ) -> tuple[AceBullet | None, str | None]:
+        candidate_text = self._normalized_rule_text(candidate)
+        candidate_placeholders = self._extract_pgmr_tokens(candidate)
+        candidate_main_var = self._extract_main_var(candidate)
+        for rule in self.playbook.bullets:
+            if not rule.enabled:
+                continue
+            if normalize_text(rule.family) != normalize_text(candidate.family):
+                continue
+            if normalize_text(rule.mode) != normalize_text(candidate.mode):
+                continue
+            if normalize_text(rule.category) != normalize_text(candidate.category):
+                continue
+            existing_text = self._normalized_rule_text(rule)
+            similarity = SequenceMatcher(None, candidate_text, existing_text).ratio()
+            if similarity >= SIMILAR_RULE_THRESHOLD:
+                return rule, "text similarity"
+
+            existing_placeholders = self._extract_pgmr_tokens(rule)
+            if candidate_placeholders and candidate_placeholders == existing_placeholders:
+                return rule, "same PGMR placeholder set"
+
+            existing_main_var = self._extract_main_var(rule)
+            if candidate_main_var and candidate_main_var == existing_main_var:
+                return rule, "same main projection variable"
+        return None, None
+
+    @staticmethod
+    def _normalized_rule_text(rule: AceBullet) -> str:
+        return " | ".join(
+            normalize_text(text)
+            for text in [rule.title, rule.content, rule.positive_pattern, rule.avoid]
+        )
+
+    @staticmethod
+    def _extract_pgmr_tokens(rule: AceBullet) -> set[str]:
+        text = " ".join(
+            str(text or "")
+            for text in [rule.title, rule.content, rule.positive_pattern, rule.avoid]
+        )
+        return set(re.findall(r"\b(?:pgmr|pgmrc):[A-Za-z_][\w-]*\b", text))
+
+    @staticmethod
+    def _extract_main_var(rule: AceBullet) -> str | None:
+        text = " ".join(
+            str(text or "")
+            for text in [rule.title, rule.content, rule.positive_pattern]
+        )
+        select_match = re.search(r"select\s+(?:distinct\s+)?(\?[A-Za-z_]\w*)", text, flags=re.IGNORECASE)
+        if select_match:
+            return select_match.group(1).lower()
+        vars_found = re.findall(r"\?[A-Za-z_]\w*", text)
+        return vars_found[0].lower() if vars_found else None
+
+    @staticmethod
+    def _should_prefer_new_pattern(existing: str | None, proposed: str | None) -> bool:
+        existing_text = str(existing or "").strip()
+        proposed_text = str(proposed or "").strip()
+        if not proposed_text:
+            return False
+        if not existing_text:
+            return True
+        return len(proposed_text) > len(existing_text)

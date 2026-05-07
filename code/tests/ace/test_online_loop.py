@@ -10,6 +10,7 @@ from src.ace.online.loop import (
     OnlineAceHooks,
     OnlineAceReflectionInput,
     compute_quality_score,
+    compute_quality_score_with_metric,
     run_online_ace_loop,
 )
 
@@ -115,7 +116,46 @@ def test_quality_score_calculation() -> None:
         }
     )
 
-    assert score == 0.55
+    assert score == 0.4625
+
+
+def test_quality_score_prefers_answer_cell_value_f1_when_available() -> None:
+    score, metric_used = compute_quality_score_with_metric(
+        {
+            "answer_cell_value_f1": 0.8,
+            "answer_f1": 0.2,
+            "kg_ref_f1": 0.0,
+            "predicate_ref_f1": 0.0,
+            "prediction_execution_success": False,
+            "query_extracted": True,
+        }
+    )
+    assert metric_used == "answer_cell_value_f1"
+    assert score == 0.42
+
+
+def test_quality_score_falls_back_to_answer_f1_and_none() -> None:
+    score_fallback, metric_fallback = compute_quality_score_with_metric(
+        {
+            "answer_f1": 0.5,
+            "kg_ref_f1": 0.0,
+            "predicate_ref_f1": 0.0,
+            "prediction_execution_success": True,
+            "query_extracted": False,
+        }
+    )
+    score_none, metric_none = compute_quality_score_with_metric(
+        {
+            "kg_ref_f1": 0.0,
+            "predicate_ref_f1": 0.0,
+            "prediction_execution_success": True,
+            "query_extracted": True,
+        }
+    )
+    assert metric_fallback == "answer_f1"
+    assert score_fallback == 0.3
+    assert metric_none == "none"
+    assert score_none == 0.2
 
 
 def test_online_loop_respects_max_iterations(tmp_path: Path) -> None:
@@ -194,6 +234,10 @@ def test_failed_iteration_adds_context_rule_and_retries_item(tmp_path: Path) -> 
     assert trace["items"][0]["iterations"][0]["new_rule_added"] is True
     assert trace["items"][0]["iterations"][1]["context_rule_ids_used"] == ["rule-1"]
     assert trace["items"][0]["iterations"][1]["helpful_rule_ids"] == ["rule-1"]
+    assert (
+        trace["items"][0]["iterations"][1]["quality_score_answer_metric_used"]
+        == "answer_f1"
+    )
     assert summary["solved_after_reflection"] == 1
     assert summary["rules_added"] == 1
     assert playbook["bullets"][0]["id"] == "rule-1"
@@ -223,3 +267,58 @@ def test_online_trace_records_multiple_iterations_for_same_item(
         attempt["item_id"] for attempt in trace["items"][0]["iterations"]
     } == {"1"}
 
+
+def test_online_trace_records_merged_rule_metadata(tmp_path: Path) -> None:
+    initial_playbook = tmp_path / "initial_playbook.json"
+    initial_playbook.write_text(
+        json.dumps(
+            {
+                "schema_version": "ace_playbook_v1",
+                "family": "nlp4re",
+                "mode": "pgmr_lite",
+                "bullets": [
+                    {
+                        "id": "existing_rule",
+                        "family": "nlp4re",
+                        "mode": "pgmr_lite",
+                        "category": "routing",
+                        "title": "Use data production time path",
+                        "content": "Use pgmr:nlp_data_production_time and avoid projecting ?nlpDataset for time questions.",
+                        "priority": 80,
+                        "enabled": True,
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    cfg = _config(tmp_path, iterations=2)
+    cfg = OnlineAceConfig(**{**cfg.to_dict(), "initial_playbook": initial_playbook})
+
+    def reflect(_: OnlineAceReflectionInput) -> dict:
+        return {
+            "rule": {
+                "id": "new_rule_candidate",
+                "family": "nlp4re",
+                "mode": "pgmr_lite",
+                "category": "routing",
+                "title": "Use data production time path",
+                "content": "Use pgmr:nlp_data_production_time. Do not project ?nlpDataset for data production time.",
+                "priority": 81,
+                "enabled": True,
+            }
+        }
+
+    run_online_ace_loop(
+        cfg,
+        hooks=OnlineAceHooks(generate=_generation, evaluate=_failed_eval, reflect=reflect),
+    )
+    trace = _read_json(tmp_path / "run" / "online_ace_trace.json")
+    summary = _read_json(tmp_path / "run" / "online_ace_summary.json")
+    first = trace["items"][0]["iterations"][0]
+    assert first["new_rule_added"] is False
+    assert first["rule_merged"] is True
+    assert first["merged_into_rule_id"] == "existing_rule"
+    assert first["proposed_rule"]["id"] == "new_rule_candidate"
+    assert first["active_rule"]["id"] == "existing_rule"
+    assert summary["rules_merged"] == 1

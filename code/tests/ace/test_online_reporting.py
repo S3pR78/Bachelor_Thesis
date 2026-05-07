@@ -42,7 +42,12 @@ def test_format_iteration_report_includes_attempt_metrics() -> None:
             "error_category": "answer_mismatch",
             "reflection_used": True,
             "new_rule_added": True,
+            "rule_merged": False,
             "quality_score": 0.55,
+            "quality_score_delta": 0.12,
+            "quality_score_answer_metric_used": "answer_cell_value_f1",
+            "merged_into_rule_id": None,
+            "merge_reason": None,
         }
     )
 
@@ -51,6 +56,8 @@ def test_format_iteration_report_includes_attempt_metrics() -> None:
     assert "answer_f1: 0.5000" in report
     assert "Reflection used: yes" in report
     assert "New rule added: yes" in report
+    assert "Rule merged: no" in report
+    assert "Quality answer metric: answer_cell_value_f1" in report
 
 
 def test_format_item_context_update_handles_empty_ids() -> None:
@@ -75,7 +82,10 @@ def test_format_final_report_handles_numeric_and_unknown_cost() -> None:
             "solved_initially": 1,
             "solved_after_reflection": 1,
             "still_unsolved": 0,
+            "rules_proposed": 2,
             "rules_added": 1,
+            "rules_merged": 1,
+            "duplicate_rule_count": 1,
             "rules_enabled": 1,
             "rules_disabled": 0,
             "rules_deleted": 0,
@@ -89,7 +99,8 @@ def test_format_final_report_handles_numeric_and_unknown_cost() -> None:
     )
 
     assert "Total items: 2" in report
+    assert "Rules proposed: 2" in report
+    assert "Rules merged: 1" in report
     assert "Top helpful rules: rule-1 (2)" in report
     assert "Total reflection tokens: 123" in report
     assert "Estimated reflection cost: unknown" in report
-

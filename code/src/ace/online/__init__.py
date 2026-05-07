@@ -5,6 +5,7 @@ from src.ace.online.loop import (
     OnlineAceConfig,
     OnlineAceHooks,
     compute_quality_score,
+    compute_quality_score_with_metric,
     is_solved,
     run_online_ace_loop,
 )
@@ -17,6 +18,7 @@ __all__ = [
     "OnlineAceReflector",
     "OnlineReflectorConfig",
     "compute_quality_score",
+    "compute_quality_score_with_metric",
     "is_solved",
     "run_online_ace_loop",
 ]

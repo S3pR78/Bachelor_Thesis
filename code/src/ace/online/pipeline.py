@@ -224,6 +224,13 @@ def flatten_validation_metrics(validation: dict[str, Any]) -> dict[str, Any]:
         "answer_f1": float(
             _metric_value(validation.get("answer_precision_recall_f1"), "f1") or 0.0
         ),
+        "answer_cell_value_f1": float(
+            _metric_value(
+                validation.get("answer_cell_value_precision_recall_f1"),
+                "f1",
+            )
+            or 0.0
+        ),
         "kg_ref_f1": float(
             _metric_value(validation.get("kg_ref_match"), "f1") or 0.0
         ),
@@ -379,4 +386,3 @@ class OnlineAcePipeline:
 def build_online_ace_hooks(config: OnlineAceConfig) -> OnlineAceHooks:
     """Prepare real online ACE hooks for server/local execution."""
     return OnlineAcePipeline(config).hooks()
-

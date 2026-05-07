@@ -143,13 +143,31 @@ def is_solved(evaluation: dict[str, Any]) -> bool:
 
 def compute_quality_score(evaluation: dict[str, Any]) -> float:
     """Compute the rule usefulness quality score."""
+    score, _ = compute_quality_score_with_metric(evaluation)
+    return score
+
+
+def compute_quality_score_with_metric(
+    evaluation: dict[str, Any],
+) -> tuple[float, str]:
+    """Compute quality score and record which answer metric was used."""
+    answer_metric_used = "none"
+    answer_value = _metric(evaluation, "answer_cell_value_f1")
+    if answer_value is not None:
+        answer_metric_used = "answer_cell_value_f1"
+    else:
+        answer_value = _metric(evaluation, "answer_f1")
+        if answer_value is not None:
+            answer_metric_used = "answer_f1"
+
     return round(
-        0.45 * _as_float(_metric(evaluation, "answer_f1"))
-        + 0.30 * _as_float(_metric(evaluation, "kg_ref_f1"))
-        + 0.15 * float(_as_bool(_metric(evaluation, "prediction_execution_success")))
+        0.40 * _as_float(answer_value)
+        + 0.25 * _as_float(_metric(evaluation, "kg_ref_f1"))
+        + 0.15 * _as_float(_metric(evaluation, "predicate_ref_f1"))
+        + 0.10 * float(_as_bool(_metric(evaluation, "prediction_execution_success")))
         + 0.10 * float(_as_bool(_metric(evaluation, "query_extracted"))),
         6,
-    )
+    ), answer_metric_used
 
 
 def _normalize_generation(generation: str | dict[str, Any]) -> dict[str, Any]:
@@ -249,7 +267,11 @@ def _build_summary(
     solved_initially: int,
     solved_after_reflection: int,
     still_unsolved: int,
+    rules_proposed: int,
     rules_added: int,
+    rules_merged: int,
+    duplicate_rule_count: int,
+    top_merged_rules: list[dict[str, Any]],
     context: OnlineAceContext,
     initial_attempts: list[dict[str, Any]],
     final_attempts: list[dict[str, Any]],
@@ -274,7 +296,11 @@ def _build_summary(
             "solved_initially": solved_initially,
             "solved_after_reflection": solved_after_reflection,
             "still_unsolved": still_unsolved,
+            "rules_proposed": rules_proposed,
             "rules_added": rules_added,
+            "rules_merged": rules_merged,
+            "duplicate_rule_count": duplicate_rule_count,
+            "top_merged_rules": top_merged_rules,
             "rules_enabled": context.enabled_rule_count(),
             "rules_disabled": disabled_count,
             "rules_deleted": len(context.deleted_rules),
@@ -375,6 +401,9 @@ def run_online_ace_loop(
     solved_after_reflection = 0
     still_unsolved = 0
     added_rule_ids: set[str] = set()
+    merged_rule_count = 0
+    merged_into_counts: dict[str, int] = {}
+    proposed_rule_count = 0
     initial_attempts: list[dict[str, Any]] = []
     final_attempts: list[dict[str, Any]] = []
 
@@ -437,7 +466,9 @@ def run_online_ace_loop(
                     or generation.get("selected_prediction_query"),
                 }
             )
-            quality_score = compute_quality_score(evaluation)
+            quality_score, quality_score_answer_metric_used = (
+                compute_quality_score_with_metric(evaluation)
+            )
             total_attempts += 1
 
             if iteration == 0:
@@ -472,6 +503,10 @@ def run_online_ace_loop(
             solved = is_solved(evaluation)
             reflection_used = False
             new_rule_added = False
+            rule_merged = False
+            merged_into_rule_id = None
+            merge_reason = None
+            proposed_rule = None
             new_rule = None
             reflection_cost = None
 
@@ -496,12 +531,25 @@ def run_online_ace_loop(
                 )
                 rule_payload = _extract_rule_payload(reflection)
                 if rule_payload is not None:
-                    added_rule = context.add_rule(rule_payload)
+                    proposed_rule_count += 1
+                    add_result = context.add_rule_with_result(rule_payload)
+                    added_rule = add_result["rule"]
                     pending_rule_id = added_rule.id
                     pending_quality_before = quality_score
-                    new_rule_added = True
+                    new_rule_added = bool(add_result["new_rule_added"])
+                    rule_merged = bool(add_result["rule_merged"])
+                    merged_into_rule_id = add_result.get("merged_into_rule_id")
+                    merge_reason = add_result.get("merge_reason")
+                    proposed_rule = add_result.get("proposed_rule")
                     new_rule = added_rule.to_dict()
-                    added_rule_ids.add(added_rule.id)
+                    if new_rule_added:
+                        added_rule_ids.add(added_rule.id)
+                    if rule_merged:
+                        merged_rule_count += 1
+                        if merged_into_rule_id:
+                            merged_into_counts[merged_into_rule_id] = (
+                                merged_into_counts.get(merged_into_rule_id, 0) + 1
+                            )
 
             attempt_trace = {
                 "item_id": item_id,
@@ -532,11 +580,17 @@ def run_online_ace_loop(
                 "error_category": evaluation.get("error_category"),
                 "reflection_used": reflection_used,
                 "new_rule_added": new_rule_added,
+                "rule_merged": rule_merged,
+                "merged_into_rule_id": merged_into_rule_id,
+                "merge_reason": merge_reason,
+                "proposed_rule": proposed_rule,
                 "new_rule": new_rule,
+                "active_rule": new_rule,
                 "quality_score": quality_score,
                 "quality_score_before": quality_score_before,
                 "quality_score_after": quality_score,
                 "quality_score_delta": quality_score_delta,
+                "quality_score_answer_metric_used": quality_score_answer_metric_used,
                 "helpful_rule_ids": helpful_rule_ids,
                 "harmful_rule_ids": harmful_rule_ids,
                 "disabled_rule_ids": disabled_rule_ids,
@@ -609,7 +663,17 @@ def run_online_ace_loop(
         solved_initially=solved_initially,
         solved_after_reflection=solved_after_reflection,
         still_unsolved=still_unsolved,
+        rules_proposed=proposed_rule_count,
         rules_added=len(added_rule_ids),
+        rules_merged=merged_rule_count,
+        duplicate_rule_count=merged_rule_count,
+        top_merged_rules=[
+            {"id": rule_id, "merged_count": count}
+            for rule_id, count in sorted(
+                merged_into_counts.items(),
+                key=lambda item: (-item[1], item[0]),
+            )[:5]
+        ],
         context=context,
         initial_attempts=initial_attempts,
         final_attempts=final_attempts,

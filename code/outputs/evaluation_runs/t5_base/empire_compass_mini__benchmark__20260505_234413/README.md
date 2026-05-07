@@ -1,1 +1,0 @@
-## === T5 original with empire_compass_mini as prompt ===
