@@ -1,0 +1,1 @@
+# Mistral original Empire Compass evaluation run on benchmark dataset with empire_compass prompt and SPARQL prediction format.
