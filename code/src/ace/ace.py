@@ -14,9 +14,9 @@ from datetime import datetime
 from typing import Dict, List, Tuple, Optional, Any
 
 from .core import Generator, Reflector, Curator, BulletpointAnalyzer
-from playbook_utils import *
-from logger import *
-from utils import *
+from ace.playbook_utils import *
+from ace.logger import *
+from ace.utils import *
 
 
 class ACE:
