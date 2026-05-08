@@ -1,0 +1,1 @@
+# Qwen original with PGMR as prompt, with similarity mapping and PGMR-lite output to SPARQL, using the templates in the ORKG memory.
