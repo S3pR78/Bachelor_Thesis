@@ -1,0 +1,1 @@
+# Mistral base with PGMR as prompt evaluation run on benchmark dataset with pgmr prompt and pgmr_lite prediction format. and pgmr similarity mapping.
