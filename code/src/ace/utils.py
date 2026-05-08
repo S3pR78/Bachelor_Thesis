@@ -2,17 +2,31 @@
 import os
 import re
 import json
-import openai
-import tiktoken
 from dotenv import load_dotenv
 from typing import List, Dict, Any, Tuple
 from concurrent.futures import ThreadPoolExecutor, as_completed
+
+try:
+    import openai
+except ImportError:
+    openai = None
+
+try:
+    import tiktoken
+except ImportError:
+    tiktoken = None
 
 # Load environment variables from .env file
 load_dotenv()
 
 def initialize_clients(api_provider):
     """Initialize separate clients for generator, reflector, and curator"""
+    if openai is None:
+        raise ImportError(
+            "The ACE LLM client requires the optional 'openai' package. "
+            "Install it before running ACE workflows that call an LLM."
+        )
+
     if api_provider == "sambanova":
         # Use SambaNova API
         base_url = "https://api.sambanova.ai/v1"
@@ -155,9 +169,14 @@ def extract_answer(response):
         
         return "No final answer found"
     
-enc = tiktoken.get_encoding("cl100k_base")
+enc = tiktoken.get_encoding("cl100k_base") if tiktoken is not None else None
+
+
 def count_tokens(prompt: str) -> int:
-    return len(enc.encode(prompt))
+    if enc is not None:
+        return len(enc.encode(prompt))
+
+    return len(str(prompt).split())
 
 
 def evaluate_single_test_sample(args_tuple, data_processor) -> Tuple[Dict, str]:

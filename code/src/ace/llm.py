@@ -9,8 +9,12 @@ This file contains the LLM class for the project.
 import time
 import random
 from datetime import datetime
-import openai
 from ace.logger import log_llm_call, log_problematic_request
+
+try:
+    import openai
+except ImportError:
+    openai = None
 
 def timed_llm_call(client, api_provider, model, prompt, role, call_id, max_tokens=4096, log_dir=None,
                    sleep_seconds=15, retries_on_timeout=1000, attempt=1, use_json_mode=False):
@@ -135,11 +139,11 @@ def timed_llm_call(client, api_provider, model, prompt, role, call_id, max_token
                 print(f"[{role.upper()}] Server error detected in message: {str(e)[:100]}...")
             
             # Also check for specific OpenAI exceptions
-            if hasattr(openai, 'RateLimitError') and isinstance(e, openai.RateLimitError):
+            if openai is not None and hasattr(openai, 'RateLimitError') and isinstance(e, openai.RateLimitError):
                 is_rate_limit = True
             
             # Check for OpenAI InternalServerError
-            if hasattr(openai, 'InternalServerError') and isinstance(e, openai.InternalServerError):
+            if openai is not None and hasattr(openai, 'InternalServerError') and isinstance(e, openai.InternalServerError):
                 is_server_error = True
                 print(f"[{role.upper()}] OpenAI InternalServerError detected")
             

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 """
 BulletpointAnalyzer Component for ACE System
 
@@ -6,18 +8,19 @@ intelligent deduplication and merging using embeddings and LLM.
 """
 
 import re
-import numpy as np
 from typing import List, Dict, Tuple, Any, Optional
 from collections import defaultdict
 
 try:
+    import numpy as np
     from sentence_transformers import SentenceTransformer
     import faiss
     DEDUP_AVAILABLE = True
 except ImportError:
+    np = None
     DEDUP_AVAILABLE = False
     print("Warning: sentence-transformers or faiss not available for bulletpoint analysis.")
-    print("Install with: pip install sentence-transformers faiss-cpu")
+    print("Install with: pip install numpy sentence-transformers faiss-cpu")
 
 
 def parse_playbook_line(line: str) -> Optional[Dict[str, Any]]:
