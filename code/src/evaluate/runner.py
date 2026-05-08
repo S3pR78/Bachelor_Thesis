@@ -32,7 +32,7 @@ from src.sparql.execution import detect_sparql_query_type, execute_sparql_query
 from src.sparql.prefixes import prepend_orkg_prefixes
 
 from src.pgmr.memory_resolver import PgmrMemoryIndex, PgmrResolutionOptions
-from src.pgmr.postprocess import postprocess_pgmr_query
+from src.pgmr.postprocess import postprocess_pgmr_query, strip_markdown_fences
 from tools.pgmr.restore_and_execute_predictions import (
     build_entry_mapping,
     detect_basic_query_status,
@@ -217,10 +217,11 @@ def _build_prediction_query_from_model_output(
             "pgmr_postprocess_applied": False,
         }
 
+    pgmr_extracted_query = strip_markdown_fences(raw_model_output)
     pgmr_postprocessed_query = (
-        postprocess_pgmr_query(raw_model_output)
+        postprocess_pgmr_query(pgmr_extracted_query)
         if postprocess_pgmr
-        else raw_model_output
+        else pgmr_extracted_query
     )
 
     # PGMR-lite predictions must be restored before SPARQL execution/metrics.
@@ -232,6 +233,7 @@ def _build_prediction_query_from_model_output(
     )
     pgmr_restored_query = restore_result.restored_query
     pgmr_missing_mapping_tokens = restore_result.missing_mapping_tokens
+    pgmr_restored_query = strip_markdown_fences(pgmr_restored_query)
     if postprocess_pgmr:
         pgmr_restored_query = postprocess_pgmr_query(pgmr_restored_query)
 

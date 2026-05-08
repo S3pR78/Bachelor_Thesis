@@ -1,0 +1,1 @@
+# T5 finetuned PGMR-mini with similarity mapping, and post-processing of the generated PGMR-lite output to SPARQL, using the templates in the ORKG memory.
