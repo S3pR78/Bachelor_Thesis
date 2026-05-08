@@ -21,6 +21,9 @@ code/outputs/evaluation_runs/**/pgmr_mini__ace_playbook__*/benchmark_raw.json
 code/outputs/evaluation_runs/**/pgmr_mini__ace_playbook__*/ace_deltas.json
 code/outputs/ace_filtered_datasets/
 code/tests/*
+!code/tests/pgmr/
+code/tests/pgmr/*
+!code/tests/pgmr/test_postprocess.py
 !code/tests/ace/
 code/tests/ace/*
 !code/tests/ace/test_online_context.py
