@@ -1,1 +1,0 @@
-# Qwen 2.5 original with Empire Compass as prompt mode and sparql as prediction format.

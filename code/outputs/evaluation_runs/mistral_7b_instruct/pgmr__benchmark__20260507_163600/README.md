@@ -1,1 +1,0 @@
-# Mistral original with PGMR prompt and pgmr_lite prediction format, with similarity mapping, evaluated on PGMR benchmark.
