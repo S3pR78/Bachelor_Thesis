@@ -13,6 +13,7 @@ PYTHONPATH=code python code/tools/evaluate/<script>.py --help
 | Script | Purpose | Input | Output |
 | --- | --- | --- | --- |
 | `run_llm_judge.py` | Ask an OpenAI judge model to semantically score predicted SPARQL against the question and gold SPARQL. | `benchmark_raw.json` | `llm_judge_raw.json`, `llm_judge_summary.json`, optional `benchmark_summary_with_llm_judge.json` |
+| `run_llm_judge_batch.py` | Run `run_llm_judge.py` for all nested benchmark runs below `code/outputs/evaluation_runs`, excluding configured top-level folders. | `**/benchmark_raw.json` | Same judge files written next to each input `benchmark_raw.json` |
 
 ## LLM Judge
 
@@ -94,6 +95,30 @@ PYTHONPATH=code python code/tools/evaluate/run_llm_judge.py \
 ```
 
 OpenAI-backed runs require `OPENAI_API_KEY` in the shell environment or in the repository-root `.env` file.
+
+### Batch LLM Judge
+
+`run_llm_judge_batch.py` recursively finds `benchmark_raw.json` files below `code/outputs/evaluation_runs`. The excluded top-level folders are configured at the top of the script in `EXCLUDED_FOLDERS`.
+
+List the runs that would be processed:
+
+```bash
+PYTHONPATH=code python code/tools/evaluate/run_llm_judge_batch.py --list-only
+```
+
+Run the judge for all included runs:
+
+```bash
+PYTHONPATH=code python code/tools/evaluate/run_llm_judge_batch.py \
+  --judge-model gpt_4o_mini \
+  --prediction-field auto
+```
+
+For each processed run directory, the output names are:
+
+- `llm_judge_raw.json`
+- `llm_judge_summary.json`
+- `benchmark_summary_with_llm_judge.json`
 
 ## Viewing Results
 
