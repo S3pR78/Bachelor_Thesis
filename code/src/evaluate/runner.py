@@ -195,6 +195,7 @@ def _build_prediction_query_from_model_output(
     prediction_format: str,
     pgmr_memory_mapping: dict[str, PgmrMemoryIndex] | None,
     pgmr_resolution_options: PgmrResolutionOptions | None = None,
+    postprocess_pgmr: bool = False,
 ) -> dict[str, Any]:
     """Convert raw model text into the query that should be evaluated."""
     if prediction_format != "pgmr_lite":
@@ -213,9 +214,14 @@ def _build_prediction_query_from_model_output(
             "pgmr_mapping_suggestions": [],
             "pgmr_unmapped_placeholders": [],
             "pgmr_basic_status": None,
+            "pgmr_postprocess_applied": False,
         }
 
-    pgmr_postprocessed_query = postprocess_pgmr_query(raw_model_output)
+    pgmr_postprocessed_query = (
+        postprocess_pgmr_query(raw_model_output)
+        if postprocess_pgmr
+        else raw_model_output
+    )
 
     # PGMR-lite predictions must be restored before SPARQL execution/metrics.
     entry_mapping = build_entry_mapping(entry, pgmr_memory_mapping or {})
@@ -226,7 +232,8 @@ def _build_prediction_query_from_model_output(
     )
     pgmr_restored_query = restore_result.restored_query
     pgmr_missing_mapping_tokens = restore_result.missing_mapping_tokens
-    pgmr_restored_query = postprocess_pgmr_query(pgmr_restored_query)
+    if postprocess_pgmr:
+        pgmr_restored_query = postprocess_pgmr_query(pgmr_restored_query)
 
     pgmr_basic_status = detect_basic_query_status(pgmr_restored_query)
     pgmr_remaining_tokens = pgmr_basic_status.get("remaining_pgmr_tokens", [])
@@ -254,6 +261,7 @@ def _build_prediction_query_from_model_output(
         "pgmr_mapping_suggestions": restore_result.mapping_suggestions,
         "pgmr_unmapped_placeholders": restore_result.unmapped_placeholders,
         "pgmr_basic_status": pgmr_basic_status,
+        "pgmr_postprocess_applied": postprocess_pgmr,
     }
 
 
@@ -300,6 +308,9 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
 
 
     if prediction_format == "pgmr_lite":
+        run_metadata["pgmr_postprocess"] = bool(
+            getattr(args, "postprocess_pgmr", False)
+        )
         run_metadata["pgmr_memory_dir"] = getattr(
             args,
             "pgmr_memory_dir",
@@ -430,6 +441,7 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
             prediction_format=prediction_format,
             pgmr_memory_mapping=pgmr_memory_mapping,
             pgmr_resolution_options=pgmr_resolution_options,
+            postprocess_pgmr=bool(getattr(args, "postprocess_pgmr", False)),
         )
 
         extracted_query = prediction_payload["extracted_query"]
@@ -511,6 +523,9 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
         ]
         result_entry["pgmr_basic_status"] = prediction_payload[
             "pgmr_basic_status"
+        ]
+        result_entry["pgmr_postprocess_applied"] = prediction_payload[
+            "pgmr_postprocess_applied"
         ]
 
         result_entry["response_time_seconds"] = round(response_time_seconds, 4)
