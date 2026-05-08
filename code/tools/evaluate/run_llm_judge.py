@@ -173,7 +173,7 @@ def build_judge_prompt(
 
 You will receive:
 - a natural language question
-- the template family
+- the template family prompt (which describes the expected structure of the SPARQL query)
 - a gold SPARQL query
 - a predicted SPARQL query
 
