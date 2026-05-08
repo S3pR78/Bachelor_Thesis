@@ -338,6 +338,32 @@ def create_judge_client(env_var_name: str) -> Any:
     return create_openai_client(env_var_name=env_var_name)
 
 
+def get_extraction_status(item: dict[str, Any]) -> str | None:
+    """Return an extraction/restoration status if it is present on the item.
+
+    This is especially useful for PGMR-lite runs where a skipped LLM-judge
+    item may not be a normal missing prediction, but a failed restoration such
+    as `pgmr_restore:missing_mapping`.
+    """
+    direct = _non_empty_text(item.get("extraction_status"))
+    if direct:
+        return direct
+
+    for container_name in ["validation", "metrics"]:
+        container = item.get(container_name)
+        if isinstance(container, dict):
+            value = container.get("extraction_status")
+            if isinstance(value, dict):
+                nested = _non_empty_text(value.get("value"))
+                if nested:
+                    return nested
+            nested = _non_empty_text(value)
+            if nested:
+                return nested
+
+    return None
+
+
 def build_skipped_record(
     *,
     item: dict[str, Any],
@@ -345,6 +371,9 @@ def build_skipped_record(
     gold_field_used: str | None,
     skip_reason: str,
 ) -> dict[str, Any]:
+    extraction_status = get_extraction_status(item)
+    main_issue = extraction_status or skip_reason
+
     return {
         "id": str(item.get("id") or item.get("uid") or ""),
         "question": str(item.get("question") or ""),
@@ -359,10 +388,11 @@ def build_skipped_record(
         "aggregation_score": 0,
         "overall_score": 0,
         "verdict": "incorrect",
-        "main_issue": "",
-        "short_rationale": "",
+        "main_issue": main_issue,
+        "short_rationale": f"Item was skipped by the LLM judge because: {main_issue}",
         "skipped": True,
         "skip_reason": skip_reason,
+        "extraction_status": extraction_status,
     }
 
 
@@ -434,6 +464,23 @@ def build_summary(
             return None
         return sum(valid) / len(valid)
 
+    def normalize_issue(value: Any) -> str:
+        text = str(value or "").strip()
+        if not text:
+            return "no_main_issue"
+        text = text.lower()
+        text = re.sub(r"[^a-z0-9:_-]+", "_", text)
+        text = re.sub(r"_+", "_", text).strip("_")
+        return text or "no_main_issue"
+
+    families = sorted(
+        {
+            str(record.get("family"))
+            for record in records
+            if str(record.get("family") or "").strip()
+        }
+    )
+
     return {
         "num_input_items": num_input_items,
         "num_judged_items": len(judged),
@@ -448,6 +495,19 @@ def build_summary(
         "mean_aggregation_score": mean("aggregation_score"),
         "mean_overall_score": mean("overall_score"),
         "verdict_counts": dict(Counter(record.get("verdict") for record in records)),
+        "main_issue_counts": dict(
+            Counter(normalize_issue(record.get("main_issue")) for record in records)
+        ),
+        "main_issue_counts_by_family": {
+            family: dict(
+                Counter(
+                    normalize_issue(record.get("main_issue"))
+                    for record in records
+                    if record.get("family") == family
+                )
+            )
+            for family in families
+        },
         "prediction_field_used_counts": dict(
             Counter(
                 record.get("prediction_field_used")
@@ -462,9 +522,18 @@ def build_summary(
                 if record.get("skip_reason")
             )
         ),
+        "extraction_status_counts": dict(
+            Counter(
+                record.get("extraction_status")
+                for record in records
+                if record.get("extraction_status")
+            )
+        ),
         "zero_score_reason_counts": dict(
             Counter(
-                record.get("skip_reason") or "judged_zero_score"
+                record.get("main_issue")
+                or record.get("skip_reason")
+                or "judged_zero_score"
                 for record in zero_scored
             )
         ),

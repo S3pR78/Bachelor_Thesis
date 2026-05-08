@@ -18,6 +18,7 @@ from tools.evaluate.run_llm_judge import EXPLICIT_PREDICTION_FIELDS, run_llm_jud
 EXCLUDED_FOLDERS = {
     "gpt_5_4",
     "t5_base",
+    "mistral_7b_instruct"
 }
 
 
