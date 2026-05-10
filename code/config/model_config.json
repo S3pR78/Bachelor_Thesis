@@ -43,7 +43,7 @@
         "model_path": "code/models/Qwen25_Coder_7B_Instruct/original"
       },
       "generation": {
-        "max_new_tokens": 1024,
+        "max_new_tokens": 10240,
         "temperature": 0.0,
         "do_sample": false
       }

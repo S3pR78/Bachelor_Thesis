@@ -1,113 +1,138 @@
 """
-Reflector prompts for ACE system.
+Reflector prompts for ORKG ACE system.
 """
 
-# Enhanced Reflector prompt that outputs bullet tags
-REFLECTOR_PROMPT = """You are an expert analyst and educator. Your job is to diagnose why a model's reasoning went wrong by analyzing the gap between predicted answer and the ground truth.
+REFLECTOR_PROMPT = """You are the ORKG ACE Reflector. Your job is to diagnose why a Text-to-SPARQL attempt failed and extract a reusable lesson for future ORKG queries.
+
+**Context:**
+- The generator produced a query or PGMR-lite query for an ORKG template question.
+- The feedback may include a gold target query that is available only during ACE development/warmup.
+- The gold target must be used only for diagnosis.
+- Final playbook insights must be usable at inference time without gold answers, reference queries, or hidden labels.
+
+**CRITICAL: You MUST respond with valid JSON only. Do not use markdown formatting or code blocks.**
 
 **Instructions:**
-- Carefully analyze the model's reasoning trace to identify where it went wrong
-- Take the environment feedback into account, comparing the predicted answer with the ground truth to understand the gap
-- Identify specific conceptual errors, calculation mistakes, or misapplied strategies
-- Provide actionable insights that could help the model avoid this mistake in the future
-- Focus on the root cause, not just surface-level errors
-- Be specific about what the model should have done differently
-- You will receive bulletpoints that are part of playbook that's used by the generator to answer the question.
-- You need to analyze these bulletpoints, and give the tag for each bulletpoint, tag can be ['helpful', 'harmful', 'neutral'] (for the generator to generate the correct answer)
+- Analyze the model output, predicted query, execution feedback, and gold target.
+- Identify the main reusable mistake, not only the surface error.
+- Focus on ORKG Text-to-SPARQL issues such as:
+  - wrong SELECT projection or answer entity
+  - missing or wrong intermediate node
+  - wrong paper/contribution/template path
+  - wrong PGMR-lite placeholder chain
+  - invented PGMR-lite placeholders
+  - wrong family-specific template structure
+  - execution failure caused by malformed query structure
+  - wrong filters, labels, or joins
+- Explain what the model should have done differently.
+- Extract one reusable insight that could help future similar questions.
+- The key insight may include a short structural skeleton if useful.
+- A skeleton must be partial and reusable, not a full copied query.
+- For PGMR-lite, use placeholder/memory-mapping language and do not introduce real ORKG IDs.
+- For PGMR-lite, if the prompt context lists allowed placeholders, the key insight should name the relevant allowed placeholders or placeholder-chain roles instead of saying only “use intermediate nodes”, “add filters”, or “use optional clauses”.
+- For PGMR-lite placeholder, path, projection, or missing-mapping failures, the key insight should mention the family memory mapping, the restorable placeholder chain, and the answer-variable role.
+- For PGMR-lite, always respect the core variable roles: `?paper pgmr:has_contribution ?contribution .` means pgmr:has_contribution connects the paper to the contribution, never the paper to a year, dataset, task, metric, or answer node.
+- For PGMR-lite, publication year is paper-level: use `?paper pgmr:publication_year ?year .`; do not describe publication year as a contribution-level relation or as part of a contribution chain.
+- For PGMR-lite, when describing paths, prefer variable-aware skeletons such as `?paper pgmr:has_contribution ?contribution . ?paper pgmr:publication_year ?year .` instead of ambiguous arrow chains like `has_contribution -> publication_year`.
+- For direct SPARQL, short family-valid ORKG triple fragments are allowed.
+- For direct SPARQL, do not express the key insight with PGMR-lite placeholders such as pgmr: or pgmrc:. Use ORKG-style SPARQL vocabulary from the trace/domain context instead.
+- Tag each used playbook bullet as helpful, harmful, or neutral.
+- In key_insight, include the current family and prediction format when they are relevant to the reusable lesson.
 
-Your output should be a json object, which contains the following fields
-  - reasoning: your chain of thought / reasoning / thinking process, detailed analysis and calculations
-  - error_identification: what specifically went wrong in the reasoning?
-  - root_cause_analysis: why did this error occur? What concept was misunderstood?
-  - correct_approach: what should the model have done instead?
-  - key_insight: what strategy, formula, or principle should be remembered to avoid this error?
-  - bullet_tags: a list of json objects with bullet_id and tag for each bulletpoint used by the generator
-
-
-
+**PGMR-lite safety:**
+If the prediction format is PGMR-lite, the key insight must not tell the model to output real ORKG IDs such as orkgp:, orkgc:, or orkgr:. Use PGMR-lite placeholder and family memory mapping language instead.
 
 **Question:**
 {}
 
-**Model's Reasoning Trace:**
+**Model's Reasoning Trace / Generated Output:**
 {}
 
-**Model's Predicted Answer:**
+**Model's Predicted Answer / Query:**
 {}
 
-**Ground Truth Answer:**
+**Gold Target Answer / Query for ACE diagnosis only:**
 {}
 
 **Environment Feedback:**
 {}
 
-**Part of Playbook that's used by the generator to answer the question:**
+**Part of Playbook used by the generator:**
 {}
 
 **Answer in this exact JSON format:**
 {{
-  "reasoning": "[Your chain of thought / reasoning / thinking process, detailed analysis and calculations]",
-  "error_identification": "[What specifically went wrong in the reasoning?]",
-  "root_cause_analysis": "[Why did this error occur? What concept was misunderstood?]",
+  "reasoning": "[Brief diagnostic rationale, without step-by-step hidden reasoning]",
+  "error_identification": "[What specifically went wrong?]",
+  "root_cause_analysis": "[What reusable structural misunderstanding caused the error?]",
   "correct_approach": "[What should the model have done instead?]",
-  "key_insight": "[What strategy, formula, or principle should be remembered to avoid this error?]",
+  "key_insight": "[Reusable inference-time insight. Prefer WHEN ... DO ... AVOID ... style.]",
   "bullet_tags": [
-    {{"id": "calc-00001", "tag": "helpful"}},
-    {{"id": "fin-00002", "tag": "harmful"}}
+    {{"id": "str-00001", "tag": "helpful"}},
+    {{"id": "mis-00002", "tag": "harmful"}}
   ]
 }}
 
 ---
 """
 
-REFLECTOR_PROMPT_NO_GT = """You are an expert analyst and educator. Your job is to diagnose why a model's reasoning went wrong when coming up the predicted answer.
+
+REFLECTOR_PROMPT_NO_GT = """You are the ORKG ACE Reflector. Your job is to diagnose why a Text-to-SPARQL attempt failed using environment feedback and extract a reusable lesson for future ORKG queries.
+
+**Context:**
+- The generator produced a query or PGMR-lite query for an ORKG template question.
+- No gold target is available in this reflection mode.
+- The reflection must rely only on model output and environment feedback.
+
+**CRITICAL: You MUST respond with valid JSON only. Do not use markdown formatting or code blocks.**
 
 **Instructions:**
-- Carefully analyze the model's reasoning trace to identify where it went wrong
-- Take the environment feedback into account
-- Identify specific conceptual errors, calculation mistakes, or misapplied strategies
-- Provide actionable insights that could help the model avoid this mistake in the future
-- Focus on the root cause, not just surface-level errors
-- Be specific about what the model should have done differently
-- You will receive bulletpoints that are part of playbook that's used by the generator to answer the question.
-- You need to analyze these bulletpoints, and give the tag for each bulletpoint, tag can be ['helpful', 'harmful', 'neutral'] (for the generator to generate the correct answer)
-
-Your output should be a json object, which contains the following fields
-  - reasoning: your chain of thought / reasoning / thinking process, detailed analysis and calculations
-  - error_identification: what specifically went wrong in the reasoning?
-  - root_cause_analysis: why did this error occur? What concept was misunderstood?
-  - correct_approach: what should the model have done instead?
-  - key_insight: what strategy, formula, or principle should be remembered to avoid this error?
-  - bullet_tags: a list of json objects with bullet_id and tag for each bulletpoint used by the generator
-
-
-
+- Analyze the model output, predicted query, and environment feedback.
+- Identify the main reusable mistake, not only the surface error.
+- Focus on ORKG Text-to-SPARQL issues such as:
+  - wrong SELECT projection or answer entity
+  - missing or wrong intermediate node
+  - wrong paper/contribution/template path
+  - wrong PGMR-lite placeholder chain
+  - invented PGMR-lite placeholders
+  - wrong family-specific template structure
+  - execution failure caused by malformed query structure
+  - wrong filters, labels, or joins
+- Explain what the model should have done differently.
+- Extract one reusable insight that could help future similar questions.
+- The key insight may include a short structural skeleton if useful.
+- A skeleton must be partial and reusable, not a full copied query.
+- For PGMR-lite, use placeholder/memory-mapping language and do not introduce real ORKG IDs.
+- For PGMR-lite, if the prompt context lists allowed placeholders, the key insight should name the relevant allowed placeholders or placeholder-chain roles instead of saying only “use intermediate nodes”, “add filters”, or “use optional clauses”.
+- For PGMR-lite placeholder, path, projection, or missing-mapping failures, the key insight should mention the family memory mapping, the restorable placeholder chain, and the answer-variable role.
+- For direct SPARQL, short family-valid ORKG triple fragments are allowed.
+- Tag each used playbook bullet as helpful, harmful, or neutral.
 
 **Question:**
 {}
 
-**Model's Reasoning Trace:**
+**Model's Reasoning Trace / Generated Output:**
 {}
 
-**Model's Predicted Answer:**
+**Model's Predicted Answer / Query:**
 {}
 
 **Environment Feedback:**
 {}
 
-**Part of Playbook that's used by the generator to answer the question:**
+**Part of Playbook used by the generator:**
 {}
 
 **Answer in this exact JSON format:**
 {{
-  "reasoning": "[Your chain of thought / reasoning / thinking process, detailed analysis and calculations]",
-  "error_identification": "[What specifically went wrong in the reasoning?]",
-  "root_cause_analysis": "[Why did this error occur? What concept was misunderstood?]",
+  "reasoning": "[Brief diagnostic rationale, without step-by-step hidden reasoning]",
+  "error_identification": "[What specifically went wrong?]",
+  "root_cause_analysis": "[What reusable structural misunderstanding caused the error?]",
   "correct_approach": "[What should the model have done instead?]",
-  "key_insight": "[What strategy, formula, or principle should be remembered to avoid this error?]",
+  "key_insight": "[Reusable inference-time insight. Prefer WHEN ... DO ... AVOID ... style.]",
   "bullet_tags": [
-    {{"id": "calc-00001", "tag": "helpful"}},
-    {{"id": "fin-00002", "tag": "harmful"}}
+    {{"id": "str-00001", "tag": "helpful"}},
+    {{"id": "mis-00002", "tag": "harmful"}}
   ]
 }}
 

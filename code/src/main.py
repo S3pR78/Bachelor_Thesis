@@ -1,14 +1,7 @@
 import argparse
+import sys
 from pathlib import Path
 
-from src.ace.offline.llm_pipeline import (
-    add_arguments as add_ace_llm_arguments,
-    execute_llm_assisted_ace,
-)
-from src.ace.online.cli import (
-    add_arguments as add_online_ace_arguments,
-    execute_online_ace,
-)
 
 
 def run_query_task(args: argparse.Namespace) -> int:
@@ -32,11 +25,12 @@ def run_query_task(args: argparse.Namespace) -> int:
         question=args.question,
         prompt_mode=args.prompt_mode,
         family=args.family,
+        model_name=getattr(args, "model", None),
+        prediction_format=getattr(args, "prediction_format", None),
         ace_playbook_path=getattr(args, "ace_playbook", None),
         ace_playbook_dir=getattr(args, "ace_playbook_dir", None),
         ace_mode=getattr(args, "ace_mode", None),
         ace_max_bullets=getattr(args, "ace_max_bullets", 0),
-        model_name=getattr(args, "model", None),
     )
 
     print("Running query task with args:", args)
@@ -144,6 +138,246 @@ def run_evaluate_task(args: argparse.Namespace) -> int:
     return execute_evaluate_task(args)
 
 
+def _latest_benchmark_raw_files() -> set[str]:
+    return {
+        str(path)
+        for path in Path("code/outputs/evaluation_runs").glob("**/benchmark_raw.json")
+    }
+
+
+def _detect_new_benchmark_raw_path(before: set[str]) -> Path:
+    after = _latest_benchmark_raw_files()
+    new_paths = sorted(after - before)
+    if new_paths:
+        return Path(new_paths[-1])
+
+    all_paths = sorted(after)
+    if not all_paths:
+        raise FileNotFoundError("No benchmark_raw.json found after evaluation.")
+    return Path(all_paths[-1])
+
+
+def _namespace_to_cli_args(args: argparse.Namespace, argument_names: list[str]) -> list[str]:
+    cli_args: list[str] = []
+    for name in argument_names:
+        value = getattr(args, name, None)
+        if value is None or value is False:
+            continue
+
+        option = f"--{name.replace('_', '-')}"
+        if value is True:
+            cli_args.append(option)
+        else:
+            cli_args.extend([option, str(value)])
+    return cli_args
+
+
+def _run_tool_main(module_name: str, argv: list[str]) -> int:
+    import importlib
+
+    module = importlib.import_module(module_name)
+    previous_argv = sys.argv[:]
+    try:
+        sys.argv = [module_name, *argv]
+        return int(module.main() or 0)
+    finally:
+        sys.argv = previous_argv
+
+
+def run_ace_offline_warmup_task(args: argparse.Namespace) -> int:
+    """Run ORKG ACE offline warmup, optionally evaluating a dataset first."""
+    if bool(args.raw_path) == bool(args.dataset):
+        raise ValueError("Exactly one of --raw-path or --dataset must be provided.")
+
+    raw_path = Path(args.raw_path) if args.raw_path else None
+
+    if args.dataset:
+        missing = [
+            name
+            for name in ("generator_model_key", "prompt_mode", "prediction_format")
+            if not getattr(args, name, None)
+        ]
+        if missing:
+            joined = ", ".join(f"--{name.replace('_', '-')}" for name in missing)
+            raise ValueError(f"--dataset mode requires: {joined}")
+
+        evaluate_args = argparse.Namespace(
+            model=args.generator_model_key,
+            dataset=args.dataset,
+            limit=args.evaluate_limit,
+            prompt_mode=args.prompt_mode,
+            sparql_endpoint=args.sparql_endpoint,
+            prediction_format=args.prediction_format,
+            postprocess_pgmr=args.postprocess_pgmr,
+            pgmr_memory_dir=args.pgmr_memory_dir,
+            pgmr_similarity_mapping=args.pgmr_similarity_mapping,
+            pgmr_auto_map_threshold=args.pgmr_auto_map_threshold,
+            pgmr_suggestion_threshold=args.pgmr_suggestion_threshold,
+            pgmr_min_margin=args.pgmr_min_margin,
+            kg_memory_path=args.kg_memory_path,
+            ace_playbook=None,
+            ace_playbook_dir=None,
+            ace_mode=None,
+            ace_max_bullets=0,
+        )
+
+        before = _latest_benchmark_raw_files()
+        result = run_evaluate_task(evaluate_args)
+        if result != 0:
+            return result
+        raw_path = _detect_new_benchmark_raw_path(before)
+        print(f"Detected benchmark_raw.json for offline warmup: {raw_path}")
+
+    if raw_path is None:
+        raise ValueError("Could not resolve raw input path for offline warmup.")
+
+    tool_args = [
+        "--raw-path",
+        str(raw_path),
+        *_namespace_to_cli_args(
+            args,
+            [
+                "generator_model_key",
+                "reflector_model_key",
+                "curator_model_key",
+                "model_config",
+                "out_dir",
+                "playbook_dir",
+                "limit",
+                "token_budget",
+                "max_tokens",
+                "include_correct",
+                "no_publish_playbooks",
+                "allow_api_calls",
+            ],
+        ),
+    ]
+    return _run_tool_main("tools.ace.run_offline_warmup", tool_args)
+
+
+def run_ace_online_task(args: argparse.Namespace) -> int:
+    """Dispatch ORKG Online ACE through the existing tool wrapper."""
+    tool_args = _namespace_to_cli_args(
+        args,
+        [
+            "dataset",
+            "generator_model_key",
+            "prompt_mode",
+            "prediction_format",
+            "online_mode",
+            "initial_playbook_dir",
+            "out_dir",
+            "planner_model_key",
+            "reflector_model_key",
+            "curator_model_key",
+            "model_config",
+            "limit",
+            "top_k_rules",
+            "ace_max_bullets",
+            "max_attempts",
+            "sparql_endpoint",
+            "pgmr_memory_dir",
+            "pgmr_similarity_mapping",
+            "no_pgmr_similarity_mapping",
+            "max_tokens",
+            "publish_final_playbooks",
+            "allow_api_calls",
+        ],
+    )
+    return _run_tool_main("tools.ace.run_online_ace", tool_args)
+
+
+def run_ace_refine_playbooks_task(args: argparse.Namespace) -> int:
+    """Dispatch ORKG ACE playbook refinement through the existing tool wrapper."""
+    tool_args = _namespace_to_cli_args(
+        args,
+        [
+            "playbook_dir",
+            "model_key",
+            "refiner_model_key",
+            "model_config",
+            "out_dir",
+            "max_tokens",
+            "publish",
+            "allow_api_calls",
+        ],
+    )
+    return _run_tool_main("tools.ace.refine_playbooks", tool_args)
+
+
+def add_ace_parser(subparsers: argparse._SubParsersAction) -> None:
+    ace_parser = subparsers.add_parser("ace", help="Run ORKG ACE workflows.")
+    ace_subparsers = ace_parser.add_subparsers(dest="ace_command", required=True)
+
+    offline_parser = ace_subparsers.add_parser(
+        "offline-warmup",
+        help="Build offline ACE warmup playbooks from benchmark_raw.json or a dataset.",
+    )
+    offline_input = offline_parser.add_mutually_exclusive_group(required=True)
+    offline_input.add_argument("--raw-path", default=None)
+    offline_input.add_argument("--dataset", default=None)
+    offline_parser.add_argument("--generator-model-key", required=True)
+    offline_parser.add_argument("--reflector-model-key", required=True)
+    offline_parser.add_argument("--curator-model-key", required=True)
+    offline_parser.add_argument("--prompt-mode", default=None)
+    offline_parser.add_argument("--prediction-format", choices=["sparql", "pgmr_lite"], default=None)
+    offline_parser.add_argument("--sparql-endpoint", default="https://www.orkg.org/triplestore")
+    offline_parser.add_argument("--postprocess-pgmr", action="store_true")
+    offline_parser.add_argument("--pgmr-memory-dir", default="code/data/orkg_memory/templates")
+    offline_parser.add_argument("--pgmr-similarity-mapping", action="store_true")
+    offline_parser.add_argument("--pgmr-auto-map-threshold", type=float, default=0.90)
+    offline_parser.add_argument("--pgmr-suggestion-threshold", type=float, default=0.75)
+    offline_parser.add_argument("--pgmr-min-margin", type=float, default=0.08)
+    offline_parser.add_argument("--kg-memory-path", "--kg_memory_path", dest="kg_memory_path", default="code/data/orkg_memory/templates")
+    offline_parser.add_argument("--evaluate-limit", type=int, default=None)
+    offline_parser.add_argument("--model-config", default="code/config/model_config.json")
+    offline_parser.add_argument("--out-dir", required=True)
+    offline_parser.add_argument("--playbook-dir", default="code/data/ace_playbooks")
+    offline_parser.add_argument("--limit", type=int, default=None)
+    offline_parser.add_argument("--include-correct", action="store_true")
+    offline_parser.add_argument("--token-budget", type=int, default=4000)
+    offline_parser.add_argument("--max-tokens", type=int, default=None)
+    offline_parser.add_argument("--no-publish-playbooks", action="store_true")
+    offline_parser.add_argument("--allow-api-calls", action="store_true")
+    offline_parser.set_defaults(func=run_ace_offline_warmup_task)
+
+    online_parser = ace_subparsers.add_parser("online", help="Run ORKG Online ACE.")
+    online_parser.add_argument("--dataset", required=True)
+    online_parser.add_argument("--generator-model-key", required=True)
+    online_parser.add_argument("--prompt-mode", required=True)
+    online_parser.add_argument("--prediction-format", required=True, choices=["pgmr_lite", "sparql"])
+    online_parser.add_argument("--online-mode", required=True, choices=["playbook_refinement", "test_time_repair"])
+    online_parser.add_argument("--initial-playbook-dir", default="code/data/ace_playbooks")
+    online_parser.add_argument("--out-dir", required=True)
+    online_parser.add_argument("--planner-model-key", default="gpt_4o_mini")
+    online_parser.add_argument("--reflector-model-key", default="gpt_4o_mini")
+    online_parser.add_argument("--curator-model-key", default="gpt_4o_mini")
+    online_parser.add_argument("--model-config", default="code/config/model_config.json")
+    online_parser.add_argument("--limit", type=int, default=None)
+    online_parser.add_argument("--top-k-rules", type=int, default=8)
+    online_parser.add_argument("--ace-max-bullets", type=int, default=-1)
+    online_parser.add_argument("--max-attempts", type=int, default=2)
+    online_parser.add_argument("--sparql-endpoint", default="https://www.orkg.org/triplestore")
+    online_parser.add_argument("--pgmr-memory-dir", default="code/data/orkg_memory/templates")
+    online_parser.add_argument("--pgmr-similarity-mapping", action="store_true", default=True)
+    online_parser.add_argument("--no-pgmr-similarity-mapping", dest="no_pgmr_similarity_mapping", action="store_true")
+    online_parser.add_argument("--max-tokens", type=int, default=None)
+    online_parser.add_argument("--publish-final-playbooks", action="store_true")
+    online_parser.add_argument("--allow-api-calls", action="store_true")
+    online_parser.set_defaults(func=run_ace_online_task)
+
+    refine_parser = ace_subparsers.add_parser("refine-playbooks", help="LLM-refine ORKG ACE playbooks.")
+    refine_parser.add_argument("--playbook-dir", default="code/data/ace_playbooks")
+    refine_parser.add_argument("--model-key", required=True)
+    refine_parser.add_argument("--refiner-model-key", default="gpt_4o_mini")
+    refine_parser.add_argument("--model-config", default="code/config/model_config.json")
+    refine_parser.add_argument("--out-dir", required=True)
+    refine_parser.add_argument("--max-tokens", type=int, default=None)
+    refine_parser.add_argument("--publish", action="store_true")
+    refine_parser.add_argument("--allow-api-calls", action="store_true")
+    refine_parser.set_defaults(func=run_ace_refine_playbooks_task)
+
+
 
 def build_parser() -> argparse.ArgumentParser:
     """Build the top-level CLI parser and register all workflow subcommands."""
@@ -180,32 +414,40 @@ def build_parser() -> argparse.ArgumentParser:
     query_parser.add_argument("--pgmr-suggestion-threshold", type=float, default=0.75, help="Minimum score for PGMR manual mapping suggestions.")
     query_parser.add_argument("--pgmr-min-margin", type=float, default=0.08, help="Minimum score margin over the second PGMR similarity candidate.")
 
-    # ACE options are optional prompt context controls shared with evaluation.
+    query_parser.add_argument(
+        "--prediction-format",
+        required=False,
+        choices=["sparql", "pgmr_lite"],
+        default=None,
+        help="Prediction format used for ACE playbook routing in query mode.",
+    )
     query_parser.add_argument(
         "--ace-playbook",
+        "--ace-playbook-path",
+        dest="ace_playbook",
         required=False,
         default=None,
-        help="Optional ACE playbook JSON file to prepend as adaptive context.",
+        help="Optional ACE playbook file to prepend as adaptive context.",
     )
     query_parser.add_argument(
         "--ace-playbook-dir",
         required=False,
         default=None,
-        help="Optional ACE playbook directory for model/family-aware routing.",
+        help="Optional ACE playbook directory for model/family/format-aware routing.",
     )
     query_parser.add_argument(
         "--ace-mode",
         required=False,
-        choices=["pgmr_lite", "direct_sparql", "any"],
+        choices=["pgmr_lite", "direct_sparql", "sparql", "any"],
         default=None,
-        help="ACE playbook mode to use. Defaults to an inferred mode from prompt-mode.",
+        help="ACE playbook mode to use. Defaults to prediction-format/prompt-mode inference.",
     )
     query_parser.add_argument(
         "--ace-max-bullets",
         required=False,
         type=int,
         default=0,
-        help="Maximum number of ACE playbook bullets to prepend. 0 disables ACE.",
+        help="Maximum number of ACE playbook bullets to prepend. 0 disables ACE; negative means all.",
     )
 
     query_parser.set_defaults(func=run_query_task)
@@ -281,67 +523,38 @@ def build_parser() -> argparse.ArgumentParser:
         "Defaults to code/data/orkg_memory/templates."
     ),)
 
-    # ACE can prepend model/family-specific playbook bullets to each prompt.
     evaluate_parser.add_argument(
         "--ace-playbook",
+        "--ace-playbook-path",
+        dest="ace_playbook",
         required=False,
         default=None,
-        help="Optional ACE playbook JSON file to prepend as adaptive context.",
+        help="Optional ACE playbook file to prepend as adaptive context.",
     )
     evaluate_parser.add_argument(
         "--ace-playbook-dir",
         required=False,
         default=None,
-        help="Optional ACE playbook directory for model/family-aware routing.",
+        help="Optional ACE playbook directory for model/family/format-aware routing.",
     )
     evaluate_parser.add_argument(
         "--ace-mode",
         required=False,
-        choices=["pgmr_lite", "direct_sparql", "any"],
+        choices=["pgmr_lite", "direct_sparql", "sparql", "any"],
         default=None,
-        help="ACE playbook mode to use. Defaults to an inferred mode from prompt-mode.",
+        help="ACE playbook mode to use. Defaults to prediction-format/prompt-mode inference.",
     )
     evaluate_parser.add_argument(
         "--ace-max-bullets",
         required=False,
         type=int,
         default=0,
-        help="Maximum number of ACE playbook bullets to prepend. 0 disables ACE.",
+        help="Maximum number of ACE playbook bullets to prepend. 0 disables ACE; negative means all.",
     )
 
     evaluate_parser.set_defaults(func=run_evaluate_task)
 
-
-    # LLM-assisted ACE starts from an existing evaluation run directory.
-    ace_llm_parser = subparsers.add_parser(
-        "ace-llm",
-        help="Run LLM-assisted ACE from an evaluation run directory.",
-    )
-    add_ace_llm_arguments(ace_llm_parser)
-    ace_llm_parser.set_defaults(func=execute_llm_assisted_ace)
-
-    ace_parser = subparsers.add_parser(
-        "ace",
-        help="Run ACE workflows.",
-    )
-    ace_subparsers = ace_parser.add_subparsers(
-        dest="ace_workflow",
-        required=True,
-    )
-
-    ace_offline_parser = ace_subparsers.add_parser(
-        "offline",
-        help="Run offline ACE-style playbook construction.",
-    )
-    add_ace_llm_arguments(ace_offline_parser)
-    ace_offline_parser.set_defaults(func=execute_llm_assisted_ace)
-
-    ace_online_parser = ace_subparsers.add_parser(
-        "online",
-        help="Run the true per-question online ACE loop.",
-    )
-    add_online_ace_arguments(ace_online_parser)
-    ace_online_parser.set_defaults(func=execute_online_ace)
+    add_ace_parser(subparsers)
     
     return parser
 

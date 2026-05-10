@@ -22,7 +22,7 @@ class Curator:
         Initialize the Curator agent.
         
         Args:
-            api_client: OpenAI client for LLM calls
+            api_client: Prepared client/runtime for LLM calls
             api_provider: API provider for LLM calls
             model: Model name to use for curation
             max_tokens: Maximum tokens for curation

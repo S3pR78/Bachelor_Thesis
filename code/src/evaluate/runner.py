@@ -24,10 +24,8 @@ from src.query.inference_session import (
     generate_response_with_session,
     prepare_inference_session,
 )
-from src.query.prompt_builder import (
-    append_ace_context_to_prompt,
-    build_final_prompt_for_question,
-)
+from src.ace.orkg.playbook_injection import append_ace_context_to_prompt
+from src.query.prompt_builder import build_final_prompt_for_question
 from src.sparql.execution import detect_sparql_query_type, execute_sparql_query
 from src.sparql.prefixes import prepend_orkg_prefixes
 
@@ -267,7 +265,12 @@ def _build_prediction_query_from_model_output(
     }
 
 
-def execute_evaluate_task(args: argparse.Namespace) -> int:
+def execute_evaluate_task(
+    args: argparse.Namespace,
+    *,
+    inference_session: dict[str, Any] | None = None,
+    run_dir_override: Path | None = None,
+) -> int:
     """Run model inference, execution, metrics, and report writing."""
     print("Running evaluation task with args:", args)
 
@@ -278,11 +281,15 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
         limit=args.limit,
     )
 
-    run_dir = ensure_evaluate_run_dir(
-        model_name=args.model,
-        dataset_path=args.dataset,
-        prompt_mode=args.prompt_mode,
-    )
+    if run_dir_override is None:
+        run_dir = ensure_evaluate_run_dir(
+            model_name=args.model,
+            dataset_path=args.dataset,
+            prompt_mode=args.prompt_mode,
+        )
+    else:
+        run_dir = Path(run_dir_override)
+        run_dir.mkdir(parents=True, exist_ok=False)
 
     output_path = get_benchmark_raw_output_path(run_dir)
     summary_output_path = get_benchmark_summary_output_path(run_dir)
@@ -307,7 +314,6 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
             "mode": getattr(args, "ace_mode", None),
             "max_bullets": getattr(args, "ace_max_bullets", 0),
         }
-
 
     if prediction_format == "pgmr_lite":
         run_metadata["pgmr_postprocess"] = bool(
@@ -336,7 +342,8 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
     print(f"Run metadata: {run_metadata}\n")
     print(f"Loaded entries for this run: {len(entries)}\n")
 
-    inference_session = prepare_inference_session(args.model)
+    if inference_session is None:
+        inference_session = prepare_inference_session(args.model)
 
     pgmr_memory_mapping: dict[str, PgmrMemoryIndex] | None = None
     pgmr_resolution_options: PgmrResolutionOptions | None = None
@@ -395,22 +402,24 @@ def execute_evaluate_task(args: argparse.Namespace) -> int:
                 prompt=final_prompt,
                 family=family,
                 prompt_mode=args.prompt_mode,
+                model_key=getattr(args, "model", None),
+                prediction_format=getattr(args, "prediction_format", None),
                 ace_playbook_path=getattr(args, "ace_playbook", None),
                 ace_playbook_dir=getattr(args, "ace_playbook_dir", None),
                 ace_mode=getattr(args, "ace_mode", None),
                 ace_max_bullets=getattr(args, "ace_max_bullets", 0),
-                model_name=getattr(args, "model", None),
             )
         else:
             final_prompt = build_final_prompt_for_question(
                 question=question,
                 prompt_mode=args.prompt_mode,
                 family=family,
+                model_name=getattr(args, "model", None),
+                prediction_format=getattr(args, "prediction_format", None),
                 ace_playbook_path=getattr(args, "ace_playbook", None),
                 ace_playbook_dir=getattr(args, "ace_playbook_dir", None),
                 ace_mode=getattr(args, "ace_mode", None),
                 ace_max_bullets=getattr(args, "ace_max_bullets", 0),
-                model_name=getattr(args, "model", None),
             )
 
         response_started_at = datetime.now(timezone.utc)

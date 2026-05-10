@@ -34,3 +34,13 @@ code/tests/ace/*
 !code/tests/ace/test_online_reporting.py
 !code/tests/ace/test_online_selection.py
 !code/tests/ace/test_online_trace.py
+
+# ACE local smoke tests and generated playbooks
+code/outputs/offline_ace/
+code/outputs/online_ace/
+code/outputs/ace_smoke/
+code/data/ace_playbooks/tmp/
+code/data/ace_playbooks/local/
+
+# ACE smoke-test outputs
+code/outputs/ace_smoke/

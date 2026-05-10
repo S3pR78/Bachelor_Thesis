@@ -20,7 +20,7 @@ class Reflector:
         Initialize the Reflector agent.
         
         Args:
-            api_client: OpenAI client for LLM calls
+            api_client: Prepared client/runtime for LLM calls
             api_provider: API provider for LLM calls
             model: Model name to use for reflection
             max_tokens: Maximum tokens for reflection

@@ -1,14 +1,14 @@
-"""Build model prompts from configured templates and optional ACE context."""
+"""Build model prompts from configured templates."""
 
 from __future__ import annotations
 
+import os
 import shutil
 import subprocess
 from pathlib import Path
 
 from src.utils.config_loader import get_configured_path, load_json_config
-from src.ace.rendering import render_ace_context
-from src.ace.routing import resolve_ace_playbook_path
+from src.ace.orkg.playbook_injection import append_ace_context_to_prompt
 
 
 EMPIRE_COMPASS_MODE = "empire_compass"
@@ -235,79 +235,20 @@ def build_empire_compass_mini_prompt(prompt_path: Path, question: str) -> str:
     )
 
 
-def infer_ace_mode(prompt_mode: str | None) -> str:
-    """Infer a default ACE playbook mode from the existing prompt mode."""
-    normalized = (prompt_mode or "").strip().lower()
-    if normalized == PGMR_MODE or "pgmr" in normalized:
-        return "pgmr_lite"
-    return "direct_sparql"
-
-
-def append_ace_context_to_prompt(
-    *,
-    prompt: str,
-    family: str | None,
-    prompt_mode: str | None,
-    ace_playbook_path: str | None = None,
-    ace_playbook_dir: str | None = None,
-    ace_mode: str | None = None,
-    ace_max_bullets: int = 0,
-    ace_include_patterns: bool = True,
-    model_name: str | None = None,
-) -> str:
-    """Prepend a compact ACE playbook block to an already-built prompt.
-
-    The function is intentionally small and optional:
-    if no playbook path or no bullets are requested, it returns the original prompt.
-    """
-    if ace_max_bullets <= 0:
-        return prompt
-
-    if not family:
-        return prompt
-
-    resolved_ace_mode = ace_mode or infer_ace_mode(prompt_mode)
-
-    resolved_playbook_path = resolve_ace_playbook_path(
-        ace_playbook_path=ace_playbook_path,
-        ace_playbook_dir=ace_playbook_dir,
-        family=family,
-        mode=resolved_ace_mode,
-        model_name=model_name,
-    )
-
-    if not resolved_playbook_path:
-        return prompt
-
-    ace_context = render_ace_context(
-        playbook_path=resolved_playbook_path,
-        family=family,
-        mode=resolved_ace_mode,
-        max_bullets=ace_max_bullets,
-        include_patterns=ace_include_patterns,
-    ).strip()
-
-    if not ace_context:
-        return prompt
-
-    return f"{ace_context}\n\n{prompt.strip()}"
-
-
 def build_final_prompt_for_question(
     question: str,
     prompt_mode: str | None,
     family: str | None,
+    model_name: str | None = None,
+    prediction_format: str | None = None,
     ace_playbook_path: str | None = None,
     ace_playbook_dir: str | None = None,
     ace_mode: str | None = None,
     ace_max_bullets: int = 0,
-    ace_include_patterns: bool = True,
-    model_name: str | None = None,
 ) -> str:
     """Build the complete prompt used by query/evaluation commands.
 
-    The selected prompt mode decides which template is loaded. ACE context is
-    added last so the same base prompt can be used with or without playbooks.
+    The selected prompt mode decides which template is loaded.
     """
     if not isinstance(question, str) or not question.strip():
         raise ValueError("question must be a non-empty string.")
@@ -381,17 +322,19 @@ def build_final_prompt_for_question(
     else:
         final_prompt = question.strip()
 
-    end_prompt = append_ace_context_to_prompt(
+    final_prompt = append_ace_context_to_prompt(
         prompt=final_prompt,
         family=family,
         prompt_mode=prompt_mode,
+        model_key=model_name,
+        prediction_format=prediction_format,
         ace_playbook_path=ace_playbook_path,
         ace_playbook_dir=ace_playbook_dir,
         ace_mode=ace_mode,
         ace_max_bullets=ace_max_bullets,
-        ace_include_patterns=ace_include_patterns,
-        model_name=model_name,
     )
 
-    #print(f"Final prompt:\n{end_prompt}\n{'-'*40}")
-    return end_prompt
+    if os.environ.get("DEBUG_ACE_PROMPT") == "1":
+        print(f"Final prompt:\n{final_prompt}\n{'-'*40}")
+
+    return final_prompt
