@@ -17,6 +17,7 @@ code/scripts
 code/slurm/
 code/outputs/slurm_logs/
 # ACE adaptation transient artifacts
+**/*_ace_playbook_*/
 code/outputs/evaluation_runs/**/pgmr_mini__ace_playbook__*/benchmark_raw.json
 code/outputs/evaluation_runs/**/pgmr_mini__ace_playbook__*/ace_deltas.json
 code/outputs/ace_filtered_datasets/
@@ -44,3 +45,6 @@ code/data/ace_playbooks/local/
 
 # ACE smoke-test outputs
 code/outputs/ace_smoke/
+code/outputs/ace_refine/
+code/data/ace_playbooks_final/
+code/data/ace_playbooks_online_refined/

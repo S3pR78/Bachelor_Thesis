@@ -35,6 +35,7 @@ from ace.orkg.rule_retrieval import (
     build_temporary_playbook_from_plan_and_rules,
 )
 from ace.orkg.safety import filter_safe_operations
+from ace.orkg.refine import refine_playbook_with_llm
 from src.evaluate.run_io import get_benchmark_raw_output_path
 
 
@@ -151,13 +152,60 @@ def run_one_item_evaluation(
     return raw_items[0], raw_path
 
 
+def metric_value(item: dict[str, Any], key: str) -> Any:
+    """Return scalar value from validation metric records.
+
+    Evaluation metrics are often stored as dictionaries such as:
+    {"metric": "...", "value": 1.0, ...}
+    or precision/recall/f1 dictionaries. Online ACE scoring needs the scalar.
+    """
+    value = get_validation_metric(item, key)
+
+    if isinstance(value, dict):
+        if "value" in value:
+            return value.get("value")
+        if "f1" in value:
+            return value.get("f1")
+
+    return value
+
+
+def metric_is_true(item: dict[str, Any], key: str) -> bool:
+    value = metric_value(item, key)
+
+    if isinstance(value, bool):
+        return value
+
+    if isinstance(value, (int, float)):
+        return float(value) >= 1.0
+
+    if isinstance(value, str):
+        return value.strip().lower() in {"true", "1", "yes", "ok"}
+
+    return False
+
+
+def metric_float(item: dict[str, Any], key: str) -> float:
+    value = metric_value(item, key)
+
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return 0.0
+
+
 def supervised_score(item: dict[str, Any]) -> tuple[int, int, float, float, int]:
     """Gold-aware score for ace_playbook online refinement."""
-    exact = 1 if get_validation_metric(item, "answer_exact_match") is True else 0
-    exec_ok = 1 if get_validation_metric(item, "prediction_execution_success") is True else 0
-    answer_f1 = float(get_f1(item, "answer_cell_value_precision_recall_f1") or 0.0)
-    kg_f1 = float(get_f1(item, "kg_ref_match") or 0.0)
-    extracted = 1 if get_validation_metric(item, "query_extracted") is True else 0
+    exact = 1 if metric_is_true(item, "answer_exact_match") else 0
+    exec_ok = 1 if metric_is_true(item, "prediction_execution_success") else 0
+    extracted = 1 if metric_is_true(item, "query_extracted") else 0
+
+    # Answer metrics should only influence acceptance when the prediction executed.
+    answer_f1 = metric_float(item, "answer_cell_value_precision_recall_f1") if exec_ok else 0.0
+
+    # KG-reference metrics are query-based and meaningful when a query was extracted.
+    kg_f1 = metric_float(item, "kg_ref_match") if extracted else 0.0
+
     return (exact, exec_ok, answer_f1, kg_f1, extracted)
 
 
@@ -169,7 +217,7 @@ def diagnostic_score(item: dict[str, Any]) -> int:
     """
     score = 0
 
-    if get_validation_metric(item, "query_extracted") is True:
+    if metric_is_true(item, "query_extracted"):
         score += 10
 
     extraction_status = str(item.get("extraction_status") or "").lower()
@@ -178,7 +226,7 @@ def diagnostic_score(item: dict[str, Any]) -> int:
     if "missing" in extraction_status or "failure" in extraction_status:
         score -= 6
 
-    if get_validation_metric(item, "prediction_execution_success") is True:
+    if metric_is_true(item, "prediction_execution_success"):
         score += 15
 
     query_execution_status = str(get_nested(item, "query_execution", "status") or "").lower()
@@ -193,7 +241,7 @@ def diagnostic_score(item: dict[str, Any]) -> int:
     else:
         score += 2
 
-    if get_validation_metric(item, "uri_hallucination") is True:
+    if metric_is_true(item, "uri_hallucination"):
         score -= 8
 
     pgmr_unmapped = get_validation_metric(item, "pgmr_unmapped_placeholders")
@@ -217,7 +265,18 @@ def diagnostic_score(item: dict[str, Any]) -> int:
 
 def is_attempt_good_enough(item: dict[str, Any], *, online_mode: str) -> bool:
     if online_mode == "playbook_refinement":
-        return get_validation_metric(item, "answer_exact_match") is True
+        exact, exec_ok, _answer_f1, kg_f1, extracted = supervised_score(item)
+
+        # In ORKG evaluation, exact answer match can be misleading when both the
+        # predicted and gold queries return an empty result set. For playbook
+        # refinement, only skip reflection if the answer is exact AND the query is
+        # executable, extractable, and structurally close to the gold query.
+        return (
+            exact == 1
+            and exec_ok == 1
+            and extracted == 1
+            and kg_f1 >= 0.90
+        )
 
     # test_time_repair: only non-gold diagnostics
     return diagnostic_score(item) >= 30
@@ -332,6 +391,7 @@ def build_item_temp_playbook(
     prediction_format: str,
     top_k_rules: int,
     extra_rule_operations: list[dict[str, Any]] | None = None,
+    include_plan: bool = True,
 ) -> tuple[str, list[dict[str, Any]]]:
     rules = load_playbook_rules(source_playbook_path)
     selected_rules = select_top_k_rules(
@@ -364,6 +424,7 @@ def build_item_temp_playbook(
         family=family,
         prediction_format=prediction_format,
         extra_rules=extra_rules,
+        include_plan=include_plan,
     )
 
     return temp_playbook, selected_rules
@@ -381,11 +442,16 @@ def run_online_ace(
     planner_max_tokens: int,
     reflector: Reflector,
     curator: Curator,
-    initial_playbook_dir: Path,
+    refiner_client: Any | None = None,
+    refiner_provider: str | None = None,
+    refiner_model: str | None = None,
+    refiner_max_tokens: int | None = None,
+    initial_playbook_dir: Path = Path("code/data/ace_playbooks"),
     out_dir: Path,
     online_mode: str,
     limit: int | None = None,
     top_k_rules: int = 8,
+    use_planner: bool = True,
     ace_max_bullets: int = -1,
     max_attempts: int = 2,
     sparql_endpoint: str = "https://www.orkg.org/triplestore",
@@ -400,6 +466,16 @@ def run_online_ace(
 
     if max_attempts < 1:
         raise ValueError("max_attempts must be >= 1")
+
+    if refine_every_accepted > 0 and online_mode != "playbook_refinement":
+        raise ValueError("refine_every_accepted is only supported for playbook_refinement mode.")
+
+    if refine_every_accepted > 0 and (
+        refiner_client is None or not refiner_provider or not refiner_model
+    ):
+        raise ValueError(
+            "refine_every_accepted requires refiner_client, refiner_provider, and refiner_model."
+        )
 
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "llm_logs").mkdir(parents=True, exist_ok=True)
@@ -427,6 +503,8 @@ def run_online_ace(
     planner_log: list[dict[str, Any]] = []
 
     accepted_rule_count = 0
+    refine_count = 0
+    next_refine_at = refine_every_accepted if refine_every_accepted > 0 else None
     rejected_unchanged_count = 0
     rejected_harmful_count = 0
     rejected_unsafe_count = 0
@@ -450,17 +528,34 @@ def run_online_ace(
         )
         full_playbook_text = read_playbook_or_empty(full_playbook_path)
 
-        plan, planner_call_info = plan_question_with_llm(
-            question=question,
-            family=family,
-            prediction_format=prediction_format,
-            api_client=planner_client,
-            api_provider=planner_provider,
-            model=planner_model,
-            max_tokens=planner_max_tokens,
-            call_id=f"online_plan_{idx:04d}_{item_id}",
-            log_dir=str(out_dir / "llm_logs"),
-        )
+        if use_planner:
+            plan, planner_call_info = plan_question_with_llm(
+                question=question,
+                family=family,
+                prediction_format=prediction_format,
+                api_client=planner_client,
+                api_provider=planner_provider,
+                model=planner_model,
+                max_tokens=planner_max_tokens,
+                call_id=f"online_plan_{idx:04d}_{item_id}",
+                log_dir=str(out_dir / "llm_logs"),
+            )
+        else:
+            plan = {
+                "question_intent": question,
+                "expected_query_form": "",
+                "answer_variables": [],
+                "required_paths": [],
+                "relevant_terms": [],
+                "common_risks": [],
+                "planner_disabled": True,
+            }
+            planner_call_info = {
+                "role": "planner",
+                "call_id": f"online_plan_{idx:04d}_{item_id}",
+                "skipped": True,
+                "reason": "planner disabled by --disable-planner",
+            }
 
         planner_log.append(
             {
@@ -493,6 +588,7 @@ def run_online_ace(
                 prediction_format=prediction_format,
                 top_k_rules=top_k_rules,
                 extra_rule_operations=accepted_operations_for_item,
+                include_plan=use_planner,
             )
 
             attempt_playbook_dir = item_dir / f"attempt_{attempt}_playbooks"
@@ -579,6 +675,66 @@ def run_online_ace(
                         full_playbook_path.parent.mkdir(parents=True, exist_ok=True)
                         full_playbook_path.write_text(full_playbook_text, encoding="utf-8")
                         accepted_rule_count += len(latest_ops)
+
+                        # ACE grow-and-refine: periodically clean the current
+                        # family/format working playbook after accepted rules.
+                        if (
+                            next_refine_at is not None
+                            and accepted_rule_count >= next_refine_at
+                        ):
+                            try:
+                                refine_report = refine_playbook_with_llm(
+                                    playbook_text=full_playbook_text,
+                                    family=family,
+                                    prediction_format=prediction_format,
+                                    api_client=refiner_client,
+                                    api_provider=str(refiner_provider),
+                                    model=str(refiner_model),
+                                    max_tokens=int(refiner_max_tokens or 2048),
+                                    call_id=f"online_refine_{idx:04d}_{item_id}_{family}_{prediction_format}",
+                                    log_dir=str(out_dir / "llm_logs"),
+                                )
+                                full_playbook_text = refine_report["cleaned_playbook"]
+                                full_playbook_path.write_text(full_playbook_text, encoding="utf-8")
+                                refine_count += 1
+                                next_refine_at += refine_every_accepted
+
+                                decisions_log.append(
+                                    {
+                                        "idx": idx,
+                                        "id": item_id,
+                                        "family": family,
+                                        "online_mode": online_mode,
+                                        "decision": "periodic_refine",
+                                        "accepted_rule_count": accepted_rule_count,
+                                        "refine_count": refine_count,
+                                        "original_rule_count": refine_report.get("original_rule_count"),
+                                        "refined_rule_count": refine_report.get("refined_rule_count"),
+                                        "pre_rejections": refine_report.get("pre_rejections", []),
+                                        "post_rejections": refine_report.get("post_rejections", []),
+                                    }
+                                )
+                            except Exception as exc:
+                                # Periodic refine is a cleanup step. It must not crash
+                                # the online ACE run. Keep the grown playbook unchanged
+                                # and continue with the next item.
+                                next_refine_at += refine_every_accepted
+                                decisions_log.append(
+                                    {
+                                        "idx": idx,
+                                        "id": item_id,
+                                        "family": family,
+                                        "online_mode": online_mode,
+                                        "decision": "periodic_refine_failed",
+                                        "accepted_rule_count": accepted_rule_count,
+                                        "refine_count": refine_count,
+                                        "error": str(exc),
+                                    }
+                                )
+                                print(
+                                    "WARNING: periodic refine failed for "
+                                    f"id={item_id} family={family} format={prediction_format}: {exc}"
+                                )
 
                     decisions_log.append(
                         {
@@ -721,10 +877,13 @@ def run_online_ace(
         "reflected_count": reflected_count,
         "attempt_counts": attempt_counts,
         "accepted_rule_count": accepted_rule_count,
+        "refine_count": refine_count,
+        "refine_every_accepted": refine_every_accepted,
         "rejected_unchanged_count": rejected_unchanged_count,
         "rejected_harmful_count": rejected_harmful_count,
         "rejected_unsafe_count": rejected_unsafe_count,
         "top_k_rules": top_k_rules,
+        "use_planner": use_planner,
         "max_attempts": max_attempts,
         "final_playbook_dir": str(final_playbook_dir),
         "published_final_playbooks": publish_final_playbooks and online_mode == "playbook_refinement",

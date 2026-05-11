@@ -242,21 +242,25 @@ def build_temporary_playbook_from_plan_and_rules(
     family: str,
     prediction_format: str,
     extra_rules: list[dict[str, Any]] | None = None,
+    include_plan: bool = True,
 ) -> str:
     """Build a temporary playbook for one item.
 
     It contains:
-    1. the planner's query plan as a rule
+    1. optionally the planner's query plan as a rule
     2. top-k retrieved rules from the frozen/current playbook
     3. optional temporary repair rules for later attempts
     """
-    rules: list[dict[str, Any]] = [
-        render_plan_as_rule(
-            plan=plan,
-            family=family,
-            prediction_format=prediction_format,
+    rules: list[dict[str, Any]] = []
+
+    if include_plan:
+        rules.append(
+            render_plan_as_rule(
+                plan=plan,
+                family=family,
+                prediction_format=prediction_format,
+            )
         )
-    ]
 
     rules.extend(selected_rules)
 

@@ -56,8 +56,20 @@ def select_items(
     selected: list[dict[str, Any]] = []
 
     for item in items:
-        if not include_correct and get_validation_metric(item, "answer_exact_match") is True:
+        answer_exact = get_validation_metric(item, "answer_exact_match")
+        if isinstance(answer_exact, dict):
+            answer_exact = answer_exact.get("value")
+
+        is_exact = (
+            answer_exact is True
+            or answer_exact == 1
+            or answer_exact == 1.0
+            or str(answer_exact).strip().lower() in {"true", "1", "yes"}
+        )
+
+        if not include_correct and is_exact:
             continue
+
         selected.append(item)
         if limit is not None and len(selected) >= limit:
             break

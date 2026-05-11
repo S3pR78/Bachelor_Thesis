@@ -65,12 +65,29 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--planner-model-key", default="gpt_4o_mini")
     parser.add_argument("--reflector-model-key", default="gpt_4o_mini")
     parser.add_argument("--curator-model-key", default="gpt_4o_mini")
+    parser.add_argument(
+        "--refiner-model-key",
+        default="gpt_4o_mini",
+        help="Model key used for periodic grow-and-refine cleanup during playbook_refinement.",
+    )
     parser.add_argument("--model-config", default="code/config/model_config.json")
 
     parser.add_argument("--limit", type=int, default=None)
     parser.add_argument("--top-k-rules", type=int, default=8)
+    parser.add_argument(
+        "--disable-planner",
+        action="store_true",
+        default=False,
+        help="Disable LLM planner and retrieve top-k rules using only the question.",
+    )
     parser.add_argument("--ace-max-bullets", type=int, default=-1)
     parser.add_argument("--max-attempts", type=int, default=2)
+    parser.add_argument(
+        "--refine-every-accepted",
+        type=int,
+        default=0,
+        help="Run LLM playbook refinement after every N accepted rules. 0 disables periodic refinement.",
+    )
     parser.add_argument("--sparql-endpoint", default="https://www.orkg.org/triplestore")
     parser.add_argument("--pgmr-memory-dir", default="code/data/orkg_memory/templates")
     parser.add_argument("--pgmr-similarity-mapping", action="store_true", default=True)
@@ -89,18 +106,22 @@ def main() -> int:
     planner_config = resolve_model_entry(args.model_config, args.planner_model_key)
     reflector_config = resolve_model_entry(args.model_config, args.reflector_model_key)
     curator_config = resolve_model_entry(args.model_config, args.curator_model_key)
+    refiner_config = resolve_model_entry(args.model_config, args.refiner_model_key)
 
     planner_provider = get_provider(planner_config)
     reflector_provider = get_provider(reflector_config)
     curator_provider = get_provider(curator_config)
+    refiner_provider = get_provider(refiner_config)
 
     planner_model_id = get_model_id(planner_config, model_key=args.planner_model_key)
     reflector_model_id = get_model_id(reflector_config, model_key=args.reflector_model_key)
     curator_model_id = get_model_id(curator_config, model_key=args.curator_model_key)
+    refiner_model_id = get_model_id(refiner_config, model_key=args.refiner_model_key)
 
     planner_max_tokens = get_max_tokens(planner_config, cli_max_tokens=args.max_tokens)
     reflector_max_tokens = get_max_tokens(reflector_config, cli_max_tokens=args.max_tokens)
     curator_max_tokens = get_max_tokens(curator_config, cli_max_tokens=args.max_tokens)
+    refiner_max_tokens = get_max_tokens(refiner_config, cli_max_tokens=args.max_tokens)
 
     planned = {
         "dataset": args.dataset,
@@ -118,7 +139,12 @@ def main() -> int:
         "curator_model_key": args.curator_model_key,
         "curator_model_id": curator_model_id,
         "curator_provider": curator_provider,
+        "refiner_model_key": args.refiner_model_key,
+        "refiner_model_id": refiner_model_id,
+        "refiner_provider": refiner_provider,
+        "refine_every_accepted": args.refine_every_accepted,
         "top_k_rules": args.top_k_rules,
+        "use_planner": not args.disable_planner,
         "max_attempts": args.max_attempts,
         "out_dir": args.out_dir,
         "initial_playbook_dir": args.initial_playbook_dir,
@@ -139,6 +165,9 @@ def main() -> int:
     planner_client = llm_cache.get(args.planner_model_key)
     reflector_client = llm_cache.get(args.reflector_model_key)
     curator_client = llm_cache.get(args.curator_model_key)
+    refiner_client = None
+    if args.refine_every_accepted > 0:
+        refiner_client = llm_cache.get(args.refiner_model_key)
     generator_client = llm_cache.get(args.generator_model_key)
     generator_inference_session = ace_client_to_inference_session(
         generator_client,
@@ -169,17 +198,23 @@ def main() -> int:
         planner_max_tokens=planner_max_tokens,
         reflector=reflector,
         curator=curator,
+        refiner_client=refiner_client,
+        refiner_provider=refiner_provider if args.refine_every_accepted > 0 else None,
+        refiner_model=refiner_model_id if args.refine_every_accepted > 0 else None,
+        refiner_max_tokens=refiner_max_tokens if args.refine_every_accepted > 0 else None,
         initial_playbook_dir=Path(args.initial_playbook_dir),
         out_dir=Path(args.out_dir),
         online_mode=args.online_mode,
         limit=args.limit,
         top_k_rules=args.top_k_rules,
+        use_planner=not args.disable_planner,
         ace_max_bullets=args.ace_max_bullets,
         max_attempts=args.max_attempts,
         sparql_endpoint=args.sparql_endpoint,
         pgmr_memory_dir=args.pgmr_memory_dir,
         pgmr_similarity_mapping=args.pgmr_similarity_mapping,
         publish_final_playbooks=args.publish_final_playbooks,
+        refine_every_accepted=args.refine_every_accepted,
         generator_inference_session=generator_inference_session,
     )
 

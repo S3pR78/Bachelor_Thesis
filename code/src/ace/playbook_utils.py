@@ -253,6 +253,69 @@ def get_playbook_stats(playbook_text):
     
     return stats
 
+def _repair_truncated_json_object(text: str) -> dict | None:
+    """Best-effort repair for near-valid JSON objects from local LLMs.
+
+    This intentionally only handles conservative cases:
+    - response contains a JSON object starting with "{"
+    - strings are already closed
+    - object/list brackets are truncated at the end
+
+    It does not invent missing field content.
+    """
+    start = text.find("{")
+    if start < 0:
+        return None
+
+    candidate = text[start:].strip()
+
+    # Remove common trailing fences or separators.
+    candidate = candidate.removesuffix("```").strip()
+    candidate = candidate.removesuffix("---").strip()
+
+    stack: list[str] = []
+    in_string = False
+    escape = False
+
+    for char in candidate:
+        if escape:
+            escape = False
+            continue
+
+        if char == "\\" and in_string:
+            escape = True
+            continue
+
+        if char == '"':
+            in_string = not in_string
+            continue
+
+        if in_string:
+            continue
+
+        if char == "{":
+            stack.append("}")
+        elif char == "[":
+            stack.append("]")
+        elif char in ("}", "]"):
+            if stack and stack[-1] == char:
+                stack.pop()
+            else:
+                # Mismatched closing bracket; do not try aggressive repair.
+                return None
+
+    if in_string:
+        # Do not repair unterminated strings; content may be incomplete.
+        return None
+
+    repaired = candidate + "".join(reversed(stack))
+
+    try:
+        return json.loads(repaired)
+    except json.JSONDecodeError:
+        return None
+
+
 def extract_json_from_text(text, json_key=None):
     """Extract JSON object from text, handling various formats"""
     try:
@@ -330,6 +393,10 @@ def extract_json_from_text(text, json_key=None):
         else:
             print(f"Raw content:\n{text}")
         
+    repaired = _repair_truncated_json_object(text)
+    if repaired is not None:
+        return repaired
+
     return None
 
 def extract_playbook_bullets(playbook_text, bullet_ids):

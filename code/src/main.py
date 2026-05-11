@@ -270,11 +270,14 @@ def run_ace_online_task(args: argparse.Namespace) -> int:
             "planner_model_key",
             "reflector_model_key",
             "curator_model_key",
+            "refiner_model_key",
             "model_config",
             "limit",
             "top_k_rules",
+            "disable_planner",
             "ace_max_bullets",
             "max_attempts",
+            "refine_every_accepted",
             "sparql_endpoint",
             "pgmr_memory_dir",
             "pgmr_similarity_mapping",
@@ -352,11 +355,28 @@ def add_ace_parser(subparsers: argparse._SubParsersAction) -> None:
     online_parser.add_argument("--planner-model-key", default="gpt_4o_mini")
     online_parser.add_argument("--reflector-model-key", default="gpt_4o_mini")
     online_parser.add_argument("--curator-model-key", default="gpt_4o_mini")
+    online_parser.add_argument(
+        "--refiner-model-key",
+        default="gpt_4o_mini",
+        help="Model key used for periodic grow-and-refine cleanup during playbook_refinement.",
+    )
     online_parser.add_argument("--model-config", default="code/config/model_config.json")
     online_parser.add_argument("--limit", type=int, default=None)
     online_parser.add_argument("--top-k-rules", type=int, default=8)
+    online_parser.add_argument(
+        "--disable-planner",
+        action="store_true",
+        default=False,
+        help="Disable LLM planner and retrieve top-k rules using only the question.",
+    )
     online_parser.add_argument("--ace-max-bullets", type=int, default=-1)
     online_parser.add_argument("--max-attempts", type=int, default=2)
+    online_parser.add_argument(
+        "--refine-every-accepted",
+        type=int,
+        default=0,
+        help="Run LLM playbook refinement after every N accepted rules. 0 disables periodic refinement.",
+    )
     online_parser.add_argument("--sparql-endpoint", default="https://www.orkg.org/triplestore")
     online_parser.add_argument("--pgmr-memory-dir", default="code/data/orkg_memory/templates")
     online_parser.add_argument("--pgmr-similarity-mapping", action="store_true", default=True)

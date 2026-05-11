@@ -21,12 +21,22 @@ PGMR_LITE_FORBIDDEN_TERMS = (
     "orkgp:",
     "orkgc:",
     "orkgr:",
+    "orkg uri",
+    "orkg uris",
+    "orkg id",
+    "orkg ids",
+    "orkg identifier",
+    "orkg identifiers",
     "orkg predicate",
     "orkg predicates",
     "orkg class",
     "orkg classes",
     "orkg resource",
     "orkg resources",
+    "correct orkg uri",
+    "correct orkg uris",
+    "use orkg uri",
+    "use orkg uris",
 )
 
 
