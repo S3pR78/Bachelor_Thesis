@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from datetime import datetime
 import shutil
 from pathlib import Path
 from typing import Any
@@ -35,11 +36,93 @@ from ace.orkg.rule_retrieval import (
     build_temporary_playbook_from_plan_and_rules,
 )
 from ace.orkg.safety import filter_safe_operations
+from src.evaluate.runner import build_benchmark_summary_payload
 from ace.orkg.refine import refine_playbook_with_llm
 from src.evaluate.run_io import get_benchmark_raw_output_path
 
 
 SUPPORTED_ONLINE_MODES = {"playbook_refinement", "test_time_repair"}
+
+
+def write_full_json(path: Path, data: Any) -> None:
+    """Write full JSON logs without compact_json truncation."""
+    path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def _metric_record_value(item: dict[str, Any], key: str) -> Any:
+    value = get_validation_metric(item, key)
+    if isinstance(value, dict):
+        if "value" in value:
+            return value.get("value")
+        if "f1" in value:
+            return value.get("f1")
+    return value
+
+
+def _metric_float_value(item: dict[str, Any], key: str) -> float:
+    value = _metric_record_value(item, key)
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return 0.0
+
+
+def build_final_benchmark_summary(
+    *,
+    final_raw_items: list[dict[str, Any]],
+    selected_attempts: list[dict[str, Any]],
+    online_summary: dict[str, Any],
+) -> dict[str, Any]:
+    """Build a compact benchmark-like summary from selected final attempts.
+
+    The selected attempt is chosen by the online mode before this summary is
+    computed. For benchmark/test-time repair, selection must use non-gold
+    diagnostic scores only. This summary is for reporting/evaluation afterwards.
+    """
+    total = len(final_raw_items)
+
+    metric_keys = {
+        "query_extracted": "query_extracted",
+        "prediction_execution_success": "prediction_execution_success",
+        "gold_execution_success": "gold_execution_success",
+        "answer_exact_match": "answer_exact_match",
+        "answer_cell_value_f1": "answer_cell_value_precision_recall_f1",
+        "answer_f1": "answer_precision_recall_f1",
+        "kg_ref_f1": "kg_ref_match",
+        "predicate_ref_f1": "predicate_ref_match",
+        "class_ref_f1": "class_ref_match",
+        "resource_ref_f1": "resource_ref_match",
+        "query_bleu": "query_bleu",
+        "query_rouge2_f1": "query_rouge2_f1",
+        "query_rougeL_f1": "query_rougeL_f1",
+    }
+
+    aggregates: dict[str, Any] = {}
+    for out_key, raw_key in metric_keys.items():
+        values = [_metric_float_value(item, raw_key) for item in final_raw_items]
+        if values:
+            aggregates[out_key] = round(sum(values) / len(values), 6)
+
+    selected_attempt_counts: dict[str, int] = {}
+    for entry in selected_attempts:
+        attempt = str(entry.get("selected_attempt"))
+        selected_attempt_counts[attempt] = selected_attempt_counts.get(attempt, 0) + 1
+
+    return {
+        "summary_type": "online_ace_selected_attempts",
+        "total_items": total,
+        "selected_attempt_counts": selected_attempt_counts,
+        "online_mode": online_summary.get("online_mode"),
+        "generator_model_key": online_summary.get("generator_model_key"),
+        "prompt_mode": online_summary.get("prompt_mode"),
+        "prediction_format": online_summary.get("prediction_format"),
+        "selection_note": (
+            "For test_time_repair, selected attempts are chosen using non-gold "
+            "diagnostic scores. Gold-based metrics in this summary are computed "
+            "only after selection for reporting."
+        ),
+        **aggregates,
+    }
 
 
 def load_dataset(path: Path) -> list[dict[str, Any]]:
@@ -430,6 +513,51 @@ def build_item_temp_playbook(
     return temp_playbook, selected_rules
 
 
+def write_evaluation_run_copy(
+    *,
+    final_raw_items: list[dict[str, Any]],
+    benchmark_summary_payload: dict[str, Any],
+    selected_attempts_log: list[dict[str, Any]],
+    online_summary: dict[str, Any],
+    generator_model_key: str,
+    prompt_mode: str,
+    dataset_path: Path,
+    online_mode: str,
+) -> Path:
+    """Write selected Online ACE results into the standard evaluation_runs tree."""
+    dataset_stem = dataset_path.stem
+    suffix = "test_time_repair" if online_mode == "test_time_repair" else online_mode
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+    run_dir = (
+        Path("code/outputs/evaluation_runs")
+        / generator_model_key
+        / f"{prompt_mode}__{dataset_stem}_{suffix}__{timestamp}"
+    )
+    run_dir.mkdir(parents=True, exist_ok=True)
+
+    write_full_json(run_dir / "benchmark_raw.json", final_raw_items)
+    write_full_json(run_dir / "benchmark_summary.json", benchmark_summary_payload)
+    write_full_json(run_dir / "selected_attempts.json", selected_attempts_log)
+    write_full_json(run_dir / "online_summary.json", online_summary)
+
+    readme = (
+        "# Online ACE Selected-Attempt Benchmark Run\n\n"
+        f"- model: `{generator_model_key}`\n"
+        f"- prompt_mode: `{prompt_mode}`\n"
+        f"- dataset: `{dataset_path}`\n"
+        f"- online_mode: `{online_mode}`\n\n"
+        "This folder stores the selected final attempts from an Online ACE run in "
+        "the standard evaluation run layout. `benchmark_raw.json` contains one "
+        "selected raw result entry per benchmark item. `benchmark_summary.json` "
+        "uses the normal benchmark summary structure. `selected_attempts.json` "
+        "records which attempt was selected for each item.\n"
+    )
+    (run_dir / "README.md").write_text(readme, encoding="utf-8")
+
+    return run_dir
+
+
 def run_online_ace(
     *,
     dataset_path: Path,
@@ -501,6 +629,8 @@ def run_online_ace(
     attempts_log: list[dict[str, Any]] = []
     decisions_log: list[dict[str, Any]] = []
     planner_log: list[dict[str, Any]] = []
+    selected_attempts_log: list[dict[str, Any]] = []
+    final_raw_items: list[dict[str, Any]] = []
 
     accepted_rule_count = 0
     refine_count = 0
@@ -571,6 +701,7 @@ def run_online_ace(
         accepted_operations_for_item: list[dict[str, Any]] = []
         previous_attempt_item: dict[str, Any] | None = None
         previous_attempt_raw: Path | None = None
+        attempt_results: list[dict[str, Any]] = []
 
         item_had_helpful_rule = False
         item_attempts = 0
@@ -628,6 +759,20 @@ def run_online_ace(
                     else None,
                     "selected_rule_ids": [rule.get("id") for rule in selected_rules],
                     "temporary_rule_count": len(accepted_operations_for_item),
+                }
+            )
+
+            attempt_results.append(
+                {
+                    "attempt": attempt,
+                    "raw_path": str(attempt_raw),
+                    "diagnostic_score": diagnostic_score(attempt_item),
+                    "supervised_score": (
+                        supervised_score(attempt_item)
+                        if online_mode == "playbook_refinement"
+                        else None
+                    ),
+                    "item": attempt_item,
                 }
             )
 
@@ -851,6 +996,47 @@ def run_online_ace(
             # per-attempt attribution clear: one candidate rule -> one retry.
             accepted_operations_for_item.append(safe_operations[0])
 
+        # Select one final attempt for this item. For playbook_refinement this
+        # is the supervised-best attempt. For test_time_repair this is the
+        # diagnostic-best attempt, using only non-gold signals for selection.
+        if attempt_results:
+            if online_mode == "playbook_refinement":
+                best_attempt = max(
+                    attempt_results,
+                    key=lambda result: tuple(result.get("supervised_score") or (0, 0, 0.0, 0.0, 0)),
+                )
+                selection_mode = "supervised"
+            else:
+                best_attempt = max(
+                    attempt_results,
+                    key=lambda result: int(result.get("diagnostic_score") or 0),
+                )
+                selection_mode = "diagnostic_non_gold"
+
+            selected_attempts_log.append(
+                {
+                    "idx": idx,
+                    "id": item_id,
+                    "family": family,
+                    "online_mode": online_mode,
+                    "selection_mode": selection_mode,
+                    "selected_attempt": best_attempt["attempt"],
+                    "selected_raw_path": best_attempt["raw_path"],
+                    "selected_diagnostic_score": best_attempt.get("diagnostic_score"),
+                    "selected_supervised_score": best_attempt.get("supervised_score"),
+                    "all_attempt_scores": [
+                        {
+                            "attempt": result["attempt"],
+                            "raw_path": result["raw_path"],
+                            "diagnostic_score": result.get("diagnostic_score"),
+                            "supervised_score": result.get("supervised_score"),
+                        }
+                        for result in attempt_results
+                    ],
+                }
+            )
+            final_raw_items.append(best_attempt["item"])
+
         if online_mode == "test_time_repair":
             # Candidate rules are intentionally discarded after each item.
             pass
@@ -887,14 +1073,67 @@ def run_online_ace(
         "max_attempts": max_attempts,
         "final_playbook_dir": str(final_playbook_dir),
         "published_final_playbooks": publish_final_playbooks and online_mode == "playbook_refinement",
+        "selected_attempts_path": str(out_dir / "selected_attempts.json"),
+        "final_benchmark_raw_path": str(out_dir / "final_benchmark_raw.json"),
+        "final_benchmark_summary_path": str(out_dir / "final_benchmark_summary.json"),
+        "benchmark_raw_path": str(out_dir / "benchmark_raw.json"),
+        "benchmark_summary_path": str(out_dir / "benchmark_summary.json"),
+        "online_selected_summary_path": str(out_dir / "online_selected_summary.json"),
+        "evaluation_run_dir": None,
+        "final_raw_item_count": len(final_raw_items),
     }
 
-    (out_dir / "online_plans.json").write_text(compact_json(planner_log), encoding="utf-8")
-    (out_dir / "online_attempts.json").write_text(compact_json(attempts_log), encoding="utf-8")
-    (out_dir / "online_rule_decisions.json").write_text(
-        compact_json(decisions_log),
-        encoding="utf-8",
+    online_selected_summary = build_final_benchmark_summary(
+        final_raw_items=final_raw_items,
+        selected_attempts=selected_attempts_log,
+        online_summary=summary,
     )
-    (out_dir / "online_summary.json").write_text(compact_json(summary), encoding="utf-8")
+
+    benchmark_run_metadata = {
+        "model_name": generator_model_key,
+        "dataset_path": str(dataset_path),
+        "prompt_mode": prompt_mode,
+        "prediction_format": prediction_format,
+        "online_mode": online_mode,
+        "source": "online_ace_selected_attempts",
+        "selection_mode": (
+            "supervised" if online_mode == "playbook_refinement" else "diagnostic_non_gold"
+        ),
+        "selected_attempts_path": str(out_dir / "selected_attempts.json"),
+        "online_summary_path": str(out_dir / "online_summary.json"),
+    }
+    benchmark_summary_payload = build_benchmark_summary_payload(
+        results=final_raw_items,
+        run_metadata=benchmark_run_metadata,
+    )
+
+    evaluation_run_dir = write_evaluation_run_copy(
+        final_raw_items=final_raw_items,
+        benchmark_summary_payload=benchmark_summary_payload,
+        selected_attempts_log=selected_attempts_log,
+        online_summary=summary,
+        generator_model_key=generator_model_key,
+        prompt_mode=prompt_mode,
+        dataset_path=dataset_path,
+        online_mode=online_mode,
+    )
+    summary["evaluation_run_dir"] = str(evaluation_run_dir)
+
+    write_full_json(out_dir / "online_plans.json", planner_log)
+    write_full_json(out_dir / "online_attempts.json", attempts_log)
+    write_full_json(out_dir / "online_rule_decisions.json", decisions_log)
+    write_full_json(out_dir / "selected_attempts.json", selected_attempts_log)
+
+    # Compatibility names for Online ACE.
+    write_full_json(out_dir / "final_benchmark_raw.json", final_raw_items)
+    write_full_json(out_dir / "final_benchmark_summary.json", benchmark_summary_payload)
+
+    # Standard evaluate-style names for downstream comparison.
+    write_full_json(out_dir / "benchmark_raw.json", final_raw_items)
+    write_full_json(out_dir / "benchmark_summary.json", benchmark_summary_payload)
+
+    # Compact Online-specific selected-attempt summary.
+    write_full_json(out_dir / "online_selected_summary.json", online_selected_summary)
+    write_full_json(out_dir / "online_summary.json", summary)
 
     return summary

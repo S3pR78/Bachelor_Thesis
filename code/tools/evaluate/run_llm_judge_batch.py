@@ -32,13 +32,36 @@ def _is_excluded(raw_path: Path, runs_root: Path) -> bool:
     return relative.parts[0] in EXCLUDED_FOLDERS
 
 
-def find_benchmark_raw_files(runs_root: Path) -> list[Path]:
+def _has_existing_llm_judge_outputs(raw_path: Path) -> bool:
+    """Return True if this run already has LLM-judge outputs."""
+    output_dir = raw_path.parent
+    existing_outputs = [
+        output_dir / "llm_judge_raw.json",
+        output_dir / "llm_judge_summary.json",
+        output_dir / "benchmark_summary_with_llm_judge.json",
+    ]
+    return any(path.exists() for path in existing_outputs)
+
+
+def find_benchmark_raw_files(
+    runs_root: Path,
+    *,
+    skip_existing: bool = False,
+) -> list[Path]:
     """Find benchmark_raw.json files, excluding configured top-level folders."""
-    return [
+    raw_files = [
         path
         for path in sorted(runs_root.glob("**/benchmark_raw.json"))
         if not _is_excluded(path, runs_root)
     ]
+
+    if skip_existing:
+        raw_files = [
+            path for path in raw_files
+            if not _has_existing_llm_judge_outputs(path)
+        ]
+
+    return raw_files
 
 
 def parse_args() -> argparse.Namespace:
@@ -78,6 +101,14 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Only print the benchmark_raw.json files that would be processed.",
     )
+    parser.add_argument(
+        "--skip-existing",
+        action="store_true",
+        help=(
+            "Skip runs where llm_judge_raw.json, llm_judge_summary.json, "
+            "or benchmark_summary_with_llm_judge.json already exists."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -85,9 +116,13 @@ def main() -> int:
     args = parse_args()
     runs_root = Path(args.runs_root).resolve()
 
-    raw_files = find_benchmark_raw_files(runs_root)
+    raw_files = find_benchmark_raw_files(
+        runs_root,
+        skip_existing=args.skip_existing,
+    )
     print(f"Runs root: {runs_root}")
     print(f"Excluded top-level folders: {', '.join(sorted(EXCLUDED_FOLDERS))}")
+    print(f"Skip existing LLM judge outputs: {args.skip_existing}")
     print(f"Found benchmark_raw.json files to process: {len(raw_files)}")
 
     for raw_path in raw_files:

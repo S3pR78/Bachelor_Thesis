@@ -265,6 +265,28 @@ def _build_prediction_query_from_model_output(
     }
 
 
+def build_benchmark_summary_payload(
+    results: list[dict],
+    run_metadata: dict,
+) -> dict:
+    """Build the standard benchmark_summary.json payload.
+
+    This helper is shared by normal evaluation and Online ACE selected-attempt
+    evaluation so both outputs use the same summary structure.
+    """
+    run_metadata = dict(run_metadata)
+    cost_summary = _aggregate_costs(results)
+    run_metadata["cost_summary"] = cost_summary
+
+    summary_body = build_benchmark_summary(results)
+    summary_body["costs"] = cost_summary
+
+    return {
+        "run_metadata": run_metadata,
+        "summary": summary_body,
+    }
+
+
 def execute_evaluate_task(
     args: argparse.Namespace,
     *,

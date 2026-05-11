@@ -48,3 +48,9 @@ code/outputs/ace_smoke/
 code/outputs/ace_refine/
 code/data/ace_playbooks_final/
 code/data/ace_playbooks_online_refined/
+
+# Large benchmark raw outputs
+**/benchmark_raw.json
+
+# ACE online intermediate outputs
+code/outputs/online_ace/

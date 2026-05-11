@@ -1,0 +1,1343 @@
+[
+  {
+    "idx": 1,
+    "id": "759",
+    "family": "empirical_research_practice",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/759/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 4,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/759/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/759/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 3,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/759/attempt_3_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 2,
+    "id": "760",
+    "family": "empirical_research_practice",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/760/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 30,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/760/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 30,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 3,
+    "id": "766",
+    "family": "empirical_research_practice",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 3,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/766/attempt_3_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 30,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/766/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/766/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 3,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/766/attempt_3_evaluation/benchmark_raw.json",
+        "diagnostic_score": 30,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 4,
+    "id": "814",
+    "family": "nlp4re",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/814/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 4,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/814/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/814/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 3,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/814/attempt_3_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 5,
+    "id": "816",
+    "family": "nlp4re",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 2,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/816/attempt_2_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 32,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/816/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/816/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 32,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 6,
+    "id": "752",
+    "family": "empirical_research_practice",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/752/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 30,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/752/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 30,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 7,
+    "id": "753",
+    "family": "empirical_research_practice",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/753/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 30,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/753/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 30,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 8,
+    "id": "755",
+    "family": "empirical_research_practice",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 2,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/755/attempt_2_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 30,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/755/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/755/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 30,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 9,
+    "id": "757",
+    "family": "empirical_research_practice",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 2,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/757/attempt_2_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 30,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/757/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/757/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 30,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 10,
+    "id": "758",
+    "family": "empirical_research_practice",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/758/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 30,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/758/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 30,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 11,
+    "id": "762",
+    "family": "empirical_research_practice",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/762/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 4,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/762/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/762/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 3,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/762/attempt_3_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 12,
+    "id": "763",
+    "family": "empirical_research_practice",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 3,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/763/attempt_3_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 30,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/763/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/763/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 3,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/763/attempt_3_evaluation/benchmark_raw.json",
+        "diagnostic_score": 30,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 13,
+    "id": "694",
+    "family": "empirical_research_practice",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/694/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 4,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/694/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 14,
+    "id": "695",
+    "family": "empirical_research_practice",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/695/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 4,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/695/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/695/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 3,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/695/attempt_3_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 15,
+    "id": "696",
+    "family": "empirical_research_practice",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/696/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 30,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/696/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 30,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 16,
+    "id": "697",
+    "family": "empirical_research_practice",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 3,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/697/attempt_3_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 30,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/697/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/697/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 3,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/697/attempt_3_evaluation/benchmark_raw.json",
+        "diagnostic_score": 30,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 17,
+    "id": "698",
+    "family": "empirical_research_practice",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/698/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 4,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/698/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/698/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 3,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/698/attempt_3_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 18,
+    "id": "699",
+    "family": "empirical_research_practice",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 2,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/699/attempt_2_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 30,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/699/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/699/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 30,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 19,
+    "id": "700",
+    "family": "empirical_research_practice",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 2,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/700/attempt_2_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 30,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/700/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/700/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 30,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 20,
+    "id": "701",
+    "family": "empirical_research_practice",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/701/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 30,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/701/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 30,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 21,
+    "id": "702",
+    "family": "empirical_research_practice",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 3,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/702/attempt_3_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 30,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/702/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": -6,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/702/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": -6,
+        "supervised_score": null
+      },
+      {
+        "attempt": 3,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/702/attempt_3_evaluation/benchmark_raw.json",
+        "diagnostic_score": 30,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 22,
+    "id": "703",
+    "family": "empirical_research_practice",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/703/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 4,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/703/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/703/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 3,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/703/attempt_3_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 23,
+    "id": "704",
+    "family": "empirical_research_practice",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/704/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 32,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/704/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 32,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 24,
+    "id": "705",
+    "family": "empirical_research_practice",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 2,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/705/attempt_2_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 30,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/705/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/705/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 30,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 25,
+    "id": "706",
+    "family": "empirical_research_practice",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 3,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/706/attempt_3_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": -4,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/706/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": -6,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/706/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": -6,
+        "supervised_score": null
+      },
+      {
+        "attempt": 3,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/706/attempt_3_evaluation/benchmark_raw.json",
+        "diagnostic_score": -4,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 26,
+    "id": "710",
+    "family": "empirical_research_practice",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/710/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 4,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/710/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/710/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 3,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/710/attempt_3_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 27,
+    "id": "778",
+    "family": "nlp4re",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/778/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 4,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/778/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 28,
+    "id": "776",
+    "family": "nlp4re",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 3,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/776/attempt_3_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 22,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/776/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/776/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": -4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 3,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/776/attempt_3_evaluation/benchmark_raw.json",
+        "diagnostic_score": 22,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 29,
+    "id": "777",
+    "family": "nlp4re",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/777/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 4,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/777/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/777/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": -4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 3,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/777/attempt_3_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 30,
+    "id": "779",
+    "family": "nlp4re",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/779/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 4,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/779/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/779/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 3,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/779/attempt_3_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 31,
+    "id": "780",
+    "family": "nlp4re",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/780/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 30,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/780/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 30,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 32,
+    "id": "782",
+    "family": "nlp4re",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/782/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 30,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/782/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 30,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 33,
+    "id": "783",
+    "family": "nlp4re",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/783/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 4,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/783/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/783/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 3,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/783/attempt_3_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 34,
+    "id": "785",
+    "family": "nlp4re",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/785/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 4,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/785/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/785/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 3,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/785/attempt_3_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 35,
+    "id": "786",
+    "family": "nlp4re",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 2,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/786/attempt_2_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 4,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/786/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": -4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/786/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 36,
+    "id": "787",
+    "family": "nlp4re",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 2,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/787/attempt_2_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 4,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/787/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": -4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/787/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 37,
+    "id": "789",
+    "family": "nlp4re",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/789/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 4,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/789/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/789/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 3,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/789/attempt_3_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 38,
+    "id": "790",
+    "family": "nlp4re",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/790/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 4,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/790/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/790/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 3,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/790/attempt_3_evaluation/benchmark_raw.json",
+        "diagnostic_score": -6,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 39,
+    "id": "792",
+    "family": "nlp4re",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/792/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 4,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/792/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/792/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 3,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/792/attempt_3_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 40,
+    "id": "793",
+    "family": "nlp4re",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/793/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 4,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/793/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/793/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 3,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/793/attempt_3_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 41,
+    "id": "796",
+    "family": "nlp4re",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/796/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 30,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/796/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 30,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 42,
+    "id": "797",
+    "family": "nlp4re",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/797/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 30,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/797/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 30,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 43,
+    "id": "804",
+    "family": "nlp4re",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 2,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/804/attempt_2_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 30,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/804/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/804/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 30,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 44,
+    "id": "805",
+    "family": "nlp4re",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/805/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 30,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/805/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 30,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 45,
+    "id": "768",
+    "family": "nlp4re",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 3,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/768/attempt_3_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 32,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/768/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/768/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 3,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/768/attempt_3_evaluation/benchmark_raw.json",
+        "diagnostic_score": 32,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 46,
+    "id": "769",
+    "family": "nlp4re",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 3,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/769/attempt_3_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 30,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/769/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/769/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 3,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/769/attempt_3_evaluation/benchmark_raw.json",
+        "diagnostic_score": 30,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 47,
+    "id": "770",
+    "family": "nlp4re",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/770/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 4,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/770/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 48,
+    "id": "771",
+    "family": "nlp4re",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 2,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/771/attempt_2_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 30,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/771/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/771/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 30,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 49,
+    "id": "772",
+    "family": "nlp4re",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/772/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 4,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/772/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/772/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 3,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/772/attempt_3_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 50,
+    "id": "773",
+    "family": "nlp4re",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/773/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 4,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/773/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/773/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 3,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/773/attempt_3_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      }
+    ]
+  },
+  {
+    "idx": 51,
+    "id": "774",
+    "family": "nlp4re",
+    "online_mode": "test_time_repair",
+    "selection_mode": "diagnostic_non_gold",
+    "selected_attempt": 1,
+    "selected_raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/774/attempt_1_evaluation/benchmark_raw.json",
+    "selected_diagnostic_score": 4,
+    "selected_supervised_score": null,
+    "all_attempt_scores": [
+      {
+        "attempt": 1,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/774/attempt_1_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 2,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/774/attempt_2_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      },
+      {
+        "attempt": 3,
+        "raw_path": "code/outputs/online_ace/mistral_7b_instruct_empire_compass_sparql_test_time_repair_benchmark/item_runs/774/attempt_3_evaluation/benchmark_raw.json",
+        "diagnostic_score": 4,
+        "supervised_score": null
+      }
+    ]
+  }
+]
