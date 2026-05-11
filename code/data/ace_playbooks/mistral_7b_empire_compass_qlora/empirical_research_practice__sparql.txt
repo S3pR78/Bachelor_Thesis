@@ -1,0 +1,25 @@
+## STRATEGIES & INSIGHTS
+
+[sai-00001] helpful=0 harmful=0 :: WHEN generating a query for the 'empirical_research_practice' family, extract the paper, year, and secondary research flag. Use the structure: SELECT ?paper ?year ?secondary_research_flag WHERE { ?paper orkgp:P31 ?contribution . ?contribution a orkgc:C27001 . ?contribution orkgp:P135046 ?serie . ?serie rdfs:label ?venue_name . ?contribution orkgp:P56008 ?data_collection . ?data_collection orkgp:P1005 ?dc_method . ?dc_method orkgp:P94003 ?dc_method_type . ?dc_method_type rdfs:label ?dc_method_type_label . FILTER(?dc_method_type_label = 'secondary research'^^xsd:string) }
+[sai-00002] helpful=0 harmful=0 :: WHEN generating a query for integrative and interpretive reviews, include a filter for the 'secondary research' method type.
+[sai-00003] helpful=0 harmful=0 :: WHEN generating a question answer, ensure to include all required answer variables in the SELECT projection.
+[sai-00004] helpful=0 harmful=0 :: WHEN filtering out papers based on the absence of a specific property, use a FILTER NOT EXISTS { ?researchData orkgp:url ?url . } clause.
+[sai-00005] helpful=0 harmful=0 :: WHEN generating a query to find papers with a hypothesis but without a hypothesis type, include the SELECT projection for the hypothesis type and its label.
+[sai-00006] helpful=0 harmful=0 :: WHEN filtering on venue name, use the venue name from the memory context or directly from the venue node, avoiding hardcoded names.
+[sai-00007] helpful=0 harmful=0 :: WHEN generating a query for papers published in a specific conference, always include the venue filter in the WHERE clause.
+[sai-00008] helpful=0 harmful=0 :: WHEN filtering papers by publication year, always include the year filter in the WHERE clause.
+[sai-00009] helpful=0 harmful=0 :: WHEN filtering papers for a question that requires both data analysis and data collection methods, use a conjunction (AND) in the FILTER clause.
+[sai-00010] helpful=0 harmful=0 :: WHEN constructing a query, use variables or memory-mapped placeholders for constants that may change across different papers or venues.
+[sai-00011] helpful=0 harmful=0 :: WHEN filtering results, apply the filter to the node that directly connects to the answer variable, such as ?paper orkgp:P31 ?contribution.
+[sai-00012] helpful=0 harmful=0 :: WHEN filtering on venue names, consider using a case-insensitive filter for minor variations.
+[sai-00013] helpful=0 harmful=0 :: WHEN generating a query that requires filtering data collection methods for a specific conference, filter based on the method type labels.
+[sai-00014] helpful=0 harmful=0 :: WHEN generating a query for papers published after a specific year, include the publication year filter in the WHERE clause.
+[sai-00015] helpful=0 harmful=0 :: WHEN filtering string values, use a case-insensitive comparison function.
+[sai-00016] helpful=0 harmful=0 :: WHEN filtering on boolean values, use the IN operator with appropriate boolean representations.
+[sai-00017] helpful=0 harmful=0 :: WHEN generating a query for papers with specific properties, avoid using venue-specific filters unless explicitly required.
+[sai-00018] helpful=0 harmful=0 :: WHEN generating a query to find papers with specific properties, avoid unnecessary filters such as venue names unless explicitly mentioned.
+[sai-00019] helpful=0 harmful=0 :: WHEN generating a query that requires finding papers with both a research question and a research question answer, consider the venue serie as an intermediate node if relevant.
+[sai-00020] helpful=0 harmful=0 :: WHEN filtering for a specific data collection method type, use the data collection method node and filter on its qualitative property.
+## COMMON MISTAKES TO AVOID
+
+## OTHERS

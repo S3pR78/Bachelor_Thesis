@@ -1,0 +1,25 @@
+## STRATEGIES & INSIGHTS
+
+[sai-00001] helpful=0 harmful=0 :: WHEN working with the 'nlp4re' family in PGMR-lite, to identify papers associated with annotation guidelines, DO use the 'pgmr:annotation_scheme' and 'pgmr:guideline_availability' relationships; AVOID omitting these relationships.
+[sai-00002] helpful=0 harmful=0 :: WHEN working with the 'nlp4re' family in PGMR-lite, remember to correctly map the 'evaluation_metric' variable to the 'has_evaluation' relationship, using 'paper' and 'contribution' as intermediate nodes; AVOID inventing new placeholders or using undefined placeholders.
+[sai-00003] helpful=0 harmful=0 :: WHEN generating queries for the 'nlp4re' family using PGMR-lite, if the question asks for the existence of specific papers with certain properties, use an ASK query instead of a SELECT query.
+[sai-00004] helpful=0 harmful=0 :: WHEN checking for papers with no associated baseline comparison type or detail in the 'nlp4re' family using PGMR-lite, ensure to check for both the type and detail using 'pgmr:baseline_comparison_type' and 'pgmr:baseline_comparison_detail' relationships.
+[sai-00005] helpful=0 harmful=0 :: WHEN querying for papers with a specific number of annotators, join the 'paper', 'contribution', 'annotation_process', and 'number_of_annotators' nodes, and use a filter to select contributions with the desired number of annotators.
+[sai-00006] helpful=0 harmful=0 :: WHEN working with the 'nlp4re' family in PGMR-lite, ensure to correctly use the 'nlpDataset' intermediate node and follow the appropriate PGMR-lite path for the dataset variable.
+[sai-00007] helpful=0 harmful=0 :: WHEN using PGMR-lite for the nlp4re family, remember to use the paper as the subject of the query for questions about paper-level properties, such as querying for the number of annotators.
+[sai-00008] helpful=0 harmful=0 :: WHEN working with PGMR-lite for the nlp4re family, use the 'pgmr:dependency' and 'pgmr:release' placeholders to link the 'Implemented approach' to the 'Release'; AVOID omitting these relationships.
+[sai-00009] helpful=0 harmful=0 :: WHEN filtering papers by publication year, always filter before joining with other nodes.
+[sai-00010] helpful=0 harmful=0 :: WHEN using PGMR-lite for the nlp4re family, to identify the documentation types associated with implemented approaches, DO use the 'pgmr:documentation' relationship; AVOID omitting this relationship.
+[sai-00011] helpful=0 harmful=0 :: WHEN querying for evaluation metrics per paper in the 'nlp4re' family using PGMR-lite, join the paper with the contribution to retrieve the evaluation metrics and project them at the paper level.
+[sai-00012] helpful=0 harmful=0 :: WHEN constructing a query for the nlp4re family in PGMR-lite, always ensure that the contribution is the main subject and the validation procedure is projected onto it.
+[sai-00013] helpful=0 harmful=0 :: WHEN working with the nlp4re template in PGMR-lite, to answer questions about NLP data sources, include the NLP dataset and NLP data source nodes in the query, and use the appropriate family memory mapping to join them.
+[sai-00014] helpful=0 harmful=0 :: WHEN querying for the publication year of papers with a specific number of annotators, join the 'paper', 'contribution', 'annotation process', and 'number of annotators' nodes. Use a filter to select papers where the 'annotation process' has exactly the desired number of 'annotators' and return the 'publication year'.
+[sai-00015] helpful=0 harmful=0 :: WHEN working with the 'nlp4re' family, use the 'NLP dataset' placeholder chain and ensure it is connected to all relevant properties such as 'public availability statement' and 'data production time'.
+[sai-00016] helpful=0 harmful=0 :: WHEN using PGMR-lite for the nlp4re family and the question asks for the number of annotators, map the 'number of annotators' placeholder to the 'annotation processing' node instead of the contribution node.
+[sai-00017] helpful=0 harmful=0 :: WHEN processing the nlp4re template, use the 'nlpDataset' node for counting data items. AVOID using the 'nlpTask' node for this purpose.
+[sai-00018] helpful=0 harmful=0 :: WHEN extracting the NLP task output extracted element for the NLP4RE contribution, use the 'NLP task output extracted element' path and the 'rdfs:label' property to project the extracted element and its label.
+[sai-00019] helpful=0 harmful=0 :: WHEN querying for location types of publicly available datasets in the nlp4re family using PGMR-lite, ensure that the 'dataset' variable is used as the intermediate node and that the correct filters are applied. Use the 'publicAvailability' property to filter for 'yes' and the 'dataset_location_location_type' property to find the location types.
+[sai-00020] helpful=0 harmful=0 :: WHEN generating a query for the URL of an NLP dataset in the nlp4re family using PGMR-lite, follow the path: paper -> contribution -> dataset location -> dataset URL. Avoid assuming that the contribution is the direct link to the dataset URL.
+## COMMON MISTAKES TO AVOID
+
+## OTHERS

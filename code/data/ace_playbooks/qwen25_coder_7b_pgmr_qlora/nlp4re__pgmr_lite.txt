@@ -1,0 +1,13 @@
+## STRATEGIES & INSIGHTS
+
+[sai-00001] helpful=0 harmful=0 :: WHEN generating a query for the nlp4re family, USE the following PGMR-lite placeholders: ?paper pgmr:has_contribution ?contribution . ?contribution a pgmrc:nlp4re_contribution . ?contribution pgmr:re_task ?reTask . ?contribution pgmr:nlp_task ?nlpTask . ?nlpTask pgmr:nlp_task_type ?taskType . OPTIONALLY { ?taskType rdfs:label ?taskTypeLabel } OPTIONALLY { ?reTask rdfs:label ?reTaskLabel }
+[sai-00002] helpful=0 harmful=0 :: WHEN generating a query for the NLP4RE family, DO ensure that you project the contribution and its label to capture specific details about the types of baselines reported in the papers. AVOID assuming that the paper itself contains the required information.
+[sai-00003] helpful=0 harmful=0 :: WHEN generating a PGMR-lite query for the nlp4re family, DO ensure that the answer entity is correctly mapped to the contribution using the appropriate placeholder. AVOID selecting entities that are not directly connected to the contribution through the required predicates.
+[sai-00004] helpful=0 harmful=0 :: WHEN generating a query for the nlp4re family that requires filtering based on specific labels, DO include explicit filter conditions for those labels to avoid including cases where the label indicates no reporting. AVOID relying on implicit assumptions about how the data will be structured or labeled.
+[sai-00005] helpful=0 harmful=0 :: WHEN constructing a PGMR-lite query for the NLP4RE family, DO establish the connection between the paper and its contribution BEFORE applying any filters related to the contribution. AVOID placing filters before establishing the necessary connections.
+[sai-00006] helpful=0 harmful=0 :: WHEN generating a query for the NLP4RE family, DO ensure that all relevant variables and labels associated with the annotation process are selected. AVOID selecting only individual variables without considering the broader context of the annotation process.
+## COMMON MISTAKES TO AVOID
+
+[err-00001] helpful=0 harmful=0 :: WHEN generating a SELECT clause for a PGMR-lite query, DO include all required answer variables mapped to their correct placeholders; AVOID omitting any necessary variables.
+[err-00002] helpful=0 harmful=0 :: WHEN generating a query that requires filtering based on specific labels, DO include explicit filter conditions for those labels to avoid including cases where the label indicates no reporting. AVOID relying on implicit assumptions about how the data will be structured or labeled.
+## OTHERS

@@ -1,0 +1,17 @@
+## STRATEGIES & INSIGHTS
+
+[sai-00001] helpful=0 harmful=0 :: WHEN generating a query for the empirical_research_practice family, DO include the intermediate node `?contribution` to link papers to their contributions and specific methods used. AVOID inventing new placeholders or using generic advice without specifying the concrete PGMR-lite path or answer-variable role.
+[sai-00002] helpful=0 harmful=0 :: WHEN generating a query for the empirical_research_practice family, DO ensure that all predicates and classes are correctly mapped according to the provided memory context. AVOID using incorrect placeholders or relations that do not align with the required structure.
+[sai-00003] helpful=0 harmful=0 :: WHEN querying for research data with specific properties, DO ensure that the path includes the necessary connections to the research data node. AVOID projecting results directly onto the paper or its label without considering the intermediary steps.
+[sai-00004] helpful=0 harmful=0 :: WHEN generating a query for the empirical_research_practice family, USE the correct placeholders for 'qualitative' and 'quantitative' data types and ensure proper connections between the paper, its contributions, and the data types. AVOID using generic placeholders and ensure all necessary filters are included.
+[sai-00005] helpful=0 harmful=0 :: WHEN generating a query for the empirical_research_practice family, DO include the placeholders for the hypothesis type and its label in the SELECT clause to avoid missing projections. AVOID omitting necessary variables from the SELECT clause.
+[sai-00006] helpful=0 harmful=0 :: WHEN performing aggregation and filtering in SPARQL, DO ensure proper grouping before applying filters to avoid incorrect projections. AVOID projecting aggregated values directly from ungrouped results.
+[sai-00007] helpful=0 harmful=0 :: WHEN projecting counts, DO ensure you are counting the correct entity (e.g., contributions rather than papers). AVOID selecting entities that do not directly relate to the desired outcome.
+[sai-00008] helpful=0 harmful=0 :: WHEN generating a query to count papers with multiple specific metrics, DO include intermediate nodes to connect the paper to its contributions and filter based on the presence of all required metrics. AVOID assuming the existing structure will suffice without additional steps.
+[sai-00009] helpful=0 harmful=0 :: WHEN querying metrics within contributions using PGMR-lite, USE specific metric-related placeholders and ENSURE the correct join between the contribution and its metrics.
+[sai-00010] helpful=0 harmful=0 :: WHEN generating a query for the empirical_research_practice family, DO ensure that you include the necessary predicates to connect the paper to its contributions and then to the method types. AVOID using generic placeholders without establishing the correct relationships.
+[sai-00011] helpful=0 harmful=0 :: WHEN counting distinct values per entity, DO include a GROUP BY clause to ensure accurate aggregation. AVOID omitting the GROUP BY clause which can lead to incorrect results.
+[sai-00012] helpful=0 harmful=0 :: WHEN generating a query for the 'empirical_research_practice' family, DO include the intermediate node `?contribution pgmr:highlighted_in_text ?answerHighlighted .` and add a filter condition `FILTER(?answerHighlighted = true)` to ensure only contributions with highlighted answers are considered. AVOID omitting crucial intermediate nodes and filter conditions that affect the query results.
+## COMMON MISTAKES TO AVOID
+
+## OTHERS

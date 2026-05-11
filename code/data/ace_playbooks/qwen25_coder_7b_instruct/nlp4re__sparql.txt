@@ -1,0 +1,15 @@
+## STRATEGIES & INSIGHTS
+
+[sai-00001] helpful=0 harmful=0 :: WHEN querying for papers associated with annotation guidelines, DO ensure that the query includes connections to guideline availability and publication year. AVOID assuming that relationships between papers, contributions, and annotation schemes alone will suffice.
+[sai-00002] helpful=0 harmful=0 :: WHEN generating a query for ORKG, ensure that the SELECT clause projects all necessary variables to accurately represent the answer. AVOID focusing solely on counts or single variables without considering the broader context required for the answer.
+[sai-00003] helpful=0 harmful=0 :: WHEN generating a query for ORKG, ensure that the SELECT projection matches the desired answer entities and that all necessary connections and filters are included. AVOID projecting unnecessary entities and omitting critical connections or filters.
+[sai-00004] helpful=0 harmful=0 :: WHEN generating a SPARQL query, DO ensure that the SELECT clause projects the correct variables to match the expected output. AVOID selecting variables that do not align with the required answer structure.
+[sai-00005] helpful=0 harmful=0 :: WHEN asked about the state of practice for validating annotated datasets, DO focus on evaluation methods, baseline comparisons, and annotation schemes. AVOID projecting metrics and validation procedures unless explicitly required by the question.
+[sai-00006] helpful=0 harmful=0 :: WHEN generating a query for a question that asks 'Are there/are any...?', DO use an ASK query to check for the existence of matching entities. AVOID using SELECT queries for such questions.
+[sai-00007] helpful=0 harmful=0 :: WHEN projecting the answer entity, USE the correct variable specified in the question. AVOID using generic variables unless explicitly required by the question.
+[sai-00008] helpful=0 harmful=0 :: WHEN calculating a minimum value in SPARQL, USE the MIN() function AND map the result to a specific variable. AVOID selecting unnecessary variables and ensure proper aggregation.
+[sai-00009] helpful=0 harmful=0 :: WHEN counting distinct entities, DO use COUNT(DISTINCT ?variable). AVOID selecting distinct labels without aggregation.
+[sai-00010] helpful=0 harmful=0 :: WHEN projecting results, AVOID including unnecessary variables; FOCUS on the specific variable needed for the answer.
+## COMMON MISTAKES TO AVOID
+
+## OTHERS

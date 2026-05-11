@@ -1,0 +1,12 @@
+## STRATEGIES & INSIGHTS
+
+[sai-00001] helpful=0 harmful=0 :: WHEN generating a query for a research question, DO ensure you project the research question itself and its wording. AVOID focusing solely on paper labels and ensure to filter out research questions with any question type.
+[sai-00002] helpful=0 harmful=0 :: WHEN generating a query, DO ensure that only required variables are projected in the SELECT clause. AVOID including unnecessary variables and ensure accurate representation of filtering conditions.
+[sai-00003] helpful=0 harmful=0 :: WHEN generating a SELECT clause for a PGMR-lite query, DO ensure that each answer variable uses the appropriate placeholder from the family memory mapping. AVOID reusing placeholders for different entities within the same SELECT clause.
+[sai-00004] helpful=0 harmful=0 :: WHEN generating queries using PGMR-lite, DO ensure that all required predicates are correctly mapped according to the domain context. AVOID using incorrect or made-up predicates.
+[sai-00005] helpful=0 harmful=0 :: WHEN generating a query for the 'empirical_research_practice' family, AVOID assuming nested properties for 'data collection' that do not exist in the schema. USE actual child properties of 'data collection' such as 'pgmr:method_type' and 'pgmr:method_name'.
+[sai-00006] helpful=0 harmful=0 :: WHEN answering questions involving venue series and inferential statistics, DO ensure the query identifies the relationship between the paper and its contribution, accessing the venue series label through the contribution.
+[sai-00007] helpful=0 harmful=0 :: WHEN generating a query for the empirical research practice template, DO ensure to include a filter for the boxplot measure within the descriptive statistics of the data analysis.
+## COMMON MISTAKES TO AVOID
+
+## OTHERS

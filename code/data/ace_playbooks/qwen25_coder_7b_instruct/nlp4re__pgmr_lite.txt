@@ -1,0 +1,22 @@
+## STRATEGIES & INSIGHTS
+
+[sai-00001] helpful=0 harmful=0 :: WHEN generating a query for ORKG, ENSURE all required variables are included in the SELECT clause according to the family memory mapping to avoid answer mismatches.
+[sai-00002] helpful=0 harmful=0 :: WHEN answering a question about the number of annotators per NLP task, DO select the '?contribution' entity as the answer entity. AVOID including unnecessary details about annotators and their assignments.
+[sai-00003] helpful=0 harmful=0 :: WHEN generating a query for the top-3 most frequently used evaluation metrics, DO ensure that the SELECT clause projects the evaluation metrics themselves. AVOID focusing on counting contributions per metric.
+[sai-00004] helpful=0 harmful=0 :: WHEN generating queries for the NLP4RE template, DO include intermediate nodes representing contributions and tasks to capture the hierarchical structure. AVOID focusing solely on lower-level entities like NLP task inputs.
+[sai-00005] helpful=0 harmful=0 :: WHEN projecting multiple entities, DO include all required variables in the SELECT clause and ensure proper joins to retrieve their labels. AVOID focusing solely on a single entity without considering the broader context and required outputs.
+[sai-00006] helpful=0 harmful=0 :: WHEN generating a query for evaluation metrics, DO ensure that the SELECT clause includes the relevant evaluation metrics. AVOID including unrelated entities like papers or contributions.
+[sai-00007] helpful=0 harmful=0 :: WHEN querying for guideline availability values related to an annotation scheme, DO ensure that the query includes the necessary intermediate steps to connect the annotation scheme to the guideline availability. AVOID focusing solely on linking the paper to the contribution without considering the intermediary steps required.
+[sai-00008] helpful=0 harmful=0 :: WHEN generating a query for ORKG, ensure that all required entities and relationships are properly projected using intermediary objects where necessary. AVOID assuming direct properties where nested relationships exist.
+[sai-00009] helpful=0 harmful=0 :: WHEN querying for papers with multiple domains, DO ensure the path includes ?paper -> ?contribution -> ?NLPdataset -> ?NLPdatasource -> ?domain. AVOID using incorrect predicates directly on the dataSource node.
+[sai-00010] helpful=0 harmful=0 :: WHEN projecting the answer entity, DO ensure it matches the desired level of granularity (e.g., paper vs. year) as specified in the domain prompt context. AVOID selecting entities that do not align with the question's requirements.
+[sai-00011] helpful=0 harmful=0 :: WHEN querying for data production times related to datasets, DO ensure that you correctly project the answer onto the '?dataProductionTime' variable and follow the path through the ORKG graph connecting the paper to its contributions and then to the datasets.
+[sai-00012] helpful=0 harmful=0 :: WHEN querying for the minimum number of annotators in NLP4RE papers, DO use the intermediate node representing the annotation process (e.g., '?annoProc'). AVOID selecting the number of annotators directly from the contribution.
+[sai-00013] helpful=0 harmful=0 :: WHEN generating a PGMR-lite query for counting distinct data items, DO include the pgmr:nlp_data_item predicate to connect the ?contribution to the ?dataItem. AVOID missing any necessary predicates in the path from ?paper to ?dataItem.
+[sai-00014] helpful=0 harmful=0 :: WHEN generating a query, AVOID using inconsistent variable names for the same concept. ALWAYS use the correct PGMR-lite placeholder variable name.
+[sai-00015] helpful=0 harmful=0 :: WHEN counting the number of annotators, DO use the pgmr:number_of_annotators relation. AVOID using properties that do not accurately represent the number of annotators.
+[sai-00016] helpful=0 harmful=0 :: WHEN generating a query for the nlp4re family, DO ensure that all required intermediate nodes and relationships are included using the appropriate PGMR-lite placeholders. AVOID omitting critical connections between entities.
+[sai-00017] helpful=0 harmful=0 :: WHEN projecting the answer, DO use the correct answer variable (e.g., '?answer') and its label (e.g., '?answerLabel'). AVOID using variables that do not represent the answer.
+## COMMON MISTAKES TO AVOID
+
+## OTHERS

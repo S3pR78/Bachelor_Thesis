@@ -1,0 +1,25 @@
+## STRATEGIES & INSIGHTS
+
+[sai-00001] helpful=0 harmful=0 :: WHEN working with the NLP4RE family, follow the memory mapping and include necessary intermediate nodes (e.g., annotation process, annotation scheme) in the query.
+[sai-00002] helpful=0 harmful=0 :: WHEN generating queries, include the paper node and connect it to the contribution node using the has_contribution relationship to avoid join failures.
+[sai-00003] helpful=0 harmful=0 :: WHEN the question asks for multiple entities, project all required entities as separate variables in the query.
+[sai-00004] helpful=0 harmful=0 :: WHEN the question asks for relationships between entities, project the required entities (e.g., RE task, NLP task input) as separate variables and use appropriate relationships between them.
+[sai-00005] helpful=0 harmful=0 :: WHEN generating queries for data format information, focus on the NLP data format relation.
+[sai-00006] helpful=0 harmful=0 :: WHEN dealing with a question about a specific metric, focus on relevant intermediate nodes to find the answer.
+[sai-00007] helpful=0 harmful=0 :: WHEN the question asks for a specific entity, project that entity instead of an intermediate node.
+[sai-00008] helpful=0 harmful=0 :: WHEN the question is framed as a yes/no question, use an ASK query instead of a SELECT query, and consider adding a FILTER clause for ambiguity.
+[sai-00009] helpful=0 harmful=0 :: WHEN generating queries for papers with at least two different domains of NLP data sources, join the NLP data source nodes and ensure at least two distinct domains.
+[sai-00010] helpful=0 harmful=0 :: WHEN generating queries for papers with missing baseline comparison type or detail, filter out papers with reported baseline comparisons and check for missing details.
+[sai-00011] helpful=0 harmful=0 :: WHEN generating queries for papers with both a dependency and at least one running requirement, include a filter to exclude papers with unreported dependencies or running requirements.
+[sai-00012] helpful=0 harmful=0 :: WHEN finding papers with a specific annotation process and a certain number of annotators, identify contributions with the desired annotation process and filter for the specified number of annotators.
+[sai-00013] helpful=0 harmful=0 :: WHEN querying for data production time of datasets with a public availability statement, use the public availability and license intermediate nodes to filter relevant datasets.
+[sai-00014] helpful=0 harmful=0 :: WHEN the question asks for data production time of datasets that specify a natural language, include the relation to connect the contribution to the dataset.
+[sai-00015] helpful=0 harmful=0 :: WHEN generating queries and dealing with numerical values, ensure to use the appropriate data type in the projection.
+[sai-00016] helpful=0 harmful=0 :: WHEN counting data items for a dataset, focus on the dataset itself instead of the paper associated with the contribution.
+[sai-00017] helpful=0 harmful=0 :: WHEN counting distinct entities in a query, use the COUNT(DISTINCT) function.
+[sai-00018] helpful=0 harmful=0 :: WHEN generating a query to count the number of annotators for NLP4RE papers, focus on the contribution and annotator nodes, avoiding unnecessary nodes.
+[sai-00019] helpful=0 harmful=0 :: WHEN finding papers using datasets with a specific language, use the dataset's language property and filter results based on the desired language.
+[sai-00020] helpful=0 harmful=0 :: WHEN generating a query for the NLP task output extracted element of an NLP4RE contribution, include the NLP task node and connect the contribution to the NLP task, then to the NLP task output, and finally to the extracted element.
+## COMMON MISTAKES TO AVOID
+
+## OTHERS

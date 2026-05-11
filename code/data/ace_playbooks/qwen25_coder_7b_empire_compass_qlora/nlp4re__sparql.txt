@@ -1,0 +1,18 @@
+## STRATEGIES & INSIGHTS
+
+[sai-00001] helpful=0 harmful=0 :: WHEN generating a SELECT query for the ORKG, DO ensure all required variables are explicitly projected and JOINed with the main subject (e.g., ?paper). AVOID assuming required information is implicitly included elsewhere in the query.
+[sai-00002] helpful=0 harmful=0 :: WHEN generating a SELECT query for the ORKG, DO project numerical values using the appropriate predicate FROM the relevant entity. AVOID selecting values directly from the entity.
+[sai-00003] helpful=0 harmful=0 :: WHEN generating a SELECT query to find the top-N most frequently used items, DO ensure that all relevant entities are included in the GROUP BY clause and that the ORDER BY clause accurately reflects the desired sorting criteria.
+[sai-00004] helpful=0 harmful=0 :: WHEN generating a SELECT query for a family like nlp4re, DO include all relevant variables projected in the answer VARIABLE role. AVOID omitting variables that contribute to the desired result set size.
+[sai-00005] helpful=0 harmful=0 :: WHEN generating a SELECT query for a family like nlp4re AND the answer requires a structured format, DO ensure that all required join paths and projection variables are included to match the expected output. AVOID focusing only on the primary subject of interest without considering the broader context and required details.
+[sai-00006] helpful=0 harmful=0 :: WHEN generating a SPARQL query for the ORKG, DO explicitly specify all required relations and classes to ensure accuracy in the query results. AVOID assumptions about implicit inclusion of necessary information.
+[sai-00007] helpful=0 harmful=0 :: WHEN answering existence questions FOR the ORKG, DO use ASK queries. AVOID using SELECT queries for counting or listing results.
+[sai-00008] helpful=0 harmful=0 :: WHEN checking for the existence of entities meeting certain conditions, DO use an ASK query. AVOID using a SELECT query with a non-answer-entity projection.
+[sai-00009] helpful=0 harmful=0 :: WHEN projecting the answer entity IN Direct SPARQL, DO ensure it matches the variable named in the domain prompt context. AVOID using a different variable name than specified.
+[sai-00010] helpful=0 harmful=0 :: WHEN generating queries for the nlp4re family, DO use the correct family memory relations for NLP4RE specific concepts. AVOID using unassigned placeholders.
+[sai-00011] helpful=0 harmful=0 :: WHEN querying for specific information, AVOID assuming that the information will always be present in the knowledge graph. ALWAYS check for the existence of the desired information before attempting to retrieve it.
+[sai-00012] helpful=0 harmful=0 :: WHEN querying for specific values in the knowledge graph, DO add a filter to check if the count of distinct values is greater than zero to avoid returning empty results.
+[sai-00013] helpful=0 harmful=0 :: WHEN generating queries involving text-based filters FOR the ORKG, DO ensure that the regex patterns correctly match the desired values. AVOID using case-sensitive filters unless explicitly required.
+## COMMON MISTAKES TO AVOID
+
+## OTHERS

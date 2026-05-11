@@ -1,0 +1,22 @@
+## STRATEGIES & INSIGHTS
+
+[sai-00001] helpful=0 harmful=0 :: WHEN calculating proportions in queries, DO ensure you include both the numerator and denominator in your calculation. AVOID focusing solely on specific venues or contributions without considering the total number of relevant entities.
+[sai-00002] helpful=0 harmful=0 :: WHEN querying for empirical methods used for secondary research, DO NOT focus on data collection processes. INSTEAD, look for properties or classes that explicitly denote secondary research within the contribution.
+[sai-00003] helpful=0 harmful=0 :: WHEN answering a question in the empirical_research_practice family, DO project only the explicitly requested variables AND AVOID including unnecessary joins.
+[sai-00004] helpful=0 harmful=0 :: WHEN generating a query, DO ensure that it is syntactically correct AND that it is being executed against a valid dataset. AVOID executing queries without verifying their correctness and the validity of the dataset.
+[sai-00005] helpful=0 harmful=0 :: WHEN querying for counts of entities per item, DO ensure proper GROUP BY clauses and use COUNT(DISTINCT) appropriately. AVOID counting globally without considering the grouping.
+[sai-00006] helpful=0 harmful=0 :: WHEN generating a query for a question involving multiple conditions, DO ensure all required connections and filters are explicitly included. AVOID assuming all conditions will be automatically covered by previous parts of the query.
+[sai-00007] helpful=0 harmful=0 :: WHEN answering questions about publication years of papers reporting specific descriptive statistics, DO ensure the query accurately reflects the required relationships between entities such as paper, contribution, venue, and descriptive statistics. AVOID unnecessary or incorrect joins or projections.
+[sai-00008] helpful=0 harmful=0 :: WHEN querying for entities that require multiple related properties, ENSURE that the same instance of the related class satisfies all required conditions. AVOID using separate filters for each property without ensuring they refer to the same instance.
+[sai-00009] helpful=0 harmful=0 :: WHEN answering questions about papers mentioning external validity threats, DO ensure the query accurately reflects the relationships between papers, contributions, venues, and threats to validity within the framework.
+[sai-00010] helpful=0 harmful=0 :: WHEN generating queries involving DISTINCT projections in the empirical_research_practice family, DO ensure that the projected values are unique and complete. AVOID relying solely on the number of rows returned to validate correctness.
+[sai-00011] helpful=0 harmful=0 :: WHEN generating queries for empirical research practice, AVOID omitting filters for specific venues. ALWAYS ensure all necessary conditions are met in the WHERE clause.
+[sai-00012] helpful=0 harmful=0 :: WHEN projecting the research question answer IN SPARQL queries, DO use the variable ?researchQuestionAnswer AVOID using any other variable name.
+[sai-00013] helpful=0 harmful=0 :: WHEN generating a query for the empirical_research_practice family, AVOID including filters based on data collection method type labels UNLESS explicitly required by the question.
+[sai-00014] helpful=0 harmful=0 :: WHEN projecting variables, USE their actual values rather than their labels. AVOID including unnecessary filters based on specific types of data analysis strategies unless explicitly required.
+[sai-00015] helpful=0 harmful=0 :: WHEN querying for papers at a specific conference AND looking for a particular data collection method, DO include an optional clause to handle cases where the paper does not have a data collection method OR the data collection method is not the specified one. AVOID returning no results due to missing or incorrect data collection method information.
+[sai-00016] helpful=0 harmful=0 :: WHEN querying for entities with optional attributes, CONSIDER adding a fallback condition to handle cases where those attributes are absent or null to ensure the query returns results even if some attributes are missing.
+[sai-00017] helpful=0 harmful=0 :: WHEN using the extracted query for further processing, DO ensure that the query aligns with the target query in terms of variable names and join paths. AVOID relying on the raw model output for further processing.
+## COMMON MISTAKES TO AVOID
+
+## OTHERS

@@ -1,0 +1,24 @@
+## STRATEGIES & INSIGHTS
+
+[sai-00001] helpful=0 harmful=0 :: WHEN querying for papers associated with annotation guidelines, include the paper's publication year using the path: ?paper pgmr:publication_year ?year .
+[sai-00002] helpful=0 harmful=0 :: WHEN asking for combinations of RE and NLP tasks, project the contribution variable and the required attributes for the answer.
+[sai-00003] helpful=0 harmful=0 :: WHEN querying the usual number of annotators per NLP task, use the 'NLP task' context to retrieve the number of annotators for all annotator assignments.
+[sai-00004] helpful=0 harmful=0 :: WHEN querying for the top-3 most frequently used evaluation metrics to assess a developed NLP approach, project the evaluation metric as the answer entity and use the contribution as the intermediate node.
+[sai-00005] helpful=0 harmful=0 :: WHEN working with the nlp4re family, use the required PGMR-lite core and relevant memory entries to correctly identify the RE task and NLP task input.
+[sai-00006] helpful=0 harmful=0 :: WHEN working with the nlp4re template, to find the most common format of textual requirements, project the NLP data format of the NLP dataset associated with the contribution.
+[sai-00007] helpful=0 harmful=0 :: WHEN querying for validation procedures in the context of an annotation process, use the annotation process instead of the contribution.
+[sai-00008] helpful=0 harmful=0 :: WHEN using PGMR-lite, always project the correct answer variable. For example, use ?guidelineAvailability for guideline availability.
+[sai-00009] helpful=0 harmful=0 :: WHEN asking for papers that report both an evaluation metric and a validation procedure, use filters to only return papers with both a reported evaluation metric and a reported validation procedure.
+[sai-00010] helpful=0 harmful=0 :: WHEN querying for the number of different domains in the NLP data source, use a filter to ensure at least two domains are reported.
+[sai-00011] helpful=0 harmful=0 :: WHEN searching for papers with a reported baseline comparison but no associated baseline comparison type or detail, include a filter for such papers.
+[sai-00012] helpful=0 harmful=0 :: WHEN querying for papers that report both a dependency and at least one running requirement for the implemented approach, include the 'implementedApproach' intermediate node and its related properties.
+[sai-00013] helpful=0 harmful=0 :: WHEN answering a question about a property of a resource, project the property instead of a related property of a nested resource.
+[sai-00014] helpful=0 harmful=0 :: WHEN generating a SELECT query for a specific data element, always project the correct variable and use it as the answer entity.
+[sai-00015] helpful=0 harmful=0 :: WHEN using PGMR-lite for the nlp4re family, ensure that the answer variable is correctly mapped to the intermediate node holding the number of annotators using the family memory mapping.
+[sai-00016] helpful=0 harmful=0 :: WHEN querying for the number of data items in an NLP4RE contribution, project the number of data items as 'dataItems' in the SELECT clause.
+[sai-00017] helpful=0 harmful=0 :: WHEN counting the number of annotators, use a SELECT ?numAnnotators query instead of COUNT(DISTINCT ?numAnnotators).
+[sai-00018] helpful=0 harmful=0 :: WHEN working with the nlp4re template, use pgmr:nlp_data_type to access the dataset language.
+[sai-00019] helpful=0 harmful=0 :: WHEN using PGMR-lite for the nlp4re family, ensure that the answer variable is correctly mapped to the intermediate node holding the NLP task output extracted element.
+## COMMON MISTAKES TO AVOID
+
+## OTHERS

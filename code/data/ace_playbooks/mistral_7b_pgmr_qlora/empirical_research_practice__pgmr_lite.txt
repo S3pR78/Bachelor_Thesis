@@ -1,0 +1,25 @@
+## STRATEGIES & INSIGHTS
+
+[sai-00001] helpful=0 harmful=0 :: WHEN using the empirical_research_practice template, use the data collection process as the intermediate node instead of the contribution.
+[sai-00002] helpful=0 harmful=0 :: WHEN conducting a query for empirical methods used for secondary research, use the 'dc_method' variable to project the empirical method.
+[sai-00003] helpful=0 harmful=0 :: WHEN searching for papers with a research question but no question type, include a filter for the research question type.
+[sai-00004] helpful=0 harmful=0 :: WHEN using the empirical_research_practice template, extract the research data node and its data type node using the family memory mapping, and filter out papers with no collection or no data.
+[sai-00005] helpful=0 harmful=0 :: WHEN generating a query to find papers with a hypothesis statement but no hypothesis type, include a filter for the absence of a hypothesis type in the query.
+[sai-00006] helpful=0 harmful=0 :: WHEN counting the number of reported subquestions for each paper, use a subquery to count all subquestions reported in the contribution.
+[sai-00007] helpful=0 harmful=0 :: WHEN using the empirical_research_practice template, filter the papers that report both mean and standard deviation as descriptive statistics by checking if both measures are reported.
+[sai-00008] helpful=0 harmful=0 :: WHEN using PGMR-lite for the empirical_research_practice family, ensure that the 'accuracy' and 'precision' metrics are correctly mapped to the 'metric' placeholder in the query.
+[sai-00009] helpful=0 harmful=0 :: WHEN using the empirical_research_practice template, ensure that the 'venue' placeholder is correctly mapped to the venue name from the prompt context.
+[sai-00010] helpful=0 harmful=0 :: WHEN using PGMR-lite for the empirical_research_practice family, always use the correct intermediate node and project the correct answer variable.
+[sai-00011] helpful=0 harmful=0 :: WHEN using the empirical_research_practice template, filter the papers that report a null hypothesis and a statistical technique by including the null hypothesis filter in the WHERE clause.
+[sai-00012] helpful=0 harmful=0 :: WHEN using PGMR-lite for the empirical_research_practice family, find papers reporting machine learning metrics that include both recall and precision.
+[sai-00013] helpful=0 harmful=0 :: WHEN asking for the number of papers reporting a qualitative data collection method, include a filter for qualitative method type in the query.
+[sai-00014] helpful=0 harmful=0 :: WHEN asking for papers with specific descriptive statistics, project the paper and paper label, and apply filters that allow any desirable descriptive statistic.
+[sai-00015] helpful=0 harmful=0 :: WHEN using the empirical_research_practice template, follow the family memory mapping for the paper/contribution path and the threat to validity path.
+[sai-00016] helpful=0 harmful=0 :: WHEN using the 'metric' placeholder in the empirical_research_practice template, map the 'recall' and 'precision' properties to it.
+[sai-00017] helpful=0 harmful=0 :: WHEN working with the empirical_research_practice template, use the contribution as the intermediate node to connect the research question and the research question answer.
+[sai-00018] helpful=0 harmful=0 :: WHEN querying for statistical techniques in a paper, select the statistical technique itself instead of its label.
+[sai-00019] helpful=0 harmful=0 :: WHEN extracting the answer to a research question, always project the research question answer, not its label.
+[sai-00020] helpful=0 harmful=0 :: WHEN querying for labels of venue series in papers that also report inferential statistics, include an explicit filter to ensure that only papers with both venue and inferential statistics are included in the result.
+## COMMON MISTAKES TO AVOID
+
+## OTHERS
